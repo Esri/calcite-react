@@ -1,5 +1,6 @@
 # Generated folders
 node_modules
+dist
 
 # Editor
 .DS_Store
