@@ -1,0 +1,41 @@
+{
+  "name": "calcite-react",
+  "version": "1.0.0",
+  "description": "Calcite components for React",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean-dist": "rm -rf ./dist",
+    "build": "npm run clean-dist && NODE_ENV=production `npm bin`/babel ./src --out-dir ./dist",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "test": "jest --coverage"
+  },
+  "author": "Esri PS",
+  "license": "Apache-2",
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.2.17",
+    "@storybook/addon-links": "^3.2.17",
+    "@storybook/addon-storyshots": "^3.2.17",
+    "@storybook/react": "^3.2.17",
+    "eslint": "^4.13.1",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "jest": "^21.2.1",
+    "prettier": "^1.9.2",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-test-renderer": "^16.2.0",
+    "styled-components": "^2.3.0"
+  },
+  "peerDependencies": {
+    "react": "^16.2.0"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1"
+  }
+}

@@ -1,0 +1,8 @@
+# Generated folders
+node_modules
+
+# Editor
+.DS_Store
+
+# Jest folders
+coverage

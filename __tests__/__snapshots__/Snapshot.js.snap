@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Button as a link 1`] = `
+<a
+  className="sc-gzVnrw iLioUP"
+  disabled={false}
+  href="www.google.com"
+  onClick={[Function]}
+  type="button"
+>
+  link button
+</a>
+`;
+
+exports[`Storyshots Button with text 1`] = `
+<div>
+  <button
+    className="sc-bdVaJa jlBGtP"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    Hello Button
+  </button>
+  <button
+    className="sc-htpNat bzpOuh"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    Hello Button
+  </button>
+  <button
+    className="sc-ifAKCX dSMblC"
+    disabled={true}
+    onClick={[Function]}
+    type="button"
+  >
+    Hello Button
+  </button>
+</div>
+`;
+
+exports[`Storyshots Label default 1`] = `
+<div>
+  <mark
+    className="sc-htoDjs iqsbvQ"
+  >
+    label
+  </mark>
+  <mark
+    className="sc-dnqmqq hXHhPY"
+  >
+    label
+  </mark>
+</div>
+`;
