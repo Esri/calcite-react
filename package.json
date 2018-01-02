@@ -9,7 +9,7 @@
     "clean-dist": "rm -rf ./dist",
     "build": "npm run clean-dist && NODE_ENV=production `npm bin`/babel ./src --out-dir ./dist",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook -o docs",
     "lint": "eslint src/** stories/index.js",
     "test": "jest --coverage"
   },
