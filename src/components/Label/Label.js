@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import React from "react";
-import styled, { css } from "styled-components";
+import PropTypes from 'prop-types';
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 const Label = ({ children, ...other }) => {
   const StyledLabel = styled.mark`
@@ -10,8 +10,8 @@ const Label = ({ children, ...other }) => {
     font-size: 0.85em;
     line-height: 1;
     white-space: nowrap;
-    font-family: "Avenir Next W01", "Avenir Next W00", "Avenir Next", "Avenir",
-      "Helvetica Neue", sans-serif;
+    font-family: 'Avenir Next W01', 'Avenir Next W00', 'Avenir Next', 'Avenir',
+      'Helvetica Neue', sans-serif;
 
     ${props =>
       props.red &&
