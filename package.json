@@ -4,29 +4,56 @@
   "description": "Calcite components for React",
   "main": "dist/index.js",
   "scripts": {
+    "start": "npm run storybook",
+    "precommit": "lint-staged",
     "clean-dist": "rm -rf ./dist",
     "build": "npm run clean-dist && NODE_ENV=production `npm bin`/babel ./src --out-dir ./dist",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "lint": "eslint src/** stories/index.js",
     "test": "jest --coverage"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|scss|less)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    },
+    "testPathIgnorePatterns": [
+      "<rootDir>/__mocks__"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "author": "Esri PS",
   "license": "Apache-2",
   "devDependencies": {
-    "@storybook/addon-actions": "^3.2.17",
-    "@storybook/addon-links": "^3.2.17",
-    "@storybook/addon-storyshots": "^3.2.17",
-    "@storybook/react": "^3.2.17",
+    "@storybook/addon-actions": "^3.3.3",
+    "@storybook/addon-links": "^3.3.3",
+    "@storybook/addon-storyshots": "^3.3.3",
+    "@storybook/react": "^3.3.3",
+    "babel-eslint": "^8.1.2",
     "eslint": "^4.13.1",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-react-app": "^2.0.1",
+    "eslint-plugin-flowtype": "^2.40.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-prettier": "^2.4.0",
     "eslint-plugin-react": "^7.5.1",
-    "jest": "^21.2.1",
+    "husky": "^0.14.3",
+    "jest": "^22.0.4",
+    "lint-staged": "^6.0.0",
     "prettier": "^1.9.2",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
-    "styled-components": "^2.3.0"
+    "styled-components": "^2.4.0"
   },
   "peerDependencies": {
     "react": "^16.2.0"

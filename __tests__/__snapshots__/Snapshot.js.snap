@@ -1,57 +1,129 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Button as a link 1`] = `
-<a
-  className="sc-gzVnrw iLioUP"
-  disabled={false}
-  href="www.google.com"
-  onClick={[Function]}
-  type="button"
->
-  link button
-</a>
+Array [
+  <div
+    className="guide-example"
+  >
+    <a
+      className="sc-gzVnrw kfSUet"
+      disabled={false}
+      href="https://google.com"
+      onClick={[Function]}
+      target="_blank"
+      type="button"
+    >
+      link button
+    </a>
+    <code
+      className="guide-example-label"
+    >
+      href
+    </code>
+  </div>,
+  <pre>
+    <code>
+      Button (as a link) sample code here (also needs styling to match calcite-web?)
+    </code>
+  </pre>,
+]
 `;
 
 exports[`Storyshots Button with text 1`] = `
-<div>
-  <button
-    className="sc-bdVaJa jlBGtP"
-    disabled={false}
-    onClick={[Function]}
-    type="button"
+Array [
+  <div
+    className="guide-example"
   >
-    Hello Button
-  </button>
-  <button
-    className="sc-htpNat bzpOuh"
-    disabled={false}
-    onClick={[Function]}
-    type="button"
+    <button
+      className="sc-bdVaJa eITdrl"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Hello Button
+    </button>
+    <code
+      className="guide-example-label"
+    >
+      default
+    </code>
+  </div>,
+  <div
+    className="guide-example"
   >
-    Hello Button
-  </button>
-  <button
-    className="sc-ifAKCX dSMblC"
-    disabled={true}
-    onClick={[Function]}
-    type="button"
+    <button
+      className="sc-htpNat cHmDcD"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Hello Button
+    </button>
+    <code
+      className="guide-example-label"
+    >
+      red
+    </code>
+  </div>,
+  <div
+    className="guide-example"
   >
-    Hello Button
-  </button>
-</div>
+    <button
+      className="sc-ifAKCX kVnZFP"
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    >
+      Hello Button
+    </button>
+    <code
+      className="guide-example-label"
+    >
+      disabled
+    </code>
+  </div>,
+  <pre>
+    <code>
+      Button sample code here (also needs styling to match calcite-web?)
+    </code>
+  </pre>,
+]
 `;
 
 exports[`Storyshots Label default 1`] = `
-<div>
-  <mark
-    className="sc-htoDjs iqsbvQ"
+Array [
+  <div
+    className="guide-example"
   >
-    label
-  </mark>
-  <mark
-    className="sc-dnqmqq hXHhPY"
+    <mark
+      className="sc-htoDjs esDZMp"
+    >
+      label
+    </mark>
+    <code
+      className="guide-example-label"
+    >
+      default
+    </code>
+  </div>,
+  <div
+    className="guide-example"
   >
-    label
-  </mark>
-</div>
+    <mark
+      className="sc-dnqmqq lbwdcO"
+    >
+      label
+    </mark>
+    <code
+      className="guide-example-label"
+    >
+      red
+    </code>
+  </div>,
+  <pre>
+    <code>
+      Label sample code here (also needs styling to match calcite-web?)
+    </code>
+  </pre>,
+]
 `;
