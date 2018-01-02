@@ -9,10 +9,6 @@
   "plugins": ["jsx-a11y", "prettier"],
 
   "rules": {
-    "prettier/prettier": ["error",
-      {
-        "singleQuote": true
-      }
-    ]
+    "prettier/prettier": "error"
   }
 }

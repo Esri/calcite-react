@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import React from "react";
-import styled, { css } from "styled-components";
+import PropTypes from 'prop-types';
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 const Button = ({ children, disabled, href, type, ...other }) => {
   const StyledButton = styled.button`
@@ -17,8 +17,8 @@ const Button = ({ children, disabled, href, type, ...other }) => {
     cursor: pointer;
     white-space: nowrap;
     text-decoration: none;
-    font-family: "Avenir Next W01", "Avenir Next W00", "Avenir Next", "Avenir",
-      "Helvetica Neue", sans-serif;
+    font-family: 'Avenir Next W01', 'Avenir Next W00', 'Avenir Next', 'Avenir',
+      'Helvetica Neue', sans-serif;
     &:hover {
       text-decoration: none;
       background-color: #005e95;
@@ -45,7 +45,7 @@ const Button = ({ children, disabled, href, type, ...other }) => {
         `};
   `;
 
-  const StyledLink = StyledButton.withComponent("a");
+  const StyledLink = StyledButton.withComponent('a');
 
   const link = (
     <StyledLink href={href} {...other} disabled={disabled} type={type}>
@@ -65,11 +65,11 @@ const Button = ({ children, disabled, href, type, ...other }) => {
 Button.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
-  type: PropTypes.oneOf(["button", "reset", "submit"])
+  type: PropTypes.oneOf(['button', 'reset', 'submit'])
 };
 
 Button.defaultProps = {
-  type: "button",
+  type: 'button',
   disabled: false,
   href: false
 };
