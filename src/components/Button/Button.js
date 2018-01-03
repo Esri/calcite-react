@@ -9,7 +9,7 @@ const Button = ({ children, disabled, href, type, ...other }) => {
     padding: 0.31rem 0.9rem;
     width: auto;
     color: #ffffff;
-    border: 1px solid #0079c1;
+    border: 1px solid ${props => props.theme.palette.blue};
     border-radius: 0;
     background-color: #0079c1;
     box-sizing: border-box;
@@ -17,8 +17,7 @@ const Button = ({ children, disabled, href, type, ...other }) => {
     cursor: pointer;
     white-space: nowrap;
     text-decoration: none;
-    font-family: 'Avenir Next W01', 'Avenir Next W00', 'Avenir Next', 'Avenir',
-      'Helvetica Neue', sans-serif;
+
     &:hover {
       text-decoration: none;
       background-color: #005e95;
