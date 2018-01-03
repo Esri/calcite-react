@@ -145,11 +145,11 @@ injectGlobal`
     min-height: 100%;
     margin: 0;
 
-    tracking: CalciteTheme.type.avenirTracking;
-    font-family: CalciteTheme.type.avenirFamily;
-    line-height: $baseline;
-    color: CalciteTheme.palette.typeColor;
-    background-color: CalciteTheme.palette.white;
+    tracking: 0;
+    font-family: "Avenir Next W01", "Avenir Next W00", "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
+    line-height: 1.55rem;
+    color: #4c4c4c;
+    background-color: #ffffff;
 
     -webkit-font-smoothing: subpixel-antialiased;
 
