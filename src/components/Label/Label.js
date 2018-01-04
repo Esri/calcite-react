@@ -4,20 +4,39 @@ import styled, { css } from 'styled-components';
 
 const Label = ({ children, ...other }) => {
   const StyledLabel = styled.mark`
-    background-color: #efefef;
+    background-color: ${props => props.theme.palette.lightestGray};
     padding: 0.25em 0.5em;
     border-radius: 3px;
     font-size: 0.85em;
     line-height: 1;
     white-space: nowrap;
-    font-family: 'Avenir Next W01', 'Avenir Next W00', 'Avenir Next', 'Avenir',
-      'Helvetica Neue', sans-serif;
 
     ${props =>
       props.red &&
       css`
-        background-color: #de2900;
-        color: #ffffff;
+        background-color: ${props => props.theme.palette.red};
+        color: ${props => props.theme.palette.white};
+      `};
+
+    ${props =>
+      props.yellow &&
+      css`
+        background-color: ${props => props.theme.palette.lightYellow};
+        color: ${props => props.theme.palette.offBlack};
+      `};
+
+    ${props =>
+      props.green &&
+      css`
+        background-color: ${props => props.theme.palette.green};
+        color: ${props => props.theme.palette.white};
+      `};
+
+    ${props =>
+      props.blue &&
+      css`
+        background-color: ${props => props.theme.palette.blue};
+        color: ${props => props.theme.palette.white};
       `};
   `;
 

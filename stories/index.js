@@ -19,7 +19,7 @@ storiesOf('Button', module)
     return (
       <ThemeProvider theme={CalciteTheme}>
         <Fragment>
-          <GuideExample label="default">
+          <GuideExample>
             <Button onClick={action('clicked')}>default</Button>
           </GuideExample>
           <GuideExample label="transparent">
@@ -134,8 +134,17 @@ storiesOf('Label', module).add('default', () => {
   return (
     <ThemeProvider theme={CalciteTheme}>
       <Fragment>
-        <GuideExample label="default">
+        <GuideExample>
           <Label>default</Label>
+        </GuideExample>
+        <GuideExample label="blue">
+          <Label blue>blue</Label>
+        </GuideExample>
+        <GuideExample label="green">
+          <Label green>green</Label>
+        </GuideExample>
+        <GuideExample label="yellow">
+          <Label yellow>yellow</Label>
         </GuideExample>
         <GuideExample label="red">
           <Label red>red</Label>

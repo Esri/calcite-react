@@ -41,10 +41,14 @@ class GuideExample extends Component {
   }
 
   render() {
+    let label;
+    if (this.props.label) {
+      label = <GuideExampleLabel>{this.props.label}</GuideExampleLabel>;
+    }
     return (
       <GuideExampleContainer>
         {this.props.children}
-        <GuideExampleLabel>{this.props.label || 'default'}</GuideExampleLabel>
+        {label}
       </GuideExampleContainer>
     );
   }
