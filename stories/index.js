@@ -4,6 +4,8 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
 
+import GuideExample from './GuideExample';
+
 import { ThemeProvider } from 'styled-components';
 import CalciteTheme from '../src/theme/CalciteTheme';
 
@@ -17,77 +19,70 @@ storiesOf('Button', module)
     return (
       <ThemeProvider theme={CalciteTheme}>
         <Fragment>
-          <div className="guide-example">
+          <GuideExample label="default">
             <Button onClick={action('clicked')}>default</Button>
-            <code className="guide-example-label">default</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="transparent">
             <Button transparent onClick={action('clicked')}>
               transparent
             </Button>
-            <code className="guide-example-label">transparent</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="clear">
             <Button clear onClick={action('clicked')}>
               clear
             </Button>
-            <code className="guide-example-label">clear</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="clear-gray">
             <Button clear-gray onClick={action('clicked')}>
               clear-gray
             </Button>
-            <code className="guide-example-label">clear-gray</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="clear-white">
             <Button clear-white onClick={action('clicked')}>
               clear-white
             </Button>
-            <code className="guide-example-label">clear-white</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="white">
             <Button white onClick={action('clicked')}>
               white
             </Button>
-            <code className="guide-example-label">white</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="small">
             <Button small onClick={action('clicked')}>
               small
             </Button>
-            <code className="guide-example-label">small</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="large">
             <Button large onClick={action('clicked')}>
               large
             </Button>
-            <code className="guide-example-label">large</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="fill">
+            <Button fill onClick={action('clicked')}>
+              fill
+            </Button>
+          </GuideExample>
+          <GuideExample label="half">
             <Button half onClick={action('clicked')}>
               half
             </Button>
-            <code className="guide-example-label">half</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="red">
             <Button red onClick={action('clicked')}>
               red
             </Button>
-            <code className="guide-example-label">red</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="green">
             <Button green onClick={action('clicked')}>
               green
             </Button>
-            <code className="guide-example-label">green</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="disabled">
             <Button disabled onClick={action('clicked')}>
               disabled
             </Button>
-            <code className="guide-example-label">disabled</code>
-          </div>
-          <div className="guide-example">
+          </GuideExample>
+          <GuideExample label="grouped">
             <nav>
               <Button grouped onClick={action('clicked')}>
                 One
@@ -99,8 +94,7 @@ storiesOf('Button', module)
                 Three
               </Button>
             </nav>
-            <code className="guide-example-label">grouped</code>
-          </div>
+          </GuideExample>
 
           <pre>
             <code>
@@ -115,7 +109,7 @@ storiesOf('Button', module)
     return (
       <ThemeProvider theme={CalciteTheme}>
         <Fragment>
-          <div className="guide-example">
+          <GuideExample label="href=&quot;&quot;">
             <Button
               href="https://google.com"
               target="_blank"
@@ -123,8 +117,7 @@ storiesOf('Button', module)
             >
               link button
             </Button>
-            <code className="guide-example-label">href</code>
-          </div>
+          </GuideExample>
 
           <pre>
             <code>
@@ -141,14 +134,12 @@ storiesOf('Label', module).add('default', () => {
   return (
     <ThemeProvider theme={CalciteTheme}>
       <Fragment>
-        <div className="guide-example">
-          <Label>label</Label>
-          <code className="guide-example-label">default</code>
-        </div>
-        <div className="guide-example">
-          <Label red>label</Label>
-          <code className="guide-example-label">red</code>
-        </div>
+        <GuideExample label="default">
+          <Label>default</Label>
+        </GuideExample>
+        <GuideExample label="red">
+          <Label red>red</Label>
+        </GuideExample>
 
         <pre>
           <code>

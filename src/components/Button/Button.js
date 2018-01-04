@@ -117,6 +117,13 @@ const Button = ({ children, disabled, href, type, ...other }) => {
       `};
 
     ${props =>
+      props.fill &&
+      css`
+        width: 100%;
+        text-align: center;
+      `};
+
+    ${props =>
       props.half &&
       css`
         width: 50%;
