@@ -227,7 +227,7 @@ storiesOf('Panel', module).add('default', () => {
           <Panel>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
-              Panels set background-color and frame content.
+              Panels set <code>background-color</code> and frame content.
             </PanelText>
           </Panel>
         </GuideExample>
@@ -235,7 +235,7 @@ storiesOf('Panel', module).add('default', () => {
           <Panel no-border>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
-              Panels set background-color and frame content.
+              Panels set <code>background-color</code> and frame content.
             </PanelText>
           </Panel>
         </GuideExample>
@@ -243,7 +243,7 @@ storiesOf('Panel', module).add('default', () => {
           <Panel no-padding>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
-              Panels set background-color and frame content.
+              Panels set <code>background-color</code> and frame content.
             </PanelText>
           </Panel>
         </GuideExample>
@@ -251,7 +251,7 @@ storiesOf('Panel', module).add('default', () => {
           <Panel dark>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
-              Panels set background-color and frame content.
+              Panels set <code>background-color</code> and frame content.
             </PanelText>
           </Panel>
         </GuideExample>
@@ -259,7 +259,7 @@ storiesOf('Panel', module).add('default', () => {
           <Panel black>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
-              Panels set background-color and frame content.
+              Panels set <code>background-color</code> and frame content.
             </PanelText>
           </Panel>
         </GuideExample>
@@ -267,7 +267,7 @@ storiesOf('Panel', module).add('default', () => {
           <Panel white>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
-              Panels set background-color and frame content.
+              Panels set <code>background-color</code> and frame content.
             </PanelText>
           </Panel>
         </GuideExample>
@@ -275,7 +275,7 @@ storiesOf('Panel', module).add('default', () => {
           <Panel light-blue>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
-              Panels set background-color and frame content.
+              Panels set <code>background-color</code> and frame content.
             </PanelText>
           </Panel>
         </GuideExample>
@@ -283,7 +283,7 @@ storiesOf('Panel', module).add('default', () => {
           <Panel blue>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
-              Panels set background-color and frame content.
+              Panels set <code>background-color</code> and frame content.
             </PanelText>
           </Panel>
         </GuideExample>
@@ -291,7 +291,7 @@ storiesOf('Panel', module).add('default', () => {
           <Panel dark-blue>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
-              Panels set background-color and frame content.
+              Panels set <code>background-color</code> and frame content.
             </PanelText>
           </Panel>
         </GuideExample>
