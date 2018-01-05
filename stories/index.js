@@ -13,6 +13,7 @@ import Button from '../src/components/Button';
 import Label from '../src/components/Label';
 import Loader from '../src/components/Loader';
 import Alert from '../src/components/Alert';
+import Panel, { PanelTitle, PanelText } from '../src/components/Panel';
 
 import './stories.css';
 
@@ -211,6 +212,93 @@ storiesOf('Alert', module).add('default', () => {
         <pre>
           <code>
             Alert sample code here (also needs styling to match calcite-web?)
+          </code>
+        </pre>
+      </Fragment>
+    </ThemeProvider>
+  );
+});
+
+storiesOf('Panel', module).add('default', () => {
+  return (
+    <ThemeProvider theme={CalciteTheme}>
+      <Fragment>
+        <GuideExample>
+          <Panel>
+            <PanelTitle>This is a panel.</PanelTitle>
+            <PanelText>
+              Panels set background-color and frame content.
+            </PanelText>
+          </Panel>
+        </GuideExample>
+        <GuideExample label="no-border">
+          <Panel no-border>
+            <PanelTitle>This is a panel.</PanelTitle>
+            <PanelText>
+              Panels set background-color and frame content.
+            </PanelText>
+          </Panel>
+        </GuideExample>
+        <GuideExample label="no-padding">
+          <Panel no-padding>
+            <PanelTitle>This is a panel.</PanelTitle>
+            <PanelText>
+              Panels set background-color and frame content.
+            </PanelText>
+          </Panel>
+        </GuideExample>
+        <GuideExample label="dark">
+          <Panel dark>
+            <PanelTitle>This is a panel.</PanelTitle>
+            <PanelText>
+              Panels set background-color and frame content.
+            </PanelText>
+          </Panel>
+        </GuideExample>
+        <GuideExample label="black">
+          <Panel black>
+            <PanelTitle>This is a panel.</PanelTitle>
+            <PanelText>
+              Panels set background-color and frame content.
+            </PanelText>
+          </Panel>
+        </GuideExample>
+        <GuideExample label="white">
+          <Panel white>
+            <PanelTitle>This is a panel.</PanelTitle>
+            <PanelText>
+              Panels set background-color and frame content.
+            </PanelText>
+          </Panel>
+        </GuideExample>
+        <GuideExample label="light-blue">
+          <Panel light-blue>
+            <PanelTitle>This is a panel.</PanelTitle>
+            <PanelText>
+              Panels set background-color and frame content.
+            </PanelText>
+          </Panel>
+        </GuideExample>
+        <GuideExample label="blue">
+          <Panel blue>
+            <PanelTitle>This is a panel.</PanelTitle>
+            <PanelText>
+              Panels set background-color and frame content.
+            </PanelText>
+          </Panel>
+        </GuideExample>
+        <GuideExample label="dark-blue">
+          <Panel dark-blue>
+            <PanelTitle>This is a panel.</PanelTitle>
+            <PanelText>
+              Panels set background-color and frame content.
+            </PanelText>
+          </Panel>
+        </GuideExample>
+
+        <pre>
+          <code>
+            Panel sample code here (also needs styling to match calcite-web?)
           </code>
         </pre>
       </Fragment>

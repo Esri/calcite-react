@@ -19,4 +19,14 @@ const unitCalc = (operand1, operand2, operator) => {
   return value;
 };
 
-export { unitCalc };
+const clearfix = () => {
+  return `
+    &::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  `;
+};
+
+export { unitCalc, clearfix };

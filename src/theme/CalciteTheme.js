@@ -27,6 +27,14 @@ const CalciteTheme = {
     transparentBlack: 'rgba(0, 0, 0, 0.75)',
     opaqueBlack: 'rgba(0, 0, 0, 0.85)',
 
+    // ┌────────────┐
+    // │ Brand Blue │
+    // └────────────┘
+    Brand_Blue_100: EsriColors.Brand_Blue_100, //  previously blue 14
+    Brand_Blue_150: EsriColors.Brand_Blue_150, // previously blue 13
+    Brand_Blue_200: EsriColors.Brand_Blue_200, // "Esri Blue", previously blue 12
+    Brand_Blue_250: EsriColors.Brand_Blue_250, // previously blue 11
+
     // ┌───────────┐
     // │ UI Colors │
     // └───────────┘
