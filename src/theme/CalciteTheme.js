@@ -37,26 +37,32 @@ const CalciteTheme = {
     darkBlue: EsriColors.Calcite_Highlight_Blue_400,
     darkerBlue: '#052942',
 
+    lightestGreen: EsriColors.Calcite_Green_100,
     lightGreen: EsriColors.Calcite_Green_150,
     green: EsriColors.Calcite_Green_250,
     darkGreen: EsriColors.Calcite_Green_a200,
 
+    lightestRed: EsriColors.Calcite_Red_100,
     lightRed: EsriColors.Calcite_Red_150,
     red: EsriColors.Brand_Red_100,
     darkRed: EsriColors.Calcite_Red_a200,
 
+    lightestOrange: EsriColors.Calcite_Orange_a100,
     lightOrange: EsriColors.Calcite_Orange_a150,
     orange: EsriColors.Calcite_Orange_a200,
     darkOrange: EsriColors.Calcite_Orange_a250,
 
+    lightestYellow: EsriColors.Calcite_Yellow_100,
     lightYellow: EsriColors.Calcite_Yellow_150,
     yellow: EsriColors.Calcite_Yellow_200,
     darkYellow: EsriColors.Calcite_Yellow_a150,
 
+    lightestPurple: EsriColors.Calcite_Purple_100,
     lightPurple: EsriColors.Calcite_Purple_150,
     purple: EsriColors.Calcite_Purple_200,
     darkPurple: EsriColors.Calcite_Purple_a150,
 
+    lightestBrown: EsriColors.Calcite_Brown_100,
     lightBrown: EsriColors.Calcite_Brown_150,
     brown: EsriColors.Calcite_Brown_250,
     darkBrown: EsriColors.Calcite_Brown_a200

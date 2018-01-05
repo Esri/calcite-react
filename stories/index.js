@@ -11,6 +11,8 @@ import CalciteTheme from '../src/theme/CalciteTheme';
 
 import Button from '../src/components/Button';
 import Label from '../src/components/Label';
+import Loader from '../src/components/Loader';
+import Alert from '../src/components/Alert';
 
 import './stories.css';
 
@@ -153,6 +155,62 @@ storiesOf('Label', module).add('default', () => {
         <pre>
           <code>
             Label sample code here (also needs styling to match calcite-web?)
+          </code>
+        </pre>
+      </Fragment>
+    </ThemeProvider>
+  );
+});
+
+storiesOf('Loader', module).add('default', () => {
+  return (
+    <ThemeProvider theme={CalciteTheme}>
+      <Fragment>
+        <GuideExample>
+          <Loader />
+        </GuideExample>
+        <GuideExample label="with text">
+          <Loader text="Loading..." />
+        </GuideExample>
+
+        <pre>
+          <code>
+            Loader sample code here (also needs styling to match calcite-web?)
+          </code>
+        </pre>
+      </Fragment>
+    </ThemeProvider>
+  );
+});
+
+storiesOf('Alert', module).add('default', () => {
+  return (
+    <ThemeProvider theme={CalciteTheme}>
+      <Fragment>
+        <GuideExample>
+          <Alert>Something Happened!</Alert>
+        </GuideExample>
+        <GuideExample label="closeLabel=&quot;close&quot;">
+          <Alert closeLabel="close" onClose={action('clicked')}>
+            Has close link!
+          </Alert>
+        </GuideExample>
+        <GuideExample label="red">
+          <Alert red>Something Happened!</Alert>
+        </GuideExample>
+        <GuideExample label="yellow">
+          <Alert yellow>Something Happened!</Alert>
+        </GuideExample>
+        <GuideExample label="green">
+          <Alert green>Something Happened!</Alert>
+        </GuideExample>
+        <GuideExample label="full">
+          <Alert full>Something Happened!</Alert>
+        </GuideExample>
+
+        <pre>
+          <code>
+            Alert sample code here (also needs styling to match calcite-web?)
           </code>
         </pre>
       </Fragment>
