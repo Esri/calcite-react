@@ -14,6 +14,12 @@ import Label from '../src/components/Label';
 import Loader from '../src/components/Loader';
 import Alert from '../src/components/Alert';
 import Panel, { PanelTitle, PanelText } from '../src/components/Panel';
+import Breadcrumbs, { Crumb } from '../src/components/Breadcrumbs';
+import TopNav, {
+  TopNavTitle,
+  TopNavList,
+  TopNavLink
+} from '../src/patterns/TopNav';
 
 import './stories.css';
 
@@ -299,6 +305,62 @@ storiesOf('Panel', module).add('default', () => {
         <pre>
           <code>
             Panel sample code here (also needs styling to match calcite-web?)
+          </code>
+        </pre>
+      </Fragment>
+    </ThemeProvider>
+  );
+});
+
+storiesOf('Breadcrumbs', module).add('default', () => {
+  return (
+    <ThemeProvider theme={CalciteTheme}>
+      <Fragment>
+        <GuideExample>
+          <Breadcrumbs>
+            <Crumb href="#">Thing</Crumb>
+            <Crumb>Thing</Crumb>
+            <Crumb href="#">Thing</Crumb>
+            <Crumb href="#">Current</Crumb>
+          </Breadcrumbs>
+        </GuideExample>
+        <GuideExample label="white">
+          <Breadcrumbs white>
+            <Crumb href="#">Thing</Crumb>
+            <Crumb>Thing</Crumb>
+            <Crumb href="#">Thing</Crumb>
+            <Crumb href="#">Current</Crumb>
+          </Breadcrumbs>
+        </GuideExample>
+
+        <pre>
+          <code>
+            Alert sample code here (also needs styling to match calcite-web?)
+          </code>
+        </pre>
+      </Fragment>
+    </ThemeProvider>
+  );
+});
+
+storiesOf('TopNav', module).add('default', () => {
+  return (
+    <ThemeProvider theme={CalciteTheme}>
+      <Fragment>
+        <GuideExample>
+          <TopNav>
+            <TopNavTitle href="#">ArcGIS for Developers</TopNavTitle>
+            <TopNavList>
+              <TopNavLink href="#">Plans</TopNavLink>
+              <TopNavLink href="#">Community</TopNavLink>
+              <TopNavLink href="#">Docs</TopNavLink>
+            </TopNavList>
+          </TopNav>
+        </GuideExample>
+
+        <pre>
+          <code>
+            Alert sample code here (also needs styling to match calcite-web?)
           </code>
         </pre>
       </Fragment>

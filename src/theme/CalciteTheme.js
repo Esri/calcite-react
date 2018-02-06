@@ -84,7 +84,15 @@ const CalciteTheme = {
     // Code Family
     codeTracking: 0,
     codeFamily:
-      '"Consolas", "Andale Mono", "Lucida Console", "Monaco", monospace'
+      '"Consolas", "Andale Mono", "Lucida Console", "Monaco", monospace',
+
+    // Structural
+    ratio: 1.414,
+    mediumRatio: 1.33,
+    smallRatio: 1.25,
+    bodySize: '1rem',
+    smallSize: '0.85rem',
+    indent: '1em'
   },
 
   // ┌──────────────┐
@@ -100,7 +108,7 @@ const CalciteTheme = {
   // └─────────────┘
   typeColor: EsriColors.Calcite_Gray_650,
   linkColor: EsriColors.Calcite_Highlight_Blue_350,
-  linkHover: '#052942',
+  linkHover: EsriColors.Calcite_Highlight_Blue_400,
 
   // ┌──────────────┐
   // │ Breakpoints  │
