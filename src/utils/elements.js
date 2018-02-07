@@ -25,4 +25,8 @@ const p = styled.p`
   margin-bottom: 1.55rem;
 `;
 
-export { a, h4, p };
+const figure = styled.figure`
+  margin: 0 0 1.55rem 0;
+`;
+
+export { a, h4, p, figure };

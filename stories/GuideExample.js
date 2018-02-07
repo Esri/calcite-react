@@ -46,7 +46,7 @@ class GuideExample extends Component {
       label = <GuideExampleLabel>{this.props.label}</GuideExampleLabel>;
     }
     return (
-      <GuideExampleContainer>
+      <GuideExampleContainer style={this.props.style}>
         {this.props.children}
         {label}
       </GuideExampleContainer>
