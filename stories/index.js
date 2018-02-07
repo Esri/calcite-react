@@ -375,8 +375,11 @@ storiesOf('Card', module)
             <Card shaped style={{ maxWidth: '320px' }}>
               <CardImage shaped src={cardImageCircle} alt="Bridge Club, 1942" />
               <CardContent shaped>
-                <CardTitle>Card with Image</CardTitle>
-                <p>Cards can have full-bleed images with optional captions.</p>
+                <p>
+                  Another class <code>shaped</code> allows for a stylized
+                  version of the card meant to work with geometrically-shaped
+                  images.
+                </p>
                 <Button clear>View Examples</Button>
               </CardContent>
             </Card>
