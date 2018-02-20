@@ -13,7 +13,7 @@ const unitCalc = (operand1, operand2, operator) => {
     operand2Unit = operand2.replace(operand2Value, '');
   }
 
-  let value = eval(operand1Value + operator + operand2Value);
+  let value = window.eval(operand1Value + operator + operand2Value); // eslint-disable-line no-eval
   value = value + (operand1Unit || operand2Unit);
 
   return value;
@@ -23,7 +23,7 @@ const unitCompare = (compare1, compare2, operator) => {
   const compare1Value = parseFloat(compare1);
   const compare2Value = parseFloat(compare2);
 
-  let value = eval(compare1Value + operator + compare2Value);
+  let value = window.eval(compare1Value + operator + compare2Value); // eslint-disable-line no-eval
 
   return value;
 };
