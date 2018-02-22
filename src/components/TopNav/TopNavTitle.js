@@ -4,7 +4,6 @@ import { a } from '../../utils/elements';
 
 const TopNavTitle = ({ children, href, ...other }) => {
   const StyledTopNavTitle = a.extend`
-    float: left;
     font-size: 1.2019rem;
     margin-right: 1.5rem;
     padding-top: 1.125rem;

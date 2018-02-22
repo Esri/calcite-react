@@ -32,7 +32,8 @@ import TopNav, {
   TopNavBrand,
   TopNavTitle,
   TopNavList,
-  TopNavLink
+  TopNavLink,
+  TopNavActionsList
 } from '../src/components/TopNav';
 
 import EsriLogo from './images/ESRI_Logo_Black.svg';
@@ -684,6 +685,10 @@ storiesOf('TopNav', module).add('default', () => {
               <TopNavLink href="#">Community</TopNavLink>
               <TopNavLink href="#">Docs</TopNavLink>
             </TopNavList>
+            <TopNavActionsList>
+              <TopNavLink href="#">Sign In</TopNavLink>
+              <Button clear>Sign Up</Button>
+            </TopNavActionsList>
           </TopNav>
         </GuideExample>
 
