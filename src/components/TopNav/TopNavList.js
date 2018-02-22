@@ -14,9 +14,9 @@ const TopNavList = ({ children, ...other }) => {
       `};
   `;
 
-  const panelTitle = <StyledTopNavList {...other}>{children}</StyledTopNavList>;
+  const topNavList = <StyledTopNavList {...other}>{children}</StyledTopNavList>;
 
-  return panelTitle;
+  return topNavList;
 };
 
 TopNavList.propTypes = {

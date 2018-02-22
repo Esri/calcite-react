@@ -35,13 +35,13 @@ const TopNavLink = ({ children, href, ...other }) => {
     }
   `;
 
-  const panelTitle = (
+  const topNavLink = (
     <StyledTopNavLink {...other} href={href}>
       {children}
     </StyledTopNavLink>
   );
 
-  return panelTitle;
+  return topNavLink;
 };
 
 TopNavLink.propTypes = {

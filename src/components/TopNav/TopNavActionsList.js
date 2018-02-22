@@ -16,11 +16,11 @@ const TopNav = ({ children, ...other }) => {
     }
   `;
 
-  const alert = (
+  const topNavActions = (
     <StyledTopNavActions {...other}>{children}</StyledTopNavActions>
   );
 
-  return alert;
+  return topNavActions;
 };
 
 TopNav.propTypes = {

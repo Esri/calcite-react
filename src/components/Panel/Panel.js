@@ -78,9 +78,9 @@ const Panel = ({ children, ...other }) => {
       `};
   `;
 
-  const alert = <StyledPanel {...other}>{children}</StyledPanel>;
+  const panel = <StyledPanel {...other}>{children}</StyledPanel>;
 
-  return alert;
+  return panel;
 };
 
 Panel.propTypes = {

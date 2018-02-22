@@ -14,9 +14,9 @@ const TopNav = ({ children, ...other }) => {
     ${clearfix()};
   `;
 
-  const alert = <StyledTopNav {...other}>{children}</StyledTopNav>;
+  const topNav = <StyledTopNav {...other}>{children}</StyledTopNav>;
 
-  return alert;
+  return topNav;
 };
 
 TopNav.propTypes = {

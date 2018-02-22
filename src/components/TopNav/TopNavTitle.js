@@ -16,13 +16,13 @@ const TopNavTitle = ({ children, href, ...other }) => {
     }
   `;
 
-  const panelText = (
+  const topNavTitle = (
     <StyledTopNavTitle {...other} href={href}>
       {children}
     </StyledTopNavTitle>
   );
 
-  return panelText;
+  return topNavTitle;
 };
 
 TopNavTitle.propTypes = {
