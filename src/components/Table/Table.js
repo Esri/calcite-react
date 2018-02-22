@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { fontSize } from '../../utils/helpers';
 
 const Table = ({ children, ...other }) => {
   const StyledTable = styled.table`
@@ -11,8 +12,10 @@ const Table = ({ children, ...other }) => {
     border: 1px solid ${props => props.theme.palette.lighterGray};
     text-align: left;
     overflow: auto;
+
     font-size: 0.875rem;
     line-height: 1.55rem;
+    /*${fontSize(2)};*/
 
     ${props =>
       props.blue &&
