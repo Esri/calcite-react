@@ -18,7 +18,7 @@ const TopNavTitle = ({ children, href, ...other }) => {
   `;
 
   const panelText = (
-    <StyledTopNavTitle {...other} href="href">
+    <StyledTopNavTitle {...other} href={href}>
       {children}
     </StyledTopNavTitle>
   );
@@ -31,6 +31,8 @@ TopNavTitle.propTypes = {
   href: PropTypes.string
 };
 
-TopNavTitle.defaultProps = {};
+TopNavTitle.defaultProps = {
+  href: '#'
+};
 
 export default TopNavTitle;

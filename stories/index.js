@@ -29,11 +29,13 @@ import Table, {
   TableCell
 } from '../src/components/Table';
 import TopNav, {
+  TopNavBrand,
   TopNavTitle,
   TopNavList,
   TopNavLink
-} from '../src/patterns/TopNav';
+} from '../src/components/TopNav';
 
+import EsriLogo from './images/ESRI_Logo_Black.svg';
 import cardImage from './images/bridge3.jpg';
 import cardImageCircle from './images/bridge-circle.png';
 
@@ -675,6 +677,7 @@ storiesOf('TopNav', module).add('default', () => {
       <Fragment>
         <GuideExample>
           <TopNav>
+            <TopNavBrand src={EsriLogo} />
             <TopNavTitle href="#">ArcGIS for Developers</TopNavTitle>
             <TopNavList>
               <TopNavLink href="#">Plans</TopNavLink>

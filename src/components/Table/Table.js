@@ -15,7 +15,9 @@ const Table = ({ children, ...other }) => {
 
     font-size: 0.875rem;
     line-height: 1.55rem;
-    /*${fontSize(2)};*/
+     {
+      /*fontSize(2)*/
+    }
 
     ${props =>
       props.blue &&
