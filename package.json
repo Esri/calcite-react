@@ -59,6 +59,7 @@
     "react": "^16.2.0"
   },
   "dependencies": {
+    "@storybook/addon-info": "^3.3.14",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
