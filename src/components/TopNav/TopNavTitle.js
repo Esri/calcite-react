@@ -4,7 +4,6 @@ import { a } from '../../utils/elements';
 
 const TopNavTitle = ({ children, href, ...other }) => {
   const StyledTopNavTitle = a.extend`
-    float: left;
     font-size: 1.2019rem;
     margin-right: 1.5rem;
     padding-top: 1.125rem;
@@ -18,7 +17,7 @@ const TopNavTitle = ({ children, href, ...other }) => {
   `;
 
   const panelText = (
-    <StyledTopNavTitle {...other} href="href">
+    <StyledTopNavTitle {...other} href={href}>
       {children}
     </StyledTopNavTitle>
   );
@@ -31,6 +30,8 @@ TopNavTitle.propTypes = {
   href: PropTypes.string
 };
 
-TopNavTitle.defaultProps = {};
+TopNavTitle.defaultProps = {
+  href: '#'
+};
 
 export default TopNavTitle;

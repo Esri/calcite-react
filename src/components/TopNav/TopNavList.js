@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components';
 
 const TopNavList = ({ children, ...other }) => {
   const StyledTopNavList = styled.nav`
-    float: left;
     padding: 0;
+    flex: 1 0 auto;
 
     ${props =>
       props.right &&
