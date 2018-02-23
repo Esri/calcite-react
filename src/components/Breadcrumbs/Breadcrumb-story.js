@@ -1,44 +1,40 @@
 import React, { Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
 import { ThemeProvider } from 'styled-components';
 
 import CalciteTheme from '../../../src/theme/CalciteTheme';
 import GuideExample from '../../../stories/GuideExample';
 
-import Alert from '../../../src/components/Alert';
+import Breadcrumbs, { Crumb } from './';
 
-storiesOf('Alert', module).add('default', () => {
-  return (
+const doc = `Breadcrumbs doc is TBD`;
+
+storiesOf('Breadcrumbs', module).add(
+  'Default',
+  withInfo(doc)(() => (
     <ThemeProvider theme={CalciteTheme}>
       <Fragment>
         <GuideExample>
-          <Alert>Something Happened!</Alert>
+          <Breadcrumbs>
+            <Crumb href="#">Thing</Crumb>
+            <Crumb>Thing</Crumb>
+            <Crumb href="#">Thing</Crumb>
+            <Crumb href="#">Current</Crumb>
+          </Breadcrumbs>
         </GuideExample>
-        <GuideExample label="closeLabel=&quot;close&quot;">
-          <Alert closeLabel="close" onClose={action('clicked')}>
-            Has close link!
-          </Alert>
+        <GuideExample
+          label="white"
+          style={{ background: CalciteTheme.palette.offBlack }}
+        >
+          <Breadcrumbs white>
+            <Crumb href="#">Thing</Crumb>
+            <Crumb>Thing</Crumb>
+            <Crumb href="#">Thing</Crumb>
+            <Crumb href="#">Current</Crumb>
+          </Breadcrumbs>
         </GuideExample>
-        <GuideExample label="red">
-          <Alert red>Something Happened!</Alert>
-        </GuideExample>
-        <GuideExample label="yellow">
-          <Alert yellow>Something Happened!</Alert>
-        </GuideExample>
-        <GuideExample label="green">
-          <Alert green>Something Happened!</Alert>
-        </GuideExample>
-        <GuideExample label="full">
-          <Alert full>Something Happened!</Alert>
-        </GuideExample>
-
-        <pre>
-          <code>
-            Alert sample code here (also needs styling to match calcite-web?)
-          </code>
-        </pre>
       </Fragment>
     </ThemeProvider>
-  );
-});
+  ))
+);
