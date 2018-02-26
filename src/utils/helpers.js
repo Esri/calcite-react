@@ -96,4 +96,12 @@ const fontSize = (scale, theme) => {
   `;
 };
 
-export { unitCalc, clearfix, fontSize };
+const subNavUnderline = props => {
+  return `
+    background-image: linear-gradient(to top, transparent 94%, ${
+      props.theme.palette.white
+    } 96%, ${props.theme.palette.white} 100%);
+  `;
+};
+
+export { unitCalc, clearfix, fontSize, subNavUnderline };
