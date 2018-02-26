@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const Card = ({ children, bar, ...other }) => {
+import { CardImage, CardContent } from './';
+
+const Card = ({ children, bar, shaped, ...other }) => {
   const StyledCard = styled.div`
     display: flex;
     flex-direction: column;
@@ -25,23 +27,39 @@ const Card = ({ children, bar, ...other }) => {
       `};
 
     ${props =>
-      props.shaped &&
+      shaped &&
       css`
         box-shadow: none;
         background: transparent;
       `};
   `;
 
-  const alert = <StyledCard {...other}>{children}</StyledCard>;
+  const childArray = React.Children.toArray(children);
+  const childrenWithProps = childArray.map((child, i) => {
+    switch (child.type) {
+      case CardImage:
+      case CardContent:
+        return React.cloneElement(child, {
+          shaped
+        });
+      default:
+        return child;
+    }
+  });
 
-  return alert;
+  const card = <StyledCard {...other}>{childrenWithProps}</StyledCard>;
+
+  return card;
 };
 
 Card.propTypes = {
   children: PropTypes.node,
-  bar: PropTypes.string
+  bar: PropTypes.string,
+  shaped: PropTypes.bool
 };
 
-Card.defaultProps = {};
+Card.defaultProps = {
+  shaped: false
+};
 
 export default Card;
