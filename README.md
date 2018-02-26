@@ -1,6 +1,9 @@
 # calcite-react
 
-## Quick Start
+## Before you Start
+`npm install`
+
+## NPM tasks
 
 ### To run `storybook`
 > Use `storybook` as the primary development/test environment.
@@ -21,3 +24,7 @@
 >This process is still very rudimentary and will be further developed!
 
 `npm run build`
+
+## References
+
+* [Calcite Web Documentation](http://esri.github.io/calcite-web/documentation/)
