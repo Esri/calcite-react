@@ -38,8 +38,8 @@ storiesOf('Card', module)
 
           <GuideExample label="shaped">
             <Card shaped style={{ maxWidth: '320px' }}>
-              <CardImage shaped src={cardImageCircle} alt="Bridge Club, 1942" />
-              <CardContent shaped>
+              <CardImage src={cardImageCircle} alt="Bridge Club, 1942" />
+              <CardContent>
                 <p>
                   Another class <code>shaped</code> allows for a stylized
                   version of the card meant to work with geometrically-shaped
