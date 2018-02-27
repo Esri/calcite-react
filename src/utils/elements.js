@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { fontSize } from './helpers';
 
 const a = styled.a`
   color: ${props => props.theme.linkColor};
@@ -15,18 +16,14 @@ const h1 = styled.h1`
   font-weight: 300;
   font-style: normal;
   margin: 0 0 ${props => props.theme.baseline} 0;
-
-  font-size: 2.40307rem;
-  line-height: 3.1rem;
+  ${fontSize(5)};
 `;
 
 const h4 = styled.h4`
   font-weight: 300;
   font-style: normal;
   margin: 0 0 ${props => props.theme.baseline} 0;
-
-  font-size: 1.414rem;
-  line-height: 1.55rem;
+  ${fontSize(2)};
 `;
 
 const p = styled.p`

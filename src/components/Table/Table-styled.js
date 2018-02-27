@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { unitCalc } from '../../utils/helpers';
-// import { fontSize } from '../../utils/helpers';
+import { fontSize } from '../../utils/helpers';
 
 const StyledTable = styled.table`
   width: 100%;
@@ -10,12 +10,7 @@ const StyledTable = styled.table`
   border: 1px solid ${props => props.theme.palette.lighterGray};
   text-align: left;
   overflow: auto;
-
-  font-size: 0.875rem;
-  line-height: 1.55rem;
-   {
-    /*fontSize(2)*/
-  }
+  ${fontSize(-2)};
 
   ${props =>
     props.blue &&
@@ -54,8 +49,7 @@ const StyledTableBody = styled.tbody`
       background-color: transparent;
       overflow: auto;
       width: 100%;
-      font-size: 1rem;
-      line-height: 1.55rem;
+      ${fontSize(0)};
     `};
 `;
 
@@ -110,8 +104,7 @@ const StyledTableHeader = styled.thead`
   border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
   font-weight: 400;
   font-style: normal;
-  font-size: 1rem;
-  line-height: 1.55rem;
+  ${fontSize(0)};
 
   ${props =>
     props.blue &&

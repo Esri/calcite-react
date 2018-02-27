@@ -79,11 +79,10 @@ const StyledTopNavList = styled.nav`
 `;
 
 const StyledTopNavTitle = a.extend`
-  font-size: 1.2019rem;
   margin-right: 1.5rem;
   padding-top: 1.125rem;
   padding-bottom: 1.25rem;
-  line-height: 1.5rem;
+  ${fontSize(1)};
   color: ${props => props.theme.palette.offBlack};
 
   &:hover {

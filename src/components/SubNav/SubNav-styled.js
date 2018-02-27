@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { a, h1 } from '../../utils/elements';
-import { subNavUnderline, unitCalc } from '../../utils/helpers';
+import { subNavUnderline, unitCalc, fontSize } from '../../utils/helpers';
 
 const StyledSubNav = styled.header`
   background-color: ${props => props.theme.palette.lightestGray};
@@ -17,8 +17,7 @@ const StyledSubNavLink = a.extend`
   margin: 0 .25em 0 0;
   font-family: ${props => props.theme.avenirFamily};
   color: ${props => props.theme.palette.offWhite};
-  font-size: 0.9375rem;
-  line-height: 1.55rem;
+  ${fontSize(-1)};
   background-color: ${props => props.theme.palette.transparentOffBlack};
   box-sizing: border-box;
   transition: background-color 150ms linear, color 150ms 150ms linear;
@@ -47,8 +46,7 @@ const StyledSubNavLink = a.extend`
 const StyledSubNavList = styled.nav``;
 
 const StyledSubNavTitle = h1.extend`
-  font-size: 1.9994rem;
-  line-height: 2.325rem;
+  ${fontSize(4)}
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
   margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
   display: inline-block;

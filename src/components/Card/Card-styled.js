@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { figure } from '../../utils/elements';
-import { h4 } from '../../utils/elements';
+import { figure, h4 } from '../../utils/elements';
+import { fontSize } from '../../utils/helpers';
 
 const StyledCard = styled.div`
   display: flex;
@@ -107,8 +107,7 @@ const StyledCardImageCaption = styled.figcaption`
   box-sizing: border-box;
   position: absolute;
   bottom: 0;
-  font-size: 0.875rem;
-  line-height: 1.55rem;
+  ${fontSize(-2)};
   padding: 0.35rem 1.25rem 0.35rem 1.25rem;
 `;
 

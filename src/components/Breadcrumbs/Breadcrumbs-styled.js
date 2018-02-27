@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 import { linkColor } from '../../utils/color';
 import { a } from '../../utils/elements';
+import { fontSize } from '../../utils/helpers';
 
 const StyledBreadcrumbs = styled.nav`
-  font-size: 0.875rem;
-  line-height: 1.55rem;
+  ${fontSize(-2)};
   color: ${props => props.theme.palette.darkerGray};
 
   ${props =>

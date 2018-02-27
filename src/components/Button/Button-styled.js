@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { fontSize } from '../../utils/helpers';
 
 const StyledButton = styled.button`
   position: relative;
@@ -14,8 +15,7 @@ const StyledButton = styled.button`
   transition: all 0.05s linear;
   cursor: pointer;
   white-space: nowrap;
-  font-size: 0.9375rem;
-  line-height: ${props => props.theme.baseline};
+  ${fontSize(-1)};
   letter-spacing: 0em;
   font-family: inherit;
 
@@ -100,16 +100,14 @@ const StyledButton = styled.button`
   ${props =>
     props.small &&
     css`
-      font-size: 0.875rem;
-      line-height: ${props => props.theme.baseline};
+      ${fontSize(-2)};
       padding: 0.2325rem 0.675rem;
     `};
 
   ${props =>
     props.large &&
     css`
-      font-size: 1rem;
-      line-height: ${props => props.theme.baseline};
+      ${fontSize(0)};
       padding: 0.5rem 1rem 0.5rem;
     `};
 

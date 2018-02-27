@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
+import { fontSize } from '../../utils/helpers';
 
 const StyledLabel = styled.mark`
   background-color: ${props => props.theme.palette.lightestGray};
   padding: 0.25em 0.5em;
   border-radius: 3px;
-  font-size: 0.85em;
-  line-height: 1;
+  ${fontSize(-2)};
   white-space: nowrap;
 
   ${props =>
