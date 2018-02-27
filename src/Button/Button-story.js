@@ -31,13 +31,13 @@ storiesOf('Button', module)
               clear
             </Button>
           </GuideExample>
-          <GuideExample label="clear-gray">
-            <Button clear-gray onClick={action('clicked')}>
+          <GuideExample label="clearGray">
+            <Button clearGray onClick={action('clicked')}>
               clear-gray
             </Button>
           </GuideExample>
-          <GuideExample label="clear-white">
-            <Button clear-white onClick={action('clicked')}>
+          <GuideExample label="clearWhite">
+            <Button clearWhite onClick={action('clicked')}>
               clear-white
             </Button>
           </GuideExample>

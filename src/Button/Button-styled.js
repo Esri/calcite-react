@@ -62,7 +62,7 @@ const StyledButton = styled.button`
     `};
 
   ${props =>
-    props['clear-gray'] &&
+    props.clearGray &&
     css`
       background: none;
       color: ${props => props.theme.palette.gray};
@@ -74,7 +74,7 @@ const StyledButton = styled.button`
     `};
 
   ${props =>
-    props['clear-white'] &&
+    props.clearWhite &&
     css`
       background: none;
       color: ${props => props.theme.palette.white};

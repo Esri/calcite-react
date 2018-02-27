@@ -34,7 +34,7 @@ const StyledCrumb = a.extend`
       ${linkColor(props.theme.palette.white, props.theme.palette.lightestGray)};
 
       &::before {
-        color: theme.palette.white;
+        color: ${props.theme.palette.white};
       }
     `};
 `;
@@ -65,7 +65,7 @@ const StyledSpanCrumb = styled.span`
       ${linkColor(props.theme.palette.white, props.theme.palette.lightestGray)};
 
       &::before {
-        color: theme.palette.white;
+        color: ${props.theme.palette.white};
       }
     `};
 `;

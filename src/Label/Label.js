@@ -3,7 +3,11 @@ import React from 'react';
 import { StyledLabel } from './Label-styled';
 
 const Label = ({ children, blue, green, yellow, red, ...other }) => {
-  const label = <StyledLabel {...other}>{children}</StyledLabel>;
+  const label = (
+    <StyledLabel blue={blue} green={green} yellow={yellow} red={red} {...other}>
+      {children}
+    </StyledLabel>
+  );
 
   return label;
 };
