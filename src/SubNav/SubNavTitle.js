@@ -2,18 +2,23 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledSubNavTitle } from './SubNav-styled';
 
-const SubNavTitle = ({ children, ...other }) => {
+const SubNavTitle = ({ children, blue, ...other }) => {
   const subNavTitle = (
-    <StyledSubNavTitle {...other}>{children}</StyledSubNavTitle>
+    <StyledSubNavTitle blue={blue} {...other}>
+      {children}
+    </StyledSubNavTitle>
   );
 
   return subNavTitle;
 };
 
 SubNavTitle.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  blue: PropTypes.bool
 };
 
-SubNavTitle.defaultProps = {};
+SubNavTitle.defaultProps = {
+  blue: false
+};
 
 export default SubNavTitle;

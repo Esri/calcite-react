@@ -4,7 +4,7 @@ import { StyledSubNavLink } from './SubNav-styled';
 
 const SubNavLink = ({ children, active, ...other }) => {
   const subNavLink = (
-    <StyledSubNavLink active {...other}>
+    <StyledSubNavLink active={active} {...other}>
       {children}
     </StyledSubNavLink>
   );
@@ -13,9 +13,12 @@ const SubNavLink = ({ children, active, ...other }) => {
 };
 
 SubNavLink.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  active: PropTypes.bool
 };
 
-SubNavLink.defaultProps = {};
+SubNavLink.defaultProps = {
+  active: false
+};
 
 export default SubNavLink;

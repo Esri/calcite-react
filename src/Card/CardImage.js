@@ -13,8 +13,8 @@ const CardImage = ({ children, src, caption, alt, shaped, wide, ...other }) => {
   }
 
   const cardImage = (
-    <StyledCardImageWrap shaped wide {...other}>
-      <StyledCardImage wide src={src} alt={alt} />
+    <StyledCardImageWrap shaped={shaped} wide={wide} {...other}>
+      <StyledCardImage wide={wide} src={src} alt={alt} />
       {figcaption}
     </StyledCardImageWrap>
   );
@@ -31,6 +31,12 @@ CardImage.propTypes = {
   wide: PropTypes.bool
 };
 
-CardImage.defaultProps = {};
+CardImage.defaultProps = {
+  src: '',
+  caption: '',
+  alt: '',
+  shaped: false,
+  wide: false
+};
 
 export default CardImage;

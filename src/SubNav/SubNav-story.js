@@ -19,7 +19,9 @@ storiesOf('SubNav', module).add(
           <SubNav>
             <SubNavTitle href="#">Fields</SubNavTitle>
             <SubNavList>
-              <SubNavLink href="#">Glens</SubNavLink>
+              <SubNavLink active href="#">
+                Glens
+              </SubNavLink>
               <SubNavLink href="#">Dales</SubNavLink>
               <SubNavLink href="#">Meadows</SubNavLink>
             </SubNavList>
@@ -27,19 +29,13 @@ storiesOf('SubNav', module).add(
         </GuideExample>
         <GuideExample label="blue">
           <SubNav blue>
-            <SubNavTitle blue href="#">
-              Fields
-            </SubNavTitle>
-            <SubNavList blue>
-              <SubNavLink blue active href="#">
+            <SubNavTitle href="#">Fields</SubNavTitle>
+            <SubNavList>
+              <SubNavLink active href="#">
                 Glens
               </SubNavLink>
-              <SubNavLink blue href="#">
-                Dales
-              </SubNavLink>
-              <SubNavLink blue href="#">
-                Meadows
-              </SubNavLink>
+              <SubNavLink href="#">Dales</SubNavLink>
+              <SubNavLink href="#">Meadows</SubNavLink>
             </SubNavList>
           </SubNav>
         </GuideExample>

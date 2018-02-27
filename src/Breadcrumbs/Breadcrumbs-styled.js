@@ -6,23 +6,6 @@ import { fontSize } from '../utils/helpers';
 const StyledBreadcrumbs = styled.nav`
   ${fontSize(-2)};
   color: ${props => props.theme.palette.darkerGray};
-
-  ${props =>
-    props.white &&
-    css`
-      > a,
-      > span {
-        color: ${props.theme.palette.white};
-        ${linkColor(
-          props.theme.palette.white,
-          props.theme.palette.lightestGray
-        )};
-
-        &::before {
-          color: theme.palette.white;
-        }
-      }
-    `};
 `;
 
 const StyledCrumb = a.extend`
@@ -43,6 +26,17 @@ const StyledCrumb = a.extend`
   &:last-child {
     font-weight: 600;
   }
+
+  ${props =>
+    props.white &&
+    css`
+      color: ${props.theme.palette.white};
+      ${linkColor(props.theme.palette.white, props.theme.palette.lightestGray)};
+
+      &::before {
+        color: theme.palette.white;
+      }
+    `};
 `;
 
 const StyledSpanCrumb = styled.span`
@@ -63,6 +57,17 @@ const StyledSpanCrumb = styled.span`
   &:last-child {
     font-weight: 600;
   }
+
+  ${props =>
+    props.white &&
+    css`
+      color: ${props.theme.palette.white};
+      ${linkColor(props.theme.palette.white, props.theme.palette.lightestGray)};
+
+      &::before {
+        color: theme.palette.white;
+      }
+    `};
 `;
 
 export { StyledBreadcrumbs, StyledCrumb, StyledSpanCrumb };

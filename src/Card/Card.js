@@ -4,14 +4,19 @@ import { StyledCard } from './Card-styled';
 
 import { CardImage, CardContent } from './';
 
-const Card = ({ children, bar, shaped, ...other }) => {
+const Card = ({ children, bar, shaped, wide, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
       case CardImage:
+        return React.cloneElement(child, {
+          shaped,
+          wide
+        });
       case CardContent:
         return React.cloneElement(child, {
-          shaped
+          shaped,
+          wide
         });
       default:
         return child;
@@ -19,7 +24,7 @@ const Card = ({ children, bar, shaped, ...other }) => {
   });
 
   const card = (
-    <StyledCard bar shaped {...other}>
+    <StyledCard bar={bar} shaped={shaped} wide={wide} {...other}>
       {childrenWithProps}
     </StyledCard>
   );
@@ -30,11 +35,14 @@ const Card = ({ children, bar, shaped, ...other }) => {
 Card.propTypes = {
   children: PropTypes.node,
   bar: PropTypes.string,
-  shaped: PropTypes.bool
+  shaped: PropTypes.bool,
+  wide: PropTypes.bool
 };
 
 Card.defaultProps = {
-  shaped: false
+  bar: '',
+  shaped: false,
+  wide: false
 };
 
 export default Card;

@@ -2,11 +2,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledCrumb, StyledSpanCrumb } from './Breadcrumbs-styled';
 
-const Crumb = ({ children, href, ...other }) => {
-  const spanCrumb = <StyledSpanCrumb {...other}>{children}</StyledSpanCrumb>;
+const Crumb = ({ children, white, href, ...other }) => {
+  const spanCrumb = (
+    <StyledSpanCrumb white={white} {...other}>
+      {children}
+    </StyledSpanCrumb>
+  );
 
   const crumb = (
-    <StyledCrumb {...other} href={href}>
+    <StyledCrumb white={white} {...other} href={href}>
       {children}
     </StyledCrumb>
   );
@@ -16,9 +20,13 @@ const Crumb = ({ children, href, ...other }) => {
 
 Crumb.propTypes = {
   children: PropTypes.node,
+  white: PropTypes.bool,
   href: PropTypes.string
 };
 
-Crumb.defaultProps = {};
+Crumb.defaultProps = {
+  white: false,
+  href: ''
+};
 
 export default Crumb;
