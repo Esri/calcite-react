@@ -1,32 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import { StyledCardContent } from './Card-styled';
 
 const CardContent = ({ children, wide, shaped, ...other }) => {
-  const StyledCardContent = styled.div`
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    word-wrap: break-word;
-
-    ${wide &&
-      css`
-        display: block;
-        flex: 1 1 75%;
-      `};
-
-    ${props =>
-      shaped &&
-      css`
-        border: 1px solid ${props => props.theme.palette.transparentOffWhite};
-        box-shadow: ${props => props.theme.boxShadow};
-        padding-top: 4rem;
-      `};
-  `;
-
   const panelText = (
-    <StyledCardContent {...other}>{children}</StyledCardContent>
+    <StyledCardContent wide shaped {...other}>
+      {children}
+    </StyledCardContent>
   );
 
   return panelText;

@@ -1,12 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { p } from '../../utils/elements';
+import { StyledPanelText } from './Panel-styled';
 
 const PanelText = ({ children, ...other }) => {
-  const StyledPanelText = p.extend`
-    margin-bottom: 0rem;
-  `;
-
   const panelText = <StyledPanelText {...other}>{children}</StyledPanelText>;
 
   return panelText;

@@ -1,12 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { h4 } from '../../utils/elements';
+import { StyledCardTitle } from './Card-styled';
 
 const CardTitle = ({ children, ...other }) => {
-  const StyledCardTitle = h4.extend`
-    margin-bottom: 0.775rem;
-  `;
-
   const cardTitle = <StyledCardTitle {...other}>{children}</StyledCardTitle>;
 
   return cardTitle;
