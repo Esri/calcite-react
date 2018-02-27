@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { unitCalc } from '../../utils/helpers';
-import { linkColor } from '../../utils/color';
-import { a } from '../../utils/elements';
+import { unitCalc } from '../utils/helpers';
+import { linkColor } from '../utils/color';
+import { a } from '../utils/elements';
 
 const StyledAlert = styled.div`
   padding: ${props => unitCalc(props.theme.baseline, 2, '/')};

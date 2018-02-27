@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { unitCalc } from '../../utils/helpers';
-import { fontSize } from '../../utils/helpers';
+import { unitCalc } from '../utils/helpers';
+import { fontSize } from '../utils/helpers';
 
 const StyledTable = styled.table`
   width: 100%;

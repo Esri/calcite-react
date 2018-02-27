@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { unitCalc } from '../../utils/helpers';
+import { unitCalc } from '../utils/helpers';
 
 const loaderVariables = {
   loaderWidth: '0.85rem',

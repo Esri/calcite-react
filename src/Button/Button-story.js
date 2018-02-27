@@ -4,8 +4,8 @@ import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import { ThemeProvider } from 'styled-components';
 
-import CalciteTheme from '../../../src/theme/CalciteTheme';
-import GuideExample from '../../../stories/GuideExample';
+import CalciteTheme from '../../src/theme/CalciteTheme';
+import GuideExample from '../../stories/GuideExample';
 
 import Button from './';
 

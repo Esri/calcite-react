@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { fontSize } from '../../utils/helpers';
+import { fontSize } from '../utils/helpers';
 
 const StyledButton = styled.button`
   position: relative;

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { clearfix, fontSize } from '../../utils/helpers';
-import { a } from '../../utils/elements';
+import { clearfix, fontSize } from '../utils/helpers';
+import { a } from '../utils/elements';
 
 const StyledTopNav = styled.header`
   display: flex;

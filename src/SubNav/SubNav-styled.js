@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { a, h1 } from '../../utils/elements';
-import { subNavUnderline, unitCalc, fontSize } from '../../utils/helpers';
+import { a, h1 } from '../utils/elements';
+import { subNavUnderline, unitCalc, fontSize } from '../utils/helpers';
 
 const StyledSubNav = styled.header`
   background-color: ${props => props.theme.palette.lightestGray};

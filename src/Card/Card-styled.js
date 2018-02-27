@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { figure, h4 } from '../../utils/elements';
-import { fontSize } from '../../utils/helpers';
+import { figure, h4 } from '../utils/elements';
+import { fontSize } from '../utils/helpers';
 
 const StyledCard = styled.div`
   display: flex;

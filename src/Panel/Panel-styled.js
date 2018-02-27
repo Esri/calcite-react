@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { unitCalc, clearfix } from '../../utils/helpers';
-import { p } from '../../utils/elements';
-import { h4 } from '../../utils/elements';
+import { unitCalc, clearfix } from '../utils/helpers';
+import { p } from '../utils/elements';
+import { h4 } from '../utils/elements';
 
 const StyledPanel = styled.div`
   ${clearfix()};

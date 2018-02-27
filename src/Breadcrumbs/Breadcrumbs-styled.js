@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { linkColor } from '../../utils/color';
-import { a } from '../../utils/elements';
-import { fontSize } from '../../utils/helpers';
+import { linkColor } from '../utils/color';
+import { a } from '../utils/elements';
+import { fontSize } from '../utils/helpers';
 
 const StyledBreadcrumbs = styled.nav`
   ${fontSize(-2)};

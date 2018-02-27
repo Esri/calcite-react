@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { ThemeProvider } from 'styled-components';
 
-import CalciteTheme from '../../../src/theme/CalciteTheme';
-import GuideExample from '../../../stories/GuideExample';
+import CalciteTheme from '../../src/theme/CalciteTheme';
+import GuideExample from '../../stories/GuideExample';
 
 import SubNav, { SubNavTitle, SubNavList, SubNavLink } from './';
 

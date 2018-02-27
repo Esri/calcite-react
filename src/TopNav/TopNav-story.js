@@ -3,9 +3,9 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { ThemeProvider } from 'styled-components';
 
-import CalciteTheme from '../../../src/theme/CalciteTheme';
-import GuideExample from '../../../stories/GuideExample';
-import EsriLogo from '../../../stories/images/ESRI_Logo_Black.svg';
+import CalciteTheme from '../../src/theme/CalciteTheme';
+import GuideExample from '../../stories/GuideExample';
+import EsriLogo from '../../stories/images/ESRI_Logo_Black.svg';
 import Button from '../Button';
 
 import TopNav, {
