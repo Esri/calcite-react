@@ -1,13 +1,22 @@
 {
   "name": "calcite-react",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Calcite components for React",
   "main": "dist/index.js",
+  "module": "dist/es/index.js",
+  "browser": "dist/umd/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "npm run storybook",
     "precommit": "lint-staged",
     "clean-dist": "rm -rf ./dist",
-    "build": "npm run clean-dist && NODE_ENV=production `npm bin`/babel ./src --out-dir ./dist",
+    "build": "npm run clean-dist && NODE_ENV=production && npm run build:main && npm run build:copy-files",
+    "build:main": "babel ./src --out-dir ./dist",
+    "build:es": "BABEL_ENV=es babel ./src/index.js --out-file ./dist/es/index.js",
+    "build:copy-files": "babel-node ./scripts/copy-files.js",
+    "build_rollup": "rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o docs",
     "lint": "eslint src/** stories/index.js",
@@ -55,16 +64,22 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
+    "rollup": "^0.56.3",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-node-resolve": "^3.0.3",
     "styled-components": "^2.4.0"
   },
   "peerDependencies": {
-    "react": "^16.2.0"
+    "react": "^16.2.0",
+    "styled-components": "^2.4.0"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-1": "^6.24.1"
+    "babel-preset-stage-1": "^6.24.1",
+    "carbon-components-react": "^5.24.2",
+    "fs-extra": "^5.0.0"
   }
 }
