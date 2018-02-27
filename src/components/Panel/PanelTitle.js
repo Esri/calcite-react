@@ -1,12 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { h4 } from '../../utils/elements';
+import { StyledPanelTitle } from './Panel-styled';
 
 const PanelTitle = ({ children, ...other }) => {
-  const StyledPanelTitle = h4.extend`
-    margin-bottom: 0.775rem;
-  `;
-
   const panelTitle = <StyledPanelTitle {...other}>{children}</StyledPanelTitle>;
 
   return panelTitle;

@@ -1,19 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import { StyledTableHeaderRow } from './Table-styled';
 
 const TableHeaderRow = ({ children, ...other }) => {
-  const StyledTableHeaderRow = styled.tr`
-    ${props =>
-      props.blue &&
-      css`
-        &:nth-child(even) {
-          background-color: ${props => props.theme.palette.lighterBlue};
-          color: ${props => props.theme.palette.typeColor};
-        }
-      `};
-  `;
-
   const tableHeaderRow = (
     <StyledTableHeaderRow {...other}>{children}</StyledTableHeaderRow>
   );
