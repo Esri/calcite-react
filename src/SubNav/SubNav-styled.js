@@ -1,9 +1,15 @@
 import styled, { css } from 'styled-components';
 import { a, h1 } from '../utils/elements';
-import { subNavUnderline, unitCalc, fontSize } from '../utils/helpers';
+import {
+  subNavUnderline,
+  unitCalc,
+  fontSize,
+  clearfix
+} from '../utils/helpers';
 
 const StyledSubNav = styled.header`
   background-color: ${props => props.theme.palette.lightestGray};
+  ${clearfix()};
 
   ${props =>
     props.blue &&
@@ -14,7 +20,7 @@ const StyledSubNav = styled.header`
 
 const StyledSubNavLink = a.extend`
   padding: .25em .75em;
-  margin: 0 .25em 0 0;
+  margin: 0 0 0 .25em;
   font-family: ${props => props.theme.avenirFamily};
   color: ${props => props.theme.palette.offWhite};
   ${fontSize(-1)};
@@ -43,14 +49,23 @@ const StyledSubNavLink = a.extend`
     `}
 `;
 
-const StyledSubNavList = styled.nav``;
+const StyledSubNavList = styled.nav`
+  float: left;
+`;
+
+const StyledSubNavActions = styled.nav`
+  float: right;
+  margin: -0.5em 0.5em 0;
+`;
 
 const StyledSubNavTitle = h1.extend`
   ${fontSize(4)}
+  margin-left: .25em;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
   margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
   display: inline-block;
   line-height: 1.25;
+  width: 100%;
 
   ${props =>
     props.blue &&
@@ -59,4 +74,10 @@ const StyledSubNavTitle = h1.extend`
     `};
 `;
 
-export { StyledSubNav, StyledSubNavLink, StyledSubNavList, StyledSubNavTitle };
+export {
+  StyledSubNav,
+  StyledSubNavLink,
+  StyledSubNavList,
+  StyledSubNavTitle,
+  StyledSubNavActions
+};

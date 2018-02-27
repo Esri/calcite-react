@@ -6,7 +6,8 @@ import { ThemeProvider } from 'styled-components';
 import CalciteTheme from '../../src/theme/CalciteTheme';
 import GuideExample from '../../stories/GuideExample';
 
-import SubNav, { SubNavTitle, SubNavList, SubNavLink } from './';
+import SubNav, { SubNavTitle, SubNavList, SubNavLink, SubNavActions } from './';
+import Button from '../Button/Button';
 
 const doc = `SubNav doc is TBD`;
 
@@ -37,6 +38,23 @@ storiesOf('SubNav', module).add(
               <SubNavLink href="#">Dales</SubNavLink>
               <SubNavLink href="#">Meadows</SubNavLink>
             </SubNavList>
+          </SubNav>
+        </GuideExample>
+        <GuideExample label="with actions">
+          <SubNav blue>
+            <SubNavTitle href="#">Fields</SubNavTitle>
+            <SubNavList>
+              <SubNavLink active href="#">
+                Glens
+              </SubNavLink>
+              <SubNavLink href="#">Dales</SubNavLink>
+              <SubNavLink href="#">Meadows</SubNavLink>
+            </SubNavList>
+            <SubNavActions>
+              <Button white small>
+                New Field
+              </Button>
+            </SubNavActions>
           </SubNav>
         </GuideExample>
       </Fragment>
