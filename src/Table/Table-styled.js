@@ -25,7 +25,7 @@ const StyledTable = styled.table`
     `};
 
   ${props =>
-    props['no-table'] &&
+    props.noTable &&
     css`
       width: auto;
       background-color: transparent;
@@ -43,7 +43,7 @@ const StyledTableBody = styled.tbody`
   width: 100%;
 
   ${props =>
-    props['no-table'] &&
+    props.noTable &&
     css`
       border: none;
       background-color: transparent;
@@ -92,7 +92,7 @@ const StyledTableCell = styled.td`
     `};
 
   ${props =>
-    props['no-table'] &&
+    props.noTable &&
     css`
       background-color: transparent;
       border: none;
@@ -123,7 +123,7 @@ const StyledTableHeader = styled.thead`
     `};
 
   ${props =>
-    props['no-table'] &&
+    props.noTable &&
     css`
       border: none;
       background-color: transparent;
@@ -152,7 +152,7 @@ const StyledTableHeaderCell = styled.th`
     `};
 
   ${props =>
-    props['no-table'] &&
+    props.noTable &&
     css`
       background-color: transparent;
       border: none;
@@ -210,7 +210,7 @@ const StyledTableRow = styled.tr`
     `};
 
   ${props =>
-    props['no-table'] &&
+    props.noTable &&
     css`
       border: none;
       text-align: left;

@@ -4,7 +4,7 @@ import { StyledTable } from './Table-styled';
 
 import { TableHeader, TableBody } from './';
 
-const Table = ({ children, blue, striped, plain, ...other }) => {
+const Table = ({ children, blue, striped, plain, noTable, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
@@ -12,12 +12,14 @@ const Table = ({ children, blue, striped, plain, ...other }) => {
         return React.cloneElement(child, {
           blue,
           striped,
-          plain
+          plain,
+          noTable
         });
       case TableHeader:
         return React.cloneElement(child, {
           blue,
-          plain
+          plain,
+          noTable
         });
       default:
         return child;
@@ -25,7 +27,7 @@ const Table = ({ children, blue, striped, plain, ...other }) => {
   });
 
   const table = (
-    <StyledTable blue={blue} plain={plain} {...other}>
+    <StyledTable blue={blue} plain={plain} noTable={noTable} {...other}>
       {childrenWithProps}
     </StyledTable>
   );
@@ -37,13 +39,15 @@ Table.propTypes = {
   children: PropTypes.node,
   blue: PropTypes.bool,
   striped: PropTypes.bool,
-  plain: PropTypes.bool
+  plain: PropTypes.bool,
+  noTable: PropTypes.bool
 };
 
 Table.defaultProps = {
   blue: false,
   striped: false,
-  plain: false
+  plain: false,
+  noTable: false
 };
 
 export default Table;

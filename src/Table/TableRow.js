@@ -4,7 +4,7 @@ import { StyledTableRow } from './Table-styled';
 
 import { TableCell } from './';
 
-const TableRow = ({ children, blue, striped, plain, ...other }) => {
+const TableRow = ({ children, blue, striped, plain, noTable, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
@@ -12,7 +12,8 @@ const TableRow = ({ children, blue, striped, plain, ...other }) => {
         return React.cloneElement(child, {
           blue,
           striped,
-          plain
+          plain,
+          noTable
         });
       default:
         return child;
@@ -20,7 +21,13 @@ const TableRow = ({ children, blue, striped, plain, ...other }) => {
   });
 
   const tableRow = (
-    <StyledTableRow blue={blue} striped={striped} plain={plain} {...other}>
+    <StyledTableRow
+      blue={blue}
+      striped={striped}
+      plain={plain}
+      noTable={noTable}
+      {...other}
+    >
       {childrenWithProps}
     </StyledTableRow>
   );
@@ -32,13 +39,15 @@ TableRow.propTypes = {
   children: PropTypes.node,
   blue: PropTypes.bool,
   striped: PropTypes.bool,
-  plain: PropTypes.bool
+  plain: PropTypes.bool,
+  noTable: PropTypes.bool
 };
 
 TableRow.defaultProps = {
   blue: false,
   striped: false,
-  plain: false
+  plain: false,
+  noTable: false
 };
 
 export default TableRow;

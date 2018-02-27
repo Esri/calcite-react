@@ -4,14 +4,15 @@ import { StyledTableHeaderRow } from './Table-styled';
 
 import { TableHeaderCell } from './';
 
-const TableHeaderRow = ({ children, blue, plain, ...other }) => {
+const TableHeaderRow = ({ children, blue, plain, noTable, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
       case TableHeaderCell:
         return React.cloneElement(child, {
           blue,
-          plain
+          plain,
+          noTable
         });
       default:
         return child;
@@ -30,12 +31,14 @@ const TableHeaderRow = ({ children, blue, plain, ...other }) => {
 TableHeaderRow.propTypes = {
   children: PropTypes.node,
   blue: PropTypes.bool,
-  plain: PropTypes.bool
+  plain: PropTypes.bool,
+  noTable: PropTypes.bool
 };
 
 TableHeaderRow.defaultProps = {
   blue: false,
-  plain: false
+  plain: false,
+  noTable: false
 };
 
 export default TableHeaderRow;

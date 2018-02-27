@@ -30,7 +30,7 @@ const StyledPanel = styled.div`
     `};
 
   ${props =>
-    props['dark-blue'] &&
+    props.darkBlue &&
     css`
       background-color: ${props => props.theme.palette.Brand_Blue_250};
       color: ${props => props.theme.palette.white};
@@ -46,7 +46,7 @@ const StyledPanel = styled.div`
     `};
 
   ${props =>
-    props['light-blue'] &&
+    props.lightBlue &&
     css`
       background-color: ${props => props.theme.palette.lightBlue};
       color: ${props => props.theme.palette.black};
@@ -65,13 +65,13 @@ const StyledPanel = styled.div`
     `};
 
   ${props =>
-    props['no-border'] &&
+    props.noBorder &&
     css`
       border: none;
     `};
 
   ${props =>
-    props['no-padding'] &&
+    props.noPadding &&
     css`
       padding: 0;
     `};

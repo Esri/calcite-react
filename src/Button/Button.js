@@ -23,13 +23,14 @@ const Button = ({ children, disabled, href, type, ...other }) => {
 Button.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
-  type: PropTypes.oneOf(['button', 'reset', 'submit'])
+  type: PropTypes.oneOf(['button', 'reset', 'submit']),
+  href: PropTypes.string
 };
 
 Button.defaultProps = {
   type: 'button',
   disabled: false,
-  href: false
+  href: ''
 };
 
 export default Button;

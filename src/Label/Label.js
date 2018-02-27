@@ -2,16 +2,25 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledLabel } from './Label-styled';
 
-const Label = ({ children, ...other }) => {
+const Label = ({ children, blue, green, yellow, red, ...other }) => {
   const label = <StyledLabel {...other}>{children}</StyledLabel>;
 
   return label;
 };
 
 Label.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  blue: PropTypes.bool,
+  green: PropTypes.bool,
+  yellow: PropTypes.bool,
+  red: PropTypes.bool
 };
 
-Label.defaultProps = {};
+Label.defaultProps = {
+  blue: false,
+  green: false,
+  yellow: false,
+  red: false
+};
 
 export default Label;

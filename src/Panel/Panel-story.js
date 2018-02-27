@@ -23,16 +23,16 @@ storiesOf('Panel', module).add(
             </PanelText>
           </Panel>
         </GuideExample>
-        <GuideExample label="no-border">
-          <Panel no-border>
+        <GuideExample label="noBorder">
+          <Panel noBorder>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
               Panels set <code>background-color</code> and frame content.
             </PanelText>
           </Panel>
         </GuideExample>
-        <GuideExample label="no-padding">
-          <Panel no-padding>
+        <GuideExample label="noPadding">
+          <Panel noPadding>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
               Panels set <code>background-color</code> and frame content.
@@ -63,8 +63,8 @@ storiesOf('Panel', module).add(
             </PanelText>
           </Panel>
         </GuideExample>
-        <GuideExample label="light-blue">
-          <Panel light-blue>
+        <GuideExample label="lightBlue">
+          <Panel lightBlue>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
               Panels set <code>background-color</code> and frame content.
@@ -79,8 +79,8 @@ storiesOf('Panel', module).add(
             </PanelText>
           </Panel>
         </GuideExample>
-        <GuideExample label="dark-blue">
-          <Panel dark-blue>
+        <GuideExample label="darkBlue">
+          <Panel darkBlue>
             <PanelTitle>This is a panel.</PanelTitle>
             <PanelText>
               Panels set <code>background-color</code> and frame content.

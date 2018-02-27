@@ -26,6 +26,8 @@ Loader.propTypes = {
   text: PropTypes.string
 };
 
-Loader.defaultProps = {};
+Loader.defaultProps = {
+  text: ''
+};
 
 export default Loader;

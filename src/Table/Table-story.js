@@ -142,25 +142,25 @@ storiesOf('Table', module).add(
           </Table>
         </GuideExample>
 
-        <GuideExample label="no-table">
-          <Table no-table>
-            <TableHeader no-table>
-              <TableHeaderRow no-table>
-                <TableHeaderCell no-table>Thing 1</TableHeaderCell>
-                <TableHeaderCell no-table>Thing 2</TableHeaderCell>
-                <TableHeaderCell no-table>Thing 3</TableHeaderCell>
+        <GuideExample label="noTable">
+          <Table noTable>
+            <TableHeader>
+              <TableHeaderRow>
+                <TableHeaderCell>Thing 1</TableHeaderCell>
+                <TableHeaderCell>Thing 2</TableHeaderCell>
+                <TableHeaderCell>Thing 3</TableHeaderCell>
               </TableHeaderRow>
             </TableHeader>
-            <TableBody no-table>
-              <TableRow no-table>
-                <TableCell no-table>a</TableCell>
-                <TableCell no-table>b</TableCell>
-                <TableCell no-table>c</TableCell>
+            <TableBody>
+              <TableRow>
+                <TableCell>a</TableCell>
+                <TableCell>b</TableCell>
+                <TableCell>c</TableCell>
               </TableRow>
-              <TableRow no-table>
-                <TableCell no-table>x</TableCell>
-                <TableCell no-table>y</TableCell>
-                <TableCell no-table>z</TableCell>
+              <TableRow>
+                <TableCell>x</TableCell>
+                <TableCell>y</TableCell>
+                <TableCell>z</TableCell>
               </TableRow>
             </TableBody>
           </Table>
