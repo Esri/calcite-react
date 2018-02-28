@@ -15,6 +15,7 @@ const StyledTopNav = styled.header`
 const StyledTopNavActions = styled.div`
   display: flex;
   align-items: center;
+  padding: 0 ${props => props.theme.baseline};
 
   > * {
     margin-left: 0.75em;
@@ -62,9 +63,11 @@ const StyledTopNavLink = a.extend`
     outline: none;
   }
 
-  &.is-active {
-    border-bottom-color: ${props => props.theme.palette.blue};
-  }
+  ${props =>
+    props.active &&
+    css`
+      border-bottom-color: ${props.theme.palette.blue};
+    `};
 `;
 
 const StyledTopNavList = styled.nav`

@@ -156,7 +156,6 @@ const CalciteTheme = {
 //Do the global styles stuff
 injectGlobal`
   html {
-    overflow-y: scroll;
     height: 100%;
     font-size: 100%;
     font-family: 'Avenir Next W01', 'Avenir Next W00', 'Avenir Next', 'Avenir',

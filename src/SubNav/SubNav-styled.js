@@ -1,15 +1,11 @@
 import styled, { css } from 'styled-components';
 import { a, h1 } from '../utils/elements';
-import {
-  subNavUnderline,
-  unitCalc,
-  fontSize,
-  clearfix
-} from '../utils/helpers';
+import { subNavUnderline, unitCalc, fontSize } from '../utils/helpers';
 
 const StyledSubNav = styled.header`
   background-color: ${props => props.theme.palette.lightestGray};
-  ${clearfix()};
+  display: flex;
+  flex-wrap: wrap;
 
   ${props =>
     props.blue &&
@@ -50,22 +46,25 @@ const StyledSubNavLink = a.extend`
 `;
 
 const StyledSubNavList = styled.nav`
-  float: left;
+  flex: 1 0 auto;
+  display: flex;
+  align-items: flex-end;
+  margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
 `;
 
 const StyledSubNavActions = styled.nav`
-  float: right;
-  margin: -0.5em 0.5em 0;
+  margin: ${props => unitCalc(props.theme.baseline, 2, '/')} 0.5em 0.5em;
 `;
 
 const StyledSubNavTitle = h1.extend`
   ${fontSize(4)}
-  margin-left: .25em;
+  padding-left: .25em;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
+  margin-bottom: 0;
   display: inline-block;
   line-height: 1.25;
   width: 100%;
+  box-sizing: border-box;
 
   ${props =>
     props.blue &&
