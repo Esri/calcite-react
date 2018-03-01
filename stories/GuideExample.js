@@ -10,13 +10,13 @@ const GuideExampleContainer = styled.div`
   position: relative;
   clear: both;
 
-  &:last-child {
-    border-bottom: none;
-  }
-
   &:first-child {
     border-top: 1px solid #efefef;
     border-radius: 6px 6px 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 0 6px 6px;
   }
 `;
 

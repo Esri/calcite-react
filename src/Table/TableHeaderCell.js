@@ -25,9 +25,9 @@ TableHeaderCell.propTypes = {
 };
 
 TableHeaderCell.defaultProps = {
-  blue: false,
-  plain: false,
-  noTable: false
+  blue: undefined,
+  plain: undefined,
+  noTable: undefined
 };
 
 export default TableHeaderCell;
