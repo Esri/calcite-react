@@ -32,7 +32,7 @@ SubNav.propTypes = {
 };
 
 SubNav.defaultProps = {
-  blue: false
+  blue: undefined
 };
 
 export default SubNav;

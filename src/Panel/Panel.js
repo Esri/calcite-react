@@ -46,14 +46,14 @@ Panel.propTypes = {
 };
 
 Panel.defaultProps = {
-  noBorder: false,
-  noPadding: false,
-  dark: false,
-  black: false,
-  white: false,
-  lightBlue: false,
-  blue: false,
-  darkBlue: false
+  noBorder: undefined,
+  noPadding: undefined,
+  dark: undefined,
+  black: undefined,
+  white: undefined,
+  lightBlue: undefined,
+  blue: undefined,
+  darkBlue: undefined
 };
 
 export default Panel;

@@ -9,6 +9,8 @@ import GuideExample from '../../stories/GuideExample';
 import SubNav, { SubNavTitle, SubNavList, SubNavLink, SubNavActions } from './';
 import Button from '../Button/Button';
 
+import greenBlueBg from '../../stories/images/subNav-greenBlue-bg.png';
+
 const doc = `SubNav doc is TBD`;
 
 storiesOf('SubNav', module).add(
@@ -55,6 +57,24 @@ storiesOf('SubNav', module).add(
                 New Field
               </Button>
             </SubNavActions>
+          </SubNav>
+        </GuideExample>
+        <GuideExample label="backgroundImage">
+          <SubNav
+            backgroundImage={greenBlueBg}
+            gradientFromColor="#70be49"
+            gradientToColor="#1688aa"
+          >
+            <SubNavTitle href="#" style={{ color: '#fff' }}>
+              Fields
+            </SubNavTitle>
+            <SubNavList>
+              <SubNavLink active href="#">
+                Glens
+              </SubNavLink>
+              <SubNavLink href="#">Dales</SubNavLink>
+              <SubNavLink href="#">Meadows</SubNavLink>
+            </SubNavList>
           </SubNav>
         </GuideExample>
       </Fragment>

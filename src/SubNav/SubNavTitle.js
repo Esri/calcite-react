@@ -18,7 +18,7 @@ SubNavTitle.propTypes = {
 };
 
 SubNavTitle.defaultProps = {
-  blue: false
+  blue: undefined
 };
 
 export default SubNavTitle;

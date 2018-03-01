@@ -41,11 +41,11 @@ Alert.propTypes = {
 };
 
 Alert.defaultProps = {
-  blue: false,
-  green: false,
-  yellow: false,
-  red: false,
-  full: false,
+  blue: undefined,
+  green: undefined,
+  yellow: undefined,
+  red: undefined,
+  full: undefined,
   closeLabel: ''
 };
 

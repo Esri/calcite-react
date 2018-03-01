@@ -25,7 +25,7 @@ Crumb.propTypes = {
 };
 
 Crumb.defaultProps = {
-  white: false,
+  white: undefined,
   href: ''
 };
 

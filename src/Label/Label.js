@@ -21,10 +21,10 @@ Label.propTypes = {
 };
 
 Label.defaultProps = {
-  blue: false,
-  green: false,
-  yellow: false,
-  red: false
+  blue: undefined,
+  green: undefined,
+  yellow: undefined,
+  red: undefined
 };
 
 export default Label;

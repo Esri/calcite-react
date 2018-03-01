@@ -11,9 +11,15 @@ import cardImageCircle from '../../stories/images/bridge-circle.png';
 import Button from '../Button';
 
 import Card, { CardTitle, CardContent, CardImage } from './';
+import { StyledCard } from './Card-styled';
 
 const defaultDoc = 'doc tbd';
 const wideDoc = 'doc tbd';
+
+const CustomStyledCard = StyledCard.extend`
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 30px,
+    rgba(0, 0, 0, 0.23) 0px 6px 10px;
+`;
 
 storiesOf('Card', module)
   .add(
@@ -99,6 +105,28 @@ storiesOf('Card', module)
                   <code>bar="{'{color}'}"</code>
                 </p>
                 <Button clear>What Colors?</Button>
+              </CardContent>
+            </Card>
+          </GuideExample>
+
+          <GuideExample label="withComponent">
+            <Card
+              style={{ maxWidth: '320px' }}
+              withComponent={<CustomStyledCard />}
+            >
+              <CardImage
+                src={cardImage}
+                caption="Florida, January 1954"
+                alt="Bridge Club, 1954"
+              />
+              <CardContent>
+                <CardTitle>Card with a Custom Component</CardTitle>
+                <p>
+                  Cards can take a <code>withComponent</code> property, allowing
+                  you to pass in a custom StyledComponent to render the card
+                  with.
+                </p>
+                <Button>View Examples</Button>
               </CardContent>
             </Card>
           </GuideExample>

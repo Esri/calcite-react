@@ -4,7 +4,7 @@ import { StyledCard } from './Card-styled';
 
 import { CardImage, CardContent } from './';
 
-const Card = ({ children, bar, shaped, wide, ...other }) => {
+const Card = ({ children, bar, shaped, wide, withComponent, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
@@ -23,13 +23,24 @@ const Card = ({ children, bar, shaped, wide, ...other }) => {
     }
   });
 
+  let customCard;
+  if (withComponent) {
+    customCard = React.cloneElement(withComponent, {
+      bar: bar,
+      shaped: shaped,
+      wide: wide,
+      ...other,
+      children: childrenWithProps
+    });
+  }
+
   const card = (
     <StyledCard bar={bar} shaped={shaped} wide={wide} {...other}>
       {childrenWithProps}
     </StyledCard>
   );
 
-  return card;
+  return withComponent ? customCard : card;
 };
 
 Card.propTypes = {
@@ -41,8 +52,8 @@ Card.propTypes = {
 
 Card.defaultProps = {
   bar: '',
-  shaped: false,
-  wide: false
+  shaped: undefined,
+  wide: undefined
 };
 
 export default Card;

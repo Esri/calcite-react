@@ -27,10 +27,10 @@ TableCell.propTypes = {
 };
 
 TableCell.defaultProps = {
-  blue: false,
-  striped: false,
-  plain: false,
-  noTable: false
+  blue: undefined,
+  striped: undefined,
+  plain: undefined,
+  noTable: undefined
 };
 
 export default TableCell;

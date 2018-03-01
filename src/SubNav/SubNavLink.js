@@ -18,7 +18,7 @@ SubNavLink.propTypes = {
 };
 
 SubNavLink.defaultProps = {
-  active: false
+  active: undefined
 };
 
 export default SubNavLink;

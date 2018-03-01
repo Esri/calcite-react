@@ -88,18 +88,18 @@ Button.propTypes = {
 
 Button.defaultProps = {
   type: 'button',
-  transparent: false,
-  clear: false,
-  clearGray: false,
-  clearWhite: false,
-  white: false,
-  small: false,
-  large: false,
-  fill: false,
-  half: false,
-  red: false,
-  green: false,
-  disabled: false,
+  transparent: undefined,
+  clear: undefined,
+  clearGray: undefined,
+  clearWhite: undefined,
+  white: undefined,
+  small: undefined,
+  large: undefined,
+  fill: undefined,
+  half: undefined,
+  red: undefined,
+  green: undefined,
+  disabled: undefined,
   href: ''
 };
 

@@ -30,7 +30,7 @@ Breadcrumbs.propTypes = {
 };
 
 Breadcrumbs.defaultProps = {
-  white: false
+  white: undefined
 };
 
 export default Breadcrumbs;
