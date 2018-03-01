@@ -142,4 +142,16 @@ const subNavUnderline = props => {
   `;
 };
 
-export { unitCalc, clearfix, fontSize, subNavUnderline };
+const backgroundGradient = (img, fromColor, toColor) => {
+  if (!fromColor || !toColor) {
+    return `
+      background: url(${img}) no-repeat top center;
+    `;
+  } else {
+    return `
+      background: url(${img}) no-repeat top center, linear-gradient(to right, ${fromColor} 0%, ${toColor} 100%);
+    `;
+  }
+};
+
+export { unitCalc, clearfix, fontSize, subNavUnderline, backgroundGradient };

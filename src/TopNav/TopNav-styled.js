@@ -48,10 +48,6 @@ const StyledTopNavLink = a.extend`
   vertical-align: top;
   margin-left: .75em;
 
-  &:first-child {
-    margin-left: 0;
-  }
-
   &:hover,
   &:focus {
     color: ${props => props.theme.palette.blue};
@@ -68,11 +64,16 @@ const StyledTopNavLink = a.extend`
     css`
       border-bottom-color: ${props.theme.palette.blue};
     `};
+
+  .active > & {
+    border-bottom-color: ${props => props.theme.palette.blue};
+  }
 `;
 
 const StyledTopNavList = styled.nav`
   padding: 0;
   flex: 1 0 auto;
+  margin-left: -0.75em;
 
   ${props =>
     props.right &&

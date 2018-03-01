@@ -28,7 +28,9 @@ storiesOf('TopNav', module).add(
             <TopNavBrand src={EsriLogo} />
             <TopNavTitle href="#">ArcGIS for Developers</TopNavTitle>
             <TopNavList>
-              <TopNavLink href="#">Plans</TopNavLink>
+              <TopNavLink href="#" active>
+                Plans
+              </TopNavLink>
               <TopNavLink href="#">Community</TopNavLink>
               <TopNavLink href="#">Docs</TopNavLink>
             </TopNavList>

@@ -3,13 +3,17 @@ import React from 'react';
 import { StyledTopNavLink } from './TopNav-styled';
 
 const TopNavLink = ({ children, href, ...other }) => {
-  const topNavLink = (
+  const StyledDiv = StyledTopNavLink.withComponent('div');
+
+  const div = <StyledDiv {...other}>{children}</StyledDiv>;
+
+  const link = (
     <StyledTopNavLink {...other} href={href}>
       {children}
     </StyledTopNavLink>
   );
 
-  return topNavLink;
+  return href ? link : div;
 };
 
 TopNavLink.propTypes = {

@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
 import { a, h1 } from '../utils/elements';
-import { subNavUnderline, unitCalc, fontSize } from '../utils/helpers';
+import {
+  subNavUnderline,
+  unitCalc,
+  fontSize,
+  backgroundGradient
+} from '../utils/helpers';
 
 const StyledSubNav = styled.header`
   background-color: ${props => props.theme.palette.lightestGray};
@@ -11,6 +16,16 @@ const StyledSubNav = styled.header`
     props.blue &&
     css`
       background-color: ${props.theme.palette.darkerBlue};
+    `};
+
+  ${props =>
+    props.backgroundImage &&
+    css`
+      ${backgroundGradient(
+        props.backgroundImage,
+        props.gradientFromColor,
+        props.gradientToColor
+      )};
     `};
 `;
 
@@ -43,24 +58,31 @@ const StyledSubNavLink = a.extend`
         color: ${props.theme.palette.offBlack};
       }
     `}
+
+  .active > &,
+  .active > &:hover,
+  .active > &:focus {
+    background-color: ${props => props.theme.palette.white};
+    color: ${props => props.theme.palette.offBlack};
+  }
 `;
 
 const StyledSubNavList = styled.nav`
   flex: 1 0 auto;
   display: flex;
   align-items: flex-end;
-  margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
+  margin-top: 0.5em;
 `;
 
 const StyledSubNavActions = styled.nav`
-  margin: ${props => unitCalc(props.theme.baseline, 2, '/')} 0.5em 0.5em;
+  margin: 0.5em;
 `;
 
 const StyledSubNavTitle = h1.extend`
   ${fontSize(4)}
   padding-left: .25em;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  margin-bottom: 0;
+  margin-bottom: ${props => unitCalc(props.theme.baseline, 6, '/')};
   display: inline-block;
   line-height: 1.25;
   width: 100%;
