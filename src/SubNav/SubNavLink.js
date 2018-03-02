@@ -13,7 +13,9 @@ const SubNavLink = ({ children, active, ...other }) => {
 };
 
 SubNavLink.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   active: PropTypes.bool
 };
 

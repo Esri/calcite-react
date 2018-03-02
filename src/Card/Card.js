@@ -44,16 +44,16 @@ const Card = ({ children, bar, shaped, wide, withComponent, ...other }) => {
 };
 
 Card.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   bar: PropTypes.string,
+  /** Description TBD */
   shaped: PropTypes.bool,
+  /** Description TBD */
   wide: PropTypes.bool
 };
 
-Card.defaultProps = {
-  bar: '',
-  shaped: undefined,
-  wide: undefined
-};
+Card.defaultProps = {};
 
 export default Card;

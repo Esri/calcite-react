@@ -36,18 +36,18 @@ const Table = ({ children, blue, striped, plain, noTable, ...other }) => {
 };
 
 Table.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   blue: PropTypes.bool,
+  /** Description TBD */
   striped: PropTypes.bool,
+  /** Description TBD */
   plain: PropTypes.bool,
+  /** Description TBD */
   noTable: PropTypes.bool
 };
 
-Table.defaultProps = {
-  blue: undefined,
-  striped: undefined,
-  plain: undefined,
-  noTable: undefined
-};
+Table.defaultProps = {};
 
 export default Table;

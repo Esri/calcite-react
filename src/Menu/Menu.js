@@ -21,6 +21,7 @@ const Menu = ({ children, ...other }) => {
 };
 
 Menu.propTypes = {
+  /** Description TBD */
   children: PropTypes.node
 };
 

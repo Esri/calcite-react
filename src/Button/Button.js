@@ -69,38 +69,40 @@ const Button = ({
 };
 
 Button.propTypes = {
+  /** Description TBD */
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   transparent: PropTypes.bool,
+  /** Description TBD */
   clear: PropTypes.bool,
+  /** Description TBD */
   clearGray: PropTypes.bool,
+  /** Description TBD */
   clearWhite: PropTypes.bool,
+  /** Description TBD */
   white: PropTypes.bool,
+  /** Description TBD */
   small: PropTypes.bool,
+  /** Description TBD */
   large: PropTypes.bool,
+  /** Description TBD */
   fill: PropTypes.bool,
+  /** Description TBD */
   half: PropTypes.bool,
+  /** Description TBD */
   red: PropTypes.bool,
+  /** Description TBD */
   green: PropTypes.bool,
+  /** Description TBD */
   disabled: PropTypes.bool,
+  /** Description TBD */
   href: PropTypes.string
 };
 
 Button.defaultProps = {
-  type: 'button',
-  transparent: undefined,
-  clear: undefined,
-  clearGray: undefined,
-  clearWhite: undefined,
-  white: undefined,
-  small: undefined,
-  large: undefined,
-  fill: undefined,
-  half: undefined,
-  red: undefined,
-  green: undefined,
-  disabled: undefined,
-  href: ''
+  type: 'button'
 };
 
 export default Button;

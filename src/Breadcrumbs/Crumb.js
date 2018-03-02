@@ -19,14 +19,14 @@ const Crumb = ({ children, white, href, ...other }) => {
 };
 
 Crumb.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   white: PropTypes.bool,
+  /** Description TBD */
   href: PropTypes.string
 };
 
-Crumb.defaultProps = {
-  white: undefined,
-  href: ''
-};
+Crumb.defaultProps = {};
 
 export default Crumb;

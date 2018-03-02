@@ -19,18 +19,18 @@ const TableCell = ({ children, blue, striped, plain, noTable, ...other }) => {
 };
 
 TableCell.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   blue: PropTypes.bool,
+  /** Description TBD */
   striped: PropTypes.bool,
+  /** Description TBD */
   plain: PropTypes.bool,
+  /** Description TBD */
   noTable: PropTypes.bool
 };
 
-TableCell.defaultProps = {
-  blue: undefined,
-  striped: undefined,
-  plain: undefined,
-  noTable: undefined
-};
+TableCell.defaultProps = {};
 
 export default TableCell;

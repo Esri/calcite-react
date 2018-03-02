@@ -28,14 +28,14 @@ const CardContent = ({ children, wide, shaped, ...other }) => {
 };
 
 CardContent.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   wide: PropTypes.bool,
+  /** Description TBD */
   shaped: PropTypes.bool
 };
 
-CardContent.defaultProps = {
-  wide: false,
-  shaped: false
-};
+CardContent.defaultProps = {};
 
 export default CardContent;

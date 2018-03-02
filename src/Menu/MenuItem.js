@@ -9,6 +9,7 @@ const MenuItem = ({ children, ...other }) => {
 };
 
 MenuItem.propTypes = {
+  /** Description TBD */
   children: PropTypes.node
 };
 

@@ -18,16 +18,16 @@ const TableHeaderCell = ({ children, blue, plain, noTable, ...other }) => {
 };
 
 TableHeaderCell.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   blue: PropTypes.bool,
+  /** Description TBD */
   plain: PropTypes.bool,
+  /** Description TBD */
   noTable: PropTypes.bool
 };
 
-TableHeaderCell.defaultProps = {
-  blue: undefined,
-  plain: undefined,
-  noTable: undefined
-};
+TableHeaderCell.defaultProps = {};
 
 export default TableHeaderCell;

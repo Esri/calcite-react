@@ -23,11 +23,10 @@ const Loader = ({ text, ...other }) => {
 };
 
 Loader.propTypes = {
+  /** Description TBD */
   text: PropTypes.string
 };
 
-Loader.defaultProps = {
-  text: ''
-};
+Loader.defaultProps = {};
 
 export default Loader;

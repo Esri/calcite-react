@@ -23,6 +23,7 @@ const SideNav = ({ children, ...other }) => {
 };
 
 SideNav.propTypes = {
+  /** Description TBD */
   children: PropTypes.node
 };
 

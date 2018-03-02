@@ -25,12 +25,12 @@ const Breadcrumbs = ({ children, white, ...other }) => {
 };
 
 Breadcrumbs.propTypes = {
+  /** Crumb components to be rendered within Breadcrumbs. */
   children: PropTypes.node,
+  /** Color modifier for the Breadcrumbs. */
   white: PropTypes.bool
 };
 
-Breadcrumbs.defaultProps = {
-  white: undefined
-};
+Breadcrumbs.defaultProps = {};
 
 export default Breadcrumbs;

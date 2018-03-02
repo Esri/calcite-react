@@ -23,20 +23,20 @@ const CardImage = ({ children, src, caption, alt, shaped, wide, ...other }) => {
 };
 
 CardImage.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   src: PropTypes.string,
+  /** Description TBD */
   caption: PropTypes.string,
+  /** Description TBD */
   alt: PropTypes.string,
+  /** Description TBD */
   shaped: PropTypes.bool,
+  /** Description TBD */
   wide: PropTypes.bool
 };
 
-CardImage.defaultProps = {
-  src: '',
-  caption: '',
-  alt: '',
-  shaped: false,
-  wide: false
-};
+CardImage.defaultProps = {};
 
 export default CardImage;

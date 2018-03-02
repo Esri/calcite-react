@@ -13,12 +13,12 @@ const TopNavTitle = ({ children, href, ...other }) => {
 };
 
 TopNavTitle.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   href: PropTypes.string
 };
 
-TopNavTitle.defaultProps = {
-  href: '#'
-};
+TopNavTitle.defaultProps = {};
 
 export default TopNavTitle;

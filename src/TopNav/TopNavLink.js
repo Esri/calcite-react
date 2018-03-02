@@ -17,7 +17,9 @@ const TopNavLink = ({ children, href, ...other }) => {
 };
 
 TopNavLink.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   href: PropTypes.string
 };
 

@@ -9,6 +9,7 @@ const PanelText = ({ children, ...other }) => {
 };
 
 PanelText.propTypes = {
+  /** Description TBD */
   children: PropTypes.node
 };
 

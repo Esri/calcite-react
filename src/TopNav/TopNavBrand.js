@@ -13,11 +13,11 @@ const TopNavBrand = ({ children, href, src, alt, imageStyle, ...other }) => {
 };
 
 TopNavBrand.propTypes = {
+  /** Description TBD */
   children: PropTypes.node
 };
 
 TopNavBrand.defaultProps = {
-  href: '#',
   alt: 'Logo'
 };
 

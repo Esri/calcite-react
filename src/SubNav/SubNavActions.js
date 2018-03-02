@@ -11,6 +11,7 @@ const SubNavActions = ({ children, ...other }) => {
 };
 
 SubNavActions.propTypes = {
+  /** Description TBD */
   children: PropTypes.node
 };
 

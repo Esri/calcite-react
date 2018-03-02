@@ -11,6 +11,7 @@ const SideNavTitle = ({ children, ...other }) => {
 };
 
 SideNavTitle.propTypes = {
+  /** Description TBD */
   children: PropTypes.node
 };
 

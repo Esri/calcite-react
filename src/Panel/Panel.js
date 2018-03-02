@@ -34,26 +34,26 @@ const Panel = ({
 };
 
 Panel.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   noBorder: PropTypes.bool,
+  /** Description TBD */
   noPadding: PropTypes.bool,
+  /** Description TBD */
   dark: PropTypes.bool,
+  /** Description TBD */
   black: PropTypes.bool,
+  /** Description TBD */
   white: PropTypes.bool,
+  /** Description TBD */
   lightBlue: PropTypes.bool,
+  /** Description TBD */
   blue: PropTypes.bool,
+  /** Description TBD */
   darkBlue: PropTypes.bool
 };
 
-Panel.defaultProps = {
-  noBorder: undefined,
-  noPadding: undefined,
-  dark: undefined,
-  black: undefined,
-  white: undefined,
-  lightBlue: undefined,
-  blue: undefined,
-  darkBlue: undefined
-};
+Panel.defaultProps = {};
 
 export default Panel;

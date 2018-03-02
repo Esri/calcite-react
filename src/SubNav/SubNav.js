@@ -27,7 +27,9 @@ const SubNav = ({ children, blue, ...other }) => {
 };
 
 SubNav.propTypes = {
+  /** Description TBD */
   children: PropTypes.node,
+  /** Description TBD */
   blue: PropTypes.bool
 };
 

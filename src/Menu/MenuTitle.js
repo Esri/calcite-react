@@ -9,6 +9,7 @@ const MenuTitle = ({ children, ...other }) => {
 };
 
 MenuTitle.propTypes = {
+  /** Description TBD */
   children: PropTypes.node
 };
 

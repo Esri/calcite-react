@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Downshift from 'downshift';
 
@@ -60,5 +61,16 @@ const Select = props => {
     />
   );
 };
+
+Select.propTypes = {
+  /** Nodes to be used as options in the Select */
+  children: PropTypes.node,
+  /** Node to use as the input for the Select */
+  input: PropTypes.node,
+  /** Callback function fired when the value of the Select changes. */
+  onChange: PropTypes.func
+};
+
+Select.defaultProps = {};
 
 export default Select;

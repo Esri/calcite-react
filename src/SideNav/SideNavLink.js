@@ -9,6 +9,7 @@ const SideNavLink = ({ children, ...other }) => {
 };
 
 SideNavLink.propTypes = {
+  /** Description TBD */
   children: PropTypes.node
 };
 

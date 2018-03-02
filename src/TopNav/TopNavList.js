@@ -9,6 +9,7 @@ const TopNavList = ({ children, ...other }) => {
 };
 
 TopNavList.propTypes = {
+  /** Description TBD */
   children: PropTypes.node
 };
 
