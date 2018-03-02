@@ -80,6 +80,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "carbon-components-react": "^5.24.2",
+    "downshift": "^1.28.2",
     "fs-extra": "^5.0.0"
   }
 }
