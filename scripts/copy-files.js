@@ -37,10 +37,12 @@ function createPackageFile() {
     .then(data => JSON.parse(data))
     .then(packageData => {
       const {
-        author,
+        name,
         version,
         description,
         keywords,
+        author,
+        contributors,
         repository,
         license,
         bugs,
@@ -50,19 +52,20 @@ function createPackageFile() {
       } = packageData;
 
       const minimalPackage = {
-        name: 'calcite-react',
-        author,
+        name,
         version,
         description,
-        main: './index.js',
-        module: './index.es.js',
         keywords,
-        repository,
+        author,
+        contributors,
         license,
+        repository,
         bugs,
         homepage,
         peerDependencies,
         dependencies
+        // main: './index.js',
+        // module: './index.es.js',
       };
 
       return new Promise(resolve => {
