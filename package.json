@@ -33,7 +33,7 @@
     "build-storybook": "build-storybook -o docs",
     "lint": "eslint src/** stories/index.js",
     "test": "jest --coverage",
-    "release:patch": "npm run build && npm version patch && npm publish dist"
+    "release:patch": "npm version patch && npm run build && npm publish dist"
   },
   "jest": {
     "moduleNameMapper": {
