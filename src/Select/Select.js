@@ -2,22 +2,45 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Downshift from 'downshift';
 
+import {
+  StyledSelectWrapper,
+  StyledSelectInput,
+  StyledSelectMenu
+} from './Select-styled';
+import Menu from '../Menu';
+
 const Select = props => {
-  function getAnchorElement(input, getButtonProps, getInputProps) {
+  function getAnchorElement(
+    input,
+    getButtonProps,
+    getInputProps,
+    selectedItem
+  ) {
     if (input) {
       return React.cloneElement(input, {
         ...getButtonProps(),
         ...getInputProps(),
-        type: 'text',
-        style: { cursor: 'pointer' }
+        children: selectedItem ? selectedItem : props.placeholder
       });
     }
-    return <input {...getButtonProps()} />;
+    return (
+      <StyledSelectInput
+        {...getButtonProps()}
+        {...getInputProps()}
+        type="text"
+        placeholder={props.placeholder}
+      />
+    );
   }
 
   function itemToString(item) {
     // TODO... what to do if the item isn't a simple component with a string as a child?
-    return (item.props && item.props.children) || 'unknown';
+    let label;
+    if (item && item.props) {
+      label = item.props.label || item.props.children || '';
+    }
+
+    return label;
   }
 
   function onChange(selectedItem, downshiftProps) {
@@ -34,6 +57,7 @@ const Select = props => {
       itemToString={itemToString}
       onChange={onChange}
       render={({
+        getRootProps,
         getButtonProps,
         getInputProps,
         getItemProps,
@@ -41,22 +65,26 @@ const Select = props => {
         selectedItem,
         highlightedIndex
       }) => (
-        <div>
-          {getAnchorElement(props.input, getButtonProps, getInputProps)}
+        <StyledSelectWrapper {...getRootProps({ refKey: 'innerRef' })}>
+          {getAnchorElement(
+            props.input,
+            getButtonProps,
+            getInputProps,
+            selectedItem
+          )}
           {isOpen ? (
-            <div style={{ border: '4px solid lime' }}>
+            <Menu withComponent={<StyledSelectMenu />}>
               {props.children.map((child, index) =>
                 React.cloneElement(child, {
                   ...getItemProps({
                     item: child,
-                    key: index,
-                    style: { cursor: 'pointer', ...child.props.style }
+                    key: index
                   })
                 })
               )}
-            </div>
+            </Menu>
           ) : null}
-        </div>
+        </StyledSelectWrapper>
       )}
     />
   );
@@ -68,9 +96,13 @@ Select.propTypes = {
   /** Node to use as the input for the Select */
   input: PropTypes.node,
   /** Callback function fired when the value of the Select changes. */
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  /** Placeholder text for the input */
+  placeholder: PropTypes.string
 };
 
-Select.defaultProps = {};
+Select.defaultProps = {
+  placeholder: 'Select...'
+};
 
 export default Select;

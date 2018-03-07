@@ -54,6 +54,7 @@ const CalciteTheme = {
     lightRed: EsriColors.Calcite_Red_150,
     red: EsriColors.Brand_Red_100,
     darkRed: EsriColors.Calcite_Red_a200,
+    darkRed200: EsriColors.Calcite_Red_200,
 
     lightestOrange: EsriColors.Calcite_Orange_a100,
     lightOrange: EsriColors.Calcite_Orange_a150,
@@ -232,6 +233,28 @@ injectGlobal`
     select {
       padding-right: 8px;
     }
+  }
+
+  /* FORM PSEUDO ELEMENTS */
+
+  :placeholder {
+    color: #767676;
+  }
+  :input-placeholder {
+    color: #767676;
+  }
+  ::-webkit-input-placeholder {
+    color: #767676;
+  }
+  ::-moz-placeholder {
+    color: #767676;
+  }
+  :-ms-input-placeholder {
+    color: #767676;
+  }
+  ::-ms-value {
+    border: none;
+    background-color: transparent;
   }
 
   /* Type */

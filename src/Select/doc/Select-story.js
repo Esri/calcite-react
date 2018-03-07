@@ -8,6 +8,8 @@ import doc from './Select.md';
 import Alert from '../../Alert';
 import Card, { CardTitle, CardContent } from '../../Card';
 import Select from '../';
+import { MenuItem } from '../../Menu';
+import Button from '../../Button';
 
 storiesOf('Select', module)
   .add(
@@ -15,10 +17,10 @@ storiesOf('Select', module)
     withInfo(doc)(() => (
       <div>
         <GuideExample>
-          <Select input={<input />} onChange={action('onChange')}>
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
+          <Select onChange={action('onChange')}>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
           </Select>
         </GuideExample>
       </div>
@@ -29,13 +31,14 @@ storiesOf('Select', module)
     withInfo(doc)(() => (
       <div>
         <GuideExample>
-          <Select input={<input />} onChange={action('onChange')}>
+          <Select input={<Button />} onChange={action('onChange')}>
             <li value={10}>Go to Online</li>
             <option value={20}>Help</option>
             <Alert value={30}>Sign Out</Alert>
             <div value={40}>I'm a div!</div>
             <Card
               value={50}
+              label="Card Option"
               bar="green"
               style={{ margin: '0 5px', width: '300px' }}
             >

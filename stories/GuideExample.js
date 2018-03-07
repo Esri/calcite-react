@@ -12,11 +12,13 @@ const GuideExampleContainer = styled.div`
 
   &:first-child {
     border-top: 1px solid #efefef;
-    border-radius: 6px 6px 0 0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
   }
 
   &:last-child {
-    border-radius: 0 0 6px 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
   }
 `;
 
