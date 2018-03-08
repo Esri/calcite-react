@@ -18,6 +18,7 @@ StyledSelectButton = StyledSelectButton.extend`
 
 const StyledSelectMenu = StyledMenu.extend`
   position: absolute;
+  left: 0;
 `;
 
 export {

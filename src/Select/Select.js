@@ -11,24 +11,45 @@ import Menu from '../Menu';
 
 const Select = props => {
   function getAnchorElement(
-    input,
+    inputEl,
     getButtonProps,
     getInputProps,
+    placeholder,
     selectedItem
   ) {
-    if (input) {
-      return React.cloneElement(input, {
-        ...getButtonProps(),
-        ...getInputProps(),
-        children: selectedItem ? selectedItem : props.placeholder
-      });
+    // Use a label prop if it exists on the selected item
+    let selectedItemLabel;
+    if (selectedItem) {
+      selectedItemLabel =
+        selectedItem.props.label || selectedItem.props.children;
+    }
+    if (inputEl) {
+      const inputElType = inputEl.props.type;
+      if (
+        inputElType === 'button' ||
+        inputElType === 'submit' ||
+        inputElType === 'reset'
+      ) {
+        return React.cloneElement(inputEl, {
+          ...getButtonProps(),
+          ...getInputProps(),
+          children: selectedItemLabel ? selectedItemLabel : props.placeholder
+        });
+      } else if (inputElType === 'text') {
+        return React.cloneElement(inputEl, {
+          ...getButtonProps(),
+          ...getInputProps(),
+          ...inputEl.props,
+          placeholder: placeholder
+        });
+      }
     }
     return (
       <StyledSelectInput
         {...getButtonProps()}
         {...getInputProps()}
         type="text"
-        placeholder={props.placeholder}
+        placeholder={placeholder}
       />
     );
   }
@@ -65,11 +86,15 @@ const Select = props => {
         selectedItem,
         highlightedIndex
       }) => (
-        <StyledSelectWrapper {...getRootProps({ refKey: 'innerRef' })}>
+        <StyledSelectWrapper
+          {...getRootProps({ refKey: 'innerRef' })}
+          style={props.wrapperStyle}
+        >
           {getAnchorElement(
             props.input,
             getButtonProps,
             getInputProps,
+            props.placeholder,
             selectedItem
           )}
           {isOpen ? (
