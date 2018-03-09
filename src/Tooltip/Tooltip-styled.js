@@ -9,7 +9,6 @@ const StyledTooltip = styled.div`
   text-align: center;
   word-wrap: break-word;
   white-space: pre;
-  pointer-events: none;
   background: ${props => props.theme.palette.transparentBlack};
   border-radius: 3px;
 

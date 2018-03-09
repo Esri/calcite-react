@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import { Manager, Target, Popper, Arrow } from 'react-popper';
@@ -22,7 +21,9 @@ class Tooltip extends Component {
     transition: `opacity ${
       this.props.transitionDuration
     }ms cubic-bezier(0.4, 0.0, 0.2, 1) ${this.props.enterDelay}ms`,
-    opacity: 0
+    opacity: 0,
+    pointerEvents: 'none',
+    zIndex: '2000'
   };
 
   transitionStyles = {
@@ -46,7 +47,6 @@ class Tooltip extends Component {
     return (
       <Manager>
         <Target
-          innerRef={c => (this.target = findDOMNode(c))}
           style={{ display: 'inline-block' }}
           onMouseEnter={this._handleTargetEnter}
           onMouseLeave={this._handleTargetLeave}
@@ -61,9 +61,6 @@ class Tooltip extends Component {
             <Popper
               key="popper"
               component={getPopperEl}
-              innerRef={c => {
-                this.popper = findDOMNode(c);
-              }}
               placement={this.props.placement}
               style={{
                 ...this.defaultStyle,
