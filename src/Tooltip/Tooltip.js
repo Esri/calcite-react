@@ -20,7 +20,7 @@ class Tooltip extends Component {
   defaultStyle = {
     transition: `opacity ${
       this.props.transitionDuration
-    }ms cubic-bezier(0.4, 0.0, 0.2, 1) ${this.props.enterDelay}ms`,
+    }ms cubic-bezier(0.4, 0.0, 0.2, 1)`,
     opacity: 0,
     pointerEvents: 'none',
     zIndex: '2000'
@@ -53,10 +53,7 @@ class Tooltip extends Component {
         >
           {this.props.children}
         </Target>
-        <Transition
-          in={this.state.open}
-          timeout={this.props.transitionDuration}
-        >
+        <Transition in={this.state.open} timeout={this.props.enterDelay}>
           {state => (
             <Popper
               key="popper"

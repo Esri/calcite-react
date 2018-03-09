@@ -61,4 +61,16 @@ storiesOf('Tooltip', module)
         </GuideExample>
       </div>
     ))
+  )
+  .add(
+    'Delayed Tooltip',
+    withInfo(doc)(() => (
+      <div>
+        <GuideExample>
+          <Tooltip title="It took me a while to show up..." enterDelay={500}>
+            <CalciteLink>Hover Me</CalciteLink>
+          </Tooltip>
+        </GuideExample>
+      </div>
+    ))
   );
