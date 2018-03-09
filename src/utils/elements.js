@@ -90,7 +90,7 @@ const select = baseSelect.extend`
   }
 
   ${props =>
-    props.full &&
+    props.fullWidth &&
     css`
       width: 100%;
     `};
