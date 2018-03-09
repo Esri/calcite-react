@@ -17,12 +17,6 @@ const Select = props => {
     placeholder,
     selectedItem
   ) {
-    // Use a label prop if it exists on the selected item
-    let selectedItemLabel;
-    if (selectedItem) {
-      selectedItemLabel =
-        selectedItem.props.label || selectedItem.props.children;
-    }
     if (inputEl) {
       const inputElType = inputEl.props.type;
       if (
@@ -33,7 +27,9 @@ const Select = props => {
         return React.cloneElement(inputEl, {
           ...getButtonProps(),
           ...getInputProps(),
-          children: selectedItemLabel ? selectedItemLabel : props.placeholder
+          children: itemToString(selectedItem)
+            ? itemToString(selectedItem)
+            : props.placeholder
         });
       } else if (inputElType === 'text') {
         return React.cloneElement(inputEl, {
@@ -56,9 +52,9 @@ const Select = props => {
 
   function itemToString(item) {
     // TODO... what to do if the item isn't a simple component with a string as a child?
-    let label;
+    let label = item;
     if (item && item.props) {
-      label = item.props.label || item.props.children || '';
+      label = item.props.label || item.props.children || item;
     }
 
     return label;
@@ -73,10 +69,19 @@ const Select = props => {
     props.onChange(value, selectedItem);
   }
 
+  function _getItemFromValue(value) {
+    return props.children.filter(child => {
+      return child.props.value === value;
+    })[0];
+  }
+
   return (
     <Downshift
       itemToString={itemToString}
       onChange={onChange}
+      selectedItem={
+        props.selectedItem || _getItemFromValue(props.selectedValue)
+      }
       render={({
         getRootProps,
         getButtonProps,
@@ -122,6 +127,10 @@ Select.propTypes = {
   input: PropTypes.node,
   /** Callback function fired when the value of the Select changes. */
   onChange: PropTypes.func,
+  /** The selected item of the select */
+  selectedItem: PropTypes.node,
+  /** Value of the selected item */
+  selectedValue: PropTypes.node,
   /** Placeholder text for the input */
   placeholder: PropTypes.string
 };

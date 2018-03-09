@@ -12,6 +12,8 @@ import { MenuItem } from '../../Menu';
 import Button from '../../Button';
 import { StyledSelectInput } from '../Select-styled';
 
+import SelectStateExample from './SelectStateExample';
+
 storiesOf('Select', module)
   .add(
     'Basic',
@@ -28,22 +30,28 @@ storiesOf('Select', module)
     ))
   )
   .add(
+    'Controlled Select',
+    withInfo(doc)(() => (
+      <div>
+        <SelectStateExample />
+      </div>
+    ))
+  )
+  .add(
     'Custom Input',
     withInfo(doc)(() => (
       <div>
         <GuideExample>
-          <label>
-            <span>Value: </span>
-            <Select
-              input={<StyledSelectInput minimal type="text" />}
-              onChange={action('onChange')}
-              wrapperStyle={{ display: 'inline' }}
-            >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </label>
+          <span>Value: </span>
+          <Select
+            input={<StyledSelectInput minimal type="text" />}
+            onChange={action('onChange')}
+            wrapperStyle={{ display: 'inline' }}
+          >
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
         </GuideExample>
       </div>
     ))
