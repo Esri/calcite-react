@@ -46,6 +46,8 @@ const Select = props => {
         {...getInputProps()}
         type="text"
         placeholder={placeholder}
+        fullWidth={props.fullWidth}
+        minimal={props.minimal}
       />
     );
   }
@@ -132,7 +134,11 @@ Select.propTypes = {
   /** Value of the selected item */
   selectedValue: PropTypes.node,
   /** Placeholder text for the input */
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  /** Whether or not the select will fill its container's width */
+  fullWidth: PropTypes.bool,
+  /** A style variant for select inputs */
+  minimal: PropTypes.bool
 };
 
 Select.defaultProps = {
