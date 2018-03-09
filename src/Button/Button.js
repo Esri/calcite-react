@@ -11,7 +11,7 @@ const Button = ({
   white,
   small,
   large,
-  fill,
+  fullWidth,
   half,
   red,
   green,
@@ -47,7 +47,7 @@ const Button = ({
       white={white}
       small={small}
       large={large}
-      fill={fill}
+      fullWidth={fullWidth}
       half={half}
       red={red}
       green={green}
@@ -71,7 +71,7 @@ const Button = ({
       white={white}
       small={small}
       large={large}
-      fill={fill}
+      fullWidth={fullWidth}
       half={half}
       red={red}
       green={green}
@@ -108,7 +108,7 @@ Button.propTypes = {
   /** Description TBD */
   large: PropTypes.bool,
   /** Description TBD */
-  fill: PropTypes.bool,
+  fullWidth: PropTypes.bool,
   /** Description TBD */
   half: PropTypes.bool,
   /** Description TBD */

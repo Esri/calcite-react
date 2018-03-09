@@ -112,7 +112,7 @@ const StyledButton = styled.button`
     `};
 
   ${props =>
-    props.fill &&
+    props.fullWidth &&
     css`
       width: 100%;
       text-align: center;

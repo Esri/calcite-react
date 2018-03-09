@@ -61,9 +61,9 @@ storiesOf('Button', module)
           </Button>
         </GuideExample>
 
-        <GuideExample label="fill">
-          <Button fill onClick={action('clicked')}>
-            fill
+        <GuideExample label="fullWidth">
+          <Button fullWidth onClick={action('clicked')}>
+            fullWidth
           </Button>
         </GuideExample>
 
