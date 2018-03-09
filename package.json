@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "downshift": "^1.28.2",
+    "mdi-react": "^2.1.19",
     "outy": "^0.1.2",
     "react-popper": "^0.8.2",
     "react-transition-group": "^2.2.1"
