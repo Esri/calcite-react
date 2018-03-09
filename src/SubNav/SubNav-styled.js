@@ -68,24 +68,33 @@ const StyledSubNavLink = a.extend`
 `;
 
 const StyledSubNavList = styled.nav`
-  flex: 1 0 auto;
   display: flex;
   align-items: flex-end;
-  margin-top: 0.5em;
+  margin-top: 0em;
+  flex: 1 0 75%;
+  padding-left: 0.25em;
+  box-sizing: border-box;
 `;
 
 const StyledSubNavActions = styled.nav`
   margin: 0.5em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  nav + & {
+    margin-top: -0.5em;
+  }
 `;
 
 const StyledSubNavTitle = h1.extend`
   ${fontSize(4)}
   padding-left: .25em;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  margin-bottom: ${props => unitCalc(props.theme.baseline, 6, '/')};
+  margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
   display: inline-block;
   line-height: 1.25;
-  width: 100%;
+  flex: 1 0 75%;
   box-sizing: border-box;
 
   ${props =>

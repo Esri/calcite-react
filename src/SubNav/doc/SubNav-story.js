@@ -58,6 +58,16 @@ storiesOf('SubNav', module).add(
           </SubNavActions>
         </SubNav>
       </GuideExample>
+      <GuideExample label="no nav - with actions">
+        <SubNav blue>
+          <SubNavTitle href="#">Fields</SubNavTitle>
+          <SubNavActions>
+            <Button white small>
+              New Field
+            </Button>
+          </SubNavActions>
+        </SubNav>
+      </GuideExample>
       <GuideExample label="backgroundImage">
         <SubNav
           backgroundImage={greenBlueBg}
