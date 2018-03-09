@@ -1,49 +1,103 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
+import outy from 'outy';
 import { Manager, Target, Popper } from 'react-popper';
 
 import { StyledPopover } from './Popover-styled';
 
 import './PopoverStyles.css';
 
-const Popover = props => {
-  const defaultStyle = {
-    transition: `opacity ${props.transitionDuration}ms ease-in-out`,
-    opacity: 0,
-    zIndex: 2000
-  };
+const transitionStyles = {
+  entering: { opacity: 0 },
+  entered: {
+    opacity: 1,
+    pointerEvents: 'auto'
+  }
+};
 
-  const transitionStyles = {
-    entering: { opacity: 0 },
-    entered: { opacity: 1 }
-  };
+class Popover extends Component {
+  constructor(props) {
+    super(props);
 
-  function getPopperEl({ innerRef, style, ...popperProps }) {
+    this.defaultStyle = {
+      transition: `opacity ${
+        this.props.transitionDuration
+      }ms cubic-bezier(0.4, 0.0, 0.2, 1)`,
+      opacity: 0,
+      zIndex: 2000,
+      pointerEvents: 'none'
+    };
+  }
+
+  componentDidMount() {
+    this._setOutsideTap();
+  }
+
+  componentDidUpdate(lastProps, lastState) {
+    if (lastProps.open !== this.props.open) {
+      setTimeout(() => this._setOutsideTap());
+    }
+  }
+
+  getPopperEl({ innerRef, style, ...popperProps }) {
     return <div ref={innerRef} style={{ ...style }} {...popperProps} />;
   }
 
-  return (
-    <Manager>
-      <Target style={{ display: 'inline-block' }}>{props.targetEl}</Target>
-      <Transition in={props.open} timeout={props.transitionDuration}>
-        {state => (
-          <Popper
-            key="popper"
-            component={getPopperEl}
-            placement={props.placement}
-            style={{
-              ...defaultStyle,
-              ...transitionStyles[state]
-            }}
-          >
-            <StyledPopover>{props.children}</StyledPopover>
-          </Popper>
-        )}
-      </Transition>
-    </Manager>
-  );
-};
+  _setOutsideTap = () => {
+    const elements = [this.target];
+
+    if (this.popper) {
+      elements.push(this.popper);
+    }
+
+    if (this.outsideTap) {
+      this.outsideTap.remove();
+    }
+
+    this.outsideTap = outy(
+      elements,
+      ['click', 'touchstart'],
+      this._handleOutsideTap
+    );
+  };
+
+  _handleOutsideTap = () => {
+    this.props.onRequestClose();
+  };
+
+  render() {
+    return (
+      <Manager>
+        <Target
+          innerRef={c => (this.target = findDOMNode(c))}
+          style={{ display: 'inline-block' }}
+        >
+          {this.props.targetEl}
+        </Target>
+        <Transition in={this.props.open} timeout={0}>
+          {state => (
+            <Popper
+              key="popper"
+              innerRef={c => {
+                this.popper = findDOMNode(c);
+              }}
+              component={this.getPopperEl}
+              placement={this.props.placement}
+              style={{
+                ...this.defaultStyle,
+                ...transitionStyles[state]
+              }}
+            >
+              <StyledPopover>{this.props.children}</StyledPopover>
+            </Popper>
+          )}
+        </Transition>
+      </Manager>
+    );
+  }
+}
 
 Popover.propTypes = {
   /** Nodes to be used as options in the Popover */
