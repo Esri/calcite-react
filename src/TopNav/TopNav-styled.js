@@ -38,8 +38,8 @@ const StyledTopNavBrandImg = styled.img`
 `;
 
 const StyledTopNavLink = a.extend`
-  ${props => fontSize(-1, props.theme)};
-  color: ${props => props.theme.palette.offBlack};
+  ${fontSize(0)};
+  color: ${props => props.theme.palette.darkGray};
   padding-top: 1.1625rem;
   padding-bottom: calc(1.1625rem - 4px);
   border-bottom: 4px solid transparent;
@@ -47,6 +47,7 @@ const StyledTopNavLink = a.extend`
   display: inline-block;
   vertical-align: top;
   margin-left: .75em;
+  font-weight: 300;
 
   &:hover,
   &:focus {
@@ -62,10 +63,12 @@ const StyledTopNavLink = a.extend`
   ${props =>
     props.active &&
     css`
+      color: ${props => props.theme.palette.offBlack};
       border-bottom-color: ${props.theme.palette.blue};
     `};
 
   .active > & {
+    color: ${props => props.theme.palette.offBlack};
     border-bottom-color: ${props => props.theme.palette.blue};
   }
 `;
@@ -87,7 +90,7 @@ const StyledTopNavTitle = a.extend`
   padding-top: 1.125rem;
   padding-bottom: 1.25rem;
   ${fontSize(1)};
-  color: ${props => props.theme.palette.offBlack};
+  color: ${props => props.theme.palette.black};
 
   &:hover {
     text-decoration: none;
