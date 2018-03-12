@@ -9,6 +9,10 @@ import Tooltip from '../Tooltip';
 import Label from '../../Label';
 import { a as CalciteLink } from '../../utils/elements';
 
+import Card, { CardTitle, CardContent, CardImage } from '../../Card';
+import Button from '../../Button';
+import cardImage from '../../../stories/images/bridge3.jpg';
+
 storiesOf('Tooltip', module)
   .add(
     'Basic',
@@ -45,6 +49,39 @@ storiesOf('Tooltip', module)
         <GuideExample label={`placement="left"`}>
           <Tooltip title="Basic Tooltip" placement="left">
             <CalciteLink>Placement Left With No Room</CalciteLink>
+          </Tooltip>
+        </GuideExample>
+      </div>
+    ))
+  )
+  .add(
+    'Tooltip On Other Components',
+    withInfo(doc)(() => (
+      <div>
+        <GuideExample>
+          <Tooltip title="This Button Has a Tooltip!">
+            <Button>Button With Tooltip</Button>
+          </Tooltip>
+        </GuideExample>
+        <GuideExample>
+          <Tooltip title="This Label Has a Tooltip!">
+            <Label>Label With Tooltip</Label>
+          </Tooltip>
+        </GuideExample>
+        <GuideExample>
+          <Tooltip title="This Card Has a Tooltip!">
+            <Card style={{ maxWidth: '320px' }}>
+              <CardImage
+                src={cardImage}
+                caption="Florida, January 1954"
+                alt="Bridge Club, 1954"
+              />
+              <CardContent>
+                <CardTitle>Card with Image</CardTitle>
+                <p>Cards can have full-bleed images with optional captions.</p>
+                <Button>View Examples</Button>
+              </CardContent>
+            </Card>
           </Tooltip>
         </GuideExample>
       </div>
