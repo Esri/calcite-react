@@ -36,7 +36,7 @@ const Select = props => {
           ...getButtonProps(),
           ...getInputProps(),
           ...inputEl.props,
-          placeholder: placeholder
+          placeholder
         });
       }
     }
@@ -53,7 +53,6 @@ const Select = props => {
   }
 
   function itemToString(item) {
-    // TODO... what to do if the item isn't a simple component with a string as a child?
     let label = item;
     if (item && item.props) {
       label = item.props.label || item.props.children || item;
