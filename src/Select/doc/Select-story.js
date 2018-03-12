@@ -5,14 +5,14 @@ import { action } from '@storybook/addon-actions';
 
 import GuideExample from '../../../stories/GuideExample';
 import doc from './Select.md';
+
 import Alert from '../../Alert';
 import Card, { CardTitle, CardContent } from '../../Card';
-import Select from '../';
 import { MenuItem } from '../../Menu';
 import Button from '../../Button';
 import { StyledSelectInput } from '../Select-styled';
-
-import SelectStateExample from './SelectStateExample';
+import ChevronDown from 'mdi-react/ChevronDownIcon';
+import Select from '../';
 
 storiesOf('Select', module)
   .add(
@@ -31,11 +31,53 @@ storiesOf('Select', module)
   )
   .add(
     'Controlled Select',
-    withInfo(doc)(() => (
-      <div>
-        <SelectStateExample />
-      </div>
-    ))
+    withInfo(doc)(() => {
+      class ControlledSelect extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValue: 10,
+            selectedItem: null
+          };
+        }
+
+        handleSelectChange = (value, item) => {
+          this.setState({
+            selectedValue: value,
+            selectedItem: item
+          });
+        };
+
+        render() {
+          return (
+            <div>
+              <GuideExample label="selectedItem={this.state.selectedValue}">
+                <Select
+                  onChange={this.handleSelectChange}
+                  selectedValue={this.state.selectedValue}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </GuideExample>
+              <GuideExample label="selectedItem={this.state.selectedItem}">
+                <Select
+                  input={<Button icon={<ChevronDown />} />}
+                  onChange={this.handleSelectChange}
+                  selectedItem={this.state.selectedItem}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </GuideExample>
+            </div>
+          );
+        }
+      }
+      return <ControlledSelect />;
+    })
   )
   .add(
     'Custom Input',
