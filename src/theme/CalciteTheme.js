@@ -1,5 +1,6 @@
 import { injectGlobal } from 'styled-components';
 import EsriColors from './EsriColors';
+import { unitCalc, fontSize } from '../utils/helpers';
 
 const CalciteTheme = {
   palette: {
@@ -54,6 +55,7 @@ const CalciteTheme = {
     lightRed: EsriColors.Calcite_Red_150,
     red: EsriColors.Brand_Red_100,
     darkRed: EsriColors.Calcite_Red_a200,
+    darkRed200: EsriColors.Calcite_Red_200,
 
     lightestOrange: EsriColors.Calcite_Orange_a100,
     lightOrange: EsriColors.Calcite_Orange_a150,
@@ -85,6 +87,19 @@ const CalciteTheme = {
     codeTracking: 0,
     codeFamily:
       '"Consolas", "Andale Mono", "Lucida Console", "Monaco", monospace',
+
+    // Icon Family
+    iconTracking: 0,
+    iconFamily: `
+      font-family: 'calcite-ui';
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      display: inline-block;
+      text-decoration: none;
+    }`,
 
     // Structural
     ratio: 1.414,
@@ -234,6 +249,28 @@ injectGlobal`
     }
   }
 
+  /* FORM PSEUDO ELEMENTS */
+
+  :placeholder {
+    color: #767676;
+  }
+  :input-placeholder {
+    color: #767676;
+  }
+  ::-webkit-input-placeholder {
+    color: #767676;
+  }
+  ::-moz-placeholder {
+    color: #767676;
+  }
+  :-ms-input-placeholder {
+    color: #767676;
+  }
+  ::-ms-value {
+    border: none;
+    background-color: transparent;
+  }
+
   /* Type */
   @import url(https://fast.fonts.net/t/1.css?apiType=css&projectid=9431e9a5-7a6d-4b5f-82be-4d935972de5a);
   @font-face{
@@ -316,6 +353,169 @@ injectGlobal`
     src:url("https://fast.fonts.net/dv2/2/12d643f2-3899-49d5-a85b-ff430f5fad15.eot?d44f19a684109620e4841678a190e8188b840650be32dfdff11226f4eb7fb62da2e4ff3ac5cb9baab9aeebd387f687d9b2e887da180096d585541d490d3d9db024bb32bb30fda6ff2d79d5960f7e637780942055575c79d5999be6317cd2d9d893107e020badd8044f29d12eed77cbe2e4ceae93321cb707732be30a17f2d854fe9b6eac5d9a24169d94c96c5d3ec2a9204fbd6a2ceb5a2d56a22044d41f42d9d47bbaa0a29232c8a85f469fd695c13771f0e196df56a5f905efb130244641637912fb8e675b873323ab93f92ed2551dc42a3aa38c068521&projectId=9431e9a5-7a6d-4b5f-82be-4d935972de5a#iefix") format("eot"),url("https://fast.fonts.net/dv2/14/aad99a1f-7917-4dd6-bbb5-b07cedbff64f.woff2?d44f19a684109620e4841678a190e8188b840650be32dfdff11226f4eb7fb62da2e4ff3ac5cb9baab9aeebd387f687d9b2e887da180096d585541d490d3d9db024bb32bb30fda6ff2d79d5960f7e637780942055575c79d5999be6317cd2d9d893107e020badd8044f29d12eed77cbe2e4ceae93321cb707732be30a17f2d854fe9b6eac5d9a24169d94c96c5d3ec2a9204fbd6a2ceb5a2d56a22044d41f42d9d47bbaa0a29232c8a85f469fd695c13771f0e196df56a5f905efb130244641637912fb8e675b873323ab93f92ed2551dc42a3aa38c068521&projectId=9431e9a5-7a6d-4b5f-82be-4d935972de5a") format("woff2"),url("https://fast.fonts.net/dv2/3/91b50bbb-9aa1-4d54-9159-ec6f19d14a7c.woff?d44f19a684109620e4841678a190e8188b840650be32dfdff11226f4eb7fb62da2e4ff3ac5cb9baab9aeebd387f687d9b2e887da180096d585541d490d3d9db024bb32bb30fda6ff2d79d5960f7e637780942055575c79d5999be6317cd2d9d893107e020badd8044f29d12eed77cbe2e4ceae93321cb707732be30a17f2d854fe9b6eac5d9a24169d94c96c5d3ec2a9204fbd6a2ceb5a2d56a22044d41f42d9d47bbaa0a29232c8a85f469fd695c13771f0e196df56a5f905efb130244641637912fb8e675b873323ab93f92ed2551dc42a3aa38c068521&projectId=9431e9a5-7a6d-4b5f-82be-4d935972de5a") format("woff"),url("https://fast.fonts.net/dv2/1/a0f4c2f9-8a42-4786-ad00-fce42b57b148.ttf?d44f19a684109620e4841678a190e8188b840650be32dfdff11226f4eb7fb62da2e4ff3ac5cb9baab9aeebd387f687d9b2e887da180096d585541d490d3d9db024bb32bb30fda6ff2d79d5960f7e637780942055575c79d5999be6317cd2d9d893107e020badd8044f29d12eed77cbe2e4ceae93321cb707732be30a17f2d854fe9b6eac5d9a24169d94c96c5d3ec2a9204fbd6a2ceb5a2d56a22044d41f42d9d47bbaa0a29232c8a85f469fd695c13771f0e196df56a5f905efb130244641637912fb8e675b873323ab93f92ed2551dc42a3aa38c068521&projectId=9431e9a5-7a6d-4b5f-82be-4d935972de5a") format("truetype"),url("https://fast.fonts.net/dv2/11/99affa9a-a5e9-4559-bd07-20cf0071852d.svg?d44f19a684109620e4841678a190e8188b840650be32dfdff11226f4eb7fb62da2e4ff3ac5cb9baab9aeebd387f687d9b2e887da180096d585541d490d3d9db024bb32bb30fda6ff2d79d5960f7e637780942055575c79d5999be6317cd2d9d893107e020badd8044f29d12eed77cbe2e4ceae93321cb707732be30a17f2d854fe9b6eac5d9a24169d94c96c5d3ec2a9204fbd6a2ceb5a2d56a22044d41f42d9d47bbaa0a29232c8a85f469fd695c13771f0e196df56a5f905efb130244641637912fb8e675b873323ab93f92ed2551dc42a3aa38c068521&projectId=9431e9a5-7a6d-4b5f-82be-4d935972de5a#99affa9a-a5e9-4559-bd07-20cf0071852d") format("svg");
     font-weight:600;font-style:normal;
   }
+
+  @font-face {
+    font-family: 'calcite-ui';
+    src: url("#{$font-path}/calcite-ui.eot?#iefix") format("embedded-opentype"),
+         url("#{$font-path}/calcite-ui.woff") format("woff"),
+         url("#{$font-path}/calcite-ui.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  [class^="icon-ui-"]:before,
+  [class*=" icon-ui-"]:before {
+    font-family: 'calcite-ui';
+    padding-right: ${unitCalc(CalciteTheme.baseline, 3, '/')};
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .icon-ui-small:before   {
+    ${fontSize(-4)};
+  }
+
+  .icon-ui-add-attachment:before { content: "\f101";}
+  .icon-ui-announcement:before { content: "\f102";}
+  .icon-ui-applications:before { content: "\f103";}
+  .icon-ui-arrow-down-circled:before { content: "\f104";}
+  .icon-ui-arrow-left-circled:before { content: "\f105";}
+  .icon-ui-arrow-right-circled:before { content: "\f106";}
+  .icon-ui-arrow-up-circled:before { content: "\f107";}
+  .icon-ui-attachment:before { content: "\f108";}
+  .icon-ui-authorize:before { content: "\f109";}
+  .icon-ui-basemap:before { content: "\f10a";}
+  .icon-ui-beginning:before { content: "\f10b";}
+  .icon-ui-blank-map-pin:before { content: "\f10c";}
+  .icon-ui-browser:before { content: "\f10d";}
+  .icon-ui-calendar:before { content: "\f10e";}
+  .icon-ui-chart:before { content: "\f10f";}
+  .icon-ui-chat:before { content: "\f110";}
+  .icon-ui-check-mark:before { content: "\f111";}
+  .icon-ui-checkbox-checked:before { content: "\f112";}
+  .icon-ui-checkbox-unchecked:before { content: "\f113";}
+  .icon-ui-close-circled:before { content: "\f114";}
+  .icon-ui-close:before { content: "\f115";}
+  .icon-ui-collapse:before { content: "\f116";}
+  .icon-ui-collection:before { content: "\f117";}
+  .icon-ui-comment:before { content: "\f118";}
+  .icon-ui-compass:before { content: "\f119";}
+  .icon-ui-configure-popup:before { content: "\f11a";}
+  .icon-ui-contact:before { content: "\f11b";}
+  .icon-ui-dashboard:before { content: "\f11c";}
+  .icon-ui-deny:before { content: "\f11d";}
+  .icon-ui-description:before { content: "\f11e";}
+  .icon-ui-directions:before { content: "\f11f";}
+  .icon-ui-directions2:before { content: "\f120";}
+  .icon-ui-dock-bottom:before { content: "\f121";}
+  .icon-ui-dock-left:before { content: "\f122";}
+  .icon-ui-dock-right:before { content: "\f123";}
+  .icon-ui-documentation:before { content: "\f124";}
+  .icon-ui-down-arrow-circled:before { content: "\f125";}
+  .icon-ui-down-arrow:before { content: "\f126";}
+  .icon-ui-down:before { content: "\f127";}
+  .icon-ui-download:before { content: "\f128";}
+  .icon-ui-drag-horizontal:before { content: "\f129";}
+  .icon-ui-drag-vertical:before { content: "\f12a";}
+  .icon-ui-duplicate:before { content: "\f12b";}
+  .icon-ui-edit:before { content: "\f12c";}
+  .icon-ui-end:before { content: "\f12d";}
+  .icon-ui-environment-settings:before { content: "\f12e";}
+  .icon-ui-erase:before { content: "\f12f";}
+  .icon-ui-error:before { content: "\f130";}
+  .icon-ui-error2:before { content: "\f131";}
+  .icon-ui-expand:before { content: "\f132";}
+  .icon-ui-experimental:before { content: "\f133";}
+  .icon-ui-favorites:before { content: "\f134";}
+  .icon-ui-feature-layer:before { content: "\f135";}
+  .icon-ui-filter:before { content: "\f136";}
+  .icon-ui-forward:before { content: "\f137";}
+  .icon-ui-globe:before { content: "\f138";}
+  .icon-ui-grant:before { content: "\f139";}
+  .icon-ui-group:before { content: "\f13a";}
+  .icon-ui-handle-horizontal:before { content: "\f13b";}
+  .icon-ui-handle-vertical:before { content: "\f13c";}
+  .icon-ui-home:before { content: "\f13d";}
+  .icon-ui-key:before { content: "\f13e";}
+  .icon-ui-labels:before { content: "\f13f";}
+  .icon-ui-layer-list:before { content: "\f140";}
+  .icon-ui-layers:before { content: "\f141";}
+  .icon-ui-left-arrow-circled:before { content: "\f142";}
+  .icon-ui-left-arrow:before { content: "\f143";}
+  .icon-ui-left-triangle-arrow:before { content: "\f144";}
+  .icon-ui-left:before { content: "\f145";}
+  .icon-ui-line-chart:before { content: "\f146";}
+  .icon-ui-link-external:before { content: "\f147";}
+  .icon-ui-link:before { content: "\f148";}
+  .icon-ui-loading-indicator:before { content: "\f149";}
+  .icon-ui-locate:before { content: "\f14a";}
+  .icon-ui-locked:before { content: "\f14b";}
+  .icon-ui-map-pin:before { content: "\f14c";}
+  .icon-ui-maps:before { content: "\f14d";}
+  .icon-ui-marketplace:before { content: "\f14e";}
+  .icon-ui-maximize:before { content: "\f14f";}
+  .icon-ui-media:before { content: "\f150";}
+  .icon-ui-media2:before { content: "\f151";}
+  .icon-ui-menu:before { content: "\f152";}
+  .icon-ui-minimize:before { content: "\f153";}
+  .icon-ui-minus-circled:before { content: "\f154";}
+  .icon-ui-minus:before { content: "\f155";}
+  .icon-ui-mobile:before { content: "\f156";}
+  .icon-ui-navigation:before { content: "\f157";}
+  .icon-ui-notice-round:before { content: "\f158";}
+  .icon-ui-notice-triangle:before { content: "\f159";}
+  .icon-ui-organization:before { content: "\f15a";}
+  .icon-ui-overview-arrow-bottom-left:before { content: "\f15b";}
+  .icon-ui-overview-arrow-bottom-right:before { content: "\f15c";}
+  .icon-ui-overview-arrow-top-left:before { content: "\f15d";}
+  .icon-ui-overview-arrow-top-right:before { content: "\f15e";}
+  .icon-ui-pan:before { content: "\f15f";}
+  .icon-ui-pause:before { content: "\f160";}
+  .icon-ui-phone:before { content: "\f161";}
+  .icon-ui-pie-chart:before { content: "\f162";}
+  .icon-ui-play:before { content: "\f163";}
+  .icon-ui-plus-circled:before { content: "\f164";}
+  .icon-ui-plus:before { content: "\f165";}
+  .icon-ui-printer:before { content: "\f166";}
+  .icon-ui-question:before { content: "\f167";}
+  .icon-ui-radio-checked:before { content: "\f168";}
+  .icon-ui-radio-unchecked:before { content: "\f169";}
+  .icon-ui-refresh:before { content: "\f16a";}
+  .icon-ui-resend-invitation:before { content: "\f16b";}
+  .icon-ui-reverse:before { content: "\f16c";}
+  .icon-ui-review:before { content: "\f16d";}
+  .icon-ui-right-arrow-circled:before { content: "\f16e";}
+  .icon-ui-right-arrow:before { content: "\f16f";}
+  .icon-ui-right-triangle-arrow:before { content: "\f170";}
+  .icon-ui-right:before { content: "\f171";}
+  .icon-ui-rotate:before { content: "\f172";}
+  .icon-ui-save:before { content: "\f173";}
+  .icon-ui-search:before { content: "\f174";}
+  .icon-ui-settings:before { content: "\f175";}
+  .icon-ui-settings2:before { content: "\f176";}
+  .icon-ui-share:before { content: "\f177";}
+  .icon-ui-sign-out:before { content: "\f178";}
+  .icon-ui-support:before { content: "\f179";}
+  .icon-ui-table:before { content: "\f17a";}
+  .icon-ui-tag:before { content: "\f17b";}
+  .icon-ui-time-clock:before { content: "\f17c";}
+  .icon-ui-trash:before { content: "\f17d";}
+  .icon-ui-unlocked:before { content: "\f17e";}
+  .icon-ui-up-arrow-circled:before { content: "\f17f";}
+  .icon-ui-up-arrow:before { content: "\f180";}
+  .icon-ui-up-down-arrows:before { content: "\f181";}
+  .icon-ui-up:before { content: "\f182";}
+  .icon-ui-upload:before { content: "\f183";}
+  .icon-ui-user:before { content: "\f184";}
+  .icon-ui-zoom-in-fixed:before { content: "\f185";}
+  .icon-ui-zoom-in-magnifying-glass:before { content: "\f186";}
+  .icon-ui-zoom-out-fixed:before { content: "\f187";}
+  .icon-ui-zoom-out-magnifying-glass:before { content: "\f188";}
 `;
 
 export default CalciteTheme;

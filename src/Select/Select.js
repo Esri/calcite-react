@@ -2,22 +2,63 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Downshift from 'downshift';
 
+import {
+  StyledSelectWrapper,
+  StyledSelectInput,
+  StyledSelectMenu
+} from './Select-styled';
+import Menu from '../Menu';
+
 const Select = props => {
-  function getAnchorElement(input, getButtonProps, getInputProps) {
-    if (input) {
-      return React.cloneElement(input, {
-        ...getButtonProps(),
-        ...getInputProps(),
-        type: 'text',
-        style: { cursor: 'pointer' }
-      });
+  function getAnchorElement(
+    inputEl,
+    getButtonProps,
+    getInputProps,
+    placeholder,
+    selectedItem
+  ) {
+    if (inputEl) {
+      const inputElType = inputEl.props.type;
+      if (
+        inputElType === 'button' ||
+        inputElType === 'submit' ||
+        inputElType === 'reset'
+      ) {
+        return React.cloneElement(inputEl, {
+          ...getButtonProps(),
+          ...getInputProps(),
+          children: itemToString(selectedItem)
+            ? itemToString(selectedItem)
+            : props.placeholder
+        });
+      } else if (inputElType === 'text') {
+        return React.cloneElement(inputEl, {
+          ...getButtonProps(),
+          ...getInputProps(),
+          ...inputEl.props,
+          placeholder
+        });
+      }
     }
-    return <input {...getButtonProps()} />;
+    return (
+      <StyledSelectInput
+        {...getButtonProps()}
+        {...getInputProps()}
+        type="text"
+        placeholder={placeholder}
+        fullWidth={props.fullWidth}
+        minimal={props.minimal}
+      />
+    );
   }
 
   function itemToString(item) {
-    // TODO... what to do if the item isn't a simple component with a string as a child?
-    return (item.props && item.props.children) || 'unknown';
+    let label = item;
+    if (item && item.props) {
+      label = item.props.label || item.props.children || item;
+    }
+
+    return label;
   }
 
   function onChange(selectedItem, downshiftProps) {
@@ -29,11 +70,21 @@ const Select = props => {
     props.onChange(value, selectedItem);
   }
 
+  function _getItemFromValue(value) {
+    return props.children.filter(child => {
+      return child.props.value === value;
+    })[0];
+  }
+
   return (
     <Downshift
       itemToString={itemToString}
       onChange={onChange}
+      selectedItem={
+        props.selectedItem || _getItemFromValue(props.selectedValue)
+      }
       render={({
+        getRootProps,
         getButtonProps,
         getInputProps,
         getItemProps,
@@ -41,22 +92,30 @@ const Select = props => {
         selectedItem,
         highlightedIndex
       }) => (
-        <div>
-          {getAnchorElement(props.input, getButtonProps, getInputProps)}
+        <StyledSelectWrapper
+          {...getRootProps({ refKey: 'innerRef' })}
+          style={props.wrapperStyle}
+        >
+          {getAnchorElement(
+            props.input,
+            getButtonProps,
+            getInputProps,
+            props.placeholder,
+            selectedItem
+          )}
           {isOpen ? (
-            <div style={{ border: '4px solid lime' }}>
+            <Menu withComponent={<StyledSelectMenu />}>
               {props.children.map((child, index) =>
                 React.cloneElement(child, {
                   ...getItemProps({
                     item: child,
-                    key: index,
-                    style: { cursor: 'pointer', ...child.props.style }
+                    key: index
                   })
                 })
               )}
-            </div>
+            </Menu>
           ) : null}
-        </div>
+        </StyledSelectWrapper>
       )}
     />
   );
@@ -68,9 +127,21 @@ Select.propTypes = {
   /** Node to use as the input for the Select */
   input: PropTypes.node,
   /** Callback function fired when the value of the Select changes. */
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  /** The selected item of the select */
+  selectedItem: PropTypes.node,
+  /** Value of the selected item */
+  selectedValue: PropTypes.node,
+  /** Placeholder text for the input */
+  placeholder: PropTypes.string,
+  /** Whether or not the select will fill its container's width */
+  fullWidth: PropTypes.bool,
+  /** A style variant for select inputs */
+  minimal: PropTypes.bool
 };
 
-Select.defaultProps = {};
+Select.defaultProps = {
+  placeholder: 'Select...'
+};
 
 export default Select;

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const GuideExampleContainer = styled.div`
-  min-height: 2rem;
   padding: 0.5em;
   border-bottom: 1px solid #efefef;
   border-left: 1px solid #efefef;
@@ -12,11 +11,13 @@ const GuideExampleContainer = styled.div`
 
   &:first-child {
     border-top: 1px solid #efefef;
-    border-radius: 6px 6px 0 0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
   }
 
   &:last-child {
-    border-radius: 0 0 6px 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
   }
 `;
 

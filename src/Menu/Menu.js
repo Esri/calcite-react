@@ -4,7 +4,7 @@ import { StyledMenu } from './Menu-styled';
 
 import { MenuItem } from './';
 
-const Menu = ({ children, ...other }) => {
+const Menu = ({ children, withComponent, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
@@ -15,14 +15,24 @@ const Menu = ({ children, ...other }) => {
     }
   });
 
+  let customMenu;
+  if (withComponent) {
+    customMenu = React.cloneElement(withComponent, {
+      ...other,
+      children: childrenWithProps
+    });
+  }
+
   const menu = <StyledMenu {...other}>{childrenWithProps}</StyledMenu>;
 
-  return menu;
+  return withComponent ? customMenu : menu;
 };
 
 Menu.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** Description TBD */
+  withComponent: PropTypes.node
 };
 
 Menu.defaultProps = {};

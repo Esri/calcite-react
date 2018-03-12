@@ -51,7 +51,9 @@ Card.propTypes = {
   /** Description TBD */
   shaped: PropTypes.bool,
   /** Description TBD */
-  wide: PropTypes.bool
+  wide: PropTypes.bool,
+  /** Description TBD */
+  withComponent: PropTypes.node
 };
 
 Card.defaultProps = {};

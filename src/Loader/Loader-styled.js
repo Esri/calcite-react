@@ -15,7 +15,7 @@ const loadAnimation = props => {
   0%,
   80%,
   100% {
-    opacity: .75;
+    opacity: 1;
     box-shadow: 0 0 ${props.theme.palette.blue};
     height: ${loaderVariables.loaderHeight};
   }
@@ -55,6 +55,7 @@ const loaderPseudoElements = props => {
 
 const StyledLoader = styled.div`
   position: relative;
+  min-height: 3rem;
 `;
 
 const StyledLoaderBars = styled.div`
@@ -67,6 +68,7 @@ const StyledLoaderBars = styled.div`
     `calc(50% - ${parseFloat(loaderVariables.loaderWidth) / 2}rem)`};
   font-size: 11px;
   animation-delay: ${loaderVariables.loaderDelay};
+  margin: ${props => unitCalc(loaderVariables.loaderHeight, 0.25, '*')} 0 0;
 
   &:before {
     ${props => loaderPseudoElements(props)};
@@ -82,7 +84,7 @@ const StyledLoaderBars = styled.div`
 
 const StyledLoaderText = styled.div`
   text-align: center;
-  padding-top: 4rem;
+  padding-top: 3.5rem;
 `;
 
 export { StyledLoader, StyledLoaderBars, StyledLoaderText };
