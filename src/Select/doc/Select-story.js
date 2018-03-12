@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
@@ -32,7 +32,7 @@ storiesOf('Select', module)
   .add(
     'Controlled Select',
     withInfo(doc)(() => {
-      class ControlledSelect extends React.Component {
+      class ControlledSelect extends Component {
         constructor(props) {
           super(props);
           this.state = {
