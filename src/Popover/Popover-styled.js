@@ -21,4 +21,12 @@ const StyledPopover = styled.div`
   }
 `;
 
-export { StyledPopover };
+const StyledPopperTransition = {
+  entering: { opacity: 0 },
+  entered: {
+    opacity: 1,
+    pointerEvents: 'auto'
+  }
+};
+
+export { StyledPopover, StyledPopperTransition };

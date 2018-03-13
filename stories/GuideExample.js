@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const GuideExampleContainer = styled.div`
@@ -35,24 +35,20 @@ const GuideExampleLabel = styled.code`
   }
 `;
 
-class GuideExample extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const GuideExample = ({ children, label, style, ...other }) => {
+  function _getLabel() {
+    if (label) {
+      return <GuideExampleLabel>{label}</GuideExampleLabel>;
+    }
+    return null;
   }
 
-  render() {
-    let label;
-    if (this.props.label) {
-      label = <GuideExampleLabel>{this.props.label}</GuideExampleLabel>;
-    }
-    return (
-      <GuideExampleContainer style={this.props.style}>
-        {this.props.children}
-        {label}
-      </GuideExampleContainer>
-    );
-  }
-}
+  return (
+    <GuideExampleContainer style={style} {...other}>
+      {children}
+      {_getLabel()}
+    </GuideExampleContainer>
+  );
+};
 
 export default GuideExample;

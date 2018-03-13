@@ -5,17 +5,9 @@ import PropTypes from 'prop-types';
 import outy from 'outy';
 import { Manager, Target, Popper } from 'react-popper';
 
-import { StyledPopover } from './Popover-styled';
+import { StyledPopover, StyledPopperTransition } from './Popover-styled';
 
 import './PopoverStyles.css';
-
-const transitionStyles = {
-  entering: { opacity: 0 },
-  entered: {
-    opacity: 1,
-    pointerEvents: 'auto'
-  }
-};
 
 class Popover extends Component {
   constructor(props) {
@@ -87,7 +79,7 @@ class Popover extends Component {
               placement={this.props.placement}
               style={{
                 ...this.defaultStyle,
-                ...transitionStyles[state]
+                ...StyledPopperTransition[state]
               }}
             >
               <StyledPopover>{this.props.children}</StyledPopover>
