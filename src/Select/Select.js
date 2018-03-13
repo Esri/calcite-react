@@ -4,7 +4,7 @@ import Downshift from 'downshift';
 
 import {
   StyledSelectWrapper,
-  StyledSelectInput,
+  StyledSelectButton,
   StyledSelectMenu
 } from './Select-styled';
 import Menu from '../Menu';
@@ -41,14 +41,17 @@ const Select = props => {
       }
     }
     return (
-      <StyledSelectInput
+      <StyledSelectButton
         {...getButtonProps()}
         {...getInputProps()}
-        type="text"
-        placeholder={placeholder}
         fullWidth={props.fullWidth}
         minimal={props.minimal}
-      />
+        style={{ ...props.style }}
+      >
+        {itemToString(selectedItem)
+          ? itemToString(selectedItem)
+          : props.placeholder}
+      </StyledSelectButton>
     );
   }
 
