@@ -112,8 +112,10 @@ const Select = props => {
                 React.cloneElement(child, {
                   ...getItemProps({
                     item: child,
-                    key: index
-                  })
+                    active: highlightedIndex === index,
+                    selected: selectedItem === child
+                  }),
+                  key: index
                 })
               )}
             </Menu>
