@@ -10,13 +10,15 @@ import {
 import Menu from '../Menu';
 
 const Select = props => {
-  function getAnchorElement(
-    inputEl,
-    getButtonProps,
-    getInputProps,
-    placeholder,
-    selectedItem
-  ) {
+  function getAnchorElement(params) {
+    const {
+      inputEl,
+      getButtonProps,
+      getInputProps,
+      placeholder,
+      selectedItem
+    } = params;
+
     if (inputEl) {
       const inputElType = inputEl.props.type;
       if (
@@ -99,13 +101,13 @@ const Select = props => {
           {...getRootProps({ refKey: 'innerRef' })}
           style={props.wrapperStyle}
         >
-          {getAnchorElement(
-            props.input,
+          {getAnchorElement({
+            inputEl: props.input,
             getButtonProps,
             getInputProps,
-            props.placeholder,
+            placeholder: props.placeholder,
             selectedItem
-          )}
+          })}
           {isOpen ? (
             <Menu withComponent={<StyledSelectMenu />}>
               {props.children.map((child, index) =>
