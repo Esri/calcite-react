@@ -28,6 +28,13 @@ const StyledMenuItem = a.extend`
   white-space: nowrap;
   cursor: pointer;
 
+  ${props =>
+    props.active &&
+    css`
+      background-color: ${props => props.theme.palette.offWhite};
+      text-decoration: none;
+      color: ${props => props.theme.palette.darkerGray};
+    `};
   &:hover {
     background-color: ${props => props.theme.palette.offWhite};
     text-decoration: none;
@@ -35,10 +42,11 @@ const StyledMenuItem = a.extend`
   }
 
   ${props =>
-    props.active &&
+    props.selected &&
     css`
       &,
-      &:focus {
+      &:focus,
+      &:hover {
         text-indent: -3px;
         border-left: 3px solid ${props => props.theme.palette.blue};
       }

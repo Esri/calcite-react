@@ -12,6 +12,36 @@ import { h1 as CalciteH1, p as CalciteP } from '../../utils/elements';
 storiesOf('Modal', module)
   .add(
     'Basic',
+    withInfo(doc)(() => (
+      <GuideExample
+        id="modalGuideExample"
+        style={{ position: 'relative', height: '400px' }}
+      >
+        <Modal
+          open={true}
+          parentSelector={() => document.getElementById('modalGuideExample')}
+          overlayStyle={{ position: 'absolute' }}
+        >
+          <CalciteH1>Modal!</CalciteH1>
+          <CalciteP>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </CalciteP>
+          <ModalActions>
+            <Button style={{ marginRight: '10px' }}>Okay</Button>
+            <Button clear>Cancel</Button>
+          </ModalActions>
+        </Modal>
+      </GuideExample>
+    ))
+  )
+  .add(
+    'Open Modal Button',
     withInfo(doc)(() => {
       class ModalStateExample extends Component {
         constructor(props) {
@@ -68,34 +98,4 @@ storiesOf('Modal', module)
 
       return <ModalStateExample />;
     })
-  )
-  .add(
-    'Just Modal',
-    withInfo(doc)(() => (
-      <GuideExample
-        id="modalGuideExample"
-        style={{ position: 'relative', height: '400px' }}
-      >
-        <Modal
-          open={true}
-          parentSelector={() => document.getElementById('modalGuideExample')}
-          overlayStyle={{ position: 'absolute' }}
-        >
-          <CalciteH1>Modal!</CalciteH1>
-          <CalciteP>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </CalciteP>
-          <ModalActions>
-            <Button style={{ marginRight: '10px' }}>Okay</Button>
-            <Button clear>Cancel</Button>
-          </ModalActions>
-        </Modal>
-      </GuideExample>
-    ))
   );
