@@ -23,7 +23,7 @@
   "scripts": {
     "start": "npm run storybook",
     "precommit": "lint-staged",
-    "clean-dist": "rm -rf ./dist",
+    "clean-dist": "rimraf ./dist",
     "build": "npm run clean-dist && NODE_ENV=production && npm run build:main && npm run build:copy-files",
     "build:main": "babel ./src --out-dir ./dist",
     "build:es": "BABEL_ENV=es babel ./src/index.js --out-file ./dist/es/index.js",
@@ -89,6 +89,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
+    "rimraf": "^2.6.2",
     "rollup": "^0.56.3",
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-node-resolve": "^3.0.3",
