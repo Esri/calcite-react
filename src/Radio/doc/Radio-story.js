@@ -33,7 +33,7 @@ storiesOf('Radio', module).add(
         <Form>
           <FormControl>
             <Fieldset name="storyRadioGroup2" horizontal>
-              <Legend>Some More Radios:</Legend>
+              <Legend>Horizontal Radio List:</Legend>
               <Radio checked={true}>Radio 1</Radio>
               <Radio>Radio 2</Radio>
             </Fieldset>
@@ -44,7 +44,7 @@ storiesOf('Radio', module).add(
         <Form>
           <FormControl error>
             <Fieldset name="storyRadioGroup3">
-              <Legend>Lots of Radios:</Legend>
+              <Legend>Radios with Error:</Legend>
               <Radio>Radio 1</Radio>
               <Radio>Radio 2</Radio>
               <Radio>Radio 3</Radio>

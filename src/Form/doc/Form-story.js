@@ -5,14 +5,10 @@ import { withInfo } from '@storybook/addon-info';
 import GuideExample from '../../../stories/GuideExample';
 import doc from './Form.md';
 
-import Form, {
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  Legend
-} from '../';
+import Form, { FormControl, FormHelperText, Fieldset, Legend } from '../';
 
 import TextField from '../../TextField';
+import Radio from '../../Radio';
 
 storiesOf('Form', module)
   .add(
@@ -22,16 +18,23 @@ storiesOf('Form', module)
         <GuideExample>
           <Form>
             <FormControl>
-              <FormControlLabel>Name:</FormControlLabel>
-              <TextField value="Map Man" />
+              <TextField value="Map Man" label="Name:" />
             </FormControl>
             <FormControl error>
-              <FormControlLabel>Email:</FormControlLabel>
-              <TextField value="map_man@yahoo.com" />
+              <TextField value="map_man@yahoo.com" label="Email:" />
               <FormHelperText>Really... Yahoo?</FormHelperText>
             </FormControl>
-            <FormControl type="radio">
-              <Legend>Gender:</Legend>
+            <FormControl>
+              <TextField value="Denver" label="City:" />
+            </FormControl>
+            <FormControl>
+              <Fieldset name="storyRadioGroup">
+                <Legend>Some Radios:</Legend>
+                <Radio>Radio 1</Radio>
+                <Radio>Radio 2</Radio>
+                <Radio>Radio 3</Radio>
+                <Radio>Radio 4</Radio>
+              </Fieldset>
             </FormControl>
           </Form>
         </GuideExample>
@@ -45,17 +48,21 @@ storiesOf('Form', module)
         <GuideExample>
           <Form horizontal>
             <FormControl>
-              <FormControlLabel>First Name:</FormControlLabel>
-              <TextField value="James" />
+              <TextField value="James" label="First Name:" />
             </FormControl>
             <FormControl>
-              <FormControlLabel>Last Name:</FormControlLabel>
-              <TextField value="Kirk" />
+              <TextField value="Kirk" label="Last Name:" />
             </FormControl>
             <FormControl error>
-              <FormControlLabel>Email:</FormControlLabel>
-              <TextField value="jKirk_1701@gmail.com" type="email" />
+              <TextField
+                value="jKirk_1701@gmail.com"
+                type="email"
+                label="Email:"
+              />
               <FormHelperText>Must be a .gov email</FormHelperText>
+            </FormControl>
+            <FormControl>
+              <TextField value="Denver" label="City:" />
             </FormControl>
           </Form>
         </GuideExample>

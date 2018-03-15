@@ -20,7 +20,7 @@ const StyledFormControl = styled.div`
   display: inline-flex;
   flex-direction: column;
   margin: 0 ${props => unitCalc(props.theme.baseline, 4, '/')}
-    ${props => props.theme.baseline}
+    ${props => unitCalc(props.theme.baseline, 1.25, '*')}
     ${props => unitCalc(props.theme.baseline, 4, '/')};
 `;
 
@@ -29,6 +29,8 @@ const StyledFormControlLabel = styled.label``;
 const StyledFormHelperText = styled.span`
   ${fontSize(-3)};
   color: ${props => props.theme.palette.transparentBlack};
+  height: 1.55rem;
+  margin-bottom: -1.55rem;
 
   ${props =>
     props.error &&
