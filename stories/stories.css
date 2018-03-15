@@ -1,0 +1,53 @@
+body {
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.guide-example {
+  min-height: 2rem;
+  padding: .5em;
+  border-bottom: 1px solid #efefef;
+  border-left: 1px solid #efefef;
+  border-right: 1px solid #efefef;
+  position: relative;
+  clear: both;
+}
+
+.guide-example:last-child {
+  border-bottom: none;
+}
+
+.guide-example:first-child {
+  border-top: 1px solid #efefef;
+  border-radius: 6px 6px 0 0;
+}
+
+.guide-example:first-child.guide-example-label {
+  border-radius: 0 3px 0 3px;
+}
+
+.guide-example
+.guide-example-label {
+  border-radius: 0 0 0 3px;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  padding-left: 3px;
+  padding-right: 3px;
+  z-index: 1;
+}
+.guide-example
+.alert {
+  z-index: 0;
+}
+
+code {
+  padding: .25rem;
+  border-radius: 3px;
+  border: 1px solid #efefef;
+  color: #595959;
+  background-color: #f8f8f8;
+  white-space: pre;
+  font-size: 0.85em;
+  line-height: 1.4rem;
+}
