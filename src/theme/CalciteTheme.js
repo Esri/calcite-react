@@ -50,6 +50,7 @@ const CalciteTheme = {
     lightGreen: EsriColors.Calcite_Green_150,
     green: EsriColors.Calcite_Green_250,
     darkGreen: EsriColors.Calcite_Green_a200,
+    darkGreen200: EsriColors.Calcite_Green_200,
 
     lightestRed: EsriColors.Calcite_Red_100,
     lightRed: EsriColors.Calcite_Red_150,

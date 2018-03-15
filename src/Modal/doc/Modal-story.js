@@ -7,7 +7,7 @@ import doc from './Modal.md';
 import Modal, { ModalActions } from '../';
 
 import Button from '../../Button';
-import { h1 as CalciteH1, p as CalciteP } from '../../utils/elements';
+import { CalciteH1, CalciteP } from '../../utils/elements';
 
 storiesOf('Modal', module)
   .add(

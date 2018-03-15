@@ -190,6 +190,12 @@ const input = baseInput.extend`
       background-repeat: no-repeat;
     `};
 
+  ${props =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+    `};
+
   &[type='file'] {
     height: auto;
   }
@@ -238,41 +244,6 @@ const textarea = baseTextarea.extend`
   padding-top: ${props => unitCalc(props.theme.baseline, 5, '/')};
 `;
 
-const errorMessage = styled.div`
-  ${fontSize(-2)};
-  padding: ${props => unitCalc(props.theme.baseline, 4, '/')};
-  color: ${props => props.theme.palette.transparentBlack};
-  background-color: ${props => props.theme.palette.lightestRed};
-  border: 1px solid ${props => props.theme.palette.lightRed};
-  position: relative;
-  display: inline-block;
-  margin-top: 0.5rem;
-
-  &:after {
-    content: '';
-    position: absolute;
-    left: 11px;
-    top: -15px;
-    width: 0;
-    height: 0;
-    pointer-events: none;
-    border: 8px solid transparent;
-    border-bottom-color: ${props => props.theme.palette.lightestRed};
-  }
-
-  &:before {
-    content: '';
-    position: absolute;
-    left: 11px;
-    top: -16px;
-    width: 0;
-    height: 0;
-    pointer-events: none;
-    border: 8px solid transparent;
-    border-bottom-color: ${props => props.theme.palette.lightRed};
-  }
-`;
-
 export {
   a as CalciteA,
   h1 as CalciteH1,
@@ -282,6 +253,5 @@ export {
   select as CalciteSelect,
   input as CalciteInput,
   textarea as CalciteTextarea,
-  errorMessage as CalciteErrorMessage,
   fieldset as CalciteFieldset
 };

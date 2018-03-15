@@ -91,6 +91,11 @@ const fontSize = (scale, theme) => {
   // }
 
   switch (scale) {
+    case -3:
+      return `
+        font-size: 0.825rem;
+        line-height: 1.55rem;
+      `;
     case -2:
       return `
         font-size: 0.875rem;
