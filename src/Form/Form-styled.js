@@ -43,10 +43,31 @@ const StyledFormHelperText = styled.span`
     `};
 `;
 
-const StyledFormLegend = styled.legend`
+const StyledLegend = styled.legend`
   position: relative;
   display: block;
   margin-bottom: 0.25rem;
+  margin-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
+
+  ${props =>
+    props.horizontal &&
+    css`
+      margin-bottom: 0;
+    `};
+`;
+
+const StyledFieldset = styled.div`
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+
+  ${props =>
+    props.horizontal &&
+    css`
+      flex-direction: row;
+    `};
 `;
 
 export {
@@ -54,5 +75,6 @@ export {
   StyledFormControl,
   StyledFormControlLabel,
   StyledFormHelperText,
-  StyledFormLegend
+  StyledLegend,
+  StyledFieldset
 };

@@ -9,7 +9,7 @@ import Form, {
   FormControl,
   FormControlLabel,
   FormHelperText,
-  FormLegend
+  Legend
 } from '../';
 
 import TextField from '../../TextField';
@@ -31,7 +31,7 @@ storiesOf('Form', module)
               <FormHelperText>Really... Yahoo?</FormHelperText>
             </FormControl>
             <FormControl type="radio">
-              <FormLegend>Gender:</FormLegend>
+              <Legend>Gender:</Legend>
             </FormControl>
           </Form>
         </GuideExample>
