@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledTopNavLink } from './TopNav-styled';
 
-const TopNavLink = ({ children, href, ...other }) => {
+const TopNavLink = ({ children, href, withComponent, ...other }) => {
   const StyledDiv = StyledTopNavLink.withComponent('div');
 
   const div = <StyledDiv {...other}>{children}</StyledDiv>;
@@ -13,7 +13,22 @@ const TopNavLink = ({ children, href, ...other }) => {
     </StyledTopNavLink>
   );
 
-  return href ? link : div;
+  let customTopNavLink;
+  if (withComponent) {
+    customTopNavLink = React.cloneElement(withComponent, {
+      href,
+      ...other,
+      children: children
+    });
+  }
+
+  if (withComponent) {
+    return customTopNavLink;
+  } else if (href) {
+    return link;
+  } else {
+    return div;
+  }
 };
 
 TopNavLink.propTypes = {
