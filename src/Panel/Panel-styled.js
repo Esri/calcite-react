@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { unitCalc, clearfix } from '../utils/helpers';
-import { p } from '../utils/elements';
-import { h4 } from '../utils/elements';
+import { CalciteP } from '../utils/elements';
+import { CalciteH4 } from '../utils/elements';
 
 const StyledPanel = styled.div`
   ${clearfix()};
@@ -77,11 +77,11 @@ const StyledPanel = styled.div`
     `};
 `;
 
-const StyledPanelText = p.extend`
+const StyledPanelText = CalciteP.extend`
   margin-bottom: 0rem;
 `;
 
-const StyledPanelTitle = h4.extend`
+const StyledPanelTitle = CalciteH4.extend`
   margin-bottom: 0.775rem;
 `;
 

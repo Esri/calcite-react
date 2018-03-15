@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 import { StyledSideNav } from '../SideNav/SideNav-styled';
-import { a } from '../utils/elements';
+import { CalciteA } from '../utils/elements';
 import { unitCalc, fontSize } from '../utils/helpers';
 
 const StyledMenu = StyledSideNav.extend`
@@ -16,7 +16,7 @@ const StyledMenu = StyledSideNav.extend`
     `};
 `;
 
-const StyledMenuItem = a.extend`
+const StyledMenuItem = CalciteA.extend`
   position: relative;
   display: block;
   box-sizing: border-box;

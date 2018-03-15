@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { figure, h4 } from '../utils/elements';
+import { CalciteFigure, CalciteH4 } from '../utils/elements';
 import { fontSize } from '../utils/helpers';
 
 const StyledCard = styled.div`
@@ -54,7 +54,7 @@ const StyledCardContent = styled.div`
     `};
 `;
 
-const StyledCardImageWrap = figure.extend`
+const StyledCardImageWrap = CalciteFigure.extend`
   width: 100%;
   position: relative;
   margin-bottom: 0;
@@ -111,7 +111,7 @@ const StyledCardImageCaption = styled.figcaption`
   padding: 0.35rem 1.25rem 0.35rem 1.25rem;
 `;
 
-const StyledCardTitle = h4.extend`
+const StyledCardTitle = CalciteH4.extend`
   margin-bottom: 0.775rem;
 `;
 

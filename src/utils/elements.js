@@ -274,14 +274,14 @@ const errorMessage = styled.div`
 `;
 
 export {
-  a,
-  h1,
-  h4,
-  p,
-  figure,
-  select,
-  input,
-  textarea,
-  errorMessage,
-  fieldset
+  a as CalciteA,
+  h1 as CalciteH1,
+  h4 as CalciteH4,
+  p as CalciteP,
+  figure as CalciteFigure,
+  select as CalciteSelect,
+  input as CalciteInput,
+  textarea as CalciteTextarea,
+  errorMessage as CalciteErrorMessage,
+  fieldset as CalciteFieldset
 };

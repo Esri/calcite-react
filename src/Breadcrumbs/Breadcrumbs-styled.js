@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { linkColor } from '../utils/color';
-import { a } from '../utils/elements';
+import { CalciteA } from '../utils/elements';
 import { fontSize } from '../utils/helpers';
 
 const StyledBreadcrumbs = styled.nav`
@@ -8,7 +8,7 @@ const StyledBreadcrumbs = styled.nav`
   color: ${props => props.theme.palette.darkerGray};
 `;
 
-const StyledCrumb = a.extend`
+const StyledCrumb = CalciteA.extend`
   color: ${props => props.theme.palette.darkerGray};
 
   &::before {

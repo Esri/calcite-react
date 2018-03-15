@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { unitCalc } from '../utils/helpers';
 import { linkColor } from '../utils/color';
-import { a } from '../utils/elements';
+import { CalciteA } from '../utils/elements';
 
 const StyledAlert = styled.div`
   padding: ${props => unitCalc(props.theme.baseline, 2, '/')};
@@ -44,9 +44,9 @@ const StyledAlert = styled.div`
     `};
 `;
 
-const StyledAlertClose = a.extend`
-    position: absolute;
-    right: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  `;
+const StyledAlertClose = CalciteA.extend`
+  position: absolute;
+  right: ${props => unitCalc(props.theme.baseline, 2, '/')};
+`;
 
 export { StyledAlert, StyledAlertClose };

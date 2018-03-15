@@ -7,7 +7,7 @@ import doc from './Tooltip.md';
 
 import Tooltip from '../Tooltip';
 import Label from '../../Label';
-import { a as CalciteLink } from '../../utils/elements';
+import { CalciteA } from '../../utils/elements';
 
 import Card, { CardTitle, CardContent, CardImage } from '../../Card';
 import Button from '../../Button';
@@ -20,17 +20,17 @@ storiesOf('Tooltip', module)
       <div>
         <GuideExample>
           <Tooltip title="Basic Tooltip">
-            <CalciteLink>Hover Me</CalciteLink>
+            <CalciteA>Hover Me</CalciteA>
           </Tooltip>
         </GuideExample>
         <GuideExample label={`placement="right"`}>
           <Tooltip title="Basic Tooltip" placement="right">
-            <CalciteLink>Placement Right</CalciteLink>
+            <CalciteA>Placement Right</CalciteA>
           </Tooltip>
         </GuideExample>
         <GuideExample label={`placement="top"`}>
           <Tooltip title="Basic Tooltip" placement="top">
-            <CalciteLink>Placement Top</CalciteLink>
+            <CalciteA>Placement Top</CalciteA>
           </Tooltip>
         </GuideExample>
         <GuideExample
@@ -38,17 +38,17 @@ storiesOf('Tooltip', module)
           style={{ textAlign: 'center' }}
         >
           <Tooltip title="Basic Tooltip" placement="left">
-            <CalciteLink>Placement Left</CalciteLink>
+            <CalciteA>Placement Left</CalciteA>
           </Tooltip>
         </GuideExample>
         <GuideExample label={`placement="bottom"`}>
           <Tooltip title="Basic Tooltip" placement="bottom">
-            <CalciteLink>Placement Bottom</CalciteLink>
+            <CalciteA>Placement Bottom</CalciteA>
           </Tooltip>
         </GuideExample>
         <GuideExample label={`placement="left"`}>
           <Tooltip title="Basic Tooltip" placement="left">
-            <CalciteLink>Placement Left With No Room</CalciteLink>
+            <CalciteA>Placement Left With No Room</CalciteA>
           </Tooltip>
         </GuideExample>
       </div>
@@ -93,7 +93,7 @@ storiesOf('Tooltip', module)
       <div>
         <GuideExample>
           <Tooltip title={<Label>I'm a label!</Label>}>
-            <CalciteLink>Hover Me</CalciteLink>
+            <CalciteA>Hover Me</CalciteA>
           </Tooltip>
         </GuideExample>
       </div>
@@ -105,7 +105,7 @@ storiesOf('Tooltip', module)
       <div>
         <GuideExample>
           <Tooltip title="It took me a while to show up..." enterDelay={500}>
-            <CalciteLink>Hover Me</CalciteLink>
+            <CalciteA>Hover Me</CalciteA>
           </Tooltip>
         </GuideExample>
       </div>

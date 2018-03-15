@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { clearfix, fontSize } from '../utils/helpers';
-import { a } from '../utils/elements';
+import { CalciteA } from '../utils/elements';
 
 const StyledTopNav = styled.header`
   display: flex;
@@ -37,7 +37,7 @@ const StyledTopNavBrandImg = styled.img`
   height: 30px;
 `;
 
-const StyledTopNavLink = a.extend`
+const StyledTopNavLink = CalciteA.extend`
   ${fontSize(0)};
   color: ${props => props.theme.palette.darkGray};
   padding-top: 1.1625rem;
@@ -46,7 +46,7 @@ const StyledTopNavLink = a.extend`
   line-height: 1.5rem;
   display: inline-block;
   vertical-align: top;
-  margin-left: .75em;
+  margin-left: 0.75em;
   font-weight: 300;
 
   &:hover,
@@ -85,7 +85,7 @@ const StyledTopNavList = styled.nav`
     `};
 `;
 
-const StyledTopNavTitle = a.extend`
+const StyledTopNavTitle = CalciteA.extend`
   margin-right: 1.5rem;
   padding-top: 1.125rem;
   padding-bottom: 1.25rem;

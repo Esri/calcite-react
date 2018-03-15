@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { a, h1 } from '../utils/elements';
+import { CalciteA, CalciteH1 } from '../utils/elements';
 import {
   subNavUnderline,
   unitCalc,
@@ -29,9 +29,9 @@ const StyledSubNav = styled.header`
     `};
 `;
 
-const StyledSubNavLink = a.extend`
-  padding: .25em .75em;
-  margin: 0 0 0 .25em;
+const StyledSubNavLink = CalciteA.extend`
+  padding: 0.25em 0.75em;
+  margin: 0 0 0 0.25em;
   font-family: ${props => props.theme.avenirFamily};
   color: ${props => props.theme.palette.offWhite};
   ${fontSize(-1)};
@@ -57,11 +57,7 @@ const StyledSubNavLink = a.extend`
         background-color: ${props.theme.palette.white};
         color: ${props.theme.palette.offBlack};
       }
-    `}
-
-  .active > &,
-  .active > &:hover,
-  .active > &:focus {
+    `} .active > &, .active > &:hover, .active > &:focus {
     background-color: ${props => props.theme.palette.white};
     color: ${props => props.theme.palette.offBlack};
   }
@@ -87,9 +83,9 @@ const StyledSubNavActions = styled.nav`
   }
 `;
 
-const StyledSubNavTitle = h1.extend`
-  ${fontSize(4)}
-  padding-left: .25em;
+const StyledSubNavTitle = CalciteH1.extend`
+  ${fontSize(4)};
+  padding-left: 0.25em;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
   margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
   display: inline-block;

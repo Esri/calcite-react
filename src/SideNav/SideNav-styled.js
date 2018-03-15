@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { h4, a } from '../utils/elements';
+import { CalciteH4, CalciteA } from '../utils/elements';
 import { unitCalc, fontSize } from '../utils/helpers';
 import { avenirRegular } from '../utils/type';
 
@@ -12,7 +12,7 @@ const StyledSideNav = styled.aside`
   background-color: ${props => props.theme.palette.white};
 `;
 
-const StyledSideNavTitle = h4.extend`
+const StyledSideNavTitle = CalciteH4.extend`
   margin: 0;
   padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
   ${avenirRegular()};
@@ -21,7 +21,7 @@ const StyledSideNavTitle = h4.extend`
   border-top: 1px solid ${props => props.theme.palette.lightestGray};
 `;
 
-const StyledSideNavLink = a.extend`
+const StyledSideNavLink = CalciteA.extend`
   position: relative;
   display: block;
   box-sizing: border-box;
