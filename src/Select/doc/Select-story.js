@@ -26,6 +26,13 @@ storiesOf('Select', module)
             <MenuItem value={30}>Thirty</MenuItem>
           </Select>
         </GuideExample>
+        <GuideExample label="label prop">
+          <Select onChange={action('onChange')} label="Value:">
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </GuideExample>
       </div>
     ))
   )
@@ -84,10 +91,11 @@ storiesOf('Select', module)
     withInfo(doc)(() => (
       <div>
         <GuideExample>
-          <span>Value: </span>
           <Select
             input={<StyledSelectInput minimal type="text" />}
             onChange={action('onChange')}
+            label="Value:"
+            horizontal
             wrapperStyle={{ display: 'inline' }}
           >
             <MenuItem value={10}>Ten</MenuItem>

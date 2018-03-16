@@ -5,10 +5,19 @@ import { withInfo } from '@storybook/addon-info';
 import GuideExample from '../../../stories/GuideExample';
 import doc from './Form.md';
 
-import Form, { FormControl, FormHelperText, Fieldset, Legend } from '../';
+import Form, {
+  FormControl,
+  FormControlLabel,
+  FormHelperText,
+  Fieldset,
+  Legend
+} from '../';
 
 import TextField from '../../TextField';
+import Select from '../../Select';
+import { MenuItem } from '../../Menu';
 import Radio from '../../Radio';
+import Checkbox from '../../Checkbox';
 
 storiesOf('Form', module)
   .add(
@@ -25,15 +34,31 @@ storiesOf('Form', module)
               <FormHelperText>Really... Yahoo?</FormHelperText>
             </FormControl>
             <FormControl>
+              <FormControlLabel>State:</FormControlLabel>
+              <Select selectedValue="co" fullWidth>
+                <MenuItem value="ca">California</MenuItem>
+                <MenuItem value="co">Colorado</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl success>
               <TextField value="Denver" label="City:" />
+              <FormHelperText>City checks out</FormHelperText>
             </FormControl>
             <FormControl>
               <Fieldset name="storyRadioGroup">
-                <Legend>Some Radios:</Legend>
-                <Radio>Radio 1</Radio>
-                <Radio>Radio 2</Radio>
-                <Radio>Radio 3</Radio>
-                <Radio>Radio 4</Radio>
+                <Legend>Gender:</Legend>
+                <Radio>Male</Radio>
+                <Radio>Female</Radio>
+                <Radio>Non-binary, genderqueer, or gender non-conforming</Radio>
+                <Radio>Transgender</Radio>
+              </Fieldset>
+            </FormControl>
+            <FormControl>
+              <Fieldset name="storyCheckboxGroup">
+                <Legend>Pets:</Legend>
+                <Checkbox>Dog</Checkbox>
+                <Checkbox>Cat</Checkbox>
+                <Checkbox>Other</Checkbox>
               </Fieldset>
             </FormControl>
           </Form>

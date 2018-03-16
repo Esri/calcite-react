@@ -235,10 +235,6 @@ const baseRadioCheckbox = styled.input`
   }
 `;
 
-const checkbox = baseRadioCheckbox.extend`
-  -webkit-appearance: checkbox;
-`;
-
 export {
   a as CalciteA,
   h1 as CalciteH1,

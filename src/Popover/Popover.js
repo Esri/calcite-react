@@ -7,8 +7,6 @@ import { Manager, Target, Popper } from 'react-popper';
 
 import { StyledPopover, StyledPopperTransition } from './Popover-styled';
 
-import './PopoverStyles.css';
-
 class Popover extends Component {
   constructor(props) {
     super(props);

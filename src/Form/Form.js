@@ -14,7 +14,9 @@ const Form = ({ children, horizontal, ...other }) => {
 
 Form.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** Display prop to make forms align items horizontally instead of vertically */
+  horizontal: PropTypes.bool
 };
 
 Form.defaultProps = {};

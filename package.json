@@ -12,7 +12,7 @@
   "author": "Esri PS",
   "contributors": [
     "Josh Peterson <jpeterson@esri.com>",
-    "Cody Lawson <clawson@esri.com"
+    "Cody Lawson <clawson@esri.com>"
   ],
   "main": "dist/index.js",
   "module": "dist/es/index.js",
@@ -33,7 +33,9 @@
     "build-storybook": "build-storybook -o docs",
     "lint": "eslint src/** stories/index.js",
     "test": "jest --coverage",
-    "release:patch": "npm version patch && npm run build && npm publish dist"
+    "release:patch": "npm version patch && npm run build && npm publish dist",
+    "release:minor": "npm version minor && npm run build && npm publish dist",
+    "release:major": "npm version major && npm run build && npm publish dist"
   },
   "jest": {
     "moduleNameMapper": {

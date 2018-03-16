@@ -1,34 +1,34 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  StyledRadio,
-  StyledRadioLabel,
-  StyledRadioGroup
-} from './Radio-styled';
+  StyledCheckbox,
+  StyledCheckboxLabel,
+  StyledCheckboxGroup
+} from './Checkbox-styled';
 
-const Radio = ({ children, value, name, checked, onChange, ...other }) => {
-  let radioLabel;
+const Checkbox = ({ children, value, name, checked, onChange, ...other }) => {
+  let checkboxLabel;
   if (children) {
-    radioLabel = <StyledRadioLabel>{children}</StyledRadioLabel>;
+    checkboxLabel = <StyledCheckboxLabel>{children}</StyledCheckboxLabel>;
   }
-  const radio = (
-    <StyledRadioGroup>
-      <StyledRadio
+  const checkbox = (
+    <StyledCheckboxGroup>
+      <StyledCheckbox
         value={value}
         name={name}
         checked={checked}
         onChange={onChange}
-        type="radio"
+        type="checkbox"
         {...other}
       />
-      {radioLabel}
-    </StyledRadioGroup>
+      {checkboxLabel}
+    </StyledCheckboxGroup>
   );
 
-  return radio;
+  return checkbox;
 };
 
-Radio.propTypes = {
+Checkbox.propTypes = {
   /** Description TBD */
   children: PropTypes.node,
   /** The form value for this checkbox */
@@ -41,6 +41,6 @@ Radio.propTypes = {
   onChange: PropTypes.func
 };
 
-Radio.defaultProps = {};
+Checkbox.defaultProps = {};
 
-export default Radio;
+export default Checkbox;
