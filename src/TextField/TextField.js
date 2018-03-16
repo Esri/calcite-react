@@ -3,6 +3,7 @@ import React from 'react';
 import { StyledTextField } from './TextField-styled';
 
 import { FormControlLabel } from '../Form';
+import { StyledFormControlLabelText } from '../Form/Form-styled';
 
 const TextField = ({
   children,
@@ -13,6 +14,7 @@ const TextField = ({
   search,
   fullWidth,
   minimal,
+  horizontal,
   label,
   id,
   name,
@@ -40,8 +42,9 @@ const TextField = ({
         name={name}
         error={error}
         success={success}
+        horizontal={horizontal}
       >
-        {label}
+        <StyledFormControlLabelText>{label}</StyledFormControlLabelText>
         {textField}
       </FormControlLabel>
     );

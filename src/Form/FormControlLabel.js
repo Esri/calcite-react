@@ -1,16 +1,39 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyledFormControlLabel } from './Form-styled';
+import {
+  StyledFormControlLabel,
+  StyledFormControlLabelText
+} from './Form-styled';
 
-const FormControlLabel = ({ children, htmlFor, error, success, ...other }) => {
+const FormControlLabel = ({
+  children,
+  htmlFor,
+  error,
+  success,
+  horizontal,
+  ...other
+}) => {
+  const childArray = React.Children.toArray(children);
+  const childrenWithProps = childArray.map((child, i) => {
+    switch (child.type) {
+      case StyledFormControlLabelText:
+        return React.cloneElement(child, {
+          horizontal
+        });
+      default:
+        return child;
+    }
+  });
+
   const formControlLabel = (
     <StyledFormControlLabel
       htmlFor={htmlFor}
       error={error}
       success={success}
+      horizontal={horizontal}
       {...other}
     >
-      {children}
+      {childrenWithProps}
     </StyledFormControlLabel>
   );
 

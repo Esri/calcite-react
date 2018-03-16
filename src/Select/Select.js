@@ -7,6 +7,8 @@ import {
   StyledSelectButton,
   StyledSelectMenu
 } from './Select-styled';
+import { FormControlLabel } from '../Form';
+import { StyledFormControlLabelText } from '../Form/Form-styled';
 import Menu from '../Menu';
 
 const Select = props => {
@@ -16,8 +18,12 @@ const Select = props => {
       getButtonProps,
       getInputProps,
       placeholder,
-      selectedItem
+      selectedItem,
+      labelEl,
+      horizontal
     } = params;
+
+    let selectEl;
 
     if (inputEl) {
       const inputElType = inputEl.props.type;
@@ -26,7 +32,7 @@ const Select = props => {
         inputElType === 'submit' ||
         inputElType === 'reset'
       ) {
-        return React.cloneElement(inputEl, {
+        selectEl = React.cloneElement(inputEl, {
           ...getButtonProps(),
           ...getInputProps(),
           children: itemToString(selectedItem)
@@ -34,7 +40,7 @@ const Select = props => {
             : props.placeholder
         });
       } else if (inputElType === 'text') {
-        return React.cloneElement(inputEl, {
+        selectEl = React.cloneElement(inputEl, {
           ...getButtonProps(),
           ...getInputProps(),
           ...inputEl.props,
@@ -42,7 +48,7 @@ const Select = props => {
         });
       }
     }
-    return (
+    selectEl = (
       <StyledSelectButton
         {...getButtonProps()}
         {...getInputProps()}
@@ -55,6 +61,17 @@ const Select = props => {
           : props.placeholder}
       </StyledSelectButton>
     );
+
+    if (labelEl) {
+      return (
+        <FormControlLabel horizontal={horizontal}>
+          <StyledFormControlLabelText>{labelEl}</StyledFormControlLabelText>
+          {selectEl}
+        </FormControlLabel>
+      );
+    } else {
+      return selectEl;
+    }
   }
 
   function itemToString(item) {
@@ -106,10 +123,14 @@ const Select = props => {
             getButtonProps,
             getInputProps,
             placeholder: props.placeholder,
-            selectedItem
+            selectedItem,
+            labelEl: props.label,
+            horizontal: props.horizontal
           })}
           {isOpen ? (
-            <Menu withComponent={<StyledSelectMenu />}>
+            <Menu
+              withComponent={<StyledSelectMenu fullWidth={props.fullWidth} />}
+            >
               {props.children.map((child, index) =>
                 React.cloneElement(child, {
                   ...getItemProps({

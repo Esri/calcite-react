@@ -24,7 +24,25 @@ const StyledFormControl = styled.div`
     ${props => unitCalc(props.theme.baseline, 4, '/')};
 `;
 
-const StyledFormControlLabel = styled.label``;
+const StyledFormControlLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+
+  ${props =>
+    props.horizontal &&
+    css`
+      flex-direction: row;
+      align-items: center;
+    `};
+`;
+
+const StyledFormControlLabelText = styled.span`
+  ${props =>
+    props.horizontal &&
+    css`
+      margin-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
+    `};
+`;
 
 const StyledFormHelperText = styled.span`
   ${fontSize(-3)};
@@ -76,6 +94,7 @@ export {
   StyledForm,
   StyledFormControl,
   StyledFormControlLabel,
+  StyledFormControlLabelText,
   StyledFormHelperText,
   StyledLegend,
   StyledFieldset
