@@ -9,6 +9,7 @@ import Form, { FormControl, FormHelperText, Fieldset, Legend } from '../';
 
 import TextField from '../../TextField';
 import Radio from '../../Radio';
+import Checkbox from '../../Checkbox';
 
 storiesOf('Form', module)
   .add(
@@ -34,6 +35,15 @@ storiesOf('Form', module)
                 <Radio>Radio 2</Radio>
                 <Radio>Radio 3</Radio>
                 <Radio>Radio 4</Radio>
+              </Fieldset>
+            </FormControl>
+            <FormControl>
+              <Fieldset name="storyCheckboxGroup">
+                <Legend>Some Checkboxes:</Legend>
+                <Checkbox>Checkbox 1</Checkbox>
+                <Checkbox>Checkbox 2</Checkbox>
+                <Checkbox>Checkbox 3</Checkbox>
+                <Checkbox>Checkbox 4</Checkbox>
               </Fieldset>
             </FormControl>
           </Form>

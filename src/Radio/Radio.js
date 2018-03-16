@@ -6,7 +6,7 @@ import {
   StyledRadioGroup
 } from './Radio-styled';
 
-const Radio = ({ children, value, name, checked, ...other }) => {
+const Radio = ({ children, value, name, checked, onChange, ...other }) => {
   let radioLabel;
   if (children) {
     radioLabel = <StyledRadioLabel>{children}</StyledRadioLabel>;
@@ -17,6 +17,7 @@ const Radio = ({ children, value, name, checked, ...other }) => {
         value={value}
         name={name}
         checked={checked}
+        onChange={onChange}
         type="radio"
         {...other}
       />
