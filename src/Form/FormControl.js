@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledFormControl } from './Form-styled';
 
-import { FormControlLabel, FormHelperText } from './';
+import { FormControlLabel, FormHelperText, Fieldset } from './';
 import TextField from '../TextField';
 
 const FormControl = ({ children, error, success, ...other }) => {
@@ -20,6 +20,11 @@ const FormControl = ({ children, error, success, ...other }) => {
           success
         });
       case TextField:
+        return React.cloneElement(child, {
+          error,
+          success
+        });
+      case Fieldset:
         return React.cloneElement(child, {
           error,
           success

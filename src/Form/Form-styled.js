@@ -20,7 +20,7 @@ const StyledFormControl = styled.div`
   display: inline-flex;
   flex-direction: column;
   margin: 0 ${props => unitCalc(props.theme.baseline, 4, '/')}
-    ${props => props.theme.baseline}
+    ${props => unitCalc(props.theme.baseline, 1.25, '*')}
     ${props => unitCalc(props.theme.baseline, 4, '/')};
 `;
 
@@ -29,6 +29,8 @@ const StyledFormControlLabel = styled.label``;
 const StyledFormHelperText = styled.span`
   ${fontSize(-3)};
   color: ${props => props.theme.palette.transparentBlack};
+  height: 1.55rem;
+  margin-bottom: -1.55rem;
 
   ${props =>
     props.error &&
@@ -43,10 +45,31 @@ const StyledFormHelperText = styled.span`
     `};
 `;
 
-const StyledFormLegend = styled.legend`
+const StyledLegend = styled.legend`
   position: relative;
   display: block;
   margin-bottom: 0.25rem;
+  margin-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
+
+  ${props =>
+    props.horizontal &&
+    css`
+      margin-bottom: 0;
+    `};
+`;
+
+const StyledFieldset = styled.div`
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+
+  ${props =>
+    props.horizontal &&
+    css`
+      flex-direction: row;
+    `};
 `;
 
 export {
@@ -54,5 +77,6 @@ export {
   StyledFormControl,
   StyledFormControlLabel,
   StyledFormHelperText,
-  StyledFormLegend
+  StyledLegend,
+  StyledFieldset
 };

@@ -199,34 +199,6 @@ const input = baseInput.extend`
   &[type='file'] {
     height: auto;
   }
-
-  &[type='radio'],
-  &[type='checkbox'] {
-    float: left;
-    width: 1rem;
-    height: 1rem;
-    margin-top: .135rem;
-    margin-right: .125rem;
-    margin-left: .125rem;
-    line-height: 1.25rem;
-    box-shadow: none;
-    box-sizing: content-box;
-
-    &:focus {
-      box-shadow: none;
-      border: none;
-      outline: 1px dotted;
-      outline: auto -webkit-focus-ring-color;
-    }
-  }
-
-  &[type='radio'] {
-    -webkit-appearance: radio;
-  }
-
-  &[type='checkbox'] {
-    -webkit-appearance: checkbox;
-  }
 `;
 
 const fieldset = styled.fieldset`
@@ -244,6 +216,25 @@ const textarea = baseTextarea.extend`
   padding-top: ${props => unitCalc(props.theme.baseline, 5, '/')};
 `;
 
+const baseRadioCheckbox = styled.input`
+  float: left;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.135rem;
+  margin-right: 0.125rem;
+  margin-left: 0.125rem;
+  line-height: 1.25rem;
+  box-shadow: none;
+  box-sizing: content-box;
+
+  &:focus {
+    box-shadow: none;
+    border: none;
+    outline: 1px dotted;
+    outline: auto -webkit-focus-ring-color;
+  }
+`;
+
 export {
   a as CalciteA,
   h1 as CalciteH1,
@@ -253,5 +244,6 @@ export {
   select as CalciteSelect,
   input as CalciteInput,
   textarea as CalciteTextarea,
-  fieldset as CalciteFieldset
+  fieldset as CalciteFieldset,
+  baseRadioCheckbox
 };

@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledTextField } from './TextField-styled';
 
+import { FormControlLabel } from '../Form';
+
 const TextField = ({
   children,
   type,
@@ -11,6 +13,9 @@ const TextField = ({
   search,
   fullWidth,
   minimal,
+  label,
+  id,
+  name,
   ...other
 }) => {
   const textField = (
@@ -22,11 +27,27 @@ const TextField = ({
       search={search}
       fullWidth={fullWidth}
       minimal={minimal}
+      id={id}
       {...other}
     />
   );
 
-  return textField;
+  let textFieldWithLabel;
+  if (label) {
+    textFieldWithLabel = (
+      <FormControlLabel
+        htmlFor={id}
+        name={name}
+        error={error}
+        success={success}
+      >
+        {label}
+        {textField}
+      </FormControlLabel>
+    );
+  }
+
+  return label ? textFieldWithLabel : textField;
 };
 
 TextField.propTypes = {
