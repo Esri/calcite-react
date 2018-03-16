@@ -31,12 +31,14 @@ const Radio = ({ children, value, name, checked, onChange, ...other }) => {
 Radio.propTypes = {
   /** Description TBD */
   children: PropTypes.node,
-  /** Description TBD */
+  /** The form value for this checkbox */
   value: PropTypes.string,
-  /** Description TBD */
+  /** The name to be shared among checkboxes in a group */
   name: PropTypes.string,
-  /** Description TBD */
-  checked: PropTypes.bool
+  /** Whether the checkbox is currently checked */
+  checked: PropTypes.bool,
+  /** Event called when the checkbox value should be toggled */
+  onChange: PropTypes.func
 };
 
 Radio.defaultProps = {};

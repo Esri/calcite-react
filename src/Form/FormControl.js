@@ -45,7 +45,11 @@ const FormControl = ({ children, error, success, ...other }) => {
 
 FormControl.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** The form control should show an error */
+  error: PropTypes.bool,
+  /** The form control should show success */
+  success: PropTypes.bool
 };
 
 FormControl.defaultProps = {};

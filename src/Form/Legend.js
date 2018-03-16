@@ -12,7 +12,9 @@ const Legend = ({ children, horizontal, ...other }) => {
 
 Legend.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** Display prop to make this element align items horizontally instead of vertically */
+  horizontal: PropTypes.bool
 };
 
 Legend.defaultProps = {};

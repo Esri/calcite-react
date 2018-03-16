@@ -14,7 +14,11 @@ const FormHelperText = ({ children, error, success, ...other }) => {
 
 FormHelperText.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** The form helper text should display as an error */
+  error: PropTypes.bool,
+  /** The form helper text should display as successful */
+  success: PropTypes.bool
 };
 
 FormHelperText.defaultProps = {};

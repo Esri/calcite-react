@@ -165,7 +165,11 @@ Select.propTypes = {
   /** Whether or not the select will fill its container's width */
   fullWidth: PropTypes.bool,
   /** A style variant for select inputs */
-  minimal: PropTypes.bool
+  minimal: PropTypes.bool,
+  /** TextField and label should appear side by side instead of stacked */
+  horizontal: PropTypes.bool,
+  /** Optional label to automatically wrap the TextField in a label */
+  label: PropTypes.node
 };
 
 Select.defaultProps = {

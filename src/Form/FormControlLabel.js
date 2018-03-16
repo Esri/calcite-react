@@ -42,7 +42,15 @@ const FormControlLabel = ({
 
 FormControlLabel.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** The for property to be applied to the label, should match a form element id */
+  htmlFor: PropTypes.string,
+  /** The form control label should show an error */
+  error: PropTypes.bool,
+  /** The form control label should show success */
+  success: PropTypes.bool,
+  /** Display prop to make this element align items horizontally instead of vertically */
+  horizontal: PropTypes.bool
 };
 
 FormControlLabel.defaultProps = {};
