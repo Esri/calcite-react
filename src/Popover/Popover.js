@@ -92,6 +92,8 @@ class Popover extends Component {
 Popover.propTypes = {
   /** Nodes to be used as options in the Popover */
   children: PropTypes.node,
+  /** The element that will anchor the popover */
+  targetEl: PropTypes.node,
   /** Whether the popover is visible or not */
   open: PropTypes.bool,
   /** Placement of the popover in relation to the target */
@@ -110,13 +112,18 @@ Popover.propTypes = {
     'left-end'
   ]),
   /** Duration of animation in milliseconds */
-  transitionDuration: PropTypes.number
+  transitionDuration: PropTypes.number,
+  /** Function called when the popover receives an event that may trigger a close */
+  onRequestClose: PropTypes.func,
+  /** Whether or not the popover should trigger onRequestClose when an element is selected */
+  closeOnSelect: PropTypes.bool
 };
 
 Popover.defaultProps = {
   open: false,
   placement: 'bottom-start',
-  transitionDuration: 200
+  transitionDuration: 200,
+  true: true
 };
 
 export default Popover;

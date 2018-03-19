@@ -11,6 +11,7 @@ const FormControlLabel = ({
   error,
   success,
   horizontal,
+  _generatedId,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
@@ -27,7 +28,7 @@ const FormControlLabel = ({
 
   const formControlLabel = (
     <StyledFormControlLabel
-      htmlFor={htmlFor}
+      htmlFor={htmlFor || _generatedId}
       error={error}
       success={success}
       horizontal={horizontal}

@@ -1,18 +1,22 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import uniqid from 'uniqid';
 import { StyledFormControl } from './Form-styled';
 
 import { FormControlLabel, FormHelperText, Fieldset } from './';
 import TextField from '../TextField';
+import Select from '../Select';
 
 const FormControl = ({ children, error, success, ...other }) => {
+  const _generatedId = uniqid();
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
       case FormControlLabel:
         return React.cloneElement(child, {
           error,
-          success
+          success,
+          _generatedId
         });
       case FormHelperText:
         return React.cloneElement(child, {
@@ -22,7 +26,12 @@ const FormControl = ({ children, error, success, ...other }) => {
       case TextField:
         return React.cloneElement(child, {
           error,
-          success
+          success,
+          _generatedId
+        });
+      case Select:
+        return React.cloneElement(child, {
+          _generatedId
         });
       case Fieldset:
         return React.cloneElement(child, {

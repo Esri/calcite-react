@@ -7,8 +7,6 @@ import {
   StyledSelectButton,
   StyledSelectMenu
 } from './Select-styled';
-import { FormControlLabel } from '../Form';
-import { StyledFormControlLabelText } from '../Form/Form-styled';
 import Menu from '../Menu';
 
 const Select = props => {
@@ -18,9 +16,7 @@ const Select = props => {
       getButtonProps,
       getInputProps,
       placeholder,
-      selectedItem,
-      labelEl,
-      horizontal
+      selectedItem
     } = params;
 
     let selectEl;
@@ -35,6 +31,7 @@ const Select = props => {
         selectEl = React.cloneElement(inputEl, {
           ...getButtonProps(),
           ...getInputProps(),
+          id: props.id || props._generatedId,
           children: itemToString(selectedItem)
             ? itemToString(selectedItem)
             : props.placeholder
@@ -44,7 +41,8 @@ const Select = props => {
           ...getButtonProps(),
           ...getInputProps(),
           ...inputEl.props,
-          placeholder
+          placeholder,
+          id: props.id || props._generatedId
         });
       }
     }
@@ -55,6 +53,7 @@ const Select = props => {
         fullWidth={props.fullWidth}
         minimal={props.minimal}
         style={{ ...props.style }}
+        id={props.id || props._generatedId}
       >
         {itemToString(selectedItem)
           ? itemToString(selectedItem)
@@ -62,16 +61,7 @@ const Select = props => {
       </StyledSelectButton>
     );
 
-    if (labelEl) {
-      return (
-        <FormControlLabel horizontal={horizontal}>
-          <StyledFormControlLabelText>{labelEl}</StyledFormControlLabelText>
-          {selectEl}
-        </FormControlLabel>
-      );
-    } else {
-      return selectEl;
-    }
+    return selectEl;
   }
 
   function itemToString(item) {
@@ -166,10 +156,8 @@ Select.propTypes = {
   fullWidth: PropTypes.bool,
   /** A style variant for select inputs */
   minimal: PropTypes.bool,
-  /** TextField and label should appear side by side instead of stacked */
-  horizontal: PropTypes.bool,
-  /** Optional label to automatically wrap the TextField in a label */
-  label: PropTypes.node
+  /** HTML prop for the Select, works together with a label's `for` prop */
+  id: PropTypes.string
 };
 
 Select.defaultProps = {

@@ -2,9 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledTextField } from './TextField-styled';
 
-import { FormControlLabel } from '../Form';
-import { StyledFormControlLabelText } from '../Form/Form-styled';
-
 const TextField = ({
   children,
   type,
@@ -15,8 +12,8 @@ const TextField = ({
   fullWidth,
   minimal,
   horizontal,
-  label,
   id,
+  _generatedId,
   name,
   ...other
 }) => {
@@ -29,28 +26,12 @@ const TextField = ({
       search={search}
       fullWidth={fullWidth}
       minimal={minimal}
-      id={id}
+      id={id || _generatedId}
       {...other}
     />
   );
 
-  let textFieldWithLabel;
-  if (label) {
-    textFieldWithLabel = (
-      <FormControlLabel
-        htmlFor={id}
-        name={name}
-        error={error}
-        success={success}
-        horizontal={horizontal}
-      >
-        <StyledFormControlLabelText>{label}</StyledFormControlLabelText>
-        {textField}
-      </FormControlLabel>
-    );
-  }
-
-  return label ? textFieldWithLabel : textField;
+  return textField;
 };
 
 TextField.propTypes = {
@@ -82,8 +63,6 @@ TextField.propTypes = {
   minimal: PropTypes.bool,
   /** TextField and label should appear side by side instead of stacked */
   horizontal: PropTypes.bool,
-  /** Optional label to automatically wrap the TextField in a label */
-  label: PropTypes.node,
   /** HTML prop for the TextField, works together with a label's `for` prop */
   id: PropTypes.string,
   /** HTML prop to name the form element */
