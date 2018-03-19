@@ -14,6 +14,8 @@ import { StyledSelectInput } from '../Select-styled';
 import ChevronDown from 'mdi-react/ChevronDownIcon';
 import Select from '../';
 
+import { FormControl, FormControlLabel } from '../../Form';
+
 storiesOf('Select', module)
   .add(
     'Basic',
@@ -26,12 +28,15 @@ storiesOf('Select', module)
             <MenuItem value={30}>Thirty</MenuItem>
           </Select>
         </GuideExample>
-        <GuideExample label="label prop">
-          <Select onChange={action('onChange')} label="Value:">
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
+        <GuideExample label="FormControlLabel">
+          <FormControl>
+            <FormControlLabel>Value:</FormControlLabel>
+            <Select onChange={action('onChange')}>
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl>
         </GuideExample>
       </div>
     ))
@@ -91,17 +96,19 @@ storiesOf('Select', module)
     withInfo(doc)(() => (
       <div>
         <GuideExample>
-          <Select
-            input={<StyledSelectInput minimal type="text" />}
-            onChange={action('onChange')}
-            label="Value:"
-            horizontal
-            wrapperStyle={{ display: 'inline' }}
-          >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
+          <FormControl>
+            <FormControlLabel>Value:</FormControlLabel>
+            <Select
+              input={<StyledSelectInput minimal type="text" />}
+              onChange={action('onChange')}
+              horizontal
+              wrapperStyle={{ display: 'inline' }}
+            >
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl>
         </GuideExample>
       </div>
     ))
