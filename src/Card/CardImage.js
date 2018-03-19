@@ -8,7 +8,7 @@ import {
 
 const CardImage = ({ children, src, caption, alt, shaped, wide, ...other }) => {
   let figcaption;
-  if (!shaped) {
+  if (!shaped && caption) {
     figcaption = <StyledCardImageCaption>{caption}</StyledCardImageCaption>;
   }
 
