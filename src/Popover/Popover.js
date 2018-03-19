@@ -21,14 +21,18 @@ class Popover extends Component {
     };
   }
 
-  componentDidMount() {
-    this._setOutsideTap();
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.open === false && this.props.open === true) {
+      this._setOutsideTap();
+    }
+
+    if (prevProps.open === true && this.props.open === false) {
+      this._unsetOutsideTap();
+    }
   }
 
-  componentDidUpdate(lastProps, lastState) {
-    if (lastProps.open !== this.props.open) {
-      setTimeout(() => this._setOutsideTap());
-    }
+  componentWillUnmount() {
+    this._unsetOutsideTap();
   }
 
   getPopperEl({ innerRef, style, ...popperProps }) {
@@ -51,6 +55,12 @@ class Popover extends Component {
       ['click', 'touchstart'],
       this._handleOutsideTap
     );
+  };
+
+  _unsetOutsideTap = () => {
+    if (this.outsideTap) {
+      this.outsideTap.remove();
+    }
   };
 
   _handleOutsideTap = () => {
