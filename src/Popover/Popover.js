@@ -42,7 +42,7 @@ class Popover extends Component {
   _setOutsideTap = () => {
     const elements = [this.target];
 
-    if (this.popper) {
+    if (this.popper && !this.props.closeOnSelect) {
       elements.push(this.popper);
     }
 
