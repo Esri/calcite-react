@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledAvatar = styled.div`
   width: ${props => props.aSize}px;
@@ -14,6 +14,12 @@ const StyledAvatar = styled.div`
   user-select: none;
   border-radius: 50%;
   justify-content: center;
+
+  ${props =>
+    props.fontSize &&
+    css`
+      font-size: ${props.fontSize}px;
+    `};
 `;
 
 const StyledAvatarImage = styled.img`
