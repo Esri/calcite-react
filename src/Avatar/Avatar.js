@@ -7,7 +7,7 @@ import {
   StyledAvatarText
 } from './Avatar-styled';
 
-const Avatar = ({ children, src, alt, ...other }) => {
+const Avatar = ({ children, src, alt, size, ...other }) => {
   let wrappedChildren;
 
   if (children) {
@@ -27,7 +27,11 @@ const Avatar = ({ children, src, alt, ...other }) => {
     wrappedChildren = <StyledAvatarImage src={src} alt={alt || ''} />;
   }
 
-  const avatar = <StyledAvatar {...other}>{wrappedChildren}</StyledAvatar>;
+  const avatar = (
+    <StyledAvatar aSize={size} {...other}>
+      {wrappedChildren}
+    </StyledAvatar>
+  );
 
   return avatar;
 };
@@ -39,9 +43,13 @@ Avatar.propTypes = {
   src: PropTypes.string,
   /** Used in combination with src to provide
    an alt attribute for the rendered img element */
-  alt: PropTypes.string
+  alt: PropTypes.string,
+  /** Diameter of the avatar */
+  size: PropTypes.number
 };
 
-Avatar.defaultProps = {};
+Avatar.defaultProps = {
+  size: 40
+};
 
 export default Avatar;
