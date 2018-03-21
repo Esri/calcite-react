@@ -25,7 +25,8 @@
     "behaviors",
     "at risk"
   ],
-  "snippet": null,
+  "snippet":
+    "Internet Users per 100 Population by Country, 2014. This is a filtered layer based on the \"Internet Users per 100 Population by country, 2000-2010 time series\" layer.",
   "thumbnail": "thumbnail/InternetUsersPer100_2014_AGOL_thumbnail.png",
   "documentation": null,
   "extent": [[-180, -89], [180, 83.5996]],
