@@ -39,6 +39,10 @@ const StyledCardItemMetrics = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 const StyledCardItemText = styled.p`

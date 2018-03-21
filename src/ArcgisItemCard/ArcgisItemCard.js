@@ -42,12 +42,25 @@ const ArcgisItemCard = ({
     return new Date(date).toLocaleDateString(language, dateOptions);
   }
 
-  function _textShortener(text = '', maxLength) {
+  function _textShortener(text, maxLength) {
     let suffix = '';
-    if (text.length > maxLength || text.length > maxDescriptionLength) {
+    const _text = text || '';
+    if (_text.length > maxLength || _text.length > maxDescriptionLength) {
       suffix = '...';
     }
-    return text.substr(0, maxLength || maxDescriptionLength) + suffix;
+    return _text.substr(0, maxLength || maxDescriptionLength) + suffix;
+  }
+
+  function _getDescription() {
+    if (item.snippet) {
+      return (
+        <StyledCardItemText title={item.snippet}>
+          {_textShortener(item.snippet)}
+        </StyledCardItemText>
+      );
+    } else {
+      return null;
+    }
   }
 
   return (
@@ -67,9 +80,7 @@ const ArcgisItemCard = ({
             <span>{_dateFormatter(item.created)}</span>
           </StyledCardItemIconLabelText>
         </StyledCardItemMetrics>
-        <StyledCardItemText title={item.snippet}>
-          {_textShortener(item.snippet)}
-        </StyledCardItemText>
+        {_getDescription()}
       </StyledItemCardContent>
     </StyledItemCard>
   );
