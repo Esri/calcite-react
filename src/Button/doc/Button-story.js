@@ -49,6 +49,12 @@ storiesOf('Button', module)
           </Button>
         </GuideExample>
 
+        <GuideExample label="halo">
+          <Button halo onClick={action('clicked')}>
+            halo
+          </Button>
+        </GuideExample>
+
         <GuideExample label="small">
           <Button small onClick={action('clicked')}>
             small
@@ -58,6 +64,12 @@ storiesOf('Button', module)
         <GuideExample label="large">
           <Button large onClick={action('clicked')}>
             large
+          </Button>
+        </GuideExample>
+
+        <GuideExample label="extraLarge">
+          <Button extraLarge onClick={action('clicked')}>
+            extraLarge
           </Button>
         </GuideExample>
 

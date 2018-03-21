@@ -7,17 +7,19 @@ import {
   StyledAvatarText
 } from './Avatar-styled';
 
-const Avatar = ({ children, src, alt, size, ...other }) => {
+const Avatar = ({ children, src, alt, size, fontSize, ...other }) => {
   let wrappedChildren;
 
   if (children) {
     if (React.isValidElement(children)) {
       //Assume the element is an SVG icon
+      const _fontSize = fontSize ? { fontSize: fontSize } : null;
       wrappedChildren = React.cloneElement(children, {
         ...children.props,
         style: {
           ...StyledAvatarSvg,
-          ...children.props.style
+          ...children.props.style,
+          ..._fontSize
         }
       });
     } else {
@@ -28,7 +30,7 @@ const Avatar = ({ children, src, alt, size, ...other }) => {
   }
 
   const avatar = (
-    <StyledAvatar aSize={size} {...other}>
+    <StyledAvatar aSize={size} fontSize={fontSize} {...other}>
       {wrappedChildren}
     </StyledAvatar>
   );

@@ -10,8 +10,10 @@ import ArcgisAccountMenu from './ArcgisAccountMenu';
 
 // App components
 import Popover from '../Popover';
+import Avatar from '../Avatar';
 
 // Third-party components (buttons, icons, etc.)
+import AccountIcon from '../icons/AccountIcon';
 
 // JSON
 
@@ -49,13 +51,33 @@ class ArcgisAccount extends Component {
     return `https://www.arcgis.com/sharing/rest/community/users/${username}/info/${thumbnail}?token=${_token}`;
   };
 
+  _getAvatar = (userInfo, token, size) => {
+    if (userInfo.thumbnail) {
+      return <Avatar src={this._getThumbnail(userInfo, token)} size={size} />;
+    } else if (userInfo.firstName && userInfo.lastName) {
+      let initials = userInfo.firstName[0] + userInfo.lastName[0];
+      initials = initials.toUpperCase();
+      return (
+        <Avatar size={size} fontSize={size * 0.5}>
+          {initials}
+        </Avatar>
+      );
+    } else {
+      return (
+        <Avatar size={size} fontSize={size * 0.7}>
+          <AccountIcon />
+        </Avatar>
+      );
+    }
+  };
+
   render() {
     return (
       <Popover
         targetEl={
           <ArcgisAccountControl
             onClick={this.toggleAccountControl}
-            thumbnail={this._getThumbnail(this.props.user, this.props.token)}
+            avatar={this._getAvatar(this.props.user, this.props.token, 32)}
             fullName={this.props.user.fullName}
             username={this.props.user.username}
             open={this.state.open}
@@ -67,7 +89,8 @@ class ArcgisAccount extends Component {
       >
         <ArcgisAccountMenu
           user={this.props.user}
-          thumbnail={this._getThumbnail(this.props.user, this.props.token)}
+          portal={this.props.portal}
+          avatar={this._getAvatar(this.props.user, this.props.token, 120)}
           style={{ width: '410px' }}
           onRequestSwitchAccount={this.props.onRequestSwitchAccount}
           onRequestSignOut={this.props.onRequestSignOut}

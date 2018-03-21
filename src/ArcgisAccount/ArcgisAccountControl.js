@@ -14,7 +14,6 @@ import {
 } from './ArcgisAccount-styled';
 
 // App components
-import Avatar from '../Avatar';
 
 // Third-party components (buttons, icons, etc.)
 
@@ -23,7 +22,7 @@ import Avatar from '../Avatar';
 // CSS
 
 const ArcgisAccountControl = ({
-  thumbnail,
+  avatar,
   fullName,
   username,
   open,
@@ -32,7 +31,7 @@ const ArcgisAccountControl = ({
   return (
     <StyledArcgisAccountControl open={open} {...other}>
       <StyledArcgisAccountControlAvatar>
-        <Avatar src={thumbnail} size={32} />
+        {avatar}
       </StyledArcgisAccountControlAvatar>
       <StyledArcgisAccountControlNames>
         <StyledArcgisAccountControlFriendlyName>

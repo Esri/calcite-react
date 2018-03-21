@@ -12,7 +12,7 @@ const StyledButton = styled.button`
   border-radius: 0;
   background-color: ${props => props.theme.palette.blue};
   box-sizing: border-box;
-  transition: all 0.05s linear;
+  transition: all 0.15s ease-in-out;
   cursor: pointer;
   white-space: nowrap;
   ${fontSize(-1)};
@@ -98,6 +98,22 @@ const StyledButton = styled.button`
     `};
 
   ${props =>
+    props.halo &&
+    css`
+      color: ${props => props.theme.palette.blue};
+      background: transparent;
+      border-color: ${props => props.theme.palette.blue};
+      box-shadow: inset 0 0 0 0 ${props => props.theme.palette.blue};
+
+      &:hover {
+        color: ${props => props.theme.palette.blue};
+        background: transparent;
+        border-color: ${props => props.theme.palette.blue};
+        box-shadow: inset 0 0 0 3px ${props => props.theme.palette.blue};
+      }
+    `};
+
+  ${props =>
     props.small &&
     css`
       ${fontSize(-2)};
@@ -109,6 +125,15 @@ const StyledButton = styled.button`
     css`
       ${fontSize(0)};
       padding: 0.5rem 1rem 0.5rem;
+    `};
+
+  ${props =>
+    props.extraLarge &&
+    css`
+      font-size: 17px;
+      line-height: 20px;
+      padding: 0.85rem 1.2rem 0.85rem;
+      font-weight: 300;
     `};
 
   ${props =>
