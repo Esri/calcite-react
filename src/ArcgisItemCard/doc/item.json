@@ -1,0 +1,66 @@
+{
+  "iot": {
+    "analyticType": "Ad-Hoc",
+    "status": "unhealthy",
+    "lastRun": "0 / 0"
+  },
+  "id": "3a261c82fc684c019dba29a6ae293906",
+  "owner": "Maps.com_carto",
+  "created": 1455225237000,
+  "modified": 1458842213000,
+  "guid": null,
+  "name": null,
+  "title": "Internet Users per 100 Population by country, 2014",
+  "type": "Analytic",
+  "typeKeywords": [
+    "Service",
+    "Hosted Service",
+    "IoT"
+  ],
+  "description": "Internet Users per 100 People by country, repeated for each of the following years: 2000, 2005, 2010 to enable time-series display using the YEAR attribute. <div>Internet users are individuals who have used the Internet (from any location) in the last 12 months. Internet can be used via a computer, mobile phone, personal digital assistant, games machine, digital TV etc. </div><div>Data Sources: International Telecommunication Union, World Telecommunication/ICT Development Report and database, and World Bank estimates via <a href='http://databank.worldbank.org' target='_blank'>World Bank DataBank</a>; Natural Earth 50M scale data.</div>",
+  "tags": [
+    "GeoInquiries",
+    "demographics",
+    "internet",
+    "broadband",
+    "computers",
+    "education",
+    "behaviors",
+    "at risk"
+  ],
+  "snippet": "Internet Users per 100 Population by Country, 2014. This is a filtered layer based on the \"Internet Users per 100 Population by country, 2000-2010 time series\" layer.",
+  "thumbnail": "thumbnail/InternetUsersPer100_2014_AGOL_thumbnail.png",
+  "documentation": null,
+  "extent": [
+    [
+      -180,
+      -89
+    ],
+    [
+      180,
+      83.5996
+    ]
+  ],
+  "categories": [],
+  "spatialReference": null,
+  "accessInformation": "International Telecommunication Union, World Telecommunication/ICT Development Report and database, and World Bank estimates via World Bank DataBank, Natural Earth, Maps.com",
+  "licenseInfo": "<em>This data is free for personal and educational use only. For more information on licensing our products please contact Maps.com at <a href='mailto:sales@maps.com'>sales@maps.com</a> or call 800.929.4627.</em><br /><div><img alt='Maps.com' src='http://beyondmaps.maps.arcgis.com/sharing/rest/content/items/5e766fe92e914b38900245f51e34ca27/data' style='width:100px;' /></div>",
+  "culture": "en-us",
+  "properties": null,
+  "url": "http://services1.arcgis.com/VAI453sU9tG9rSmh/arcgis/rest/services/WorldGeo_HumanCulture_InternetAccess_features/FeatureServer",
+  "proxyFilter": null,
+  "access": "public",
+  "size": -1,
+  "appCategories": [],
+  "industries": [],
+  "languages": [],
+  "largeThumbnail": null,
+  "banner": null,
+  "screenshots": [],
+  "listed": false,
+  "numComments": 0,
+  "numRatings": 0,
+  "avgRating": 0,
+  "numViews": 29495,
+  "scoreCompleteness": 98
+}

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const StyledAvatar = styled.div`
-  width: 40px;
-  height: 40px;
+  width: ${props => props.aSize}px;
+  height: ${props => props.aSize}px;
   display: flex;
   position: relative;
   overflow: hidden;
