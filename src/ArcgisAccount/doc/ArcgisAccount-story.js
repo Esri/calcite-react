@@ -18,6 +18,7 @@ import TopNav, {
 import EsriLogo from '../../../stories/images/ESRI_Logo_Black.svg';
 
 import user from './user.json';
+import portal from './portal.json';
 
 storiesOf('ArcGIS Account Control', module).add(
   'Basic',
@@ -37,6 +38,7 @@ storiesOf('ArcGIS Account Control', module).add(
           <TopNavActionsList style={{ padding: 0 }}>
             <ArcgisAccount
               user={user}
+              portal={portal}
               onRequestSwitchAccount={action('switch account clicked')}
               onRequestSignOut={action('sign out clicked')}
             >

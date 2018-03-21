@@ -25,7 +25,8 @@ import Button from '../Button';
 const ArcgisAccountMenu = ({
   children,
   user,
-  thumbnail,
+  portal,
+  avatar,
   onRequestSwitchAccount,
   onRequestSignOut,
   ...other
@@ -33,14 +34,14 @@ const ArcgisAccountMenu = ({
   return (
     <StyledArcgisAccountMenu {...other}>
       <StyledArcgisAccountContent>
-        <ArcgisAccountContentInfo user={user} thumbnail={thumbnail} />
+        <ArcgisAccountContentInfo user={user} portal={portal} avatar={avatar} />
         <ArcgisAccountContentMenu>{children}</ArcgisAccountContentMenu>
       </StyledArcgisAccountContent>
       <StyledArcgisAccountSignInMenu>
-        <Button primary grouped half large onClick={onRequestSwitchAccount}>
+        <Button grouped half extraLarge onClick={onRequestSwitchAccount}>
           Switch Account
         </Button>
-        <Button clear grouped half large onClick={onRequestSignOut}>
+        <Button halo grouped half extraLarge onClick={onRequestSignOut}>
           Sign Out
         </Button>
       </StyledArcgisAccountSignInMenu>

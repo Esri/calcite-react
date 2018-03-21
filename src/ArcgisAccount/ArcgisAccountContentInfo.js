@@ -14,7 +14,6 @@ import {
 
 // App components
 import CalciteTheme from '../theme/CalciteTheme';
-import Avatar from '../Avatar';
 
 // Third-party components (buttons, icons, etc.)
 
@@ -22,18 +21,17 @@ import Avatar from '../Avatar';
 
 // CSS
 
-const ArcgisAccountMenu = ({ user, thumbnail, ...other }) => {
+const ArcgisAccountMenu = ({ user, portal, avatar, ...other }) => {
+  const _avatar = React.cloneElement(avatar, {
+    style: {
+      border: `2px solid ${CalciteTheme.palette.white}`,
+      boxShadow: `0 0 0 3px ${CalciteTheme.palette.blue}`,
+      marginBottom: CalciteTheme.baseline
+    }
+  });
   return (
     <StyledArcgisAccountContentInfo {...other}>
-      <Avatar
-        src={thumbnail}
-        size={120}
-        style={{
-          border: `2px solid ${CalciteTheme.palette.white}`,
-          boxShadow: `0 0 0 3px ${CalciteTheme.palette.blue}`,
-          marginBottom: CalciteTheme.baseline
-        }}
-      />
+      {_avatar}
       <StyledArcgisAccountContentName>
         {user.fullName}
       </StyledArcgisAccountContentName>
@@ -41,7 +39,7 @@ const ArcgisAccountMenu = ({ user, thumbnail, ...other }) => {
         {user.username}
       </StyledArcgisAccountContentId>
       <StyledArcgisAccountContentGroup>
-        {user.role}
+        {portal.name}
       </StyledArcgisAccountContentGroup>
     </StyledArcgisAccountContentInfo>
   );
