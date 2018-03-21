@@ -42,7 +42,7 @@ const ArcgisItemCard = ({
     return new Date(date).toLocaleDateString(language, dateOptions);
   }
 
-  function _textShortener(text, maxLength) {
+  function _textShortener(text = '', maxLength) {
     let suffix = '';
     if (text.length > maxLength || text.length > maxDescriptionLength) {
       suffix = '...';
