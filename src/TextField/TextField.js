@@ -15,6 +15,7 @@ const TextField = ({
   id,
   _generatedId,
   name,
+  onChange,
   ...other
 }) => {
   const textField = (
@@ -27,6 +28,7 @@ const TextField = ({
       fullWidth={fullWidth}
       minimal={minimal}
       id={id || _generatedId}
+      onChange={onChange}
       {...other}
     />
   );
