@@ -12,19 +12,40 @@ const a = styled.a`
   }
 `;
 
-const h1 = styled.h1`
+const baseH = styled.h1`
   font-weight: 300;
   font-style: normal;
-  margin: 0 0 ${props => props.theme.baseline} 0;
+  margin-left: 0 0 ${props => props.theme.baseline} 0;
+`;
+
+const h1 = baseH.extend`
   ${fontSize(5)};
 `;
 
-const h4 = styled.h4`
-  font-weight: 300;
-  font-style: normal;
-  margin: 0 0 ${props => props.theme.baseline} 0;
+let h2 = baseH.extend`
+  ${fontSize(4)};
+`;
+h2.withComponent('h2');
+
+let h3 = baseH.extend`
+  ${fontSize(3)};
+`;
+h3.withComponent('h3');
+
+let h4 = baseH.extend`
   ${fontSize(2)};
 `;
+h4.withComponent('h4');
+
+let h5 = baseH.extend`
+  ${fontSize(1)};
+`;
+h5.withComponent('h5');
+
+let h6 = baseH.extend`
+  ${fontSize(0)};
+`;
+h6.withComponent('h6');
 
 const p = styled.p`
   margin-top: 0;
@@ -238,7 +259,11 @@ const baseRadioCheckbox = styled.input`
 export {
   a as CalciteA,
   h1 as CalciteH1,
+  h2 as CalciteH2,
+  h3 as CalciteH3,
   h4 as CalciteH4,
+  h5 as CalciteH5,
+  h6 as CalciteH6,
   p as CalciteP,
   figure as CalciteFigure,
   select as CalciteSelect,

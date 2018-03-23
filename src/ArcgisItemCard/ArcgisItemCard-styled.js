@@ -32,7 +32,6 @@ const StyledItemCardImageWrap = StyledCardImageWrap.extend`
 const StyledCardItemTitle = StyledCardTitle.extend`
   ${fontSize(1)};
   margin-bottom: ${props => unitCalc(props.theme.baseline, 5, '/')};
-  word-break: break-all;
 `;
 
 const StyledCardItemMetrics = styled.div`
