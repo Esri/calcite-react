@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { StyledSideNav } from '../SideNav/SideNav-styled';
 import { CalciteA } from '../utils/elements';
 import { unitCalc, fontSize } from '../utils/helpers';
@@ -18,10 +18,11 @@ const StyledMenu = StyledSideNav.extend`
 
 const StyledMenuItem = CalciteA.extend`
   position: relative;
-  display: block;
+  display: flex;
+  justify-content: space-between;
   box-sizing: border-box;
   padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
-  ${fontSize(-2)};
+  ${fontSize(-1)};
   color: ${props => props.theme.palette.darkerGray};
   background-color: ${props => props.theme.palette.white};
   border-top: 1px solid ${props => props.theme.palette.lightestGray};
@@ -60,4 +61,13 @@ const StyledMenuTitleLink = StyledMenuItem.extend`
 
 const StyledMenuTitle = StyledMenuTitleLink.withComponent('span');
 
-export { StyledMenu, StyledMenuItem, StyledMenuTitle };
+const StyledMenuItemSubtitle = styled.span`
+  ${fontSize(-3)};
+  color: ${props => props.theme.palette.lighterGray};
+
+  *:hover > & {
+    color: ${props => props.theme.palette.lightGray};
+  }
+`;
+
+export { StyledMenu, StyledMenuItem, StyledMenuTitle, StyledMenuItemSubtitle };
