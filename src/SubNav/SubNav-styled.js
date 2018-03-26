@@ -67,6 +67,7 @@ const StyledSubNavLink = CalciteA.extend`
 const StyledSubNavList = styled.nav`
   display: flex;
   align-items: flex-end;
+  height: 32px;
   margin-top: 0em;
   flex: 1 0 75%;
   padding-left: 0.25em;
@@ -81,6 +82,7 @@ const StyledSubNavActions = styled.nav`
 
   nav + & {
     margin-top: -0.5em;
+    height: 32px;
   }
 `;
 
