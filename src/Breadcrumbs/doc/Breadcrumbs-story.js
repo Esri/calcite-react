@@ -4,7 +4,7 @@ import { withInfo } from '@storybook/addon-info';
 import CalciteTheme from '../../../src/theme/CalciteTheme';
 
 import GuideExample from '../../../stories/GuideExample';
-import doc from './Breadcrumb.md';
+import doc from './Breadcrumbs.md';
 import Breadcrumbs, { Crumb } from '../';
 
 storiesOf('Breadcrumbs', module).add(
