@@ -4,7 +4,7 @@ import { StyledSubNav } from './SubNav-styled';
 
 import { SubNavTitle } from './';
 
-const SubNav = ({ children, blue, ...other }) => {
+const SubNav = ({ children, blue, overlayGradient, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
@@ -18,7 +18,7 @@ const SubNav = ({ children, blue, ...other }) => {
   });
 
   const subNav = (
-    <StyledSubNav blue={blue} {...other}>
+    <StyledSubNav blue={blue} overlayGradient={overlayGradient} {...other}>
       {childrenWithProps}
     </StyledSubNav>
   );
@@ -30,11 +30,14 @@ SubNav.propTypes = {
   /** Description TBD */
   children: PropTypes.node,
   /** Description TBD */
-  blue: PropTypes.bool
+  blue: PropTypes.bool,
+  /** If true, the gradient is applied on top of the image */
+  overlayGradient: PropTypes.bool
 };
 
 SubNav.defaultProps = {
-  blue: undefined
+  blue: undefined,
+  overlayGradient: true
 };
 
 export default SubNav;

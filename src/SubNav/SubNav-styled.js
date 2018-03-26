@@ -24,7 +24,8 @@ const StyledSubNav = styled.header`
       ${backgroundGradient(
         props.backgroundImage,
         props.gradientFromColor,
-        props.gradientToColor
+        props.gradientToColor,
+        props.overlayGradient
       )};
     `};
 `;
