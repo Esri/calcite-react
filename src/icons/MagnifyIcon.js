@@ -1,5 +1,3 @@
-'use strict';
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
@@ -44,7 +42,6 @@ var MagnifyIcon = function MagnifyIcon(_ref) {
     _ref$viewBox = _ref.viewBox,
     viewBox = _ref$viewBox === undefined ? '0 0 24 24' : _ref$viewBox,
     className = _ref.className,
-    children = _ref.children,
     props = _objectWithoutProperties(_ref, [
       'width',
       'height',
