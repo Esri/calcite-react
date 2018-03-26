@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import { action } from '@storybook/addon-actions';
 
 import GuideExample from '../../../stories/GuideExample';
 import doc from './MultiSelect.md';
 
 import { MenuItem } from '../../Menu';
-import Button from '../../Button';
-import { StyledMultiSelectInput } from '../MultiSelect-styled';
-import ChevronDown from 'mdi-react/ChevronDownIcon';
 import MultiSelect from '../';
 
 storiesOf('MultiSelect', module).add(
