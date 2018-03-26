@@ -2,12 +2,7 @@
   "name": "calcite-react",
   "version": "0.1.13",
   "description": "Calcite components for React",
-  "keywords": [
-    "calcite",
-    "esri",
-    "arcgis",
-    "react"
-  ],
+  "keywords": ["calcite", "esri", "arcgis", "react"],
   "license": "Apache-2.0",
   "author": "Esri PS",
   "contributors": [
@@ -17,16 +12,16 @@
   "main": "dist/index.js",
   "module": "dist/es/index.js",
   "browser": "dist/umd/index.js",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "start": "npm run storybook",
     "precommit": "lint-staged",
     "clean-dist": "rimraf ./dist",
-    "build": "npm run clean-dist && cross-env NODE_ENV=production && npm run build:main && npm run build:copy-files",
+    "build":
+      "npm run clean-dist && cross-env NODE_ENV=production && npm run build:main && npm run build:copy-files",
     "build:main": "babel ./src --out-dir ./dist",
-    "build:es": "cross-env BABEL_ENV=es babel ./src/index.js --out-file ./dist/es/index.js",
+    "build:es":
+      "cross-env BABEL_ENV=es babel ./src/index.js --out-file ./dist/es/index.js",
     "build:copy-files": "babel-node ./scripts/copy-files.js",
     "build_rollup": "rollup -c",
     "storybook": "start-storybook -p 6006",
@@ -40,17 +35,17 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(css|scss|less)$": "<rootDir>/__mocks__/styleMock.js",
-      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+      "\\.(png|gif|ttf|eot|svg|jpg|jpeg)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(md)$": "<rootDir>/__mocks__/markdownMock.js"
     },
     "testPathIgnorePatterns": [
-      "<rootDir>/__mocks__"
+      "<rootDir>/__mocks__/",
+      "<rootDir>/stories/",
+      "<rootDir>/dist/"
     ]
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["prettier --write", "git add"]
   },
   "dependencies": {
     "downshift": "^1.28.2",
