@@ -1,3 +1,5 @@
+import { transparentize } from 'polished';
+
 const unitCalc = (operand1, operand2, operator) => {
   let operand1Value = operand1;
   let operand1Unit;
@@ -147,15 +149,30 @@ const subNavUnderline = props => {
   `;
 };
 
-const backgroundGradient = (img, fromColor, toColor) => {
+const backgroundGradient = (img, fromColor, toColor, addOverlayGradient) => {
   if (!fromColor || !toColor) {
     return `
       background: url(${img}) no-repeat top center;
+      background-size: cover;
     `;
   } else {
-    return `
-      background: url(${img}) no-repeat top center, linear-gradient(to right, ${fromColor} 0%, ${toColor} 100%);
-    `;
+    if (addOverlayGradient) {
+      return `
+        background: linear-gradient(to right, ${transparentize(
+          0.3,
+          fromColor
+        )} 0%, ${transparentize(
+        0.3,
+        toColor
+      )} 100%), url(${img}) no-repeat center center, linear-gradient(to right, ${fromColor} 0%, ${toColor} 100%);
+        background-size: cover;
+      `;
+    } else {
+      return `
+        background: url(${img}) no-repeat center center, linear-gradient(to right, ${fromColor} 0%, ${toColor} 100%);
+        background-size: cover;
+      `;
+    }
   }
 };
 

@@ -5,6 +5,7 @@ import { withInfo } from '@storybook/addon-info';
 import GuideExample from '../../../stories/GuideExample';
 import doc from './SubNav.md';
 import greenBlueBg from '../../../stories/images/subNav-greenBlue-bg.png';
+import grayCityBg from '../../../stories/images/city_map.png';
 import Button from '../../Button/Button';
 import SubNav, {
   SubNavTitle,
@@ -81,6 +82,26 @@ storiesOf('SubNav', module)
             backgroundImage={greenBlueBg}
             gradientFromColor="#70be49"
             gradientToColor="#1688aa"
+            overlayGradient={false}
+          >
+            <SubNavTitle href="#" style={{ color: '#fff' }}>
+              Fields
+            </SubNavTitle>
+            <SubNavList>
+              <SubNavLink active href="#">
+                Glens
+              </SubNavLink>
+              <SubNavLink href="#">Dales</SubNavLink>
+              <SubNavLink href="#">Meadows</SubNavLink>
+            </SubNavList>
+          </SubNav>
+        </GuideExample>
+
+        <GuideExample label="overlayGradient">
+          <SubNav
+            backgroundImage={grayCityBg}
+            gradientFromColor="#70BB51"
+            gradientToColor="#2088A7"
           >
             <SubNavTitle href="#" style={{ color: '#fff' }}>
               Fields
