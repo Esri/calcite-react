@@ -1,4 +1,4 @@
-import { CalciteInput } from '../utils/elements';
+import { CalciteInput } from '../utils/commonElements';
 
 const StyledTextField = CalciteInput.extend``;
 

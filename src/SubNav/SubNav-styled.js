@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { CalciteA, CalciteH1 } from '../utils/elements';
+import { CalciteA, CalciteH1 } from '../Elements';
 import {
   subNavUnderline,
   unitCalc,

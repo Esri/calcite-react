@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { CalciteH4, CalciteA } from '../utils/elements';
+import { CalciteH4, CalciteA } from '../Elements';
 import { unitCalc, fontSize } from '../utils/helpers';
 import { avenirRegular } from '../utils/type';
 

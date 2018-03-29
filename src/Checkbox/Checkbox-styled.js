@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { fontSize, unitCalc } from '../utils/helpers';
 
-import { baseRadioCheckbox } from '../utils/elements';
+import { baseRadioCheckbox } from '../utils/commonElements';
 
 const StyledCheckbox = baseRadioCheckbox.extend`
   -webkit-appearance: checkbox;

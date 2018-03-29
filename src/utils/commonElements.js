@@ -1,61 +1,6 @@
 import styled, { css } from 'styled-components';
 import { fontSize, unitCalc } from './helpers';
 
-const a = styled.a`
-  color: ${props => props.theme.linkColor};
-  text-decoration: none;
-  cursor: pointer;
-
-  &:hover {
-    color: ${props => props.theme.linkHover};
-    text-decoration: underline;
-  }
-`;
-
-const baseH = styled.h1`
-  font-weight: 300;
-  font-style: normal;
-  margin-left: 0 0 ${props => props.theme.baseline} 0;
-`;
-
-const h1 = baseH.extend`
-  ${fontSize(5)};
-`;
-
-let h2 = baseH.extend`
-  ${fontSize(4)};
-`;
-h2.withComponent('h2');
-
-let h3 = baseH.extend`
-  ${fontSize(3)};
-`;
-h3.withComponent('h3');
-
-let h4 = baseH.extend`
-  ${fontSize(2)};
-`;
-h4.withComponent('h4');
-
-let h5 = baseH.extend`
-  ${fontSize(1)};
-`;
-h5.withComponent('h5');
-
-let h6 = baseH.extend`
-  ${fontSize(0)};
-`;
-h6.withComponent('h6');
-
-const p = styled.p`
-  margin-top: 0;
-  margin-bottom: 1.55rem;
-`;
-
-const figure = styled.figure`
-  margin: 0 0 1.55rem 0;
-`;
-
 const formSelectInputTextarea = styled.select`
   position: relative;
   display: block;
@@ -257,15 +202,6 @@ const baseRadioCheckbox = styled.input`
 `;
 
 export {
-  a as CalciteA,
-  h1 as CalciteH1,
-  h2 as CalciteH2,
-  h3 as CalciteH3,
-  h4 as CalciteH4,
-  h5 as CalciteH5,
-  h6 as CalciteH6,
-  p as CalciteP,
-  figure as CalciteFigure,
   select as CalciteSelect,
   input as CalciteInput,
   textarea as CalciteTextarea,

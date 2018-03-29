@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { clearfix, fontSize } from '../utils/helpers';
-import { CalciteA } from '../utils/elements';
+import { CalciteA } from '../Elements';
 
 const StyledTopNav = styled.header`
   display: flex;

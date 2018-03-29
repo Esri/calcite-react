@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { StyledSideNav } from '../SideNav/SideNav-styled';
-import { CalciteA } from '../utils/elements';
+import { CalciteA } from '../Elements';
 import { unitCalc, fontSize } from '../utils/helpers';
 
 const StyledMenu = StyledSideNav.extend`
