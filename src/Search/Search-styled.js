@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { CalciteInput } from '../utils/elements';
+import { CalciteInput } from '../utils/commonElements';
 import { fontSize, unitCalc } from '../utils/helpers';
 
 const StyledSearchContainer = styled.div`

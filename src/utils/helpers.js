@@ -95,7 +95,7 @@ const fontSize = (scale, theme) => {
   switch (scale) {
     case -3:
       return `
-        font-size: 0.825rem;
+        font-size: 0.8125rem;
         line-height: 1.55rem;
       `;
     case -2:
@@ -123,6 +123,11 @@ const fontSize = (scale, theme) => {
         font-size: 1.414rem;
         line-height: 1.55rem;
       `;
+    case 3:
+      return `
+        font-size: 1.69949rem;
+        line-height: 2.325rem;
+      `;
     case 4:
       return `
         font-size: 1.9994rem;
@@ -132,6 +137,21 @@ const fontSize = (scale, theme) => {
       return `
         font-size: 2.40307rem;
         line-height: 3.1rem;
+      `;
+    case 6:
+      return `
+        font-size: 2.82715rem;
+        line-height: 3.1rem;
+      `;
+    case 7:
+      return `
+        font-size: 3.39795rem;
+        line-height: 3.1rem;
+      `;
+    case 8:
+      return `
+        font-size: 3.99758rem;
+        line-height: 3.875rem;
       `;
     default:
       return `

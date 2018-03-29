@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { CalciteFigure, CalciteH4 } from '../utils/elements';
+import { CalciteFigure, CalciteH4 } from '../Elements';
 import { fontSize } from '../utils/helpers';
 
 const StyledCard = styled.div`

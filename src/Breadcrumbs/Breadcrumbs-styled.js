@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { linkColor } from '../utils/color';
-import { CalciteA } from '../utils/elements';
+import { CalciteA } from '../Elements';
 import { fontSize } from '../utils/helpers';
 
 const StyledBreadcrumbs = styled.nav`

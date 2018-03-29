@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CalciteSelect } from '../utils/elements';
+import { CalciteSelect } from '../utils/commonElements';
 import { StyledMenu } from '../Menu/Menu-styled';
 
 const StyledMultiSelectWrapper = styled.div`

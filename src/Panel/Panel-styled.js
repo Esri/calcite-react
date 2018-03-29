@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { unitCalc, clearfix } from '../utils/helpers';
-import { CalciteP } from '../utils/elements';
-import { CalciteH4 } from '../utils/elements';
+import { CalciteP, CalciteH4 } from '../Elements';
 
 const StyledPanel = styled.div`
   ${clearfix()};

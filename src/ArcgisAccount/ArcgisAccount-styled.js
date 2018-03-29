@@ -89,6 +89,7 @@ const StyledArcgisAccountContentGroup = styled.span`
   font-weight: 300;
   line-height: 20px;
   margin-bottom: ${props => unitCalc(props.theme.baseline, 1.5, '*')};
+  text-align: center;
 `;
 
 const StyledArcgisAccountContentMenu = styled.div`

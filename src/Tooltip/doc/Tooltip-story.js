@@ -7,7 +7,7 @@ import doc from './Tooltip.md';
 
 import Tooltip from '../Tooltip';
 import Label from '../../Label';
-import { CalciteA } from '../../utils/elements';
+import { CalciteA } from '../../Elements';
 
 import Card, { CardTitle, CardContent, CardImage } from '../../Card';
 import Button from '../../Button';
