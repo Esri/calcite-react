@@ -1,5 +1,7 @@
-import { CalciteInput } from '../utils/commonElements';
+import { CalciteInput, CalciteTextarea } from '../utils/commonElements';
 
 const StyledTextField = CalciteInput.extend``;
 
-export { StyledTextField };
+const StyledTextArea = CalciteTextarea.extend``;
+
+export { StyledTextField, StyledTextArea };
