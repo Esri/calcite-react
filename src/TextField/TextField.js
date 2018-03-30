@@ -35,7 +35,6 @@ const TextField = ({
 
   const textArea = (
     <StyledTextArea
-      type={type}
       value={value}
       error={error}
       success={success}
@@ -64,7 +63,8 @@ TextField.propTypes = {
     'password',
     'tel',
     'text',
-    'url'
+    'url',
+    'textarea'
   ]),
   /** HTML prop for the current value of the input */
   value: PropTypes.node,
