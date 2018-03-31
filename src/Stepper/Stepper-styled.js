@@ -22,6 +22,21 @@ const StyledStep = styled.div`
   &:last-of-type {
     margin-right: 0;
   }
+
+  ${props =>
+    props.vertical &&
+    css`
+      flex: unset;
+      align-items: flex-start;
+      margin-right: 0;
+      margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
+      padding-bottom: ${props => props.theme.baseline};
+
+      &:last-of-type {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+    `};
 `;
 
 const StyledStepTextContainer = styled.div`
@@ -91,6 +106,14 @@ const StyledStepTitle = CalciteH6.extend`
   *:last-of-type > * > &::after {
     content: none;
   }
+
+  ${props =>
+    props.vertical &&
+    css`
+      &::after {
+        content: none;
+      }
+    `};
 `;
 
 const StyledStepDescription = CalciteP.extend`
@@ -124,7 +147,42 @@ const StyledStepDescription = CalciteP.extend`
     `};
 `;
 
-const StyledStepIcon = styled.div``;
+const StyledStepIcon = styled.div`
+  position: relative;
+
+  ${props =>
+    props.vertical &&
+    css`
+      padding-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
+
+      &::after {
+        content: '';
+        width: 1px;
+        height: 9999px;
+        background: ${props => props.theme.palette.lighterGray};
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 16px;
+
+        ${props =>
+          props.small &&
+          css`
+            left: 12px;
+          `};
+
+        ${props =>
+          props.complete &&
+          css`
+            background: ${props => props.theme.palette.blue};
+          `};
+      }
+
+      *:last-of-type > &::after {
+        content: none;
+      }
+    `};
+`;
 
 const StepAvatarStyles = {
   default: {

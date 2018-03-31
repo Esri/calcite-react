@@ -12,6 +12,7 @@ const Step = ({
   complete,
   error,
   icon,
+  vertical,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
@@ -22,14 +23,16 @@ const Step = ({
           active,
           small,
           complete,
-          error
+          error,
+          vertical
         });
       case StepDescription:
         return React.cloneElement(child, {
           active,
           small,
           complete,
-          error
+          error,
+          vertical
         });
       default:
         return child;
@@ -37,17 +40,20 @@ const Step = ({
   });
 
   const step = (
-    <StyledStep {...other}>
+    <StyledStep vertical={vertical} {...other}>
       <StepIcon
         icon={icon}
         active={active}
         complete={complete}
         error={error}
         small={small}
+        vertical={vertical}
       >
         {stepNumber}
       </StepIcon>
-      <StyledStepTextContainer>{childrenWithProps}</StyledStepTextContainer>
+      <StyledStepTextContainer vertical={vertical}>
+        {childrenWithProps}
+      </StyledStepTextContainer>
     </StyledStep>
   );
 

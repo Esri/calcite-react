@@ -17,6 +17,7 @@ const StepIcon = ({
   active,
   complete,
   error,
+  vertical,
   ...other
 }) => {
   let iconContent;
@@ -69,7 +70,16 @@ const StepIcon = ({
     );
   }
 
-  return <StyledStepIcon {...other}>{iconContent}</StyledStepIcon>;
+  return (
+    <StyledStepIcon
+      small={small}
+      complete={complete}
+      vertical={vertical}
+      {...other}
+    >
+      {iconContent}
+    </StyledStepIcon>
+  );
 };
 
 StepIcon.propTypes = {

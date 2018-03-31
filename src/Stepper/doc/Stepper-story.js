@@ -98,7 +98,7 @@ storiesOf('Stepper', module)
             </Step>
           </Stepper>
         </GuideExample>
-        <GuideExample>
+        <GuideExample label="small">
           <Stepper small currentStep={3}>
             <Step icon={<AccountOutlineIcon />}>
               <StepTitle>Complete Step</StepTitle>
@@ -110,6 +110,48 @@ storiesOf('Stepper', module)
               <StepTitle>Current Step</StepTitle>
             </Step>
             <Step icon={<EmoticonIcon />}>
+              <StepTitle>Pending Step</StepTitle>
+            </Step>
+          </Stepper>
+        </GuideExample>
+      </div>
+    ))
+  )
+  .add(
+    'Vertical',
+    withInfo(doc)(() => (
+      <div>
+        <GuideExample>
+          <Stepper vertical currentStep={2}>
+            <Step>
+              <StepTitle>Complete Step</StepTitle>
+              <StepDescription>
+                This is the first step in a series
+              </StepDescription>
+            </Step>
+            <Step error>
+              <StepTitle>Error Step</StepTitle>
+              <StepDescription>
+                This is the second step in a series
+              </StepDescription>
+            </Step>
+            <Step>
+              <StepTitle>Pending Step</StepTitle>
+              <StepDescription>
+                This is the third step in a series
+              </StepDescription>
+            </Step>
+          </Stepper>
+        </GuideExample>
+        <GuideExample label="small">
+          <Stepper vertical small currentStep={2}>
+            <Step>
+              <StepTitle>Complete Step</StepTitle>
+            </Step>
+            <Step error>
+              <StepTitle>Error Step</StepTitle>
+            </Step>
+            <Step>
               <StepTitle>Pending Step</StepTitle>
             </Step>
           </Stepper>
