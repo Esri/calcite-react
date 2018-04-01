@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyledTextField } from './TextField-styled';
+import { StyledTextField, StyledTextArea } from './TextField-styled';
 
 const TextField = ({
   children,
@@ -33,7 +33,21 @@ const TextField = ({
     />
   );
 
-  return textField;
+  const textArea = (
+    <StyledTextArea
+      value={value}
+      error={error}
+      success={success}
+      search={search}
+      fullWidth={fullWidth}
+      minimal={minimal}
+      id={id || _generatedId}
+      onChange={onChange}
+      {...other}
+    />
+  );
+
+  return type === 'textarea' ? textArea : textField;
 };
 
 TextField.propTypes = {
@@ -49,7 +63,8 @@ TextField.propTypes = {
     'password',
     'tel',
     'text',
-    'url'
+    'url',
+    'textarea'
   ]),
   /** HTML prop for the current value of the input */
   value: PropTypes.node,

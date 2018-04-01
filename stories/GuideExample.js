@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const GuideExampleContainer = styled.div`
-  padding: 0.5em;
+  padding: 1rem;
   border-bottom: 1px solid #efefef;
   border-left: 1px solid #efefef;
   border-right: 1px solid #efefef;
