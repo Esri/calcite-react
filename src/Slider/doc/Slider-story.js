@@ -6,6 +6,9 @@ import GuideExample from '../../../stories/GuideExample';
 import doc from './Slider.md';
 import Slider from '../';
 
+import Form, { FormControl } from '../../Form';
+import TextField from '../../TextField';
+
 storiesOf('Slider', module)
   .add(
     'Basic',
@@ -38,10 +41,20 @@ storiesOf('Slider', module)
         render() {
           return (
             <GuideExample>
-              <Slider
-                value={this.state.value}
-                onChange={this.updateSliderValue}
-              />
+              <Form horizontal>
+                <FormControl>
+                  <TextField
+                    value={this.state.value}
+                    onChange={this.updateSliderValue}
+                  />
+                </FormControl>
+                <FormControl style={{ flex: '1 0 100px' }}>
+                  <Slider
+                    value={this.state.value}
+                    onChange={this.updateSliderValue}
+                  />
+                </FormControl>
+              </Form>
             </GuideExample>
           );
         }
