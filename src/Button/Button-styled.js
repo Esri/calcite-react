@@ -1,12 +1,11 @@
 import styled, { css } from 'styled-components';
-import { fontSize } from '../utils/helpers';
+import { unitCalc, fontSize } from '../utils/helpers';
 
 const StyledButton = styled.button`
   position: relative;
   display: inline-block;
-  ${props => css`
-    padding: ${props => parseFloat(props.theme.baseline) / 5 + 'em'} 0.9rem;
-  `} width: auto;
+  padding: ${props => unitCalc(props.theme.baseline, 5, '/')} 0.9rem;
+  width: auto;
   color: ${props => props.theme.palette.white};
   border: 1px solid ${props => props.theme.palette.blue};
   border-radius: 0;

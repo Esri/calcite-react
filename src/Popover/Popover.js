@@ -72,7 +72,10 @@ class Popover extends Component {
       <Manager>
         <Target
           innerRef={c => (this.target = findDOMNode(c))}
-          style={{ display: 'inline-block' }}
+          style={{
+            display: 'inline-block',
+            ...this.props.targetContainerStyles
+          }}
         >
           {this.props.targetEl}
         </Target>
