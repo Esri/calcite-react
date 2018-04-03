@@ -17,7 +17,7 @@ const formSelectInputTextarea = styled.select`
   outline: none;
   outline-offset: 0;
   background-color: ${props => props.theme.palette.white};
-  border: 1px solid ${props => props.theme.palette.lightgray};
+  border: 1px solid ${props => props.theme.palette.lightGray};
   border-radius: 0;
   transition: border-color 150ms linear;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
