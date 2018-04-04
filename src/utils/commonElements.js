@@ -10,7 +10,7 @@ const formSelectInputTextarea = styled.select`
   margin: 0.25rem 0 0 0;
   padding: 0 ${props => unitCalc(props.theme.baseline, 5, '/')};
   box-sizing: border-box;
-  font-family: inherit;
+  font-family: ${props => props.theme.type.avenirFamily};
   ${fontSize(-1)};
   color: ${props => props.theme.palette.offBlack};
   vertical-align: baseline;
