@@ -142,4 +142,18 @@ storiesOf('Select', module)
         </GuideExample>
       </div>
     ))
+  )
+  .add(
+    'Minimal',
+    withInfo(doc)(() => (
+      <div>
+        <GuideExample>
+          <Select minimal onChange={action('onChange')}>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </GuideExample>
+      </div>
+    ))
   );

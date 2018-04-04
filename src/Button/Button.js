@@ -18,11 +18,23 @@ const Button = ({
   disabled,
   href,
   type,
+  iconButton,
   icon,
   iconPosition,
   ...other
 }) => {
   const StyledLink = StyledButton.withComponent('a');
+
+  function getIconMargin() {
+    if (iconButton) {
+      return;
+    } else {
+      return {
+        marginLeft: iconPosition === 'after' ? '0.75em' : '-0.25em',
+        marginRight: iconPosition === 'before' ? '0.75em' : '-0.25em'
+      };
+    }
+  }
 
   let wrappedIcon;
   if (icon) {
@@ -31,8 +43,7 @@ const Button = ({
       style: {
         fill: 'currentColor',
         verticalAlign: 'bottom',
-        marginLeft: iconPosition === 'after' ? '0.75em' : '-0.25em',
-        marginRight: iconPosition === 'before' ? '0.75em' : '-0.25em',
+        ...getIconMargin(),
         ...icon.props.style
       }
     });
@@ -51,6 +62,7 @@ const Button = ({
       half={half}
       red={red}
       green={green}
+      iconButton={iconButton}
       href={href}
       {...other}
       disabled={disabled}
@@ -75,6 +87,7 @@ const Button = ({
       half={half}
       red={red}
       green={green}
+      iconButton={iconButton}
       {...other}
       disabled={disabled}
       type={type}

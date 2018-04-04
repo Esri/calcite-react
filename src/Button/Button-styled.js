@@ -178,6 +178,20 @@ const StyledButton = styled.button`
     `};
 
   ${props =>
+    props.iconButton &&
+    css`
+      background: transparent;
+      color: ${props => props.theme.palette.darkGray};
+      border: none;
+      padding: ${props => unitCalc(props.theme.baseline, 5, '/')};
+
+      &:hover {
+        color: ${props => props.theme.palette.offBlack};
+        background: transparent;
+      }
+    `};
+
+  ${props =>
     props.grouped &&
     css`
       float: left;

@@ -10,14 +10,14 @@ const formSelectInputTextarea = styled.select`
   margin: 0.25rem 0 0 0;
   padding: 0 ${props => unitCalc(props.theme.baseline, 5, '/')};
   box-sizing: border-box;
-  font-family: inherit;
+  font-family: ${props => props.theme.type.avenirFamily};
   ${fontSize(-1)};
   color: ${props => props.theme.palette.offBlack};
   vertical-align: baseline;
   outline: none;
   outline-offset: 0;
   background-color: ${props => props.theme.palette.white};
-  border: 1px solid ${props => props.theme.palette.lightgray};
+  border: 1px solid ${props => props.theme.palette.lightGray};
   border-radius: 0;
   transition: border-color 150ms linear;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);

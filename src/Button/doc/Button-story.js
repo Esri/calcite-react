@@ -9,6 +9,7 @@ import Button from '../';
 
 import DownloadIcon from 'mdi-react/DownloadIcon';
 import ContentSaveIcon from 'mdi-react/ContentSaveIcon';
+import AppsIcon from 'mdi-react/AppsIcon';
 
 storiesOf('Button', module)
   .add(
@@ -136,7 +137,7 @@ storiesOf('Button', module)
             Download
           </Button>
         </GuideExample>
-        <GuideExample>
+        <GuideExample label={`iconPosition="before"`}>
           <Button
             onClick={action('clicked')}
             icon={<ContentSaveIcon />}
@@ -144,6 +145,10 @@ storiesOf('Button', module)
           >
             Save
           </Button>
+        </GuideExample>
+
+        <GuideExample label="iconButton">
+          <Button iconButton icon={<AppsIcon />} onClick={action('clicked')} />
         </GuideExample>
       </div>
     ))
