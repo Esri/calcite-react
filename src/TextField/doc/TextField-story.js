@@ -65,4 +65,16 @@ storiesOf('TextField', module)
         </GuideExample>
       </div>
     ))
+  )
+  .add(
+    'Minimal',
+    withInfo(doc)(() => (
+      <div>
+        <GuideExample>
+          <FormControl>
+            <TextField minimal value="James T Kirk" />
+          </FormControl>
+        </GuideExample>
+      </div>
+    ))
   );

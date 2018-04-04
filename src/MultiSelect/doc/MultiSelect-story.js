@@ -96,4 +96,42 @@ storiesOf('MultiSelect', module)
       }
       return <CustomLabelMultiSelect />;
     })
+  )
+  .add(
+    'Minimal',
+    withInfo(doc)(() => {
+      class MinimalMultiSelect extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValues: [10]
+          };
+        }
+
+        handleMultiSelectChange = (values, items) => {
+          this.setState({
+            selectedValues: values
+          });
+        };
+
+        render() {
+          return (
+            <div>
+              <GuideExample>
+                <MultiSelect
+                  minimal
+                  onChange={this.handleMultiSelectChange}
+                  selectedValues={this.state.selectedValues}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </MultiSelect>
+              </GuideExample>
+            </div>
+          );
+        }
+      }
+      return <MinimalMultiSelect />;
+    })
   );
