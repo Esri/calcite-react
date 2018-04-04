@@ -18,6 +18,7 @@ import Select from '../../Select';
 import { MenuItem } from '../../Menu';
 import Radio from '../../Radio';
 import Checkbox from '../../Checkbox';
+import DatePicker from '../../DatePicker';
 
 storiesOf('Form', module)
   .add(
@@ -43,6 +44,9 @@ storiesOf('Form', module)
             <FormControl success>
               <TextField value="Denver" label="City:" />
               <FormHelperText>City checks out</FormHelperText>
+            </FormControl>
+            <FormControl>
+              <DatePicker date={null} focused={false} />
             </FormControl>
             <FormControl>
               <Fieldset name="storyRadioGroup">
