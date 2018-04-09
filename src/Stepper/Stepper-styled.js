@@ -37,6 +37,17 @@ const StyledStep = styled.div`
         padding-bottom: 0;
       }
     `};
+
+  ${props =>
+    props.selectable &&
+    css`
+      cursor: pointer;
+      transition: opacity 175ms cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:hover {
+        opacity: 0.7;
+      }
+    `};
 `;
 
 const StyledStepTextContainer = styled.div`
