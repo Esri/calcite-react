@@ -90,7 +90,8 @@ class Popover extends Component {
               placement={this.props.placement}
               style={{
                 ...this.defaultStyle,
-                ...StyledPopperTransition[state]
+                ...StyledPopperTransition[state],
+                ...this.props.popoverContainerStyles
               }}
             >
               <StyledPopover>{this.props.children}</StyledPopover>
@@ -129,7 +130,11 @@ Popover.propTypes = {
   /** Function called when the popover receives an event that may trigger a close */
   onRequestClose: PropTypes.func,
   /** Whether or not the popover should trigger onRequestClose when an element is selected */
-  closeOnSelect: PropTypes.bool
+  closeOnSelect: PropTypes.bool,
+  /** Styles passed onto the target element container div */
+  targetContainerStyles: PropTypes.object,
+  /** Styles passed onto the popover container div */
+  popoverContainerStyles: PropTypes.object
 };
 
 Popover.defaultProps = {

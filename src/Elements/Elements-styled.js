@@ -47,7 +47,7 @@ const a = styled.a`
 const baseH = styled.h1`
   font-weight: 300;
   font-style: normal;
-  margin-left: 0 0 ${props => props.theme.baseline} 0;
+  margin: 0 0 ${props => props.theme.baseline} 0;
 `;
 
 const h1 = baseH.extend`

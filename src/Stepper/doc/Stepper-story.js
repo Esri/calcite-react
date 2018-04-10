@@ -75,6 +75,28 @@ storiesOf('Stepper', module)
             </Step>
           </Stepper>
         </GuideExample>
+        <GuideExample label="selectable">
+          <Stepper currentStep={1}>
+            <Step>
+              <StepTitle>Complete Step</StepTitle>
+              <StepDescription>
+                This is the first step in a series
+              </StepDescription>
+            </Step>
+            <Step selectable>
+              <StepTitle>Current Step</StepTitle>
+              <StepDescription>
+                This is the second step in a series
+              </StepDescription>
+            </Step>
+            <Step>
+              <StepTitle>Pending Step</StepTitle>
+              <StepDescription>
+                This is the third step in a series
+              </StepDescription>
+            </Step>
+          </Stepper>
+        </GuideExample>
       </div>
     ))
   )

@@ -13,6 +13,7 @@ const Step = ({
   error,
   icon,
   vertical,
+  selectable,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
@@ -40,7 +41,7 @@ const Step = ({
   });
 
   const step = (
-    <StyledStep vertical={vertical} {...other}>
+    <StyledStep selectable={selectable} vertical={vertical} {...other}>
       <StepIcon
         icon={icon}
         active={active}
