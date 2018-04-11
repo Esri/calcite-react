@@ -27,6 +27,8 @@ const ArcgisAccountMenu = ({
   user,
   portal,
   avatar,
+  switchAccountLabel,
+  signOutLabel,
   onRequestSwitchAccount,
   onRequestSignOut,
   ...other
@@ -39,10 +41,10 @@ const ArcgisAccountMenu = ({
       </StyledArcgisAccountContent>
       <StyledArcgisAccountSignInMenu>
         <Button grouped half extraLarge onClick={onRequestSwitchAccount}>
-          Switch Account
+          {switchAccountLabel}
         </Button>
         <Button halo grouped half extraLarge onClick={onRequestSignOut}>
-          Sign Out
+          {signOutLabel}
         </Button>
       </StyledArcgisAccountSignInMenu>
     </StyledArcgisAccountMenu>
@@ -50,9 +52,14 @@ const ArcgisAccountMenu = ({
 };
 
 ArcgisAccountMenu.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  switchAccountLabel: PropTypes.string,
+  signOutLabel: PropTypes.string
 };
 
-ArcgisAccountMenu.defaultProps = {};
+ArcgisAccountMenu.defaultProps = {
+  switchAccountLabel: 'Switch Account',
+  signOutLabel: 'Sign Out'
+};
 
 export default ArcgisAccountMenu;

@@ -37,9 +37,12 @@ DatePicker.propTypes = {
   date: momentPropTypes.momentObj,
   onDateChange: PropTypes.func.isRequired,
   focused: PropTypes.bool,
-  onFocusChange: PropTypes.func.isRequired
+  onFocusChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string
 };
 
-DatePicker.defaultProps = {};
+DatePicker.defaultProps = {
+  placeholder: 'Date'
+};
 
 export default DatePicker;
