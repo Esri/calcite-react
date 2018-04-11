@@ -6,10 +6,20 @@ import {
   StyledCheckboxGroup
 } from './Checkbox-styled';
 
-const Checkbox = ({ children, value, name, checked, onChange, ...other }) => {
+const Checkbox = ({
+  children,
+  value,
+  name,
+  checked,
+  labelStyle,
+  onChange,
+  ...other
+}) => {
   let checkboxLabel;
   if (children) {
-    checkboxLabel = <StyledCheckboxLabel>{children}</StyledCheckboxLabel>;
+    checkboxLabel = (
+      <StyledCheckboxLabel style={labelStyle}>{children}</StyledCheckboxLabel>
+    );
   }
   const checkbox = (
     <StyledCheckboxGroup>
@@ -37,6 +47,8 @@ Checkbox.propTypes = {
   name: PropTypes.string,
   /** Whether the checkbox is currently checked */
   checked: PropTypes.bool,
+  /** Style object passed down to the label */
+  labelStyle: PropTypes.object,
   /** Event called when the checkbox value should be toggled */
   onChange: PropTypes.func
 };

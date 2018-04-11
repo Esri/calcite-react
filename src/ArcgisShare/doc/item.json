@@ -1,0 +1,59 @@
+{
+  "item": {
+    "id": "258c79a68c164553b87f0ee5bed33295",
+    "owner": "jpeterson_iot",
+    "created": 1522266045000,
+    "modified": 1522266046000,
+    "guid": null,
+    "name": null,
+    "title": "ArcGIS for IoT",
+    "type": "Web Mapping Application",
+    "typeKeywords": [
+      "JavaScript",
+      "Map",
+      "Mapping Site",
+      "Online Map",
+      "Ready To Use",
+      "Web Map",
+      "Registered App"
+    ],
+    "description": null,
+    "tags": ["a4iot"],
+    "snippet": null,
+    "thumbnail": "thumbnail/ago_downloaded.png",
+    "documentation": null,
+    "extent": [],
+    "categories": [],
+    "spatialReference": null,
+    "accessInformation": null,
+    "licenseInfo": null,
+    "culture": "en-us",
+    "properties": null,
+    "url": "https://iot.arcgis.com",
+    "proxyFilter": null,
+    "access": "org",
+    "size": 0,
+    "appCategories": [],
+    "industries": [],
+    "languages": [],
+    "largeThumbnail": null,
+    "banner": null,
+    "screenshots": [],
+    "listed": false,
+    "ownerFolder": null,
+    "protected": false,
+    "numComments": 0,
+    "numRatings": 0,
+    "avgRating": 0,
+    "numViews": 3,
+    "itemControl": "admin",
+    "scoreCompleteness": 33
+  },
+  "sharing": {
+    "access": "org",
+    "groups": [
+      "f83a849864f24fae885010a1f073e32b",
+      "59cc321052ca479ca00a8d20f8181c80"
+    ]
+  }
+}
