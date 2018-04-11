@@ -4,7 +4,9 @@ import { StyledLegend } from './Form-styled';
 
 const Legend = ({ children, horizontal, ...other }) => {
   const legend = (
-    <StyledLegend horizontal={horizontal}>{children}</StyledLegend>
+    <StyledLegend horizontal={horizontal} {...other}>
+      {children}
+    </StyledLegend>
   );
 
   return legend;
