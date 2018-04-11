@@ -108,7 +108,7 @@ const StyledButton = styled.button`
         color: ${props => props.theme.palette.blue};
         background: transparent;
         border-color: ${props => props.theme.palette.blue};
-        box-shadow: inset 0 0 0 3px ${props => props.theme.palette.blue};
+        box-shadow: inset 0 0 0 2px ${props => props.theme.palette.blue};
       }
     `};
 

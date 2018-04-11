@@ -33,6 +33,7 @@ const DatePicker = ({
         onDatesChange={onDatesChange}
         focusedInput={focusedInput}
         onFocusChange={onFocusChange}
+        {...other}
       />
     </StyledDatePickerContainer>
   );
@@ -45,9 +46,14 @@ DatePicker.propTypes = {
   endDateId: PropTypes.string.isRequired,
   onDatesChange: PropTypes.func.isRequired,
   focusedInput: PropTypes.oneOf(['startDate', 'endDate']),
-  onFocusChange: PropTypes.func.isRequired
+  onFocusChange: PropTypes.func.isRequired,
+  startDatePlaceholderText: PropTypes.string,
+  endDatePlaceholderText: PropTypes.string
 };
 
-DatePicker.defaultProps = {};
+DatePicker.defaultProps = {
+  startDatePlaceholderText: 'Start Date',
+  endDatePlaceholderText: 'End Date'
+};
 
 export default DatePicker;

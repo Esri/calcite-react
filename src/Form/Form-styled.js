@@ -22,6 +22,13 @@ const StyledFormControl = styled.div`
   margin: 0 ${props => unitCalc(props.theme.baseline, 4, '/')}
     ${props => unitCalc(props.theme.baseline, 1.25, '*')}
     ${props => unitCalc(props.theme.baseline, 4, '/')};
+
+  ${props =>
+    props.horizontal &&
+    css`
+      flex-direction: row;
+      align-items: baseline;
+    `};
 `;
 
 const StyledFormControlLabel = styled.label`
