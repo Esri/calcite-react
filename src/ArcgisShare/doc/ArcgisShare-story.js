@@ -40,4 +40,19 @@ storiesOf('ArcGIS Share', module)
         </GuideExample>
       </div>
     ))
+  )
+  .add(
+    'Promote Favorites',
+    withInfo(doc)(() => (
+      <div>
+        <GuideExample>
+          <ArcgisShare
+            user={user}
+            portal={portal}
+            promoteFavorites
+            onChange={e => console.log(e)}
+          />
+        </GuideExample>
+      </div>
+    ))
   );

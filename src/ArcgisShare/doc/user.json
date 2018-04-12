@@ -114,7 +114,7 @@
       "sortField": "title",
       "sortOrder": "asc",
       "isViewOnly": false,
-      "isFav": false,
+      "isFav": true,
       "thumbnail": "logo_simple.jpg",
       "created": 1379444282000,
       "modified": 1379459227000,
