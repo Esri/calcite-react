@@ -7,7 +7,7 @@ import { FormControlLabel, FormHelperText, Fieldset } from './';
 import TextField from '../TextField';
 import Select from '../Select';
 
-const FormControl = ({ children, error, success, ...other }) => {
+const FormControl = ({ children, error, success, horizontal, ...other }) => {
   const _generatedId = uniqid();
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
@@ -44,7 +44,12 @@ const FormControl = ({ children, error, success, ...other }) => {
   });
 
   const formControl = (
-    <StyledFormControl error={error} success={success} {...other}>
+    <StyledFormControl
+      error={error}
+      success={success}
+      horizontal={horizontal}
+      {...other}
+    >
       {childrenWithProps}
     </StyledFormControl>
   );
@@ -58,7 +63,9 @@ FormControl.propTypes = {
   /** The form control should show an error */
   error: PropTypes.bool,
   /** The form control should show success */
-  success: PropTypes.bool
+  success: PropTypes.bool,
+  /** The form control should layout as horizontal elements */
+  horizontal: PropTypes.bool
 };
 
 FormControl.defaultProps = {};
