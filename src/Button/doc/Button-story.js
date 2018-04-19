@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
@@ -116,6 +116,20 @@ storiesOf('Button', module)
           </nav>
         </GuideExample>
 
+        <GuideExample label="grouped">
+          <nav>
+            <Button grouped onClick={action('clicked')}>
+              One
+            </Button>
+            <Button grouped onClick={action('clicked')}>
+              Two
+            </Button>
+            <Button grouped onClick={action('clicked')}>
+              Three
+            </Button>
+          </nav>
+        </GuideExample>
+
         <GuideExample label="href=&quot;&quot;">
           <Button
             href="https://esri.com"
@@ -127,6 +141,81 @@ storiesOf('Button', module)
         </GuideExample>
       </div>
     ))
+  )
+  .add(
+    'Toggle Button Group',
+    withInfo(doc)(() => {
+      class ToggleGroupExample extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selected: 1
+          };
+        }
+
+        selectButton = selected => {
+          this.setState({
+            selected
+          });
+        };
+
+        render() {
+          return (
+            <GuideExample label="grouped">
+              <nav>
+                <Button
+                  grouped
+                  clear={this.state.selected === 1}
+                  onClick={() => {
+                    this.selectButton(1);
+                  }}
+                >
+                  One
+                </Button>
+                <Button
+                  grouped
+                  clear={this.state.selected === 2}
+                  onClick={() => {
+                    this.selectButton(2);
+                  }}
+                >
+                  Two
+                </Button>
+                <Button
+                  grouped
+                  clear={this.state.selected === 3}
+                  onClick={() => {
+                    this.selectButton(3);
+                  }}
+                >
+                  Three
+                </Button>
+                <Button
+                  grouped
+                  clear={this.state.selected === 4}
+                  onClick={() => {
+                    this.selectButton(4);
+                  }}
+                >
+                  Four
+                </Button>
+                <Button
+                  grouped
+                  clear={this.state.selected === 5}
+                  onClick={() => {
+                    this.selectButton(5);
+                  }}
+                >
+                  Five
+                </Button>
+              </nav>
+            </GuideExample>
+          );
+        }
+      }
+
+      return <ToggleGroupExample />;
+    })
   )
   .add(
     'With Icon',
