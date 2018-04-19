@@ -204,6 +204,21 @@ const StyledButton = styled.button`
       &:first-of-type {
         margin-left: 0;
       }
+
+      ${props.clear &&
+        css`
+          margin-right: -1px;
+          margin-left: 0;
+
+          &:first-of-type {
+            border-right-width: 0;
+          }
+
+          &:last-of-type {
+            margin-right: 0;
+            border-left-width: 0;
+          }
+        `};
     `};
 
   ${props =>
