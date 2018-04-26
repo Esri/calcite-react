@@ -28,4 +28,4 @@ To get started, go ahead and fork this repo. Once you've done that, there are a 
 `npm run build`
 
 ## Submitting a Pull Request
-Once you're ready to submit your changes, submit a pull request! Often it's a good idea to open an issue to discuss your proposed changes before making a PR, but you're welcome to submit a PR without an issue - just be sure to include a good description of your changes.
+Once you're ready to submit your changes, submit a pull request **into the `develop` branch**. Often it's a good idea to open an issue to discuss your proposed changes before making a PR, but you're welcome to submit a PR without an issue - just be sure to include a good description of your changes.
