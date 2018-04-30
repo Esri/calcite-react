@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledCrumb, StyledSpanCrumb } from './Breadcrumbs-styled';
 
-const Crumb = ({ children, white, href, ...other }) => {
+const Crumb = ({ children, white, href, hasLink, ...other }) => {
   const spanCrumb = (
     <StyledSpanCrumb white={white} {...other}>
       {children}
@@ -15,7 +15,7 @@ const Crumb = ({ children, white, href, ...other }) => {
     </StyledCrumb>
   );
 
-  return href ? crumb : spanCrumb;
+  return href || hasLink ? crumb : spanCrumb;
 };
 
 Crumb.propTypes = {

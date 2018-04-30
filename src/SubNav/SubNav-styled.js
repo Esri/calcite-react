@@ -62,6 +62,13 @@ const StyledSubNavLink = CalciteA.extend`
     background-color: ${props => props.theme.palette.white};
     color: ${props => props.theme.palette.offBlack};
   }
+
+  ${props =>
+    props.disabled &&
+    css`
+      opacity: 0.5;
+      pointer-events: none;
+    `};
 `;
 
 const StyledSubNavList = styled.nav`

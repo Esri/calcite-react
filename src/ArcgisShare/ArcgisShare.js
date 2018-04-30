@@ -16,7 +16,7 @@ import {
 
 // App components
 import Checkbox from '../Checkbox';
-import Form, { Fieldset, Legend } from '../Form';
+import { Fieldset, Legend } from '../Form';
 
 // Third-party components (buttons, icons, etc.)
 import StarIcon from '../icons/StarIcon';
@@ -47,7 +47,8 @@ class ArcgisShare extends Component {
     let groubsObj = {};
     groups.forEach(group => {
       const sharing = this.props.sharing;
-      const isShared = sharing && sharing.groups.indexOf(group.id) > -1;
+      const isShared =
+        sharing && sharing.groups && sharing.groups.indexOf(group.id) > -1;
       groubsObj[group.id] = isShared;
     });
 
@@ -124,30 +125,28 @@ class ArcgisShare extends Component {
   render() {
     return (
       <StyledArcgisShare>
-        <Form>
-          <Checkbox
-            id="public"
-            labelStyle={{ ...PrimaryCheckboxLabelStyles }}
-            checked={this.state.public}
-            onChange={this.publicChange}
-          >
-            {this.props.publicLabel}
-          </Checkbox>
-          <Checkbox
-            id="org"
-            labelStyle={{ ...PrimaryCheckboxLabelStyles }}
-            checked={this.state.org}
-            onChange={this.orgChange}
-          >
-            {this.props.portal.name}
-          </Checkbox>
-          <Fieldset name="shareGroups" style={{ ...GroupFieldsetStyles }}>
-            <Legend>{this.props.groupsLabel}:</Legend>
-            <StyledGroupContainer>
-              {this.getGroupCheckboxes(this.props.user.groups)}
-            </StyledGroupContainer>
-          </Fieldset>
-        </Form>
+        <Checkbox
+          id="public"
+          labelStyle={{ ...PrimaryCheckboxLabelStyles }}
+          checked={this.state.public}
+          onChange={this.publicChange}
+        >
+          {this.props.publicLabel}
+        </Checkbox>
+        <Checkbox
+          id="org"
+          labelStyle={{ ...PrimaryCheckboxLabelStyles }}
+          checked={this.state.org}
+          onChange={this.orgChange}
+        >
+          {this.props.portal.name}
+        </Checkbox>
+        <Fieldset name="shareGroups" style={{ ...GroupFieldsetStyles }}>
+          <Legend>{this.props.groupsLabel}:</Legend>
+          <StyledGroupContainer>
+            {this.getGroupCheckboxes(this.props.user.groups)}
+          </StyledGroupContainer>
+        </Fieldset>
       </StyledArcgisShare>
     );
   }

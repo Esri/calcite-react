@@ -90,14 +90,16 @@ const StyledArcgisAccountContentGroup = styled.span`
   line-height: 20px;
   margin-bottom: ${props => unitCalc(props.theme.baseline, 1.5, '*')};
   text-align: center;
+  padding: 0 ${props => unitCalc(props.theme.baseline, 4, '/')};
 `;
 
 const StyledArcgisAccountContentMenu = styled.div`
-  flex: 1 0 50px;
-  padding-left: ${props => props.theme.baseline};
+  flex: 1 0 30px;
+  padding-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
+  padding-right: ${props => props.theme.baseline};
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: flex-start;
 `;
 
 const StyledArcgisAccountSignInMenu = styled.div``;
