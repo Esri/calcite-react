@@ -47,7 +47,8 @@ class ArcgisShare extends Component {
     let groubsObj = {};
     groups.forEach(group => {
       const sharing = this.props.sharing;
-      const isShared = sharing && sharing.groups.indexOf(group.id) > -1;
+      const isShared =
+        sharing && sharing.groups && sharing.groups.indexOf(group.id) > -1;
       groubsObj[group.id] = isShared;
     });
 
