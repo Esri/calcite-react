@@ -3,7 +3,9 @@ import { unitCalc, fontSize } from '../utils/helpers';
 
 const StyledButton = styled.button`
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: ${props => unitCalc(props.theme.baseline, 5, '/')} 0.9rem;
   width: auto;
   color: ${props => props.theme.palette.white};
@@ -17,9 +19,9 @@ const StyledButton = styled.button`
   ${fontSize(-1)};
   letter-spacing: 0em;
   font-family: inherit;
+  text-decoration: none;
 
   &:hover {
-    text-decoration: none;
     background-color: ${props => props.theme.palette.darkBlue};
     color: ${props => props.theme.palette.white};
   }
@@ -194,29 +196,23 @@ const StyledButton = styled.button`
   ${props =>
     props.grouped &&
     css`
-      float: left;
       margin-left: 1px;
-
-      &:last-of-type {
-        float: none;
-      }
 
       &:first-of-type {
         margin-left: 0;
       }
 
-      ${props.clear &&
+      ${props =>
+        props.clear &&
         css`
-          margin-right: -1px;
-          margin-left: 0;
+          box-shadow: 1px 0 0 currentColor, -1px 0 0 currentColor;
 
           &:first-of-type {
-            border-right-width: 0;
+            box-shadow: 1px 0 0 currentColor;
           }
 
           &:last-of-type {
-            margin-right: 0;
-            border-left-width: 0;
+            box-shadow: -1px 0 0 currentColor;
           }
         `};
     `};
@@ -229,4 +225,9 @@ const StyledButton = styled.button`
     `};
 `;
 
-export { StyledButton };
+const StyledButtonGroup = styled.nav`
+  display: inline-flex;
+  justify-content: space-between;
+`;
+
+export { StyledButton, StyledButtonGroup };
