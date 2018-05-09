@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { fontSize, unitCalc } from './helpers';
+import { fontSize, unitCalc, transition } from './helpers';
 
 const formSelectInputTextarea = styled.select`
   position: relative;
@@ -19,7 +19,7 @@ const formSelectInputTextarea = styled.select`
   background-color: ${props => props.theme.palette.white};
   border: 1px solid ${props => props.theme.palette.lightGray};
   border-radius: 0;
-  transition: border-color 150ms linear;
+  transition: border-color ${transition()};
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
 
   &:disabled {

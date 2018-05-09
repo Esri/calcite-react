@@ -1,4 +1,5 @@
 import { transparentize } from 'polished';
+import CalciteTheme from '../theme/CalciteTheme';
 
 const unitCalc = (operand1, operand2, operator) => {
   let operand1Value = operand1;
@@ -196,4 +197,22 @@ const backgroundGradient = (img, fromColor, toColor, addOverlayGradient) => {
   }
 };
 
-export { unitCalc, clearfix, fontSize, subNavUnderline, backgroundGradient };
+const transition = delayTime => {
+  if (delayTime) {
+    return `
+      ${CalciteTheme.transitionDuration} ${delayTime} ${CalciteTheme.easingFunc}
+    `;
+  }
+  return `
+    ${CalciteTheme.transitionDuration} ${CalciteTheme.easingFunc}
+  `;
+};
+
+export {
+  unitCalc,
+  clearfix,
+  fontSize,
+  subNavUnderline,
+  backgroundGradient,
+  transition
+};
