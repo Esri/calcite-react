@@ -1,22 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledTab, StyledTabNav } from './Tab-styled';
-import TabButton from './TabButton';
+import TabButtonGrouped from './TabButtonGrouped';
 import TabSection from './TabSection';
 
-const Tabs = ({ children, ...props }) => {
+const TabsGrouped = ({ children, ...props }) => {
   const childArray = React.Children.toArray(children);
-  const tabButtonarray = childArray.filter(child => {
-    return child.type.name === 'TabButton';
-  });
-  const tabSectionArray = childArray.filter(child => {
-    return child.type.name === 'TabSection';
-  });
+
   const setActiveTab = (e, index) => {
     props.onTabChange(index);
   };
 
-  const tabSections = tabSectionArray.map((child, itemIndex) => {
+  const tabSections = childArray.map((child, itemIndex) => {
     switch (child.type) {
       case TabSection:
         let section = null;
@@ -31,21 +26,10 @@ const Tabs = ({ children, ...props }) => {
         return child;
     }
   });
-  const tabButtons = tabButtonarray.map((child, itemIndex) => {
-    switch (child.type) {
-      case TabButton:
-        return React.cloneElement(child, {
-          index: itemIndex,
-          activeTab: props.activeTab,
-          setActiveTab: (e, itemIndex) => props.onTabChange(e, itemIndex)
-        });
-      default:
-        return child;
-    }
-  });
+
   const renderTabs = childArray.map((child, itemIndex) => {
     return (
-      <TabButton
+      <TabButtonGrouped
         key={itemIndex}
         index={itemIndex}
         args={child.props}
@@ -56,27 +40,25 @@ const Tabs = ({ children, ...props }) => {
   });
 
   const renderTabSection = (
-    <StyledTabNav {...props}>
-      {tabButtons} {tabSections}
-    </StyledTabNav>
+    <StyledTabNav {...props}>{tabSections}</StyledTabNav>
   );
 
   return (
     <StyledTab>
-      {/* {renderTabs} */}
+      {renderTabs}
       {renderTabSection}
     </StyledTab>
   );
 };
 
-Tabs.propTypes = {
+TabsGrouped.propTypes = {
   /** Description TBD */
   children: PropTypes.node,
   activeTab: PropTypes.number
 };
 
-Tabs.defaultProps = {
+TabsGrouped.defaultProps = {
   activeTab: 0
 };
 
-export default Tabs;
+export default TabsGrouped;

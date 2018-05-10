@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { StyledTabChildContainer } from './Tab-styled';
+import { StyledTabContents } from './Tab-styled';
 
-class TabSection extends Component {
-  render() {
-    return (
-      <StyledTabChildContainer>{this.props.children}</StyledTabChildContainer>
-    );
-  }
-}
+const TabSection = ({ children, ...props }) => {
+  const tabSection = (
+    <StyledTabContents {...props}>{children}</StyledTabContents>
+  );
+
+  return tabSection;
+};
 
 TabSection.propTypes = {
   /** Description TBD */

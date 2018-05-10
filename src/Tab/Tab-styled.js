@@ -1,19 +1,20 @@
 import styled, { css } from 'styled-components';
-import { fontSize } from '../utils/helpers';
+import { fontSize, unitCalc } from '../utils/helpers';
 import { CalciteA } from '../Elements';
 
-const StyledTabMain = styled.div`
+const StyledTab = styled.div`
   padding: 0;
   flex: 1 0 auto;
-  margin-left: -0.75em;
+  margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
   ${props =>
     props.right &&
     css`
       float: right;
     `};
 `;
-const StyledTabLink = CalciteA.extend`
-  padding: 5px 10px;
+const StyledTabTitle = CalciteA.extend`
+  padding: ${props => unitCalc(props.theme.baseline, 4, '/')}
+    ${props => unitCalc(props.theme.baseline, 2, '/')};
   font-family: ${props => props.theme.avenirFamily};
   color: ${props => props.theme.palette.offWhite};
   ${fontSize(-1)};
@@ -50,35 +51,27 @@ const StyledTabLink = CalciteA.extend`
     `};
 `;
 
-const StyledTabContainer = styled.div`
+const StyledTabNav = styled.div`
   margin: 0px;
   padding: 0px;
   list-style: none;
 `;
-const StyledTabChildContainer = styled.div`
+const StyledTabContents = styled.div`
   padding: 2px 4px;
   display: block;
-  margin-top: 15px;
+  margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
 `;
 
-const StyledTabItem = styled.div`
+const StyledTabSection = styled.div`
   background-color: ${props => props.theme.palette.darkGray};
   display: inline-block;
-  margin-right: 1px;
-
-  ${props =>
-    props.children.props.active &&
-    css`
-      color: ${props => props.theme.palette.white};
-      border: none;
-      background-color: ${props => props.theme.palette.white};
-    `};
+  margin-right: ${props => unitCalc(props.theme.baseline, 28, '/')};
 `;
 
 export {
-  StyledTabMain,
-  StyledTabLink,
-  StyledTabContainer,
-  StyledTabItem,
-  StyledTabChildContainer
+  StyledTab,
+  StyledTabTitle,
+  StyledTabNav,
+  StyledTabSection,
+  StyledTabContents
 };

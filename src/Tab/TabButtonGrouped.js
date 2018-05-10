@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledTabSection, StyledTabTitle } from './Tab-styled';
 
-const TabButton = ({ children, ...props }) => {
+const TabButtonGrouped = ({ args, ...props }) => {
   const setActiveTab = e => {
     props.setActiveTab(e, props.index);
   };
   const tabButton = (
     <StyledTabSection onClick={setActiveTab}>
       <StyledTabTitle active={props.activeTab === props.index}>
-        {children}
+        {args.title}
       </StyledTabTitle>
     </StyledTabSection>
   );
@@ -17,12 +17,12 @@ const TabButton = ({ children, ...props }) => {
   return tabButton;
 };
 
-TabButton.propTypes = {
+TabButtonGrouped.propTypes = {
   title: PropTypes.string
 };
 
-TabButton.defaultProps = {
+TabButtonGrouped.defaultProps = {
   title: ''
 };
 
-export default TabButton;
+export default TabButtonGrouped;
