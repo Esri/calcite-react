@@ -22,7 +22,7 @@ storiesOf('Tabs', module)
           };
         }
 
-        onTabChange = (e, index) => {
+        onTabChange = index => {
           this.setState({ activeTab: index });
         };
 

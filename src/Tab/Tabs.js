@@ -12,9 +12,6 @@ const Tabs = ({ children, ...props }) => {
   const tabSectionArray = childArray.filter(child => {
     return child.type.name === 'TabSection';
   });
-  const setActiveTab = (e, index) => {
-    props.onTabChange(index);
-  };
 
   const tabSections = tabSectionArray.map((child, itemIndex) => {
     switch (child.type) {
@@ -37,36 +34,20 @@ const Tabs = ({ children, ...props }) => {
         return React.cloneElement(child, {
           index: itemIndex,
           activeTab: props.activeTab,
-          setActiveTab: (e, itemIndex) => props.onTabChange(e, itemIndex)
+          setActiveTab: (e, itemIndex) => props.onTabChange(itemIndex)
         });
       default:
         return child;
     }
   });
-  const renderTabs = childArray.map((child, itemIndex) => {
-    return (
-      <TabButton
-        key={itemIndex}
-        index={itemIndex}
-        args={child.props}
-        setActiveTab={setActiveTab}
-        {...props}
-      />
-    );
-  });
 
-  const renderTabSection = (
+  const renderTabsChildren = (
     <StyledTabNav {...props}>
       {tabButtons} {tabSections}
     </StyledTabNav>
   );
 
-  return (
-    <StyledTab>
-      {/* {renderTabs} */}
-      {renderTabSection}
-    </StyledTab>
-  );
+  return <StyledTab>{renderTabsChildren}</StyledTab>;
 };
 
 Tabs.propTypes = {

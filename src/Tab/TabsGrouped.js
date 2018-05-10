@@ -7,10 +7,6 @@ import TabSection from './TabSection';
 const TabsGrouped = ({ children, ...props }) => {
   const childArray = React.Children.toArray(children);
 
-  const setActiveTab = (e, index) => {
-    props.onTabChange(index);
-  };
-
   const tabSections = childArray.map((child, itemIndex) => {
     switch (child.type) {
       case TabSection:
@@ -33,7 +29,7 @@ const TabsGrouped = ({ children, ...props }) => {
         key={itemIndex}
         index={itemIndex}
         args={child.props}
-        setActiveTab={setActiveTab}
+        setActiveTab={(e, itemIndex) => props.onTabChange(itemIndex)}
         {...props}
       />
     );
