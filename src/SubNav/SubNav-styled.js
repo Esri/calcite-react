@@ -4,7 +4,8 @@ import {
   subNavUnderline,
   unitCalc,
   fontSize,
-  backgroundGradient
+  backgroundGradient,
+  transition
 } from '../utils/helpers';
 
 const StyledSubNav = styled.header`
@@ -38,7 +39,7 @@ const StyledSubNavLink = CalciteA.extend`
   ${fontSize(-1)};
   background-color: ${props => props.theme.palette.transparentOffBlack};
   box-sizing: border-box;
-  transition: background-color 150ms linear, color 150ms 150ms linear;
+  transition: background-color ${transition()}, color ${transition('150ms')};
   display: inline-block;
 
   &:hover,

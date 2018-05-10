@@ -7,7 +7,6 @@ const StyledModalOverlay = {
   left: '0px',
   right: '0px',
   bottom: '0px',
-  overflowY: 'hidden',
   textAlign: 'center',
   background: theme.palette.transparentBlack,
   zIndex: 101,

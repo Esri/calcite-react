@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 
 import GuideExample from '../../../stories/GuideExample';
 import doc from './Button.md';
-import Button from '../';
+import Button, { ButtonGroup } from '../';
 
 import DownloadIcon from 'mdi-react/DownloadIcon';
 import ContentSaveIcon from 'mdi-react/ContentSaveIcon';
@@ -103,31 +103,11 @@ storiesOf('Button', module)
         </GuideExample>
 
         <GuideExample label="grouped">
-          <nav>
-            <Button grouped onClick={action('clicked')}>
-              One
-            </Button>
-            <Button grouped onClick={action('clicked')}>
-              Two
-            </Button>
-            <Button grouped onClick={action('clicked')}>
-              Three
-            </Button>
-          </nav>
-        </GuideExample>
-
-        <GuideExample label="grouped">
-          <nav>
-            <Button grouped onClick={action('clicked')}>
-              One
-            </Button>
-            <Button grouped onClick={action('clicked')}>
-              Two
-            </Button>
-            <Button grouped onClick={action('clicked')}>
-              Three
-            </Button>
-          </nav>
+          <ButtonGroup>
+            <Button onClick={action('clicked')}>One</Button>
+            <Button onClick={action('clicked')}>Two</Button>
+            <Button onClick={action('clicked')}>Three</Button>
+          </ButtonGroup>
         </GuideExample>
 
         <GuideExample label="href=&quot;&quot;">
@@ -162,9 +142,8 @@ storiesOf('Button', module)
         render() {
           return (
             <GuideExample label="grouped">
-              <nav>
+              <ButtonGroup>
                 <Button
-                  grouped
                   clear={this.state.selected === 1}
                   onClick={() => {
                     this.selectButton(1);
@@ -173,7 +152,6 @@ storiesOf('Button', module)
                   One
                 </Button>
                 <Button
-                  grouped
                   clear={this.state.selected === 2}
                   onClick={() => {
                     this.selectButton(2);
@@ -182,7 +160,6 @@ storiesOf('Button', module)
                   Two
                 </Button>
                 <Button
-                  grouped
                   clear={this.state.selected === 3}
                   onClick={() => {
                     this.selectButton(3);
@@ -191,7 +168,6 @@ storiesOf('Button', module)
                   Three
                 </Button>
                 <Button
-                  grouped
                   clear={this.state.selected === 4}
                   onClick={() => {
                     this.selectButton(4);
@@ -200,7 +176,6 @@ storiesOf('Button', module)
                   Four
                 </Button>
                 <Button
-                  grouped
                   clear={this.state.selected === 5}
                   onClick={() => {
                     this.selectButton(5);
@@ -208,7 +183,7 @@ storiesOf('Button', module)
                 >
                   Five
                 </Button>
-              </nav>
+              </ButtonGroup>
             </GuideExample>
           );
         }
