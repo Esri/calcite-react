@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { fontSize, unitCalc } from '../utils/helpers';
+import { fontSize, unitCalc, transition } from '../utils/helpers';
 import { CalciteA } from '../Elements';
 
 const StyledTab = styled.div`
@@ -19,7 +19,7 @@ const StyledTabTitle = CalciteA.extend`
   color: ${props => props.theme.palette.offWhite};
   ${fontSize(-1)};
   box-sizing: border-box;
-  transition: background-color 150ms linear, color 150ms 150ms linear;
+  transition: background-color ${transition()}, color ${transition('150ms')};
   display: inline-block;
 
   &:hover,
@@ -65,7 +65,7 @@ const StyledTabContents = styled.div`
 const StyledTabSection = styled.div`
   background-color: ${props => props.theme.palette.darkGray};
   display: inline-block;
-  margin-right: ${props => unitCalc(props.theme.baseline, 28, '/')};
+  margin-right: 1px;
 `;
 
 export {
