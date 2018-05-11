@@ -6,27 +6,12 @@ import TabContents from './TabContents';
 
 const Tabs = ({ children, ...props }) => {
   const childArray = React.Children.toArray(children);
-
-  const tabButtonarray = childArray.filter(child => {
-    return child.type.name === 'TabNav';
-  });
-  const tabSectionArray = childArray.filter(child => {
-    return child.type.name === 'TabContents';
-  });
-
-  const tabNav = tabButtonarray.map((child, itemIndex) => {
+  const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
       case TabNav:
         return React.cloneElement(child, {
           ...props
         });
-      default:
-        return child;
-    }
-  });
-
-  const tabContents = tabSectionArray.map((child, itemIndex) => {
-    switch (child.type) {
       case TabContents:
         return React.cloneElement(child, {
           ...props
@@ -36,12 +21,7 @@ const Tabs = ({ children, ...props }) => {
     }
   });
 
-  return (
-    <StyledTab>
-      <TabNav {...props}>{tabNav}</TabNav>
-      <TabContents {...props}>{tabContents}</TabContents>
-    </StyledTab>
-  );
+  return <StyledTab>{childrenWithProps}</StyledTab>;
 };
 
 Tabs.propTypes = {

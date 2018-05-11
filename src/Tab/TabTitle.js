@@ -1,20 +1,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyledTabSection, StyledTabTitle } from './Tab-styled';
+import { StyledTabTitle } from './Tab-styled';
 
 const TabTitle = ({ children, ...props }) => {
   const setActiveTabIndex = e => {
     props.setActiveTabIndex(e, props.index);
   };
-  const tabButton = (
-    <StyledTabSection onClick={setActiveTabIndex}>
-      <StyledTabTitle active={props.activeTabIndex === props.index}>
-        {children}
-      </StyledTabTitle>
-    </StyledTabSection>
+  const tabTitle = (
+    <StyledTabTitle
+      onClick={setActiveTabIndex}
+      active={props.activeTabIndex === props.index}
+    >
+      {children}
+    </StyledTabTitle>
   );
 
-  return tabButton;
+  return tabTitle;
 };
 
 TabTitle.propTypes = {

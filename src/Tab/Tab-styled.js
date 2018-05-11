@@ -1,5 +1,10 @@
 import styled, { css } from 'styled-components';
-import { fontSize, unitCalc, transition } from '../utils/helpers';
+import {
+  subNavUnderline,
+  fontSize,
+  unitCalc,
+  transition
+} from '../utils/helpers';
 import { CalciteA } from '../Elements';
 
 const StyledTab = styled.div`
@@ -12,12 +17,14 @@ const StyledTab = styled.div`
       float: right;
     `};
 `;
+
 const StyledTabTitle = CalciteA.extend`
-  padding: ${props => unitCalc(props.theme.baseline, 4, '/')}
-    ${props => unitCalc(props.theme.baseline, 2, '/')};
+  padding: 0.25em 0.75em;
+  margin: 0 0 0 0.25em;
   font-family: ${props => props.theme.avenirFamily};
   color: ${props => props.theme.palette.offWhite};
   ${fontSize(-1)};
+  background-color: ${props => props.theme.palette.transparentOffBlack};
   box-sizing: border-box;
   transition: background-color ${transition()}, color ${transition('150ms')};
   display: inline-block;
@@ -27,6 +34,7 @@ const StyledTabTitle = CalciteA.extend`
     background-color: ${props => props.theme.palette.transparentDarkerGray};
     color: ${props => props.theme.palette.white};
     text-decoration: none;
+    ${props => subNavUnderline(props)};
   }
 
   ${props =>
@@ -51,27 +59,20 @@ const StyledTabTitle = CalciteA.extend`
     `};
 `;
 
-const StyledTabNav = styled.div`
-  margin: 0px;
-  padding: 0px;
-  list-style: none;
+const StyledTabNav = styled.nav`
+  display: flex;
+  align-items: flex-end;
+  height: 32px;
+  margin-top: 0em;
+  flex: 1 0 75%;
+  padding-left: 0.25em;
+  box-sizing: border-box;
 `;
+
 const StyledTabContents = styled.div`
   padding: 2px 4px;
   display: block;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
 `;
 
-const StyledTabSection = styled.div`
-  background-color: ${props => props.theme.palette.darkGray};
-  display: inline-block;
-  margin-right: 1px;
-`;
-
-export {
-  StyledTab,
-  StyledTabTitle,
-  StyledTabNav,
-  StyledTabSection,
-  StyledTabContents
-};
+export { StyledTab, StyledTabTitle, StyledTabNav, StyledTabContents };
