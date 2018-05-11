@@ -1,63 +1,57 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyledTab, StyledTabNav } from './Tab-styled';
-import TabButton from './TabButton';
-import TabSection from './TabSection';
+import { StyledTab } from './Tab-styled';
+import TabNav from './TabNav';
+import TabContents from './TabContents';
 
 const Tabs = ({ children, ...props }) => {
   const childArray = React.Children.toArray(children);
+
   const tabButtonarray = childArray.filter(child => {
-    return child.type.name === 'TabButton';
+    return child.type.name === 'TabNav';
   });
   const tabSectionArray = childArray.filter(child => {
-    return child.type.name === 'TabSection';
+    return child.type.name === 'TabContents';
   });
 
-  const tabSections = tabSectionArray.map((child, itemIndex) => {
+  const tabNav = tabButtonarray.map((child, itemIndex) => {
     switch (child.type) {
-      case TabSection:
-        let section = null;
-        if (itemIndex === props.activeTab) {
-          section = React.cloneElement(child, {
-            index: itemIndex,
-            activeTab: props.activeTab
-          });
-        }
-        return section;
-      default:
-        return child;
-    }
-  });
-  const tabButtons = tabButtonarray.map((child, itemIndex) => {
-    switch (child.type) {
-      case TabButton:
+      case TabNav:
         return React.cloneElement(child, {
-          index: itemIndex,
-          activeTab: props.activeTab,
-          setActiveTab: (e, itemIndex) => props.onTabChange(itemIndex)
+          ...props
         });
       default:
         return child;
     }
   });
 
-  const renderTabsChildren = (
-    <StyledTabNav {...props}>
-      {tabButtons} {tabSections}
-    </StyledTabNav>
-  );
+  const tabContents = tabSectionArray.map((child, itemIndex) => {
+    switch (child.type) {
+      case TabContents:
+        return React.cloneElement(child, {
+          ...props
+        });
+      default:
+        return child;
+    }
+  });
 
-  return <StyledTab>{renderTabsChildren}</StyledTab>;
+  return (
+    <StyledTab>
+      <TabNav {...props}>{tabNav}</TabNav>
+      <TabContents {...props}>{tabContents}</TabContents>
+    </StyledTab>
+  );
 };
 
 Tabs.propTypes = {
   /** Description TBD */
   children: PropTypes.node,
-  activeTab: PropTypes.number
+  activeTabIndex: PropTypes.number
 };
 
 Tabs.defaultProps = {
-  activeTab: 0
+  activeTabIndex: 0
 };
 
 export default Tabs;
