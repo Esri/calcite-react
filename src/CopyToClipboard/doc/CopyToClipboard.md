@@ -1,1 +1,1 @@
-Labels are a way to call attention to a word. The mark element, a notification count, or an important indicator (like marking a technology as 'beta' or 'private') are all use cases for labels.
+A component that allows you to easily make snippets of text selectable and add it to your clipboard for pasting in another location.
