@@ -1,37 +1,24 @@
 import styled, { css } from 'styled-components';
-import { CalciteA, CalciteH1 } from '../Elements';
 import {
   subNavUnderline,
-  unitCalc,
   fontSize,
-  backgroundGradient,
+  unitCalc,
   transition
 } from '../utils/helpers';
+import { CalciteA } from '../Elements';
 
-const StyledSubNav = styled.header`
-  background-color: ${props => props.theme.palette.lightestGray};
-  display: flex;
-  flex-wrap: wrap;
-
+const StyledTab = styled.div`
+  padding: 0;
+  flex: 1 0 auto;
+  margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
   ${props =>
-    props.blue &&
+    props.right &&
     css`
-      background-color: ${props.theme.palette.darkerBlue};
-    `};
-
-  ${props =>
-    props.backgroundImage &&
-    css`
-      ${backgroundGradient(
-        props.backgroundImage,
-        props.gradientFromColor,
-        props.gradientToColor,
-        props.overlayGradient
-      )};
+      float: right;
     `};
 `;
 
-const StyledSubNavLink = CalciteA.extend`
+const StyledTabTitle = CalciteA.extend`
   padding: 0.25em 0.75em;
   margin: 0 0 0 0.25em;
   font-family: ${props => props.theme.avenirFamily};
@@ -72,7 +59,7 @@ const StyledSubNavLink = CalciteA.extend`
     `};
 `;
 
-const StyledSubNavList = styled.nav`
+const StyledTabNav = styled.nav`
   display: flex;
   align-items: flex-end;
   height: 32px;
@@ -82,39 +69,10 @@ const StyledSubNavList = styled.nav`
   box-sizing: border-box;
 `;
 
-const StyledSubNavActions = styled.nav`
-  margin: 0.5em;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  nav + & {
-    margin-top: -0.5em;
-    height: 32px;
-  }
-`;
-
-const StyledSubNavTitle = CalciteH1.extend`
-  ${fontSize(4)};
-  padding-left: 0.25em;
+const StyledTabContents = styled.div`
+  padding: 2px 4px;
+  display: block;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  display: inline-block;
-  line-height: 1.25;
-  flex: 1 0 75%;
-  box-sizing: border-box;
-
-  ${props =>
-    props.blue &&
-    css`
-      color: ${props.theme.palette.white};
-    `};
 `;
 
-export {
-  StyledSubNav,
-  StyledSubNavLink,
-  StyledSubNavList,
-  StyledSubNavTitle,
-  StyledSubNavActions
-};
+export { StyledTab, StyledTabTitle, StyledTabNav, StyledTabContents };

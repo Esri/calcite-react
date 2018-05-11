@@ -14,7 +14,9 @@ const TopNavBrand = ({ children, href, src, alt, imageStyle, ...other }) => {
 
 TopNavBrand.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** Style property for the underlying img element */
+  imageStyle: PropTypes.object
 };
 
 TopNavBrand.defaultProps = {
