@@ -2,7 +2,7 @@ Modals are meant to "take over" the screen and focus users attention on a dialog
 
 Note: A modal requires the `appElement` prop to be aria-compliant. Details on how to set this property can be found at http://reactcommunity.org/react-modal/accessibility/
 
-Example: Create a DOM element dynamically and passing it via `appElement` prop to `Modal`
+Example: Create a DOM element dynamically and pass it via `appElement` prop to `Modal`
 
 **`ModalExample.js`**
 
@@ -20,7 +20,7 @@ export class ModalExample extends React.Component {
 }
 ` 
 
-Example: Passing an existing DOM element via `appElement`prop to `Modal`
+Example: Pass an existing DOM element via `appElement` prop to `Modal`
 
 **`index.html`**
 
