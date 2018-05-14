@@ -9,6 +9,7 @@ const Drawer = ({
   right,
   drawerWidth,
   onRequestClose,
+  drawerNavStyle,
   ...other
 }) => {
   function gutterClicked(e) {
@@ -20,7 +21,12 @@ const Drawer = ({
 
   const drawer = (
     <StyledDrawer active={active} onClick={gutterClicked} {...other}>
-      <StyledDrawerNav active={active} right={right} drawerWidth={drawerWidth}>
+      <StyledDrawerNav
+        active={active}
+        right={right}
+        drawerWidth={drawerWidth}
+        style={drawerNavStyle}
+      >
         {children}
       </StyledDrawerNav>
     </StyledDrawer>
@@ -33,16 +39,18 @@ const Drawer = ({
 };
 
 Drawer.propTypes = {
-  /** Description TBD */
+  /** Child elements to be rendered inside the Drawer */
   children: PropTypes.node,
-  /** Description TBD */
+  /** Toggle visibility of the drawer */
   active: PropTypes.bool,
-  /** Description TBD */
+  /** Display the drawer on the right side of the screen */
   right: PropTypes.bool,
-  /** Description TBD */
+  /** Width (in px) of the drawer nav */
   drawerWidth: PropTypes.number,
-  /** Description TBD */
-  onRequestClose: PropTypes.func
+  /** Function called when the user clicks the overlay area of a drawer */
+  onRequestClose: PropTypes.func,
+  /** Styles passed to the DrawerNav sub-component */
+  drawerNavStyle: PropTypes.node
 };
 
 Drawer.defaultProps = {
