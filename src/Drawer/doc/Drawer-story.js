@@ -36,7 +36,7 @@ storiesOf('Drawer', module).add(
 
       render() {
         return (
-          <GuideExample label="grouped">
+          <GuideExample>
             <Button onClick={() => this.showDrawerClicked('left')}>
               Open Left Drawer
             </Button>
