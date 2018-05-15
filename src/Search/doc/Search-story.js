@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -14,7 +14,9 @@ storiesOf('Search', module).add(
       constructor(props) {
         super(props);
         this.state = {
-          value: ''
+          value: '',
+          selectedItem: '',
+          items: ['Black', 'Red', 'Green', 'Blue', 'Orange', 'Purple']
         };
       }
 
@@ -30,25 +32,26 @@ storiesOf('Search', module).add(
         });
       };
 
+      onUserAction = (inputValue, itemsToShow, selectedItemVal) => {
+        this.setState({
+          value: inputValue,
+          selectedItem: selectedItemVal
+        });
+      };
+
       render() {
         return (
-          <Fragment>
-            <GuideExample>
-              <Search
-                value={this.state.value}
-                onChange={this.searchChanged}
-                onRequestClear={this.clearSearch}
-              />
-            </GuideExample>
-            <GuideExample>
-              <Search
-                value={this.state.value}
-                minimal={true}
-                onChange={this.searchChanged}
-                onRequestClear={this.clearSearch}
-              />
-            </GuideExample>
-          </Fragment>
+          <GuideExample>
+            <Search
+              value={this.state.value}
+              selectedItem={this.state.selectedItem}
+              items={this.state.items}
+              minimal={true}
+              onChange={this.searchChanged}
+              onUserAction={this.onUserAction}
+              onRequestClear={this.clearSearch}
+            />
+          </GuideExample>
         );
       }
     }

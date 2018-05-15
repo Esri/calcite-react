@@ -51,6 +51,10 @@ const StyledSearchContainer = styled.div`
   }
 `;
 
+const StyledSearchInputWrapper = styled.div`
+  position: relative;
+`;
+
 const StyledSearch = CalciteInput.extend`
   padding-left: ${props => unitCalc(props.theme.baseline, 1.2, '*')};
   padding-right: ${props => props.theme.baseline};
@@ -70,4 +74,4 @@ const StyledSearch = CalciteInput.extend`
     `};
 `;
 
-export { StyledSearchContainer, StyledSearch };
+export { StyledSearchContainer, StyledSearchInputWrapper, StyledSearch };
