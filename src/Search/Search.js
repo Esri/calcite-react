@@ -1,5 +1,5 @@
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
 import Downshift from 'downshift';
 import matchSorter from 'match-sorter';
 
@@ -15,29 +15,21 @@ import Menu, { MenuItem } from '../Menu';
 import MagnifyIcon from '../icons/MagnifyIcon';
 import CloseCircleIcon from '../icons/CloseCircleIcon';
 
-const Search = ({
-  children,
-  value,
-  minimal,
-  placeholder,
-  items,
-  selectedItem,
-  onRequestClear,
-  onChange,
-  onUserAction,
-  ...other
-}) => {
-  let clearSearchIcon;
-  if (value) {
-    clearSearchIcon = (
-      <CloseCircleIcon onClick={onRequestClear} className="search-close-icon" />
-    );
+class Search extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      itemsToShow: this.props.items
+    };
+    this.userInputtedValue = '';
   }
 
-  function handleOnUserAction(changes) {
-    let selectedItemVal = changes.selectedItem || selectedItem;
+  handleOnUserAction = changes => {
+    let selectedItemVal = changes.selectedItem || this.props.selectedItem;
     let inputValue;
-    let itemsToShow;
+    let newItemsToShow;
+
     const isClosingMenu = changes.hasOwnProperty('isOpen') && !changes.isOpen;
 
     if (
@@ -54,59 +46,87 @@ const Search = ({
         this.userInputtedValue = changes.inputValue;
       }
     }
-    itemsToShow = this.userInputtedValue
-      ? matchSorter(this.items, this.userInputtedValue)
-      : this.items;
+    newItemsToShow = this.userInputtedValue
+      ? matchSorter(this.props.items, this.userInputtedValue)
+      : this.props.items;
     if (
       changes.hasOwnProperty('highlightedIndex') &&
       (changes.type === Downshift.stateChangeTypes.keyDownArrowUp ||
         changes.type === Downshift.stateChangeTypes.keyDownArrowDown)
     ) {
-      inputValue = itemsToShow[changes.highlightedIndex];
+      inputValue = newItemsToShow[changes.highlightedIndex];
     }
     if (isClosingMenu) {
       inputValue = selectedItemVal;
       this.userInputtedValue = selectedItemVal;
     }
 
-    onUserAction(inputValue, itemsToShow, selectedItemVal);
+    this.setState({
+      itemsToShow: newItemsToShow
+    });
+
+    this.props.onUserAction(inputValue, selectedItemVal);
+  };
+
+  getClearSearchIcon = () => {
+    console.log(this.props.value, this.props.selectedItem);
+    if (this.props.value || this.props.selectedItem) {
+      return (
+        <CloseCircleIcon
+          onClick={this.props.onRequestClear}
+          className="search-close-icon"
+        />
+      );
+    }
+  };
+
+  render() {
+    return (
+      <StyledSearchContainer minimal={this.props.minimal}>
+        <MagnifyIcon />
+        <Downshift
+          inputValue={this.props.value}
+          selectedItem={this.props.selectedItem}
+          onChange={this.props.onChange}
+          onUserAction={this.handleOnUserAction}
+          render={({
+            getRootProps,
+            getInputProps,
+            getItemProps,
+            highlightedIndex,
+            isOpen
+          }) => (
+            <StyledSearchInputWrapper {...getRootProps({ refKey: 'innerRef' })}>
+              <StyledSearch
+                {...getInputProps({
+                  placeholder: this.props.placeholder,
+                  minimal: this.props.minimal
+                })}
+              />
+              {isOpen ? (
+                <Menu withComponent={<StyledSelectMenu />}>
+                  {this.state.itemsToShow.map((item, index) => (
+                    <MenuItem
+                      key={item}
+                      {...getItemProps({
+                        item,
+                        active: highlightedIndex === index,
+                        selected: this.props.selectedItem === item
+                      })}
+                    >
+                      {item}
+                    </MenuItem>
+                  ))}
+                </Menu>
+              ) : null}
+            </StyledSearchInputWrapper>
+          )}
+        />
+        {this.getClearSearchIcon()}
+      </StyledSearchContainer>
+    );
   }
-
-  const search = (
-    <StyledSearchContainer minimal={minimal}>
-      <MagnifyIcon />
-      <Downshift
-        inputValue={value}
-        selectedItem={selectedItem}
-        onChange={onChange}
-        onUserAction={handleOnUserAction}
-        render={({
-          getRootProps,
-          getInputProps,
-          getItemProps,
-          highlightedIndex,
-          isOpen
-        }) => (
-          <StyledSearchInputWrapper {...getRootProps({ refKey: 'innerRef' })}>
-            <StyledSearch
-              {...getInputProps({ placeholder: placeholder, minimal: minimal })}
-            />
-            {isOpen ? (
-              <Menu withComponent={<StyledSelectMenu />}>
-                {items.map((item, index) => (
-                  <MenuItem key={item}>{item}</MenuItem>
-                ))}
-              </Menu>
-            ) : null}
-          </StyledSearchInputWrapper>
-        )}
-      />
-      {clearSearchIcon}
-    </StyledSearchContainer>
-  );
-
-  return search;
-};
+}
 
 Search.propTypes = {
   /** Description TBD */

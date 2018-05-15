@@ -11,31 +11,95 @@ storiesOf('Search', module).add(
   'Basic',
   withInfo(doc)(() => {
     class SearchStateExample extends Component {
+      items = [
+        'Alabama',
+        'Alaska',
+        'American Samoa',
+        'Arizona',
+        'Arkansas',
+        'California',
+        'Colorado',
+        'Connecticut',
+        'Delaware',
+        'District of Columbia',
+        'Federated States of Micronesia',
+        'Florida',
+        'Georgia',
+        'Guam',
+        'Hawaii',
+        'Idaho',
+        'Illinois',
+        'Indiana',
+        'Iowa',
+        'Kansas',
+        'Kentucky',
+        'Louisiana',
+        'Maine',
+        'Marshall Islands',
+        'Maryland',
+        'Massachusetts',
+        'Michigan',
+        'Minnesota',
+        'Mississippi',
+        'Missouri',
+        'Montana',
+        'Nebraska',
+        'Nevada',
+        'New Hampshire',
+        'New Jersey',
+        'New Mexico',
+        'New York',
+        'North Carolina',
+        'North Dakota',
+        'Northern Mariana Islands',
+        'Ohio',
+        'Oklahoma',
+        'Oregon',
+        'Palau',
+        'Pennsylvania',
+        'Puerto Rico',
+        'Rhode Island',
+        'South Carolina',
+        'South Dakota',
+        'Tennessee',
+        'Texas',
+        'Utah',
+        'Vermont',
+        'Virgin Island',
+        'Virginia',
+        'Washington',
+        'West Virginia',
+        'Wisconsin',
+        'Wyoming'
+      ];
+
       constructor(props) {
         super(props);
+
         this.state = {
           value: '',
-          selectedItem: '',
-          items: ['Black', 'Red', 'Green', 'Blue', 'Orange', 'Purple']
+          selectedItem: ''
         };
       }
 
       searchChanged = e => {
         this.setState({
-          value: e.target.value
+          value: e
         });
       };
 
       clearSearch = () => {
         this.setState({
-          value: ''
+          value: '',
+          selectedItem: ''
         });
       };
 
       onUserAction = (inputValue, itemsToShow, selectedItemVal) => {
         this.setState({
           value: inputValue,
-          selectedItem: selectedItemVal
+          selectedItem: selectedItemVal,
+          itemsToShow: itemsToShow
         });
       };
 
@@ -45,7 +109,7 @@ storiesOf('Search', module).add(
             <Search
               value={this.state.value}
               selectedItem={this.state.selectedItem}
-              items={this.state.items}
+              items={this.items}
               minimal={true}
               onChange={this.searchChanged}
               onUserAction={this.onUserAction}

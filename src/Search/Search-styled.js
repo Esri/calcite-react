@@ -53,6 +53,7 @@ const StyledSearchContainer = styled.div`
 
 const StyledSearchInputWrapper = styled.div`
   position: relative;
+  flex: 1 0 50px;
 `;
 
 const StyledSearch = CalciteInput.extend`
