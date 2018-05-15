@@ -13,7 +13,6 @@ const Drawer = ({
   ...other
 }) => {
   function gutterClicked(e) {
-    console.log(e);
     if (e.target === e.currentTarget) {
       onRequestClose(e);
     }
