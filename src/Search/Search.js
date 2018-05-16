@@ -26,8 +26,8 @@ class Search extends Component {
   }
 
   handleOnUserAction = changes => {
-    let selectedItemVal = changes.selectedItem || this.props.selectedItem;
-    let inputValue;
+    let selectedItemVal = changes.selectedItem || this.props.selectedItem || '';
+    let inputValue = this.props.inputValue || '';
     let newItemsToShow;
 
     const isClosingMenu = changes.hasOwnProperty('isOpen') && !changes.isOpen;
@@ -69,8 +69,7 @@ class Search extends Component {
   };
 
   getClearSearchIcon = () => {
-    console.log(this.props.value, this.props.selectedItem);
-    if (this.props.value || this.props.selectedItem) {
+    if (this.props.inputValue || this.props.selectedItem) {
       return (
         <CloseCircleIcon
           onClick={this.props.onRequestClear}
@@ -85,7 +84,7 @@ class Search extends Component {
       <StyledSearchContainer minimal={this.props.minimal}>
         <MagnifyIcon />
         <Downshift
-          inputValue={this.props.value}
+          inputValue={this.props.inputValue}
           selectedItem={this.props.selectedItem}
           onChange={this.props.onChange}
           onUserAction={this.handleOnUserAction}
@@ -129,11 +128,21 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
+  /** Array of items */
+  items: PropTypes.array,
+  /** Text in the input */
+  inputValue: PropTypes.string,
+  /** The selected item */
+  selectedItem: PropTypes.string,
+  /** Text for the placeholder property on the input */
   placeholder: PropTypes.string,
+  /** Function called when an item is selected */
   onChange: PropTypes.func,
+  /** Function called when the input value is changed, items dropdown hides/shows, hovers an item, or clicks on an item */
+  onUserAction: PropTypes.func,
+  /** Function called when the user clicks the clear button */
   onRequestClear: PropTypes.func,
+  /** Toggle minimal style on the input */
   minimal: PropTypes.bool
 };
 

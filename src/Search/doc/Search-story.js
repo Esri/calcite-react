@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -77,45 +77,56 @@ storiesOf('Search', module).add(
         super(props);
 
         this.state = {
-          value: '',
+          inputValue: '',
           selectedItem: ''
         };
       }
 
       searchChanged = e => {
         this.setState({
-          value: e
+          selectedItem: e
         });
       };
 
       clearSearch = () => {
         this.setState({
-          value: '',
+          inputValue: '',
           selectedItem: ''
         });
       };
 
-      onUserAction = (inputValue, itemsToShow, selectedItemVal) => {
+      onUserAction = (inputValue, selectedItemVal) => {
         this.setState({
-          value: inputValue,
-          selectedItem: selectedItemVal,
-          itemsToShow: itemsToShow
+          inputValue: inputValue,
+          selectedItem: selectedItemVal
         });
       };
 
       render() {
         return (
-          <GuideExample>
-            <Search
-              value={this.state.value}
-              selectedItem={this.state.selectedItem}
-              items={this.items}
-              minimal={true}
-              onChange={this.searchChanged}
-              onUserAction={this.onUserAction}
-              onRequestClear={this.clearSearch}
-            />
-          </GuideExample>
+          <Fragment>
+            <GuideExample>
+              <Search
+                inputValue={this.state.inputValue}
+                selectedItem={this.state.selectedItem}
+                items={this.items}
+                onChange={this.searchChanged}
+                onUserAction={this.onUserAction}
+                onRequestClear={this.clearSearch}
+              />
+            </GuideExample>
+            <GuideExample>
+              <Search
+                inputValue={this.state.inputValue}
+                selectedItem={this.state.selectedItem}
+                items={this.items}
+                minimal={true}
+                onChange={this.searchChanged}
+                onUserAction={this.onUserAction}
+                onRequestClear={this.clearSearch}
+              />
+            </GuideExample>
+          </Fragment>
         );
       }
     }
