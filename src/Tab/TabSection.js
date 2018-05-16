@@ -8,7 +8,7 @@ const TabSection = ({
   transparent,
   translucent,
   dark,
-  ...props
+  ...other
 }) => {
   const tabSection = (
     <StyledTabSection
@@ -16,7 +16,7 @@ const TabSection = ({
       transparent={transparent}
       translucent={translucent}
       dark={dark}
-      {...props}
+      {...other}
     >
       {children}
     </StyledTabSection>
@@ -27,7 +27,11 @@ const TabSection = ({
 
 TabSection.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  gray: PropTypes.bool,
+  transparent: PropTypes.bool,
+  translucent: PropTypes.bool,
+  dark: PropTypes.bool
 };
 
 export default TabSection;

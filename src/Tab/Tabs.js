@@ -4,25 +4,36 @@ import { StyledTab } from './Tab-styled';
 import TabNav from './TabNav';
 import TabContents from './TabContents';
 
-const Tabs = ({ children, gray, transparent, translucent, dark, ...props }) => {
+const Tabs = ({
+  children,
+  activeTabIndex,
+  onTabChange,
+  gray,
+  transparent,
+  translucent,
+  dark,
+  ...other
+}) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
       case TabNav:
         return React.cloneElement(child, {
+          activeTabIndex,
+          onTabChange,
           gray,
           transparent,
           translucent,
-          dark,
-          ...props
+          dark
         });
       case TabContents:
         return React.cloneElement(child, {
+          activeTabIndex,
+          onTabChange,
           gray,
           transparent,
           translucent,
-          dark,
-          ...props
+          dark
         });
       default:
         return child;
@@ -35,6 +46,7 @@ const Tabs = ({ children, gray, transparent, translucent, dark, ...props }) => {
       transparent={transparent}
       translucent={translucent}
       dark={dark}
+      {...other}
     >
       {childrenWithProps}
     </StyledTab>
@@ -44,7 +56,12 @@ const Tabs = ({ children, gray, transparent, translucent, dark, ...props }) => {
 Tabs.propTypes = {
   /** Description TBD */
   children: PropTypes.node,
-  activeTabIndex: PropTypes.number
+  activeTabIndex: PropTypes.number,
+  onTabChange: PropTypes.func,
+  gray: PropTypes.bool,
+  transparent: PropTypes.bool,
+  translucent: PropTypes.bool,
+  dark: PropTypes.bool
 };
 
 Tabs.defaultProps = {

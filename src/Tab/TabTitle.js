@@ -4,23 +4,28 @@ import { StyledTabTitle } from './Tab-styled';
 
 const TabTitle = ({
   children,
+  index,
+  activeTabIndex,
+  setActiveTabIndex,
   gray,
   transparent,
   translucent,
   dark,
-  ...props
+  ...other
 }) => {
-  const setActiveTabIndex = e => {
-    props.setActiveTabIndex(e, props.index);
+  const handleSetActiveTabIndex = e => {
+    setActiveTabIndex(e, index);
   };
+
   const tabTitle = (
     <StyledTabTitle
       gray={gray}
       transparent={transparent}
       translucent={translucent}
       dark={dark}
-      onClick={setActiveTabIndex}
-      active={props.activeTabIndex === props.index}
+      onClick={handleSetActiveTabIndex}
+      active={activeTabIndex === index}
+      {...other}
     >
       {children}
     </StyledTabTitle>
@@ -31,7 +36,14 @@ const TabTitle = ({
 
 TabTitle.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  index: PropTypes.number,
+  activeTabIndex: PropTypes.number,
+  setActiveTabIndex: PropTypes.func,
+  gray: PropTypes.bool,
+  transparent: PropTypes.bool,
+  translucent: PropTypes.bool,
+  dark: PropTypes.bool
 };
 
 TabTitle.defaultProps = {};

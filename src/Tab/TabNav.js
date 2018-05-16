@@ -5,11 +5,13 @@ import TabTitle from './TabTitle';
 
 const TabNav = ({
   children,
+  activeTabIndex,
+  onTabChange,
   gray,
   transparent,
   translucent,
   dark,
-  ...props
+  ...other
 }) => {
   const childrenWithProps = children.map((child, itemIndex) => {
     switch (child.type) {
@@ -17,8 +19,8 @@ const TabNav = ({
         return React.cloneElement(child, {
           key: itemIndex,
           index: itemIndex,
-          activeTabIndex: props.activeTabIndex,
-          setActiveTabIndex: (e, itemIndex) => props.onTabChange(itemIndex),
+          activeTabIndex,
+          setActiveTabIndex: (e, itemIndex) => onTabChange(itemIndex),
           gray,
           transparent,
           translucent,
@@ -34,6 +36,7 @@ const TabNav = ({
       transparent={transparent}
       translucent={translucent}
       dark={dark}
+      {...other}
     >
       {childrenWithProps}
     </StyledTabNav>
@@ -42,7 +45,13 @@ const TabNav = ({
 
 TabNav.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  activeTabIndex: PropTypes.number,
+  onTabChange: PropTypes.func,
+  gray: PropTypes.bool,
+  transparent: PropTypes.bool,
+  translucent: PropTypes.bool,
+  dark: PropTypes.bool
 };
 
 export default TabNav;

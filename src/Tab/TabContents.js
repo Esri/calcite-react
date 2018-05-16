@@ -5,21 +5,22 @@ import TabSection from './TabSection';
 
 const TabContents = ({
   children,
+  activeTabIndex,
   gray,
   transparent,
   translucent,
   dark,
-  ...props
+  ...other
 }) => {
   const childrenWithProps = children.map((child, itemIndex) => {
     switch (child.type) {
       case TabSection:
         let section;
-        if (itemIndex === props.activeTabIndex) {
+        if (itemIndex === activeTabIndex) {
           section = React.cloneElement(child, {
             key: itemIndex,
             index: itemIndex,
-            activeTabIndex: props.activeTabIndex,
+            activeTabIndex,
             gray,
             transparent,
             translucent,
@@ -37,6 +38,7 @@ const TabContents = ({
       transparent={transparent}
       translucent={translucent}
       dark={dark}
+      {...other}
     >
       {childrenWithProps}
     </StyledTabContents>
@@ -45,7 +47,12 @@ const TabContents = ({
 
 TabContents.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  activeTabIndex: PropTypes.number,
+  gray: PropTypes.bool,
+  transparent: PropTypes.bool,
+  translucent: PropTypes.bool,
+  dark: PropTypes.bool
 };
 
 export default TabContents;
