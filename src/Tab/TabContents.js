@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 import { StyledTabContents } from './Tab-styled';
 import TabSection from './TabSection';
 
-const TabContents = ({ children, ...props }) => {
+const TabContents = ({
+  children,
+  gray,
+  transparent,
+  translucent,
+  dark,
+  ...props
+}) => {
   const childrenWithProps = children.map((child, itemIndex) => {
     switch (child.type) {
       case TabSection:
@@ -12,7 +19,11 @@ const TabContents = ({ children, ...props }) => {
           section = React.cloneElement(child, {
             key: itemIndex,
             index: itemIndex,
-            activeTabIndex: props.activeTabIndex
+            activeTabIndex: props.activeTabIndex,
+            gray,
+            transparent,
+            translucent,
+            dark
           });
         }
         return section;
@@ -20,7 +31,16 @@ const TabContents = ({ children, ...props }) => {
         return child;
     }
   });
-  return <StyledTabContents>{childrenWithProps}</StyledTabContents>;
+  return (
+    <StyledTabContents
+      gray={gray}
+      transparent={transparent}
+      translucent={translucent}
+      dark={dark}
+    >
+      {childrenWithProps}
+    </StyledTabContents>
+  );
 };
 
 TabContents.propTypes = {
