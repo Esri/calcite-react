@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -7,43 +7,121 @@ import doc from './Tab.md';
 
 import Tabs, { TabNav, TabTitle, TabContents, TabSection } from '../';
 
-storiesOf('Tabs', module).add(
-  'Controlled Tabs',
-  withInfo(doc)(() => {
-    class ControlledTab extends Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          activeTabIndex: 0
+storiesOf('Tabs', module)
+  .add(
+    'Basic',
+    withInfo(doc)(() => (
+      <Fragment>
+        <GuideExample>
+          <Tabs activeTabIndex={0}>
+            <TabNav>
+              <TabTitle>Tab 1</TabTitle>
+              <TabTitle>Tab 2</TabTitle>
+              <TabTitle>Tab 3</TabTitle>
+            </TabNav>
+            <TabContents>
+              <TabSection>Tab 1 content</TabSection>
+              <TabSection>Tab 2 content</TabSection>
+              <TabSection>Tab 3 content</TabSection>
+            </TabContents>
+          </Tabs>
+        </GuideExample>
+        <GuideExample label="gray">
+          <Tabs gray activeTabIndex={0}>
+            <TabNav>
+              <TabTitle>Tab 1</TabTitle>
+              <TabTitle>Tab 2</TabTitle>
+              <TabTitle>Tab 3</TabTitle>
+            </TabNav>
+            <TabContents>
+              <TabSection>Tab 1 content</TabSection>
+              <TabSection>Tab 2 content</TabSection>
+              <TabSection>Tab 3 content</TabSection>
+            </TabContents>
+          </Tabs>
+        </GuideExample>
+        <GuideExample label="transparent">
+          <Tabs transparent activeTabIndex={0}>
+            <TabNav>
+              <TabTitle>Tab 1</TabTitle>
+              <TabTitle>Tab 2</TabTitle>
+              <TabTitle>Tab 3</TabTitle>
+            </TabNav>
+            <TabContents>
+              <TabSection>Tab 1 content</TabSection>
+              <TabSection>Tab 2 content</TabSection>
+              <TabSection>Tab 3 content</TabSection>
+            </TabContents>
+          </Tabs>
+        </GuideExample>
+        <GuideExample label="translucent">
+          <Tabs translucent activeTabIndex={0}>
+            <TabNav>
+              <TabTitle>Tab 1</TabTitle>
+              <TabTitle>Tab 2</TabTitle>
+              <TabTitle>Tab 3</TabTitle>
+            </TabNav>
+            <TabContents>
+              <TabSection>Tab 1 content</TabSection>
+              <TabSection>Tab 2 content</TabSection>
+              <TabSection>Tab 3 content</TabSection>
+            </TabContents>
+          </Tabs>
+        </GuideExample>
+        <GuideExample label="dark">
+          <Tabs dark activeTabIndex={0}>
+            <TabNav>
+              <TabTitle>Tab 1</TabTitle>
+              <TabTitle>Tab 2</TabTitle>
+              <TabTitle>Tab 3</TabTitle>
+            </TabNav>
+            <TabContents>
+              <TabSection>Tab 1 content</TabSection>
+              <TabSection>Tab 2 content</TabSection>
+              <TabSection>Tab 3 content</TabSection>
+            </TabContents>
+          </Tabs>
+        </GuideExample>
+      </Fragment>
+    ))
+  )
+  .add(
+    'Controlled Tabs',
+    withInfo(doc)(() => {
+      class ControlledTab extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            activeTabIndex: 0
+          };
+        }
+
+        onTabChange = index => {
+          this.setState({ activeTabIndex: index });
         };
-      }
 
-      onTabChange = index => {
-        this.setState({ activeTabIndex: index });
-      };
-
-      render() {
-        return (
-          <GuideExample>
-            <Tabs
-              onTabChange={this.onTabChange}
-              activeTabIndex={this.state.activeTabIndex}
-            >
-              <TabNav>
-                <TabTitle>Tab 1</TabTitle>
-                <TabTitle>Tab 2</TabTitle>
-                <TabTitle>Tab 3</TabTitle>
-              </TabNav>
-              <TabContents>
-                <TabSection>Tab 1 content</TabSection>
-                <TabSection>Tab 2 content</TabSection>
-                <TabSection>Tab 3 content</TabSection>
-              </TabContents>
-            </Tabs>
-          </GuideExample>
-        );
+        render() {
+          return (
+            <GuideExample>
+              <Tabs
+                onTabChange={this.onTabChange}
+                activeTabIndex={this.state.activeTabIndex}
+              >
+                <TabNav>
+                  <TabTitle>Tab 1</TabTitle>
+                  <TabTitle>Tab 2</TabTitle>
+                  <TabTitle>Tab 3</TabTitle>
+                </TabNav>
+                <TabContents>
+                  <TabSection>Tab 1 content</TabSection>
+                  <TabSection>Tab 2 content</TabSection>
+                  <TabSection>Tab 3 content</TabSection>
+                </TabContents>
+              </Tabs>
+            </GuideExample>
+          );
+        }
       }
-    }
-    return <ControlledTab />;
-  })
-);
+      return <ControlledTab />;
+    })
+  );
