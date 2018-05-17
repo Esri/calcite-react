@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "downshift": "^1.28.2",
+    "match-sorter": "^2.2.3",
     "outy": "^0.1.2",
     "polished": "^1.9.2",
     "react-dates": "^16.4.0",
