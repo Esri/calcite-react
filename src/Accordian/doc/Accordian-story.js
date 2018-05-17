@@ -14,16 +14,24 @@ import Accordian, {
 storiesOf('Accordian', module).add(
   'Basic',
   withInfo(doc)(() => {
-    class ControlledAccordian extends Component {
+    class AccordianExample extends Component {
       constructor(props) {
         super(props);
         this.state = {
-          activeSection: 0
+          activeSectionIndexes: [0]
         };
       }
 
-      onAccordianChange = index => {
-        this.setState({ activeSection: index });
+      onAccordianChange = (evt, index) => {
+        this.state.activeSectionIndexes.includes(index)
+          ? this.setState({
+              activeSectionIndexes: this.state.activeSectionIndexes.filter(
+                item => index !== item
+              )
+            })
+          : this.setState({
+              activeSectionIndexes: [...this.state.activeSectionIndexes, index]
+            });
       };
 
       render() {
@@ -31,22 +39,24 @@ storiesOf('Accordian', module).add(
           <GuideExample>
             <Accordian
               onAccordianChange={this.onAccordianChange}
-              activeSection={this.state.activeSection}
+              activeSectionIndexes={this.state.activeSectionIndexes}
             >
               <AccordianSection>
-                <AccordianTitle>
-                  This is the best accordian. number 1
-                </AccordianTitle>
+                <AccordianTitle>Accordian Title 1</AccordianTitle>
                 <AccordianContent>
-                  <span>Hello</span>
+                  <span>Accordian Content 1</span>
                 </AccordianContent>
               </AccordianSection>
               <AccordianSection>
-                <AccordianTitle>
-                  This is the best accordian. number 1
-                </AccordianTitle>
+                <AccordianTitle>Accordian Title 2</AccordianTitle>
                 <AccordianContent>
-                  <span>Hello 2</span>
+                  <span>Accordian Content 2</span>
+                </AccordianContent>
+              </AccordianSection>
+              <AccordianSection>
+                <AccordianTitle>Accordian Title 3</AccordianTitle>
+                <AccordianContent>
+                  <span>Accordian Content 3</span>
                 </AccordianContent>
               </AccordianSection>
             </Accordian>
@@ -54,6 +64,6 @@ storiesOf('Accordian', module).add(
         );
       }
     }
-    return <ControlledAccordian />;
+    return <AccordianExample />;
   })
 );

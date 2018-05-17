@@ -1,16 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledAccordianTitle } from './Accordian-styled';
+import ChevronDownIcon from '../icons/ChevronDownIcon';
+import ChevronRightIcon from '../icons/ChevronRightIcon';
 
 const AccordianTitle = ({ children, ...props }) => {
   const setActiveAccordianIndex = e => {
-    props.onAccordianChange(e, props.index);
+    props.onAccordianChange(e, props.sectionIndex);
   };
+
   const tabTitle = (
     <StyledAccordianTitle
       onClick={setActiveAccordianIndex}
-      active={props.activeAccordianIndex === props.index}
+      active={props.active}
     >
+      {props.active ? <ChevronDownIcon /> : <ChevronRightIcon />}
       {children}
     </StyledAccordianTitle>
   );
@@ -20,7 +24,9 @@ const AccordianTitle = ({ children, ...props }) => {
 
 AccordianTitle.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  active: PropTypes.bool,
+  onClick: PropTypes.func
 };
 
 AccordianTitle.defaultProps = {};

@@ -9,24 +9,14 @@ import { CalciteA } from '../Elements';
 
 const StyledAccordian = styled.div`
   padding: 0;
-  flex: 1 0 auto;
-  margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  ${props =>
-    props.right &&
-    css`
-      float: right;
-    `};
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledAccordianSection = styled.div`
   padding: 0;
-  flex: 1 0 auto;
-  margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  ${props =>
-    props.right &&
-    css`
-      float: right;
-    `};
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledAccordianTitle = CalciteA.extend`
@@ -70,20 +60,20 @@ const StyledAccordianTitle = CalciteA.extend`
     `};
 `;
 
-// const StyledAccordianNav = styled.nav`
-//   display: flex;
-//   align-items: flex-end;
-//   height: 32px;
-//   margin-top: 0em;
-//   flex: 1 0 75%;
-//   padding-left: 0.25em;
-//   box-sizing: border-box;
-// `;
-
 const StyledAccordianContent = styled.div`
   padding: 2px 4px;
   display: block;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
+  max-height: 0;
+  transition: max-height 200ms linear;
+  overflow: hidden;
+  ${props =>
+    props.active &&
+    css`
+      max-height: 300px;
+    `};
+    
+  }
 `;
 
 export {

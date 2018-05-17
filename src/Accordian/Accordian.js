@@ -4,14 +4,18 @@ import { StyledAccordian } from './Accordian-styled';
 import AccordianSection from './AccordianSection';
 
 const Accordian = ({ children, ...props }) => {
-  console.log(props);
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
       case AccordianSection:
-        return React.cloneElement(child, {
-          ...props
+        let section;
+        section = React.cloneElement(child, {
+          key: i,
+          active: props.activeSectionIndexes.includes(i),
+          sectionIndex: i,
+          onAccordianChange: props.onAccordianChange
         });
+        return section;
       default:
         return child;
     }
@@ -23,11 +27,12 @@ const Accordian = ({ children, ...props }) => {
 Accordian.propTypes = {
   /** Description TBD */
   children: PropTypes.node,
-  activeTabIndex: PropTypes.number
+  /** Indexes of the sections that are supposed to be active */
+  activeSectionIndexes: PropTypes.array
 };
 
 Accordian.defaultProps = {
-  activeTabIndex: 0
+  activeSectionIndexes: []
 };
 
 export default Accordian;
