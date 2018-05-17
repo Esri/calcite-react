@@ -55,6 +55,7 @@ storiesOf('Search', module).add(
                 onChange={this.searchChanged}
                 onUserAction={this.onUserAction}
                 onRequestClear={this.clearSearch}
+                menuStyle={{ maxHeight: '400px' }}
               />
             </GuideExample>
             <GuideExample>
@@ -66,6 +67,7 @@ storiesOf('Search', module).add(
                 onChange={this.searchChanged}
                 onUserAction={this.onUserAction}
                 onRequestClear={this.clearSearch}
+                menuStyle={{ maxHeight: '400px' }}
               />
             </GuideExample>
           </Fragment>

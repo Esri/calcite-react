@@ -133,6 +133,7 @@ const Select = props => {
           })}
           {isOpen ? (
             <Menu
+              style={props.menuStyle}
               withComponent={<StyledSelectMenu fullWidth={props.fullWidth} />}
             >
               {getMenuItems(
@@ -167,7 +168,9 @@ Select.propTypes = {
   /** A style variant for select inputs */
   minimal: PropTypes.bool,
   /** HTML prop for the Select, works together with a label's `for` prop */
-  id: PropTypes.string
+  id: PropTypes.string,
+  /** Style prop applied to the menu wrapper */
+  menuStyle: PropTypes.object
 };
 
 Select.defaultProps = {

@@ -116,6 +116,7 @@ storiesOf('Select', module)
                   filterable
                   onChange={this.handleSelectChange}
                   selectedValue={this.state.selectedValue}
+                  menuStyle={{ maxHeight: '400px' }}
                 >
                   {statesJson.states.map(state => {
                     return (
