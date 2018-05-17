@@ -103,7 +103,10 @@ class Search extends Component {
                 })}
               />
               {isOpen ? (
-                <Menu withComponent={<StyledSelectMenu />}>
+                <Menu
+                  style={this.props.menuStyle}
+                  withComponent={<StyledSelectMenu />}
+                >
                   {this.state.itemsToShow.map((item, index) => (
                     <MenuItem
                       key={item}
@@ -143,7 +146,9 @@ Search.propTypes = {
   /** Function called when the user clicks the clear button */
   onRequestClear: PropTypes.func,
   /** Toggle minimal style on the input */
-  minimal: PropTypes.bool
+  minimal: PropTypes.bool,
+  /** Style prop applied to the menu wrapper */
+  menuStyle: PropTypes.object
 };
 
 Search.defaultProps = {
