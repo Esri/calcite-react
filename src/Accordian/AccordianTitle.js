@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyledAccordianTitle } from './Accordian-styled';
+import { StyledAccordianTitle, ArrowIconStyles } from './Accordian-styled';
 import ChevronDownIcon from '../icons/ChevronDownIcon';
 import ChevronRightIcon from '../icons/ChevronRightIcon';
 
@@ -14,7 +14,11 @@ const AccordianTitle = ({ children, ...props }) => {
       onClick={setActiveAccordianIndex}
       active={props.active}
     >
-      {props.active ? <ChevronDownIcon /> : <ChevronRightIcon />}
+      {props.active ? (
+        <ChevronDownIcon style={ArrowIconStyles} />
+      ) : (
+        <ChevronRightIcon style={ArrowIconStyles} />
+      )}
       {children}
     </StyledAccordianTitle>
   );
