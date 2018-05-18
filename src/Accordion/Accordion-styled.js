@@ -2,11 +2,11 @@ import styled, { css } from 'styled-components';
 import { transition } from '../utils/helpers';
 import { StyledSideNav, StyledSideNavTitle } from '../SideNav/SideNav-styled';
 
-const StyledAccordian = StyledSideNav.extend``;
+const StyledAccordion = StyledSideNav.extend``;
 
-const StyledAccordianSection = styled.div``;
+const StyledAccordionSection = styled.div``;
 
-const StyledAccordianTitle = StyledSideNavTitle.extend`
+const StyledAccordionTitle = StyledSideNavTitle.extend`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -26,7 +26,7 @@ const StyledAccordianTitle = StyledSideNavTitle.extend`
     `};
 `;
 
-const StyledAccordianContent = styled.div`
+const StyledAccordionContent = styled.div`
   display: none;
 
   ${props =>
@@ -42,9 +42,9 @@ const ArrowIconStyles = {
 };
 
 export {
-  StyledAccordian,
-  StyledAccordianTitle,
-  StyledAccordianSection,
-  StyledAccordianContent,
+  StyledAccordion,
+  StyledAccordionTitle,
+  StyledAccordionSection,
+  StyledAccordionContent,
   ArrowIconStyles
 };

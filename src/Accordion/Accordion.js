@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyledAccordian } from './Accordian-styled';
-import AccordianSection from './AccordianSection';
+import { StyledAccordion } from './Accordion-styled';
+import AccordionSection from './AccordionSection';
 
-const Accordian = ({ children, ...props }) => {
+const Accordion = ({ children, ...props }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
-      case AccordianSection:
+      case AccordionSection:
         let section;
         section = React.cloneElement(child, {
           key: i,
           active: props.activeSectionIndexes.includes(i),
           sectionIndex: i,
-          onAccordianChange: props.onAccordianChange
+          onAccordionChange: props.onAccordionChange
         });
         return section;
       default:
@@ -21,18 +21,18 @@ const Accordian = ({ children, ...props }) => {
     }
   });
 
-  return <StyledAccordian>{childrenWithProps}</StyledAccordian>;
+  return <StyledAccordion>{childrenWithProps}</StyledAccordion>;
 };
 
-Accordian.propTypes = {
+Accordion.propTypes = {
   /** Description TBD */
   children: PropTypes.node,
   /** Indexes of the sections that are supposed to be active */
   activeSectionIndexes: PropTypes.array
 };
 
-Accordian.defaultProps = {
+Accordion.defaultProps = {
   activeSectionIndexes: []
 };
 
-export default Accordian;
+export default Accordion;

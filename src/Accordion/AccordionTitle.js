@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyledAccordianTitle, ArrowIconStyles } from './Accordian-styled';
+import { StyledAccordionTitle, ArrowIconStyles } from './Accordion-styled';
 import ChevronDownIcon from '../icons/ChevronDownIcon';
 import ChevronRightIcon from '../icons/ChevronRightIcon';
 
-const AccordianTitle = ({ children, ...props }) => {
-  const setActiveAccordianIndex = e => {
-    props.onAccordianChange(e, props.sectionIndex);
+const AccordionTitle = ({ children, ...props }) => {
+  const setActiveAccordionIndex = e => {
+    props.onAccordionChange(e, props.sectionIndex);
   };
 
-  const tabTitle = (
-    <StyledAccordianTitle
-      onClick={setActiveAccordianIndex}
+  const accordionTitle = (
+    <StyledAccordionTitle
+      onClick={setActiveAccordionIndex}
       active={props.active}
     >
       {props.active ? (
@@ -20,19 +20,19 @@ const AccordianTitle = ({ children, ...props }) => {
         <ChevronRightIcon style={ArrowIconStyles} />
       )}
       {children}
-    </StyledAccordianTitle>
+    </StyledAccordionTitle>
   );
 
-  return tabTitle;
+  return accordionTitle;
 };
 
-AccordianTitle.propTypes = {
+AccordionTitle.propTypes = {
   /** Description TBD */
   children: PropTypes.node,
   active: PropTypes.bool,
   onClick: PropTypes.func
 };
 
-AccordianTitle.defaultProps = {};
+AccordionTitle.defaultProps = {};
 
-export default AccordianTitle;
+export default AccordionTitle;

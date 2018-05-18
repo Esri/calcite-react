@@ -1,0 +1,1 @@
+Accordion comprises of vertically stacked items/sections that can be expanded or collapsed to reveal the related content. There can be more than one expanded section at the same time. The sections can be expanded or collapsed by clicking on their title.
