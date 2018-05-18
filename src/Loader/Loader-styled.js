@@ -15,7 +15,7 @@ const loadAnimation = props => {
   0%,
   80%,
   100% {
-    opacity: 1;
+    opacity: .75;
     box-shadow: 0 0 ${props.theme.palette.blue};
     height: ${loaderVariables.loaderHeight};
   }
