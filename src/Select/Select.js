@@ -1,52 +1,35 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Downshift from 'downshift';
+import matchSorter from 'match-sorter';
 
 import {
   StyledSelectWrapper,
   StyledSelectButton,
+  StyledSelectInput,
   StyledSelectMenu
 } from './Select-styled';
 import Menu from '../Menu';
 
 const Select = props => {
   function getAnchorElement(params) {
-    const {
-      inputEl,
-      getButtonProps,
-      getInputProps,
-      placeholder,
-      selectedItem
-    } = params;
+    const { getButtonProps, getInputProps, placeholder, selectedItem } = params;
 
-    let selectEl;
-
-    if (inputEl) {
-      const inputElType = inputEl.props.type;
-      if (
-        inputElType === 'button' ||
-        inputElType === 'submit' ||
-        inputElType === 'reset'
-      ) {
-        selectEl = React.cloneElement(inputEl, {
-          ...getButtonProps(),
-          ...getInputProps(),
-          id: props.id || props._generatedId,
-          children: itemToString(selectedItem)
-            ? itemToString(selectedItem)
-            : props.placeholder
-        });
-      } else if (inputElType === 'text') {
-        selectEl = React.cloneElement(inputEl, {
-          ...getButtonProps(),
-          ...getInputProps(),
-          ...inputEl.props,
-          placeholder,
-          id: props.id || props._generatedId
-        });
-      }
+    if (props.filterable) {
+      return (
+        <StyledSelectInput
+          onClick={getButtonProps().onClick}
+          {...getInputProps({
+            placeholder: placeholder,
+            style: { ...props.style },
+            id: props.id || props._generatedId,
+            fullWidth: props.fullWidth,
+            minimal: props.minimal
+          })}
+        />
+      );
     }
-    selectEl = (
+    return (
       <StyledSelectButton
         {...getButtonProps()}
         {...getInputProps()}
@@ -60,8 +43,6 @@ const Select = props => {
           : props.placeholder}
       </StyledSelectButton>
     );
-
-    return selectEl;
   }
 
   function itemToString(item) {
@@ -74,10 +55,6 @@ const Select = props => {
   }
 
   function onChange(selectedItem, downshiftProps) {
-    // 🚨 Currently, the arguments passed back to the `onChange` event handler
-    //    are the value of the selected item (literally just props.value) and
-    //    the item itself.
-
     const value = selectedItem.props.value;
     props.onChange(value, selectedItem);
   }
@@ -86,6 +63,43 @@ const Select = props => {
     return props.children.filter(child => {
       return child.props.value === value;
     })[0];
+  }
+
+  function getMenuItems(
+    inputValue,
+    getItemProps,
+    highlightedIndex,
+    selectedItem
+  ) {
+    // return the full list if they reopen the dropdown
+    // filter if they change the inputValue
+    const inputMatchesSelection = inputValue === itemToString(selectedItem);
+
+    if (props.filterable && inputValue && !inputMatchesSelection) {
+      return matchSorter(props.children, inputValue, {
+        keys: ['props.children', 'props.value']
+      }).map((child, index) =>
+        React.cloneElement(child, {
+          ...getItemProps({
+            item: child,
+            active: highlightedIndex === index,
+            selected: selectedItem === child
+          }),
+          key: index
+        })
+      );
+    }
+
+    return props.children.map((child, index) =>
+      React.cloneElement(child, {
+        ...getItemProps({
+          item: child,
+          active: highlightedIndex === index,
+          selected: selectedItem === child
+        }),
+        key: index
+      })
+    );
   }
 
   return (
@@ -102,14 +116,14 @@ const Select = props => {
         getItemProps,
         isOpen,
         selectedItem,
-        highlightedIndex
+        highlightedIndex,
+        inputValue
       }) => (
         <StyledSelectWrapper
           {...getRootProps({ refKey: 'innerRef' })}
           style={props.wrapperStyle}
         >
           {getAnchorElement({
-            inputEl: props.input,
             getButtonProps,
             getInputProps,
             placeholder: props.placeholder,
@@ -119,17 +133,14 @@ const Select = props => {
           })}
           {isOpen ? (
             <Menu
+              style={props.menuStyle}
               withComponent={<StyledSelectMenu fullWidth={props.fullWidth} />}
             >
-              {props.children.map((child, index) =>
-                React.cloneElement(child, {
-                  ...getItemProps({
-                    item: child,
-                    active: highlightedIndex === index,
-                    selected: selectedItem === child
-                  }),
-                  key: index
-                })
+              {getMenuItems(
+                inputValue,
+                getItemProps,
+                highlightedIndex,
+                selectedItem
               )}
             </Menu>
           ) : null}
@@ -142,8 +153,8 @@ const Select = props => {
 Select.propTypes = {
   /** Nodes to be used as options in the Select */
   children: PropTypes.node,
-  /** Node to use as the input for the Select */
-  input: PropTypes.node,
+  /** Toggle the select to use an input and allow filtering of the items */
+  filterable: PropTypes.bool,
   /** Callback function fired when the value of the Select changes. */
   onChange: PropTypes.func,
   /** The selected item of the select */
@@ -157,7 +168,9 @@ Select.propTypes = {
   /** A style variant for select inputs */
   minimal: PropTypes.bool,
   /** HTML prop for the Select, works together with a label's `for` prop */
-  id: PropTypes.string
+  id: PropTypes.string,
+  /** Style prop applied to the menu wrapper */
+  menuStyle: PropTypes.object
 };
 
 Select.defaultProps = {

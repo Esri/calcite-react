@@ -76,7 +76,10 @@ const Select = props => {
             {renderValue(selectedItem)}
           </StyledMultiSelectButton>
           {isOpen ? (
-            <Menu withComponent={<StyledMultiSelectMenu />}>
+            <Menu
+              style={props.menuStyle}
+              withComponent={<StyledMultiSelectMenu />}
+            >
               {props.children.map((child, index) =>
                 React.cloneElement(child, {
                   ...getItemProps({
@@ -109,7 +112,9 @@ Select.propTypes = {
   /** Whether or not the select will fill its container's width */
   fullWidth: PropTypes.bool,
   /** A style variant for select inputs */
-  minimal: PropTypes.bool
+  minimal: PropTypes.bool,
+  /** Style prop applied to the menu wrapper */
+  menuStyle: PropTypes.object
 };
 
 Select.defaultProps = {

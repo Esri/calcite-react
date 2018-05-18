@@ -9,12 +9,11 @@ import doc from './Select.md';
 import Alert from '../../Alert';
 import Card, { CardTitle, CardContent } from '../../Card';
 import { MenuItem } from '../../Menu';
-import Button from '../../Button';
-import { StyledSelectInput } from '../Select-styled';
-import ChevronDown from 'mdi-react/ChevronDownIcon';
 import Select from '../';
 
 import { FormControl, FormControlLabel } from '../../Form';
+
+import statesJson from '../../../stories/_sampleJson/states.json';
 
 storiesOf('Select', module)
   .add(
@@ -75,7 +74,6 @@ storiesOf('Select', module)
               </GuideExample>
               <GuideExample label="selectedItem={this.state.selectedItem}">
                 <Select
-                  input={<Button icon={<ChevronDown />} />}
                   onChange={this.handleSelectChange}
                   selectedItem={this.state.selectedItem}
                 >
@@ -92,33 +90,56 @@ storiesOf('Select', module)
     })
   )
   .add(
-    'Custom Input',
-    withInfo(doc)(() => (
-      <div>
-        <GuideExample>
-          <FormControl>
-            <FormControlLabel>Value:</FormControlLabel>
-            <Select
-              input={<StyledSelectInput minimal type="text" />}
-              onChange={action('onChange')}
-              horizontal
-              wrapperStyle={{ display: 'inline' }}
-            >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </GuideExample>
-      </div>
-    ))
+    'Filterable',
+    withInfo(doc)(() => {
+      class FilterableSelect extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValue: null,
+            selectedItem: null
+          };
+        }
+
+        handleSelectChange = (value, item) => {
+          this.setState({
+            selectedValue: value,
+            selectedItem: item
+          });
+        };
+
+        render() {
+          return (
+            <div>
+              <GuideExample label="filterable">
+                <Select
+                  filterable
+                  onChange={this.handleSelectChange}
+                  selectedValue={this.state.selectedValue}
+                  menuStyle={{ maxHeight: '400px' }}
+                >
+                  {statesJson.states.map(state => {
+                    return (
+                      <MenuItem key={state} value={state}>
+                        {state}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </GuideExample>
+            </div>
+          );
+        }
+      }
+      return <FilterableSelect />;
+    })
   )
   .add(
     'Ridiculous Example',
     withInfo(doc)(() => (
       <div>
         <GuideExample>
-          <Select input={<Button />} onChange={action('onChange')}>
+          <Select onChange={action('onChange')}>
             <li value={10}>Go to Online</li>
             <option value={20}>Help</option>
             <Alert value={30}>Sign Out</Alert>

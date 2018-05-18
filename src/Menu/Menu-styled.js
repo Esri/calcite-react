@@ -36,6 +36,7 @@ const StyledMenuItem = CalciteA.extend`
       text-decoration: none;
       color: ${props => props.theme.palette.darkerGray};
     `};
+
   &:hover {
     background-color: ${props => props.theme.palette.offWhite};
     text-decoration: none;

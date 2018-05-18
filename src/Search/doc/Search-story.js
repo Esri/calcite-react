@@ -7,26 +7,40 @@ import doc from './Search.md';
 
 import Search from '../';
 
+import statesJson from '../../../stories/_sampleJson/states.json';
+
 storiesOf('Search', module).add(
   'Basic',
   withInfo(doc)(() => {
     class SearchStateExample extends Component {
+      items = [...statesJson.states];
+
       constructor(props) {
         super(props);
+
         this.state = {
-          value: ''
+          inputValue: '',
+          selectedItem: ''
         };
       }
 
       searchChanged = e => {
         this.setState({
-          value: e.target.value
+          selectedItem: e
         });
       };
 
       clearSearch = () => {
         this.setState({
-          value: ''
+          inputValue: '',
+          selectedItem: ''
+        });
+      };
+
+      onUserAction = (inputValue, selectedItemVal) => {
+        this.setState({
+          inputValue: inputValue,
+          selectedItem: selectedItemVal
         });
       };
 
@@ -35,17 +49,25 @@ storiesOf('Search', module).add(
           <Fragment>
             <GuideExample>
               <Search
-                value={this.state.value}
+                inputValue={this.state.inputValue}
+                selectedItem={this.state.selectedItem}
+                items={this.items}
                 onChange={this.searchChanged}
+                onUserAction={this.onUserAction}
                 onRequestClear={this.clearSearch}
+                menuStyle={{ maxHeight: '400px' }}
               />
             </GuideExample>
             <GuideExample>
               <Search
-                value={this.state.value}
+                inputValue={this.state.inputValue}
+                selectedItem={this.state.selectedItem}
+                items={this.items}
                 minimal={true}
                 onChange={this.searchChanged}
+                onUserAction={this.onUserAction}
                 onRequestClear={this.clearSearch}
+                menuStyle={{ maxHeight: '400px' }}
               />
             </GuideExample>
           </Fragment>
