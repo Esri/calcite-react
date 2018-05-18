@@ -1,29 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyledAccordianSection } from './Accordian-styled';
-import AccordianTitle from './AccordianTitle';
-import AccordianContent from './AccordianContent';
+import { StyledAccordionSection } from './Accordion-styled';
+import AccordionTitle from './AccordionTitle';
+import AccordionContent from './AccordionContent';
 
-const AccordianSection = ({ children, ...props }) => {
+const AccordionSection = ({ children, ...props }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (child.type) {
-      case AccordianTitle:
+      case AccordionTitle:
         let title;
         title = React.cloneElement(child, {
           key: i,
           active: props.active,
           sectionIndex: props.sectionIndex,
-          onAccordianChange: props.onAccordianChange
+          onAccordionChange: props.onAccordionChange
         });
         return title;
-      case AccordianContent:
+      case AccordionContent:
         let content;
         content = React.cloneElement(child, {
           key: i,
           active: props.active,
           sectionIndex: props.sectionIndex,
-          onAccordianChange: props.onAccordianChange
+          onAccordionChange: props.onAccordionChange
         });
         return content;
       default:
@@ -31,11 +31,11 @@ const AccordianSection = ({ children, ...props }) => {
     }
   });
 
-  return <StyledAccordianSection>{childrenWithProps}</StyledAccordianSection>;
+  return <StyledAccordionSection>{childrenWithProps}</StyledAccordionSection>;
 };
-AccordianSection.propTypes = {
+AccordionSection.propTypes = {
   /** Description TBD */
   children: PropTypes.node
 };
 
-export default AccordianSection;
+export default AccordionSection;
