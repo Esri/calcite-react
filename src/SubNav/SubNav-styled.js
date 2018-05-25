@@ -9,6 +9,7 @@ import {
 } from '../utils/helpers';
 
 const StyledSubNav = styled.header`
+  position: relative;
   background-color: ${props => props.theme.palette.lightestGray};
   display: flex;
   flex-wrap: wrap;
@@ -29,6 +30,13 @@ const StyledSubNav = styled.header`
         props.overlayGradient
       )};
     `};
+`;
+
+const StyledSubNavLeftContent = styled.div`
+  display: flex;
+  flex: 1 0 200px;
+  justify-content: space-between;
+  flex-direction: column;
 `;
 
 const StyledSubNavLink = CalciteA.extend`
@@ -74,10 +82,8 @@ const StyledSubNavLink = CalciteA.extend`
 
 const StyledSubNavList = styled.nav`
   display: flex;
-  align-items: flex-end;
   height: 32px;
   margin-top: 0em;
-  flex: 1 0 75%;
   padding-left: 0.25em;
   box-sizing: border-box;
 `;
@@ -87,11 +93,6 @@ const StyledSubNavActions = styled.nav`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
-  nav + & {
-    margin-top: -0.5em;
-    height: 32px;
-  }
 `;
 
 const StyledSubNavTitle = CalciteH1.extend`
@@ -99,9 +100,7 @@ const StyledSubNavTitle = CalciteH1.extend`
   padding-left: 0.25em;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
   margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  display: inline-block;
-  line-height: 1.25;
-  flex: 1 0 75%;
+  line-height: 1.25
   box-sizing: border-box;
 
   ${props =>
@@ -111,10 +110,17 @@ const StyledSubNavTitle = CalciteH1.extend`
     `};
 `;
 
+const StyledMultiRowActions = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export {
   StyledSubNav,
+  StyledSubNavLeftContent,
   StyledSubNavLink,
   StyledSubNavList,
   StyledSubNavTitle,
-  StyledSubNavActions
+  StyledSubNavActions,
+  StyledMultiRowActions
 };

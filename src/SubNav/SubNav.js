@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyledSubNav } from './SubNav-styled';
+import { StyledSubNav, StyledSubNavLeftContent } from './SubNav-styled';
 
-import { SubNavTitle } from './';
+import { SubNavTitle, SubNavList, SubNavActions } from './';
 
 const SubNav = ({ children, blue, overlayGradient, ...other }) => {
   const childArray = React.Children.toArray(children);
@@ -17,9 +17,22 @@ const SubNav = ({ children, blue, overlayGradient, ...other }) => {
     }
   });
 
+  const getLeftContent = function() {
+    return childrenWithProps.filter(child => {
+      return child.type === SubNavTitle || child.type === SubNavList;
+    });
+  };
+
+  const getSubNavActions = function() {
+    return childrenWithProps.filter(child => {
+      return child.type === SubNavActions;
+    });
+  };
+
   const subNav = (
     <StyledSubNav blue={blue} overlayGradient={overlayGradient} {...other}>
-      {childrenWithProps}
+      <StyledSubNavLeftContent>{getLeftContent()}</StyledSubNavLeftContent>
+      {getSubNavActions()}
     </StyledSubNav>
   );
 
