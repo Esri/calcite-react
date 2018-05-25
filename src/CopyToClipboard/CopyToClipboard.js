@@ -50,10 +50,10 @@ class CopyToClipboard extends Component {
 
   getTooltipText = () => {
     if (this.state.copySuccessful) {
-      return 'Copied!';
+      return this.props.successTooltip;
     }
 
-    return 'Copy to clipboard';
+    return this.props.tooltip;
   };
 
   getClipboardIcon = () => {
@@ -76,6 +76,7 @@ class CopyToClipboard extends Component {
         <StyledCopyToClipboardInput value={children} readOnly />
         <Tooltip title={this.getTooltipText()}>
           <Button
+            clear
             onClick={() => this.copyTextToClipboard(children)}
             onBlur={this.resetCopySuccess}
             icon={this.getClipboardIcon()}
@@ -90,9 +91,16 @@ class CopyToClipboard extends Component {
 
 CopyToClipboard.propTypes = {
   /** Text to be copied */
-  children: PropTypes.string
+  children: PropTypes.string,
+  /** The tooltip label before the text is copied */
+  tooltip: PropTypes.string,
+  /** The tooltip label after the text is copied */
+  successTooltip: PropTypes.string
 };
 
-CopyToClipboard.defaultProps = {};
+CopyToClipboard.defaultProps = {
+  tooltip: 'Copy',
+  successTooltip: 'Copied!'
+};
 
 export default CopyToClipboard;
