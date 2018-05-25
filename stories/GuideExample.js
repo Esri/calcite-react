@@ -28,7 +28,7 @@ const GuideExampleLabel = styled.code`
   right: -1px;
   padding-left: 3px;
   padding-right: 3px;
-  z-index: 1;
+  z-index: 101;
 
   *:first-child & {
     border-radius: 0 3px 0 3px;

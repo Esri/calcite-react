@@ -5,7 +5,7 @@ import { CalciteA } from '../Elements';
 
 const StyledAlert = styled.div`
   padding: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  color: ${props => props.theme.palette.transparentBlack};
+  color: ${props => props.theme.palette.offBlack};
   background-color: ${props => props.theme.palette.lightestBlue};
   position: relative;
   z-index: 100;
@@ -47,6 +47,15 @@ const StyledAlert = styled.div`
 const StyledAlertClose = CalciteA.extend`
   position: absolute;
   right: ${props => unitCalc(props.theme.baseline, 2, '/')};
+  color: ${props => props.theme.palette.offBlack};
+
+  &:hover {
+    color: ${props => props.theme.palette.black};
+  }
+
+  svg {
+    fill: currentColor;
+  }
 `;
 
 export { StyledAlert, StyledAlertClose };

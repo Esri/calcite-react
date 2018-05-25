@@ -7,6 +7,8 @@ import GuideExample from '../../../stories/GuideExample';
 import doc from './Alert.md';
 import Alert from '../';
 
+import CloseIcon from '../../icons/CloseIcon';
+
 storiesOf('Alert', module).add(
   'Basic',
   withInfo(doc)(() => (
@@ -15,7 +17,7 @@ storiesOf('Alert', module).add(
         <Alert>Something Happened!</Alert>
       </GuideExample>
       <GuideExample label="closeLabel=&quot;close&quot;">
-        <Alert closeLabel="close" onClose={action('clicked')}>
+        <Alert closeLabel={<CloseIcon />} onClose={action('clicked')}>
           Has close link!
         </Alert>
       </GuideExample>
