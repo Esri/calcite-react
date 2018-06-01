@@ -9,7 +9,18 @@ import {
 } from './MultiSelect-styled';
 import Menu from '../Menu';
 
-const Select = props => {
+const Select = ({
+  children,
+  selectedValues,
+  placeholder,
+  wrapperStyle,
+  menuStyle,
+  fullWidth,
+  minimal,
+  onChange,
+  renderValue,
+  ...other
+}) => {
   function itemToString(item) {
     let label = item;
     if (item && item.props) {
@@ -19,14 +30,14 @@ const Select = props => {
     return label;
   }
 
-  function renderValue(items) {
-    if (props.renderValue) return props.renderValue(items);
+  function downshiftRenderValue(items) {
+    if (renderValue) return renderValue(items);
 
-    if (!items || !items.length) return props.placeholder;
+    if (!items || !items.length) return placeholder;
     return items.map(item => itemToString(item)).join(', ');
   }
 
-  function onChange(selectedItem, downshiftProps) {
+  function downshiftOnChange(selectedItem, downshiftProps) {
     const { selectedItem: selectedItems } = downshiftProps;
 
     if (selectedItems.indexOf(selectedItem) !== -1) {
@@ -34,16 +45,16 @@ const Select = props => {
       const values = selectedItems
         .filter(item => item !== selectedItem)
         .map(item => item.props.value);
-      props.onChange(values);
+      onChange(values);
     } else {
       // An unselected item was clicked, add it selection
       const values = selectedItems.map(item => item.props.value);
-      props.onChange([...values, selectedItem.props.value]);
+      onChange([...values, selectedItem.props.value]);
     }
   }
 
   function _getItemsFromValues(values) {
-    return props.children.filter(child => {
+    return children.filter(child => {
       return values.indexOf(child.props.value) !== -1;
     });
   }
@@ -51,8 +62,8 @@ const Select = props => {
   return (
     <Downshift
       itemToString={itemToString}
-      onChange={onChange}
-      selectedItem={_getItemsFromValues(props.selectedValues)}
+      onChange={downshiftOnChange}
+      selectedItem={_getItemsFromValues(selectedValues)}
       render={({
         getRootProps,
         getButtonProps,
@@ -64,23 +75,20 @@ const Select = props => {
       }) => (
         <StyledMultiSelectWrapper
           {...getRootProps({ refKey: 'innerRef' })}
-          style={props.wrapperStyle}
+          style={wrapperStyle}
         >
           <StyledMultiSelectButton
             {...getButtonProps()}
             {...getInputProps()}
-            fullWidth={props.fullWidth}
-            minimal={props.minimal}
-            style={{ ...props.style }}
+            fullWidth={fullWidth}
+            minimal={minimal}
+            {...other}
           >
-            {renderValue(selectedItem)}
+            {downshiftRenderValue(selectedItem)}
           </StyledMultiSelectButton>
           {isOpen ? (
-            <Menu
-              style={props.menuStyle}
-              withComponent={<StyledMultiSelectMenu />}
-            >
-              {props.children.map((child, index) =>
+            <Menu style={menuStyle} withComponent={<StyledMultiSelectMenu />}>
+              {children.map((child, index) =>
                 React.cloneElement(child, {
                   ...getItemProps({
                     item: child,
