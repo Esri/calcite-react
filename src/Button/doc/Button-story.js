@@ -56,6 +56,12 @@ storiesOf('Button', module)
           </Button>
         </GuideExample>
 
+        <GuideExample label="extraSmall">
+          <Button extraSmall onClick={action('clicked')}>
+            extraSmall
+          </Button>
+        </GuideExample>
+
         <GuideExample label="small">
           <Button small onClick={action('clicked')}>
             small

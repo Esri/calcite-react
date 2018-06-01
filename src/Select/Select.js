@@ -11,20 +11,37 @@ import {
 } from './Select-styled';
 import Menu from '../Menu';
 
-const Select = props => {
+const Select = ({
+  children,
+  filterable,
+  fullWidth,
+  minimal,
+  style,
+  id,
+  _generatedId,
+  placeholder,
+  selectedItem,
+  selectedValue,
+  menuStyle,
+  wrapperStyle,
+  horizontal,
+  label,
+  onChange,
+  ...other
+}) => {
   function getAnchorElement(params) {
     const { getButtonProps, getInputProps, placeholder, selectedItem } = params;
 
-    if (props.filterable) {
+    if (filterable) {
       return (
         <StyledSelectInput
           onClick={getButtonProps().onClick}
           {...getInputProps({
             placeholder: placeholder,
-            style: { ...props.style },
-            id: props.id || props._generatedId,
-            fullWidth: props.fullWidth,
-            minimal: props.minimal
+            id: id || _generatedId,
+            fullWidth: fullWidth,
+            minimal: minimal,
+            ...other
           })}
         />
       );
@@ -33,14 +50,12 @@ const Select = props => {
       <StyledSelectButton
         {...getButtonProps()}
         {...getInputProps()}
-        fullWidth={props.fullWidth}
-        minimal={props.minimal}
-        style={{ ...props.style }}
-        id={props.id || props._generatedId}
+        fullWidth={fullWidth}
+        minimal={minimal}
+        id={id || _generatedId}
+        {...other}
       >
-        {itemToString(selectedItem)
-          ? itemToString(selectedItem)
-          : props.placeholder}
+        {itemToString(selectedItem) ? itemToString(selectedItem) : placeholder}
       </StyledSelectButton>
     );
   }
@@ -54,13 +69,13 @@ const Select = props => {
     return label;
   }
 
-  function onChange(selectedItem, downshiftProps) {
+  function downshiftOnChange(selectedItem, downshiftProps) {
     const value = selectedItem.props.value;
-    props.onChange(value, selectedItem);
+    onChange(value, selectedItem);
   }
 
   function _getItemFromValue(value) {
-    return props.children.filter(child => {
+    return children.filter(child => {
       return child.props.value === value;
     })[0];
   }
@@ -75,8 +90,8 @@ const Select = props => {
     // filter if they change the inputValue
     const inputMatchesSelection = inputValue === itemToString(selectedItem);
 
-    if (props.filterable && inputValue && !inputMatchesSelection) {
-      return matchSorter(props.children, inputValue, {
+    if (filterable && inputValue && !inputMatchesSelection) {
+      return matchSorter(children, inputValue, {
         keys: ['props.children', 'props.value']
       }).map((child, index) =>
         React.cloneElement(child, {
@@ -90,7 +105,7 @@ const Select = props => {
       );
     }
 
-    return props.children.map((child, index) =>
+    return children.map((child, index) =>
       React.cloneElement(child, {
         ...getItemProps({
           item: child,
@@ -105,10 +120,8 @@ const Select = props => {
   return (
     <Downshift
       itemToString={itemToString}
-      onChange={onChange}
-      selectedItem={
-        props.selectedItem || _getItemFromValue(props.selectedValue)
-      }
+      onChange={downshiftOnChange}
+      selectedItem={selectedItem || _getItemFromValue(selectedValue)}
       render={({
         getRootProps,
         getButtonProps,
@@ -121,20 +134,20 @@ const Select = props => {
       }) => (
         <StyledSelectWrapper
           {...getRootProps({ refKey: 'innerRef' })}
-          style={props.wrapperStyle}
+          style={wrapperStyle}
         >
           {getAnchorElement({
             getButtonProps,
             getInputProps,
-            placeholder: props.placeholder,
+            placeholder: placeholder,
             selectedItem,
-            labelEl: props.label,
-            horizontal: props.horizontal
+            labelEl: label,
+            horizontal: horizontal
           })}
           {isOpen ? (
             <Menu
-              style={props.menuStyle}
-              withComponent={<StyledSelectMenu fullWidth={props.fullWidth} />}
+              style={menuStyle}
+              withComponent={<StyledSelectMenu fullWidth={fullWidth} />}
             >
               {getMenuItems(
                 inputValue,

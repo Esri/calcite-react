@@ -80,13 +80,23 @@ class Search extends Component {
   };
 
   render() {
+    const {
+      minimal,
+      inputValue,
+      selectedItem,
+      onChange,
+      placeholder,
+      menuStyle,
+      ...other
+    } = this.props;
+
     return (
-      <StyledSearchContainer minimal={this.props.minimal}>
+      <StyledSearchContainer minimal={minimal}>
         <MagnifyIcon />
         <Downshift
-          inputValue={this.props.inputValue}
-          selectedItem={this.props.selectedItem}
-          onChange={this.props.onChange}
+          inputValue={inputValue}
+          selectedItem={selectedItem}
+          onChange={onChange}
           onUserAction={this.handleOnUserAction}
           render={({
             getRootProps,
@@ -98,22 +108,20 @@ class Search extends Component {
             <StyledSearchInputWrapper {...getRootProps({ refKey: 'innerRef' })}>
               <StyledSearch
                 {...getInputProps({
-                  placeholder: this.props.placeholder,
-                  minimal: this.props.minimal
+                  placeholder: placeholder,
+                  minimal: minimal,
+                  ...other
                 })}
               />
               {isOpen ? (
-                <Menu
-                  style={this.props.menuStyle}
-                  withComponent={<StyledSelectMenu />}
-                >
+                <Menu style={menuStyle} withComponent={<StyledSelectMenu />}>
                   {this.state.itemsToShow.map((item, index) => (
                     <MenuItem
                       key={item}
                       {...getItemProps({
                         item,
                         active: highlightedIndex === index,
-                        selected: this.props.selectedItem === item
+                        selected: selectedItem === item
                       })}
                     >
                       {item}

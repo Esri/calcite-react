@@ -115,6 +115,13 @@ const StyledButton = styled.button`
     `};
 
   ${props =>
+    props.extraSmall &&
+    css`
+      ${fontSize(-3)};
+      padding: 0.12rem 0.375rem;
+    `};
+
+  ${props =>
     props.small &&
     css`
       ${fontSize(-2)};
