@@ -18,6 +18,7 @@ const StyledModalOverlay = {
 };
 
 const StyledModalDialog = {
+  position: 'relative',
   top: 'auto',
   left: 'auto',
   right: 'auto',
