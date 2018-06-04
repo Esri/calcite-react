@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import theme from '../theme/CalciteTheme';
 
 const StyledModalOverlay = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   position: 'fixed',
   top: '0px',
   left: '0px',
@@ -15,12 +18,10 @@ const StyledModalOverlay = {
 };
 
 const StyledModalDialog = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  bottom: 'auto',
+  top: 'auto',
+  left: 'auto',
   right: 'auto',
-  transform: 'translate(-50%, -50%)',
+  bottom: 'auto',
   maxWidth: '80vw',
   maxHeight: '80vh',
   overflow: 'auto',
