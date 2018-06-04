@@ -9,6 +9,9 @@ const StyledMultiSelectWrapper = styled.div`
 let StyledMultiSelectButton = CalciteSelect.withComponent('button');
 StyledMultiSelectButton = StyledMultiSelectButton.extend`
   cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const StyledMultiSelectMenu = StyledMenu.extend`

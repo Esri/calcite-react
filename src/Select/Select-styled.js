@@ -9,12 +9,16 @@ const StyledSelectWrapper = styled.div`
 let StyledSelectInput = CalciteSelect.withComponent('input');
 StyledSelectInput = StyledSelectInput.extend`
   cursor: pointer;
+  text-overflow: ellipsis;
 `;
 
 let StyledSelectButton = CalciteSelect.withComponent('button');
 StyledSelectButton = StyledSelectButton.extend`
   cursor: pointer;
   text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const StyledSelectMenu = StyledMenu.extend`
