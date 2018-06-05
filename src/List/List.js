@@ -31,9 +31,10 @@ class List extends Component {
       listMaxHeight = '0px';
     } else if (this.listNode && this.props.nested) {
       listMaxHeight = 0;
-      this.listNode.childNodes.forEach(child => {
+      for (let i = 0; i < this.listNode.childNodes.length; i++) {
+        const child = this.listNode.childNodes[i];
         listMaxHeight = listMaxHeight + child.clientHeight;
-      });
+      }
       listMaxHeight = listMaxHeight + 'px';
     }
 

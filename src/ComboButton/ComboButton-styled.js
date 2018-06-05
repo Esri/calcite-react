@@ -11,6 +11,7 @@ const StyledComboButton = StyledButton.extend`
 `;
 
 const StyledComboButtonDropdown = StyledButton.extend`
+  height: 100%;
   fill: currentColor;
   padding-left: 0.3rem;
   padding-right: 0.3rem;

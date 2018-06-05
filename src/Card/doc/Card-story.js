@@ -55,7 +55,7 @@ storiesOf('Card', module).add(
           justifyContent: 'space-between'
         }}
       >
-        <Card bar="blue" style={{ margin: '0 5px' }}>
+        <Card bar="blue" style={{ margin: '0 5px', flex: '1 1 20%' }}>
           <CardContent>
             <CardTitle>Card with Colored Bar</CardTitle>
             <p>
@@ -66,7 +66,7 @@ storiesOf('Card', module).add(
             <Button clear>What Colors?</Button>
           </CardContent>
         </Card>
-        <Card bar="green" style={{ margin: '0 5px' }}>
+        <Card bar="green" style={{ margin: '0 5px', flex: '1 1 20%' }}>
           <CardContent>
             <CardTitle>Card with Colored Bar</CardTitle>
             <p>
@@ -77,7 +77,7 @@ storiesOf('Card', module).add(
             <Button clear>What Colors?</Button>
           </CardContent>
         </Card>
-        <Card bar="yellow" style={{ margin: '0 5px' }}>
+        <Card bar="yellow" style={{ margin: '0 5px', flex: '1 1 20%' }}>
           <CardContent>
             <CardTitle>Card with Colored Bar</CardTitle>
             <p>
@@ -88,7 +88,7 @@ storiesOf('Card', module).add(
             <Button clear>What Colors?</Button>
           </CardContent>
         </Card>
-        <Card bar="red" style={{ margin: '0 5px' }}>
+        <Card bar="red" style={{ margin: '0 5px', flex: '1 1 20%' }}>
           <CardContent>
             <CardTitle>Card with Colored Bar</CardTitle>
             <p>

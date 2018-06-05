@@ -41,7 +41,7 @@ const StyledDrawerNav = styled.nav`
   ${props =>
     props.right &&
     css`
-      left: unset;
+      left: auto;
       right: -${props => props.drawerWidth}px;
     `};
 
@@ -52,7 +52,7 @@ const StyledDrawerNav = styled.nav`
 
       ${props.right &&
         css`
-          left: unset;
+          left: auto;
           right: 0;
         `};
     `};
