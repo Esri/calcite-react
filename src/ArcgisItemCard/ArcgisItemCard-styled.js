@@ -11,14 +11,14 @@ const StyledItemCard = StyledCard.extend``;
 
 const StyledItemCardContent = StyledCardContent.extend`
   white-space: normal;
-  flex: 1 0 75%;
+  flex: 3 1 75px;
   padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
   box-sizing: border-box;
 `;
 
 const StyledItemCardImageWrap = StyledCardImageWrap.extend`
   display: flex;
-  flex: 1 0 25%;
+  flex: 1 1 25px;
   height: auto;
   align-items: center;
   justify-content: center;

@@ -88,7 +88,7 @@ class ComboButton extends Component {
           open={this.state.open}
           onRequestClose={this.closePopover}
           placement="bottom-end"
-          targetContainerStyles={{ display: 'block' }}
+          targetContainerStyles={{ display: 'block', height: '100%' }}
           targetEl={
             <StyledComboButtonDropdown
               onClick={this.togglePopover}

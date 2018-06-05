@@ -22,8 +22,9 @@ class CopyToClipboard extends Component {
   }
 
   fallbackCopyTextToClipboard = children => {
-    var textArea = document.createElement('textarea');
+    let textArea = document.createElement('textarea');
     textArea.value = children;
+    textArea.style.cssText = 'position: fixed; top: -9999px; left: -9999px;';
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
