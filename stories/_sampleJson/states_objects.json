@@ -1,0 +1,44 @@
+{
+  "states": [
+    {
+      "name": "Alabama",
+      "abbrev": "AL"
+    },
+    {
+      "name": "Alaska",
+      "abbrev": "AK"
+    },
+    {
+      "name": "American Samoa",
+      "abbrev": "AS"
+    },
+    {
+      "name": "Arizona",
+      "abbrev": "AZ"
+    },
+    {
+      "name": "Arkansas",
+      "abbrev": "AR"
+    },
+    {
+      "name": "California",
+      "abbrev": "CA"
+    },
+    {
+      "name": "Colorado",
+      "abbrev": "CO"
+    },
+    {
+      "name": "Connecticut",
+      "abbrev": "CT"
+    },
+    {
+      "name": "Delaware",
+      "abbrev": "DE"
+    },
+    {
+      "name": "District of Columbia",
+      "abbrev": "DC"
+    }
+  ]
+}

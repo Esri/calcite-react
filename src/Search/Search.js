@@ -25,6 +25,30 @@ class Search extends Component {
     this.userInputtedValue = '';
   }
 
+  itemToString = item => {
+    if (typeof item === 'string') {
+      return item;
+    }
+
+    if (this.props.dataSourceConfig) {
+      return item[this.props.dataSourceConfig.label];
+    }
+
+    return item.name;
+  };
+
+  itemToValue = item => {
+    if (typeof item === 'string') {
+      return item;
+    }
+
+    if (this.props.dataSourceConfig) {
+      return item[this.props.dataSourceConfig.value];
+    }
+
+    return item.value;
+  };
+
   handleOnUserAction = changes => {
     let selectedItemVal = changes.selectedItem || this.props.selectedItem || '';
     let inputValue = this.props.inputValue || '';
@@ -46,18 +70,22 @@ class Search extends Component {
         this.userInputtedValue = changes.inputValue;
       }
     }
+
+    // object or string?
     newItemsToShow = this.userInputtedValue
-      ? matchSorter(this.props.items, this.userInputtedValue)
+      ? matchSorter(this.props.items, this.userInputtedValue, {
+          keys: [this.itemToString]
+        })
       : this.props.items;
     if (
       changes.hasOwnProperty('highlightedIndex') &&
       (changes.type === Downshift.stateChangeTypes.keyDownArrowUp ||
         changes.type === Downshift.stateChangeTypes.keyDownArrowDown)
     ) {
-      inputValue = newItemsToShow[changes.highlightedIndex];
+      inputValue = this.itemToString(newItemsToShow[changes.highlightedIndex]);
     }
     if (isClosingMenu) {
-      inputValue = selectedItemVal;
+      inputValue = this.itemToString(selectedItemVal);
       this.userInputtedValue = selectedItemVal;
     }
 
@@ -94,6 +122,7 @@ class Search extends Component {
       <StyledSearchContainer minimal={minimal}>
         <MagnifyIcon />
         <Downshift
+          itemToString={this.itemToString}
           inputValue={inputValue}
           selectedItem={selectedItem}
           onChange={onChange}
@@ -117,14 +146,14 @@ class Search extends Component {
                 <Menu style={menuStyle} withComponent={<StyledSelectMenu />}>
                   {this.state.itemsToShow.map((item, index) => (
                     <MenuItem
-                      key={item}
+                      key={this.itemToValue(item)}
                       {...getItemProps({
                         item,
                         active: highlightedIndex === index,
                         selected: selectedItem === item
                       })}
                     >
-                      {item}
+                      {this.itemToString(item)}
                     </MenuItem>
                   ))}
                 </Menu>
@@ -144,7 +173,7 @@ Search.propTypes = {
   /** Text in the input */
   inputValue: PropTypes.string,
   /** The selected item */
-  selectedItem: PropTypes.string,
+  selectedItem: PropTypes.any,
   /** Text for the placeholder property on the input */
   placeholder: PropTypes.string,
   /** Function called when an item is selected */
