@@ -27,6 +27,27 @@ const StyledButton = styled.button`
   }
 
   ${props =>
+    props.isAdornment &&
+    css`
+      margin: ${props => unitCalc(props.theme.baseline, 6, '/')} 0 0 0;
+
+      ${props =>
+        props.minimal &&
+        css`
+          background: none;
+          color: ${props => props.theme.linkColor};
+          border: none;
+          border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
+
+          &:hover {
+            color: ${props => props.theme.linkHover};
+            background: none;
+            text-decoration: underline;
+          }
+        `};
+    `};
+
+  ${props =>
     props.disabled &&
     css`
       cursor: not-allowed;

@@ -4,6 +4,7 @@ import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 
 import GuideExample from '../../../stories/GuideExample';
+import CalciteTheme from '../../theme/CalciteTheme';
 import doc from './Button.md';
 import Button, { ButtonGroup } from '../';
 
@@ -38,13 +39,19 @@ storiesOf('Button', module)
           </Button>
         </GuideExample>
 
-        <GuideExample label="clearWhite">
+        <GuideExample
+          label="clearWhite"
+          style={{ background: CalciteTheme.palette.offBlack }}
+        >
           <Button clearWhite onClick={action('clicked')}>
             clear-white
           </Button>
         </GuideExample>
 
-        <GuideExample label="white">
+        <GuideExample
+          label="white"
+          style={{ background: CalciteTheme.palette.offBlack }}
+        >
           <Button white onClick={action('clicked')}>
             white
           </Button>

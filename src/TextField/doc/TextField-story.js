@@ -7,7 +7,14 @@ import doc from './TextField.md';
 
 import TextField from '../';
 
-import { FormControl, FormHelperText, FormControlLabel } from '../../Form';
+import Form, {
+  FormControl,
+  FormHelperText,
+  FormControlLabel
+} from '../../Form';
+import Button from '../../Button';
+
+import AccountIcon from 'mdi-react/AccountIcon';
 
 storiesOf('TextField', module)
   .add(
@@ -44,6 +51,29 @@ storiesOf('TextField', module)
             />
           </FormControl>
         </GuideExample>
+        <GuideExample label="with adornments">
+          <Form>
+            <FormControl>
+              <TextField
+                placeholder="Username"
+                rightAdornment={<Button>Yay</Button>}
+              />
+            </FormControl>
+            <FormControl>
+              <TextField
+                value="Dr. Leonard McCoy"
+                leftAdornment={<AccountIcon />}
+              />
+            </FormControl>
+            <FormControl success>
+              <TextField
+                value="500.00"
+                leftAdornment="$"
+                rightAdornment={<Button>Submit</Button>}
+              />
+            </FormControl>
+          </Form>
+        </GuideExample>
       </div>
     ))
   )
@@ -73,6 +103,16 @@ storiesOf('TextField', module)
         <GuideExample>
           <FormControl>
             <TextField minimal value="James T Kirk" />
+          </FormControl>
+        </GuideExample>
+        <GuideExample>
+          <FormControl>
+            <TextField
+              minimal
+              value="500.00"
+              leftAdornment="$"
+              rightAdornment={<Button>Submit</Button>}
+            />
           </FormControl>
         </GuideExample>
       </div>

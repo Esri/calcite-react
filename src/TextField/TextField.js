@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyledTextField, StyledTextArea } from './TextField-styled';
+import {
+  StyledTextField,
+  StyledTextArea,
+  StyledTextFieldAdornmentWrapper,
+  StyledAdornmentWrapper
+} from './TextField-styled';
+
+import Button from '../Button';
 
 const TextField = ({
   children,
@@ -16,38 +23,67 @@ const TextField = ({
   _generatedId,
   name,
   onChange,
+  leftAdornment,
+  rightAdornment,
   ...other
 }) => {
-  const textField = (
-    <StyledTextField
-      type={type}
-      value={value}
-      error={error}
-      success={success}
-      search={search}
-      fullWidth={fullWidth}
-      minimal={minimal}
-      id={id || _generatedId}
-      onChange={onChange}
-      {...other}
-    />
-  );
+  const getAdornment = function(adornment) {
+    if (adornment && adornment.type === Button) {
+      return React.cloneElement(adornment, {
+        ...adornment.props,
+        minimal,
+        isAdornment: true
+      });
+    }
 
-  const textArea = (
-    <StyledTextArea
-      value={value}
-      error={error}
-      success={success}
-      search={search}
-      fullWidth={fullWidth}
-      minimal={minimal}
-      id={id || _generatedId}
-      onChange={onChange}
-      {...other}
-    />
-  );
+    return (
+      adornment && (
+        <StyledAdornmentWrapper minimal={minimal}>
+          {adornment}
+        </StyledAdornmentWrapper>
+      )
+    );
+  };
 
-  return type === 'textarea' ? textArea : textField;
+  let TextFieldArea = StyledTextField;
+
+  if (type === 'textarea') {
+    TextFieldArea = StyledTextArea;
+  }
+
+  if (!leftAdornment && !rightAdornment) {
+    return (
+      <TextFieldArea
+        value={value}
+        error={error}
+        success={success}
+        search={search}
+        fullWidth={fullWidth}
+        minimal={minimal}
+        id={id || _generatedId}
+        onChange={onChange}
+        {...other}
+      />
+    );
+  }
+
+  return (
+    <StyledTextFieldAdornmentWrapper>
+      {getAdornment(leftAdornment)}
+      <TextFieldArea
+        value={value}
+        error={error}
+        success={success}
+        search={search}
+        fullWidth={fullWidth}
+        minimal={minimal}
+        id={id || _generatedId}
+        onChange={onChange}
+        {...other}
+      />
+      {getAdornment(rightAdornment)}
+    </StyledTextFieldAdornmentWrapper>
+  );
 };
 
 TextField.propTypes = {
