@@ -176,6 +176,8 @@ Search.propTypes = {
   selectedItem: PropTypes.any,
   /** Text for the placeholder property on the input */
   placeholder: PropTypes.string,
+  /** An object used to map properties to name and value of items (only applies if `items` is an array of objects) */
+  dataSourceConfig: PropTypes.object,
   /** Function called when an item is selected */
   onChange: PropTypes.func,
   /** Function called when the input value is changed, items dropdown hides/shows, hovers an item, or clicks on an item */
@@ -189,7 +191,11 @@ Search.propTypes = {
 };
 
 Search.defaultProps = {
-  placeholder: 'Search...'
+  placeholder: 'Search...',
+  dataSourceConfig: {
+    label: 'label',
+    value: 'value'
+  }
 };
 
 export default Search;
