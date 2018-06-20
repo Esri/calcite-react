@@ -14,10 +14,7 @@ StyledMultiSelectButton = StyledMultiSelectButton.extend`
   text-overflow: ellipsis;
 `;
 
-const StyledMultiSelectMenu = StyledMenu.extend`
-  position: absolute;
-  left: 0;
-`;
+const StyledMultiSelectMenu = StyledMenu.extend``;
 
 export {
   StyledMultiSelectWrapper,

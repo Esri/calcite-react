@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Downshift from 'downshift';
+import { Manager, Target, Popper } from 'react-popper';
 
 import {
   StyledMultiSelectWrapper,
@@ -8,6 +9,11 @@ import {
   StyledMultiSelectMenu
 } from './MultiSelect-styled';
 import Menu from '../Menu';
+
+const popperStyle = {
+  transition: `opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)`,
+  zIndex: 2000
+};
 
 const Select = ({
   children,
@@ -60,49 +66,58 @@ const Select = ({
   }
 
   return (
-    <Downshift
-      itemToString={itemToString}
-      onChange={downshiftOnChange}
-      selectedItem={_getItemsFromValues(selectedValues)}
-      render={({
-        getRootProps,
-        getButtonProps,
-        getInputProps,
-        getItemProps,
-        isOpen,
-        selectedItem,
-        highlightedIndex
-      }) => (
-        <StyledMultiSelectWrapper
-          {...getRootProps({ refKey: 'innerRef' })}
-          style={wrapperStyle}
-        >
-          <StyledMultiSelectButton
-            {...getButtonProps()}
-            {...getInputProps()}
-            fullWidth={fullWidth}
-            minimal={minimal}
-            {...other}
+    <Manager>
+      <Downshift
+        itemToString={itemToString}
+        onChange={downshiftOnChange}
+        selectedItem={_getItemsFromValues(selectedValues)}
+        render={({
+          getRootProps,
+          getButtonProps,
+          getInputProps,
+          getItemProps,
+          isOpen,
+          selectedItem,
+          highlightedIndex
+        }) => (
+          <StyledMultiSelectWrapper
+            {...getRootProps({ refKey: 'innerRef' })}
+            style={wrapperStyle}
           >
-            {downshiftRenderValue(selectedItem)}
-          </StyledMultiSelectButton>
-          {isOpen ? (
-            <Menu style={menuStyle} withComponent={<StyledMultiSelectMenu />}>
-              {children.map((child, index) =>
-                React.cloneElement(child, {
-                  ...getItemProps({
-                    item: child,
-                    active: highlightedIndex === index,
-                    selected: selectedItem.indexOf(child) !== -1
-                  }),
-                  key: index
-                })
-              )}
-            </Menu>
-          ) : null}
-        </StyledMultiSelectWrapper>
-      )}
-    />
+            <Target>
+              <StyledMultiSelectButton
+                {...getButtonProps()}
+                {...getInputProps()}
+                fullWidth={fullWidth}
+                minimal={minimal}
+                {...other}
+              >
+                {downshiftRenderValue(selectedItem)}
+              </StyledMultiSelectButton>
+            </Target>
+            {isOpen ? (
+              <Popper style={popperStyle} placement={'bottom-start'}>
+                <Menu
+                  style={menuStyle}
+                  withComponent={<StyledMultiSelectMenu />}
+                >
+                  {children.map((child, index) =>
+                    React.cloneElement(child, {
+                      ...getItemProps({
+                        item: child,
+                        active: highlightedIndex === index,
+                        selected: selectedItem.indexOf(child) !== -1
+                      }),
+                      key: index
+                    })
+                  )}
+                </Menu>
+              </Popper>
+            ) : null}
+          </StyledMultiSelectWrapper>
+        )}
+      />
+    </Manager>
   );
 };
 
