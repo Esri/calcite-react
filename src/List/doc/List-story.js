@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -69,8 +70,11 @@ storiesOf('List', module)
   )
   .add(
     'Controlled',
-    withInfo(doc)(() => {
-      class ListStateExample extends Component {
+    withInfo({
+      text: doc,
+      propTables: [List, ListHeader, ListItem, ListItemTitle, ListItemSubtitle]
+    })(() => {
+      class ListStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -132,7 +136,10 @@ storiesOf('List', module)
         }
       }
 
-      return <ListStateExample />;
+      ListStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <ListStory />;
     })
   )
   .add(

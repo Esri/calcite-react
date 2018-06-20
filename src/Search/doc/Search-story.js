@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -13,8 +14,11 @@ import statesJson2 from '../../../stories/_sampleJson/states_objects.json';
 storiesOf('Search', module)
   .add(
     'Basic',
-    withInfo(doc)(() => {
-      class SearchStateExample extends Component {
+    withInfo({
+      text: doc,
+      propTables: [Search]
+    })(() => {
+      class SearchStory extends Component {
         items = [...statesJson.states];
 
         constructor(props) {
@@ -77,14 +81,20 @@ storiesOf('Search', module)
         }
       }
 
-      return <SearchStateExample />;
+      SearchStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <SearchStory />;
     })
   )
 
   .add(
     'Array (Objects)',
-    withInfo(doc)(() => {
-      class SearchStateExample extends Component {
+    withInfo({
+      text: doc,
+      propTables: [Search]
+    })(() => {
+      class SearchStory extends Component {
         items = [...statesJson2.states];
 
         constructor(props) {
@@ -154,6 +164,9 @@ storiesOf('Search', module)
         }
       }
 
-      return <SearchStateExample />;
+      SearchStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <SearchStory />;
     })
   );
