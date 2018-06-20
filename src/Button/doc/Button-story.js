@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
@@ -137,8 +138,11 @@ storiesOf('Button', module)
   )
   .add(
     'Toggle Button Group',
-    withInfo(doc)(() => {
-      class ToggleGroupExample extends Component {
+    withInfo({
+      text: doc,
+      propTables: [ButtonGroup]
+    })(() => {
+      class ButtonGroupStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -202,7 +206,10 @@ storiesOf('Button', module)
         }
       }
 
-      return <ToggleGroupExample />;
+      ButtonGroupStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <ButtonGroupStory />;
     })
   )
   .add(

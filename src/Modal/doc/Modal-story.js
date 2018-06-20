@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -42,8 +43,11 @@ storiesOf('Modal', module)
   )
   .add(
     'Open Modal Button',
-    withInfo(doc)(() => {
-      class ModalStateExample extends Component {
+    withInfo({
+      text: doc,
+      propTables: [Modal, ModalActions]
+    })(() => {
+      class ModalStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -96,6 +100,9 @@ storiesOf('Modal', module)
         }
       }
 
-      return <ModalStateExample />;
+      ModalStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <ModalStory />;
     })
   );

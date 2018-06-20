@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -11,8 +12,11 @@ import MultiSelect from '../';
 storiesOf('MultiSelect', module)
   .add(
     'Controlled MultiSelect',
-    withInfo(doc)(() => {
-      class ControlledMultiSelect extends Component {
+    withInfo({
+      text: doc,
+      propTables: [MultiSelect]
+    })(() => {
+      class MultiSelectStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -43,13 +47,20 @@ storiesOf('MultiSelect', module)
           );
         }
       }
-      return <ControlledMultiSelect />;
+
+      MultiSelectStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <MultiSelectStory />;
     })
   )
   .add(
     'Custom Label Renderer',
-    withInfo(doc)(() => {
-      class CustomLabelMultiSelect extends Component {
+    withInfo({
+      text: doc,
+      propTables: [MultiSelect]
+    })(() => {
+      class MultiSelectStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -94,13 +105,20 @@ storiesOf('MultiSelect', module)
           );
         }
       }
-      return <CustomLabelMultiSelect />;
+
+      MultiSelectStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <MultiSelectStory />;
     })
   )
   .add(
     'Minimal',
-    withInfo(doc)(() => {
-      class MinimalMultiSelect extends Component {
+    withInfo({
+      text: doc,
+      propTables: [MultiSelect]
+    })(() => {
+      class MultiSelectStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -132,6 +150,10 @@ storiesOf('MultiSelect', module)
           );
         }
       }
-      return <MinimalMultiSelect />;
+
+      MultiSelectStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <MultiSelectStory />;
     })
   );
