@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -10,8 +11,11 @@ import DatePicker, { DateRangePicker } from '../';
 storiesOf('DatePicker', module)
   .add(
     'Single Date Picker',
-    withInfo(doc)(() => {
-      class ControlledDatePicker extends Component {
+    withInfo({
+      text: doc,
+      propTables: [DatePicker]
+    })(() => {
+      class DatePickerStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -47,13 +51,20 @@ storiesOf('DatePicker', module)
           );
         }
       }
-      return <ControlledDatePicker />;
+
+      DatePickerStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <DatePickerStory />;
     })
   )
   .add(
     'Date Range Picker',
-    withInfo(doc)(() => {
-      class ControlledDateRangePicker extends Component {
+    withInfo({
+      text: doc,
+      propTables: [DateRangePicker]
+    })(() => {
+      class DatePickerStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -94,6 +105,10 @@ storiesOf('DatePicker', module)
           );
         }
       }
-      return <ControlledDateRangePicker />;
+
+      DatePickerStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <DatePickerStory />;
     })
   );
