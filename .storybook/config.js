@@ -1,6 +1,7 @@
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import { setDefaults } from '@storybook/addon-info';
+import { setOptions } from '@storybook/addon-options';
 // import { checkA11y } from '@storybook/addon-a11y';
 
 import Container from '../stories/Container';
@@ -9,6 +10,12 @@ import PropTable from '../stories/info-addon/PropTable';
 
 addDecorator(story => <Container story={story} />);
 // addDecorator(checkA11y);
+
+setOptions({
+  name: 'Calcite React',
+  url: 'https://github.com/ArcGIS/calcite-react',
+  sortStoriesByKind: true
+});
 
 setDefaults({
   header: true,
