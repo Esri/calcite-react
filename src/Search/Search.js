@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
+import { Manager, Target, Popper } from 'react-popper';
 import matchSorter from 'match-sorter';
 
 import {
   StyledSearchContainer,
   StyledSearchInputWrapper,
-  StyledSearch
+  StyledSearch,
+  ManagerStyle,
+  PopperStyle
 } from './Search-styled';
 
 import { StyledSelectMenu } from '../Select/Select-styled';
@@ -121,46 +124,59 @@ class Search extends Component {
     return (
       <StyledSearchContainer minimal={minimal}>
         <MagnifyIcon />
-        <Downshift
-          itemToString={this.itemToString}
-          inputValue={inputValue}
-          selectedItem={selectedItem}
-          onChange={onChange}
-          onUserAction={this.handleOnUserAction}
-          render={({
-            getRootProps,
-            getInputProps,
-            getItemProps,
-            highlightedIndex,
-            isOpen
-          }) => (
-            <StyledSearchInputWrapper {...getRootProps({ refKey: 'innerRef' })}>
-              <StyledSearch
-                {...getInputProps({
-                  placeholder: placeholder,
-                  minimal: minimal,
-                  ...other
-                })}
-              />
-              {isOpen ? (
-                <Menu style={menuStyle} withComponent={<StyledSelectMenu />}>
-                  {this.state.itemsToShow.map((item, index) => (
-                    <MenuItem
-                      key={this.itemToValue(item)}
-                      {...getItemProps({
-                        item,
-                        active: highlightedIndex === index,
-                        selected: selectedItem === item
-                      })}
+        <Manager style={ManagerStyle}>
+          <Downshift
+            itemToString={this.itemToString}
+            inputValue={inputValue}
+            selectedItem={selectedItem}
+            onChange={onChange}
+            onUserAction={this.handleOnUserAction}
+            render={({
+              getRootProps,
+              getInputProps,
+              getItemProps,
+              highlightedIndex,
+              isOpen
+            }) => (
+              <StyledSearchInputWrapper
+                {...getRootProps({ refKey: 'innerRef' })}
+              >
+                <Target>
+                  <StyledSearch
+                    {...getInputProps({
+                      placeholder: placeholder,
+                      minimal: minimal,
+                      ...other
+                    })}
+                  />
+                </Target>
+
+                {isOpen ? (
+                  <Popper style={PopperStyle} placement={'bottom-start'}>
+                    <Menu
+                      style={menuStyle}
+                      withComponent={<StyledSelectMenu />}
                     >
-                      {this.itemToString(item)}
-                    </MenuItem>
-                  ))}
-                </Menu>
-              ) : null}
-            </StyledSearchInputWrapper>
-          )}
-        />
+                      {this.state.itemsToShow.map((item, index) => (
+                        <MenuItem
+                          key={this.itemToValue(item)}
+                          {...getItemProps({
+                            item,
+                            active: highlightedIndex === index,
+                            selected: selectedItem === item
+                          })}
+                        >
+                          {this.itemToString(item)}
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </Popper>
+                ) : null}
+              </StyledSearchInputWrapper>
+            )}
+          />
+        </Manager>
+
         {this.getClearSearchIcon()}
       </StyledSearchContainer>
     );

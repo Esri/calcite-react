@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { CalciteSelect } from '../utils/commonElements';
 import { StyledMenu } from '../Menu/Menu-styled';
+import { transition } from '../utils/helpers';
 
 const StyledMultiSelectWrapper = styled.div`
   position: relative;
@@ -14,13 +15,16 @@ StyledMultiSelectButton = StyledMultiSelectButton.extend`
   text-overflow: ellipsis;
 `;
 
-const StyledMultiSelectMenu = StyledMenu.extend`
-  position: absolute;
-  left: 0;
-`;
+const StyledMultiSelectMenu = StyledMenu.extend``;
+
+const PopperStyle = {
+  transition: `opacity ${transition()}`,
+  zIndex: 2000
+};
 
 export {
   StyledMultiSelectWrapper,
   StyledMultiSelectButton,
-  StyledMultiSelectMenu
+  StyledMultiSelectMenu,
+  PopperStyle
 };

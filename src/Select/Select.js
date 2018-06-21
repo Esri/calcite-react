@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Downshift from 'downshift';
+import { Manager, Target, Popper } from 'react-popper';
 import matchSorter from 'match-sorter';
 
 import {
   StyledSelectWrapper,
   StyledSelectButton,
   StyledSelectInput,
-  StyledSelectMenu
+  StyledSelectMenu,
+  PopperStyle
 } from './Select-styled';
 import Menu from '../Menu';
 
@@ -118,48 +120,54 @@ const Select = ({
   }
 
   return (
-    <Downshift
-      itemToString={itemToString}
-      onChange={downshiftOnChange}
-      selectedItem={selectedItem || _getItemFromValue(selectedValue)}
-      render={({
-        getRootProps,
-        getButtonProps,
-        getInputProps,
-        getItemProps,
-        isOpen,
-        selectedItem,
-        highlightedIndex,
-        inputValue
-      }) => (
-        <StyledSelectWrapper
-          {...getRootProps({ refKey: 'innerRef' })}
-          style={wrapperStyle}
-        >
-          {getAnchorElement({
-            getButtonProps,
-            getInputProps,
-            placeholder: placeholder,
-            selectedItem,
-            labelEl: label,
-            horizontal: horizontal
-          })}
-          {isOpen ? (
-            <Menu
-              style={menuStyle}
-              withComponent={<StyledSelectMenu fullWidth={fullWidth} />}
-            >
-              {getMenuItems(
-                inputValue,
-                getItemProps,
-                highlightedIndex,
-                selectedItem
-              )}
-            </Menu>
-          ) : null}
-        </StyledSelectWrapper>
-      )}
-    />
+    <Manager>
+      <Downshift
+        itemToString={itemToString}
+        onChange={downshiftOnChange}
+        selectedItem={selectedItem || _getItemFromValue(selectedValue)}
+        render={({
+          getRootProps,
+          getButtonProps,
+          getInputProps,
+          getItemProps,
+          isOpen,
+          selectedItem,
+          highlightedIndex,
+          inputValue
+        }) => (
+          <StyledSelectWrapper
+            {...getRootProps({ refKey: 'innerRef' })}
+            style={wrapperStyle}
+          >
+            <Target>
+              {getAnchorElement({
+                getButtonProps,
+                getInputProps,
+                placeholder: placeholder,
+                selectedItem,
+                labelEl: label,
+                horizontal: horizontal
+              })}
+            </Target>
+            {isOpen ? (
+              <Popper style={PopperStyle} placement={'bottom-start'}>
+                <Menu
+                  style={menuStyle}
+                  withComponent={<StyledSelectMenu fullWidth={fullWidth} />}
+                >
+                  {getMenuItems(
+                    inputValue,
+                    getItemProps,
+                    highlightedIndex,
+                    selectedItem
+                  )}
+                </Menu>
+              </Popper>
+            ) : null}
+          </StyledSelectWrapper>
+        )}
+      />
+    </Manager>
   );
 };
 
