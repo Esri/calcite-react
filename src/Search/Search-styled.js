@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { CalciteInput } from '../utils/commonElements';
-import { fontSize, unitCalc } from '../utils/helpers';
+import { fontSize, unitCalc, transition } from '../utils/helpers';
 
 const StyledSearchContainer = styled.div`
   display: flex;
@@ -75,4 +75,19 @@ const StyledSearch = CalciteInput.extend`
     `};
 `;
 
-export { StyledSearchContainer, StyledSearchInputWrapper, StyledSearch };
+const ManagerStyle = {
+  width: '100%'
+};
+
+const PopperStyle = {
+  transition: `opacity ${transition()}`,
+  zIndex: 2000
+};
+
+export {
+  StyledSearchContainer,
+  StyledSearchInputWrapper,
+  StyledSearch,
+  ManagerStyle,
+  PopperStyle
+};

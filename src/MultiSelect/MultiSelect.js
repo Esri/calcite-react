@@ -6,14 +6,10 @@ import { Manager, Target, Popper } from 'react-popper';
 import {
   StyledMultiSelectWrapper,
   StyledMultiSelectButton,
-  StyledMultiSelectMenu
+  StyledMultiSelectMenu,
+  PopperStyle
 } from './MultiSelect-styled';
 import Menu from '../Menu';
-
-const popperStyle = {
-  transition: `opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)`,
-  zIndex: 2000
-};
 
 const Select = ({
   children,
@@ -96,7 +92,7 @@ const Select = ({
               </StyledMultiSelectButton>
             </Target>
             {isOpen ? (
-              <Popper style={popperStyle} placement={'bottom-start'}>
+              <Popper style={PopperStyle} placement={'bottom-start'}>
                 <Menu
                   style={menuStyle}
                   withComponent={<StyledMultiSelectMenu />}

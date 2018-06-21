@@ -7,7 +7,9 @@ import matchSorter from 'match-sorter';
 import {
   StyledSearchContainer,
   StyledSearchInputWrapper,
-  StyledSearch
+  StyledSearch,
+  ManagerStyle,
+  PopperStyle
 } from './Search-styled';
 
 import { StyledSelectMenu } from '../Select/Select-styled';
@@ -15,16 +17,6 @@ import Menu, { MenuItem } from '../Menu';
 
 import MagnifyIcon from '../icons/MagnifyIcon';
 import CloseCircleIcon from '../icons/CloseCircleIcon';
-
-const styles = {
-  managerStyle: {
-    width: '100%'
-  },
-  popperStyle: {
-    transition: `opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)`,
-    zIndex: 2000
-  }
-};
 
 class Search extends Component {
   constructor(props) {
@@ -132,7 +124,7 @@ class Search extends Component {
     return (
       <StyledSearchContainer minimal={minimal}>
         <MagnifyIcon />
-        <Manager style={styles.managerStyle}>
+        <Manager style={ManagerStyle}>
           <Downshift
             itemToString={this.itemToString}
             inputValue={inputValue}
@@ -160,7 +152,7 @@ class Search extends Component {
                 </Target>
 
                 {isOpen ? (
-                  <Popper style={styles.popperStyle} placement={'bottom-start'}>
+                  <Popper style={PopperStyle} placement={'bottom-start'}>
                     <Menu
                       style={menuStyle}
                       withComponent={<StyledSelectMenu />}
