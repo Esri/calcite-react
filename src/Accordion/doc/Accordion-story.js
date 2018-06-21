@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -15,8 +16,16 @@ import { CalciteP } from '../../Elements';
 storiesOf('Accordion', module)
   .add(
     'Controlled Accordion',
-    withInfo(doc)(() => {
-      class AccordionExample extends Component {
+    withInfo({
+      text: doc,
+      propTables: [
+        Accordion,
+        AccordionSection,
+        AccordionTitle,
+        AccordionContent
+      ]
+    })(() => {
+      class AccordionStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -69,7 +78,11 @@ storiesOf('Accordion', module)
           );
         }
       }
-      return <AccordionExample />;
+
+      AccordionStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <AccordionStory />;
     })
   )
   .add(

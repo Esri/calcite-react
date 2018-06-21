@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -183,8 +184,11 @@ storiesOf('Stepper', module)
   )
   .add(
     'Controlled Stepper',
-    withInfo(doc)(() => {
-      class ControlledStepperExample extends Component {
+    withInfo({
+      text: doc,
+      propTables: [Stepper, Step, StepTitle, StepDescription]
+    })(() => {
+      class StepperStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -244,6 +248,9 @@ storiesOf('Stepper', module)
         }
       }
 
-      return <ControlledStepperExample />;
+      StepperStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <StepperStory />;
     })
   );

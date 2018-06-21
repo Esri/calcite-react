@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -11,8 +12,11 @@ import Menu, { MenuTitle, MenuItem } from '../../Menu';
 
 storiesOf('Popover', module).add(
   'Basic',
-  withInfo(doc)(() => {
-    class PopoverStateExample extends Component {
+  withInfo({
+    text: doc,
+    propTables: [Popover]
+  })(() => {
+    class PopoverStory extends Component {
       constructor(props) {
         super(props);
         this.state = {
@@ -57,6 +61,9 @@ storiesOf('Popover', module).add(
       }
     }
 
-    return <PopoverStateExample />;
+    PopoverStory.propTypes = {
+      isStory: PropTypes.bool
+    };
+    return <PopoverStory />;
   })
 );

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
@@ -42,8 +43,11 @@ storiesOf('Select', module)
   )
   .add(
     'Controlled Select',
-    withInfo(doc)(() => {
-      class ControlledSelect extends Component {
+    withInfo({
+      text: doc,
+      propTables: [Select]
+    })(() => {
+      class SelectStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -86,13 +90,20 @@ storiesOf('Select', module)
           );
         }
       }
-      return <ControlledSelect />;
+
+      SelectStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <SelectStory />;
     })
   )
   .add(
     'Filterable',
-    withInfo(doc)(() => {
-      class FilterableSelect extends Component {
+    withInfo({
+      text: doc,
+      propTables: [Select]
+    })(() => {
+      class SelectStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -131,7 +142,11 @@ storiesOf('Select', module)
           );
         }
       }
-      return <FilterableSelect />;
+
+      SelectStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <SelectStory />;
     })
   )
   .add(

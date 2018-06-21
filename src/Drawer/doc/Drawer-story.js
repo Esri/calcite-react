@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -11,8 +12,11 @@ import Button from '../../Button';
 
 storiesOf('Drawer', module).add(
   'Basic',
-  withInfo(doc)(() => {
-    class DrawerExample extends Component {
+  withInfo({
+    text: doc,
+    propTables: [Drawer]
+  })(() => {
+    class DrawerStory extends Component {
       constructor(props) {
         super(props);
         this.state = {
@@ -66,6 +70,9 @@ storiesOf('Drawer', module).add(
       }
     }
 
-    return <DrawerExample />;
+    DrawerStory.propTypes = {
+      isStory: PropTypes.bool
+    };
+    return <DrawerStory />;
   })
 );

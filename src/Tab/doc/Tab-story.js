@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -87,8 +88,11 @@ storiesOf('Tabs', module)
   )
   .add(
     'Controlled Tabs',
-    withInfo(doc)(() => {
-      class ControlledTab extends Component {
+    withInfo({
+      text: doc,
+      propTables: [Tabs, TabNav, TabTitle, TabContents, TabSection]
+    })(() => {
+      class TabStory extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -122,6 +126,10 @@ storiesOf('Tabs', module)
           );
         }
       }
-      return <ControlledTab />;
+
+      TabStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <TabStory />;
     })
   );

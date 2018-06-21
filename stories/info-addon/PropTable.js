@@ -43,6 +43,10 @@ export default function PropTable(props) {
     return null;
   }
 
+  if (type && type.propTypes && type.propTypes.isStory) {
+    return <small>Component used in story define controlled examples</small>;
+  }
+
   if (!propDefinitions.length) {
     return <small>No propTypes defined!</small>;
   }

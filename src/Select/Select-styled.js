@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { CalciteSelect } from '../utils/commonElements';
 import { StyledMenu } from '../Menu/Menu-styled';
+import { transition } from '../utils/helpers';
 
 const StyledSelectWrapper = styled.div`
   position: relative;
@@ -22,9 +23,6 @@ StyledSelectButton = StyledSelectButton.extend`
 `;
 
 const StyledSelectMenu = StyledMenu.extend`
-  position: absolute;
-  left: 0;
-
   ${props =>
     props.fullWidth &&
     css`
@@ -32,9 +30,15 @@ const StyledSelectMenu = StyledMenu.extend`
     `};
 `;
 
+const PopperStyle = {
+  transition: `opacity ${transition()}`,
+  zIndex: 2000
+};
+
 export {
   StyledSelectWrapper,
   StyledSelectInput,
   StyledSelectButton,
-  StyledSelectMenu
+  StyledSelectMenu,
+  PopperStyle
 };
