@@ -9,6 +9,7 @@ import {
   StyledSelectButton,
   StyledSelectInput,
   StyledSelectMenu,
+  PopperManagerStyles,
   PopperStyle
 } from './Select-styled';
 import Menu from '../Menu';
@@ -43,6 +44,7 @@ const Select = ({
             id: id || _generatedId,
             fullWidth: fullWidth,
             minimal: minimal,
+            style: style,
             ...other
           })}
         />
@@ -55,6 +57,7 @@ const Select = ({
         fullWidth={fullWidth}
         minimal={minimal}
         id={id || _generatedId}
+        style={style}
         {...other}
       >
         {itemToString(selectedItem) ? itemToString(selectedItem) : placeholder}
@@ -119,8 +122,14 @@ const Select = ({
     );
   }
 
+  function getFullWidthStyle() {
+    if (fullWidth) {
+      return { minWidth: '100%' };
+    }
+  }
+
   return (
-    <Manager>
+    <Manager style={{ ...PopperManagerStyles, ...wrapperStyle }}>
       <Downshift
         itemToString={itemToString}
         onChange={downshiftOnChange}
@@ -135,10 +144,7 @@ const Select = ({
           highlightedIndex,
           inputValue
         }) => (
-          <StyledSelectWrapper
-            {...getRootProps({ refKey: 'innerRef' })}
-            style={wrapperStyle}
-          >
+          <StyledSelectWrapper {...getRootProps({ refKey: 'innerRef' })}>
             <Target>
               {getAnchorElement({
                 getButtonProps,
@@ -150,7 +156,10 @@ const Select = ({
               })}
             </Target>
             {isOpen ? (
-              <Popper style={PopperStyle} placement={'bottom-start'}>
+              <Popper
+                style={{ ...getFullWidthStyle(), ...PopperStyle }}
+                placement={'bottom-start'}
+              >
                 <Menu
                   style={menuStyle}
                   withComponent={<StyledSelectMenu fullWidth={fullWidth} />}

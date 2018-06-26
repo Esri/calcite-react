@@ -26,9 +26,13 @@ const StyledSelectMenu = StyledMenu.extend`
   ${props =>
     props.fullWidth &&
     css`
-      width: 100%;
+      min-width: 100%;
     `};
 `;
+
+const PopperManagerStyles = {
+  width: '100%'
+};
 
 const PopperStyle = {
   transition: `opacity ${transition()}`,
@@ -40,5 +44,6 @@ export {
   StyledSelectInput,
   StyledSelectButton,
   StyledSelectMenu,
+  PopperManagerStyles,
   PopperStyle
 };

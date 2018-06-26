@@ -28,6 +28,13 @@ storiesOf('Select', module)
             <MenuItem value={30}>Thirty</MenuItem>
           </Select>
         </GuideExample>
+        <GuideExample label="fullWidth">
+          <Select fullWidth onChange={action('onChange')}>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </GuideExample>
         <GuideExample label="FormControlLabel">
           <FormControl>
             <FormControlLabel>Value:</FormControlLabel>
