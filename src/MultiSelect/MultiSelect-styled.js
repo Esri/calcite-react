@@ -13,6 +13,7 @@ StyledMultiSelectButton = StyledMultiSelectButton.extend`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-align: left;
 `;
 
 const StyledMultiSelectMenu = StyledMenu.extend``;

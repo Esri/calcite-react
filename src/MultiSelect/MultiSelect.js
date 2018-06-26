@@ -61,6 +61,12 @@ const Select = ({
     });
   }
 
+  function getFullWidthStyle() {
+    if (fullWidth) {
+      return { minWidth: '100%' };
+    }
+  }
+
   return (
     <Manager>
       <Downshift
@@ -92,7 +98,10 @@ const Select = ({
               </StyledMultiSelectButton>
             </Target>
             {isOpen ? (
-              <Popper style={PopperStyle} placement={'bottom-start'}>
+              <Popper
+                style={{ ...getFullWidthStyle(), ...PopperStyle }}
+                placement={'bottom-start'}
+              >
                 <Menu
                   style={menuStyle}
                   withComponent={<StyledMultiSelectMenu />}
