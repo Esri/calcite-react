@@ -7,7 +7,7 @@ const StyledSearchContainer = styled.div`
   align-items: center;
   position: relative;
 
-  .mdi-icon {
+  .mdi-icon.search-magnify-icon {
     position: absolute;
     bottom: 0.45em;
     left: 0.25em;
@@ -25,9 +25,9 @@ const StyledSearchContainer = styled.div`
 
   .mdi-icon.search-close-icon {
     display: none;
+    position: absolute;
     right: ${props => unitCalc(props.theme.baseline, 4, '/')};
     bottom: 0.55em;
-    left: auto;
     width: 18px;
     height: 18px;
     fill: ${props => props.theme.palette.lightGray};
