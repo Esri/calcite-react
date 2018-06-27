@@ -23,7 +23,7 @@ class Search extends Component {
     super(props);
 
     this.state = {
-      itemsToShow: this.props.items
+      itemsToShow: this.props.children || this.props.items
     };
     this.userInputtedValue = '';
   }
@@ -34,6 +34,14 @@ class Search extends Component {
     }
 
     if (this.props.dataSourceConfig) {
+      if (React.isValidElement(item)) {
+        if (item.props.item) {
+          return item.props.item[this.props.dataSourceConfig.label];
+        }
+
+        return item.props[this.props.dataSourceConfig.label];
+      }
+
       return item[this.props.dataSourceConfig.label];
     }
 
@@ -46,6 +54,14 @@ class Search extends Component {
     }
 
     if (this.props.dataSourceConfig) {
+      if (React.isValidElement(item)) {
+        if (item.props.item) {
+          return item.props.item[this.props.dataSourceConfig.value];
+        }
+
+        return item.props[this.props.dataSourceConfig.value];
+      }
+
       return item[this.props.dataSourceConfig.value];
     }
 
@@ -76,10 +92,14 @@ class Search extends Component {
 
     // object or string?
     newItemsToShow = this.userInputtedValue
-      ? matchSorter(this.props.items, this.userInputtedValue, {
-          keys: [this.itemToString]
-        })
-      : this.props.items;
+      ? matchSorter(
+          this.props.children || this.props.items,
+          this.userInputtedValue,
+          {
+            keys: [this.itemToString]
+          }
+        )
+      : this.props.children || this.props.items;
     if (
       changes.hasOwnProperty('highlightedIndex') &&
       (changes.type === Downshift.stateChangeTypes.keyDownArrowUp ||
@@ -110,6 +130,37 @@ class Search extends Component {
     }
   };
 
+  getMenuItems = (
+    itemsToShow,
+    getItemProps,
+    highlightedIndex,
+    selectedItem
+  ) => {
+    return itemsToShow.map((item, index) => {
+      if (React.isValidElement(item)) {
+        return React.cloneElement(item, {
+          ...getItemProps({
+            item: item.props.item || item.props,
+            active: highlightedIndex === index,
+            selected: this.itemToValue(selectedItem) === this.itemToValue(item)
+          })
+        });
+      }
+      return (
+        <MenuItem
+          key={this.itemToValue(item)}
+          {...getItemProps({
+            item,
+            active: highlightedIndex === index,
+            selected: selectedItem === item
+          })}
+        >
+          {this.itemToString(item)}
+        </MenuItem>
+      );
+    });
+  };
+
   render() {
     const {
       minimal,
@@ -118,12 +169,13 @@ class Search extends Component {
       onChange,
       placeholder,
       menuStyle,
+      children,
       ...other
     } = this.props;
 
     return (
       <StyledSearchContainer minimal={minimal}>
-        <MagnifyIcon />
+        <MagnifyIcon className="search-magnify-icon" />
         <Manager style={ManagerStyle}>
           <Downshift
             itemToString={this.itemToString}
@@ -157,18 +209,12 @@ class Search extends Component {
                       style={menuStyle}
                       withComponent={<StyledSelectMenu />}
                     >
-                      {this.state.itemsToShow.map((item, index) => (
-                        <MenuItem
-                          key={this.itemToValue(item)}
-                          {...getItemProps({
-                            item,
-                            active: highlightedIndex === index,
-                            selected: selectedItem === item
-                          })}
-                        >
-                          {this.itemToString(item)}
-                        </MenuItem>
-                      ))}
+                      {this.getMenuItems(
+                        this.state.itemsToShow,
+                        getItemProps,
+                        highlightedIndex,
+                        selectedItem
+                      )}
                     </Menu>
                   </Popper>
                 ) : null}
@@ -203,7 +249,9 @@ Search.propTypes = {
   /** Toggle minimal style on the input */
   minimal: PropTypes.bool,
   /** Style prop applied to the menu wrapper */
-  menuStyle: PropTypes.object
+  menuStyle: PropTypes.object,
+  /** You can add search options as children if you want more control over the item rendering. Search MenuItems can take either an item object that maps to your dataSourceConfig or you can manually set the label and value props on MenuItems */
+  children: PropTypes.node
 };
 
 Search.defaultProps = {
