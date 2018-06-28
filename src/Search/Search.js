@@ -161,9 +161,16 @@ class Search extends Component {
     });
   };
 
+  getFullWidthStyle = fullWidth => {
+    if (fullWidth) {
+      return { minWidth: '100%' };
+    }
+  };
+
   render() {
     const {
       minimal,
+      fullWidth,
       inputValue,
       selectedItem,
       onChange,
@@ -174,7 +181,7 @@ class Search extends Component {
     } = this.props;
 
     return (
-      <StyledSearchContainer minimal={minimal}>
+      <StyledSearchContainer fullWidth={fullWidth} minimal={minimal}>
         <MagnifyIcon className="search-magnify-icon" />
         <Manager style={ManagerStyle}>
           <Downshift
@@ -204,8 +211,15 @@ class Search extends Component {
                 </Target>
 
                 {isOpen ? (
-                  <Popper style={PopperStyle} placement={'bottom-start'}>
+                  <Popper
+                    style={{
+                      ...this.getFullWidthStyle(fullWidth),
+                      ...PopperStyle
+                    }}
+                    placement={'bottom-start'}
+                  >
                     <Menu
+                      fullWidth={fullWidth}
                       style={menuStyle}
                       withComponent={<StyledSelectMenu />}
                     >
@@ -248,6 +262,8 @@ Search.propTypes = {
   onRequestClear: PropTypes.func,
   /** Toggle minimal style on the input */
   minimal: PropTypes.bool,
+  /** Whether or not the search and its menu will fill the container's width */
+  fullWidth: PropTypes.bool,
   /** Style prop applied to the menu wrapper */
   menuStyle: PropTypes.object,
   /** You can add search options as children if you want more control over the item rendering. Search MenuItems can take either an item object that maps to your dataSourceConfig or you can manually set the label and value props on MenuItems */
