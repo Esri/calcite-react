@@ -175,13 +175,18 @@ class Search extends Component {
       selectedItem,
       onChange,
       placeholder,
+      containerStyle,
       menuStyle,
       children,
       ...other
     } = this.props;
 
     return (
-      <StyledSearchContainer fullWidth={fullWidth} minimal={minimal}>
+      <StyledSearchContainer
+        style={containerStyle}
+        fullWidth={fullWidth}
+        minimal={minimal}
+      >
         <MagnifyIcon className="search-magnify-icon" />
         <Manager style={ManagerStyle}>
           <Downshift
@@ -264,6 +269,8 @@ Search.propTypes = {
   minimal: PropTypes.bool,
   /** Whether or not the search and its menu will fill the container's width */
   fullWidth: PropTypes.bool,
+  /** Style prop applied to the Search container element */
+  containerStyle: PropTypes.object,
   /** Style prop applied to the menu wrapper */
   menuStyle: PropTypes.object,
   /** You can add search options as children if you want more control over the item rendering. Search MenuItems can take either an item object that maps to your dataSourceConfig or you can manually set the label and value props on MenuItems */
