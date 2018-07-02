@@ -264,7 +264,6 @@ storiesOf('Search', module)
         }
 
         searchChanged = e => {
-          console.log(e);
           this.setState({
             selectedItem: e
           });
@@ -310,6 +309,89 @@ storiesOf('Search', module)
                     );
                   })}
                 </Search>
+              </GuideExample>
+            </Fragment>
+          );
+        }
+      }
+
+      SearchStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <SearchStory />;
+    })
+  )
+  .add(
+    'Shortcut Character',
+    withInfo({
+      text: doc,
+      propTables: [Search]
+    })(() => {
+      class SearchStory extends Component {
+        items = [...statesJson.states];
+
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: '',
+            selectedItem: ''
+          };
+        }
+
+        componentDidMount() {
+          document.body.addEventListener('keypress', this.handleKeypress);
+        }
+
+        componentWillUnmount() {
+          document.body.removeEventListener('keypress', this.handleKeypress);
+        }
+
+        handleKeypress = e => {
+          if (e.key === '/' && document.activeElement !== this.searchInput) {
+            // Stop the typed character from being inserted in the input
+            e.preventDefault();
+
+            // Focus the input
+            this.searchInput.focus();
+          }
+        };
+
+        searchChanged = e => {
+          this.setState({
+            selectedItem: e
+          });
+        };
+
+        clearSearch = () => {
+          this.setState({
+            inputValue: '',
+            selectedItem: ''
+          });
+        };
+
+        onUserAction = (inputValue, selectedItemVal) => {
+          this.setState({
+            inputValue: inputValue,
+            selectedItem: selectedItemVal
+          });
+        };
+
+        render() {
+          return (
+            <Fragment>
+              <GuideExample>
+                <Search
+                  innerRef={search => (this.searchInput = search)}
+                  shortcutCharacter="/"
+                  inputValue={this.state.inputValue}
+                  selectedItem={this.state.selectedItem}
+                  items={this.items}
+                  onChange={this.searchChanged}
+                  onUserAction={this.onUserAction}
+                  onRequestClear={this.clearSearch}
+                  menuStyle={{ maxHeight: '400px' }}
+                />
               </GuideExample>
             </Fragment>
           );

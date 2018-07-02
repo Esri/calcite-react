@@ -29,6 +29,12 @@ const StyledFormControl = styled.div`
       flex-direction: row;
       align-items: baseline;
     `};
+
+  ${props =>
+    props.noValidation &&
+    css`
+      margin-bottom: ${props => unitCalc(props.theme.baseline, 4, '/')};
+    `};
 `;
 
 const StyledFormControlLabel = styled.label`

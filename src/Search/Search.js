@@ -8,15 +8,16 @@ import {
   StyledSearchContainer,
   StyledSearchInputWrapper,
   StyledSearch,
+  StyledShortcutCharacter,
+  StyledCloseCircleIcon,
+  StyledMagnifyIcon,
   ManagerStyle,
   PopperStyle
 } from './Search-styled';
 
 import { StyledSelectMenu } from '../Select/Select-styled';
 import Menu, { MenuItem } from '../Menu';
-
-import MagnifyIcon from '../icons/MagnifyIcon';
-import CloseCircleIcon from '../icons/CloseCircleIcon';
+import Tooltip from '../Tooltip';
 
 class Search extends Component {
   constructor(props) {
@@ -121,11 +122,22 @@ class Search extends Component {
 
   getClearSearchIcon = () => {
     if (this.props.inputValue || this.props.selectedItem) {
+      return <StyledCloseCircleIcon onClick={this.props.onRequestClear} />;
+    }
+  };
+
+  getShortcutIcon = () => {
+    if (
+      this.props.shortcutCharacter &&
+      !this.props.inputValue &&
+      !this.props.selectedItem
+    ) {
       return (
-        <CloseCircleIcon
-          onClick={this.props.onRequestClear}
-          className="search-close-icon"
-        />
+        <StyledShortcutCharacter>
+          <Tooltip title={this.props.shortcutTooltip} placement="left">
+            {this.props.shortcutCharacter}
+          </Tooltip>
+        </StyledShortcutCharacter>
       );
     }
   };
@@ -187,7 +199,7 @@ class Search extends Component {
         fullWidth={fullWidth}
         minimal={minimal}
       >
-        <MagnifyIcon className="search-magnify-icon" />
+        <StyledMagnifyIcon />
         <Manager style={ManagerStyle}>
           <Downshift
             itemToString={this.itemToString}
@@ -241,7 +253,7 @@ class Search extends Component {
             )}
           />
         </Manager>
-
+        {this.getShortcutIcon()}
         {this.getClearSearchIcon()}
       </StyledSearchContainer>
     );
@@ -273,6 +285,10 @@ Search.propTypes = {
   containerStyle: PropTypes.object,
   /** Style prop applied to the menu wrapper */
   menuStyle: PropTypes.object,
+  /** Character used to display a shortcut icon on the right side of the search input */
+  shortcutCharacter: PropTypes.string,
+  /** Text used in the shortcut tooltip to describe what the shortcut is */
+  shortcutTooltip: PropTypes.node,
   /** You can add search options as children if you want more control over the item rendering. Search MenuItems can take either an item object that maps to your dataSourceConfig or you can manually set the label and value props on MenuItems */
   children: PropTypes.node
 };
@@ -282,7 +298,8 @@ Search.defaultProps = {
   dataSourceConfig: {
     label: 'label',
     value: 'value'
-  }
+  },
+  shortcutTooltip: 'Press  /  to search'
 };
 
 export default Search;
