@@ -65,7 +65,9 @@ FormControl.propTypes = {
   /** The form control should show success */
   success: PropTypes.bool,
   /** The form control should layout as horizontal elements */
-  horizontal: PropTypes.bool
+  horizontal: PropTypes.bool,
+  /** If the FormControl doesn't need validation you can set this to true to tighten up the bottom margin */
+  noValidation: PropTypes.bool
 };
 
 FormControl.defaultProps = {};
