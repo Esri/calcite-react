@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getChildType } from '../utils/helpers';
 import uniqid from 'uniqid';
 import { StyledFormControl } from './Form-styled';
 

@@ -210,7 +210,7 @@ const transition = delayTime => {
 
 // Helps with styled components wrapping calcite components
 const getChildType = child => {
-  return child.type.target || child.type;
+  return (child.type && child.type.target) || child.type;
 };
 
 export {
