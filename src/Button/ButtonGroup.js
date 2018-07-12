@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getChildType } from '../utils/helpers';
 import { StyledButtonGroup } from './Button-styled';
 import Button from './';
 
 const ButtonGroup = ({ children, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case Button:
         return React.cloneElement(child, {
           grouped: true

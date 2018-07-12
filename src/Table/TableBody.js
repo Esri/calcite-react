@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getChildType } from '../utils/helpers';
 import { StyledTableBody } from './Table-styled';
 
 import { TableRow } from './';
@@ -7,7 +8,7 @@ import { TableRow } from './';
 const TableBody = ({ children, blue, striped, plain, noTable, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case TableRow:
         return React.cloneElement(child, {
           blue,

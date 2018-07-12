@@ -16,7 +16,7 @@ const FormControlLabel = ({
 }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case StyledFormControlLabelText:
         return React.cloneElement(child, {
           horizontal

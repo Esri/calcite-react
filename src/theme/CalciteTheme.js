@@ -1,6 +1,5 @@
 import { injectGlobal } from 'styled-components';
 import EsriColors from './EsriColors';
-import { unitCalc, fontSize } from '../utils/helpers';
 
 const CalciteTheme = {
   palette: {
@@ -277,7 +276,7 @@ injectGlobal`
   /* Type */
   @font-face {
     font-family: 'Avenir Next';
-    src: url('https://webapps-cdn.esri.com/CDN/fonts/v1.0.0/v1.0.0/77156710-6a58-4606-b189-b4185e75967b.woff2')
+    src: url('https://webapps-cdn.esri.com/CDN/fonts/v1.0.0/77156710-6a58-4606-b189-b4185e75967b.woff2')
         format('woff2'),
       url('https://webapps-cdn.esri.com/CDN/fonts/v1.0.0/3d5260a1-e4cd-4567-80ed-69d23c40355f.woff')
         format('woff');

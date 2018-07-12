@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getChildType } from '../utils/helpers';
 import { StyledStep, StyledStepTextContainer } from './Stepper-styled';
 import { StepTitle, StepDescription } from './';
 import StepIcon from './StepIcon';
@@ -18,7 +19,7 @@ const Step = ({
 }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case StepTitle:
         return React.cloneElement(child, {
           active,
