@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getChildType } from '../utils/helpers';
 import { StyledTabContents } from './Tab-styled';
 import TabSection from './TabSection';
 
@@ -13,7 +14,7 @@ const TabContents = ({
   ...other
 }) => {
   const childrenWithProps = children.map((child, itemIndex) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case TabSection:
         let section;
         if (itemIndex === activeTabIndex) {

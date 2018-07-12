@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getChildType } from '../utils/helpers';
 import { StyledCard } from './Card-styled';
 
 import { CardImage, CardContent } from './';
@@ -7,7 +8,7 @@ import { CardImage, CardContent } from './';
 const Card = ({ children, bar, shaped, wide, withComponent, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case CardImage:
         return React.cloneElement(child, {
           shaped,

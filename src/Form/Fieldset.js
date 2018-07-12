@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getChildType } from '../utils/helpers';
 
 import { StyledFieldset } from './Form-styled';
 
@@ -9,7 +10,7 @@ import Radio from '../Radio';
 const Fieldset = ({ children, name, horizontal, error, success, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case Radio:
         return React.cloneElement(child, {
           name: child.props.name || name,

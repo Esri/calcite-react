@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getChildType } from '../utils/helpers';
 import { StyledAccordionSection } from './Accordion-styled';
 import AccordionTitle from './AccordionTitle';
 import AccordionContent from './AccordionContent';
@@ -7,7 +8,7 @@ import AccordionContent from './AccordionContent';
 const AccordionSection = ({ children, ...props }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case AccordionTitle:
         let title;
         title = React.cloneElement(child, {

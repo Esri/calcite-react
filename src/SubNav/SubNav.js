@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getChildType } from '../utils/helpers';
 import { StyledSubNav, StyledSubNavLeftContent } from './SubNav-styled';
 
 import { SubNavTitle, SubNavList, SubNavActions } from './';
@@ -7,7 +8,7 @@ import { SubNavTitle, SubNavList, SubNavActions } from './';
 const SubNav = ({ children, blue, overlayGradient, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case SubNavTitle:
         return React.cloneElement(child, {
           blue
@@ -19,13 +20,16 @@ const SubNav = ({ children, blue, overlayGradient, ...other }) => {
 
   const getLeftContent = function() {
     return childrenWithProps.filter(child => {
-      return child.type === SubNavTitle || child.type === SubNavList;
+      return (
+        getChildType(child) === SubNavTitle ||
+        getChildType(child) === SubNavList
+      );
     });
   };
 
   const getSubNavActions = function() {
     return childrenWithProps.filter(child => {
-      return child.type === SubNavActions;
+      return getChildType(child) === SubNavActions;
     });
   };
 

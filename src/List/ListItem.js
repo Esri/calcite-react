@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getChildType } from '../utils/helpers';
 import {
   StyledListItem,
   StyledListTextContainer,
@@ -18,7 +19,7 @@ const ListItem = ({
 }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case ListItemTitle:
         return React.cloneElement(child, {
           nested

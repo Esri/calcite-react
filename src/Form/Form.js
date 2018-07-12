@@ -6,7 +6,7 @@ import { FormControl } from './';
 const Form = ({ children, horizontal, noValidation, ...other }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case FormControl:
         return React.cloneElement(child, {
           noValidation: child.props.noValidation || noValidation

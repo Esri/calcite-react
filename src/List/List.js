@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { getChildType } from '../utils/helpers';
 
 import { StyledList } from './List-styled';
 import { ListHeader, ListItem } from './';
@@ -8,7 +9,7 @@ class List extends Component {
   render() {
     const childArray = React.Children.toArray(this.props.children);
     const childrenWithProps = childArray.map((child, i) => {
-      switch (child.type) {
+      switch (getChildType(child)) {
         case ListHeader:
           return React.cloneElement(child, {
             nested: this.props.nested,

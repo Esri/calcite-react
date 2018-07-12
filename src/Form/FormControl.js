@@ -11,7 +11,7 @@ const FormControl = ({ children, error, success, horizontal, ...other }) => {
   const _generatedId = uniqid();
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type) {
+    switch (getChildType(child)) {
       case FormControlLabel:
         return React.cloneElement(child, {
           error,
