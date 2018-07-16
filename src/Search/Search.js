@@ -30,6 +30,10 @@ class Search extends Component {
   }
 
   itemToString = item => {
+    if (!item) {
+      return;
+    }
+
     if (typeof item === 'string') {
       return item;
     }
@@ -50,6 +54,10 @@ class Search extends Component {
   };
 
   itemToValue = item => {
+    if (!item) {
+      return;
+    }
+
     if (typeof item === 'string') {
       return item;
     }
@@ -89,6 +97,12 @@ class Search extends Component {
         inputValue = changes.inputValue;
         this.userInputtedValue = changes.inputValue;
       }
+    }
+
+    // If the component is just being used as an input filter
+    if (!this.props.children && !this.props.items) {
+      this.props.onUserAction(inputValue || this.props.inputValue);
+      return;
     }
 
     // object or string?
@@ -227,7 +241,7 @@ class Search extends Component {
                   />
                 </Target>
 
-                {isOpen ? (
+                {isOpen && this.state.itemsToShow ? (
                   <Popper
                     style={{
                       ...this.getFullWidthStyle(fullWidth),
