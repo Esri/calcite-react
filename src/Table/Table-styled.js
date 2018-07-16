@@ -97,6 +97,17 @@ const StyledTableCell = styled.td`
       background-color: transparent;
       border: none;
     `};
+
+  ${props =>
+    props.justified &&
+    css`
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+    `};
 `;
 
 const StyledTableHeader = styled.thead`
@@ -156,6 +167,17 @@ const StyledTableHeaderCell = styled.th`
     css`
       background-color: transparent;
       border: none;
+    `};
+
+  ${props =>
+    props.justified &&
+    css`
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
     `};
 `;
 
