@@ -2,12 +2,20 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledTableHeaderCell } from './Table-styled';
 
-const TableHeaderCell = ({ children, blue, plain, noTable, ...other }) => {
+const TableHeaderCell = ({
+  children,
+  blue,
+  plain,
+  noTable,
+  justified,
+  ...other
+}) => {
   const tableHeaderCell = (
     <StyledTableHeaderCell
       blue={blue}
       plain={plain}
       noTable={noTable}
+      justified={justified}
       {...other}
     >
       {children}
@@ -25,7 +33,9 @@ TableHeaderCell.propTypes = {
   /** Description TBD */
   plain: PropTypes.bool,
   /** Description TBD */
-  noTable: PropTypes.bool
+  noTable: PropTypes.bool,
+  /** Description TBD */
+  justified: PropTypes.bool
 };
 
 TableHeaderCell.defaultProps = {};

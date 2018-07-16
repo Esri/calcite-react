@@ -403,4 +403,50 @@ storiesOf('Search', module)
       };
       return <SearchStory />;
     })
+  )
+  .add(
+    'Dumb Input',
+    withInfo({
+      text: doc,
+      propTables: [Search]
+    })(() => {
+      class SearchStory extends Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: ''
+          };
+        }
+
+        clearSearch = () => {
+          this.setState({
+            inputValue: ''
+          });
+        };
+
+        onUserAction = inputValue => {
+          this.setState({
+            inputValue: inputValue
+          });
+        };
+
+        render() {
+          return (
+            <GuideExample>
+              <Search
+                inputValue={this.state.inputValue}
+                onUserAction={this.onUserAction}
+                onRequestClear={this.clearSearch}
+              />
+            </GuideExample>
+          );
+        }
+      }
+
+      SearchStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <SearchStory />;
+    })
   );

@@ -43,7 +43,7 @@ Alert.propTypes = {
   /** Full-width modifier for the Alert. */
   full: PropTypes.bool,
   /** Display label used to close the Alert. */
-  closeLabel: PropTypes.string,
+  closeLabel: PropTypes.node,
   /** Callback function fired when the close link is clicked. */
   onClose: PropTypes.func
 };

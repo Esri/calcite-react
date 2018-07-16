@@ -5,7 +5,15 @@ import { StyledTableBody } from './Table-styled';
 
 import { TableRow } from './';
 
-const TableBody = ({ children, blue, striped, plain, noTable, ...other }) => {
+const TableBody = ({
+  children,
+  blue,
+  striped,
+  plain,
+  noTable,
+  justified,
+  ...other
+}) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (getChildType(child)) {
@@ -14,7 +22,8 @@ const TableBody = ({ children, blue, striped, plain, noTable, ...other }) => {
           blue,
           striped,
           plain,
-          noTable
+          noTable,
+          justified
         });
       default:
         return child;
@@ -40,7 +49,9 @@ TableBody.propTypes = {
   /** Description TBD */
   plain: PropTypes.bool,
   /** Description TBD */
-  noTable: PropTypes.bool
+  noTable: PropTypes.bool,
+  /** Description TBD */
+  justified: PropTypes.bool
 };
 
 TableBody.defaultProps = {};
