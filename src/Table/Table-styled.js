@@ -36,6 +36,20 @@ const StyledTable = styled.table`
       overflow: auto;
       margin-bottom: 0;
     `};
+
+  ${props =>
+    props.noCol &&
+    css`
+      border-left: none;
+      border-right: none;
+    `};
+
+  ${props =>
+    props.noRow &&
+    css`
+      border-top: none;
+      border-bottom: none;
+    `};
 `;
 
 const StyledTableBody = styled.tbody`
@@ -50,6 +64,20 @@ const StyledTableBody = styled.tbody`
       overflow: auto;
       width: 100%;
       ${fontSize(0)};
+    `};
+
+  ${props =>
+    props.noCol &&
+    css`
+      border-left: none;
+      border-right: none;
+    `};
+
+  ${props =>
+    props.noRow &&
+    css`
+      border-top: none;
+      border-bottom: none;
     `};
 `;
 
@@ -99,6 +127,20 @@ const StyledTableCell = styled.td`
     `};
 
   ${props =>
+    props.noCol &&
+    css`
+      border-left: none;
+      border-right: none;
+    `};
+
+  ${props =>
+    props.noRow &&
+    css`
+      border-top: none;
+      border-bottom: none;
+    `};
+
+  ${props =>
     props.justified &&
     css`
       &:first-child {
@@ -141,6 +183,20 @@ const StyledTableHeader = styled.thead`
       overflow: auto;
       width: 100%;
     `};
+
+  ${props =>
+    props.noCol &&
+    css`
+      border-left: none;
+      border-right: none;
+    `};
+
+  ${props =>
+    props.noRow &&
+    css`
+      border-top: none;
+      border-bottom: none;
+    `};
 `;
 
 const StyledTableHeaderCell = styled.th`
@@ -167,6 +223,20 @@ const StyledTableHeaderCell = styled.th`
     css`
       background-color: transparent;
       border: none;
+    `};
+
+  ${props =>
+    props.noCol &&
+    css`
+      border-left: none;
+      border-right: none;
+    `};
+
+  ${props =>
+    props.noRow &&
+    css`
+      border-top: none;
+      border-bottom: none;
     `};
 
   ${props =>
@@ -236,6 +306,20 @@ const StyledTableRow = styled.tr`
     css`
       border: none;
       text-align: left;
+    `};
+
+  ${props =>
+    props.noCol &&
+    css`
+      border-left: none;
+      border-right: none;
+    `};
+
+  ${props =>
+    props.noRow &&
+    css`
+      border-top: none;
+      border-bottom: none;
     `};
 `;
 

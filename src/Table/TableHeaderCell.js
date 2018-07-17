@@ -8,6 +8,8 @@ const TableHeaderCell = ({
   plain,
   noTable,
   justified,
+  noCol,
+  noRow,
   ...other
 }) => {
   const tableHeaderCell = (
@@ -16,6 +18,8 @@ const TableHeaderCell = ({
       plain={plain}
       noTable={noTable}
       justified={justified}
+      noCol={noCol}
+      noRow={noRow}
       {...other}
     >
       {children}
@@ -35,7 +39,11 @@ TableHeaderCell.propTypes = {
   /** Description TBD */
   noTable: PropTypes.bool,
   /** Description TBD */
-  justified: PropTypes.bool
+  justified: PropTypes.bool,
+  /** Description TBD */
+  noCol: PropTypes.bool,
+  /** Description TBD */
+  noRow: PropTypes.bool
 };
 
 TableHeaderCell.defaultProps = {};
