@@ -64,11 +64,13 @@ class Tooltip extends Component {
                 ...this.transitionStyles[state]
               }}
             >
-              <StyledTooltip>{this.props.title}</StyledTooltip>
+              <StyledTooltip style={this.props.style}>
+                {this.props.title}
+              </StyledTooltip>
               <Arrow>
                 {({ arrowProps, restProps }) => (
                   <span {...arrowProps}>
-                    <StyledTooltipArrow />
+                    <StyledTooltipArrow style={this.props.arrowStyle} />
                   </span>
                 )}
               </Arrow>
@@ -91,7 +93,11 @@ Tooltip.propTypes = {
   /** Duration of animation in milliseconds */
   transitionDuration: PropTypes.number,
   /** Delay before the tooltip will show up, in milliseconds */
-  enterDelay: PropTypes.number
+  enterDelay: PropTypes.number,
+  /** Apply styles to the tooltip element */
+  style: PropTypes.object,
+  /** Apply styles to the tooltip arrow element */
+  arrowStyle: PropTypes.object
 };
 
 Tooltip.defaultProps = {
