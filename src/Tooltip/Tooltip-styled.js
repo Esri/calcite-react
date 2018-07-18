@@ -7,10 +7,9 @@ const StyledTooltip = styled.div`
   ${fontSize(-2)};
   color: ${props => props.theme.palette.white};
   text-align: center;
-  word-wrap: break-word;
-  white-space: pre;
   background: ${props => props.theme.palette.transparentBlack};
   border-radius: 3px;
+  max-width: 400px;
 
   *[data-placement^='top'] & {
     margin-bottom: 8px;

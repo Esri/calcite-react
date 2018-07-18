@@ -184,6 +184,54 @@ storiesOf('Table', module).add(
           </TableBody>
         </Table>
       </GuideExample>
+
+      <GuideExample label="noCol">
+        <Table noCol>
+          <TableHeader>
+            <TableHeaderRow>
+              <TableHeaderCell>Thing 1</TableHeaderCell>
+              <TableHeaderCell>Thing 2</TableHeaderCell>
+              <TableHeaderCell>Thing 3</TableHeaderCell>
+            </TableHeaderRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>a</TableCell>
+              <TableCell>b</TableCell>
+              <TableCell>c</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>x</TableCell>
+              <TableCell>y</TableCell>
+              <TableCell>z</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </GuideExample>
+
+      <GuideExample label="noRow">
+        <Table noRow>
+          <TableHeader>
+            <TableHeaderRow>
+              <TableHeaderCell>Thing 1</TableHeaderCell>
+              <TableHeaderCell>Thing 2</TableHeaderCell>
+              <TableHeaderCell>Thing 3</TableHeaderCell>
+            </TableHeaderRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>a</TableCell>
+              <TableCell>b</TableCell>
+              <TableCell>c</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>x</TableCell>
+              <TableCell>y</TableCell>
+              <TableCell>z</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </GuideExample>
     </div>
   ))
 );

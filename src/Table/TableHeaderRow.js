@@ -11,6 +11,8 @@ const TableHeaderRow = ({
   plain,
   noTable,
   justified,
+  noCol,
+  noRow,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
@@ -21,7 +23,9 @@ const TableHeaderRow = ({
           blue,
           plain,
           noTable,
-          justified
+          justified,
+          noCol,
+          noRow
         });
       default:
         return child;
@@ -29,7 +33,7 @@ const TableHeaderRow = ({
   });
 
   const tableHeaderRow = (
-    <StyledTableHeaderRow blue={blue} {...other}>
+    <StyledTableHeaderRow blue={blue} noCol={noCol} noRow={noRow} {...other}>
       {childrenWithProps}
     </StyledTableHeaderRow>
   );
@@ -47,7 +51,11 @@ TableHeaderRow.propTypes = {
   /** Description TBD */
   noTable: PropTypes.bool,
   /** Description TBD */
-  justified: PropTypes.bool
+  justified: PropTypes.bool,
+  /** Description TBD */
+  noCol: PropTypes.bool,
+  /** Description TBD */
+  noRow: PropTypes.bool
 };
 
 TableHeaderRow.defaultProps = {};

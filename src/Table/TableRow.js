@@ -12,6 +12,8 @@ const TableRow = ({
   plain,
   noTable,
   justified,
+  noCol,
+  noRow,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
@@ -23,7 +25,9 @@ const TableRow = ({
           striped,
           plain,
           noTable,
-          justified
+          justified,
+          noCol,
+          noRow
         });
       default:
         return child;
@@ -36,6 +40,8 @@ const TableRow = ({
       striped={striped}
       plain={plain}
       noTable={noTable}
+      noCol={noCol}
+      noRow={noRow}
       {...other}
     >
       {childrenWithProps}
@@ -57,7 +63,11 @@ TableRow.propTypes = {
   /** Description TBD */
   noTable: PropTypes.bool,
   /** Description TBD */
-  justified: PropTypes.bool
+  justified: PropTypes.bool,
+  /** Description TBD */
+  noCol: PropTypes.bool,
+  /** Description TBD */
+  noRow: PropTypes.bool
 };
 
 TableRow.defaultProps = {};

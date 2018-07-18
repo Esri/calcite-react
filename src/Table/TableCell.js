@@ -9,6 +9,8 @@ const TableCell = ({
   plain,
   noTable,
   justified,
+  noCol,
+  noRow,
   ...other
 }) => {
   const tableCell = (
@@ -18,6 +20,8 @@ const TableCell = ({
       plain={plain}
       noTable={noTable}
       justified={justified}
+      noCol={noCol}
+      noRow={noRow}
       {...other}
     >
       {children}
@@ -39,7 +43,11 @@ TableCell.propTypes = {
   /** Description TBD */
   noTable: PropTypes.bool,
   /** Description TBD */
-  justified: PropTypes.bool
+  justified: PropTypes.bool,
+  /** Description TBD */
+  noCol: PropTypes.bool,
+  /** Description TBD */
+  noRow: PropTypes.bool
 };
 
 TableCell.defaultProps = {};

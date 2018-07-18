@@ -12,6 +12,8 @@ const Table = ({
   plain,
   noTable,
   justified,
+  noCol,
+  noRow,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
@@ -23,14 +25,18 @@ const Table = ({
           striped,
           plain,
           noTable,
-          justified
+          justified,
+          noCol,
+          noRow
         });
       case TableHeader:
         return React.cloneElement(child, {
           blue,
           plain,
           noTable,
-          justified
+          justified,
+          noCol,
+          noRow
         });
       default:
         return child;
@@ -38,7 +44,14 @@ const Table = ({
   });
 
   const table = (
-    <StyledTable blue={blue} plain={plain} noTable={noTable} {...other}>
+    <StyledTable
+      blue={blue}
+      plain={plain}
+      noTable={noTable}
+      noCol={noCol}
+      noRow={noRow}
+      {...other}
+    >
       {childrenWithProps}
     </StyledTable>
   );
@@ -58,7 +71,11 @@ Table.propTypes = {
   /** Description TBD */
   noTable: PropTypes.bool,
   /** Description TBD */
-  justified: PropTypes.bool
+  justified: PropTypes.bool,
+  /** Description TBD */
+  noCol: PropTypes.bool,
+  /** Description TBD */
+  noRow: PropTypes.bool
 };
 
 Table.defaultProps = {};
