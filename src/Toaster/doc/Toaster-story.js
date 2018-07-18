@@ -118,7 +118,7 @@ storiesOf('Toaster', module)
                     onClose={this.hideToaster4}
                     showProgress
                   >
-                    default
+                    This toaster has a progress bar!
                   </Toaster>
                 </GuideExample>
               </div>
