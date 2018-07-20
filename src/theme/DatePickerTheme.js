@@ -33,7 +33,13 @@ const DatePickerTheme = {
         borderTopFocused: 0,
         borderLeftFocused: 0,
         borderBottomFocused: `2px solid ${CalciteTheme.palette.blue}`,
-        borderRightFocused: 0
+        borderRightFocused: 0,
+        borderWidth: 1
+      },
+      pickerInput: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderRadius: 0
       }
     },
 
@@ -45,6 +51,7 @@ const DatePickerTheme = {
       background: core.white,
       backgroundDark: '#f2f2f2',
       backgroundFocused: core.white,
+      border: CalciteTheme.palette.lightGray,
       text: core.gray,
       textDisabled: core.border,
       textFocused: CalciteTheme.palette.blue,
