@@ -67,7 +67,7 @@
     "polished": "^1.9.2",
     "react-dates": "^17.1.1",
     "react-modal": "^3.3.1",
-    "react-popper": "^0.8.2",
+    "react-popper": "^1.0.0",
     "react-toastify": "^4.1.0",
     "react-transition-group": "^2.2.1",
     "react-with-styles-interface-aphrodite": "^5.0.0",
