@@ -335,7 +335,8 @@ storiesOf('Search', module)
 
           this.state = {
             inputValue: '',
-            selectedItem: ''
+            selectedItem: '',
+            searchInput: null
           };
         }
 
@@ -348,13 +349,22 @@ storiesOf('Search', module)
         }
 
         handleKeypress = e => {
-          if (e.key === '/' && document.activeElement !== this.searchInput) {
+          if (
+            e.key === '/' &&
+            document.activeElement !== this.state.searchInput
+          ) {
             // Stop the typed character from being inserted in the input
             e.preventDefault();
 
             // Focus the input
-            this.searchInput.focus();
+            this.state.searchInput.focus();
           }
+        };
+
+        setSearchInput = searchInput => {
+          this.setState({
+            searchInput
+          });
         };
 
         searchChanged = e => {
@@ -382,7 +392,7 @@ storiesOf('Search', module)
             <Fragment>
               <GuideExample>
                 <Search
-                  innerRef={search => (this.searchInput = search)}
+                  inputRef={this.setSearchInput}
                   shortcutCharacter="/"
                   inputValue={this.state.inputValue}
                   selectedItem={this.state.selectedItem}

@@ -23,6 +23,9 @@ StyledSelectButton = StyledSelectButton.extend`
 `;
 
 const StyledSelectMenu = StyledMenu.extend`
+  transition: opacity ${transition()};
+  z-index: 2000;
+
   ${props =>
     props.fullWidth &&
     css`
@@ -34,16 +37,10 @@ const PopperManagerStyles = {
   width: '100%'
 };
 
-const PopperStyle = {
-  transition: `opacity ${transition()}`,
-  zIndex: 2000
-};
-
 export {
   StyledSelectWrapper,
   StyledSelectInput,
   StyledSelectButton,
   StyledSelectMenu,
-  PopperManagerStyles,
-  PopperStyle
+  PopperManagerStyles
 };

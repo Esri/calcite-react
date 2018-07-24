@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import outy from 'outy';
-import { Manager, Target, Popper } from 'react-popper';
+import { Manager, Reference, Popper } from 'react-popper';
+import uniqid from 'uniqid';
 
-import { StyledPopover, StyledPopperTransition } from './Popover-styled';
+import { StyledTargetWrapper, StyledPopover } from './Popover-styled';
 
 class Popover extends Component {
   constructor(props) {
     super(props);
 
-    this.defaultStyle = {
-      transition: `opacity ${
-        this.props.transitionDuration
-      }ms cubic-bezier(0.4, 0.0, 0.2, 1)`,
-      opacity: 0,
-      zIndex: 2000,
-      pointerEvents: 'none'
-    };
+    this._generatedId = uniqid();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -35,15 +28,11 @@ class Popover extends Component {
     this._unsetOutsideTap();
   }
 
-  getPopperEl({ innerRef, style, ...popperProps }) {
-    return <div ref={innerRef} style={{ ...style }} {...popperProps} />;
-  }
-
   _setOutsideTap = () => {
-    const elements = [this.target];
+    const elements = [document.getElementById(`${this._generatedId}Target`)];
 
-    if (this.popper && !this.props.closeOnSelect) {
-      elements.push(this.popper);
+    if (!this.props.closeOnSelect) {
+      elements.push(document.getElementById(`${this._generatedId}Popover`));
     }
 
     if (this.outsideTap) {
@@ -70,31 +59,38 @@ class Popover extends Component {
   render() {
     return (
       <Manager>
-        <Target
-          innerRef={c => (this.target = findDOMNode(c))}
-          style={{
-            display: 'inline-block',
-            ...this.props.targetContainerStyles
-          }}
-        >
-          {this.props.targetEl}
-        </Target>
+        <Reference style={{ display: 'inline-block' }}>
+          {({ ref }) => (
+            <StyledTargetWrapper
+              innerRef={ref}
+              id={`${this._generatedId}Target`}
+              style={this.props.targetContainerStyles}
+            >
+              {this.props.targetEl}
+            </StyledTargetWrapper>
+          )}
+        </Reference>
         <Transition in={this.props.open} timeout={0}>
           {state => (
             <Popper
-              key="popper"
-              innerRef={c => {
-                this.popper = findDOMNode(c);
-              }}
-              component={this.getPopperEl}
+              positionFixed={this.props.positionFixed}
               placement={this.props.placement}
-              style={{
-                ...this.defaultStyle,
-                ...StyledPopperTransition[state],
-                ...this.props.popoverContainerStyles
-              }}
             >
-              <StyledPopover>{this.props.children}</StyledPopover>
+              {({ ref, style, placement }) => (
+                <StyledPopover
+                  innerRef={ref}
+                  id={`${this._generatedId}Popover`}
+                  style={{
+                    ...style,
+                    ...this.props.style
+                  }}
+                  transitionState={state}
+                  transitionDuration={this.props.transitionDuration}
+                  data-placement={placement}
+                >
+                  {this.props.children}
+                </StyledPopover>
+              )}
             </Popper>
           )}
         </Transition>

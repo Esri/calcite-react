@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
-import { Manager, Target, Popper, Arrow } from 'react-popper';
+import { Manager, Reference, Popper } from 'react-popper';
 
-import { StyledTooltip, StyledTooltipArrow } from './Tooltip-styled';
-
-const getPopperEl = function({ innerRef, style, ...popperProps }) {
-  return <div ref={innerRef} style={{ ...style }} {...popperProps} />;
-};
+import {
+  StyledTargetWrapper,
+  StyledTooltip,
+  StyledTooltipArrow
+} from './Tooltip-styled';
 
 class Tooltip extends Component {
   constructor(props) {
@@ -17,27 +17,13 @@ class Tooltip extends Component {
     };
   }
 
-  defaultStyle = {
-    transition: `opacity ${
-      this.props.transitionDuration
-    }ms cubic-bezier(0.4, 0.0, 0.2, 1)`,
-    opacity: 0,
-    pointerEvents: 'none',
-    zIndex: '2000'
-  };
-
-  transitionStyles = {
-    entering: { opacity: 0 },
-    entered: { opacity: 1 }
-  };
-
-  _handleTargetEnter = () => {
+  _handleReferenceEnter = () => {
     this.setState({
       open: true
     });
   };
 
-  _handleTargetLeave = () => {
+  _handleReferenceLeave = () => {
     this.setState({
       open: false
     });
@@ -46,34 +32,42 @@ class Tooltip extends Component {
   render() {
     return (
       <Manager>
-        <Target
-          style={{ display: 'inline-block' }}
-          onMouseEnter={this._handleTargetEnter}
-          onMouseLeave={this._handleTargetLeave}
-        >
-          {this.props.children}
-        </Target>
+        <Reference style={{ display: 'inline-block' }}>
+          {({ ref }) => (
+            <StyledTargetWrapper
+              innerRef={ref}
+              onMouseEnter={this._handleReferenceEnter}
+              onMouseLeave={this._handleReferenceLeave}
+            >
+              {this.props.children}
+            </StyledTargetWrapper>
+          )}
+        </Reference>
         <Transition in={this.state.open} timeout={this.props.enterDelay}>
           {state => (
             <Popper
-              key="popper"
-              component={getPopperEl}
+              positionFixed={this.props.positionFixed}
               placement={this.props.placement}
-              style={{
-                ...this.defaultStyle,
-                ...this.transitionStyles[state]
-              }}
             >
-              <StyledTooltip style={this.props.style}>
-                {this.props.title}
-              </StyledTooltip>
-              <Arrow>
-                {({ arrowProps, restProps }) => (
-                  <span {...arrowProps}>
-                    <StyledTooltipArrow style={this.props.arrowStyle} />
-                  </span>
-                )}
-              </Arrow>
+              {({ ref, style, placement, arrowProps }) => (
+                <StyledTooltip
+                  innerRef={ref}
+                  style={{
+                    ...style,
+                    ...this.props.style
+                  }}
+                  transitionState={state}
+                  transitionDuration={this.props.transitionDuration}
+                  data-placement={placement}
+                >
+                  {this.props.title}
+                  <StyledTooltipArrow
+                    innerRef={arrowProps.ref}
+                    data-placement={placement}
+                    style={{ ...arrowProps.style, ...this.props.arrowStyle }}
+                  />
+                </StyledTooltip>
+              )}
             </Popper>
           )}
         </Transition>
@@ -90,6 +84,8 @@ Tooltip.propTypes = {
   /** Placement of the popover in relation to the target. The tooltip will override the placement if there is no room.
    If this property is not set the tooltip will position itself wherever there is room */
   placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
+  positionFixed: PropTypes.bool,
   /** Duration of animation in milliseconds */
   transitionDuration: PropTypes.number,
   /** Delay before the tooltip will show up, in milliseconds */

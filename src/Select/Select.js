@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Downshift from 'downshift';
-import { Manager, Target, Popper } from 'react-popper';
+import { Manager, Reference, Popper } from 'react-popper';
 import matchSorter from 'match-sorter';
 
 import {
@@ -9,8 +9,7 @@ import {
   StyledSelectButton,
   StyledSelectInput,
   StyledSelectMenu,
-  PopperManagerStyles,
-  PopperStyle
+  PopperManagerStyles
 } from './Select-styled';
 import Menu from '../Menu';
 
@@ -30,10 +29,17 @@ const Select = ({
   horizontal,
   label,
   onChange,
+  positionFixed,
   ...other
 }) => {
   function getAnchorElement(params) {
-    const { getButtonProps, getInputProps, placeholder, selectedItem } = params;
+    const {
+      ref,
+      getButtonProps,
+      getInputProps,
+      placeholder,
+      selectedItem
+    } = params;
 
     if (filterable) {
       return (
@@ -47,6 +53,7 @@ const Select = ({
             style: style,
             ...other
           })}
+          innerRef={ref}
         />
       );
     }
@@ -56,6 +63,7 @@ const Select = ({
         {...getInputProps()}
         fullWidth={fullWidth}
         minimal={minimal}
+        innerRef={ref}
         id={id || _generatedId}
         style={style}
         {...other}
@@ -145,32 +153,40 @@ const Select = ({
           inputValue
         }) => (
           <StyledSelectWrapper {...getRootProps({ refKey: 'innerRef' })}>
-            <Target>
-              {getAnchorElement({
-                getButtonProps,
-                getInputProps,
-                placeholder: placeholder,
-                selectedItem,
-                labelEl: label,
-                horizontal: horizontal
-              })}
-            </Target>
+            <Reference style={{ display: 'inline-block' }}>
+              {({ ref }) => {
+                return getAnchorElement({
+                  ref,
+                  getButtonProps,
+                  getInputProps,
+                  placeholder: placeholder,
+                  selectedItem,
+                  labelEl: label,
+                  horizontal: horizontal
+                });
+              }}
+            </Reference>
             {isOpen ? (
-              <Popper
-                style={{ ...getFullWidthStyle(), ...PopperStyle }}
-                placement={'bottom-start'}
-              >
-                <Menu
-                  style={menuStyle}
-                  withComponent={<StyledSelectMenu fullWidth={fullWidth} />}
-                >
-                  {getMenuItems(
-                    inputValue,
-                    getItemProps,
-                    highlightedIndex,
-                    selectedItem
-                  )}
-                </Menu>
+              <Popper positionFixed={positionFixed} placement={'bottom-start'}>
+                {({ ref, style, placement }) => (
+                  <Menu
+                    innerRef={ref}
+                    style={{
+                      ...style,
+                      ...getFullWidthStyle(),
+                      ...menuStyle
+                    }}
+                    data-placement={placement}
+                    withComponent={<StyledSelectMenu fullWidth={fullWidth} />}
+                  >
+                    {getMenuItems(
+                      inputValue,
+                      getItemProps,
+                      highlightedIndex,
+                      selectedItem
+                    )}
+                  </Menu>
+                )}
               </Popper>
             ) : null}
           </StyledSelectWrapper>
