@@ -9,7 +9,6 @@ const StyledPopover = styled.div`
   opacity: 0;
   transition: opacity ${props => props.transitionDuration}ms
     cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
   z-index: 2000;
 
   &[data-x-out-of-boundaries] {
