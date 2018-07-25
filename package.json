@@ -65,9 +65,9 @@
     "match-sorter": "^2.2.3",
     "outy": "^0.1.2",
     "polished": "^1.9.2",
-    "react-dates": "^16.4.0",
+    "react-dates": "^17.1.1",
     "react-modal": "^3.3.1",
-    "react-popper": "^0.8.2",
+    "react-popper": "^1.0.0",
     "react-toastify": "^4.1.0",
     "react-transition-group": "^2.2.1",
     "react-with-styles-interface-aphrodite": "^5.0.0",
@@ -105,15 +105,15 @@
     "mdi-react": "^2.1.19",
     "prettier": "^1.9.2",
     "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-test-renderer": "^16.2.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-test-renderer": "^16.4.1",
     "rimraf": "^2.6.2",
     "rollup": "^0.56.3",
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-node-resolve": "^3.0.3"
   },
   "peerDependencies": {
-    "react": "^16.2.0"
+    "react": "^16.4.1"
   }
 }
