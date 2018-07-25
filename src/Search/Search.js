@@ -32,9 +32,10 @@ class Search extends Component {
   }
 
   componentDidMount() {
-    this.props.inputRef(
-      document.getElementById(`${this._generatedId}Reference`)
-    );
+    this.props.inputRef &&
+      this.props.inputRef(
+        document.getElementById(`${this._generatedId}Reference`)
+      );
   }
 
   itemToString = item => {
