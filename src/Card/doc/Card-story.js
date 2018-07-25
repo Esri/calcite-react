@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
+import styled from 'styled-components';
 
 import GuideExample from '../../../stories/GuideExample';
 import doc from './Card.md';
@@ -8,10 +9,10 @@ import cardImage from '../../../stories/images/bridge3.jpg';
 import cardImageCircle from '../../../stories/images/bridge-circle.png';
 
 import Card, { CardTitle, CardContent, CardImage } from '../';
-import { StyledCard } from '../Card-styled';
 import Button from '../../Button';
 
-const CustomStyledCard = StyledCard.extend`
+const CustomStyledCard = styled(Card)`
+  max-width: 320px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 30px,
     rgba(0, 0, 0, 0.23) 0px 6px 10px;
 `;
@@ -126,10 +127,7 @@ storiesOf('Card', module).add(
       </GuideExample>
 
       <GuideExample label="withComponent">
-        <Card
-          style={{ maxWidth: '320px' }}
-          withComponent={<CustomStyledCard />}
-        >
+        <CustomStyledCard>
           <CardImage
             src={cardImage}
             caption="Florida, January 1954"
@@ -143,7 +141,7 @@ storiesOf('Card', module).add(
             </p>
             <Button>View Examples</Button>
           </CardContent>
-        </Card>
+        </CustomStyledCard>
       </GuideExample>
     </div>
   ))

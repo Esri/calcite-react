@@ -2,14 +2,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledLegend } from './Form-styled';
 
-const Legend = ({ children, horizontal, ...other }) => {
-  const legend = (
-    <StyledLegend horizontal={horizontal} {...other}>
-      {children}
-    </StyledLegend>
-  );
+import { FormControlContext } from './FormControl';
 
-  return legend;
+const Legend = ({ children, ...other }) => {
+  return (
+    <FormControlContext.Consumer>
+      {({ formControlContext }) => (
+        <StyledLegend horizontal={formControlContext.horizontal} {...other}>
+          {children}
+        </StyledLegend>
+      )}
+    </FormControlContext.Consumer>
+  );
 };
 
 Legend.propTypes = {

@@ -2,10 +2,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledListTitle } from './List-styled';
 
-const ListTitle = ({ children, ...other }) => {
-  const listTitle = <StyledListTitle {...other}>{children}</StyledListTitle>;
+import { ListContext } from './List';
 
-  return listTitle;
+const ListTitle = ({ children, ...other }) => {
+  return (
+    <ListContext.Consumer>
+      {({ listContext }) => (
+        <StyledListTitle nested={listContext.nested} {...other}>
+          {children}
+        </StyledListTitle>
+      )}
+    </ListContext.Consumer>
+  );
 };
 
 ListTitle.propTypes = {

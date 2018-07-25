@@ -52,7 +52,7 @@ storiesOf('List', module)
               <ListItemTitle>Inbox</ListItemTitle>
               <ListItemSubtitle>3 Items</ListItemSubtitle>
             </ListItem>
-            <List>
+            <List nested>
               <ListItem leftNode={<EmailIcon />} rightNode={1}>
                 <ListItemTitle>Unread</ListItemTitle>
               </ListItem>
@@ -119,7 +119,7 @@ storiesOf('List', module)
                   <ListItemTitle>Inbox</ListItemTitle>
                   <ListItemSubtitle>3 Items</ListItemSubtitle>
                 </ListItem>
-                <List open={this.state.open}>
+                <List nested open={this.state.open}>
                   <ListItem leftNode={<EmailIcon />} rightNode={1}>
                     <ListItemTitle>Unread</ListItemTitle>
                   </ListItem>
@@ -166,7 +166,7 @@ storiesOf('List', module)
                 nisi ut aliquip ex ea.
               </ListItemSubtitle>
             </ListItem>
-            <List>
+            <List nested>
               <ListItem leftNode={<ViewGridIcon />}>
                 <ListItemTitle>Azure Blob storage</ListItemTitle>
                 <ListItemSubtitle>

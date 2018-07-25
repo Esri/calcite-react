@@ -1,25 +1,30 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { createContext } from 'react';
 import { getChildType } from '../utils/helpers';
 import { StyledSubNav, StyledSubNavLeftContent } from './SubNav-styled';
 
 import { SubNavTitle, SubNavList, SubNavActions } from './';
 
+const SubNavContext = createContext();
+
 const SubNav = ({ children, blue, overlayGradient, ...other }) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case SubNavTitle:
-        return React.cloneElement(child, {
-          blue
-        });
-      default:
-        return child;
-    }
-  });
+  const subNavContext = {
+    blue
+  };
+  // const childArray = React.Children.toArray(children);
+  // const childrenWithProps = childArray.map((child, i) => {
+  //   switch (getChildType(child)) {
+  //     case SubNavTitle:
+  //       return React.cloneElement(child, {
+  //         blue
+  //       });
+  //     default:
+  //       return child;
+  //   }
+  // });
 
   const getLeftContent = function() {
-    return childrenWithProps.filter(child => {
+    return children.filter(child => {
       return (
         getChildType(child) === SubNavTitle ||
         getChildType(child) === SubNavList
@@ -28,19 +33,19 @@ const SubNav = ({ children, blue, overlayGradient, ...other }) => {
   };
 
   const getSubNavActions = function() {
-    return childrenWithProps.filter(child => {
+    return children.filter(child => {
       return getChildType(child) === SubNavActions;
     });
   };
 
-  const subNav = (
-    <StyledSubNav blue={blue} overlayGradient={overlayGradient} {...other}>
-      <StyledSubNavLeftContent>{getLeftContent()}</StyledSubNavLeftContent>
-      {getSubNavActions()}
-    </StyledSubNav>
+  return (
+    <SubNavContext.Provider value={{ subNavContext }}>
+      <StyledSubNav blue={blue} overlayGradient={overlayGradient} {...other}>
+        <StyledSubNavLeftContent>{getLeftContent()}</StyledSubNavLeftContent>
+        {getSubNavActions()}
+      </StyledSubNav>
+    </SubNavContext.Provider>
   );
-
-  return subNav;
 };
 
 SubNav.propTypes = {
@@ -53,8 +58,7 @@ SubNav.propTypes = {
 };
 
 SubNav.defaultProps = {
-  blue: undefined,
   overlayGradient: true
 };
 
-export default SubNav;
+export { SubNav as default, SubNavContext };

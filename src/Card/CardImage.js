@@ -6,20 +6,25 @@ import {
   StyledCardImageCaption
 } from './Card-styled';
 
-const CardImage = ({ children, src, caption, alt, shaped, wide, ...other }) => {
-  let figcaption;
-  if (!shaped && caption) {
-    figcaption = <StyledCardImageCaption>{caption}</StyledCardImageCaption>;
+import { CardContext } from './Card';
+
+const CardImage = ({ children, src, caption, alt, ...other }) => {
+  function getFigcaption(shaped) {
+    if (!shaped && caption) {
+      return <StyledCardImageCaption>{caption}</StyledCardImageCaption>;
+    }
   }
 
-  const cardImage = (
-    <StyledCardImageWrap shaped={shaped} wide={wide} {...other}>
-      <StyledCardImage wide={wide} src={src} alt={alt} />
-      {figcaption}
-    </StyledCardImageWrap>
+  return (
+    <CardContext.Consumer>
+      {({ cardContext }) => (
+        <StyledCardImageWrap {...cardContext} {...other}>
+          <StyledCardImage {...cardContext} src={src} alt={alt} />
+          {getFigcaption(cardContext.shaped)}
+        </StyledCardImageWrap>
+      )}
+    </CardContext.Consumer>
   );
-
-  return cardImage;
 };
 
 CardImage.propTypes = {

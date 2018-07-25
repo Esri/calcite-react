@@ -1,28 +1,19 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { getChildType } from '../utils/helpers';
+import React, { createContext } from 'react';
 import { StyledBreadcrumbs } from './Breadcrumbs-styled';
 
-import { Crumb } from './';
+const BreadcrumbsContext = createContext();
 
 const Breadcrumbs = ({ children, white, ...other }) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case Crumb:
-        return React.cloneElement(child, {
-          white
-        });
-      default:
-        return child;
-    }
-  });
+  const breadcrumbsContext = {
+    white
+  };
 
-  const breadcrumbs = (
-    <StyledBreadcrumbs {...other}>{childrenWithProps}</StyledBreadcrumbs>
+  return (
+    <BreadcrumbsContext.Provider value={{ breadcrumbsContext }}>
+      <StyledBreadcrumbs {...other}>{children}</StyledBreadcrumbs>
+    </BreadcrumbsContext.Provider>
   );
-
-  return breadcrumbs;
 };
 
 Breadcrumbs.propTypes = {
@@ -34,4 +25,4 @@ Breadcrumbs.propTypes = {
 
 Breadcrumbs.defaultProps = {};
 
-export default Breadcrumbs;
+export { Breadcrumbs as default, BreadcrumbsContext };

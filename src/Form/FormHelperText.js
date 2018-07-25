@@ -2,14 +2,22 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledFormHelperText } from './Form-styled';
 
-const FormHelperText = ({ children, error, success, ...other }) => {
-  const formHelperText = (
-    <StyledFormHelperText error={error} success={success} {...other}>
-      {children}
-    </StyledFormHelperText>
-  );
+import { FormControlContext } from './FormControl';
 
-  return formHelperText;
+const FormHelperText = ({ children, ...other }) => {
+  return (
+    <FormControlContext>
+      {({ formControlContext }) => (
+        <StyledFormHelperText
+          error={formControlContext.error}
+          success={formControlContext.success}
+          {...other}
+        >
+          {children}
+        </StyledFormHelperText>
+      )}
+    </FormControlContext>
+  );
 };
 
 FormHelperText.propTypes = {

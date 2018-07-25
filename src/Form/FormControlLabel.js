@@ -1,42 +1,36 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getChildType } from '../utils/helpers';
-import {
-  StyledFormControlLabel,
-  StyledFormControlLabelText
-} from './Form-styled';
+import { StyledFormControlLabel } from './Form-styled';
 
-const FormControlLabel = ({
-  children,
-  htmlFor,
-  error,
-  success,
-  horizontal,
-  _generatedId,
-  ...other
-}) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case StyledFormControlLabelText:
-        return React.cloneElement(child, {
-          horizontal
-        });
-      default:
-        return child;
-    }
-  });
+import { FormControlContext } from './FormControl';
+
+const FormControlLabel = ({ children, htmlFor, ...other }) => {
+  // const childArray = React.Children.toArray(children);
+  // const childrenWithProps = childArray.map((child, i) => {
+  //   switch (getChildType(child)) {
+  //     case StyledFormControlLabelText:
+  //       return React.cloneElement(child, {
+  //         horizontal
+  //       });
+  //     default:
+  //       return child;
+  //   }
+  // });
 
   const formControlLabel = (
-    <StyledFormControlLabel
-      htmlFor={htmlFor || _generatedId}
-      error={error}
-      success={success}
-      horizontal={horizontal}
-      {...other}
-    >
-      {childrenWithProps}
-    </StyledFormControlLabel>
+    <FormControlContext.Consumer>
+      {({ formControlContext }) => (
+        <StyledFormControlLabel
+          htmlFor={htmlFor || formControlContext._generatedId}
+          error={formControlContext.error}
+          success={formControlContext.success}
+          horizontal={formControlContext.horizontal}
+          {...other}
+        >
+          {children}
+        </StyledFormControlLabel>
+      )}
+    </FormControlContext.Consumer>
   );
 
   return formControlLabel;

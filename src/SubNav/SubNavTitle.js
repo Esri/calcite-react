@@ -2,14 +2,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledSubNavTitle } from './SubNav-styled';
 
-const SubNavTitle = ({ children, blue, ...other }) => {
-  const subNavTitle = (
-    <StyledSubNavTitle blue={blue} {...other}>
-      {children}
-    </StyledSubNavTitle>
-  );
+import { SubNavContext } from './SubNav';
 
-  return subNavTitle;
+const SubNavTitle = ({ children, ...other }) => {
+  return (
+    <SubNavContext.Consumer>
+      {({ subNavContext }) => (
+        <StyledSubNavTitle blue={subNavContext.blue} {...other}>
+          {children}
+        </StyledSubNavTitle>
+      )}
+    </SubNavContext.Consumer>
+  );
 };
 
 SubNavTitle.propTypes = {
@@ -19,8 +23,6 @@ SubNavTitle.propTypes = {
   blue: PropTypes.bool
 };
 
-SubNavTitle.defaultProps = {
-  blue: undefined
-};
+SubNavTitle.defaultProps = {};
 
 export default SubNavTitle;

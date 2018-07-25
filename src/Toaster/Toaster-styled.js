@@ -29,15 +29,19 @@ const StyledToastContainer = styled(ToastContainer)`
     }
     &--info {
       background: ${props => props.theme.palette.blue};
+      border-color: transparent;
     }
     &--success {
       background: ${props => props.theme.palette.darkGreen};
+      border-color: transparent;
     }
     &--warning {
       background: ${props => props.theme.palette.darkYellow};
+      border-color: transparent;
     }
     &--error {
       background: ${props => props.theme.palette.red};
+      border-color: transparent;
     }
   }
 
