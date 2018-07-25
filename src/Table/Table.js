@@ -1,9 +1,18 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { getChildType } from '../utils/helpers';
+import React, { createContext } from 'react';
 import { StyledTable } from './Table-styled';
 
-import { TableHeader, TableBody } from './';
+const TableContext = createContext({
+  tableContext: {
+    blue: undefined,
+    striped: undefined,
+    plain: undefined,
+    noTable: undefined,
+    justified: undefined,
+    noCol: undefined,
+    noRow: undefined
+  }
+});
 
 const Table = ({
   children,
@@ -16,47 +25,57 @@ const Table = ({
   noRow,
   ...other
 }) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case TableBody:
-        return React.cloneElement(child, {
-          blue,
-          striped,
-          plain,
-          noTable,
-          justified,
-          noCol,
-          noRow
-        });
-      case TableHeader:
-        return React.cloneElement(child, {
-          blue,
-          plain,
-          noTable,
-          justified,
-          noCol,
-          noRow
-        });
-      default:
-        return child;
-    }
-  });
+  const tableContext = {
+    blue,
+    striped,
+    plain,
+    noTable,
+    justified,
+    noCol,
+    noRow
+  };
 
-  const table = (
-    <StyledTable
-      blue={blue}
-      plain={plain}
-      noTable={noTable}
-      noCol={noCol}
-      noRow={noRow}
-      {...other}
-    >
-      {childrenWithProps}
-    </StyledTable>
+  // const childArray = React.Children.toArray(children);
+  // const childrenWithProps = childArray.map((child, i) => {
+  //   switch (getChildType(child)) {
+  //     case TableBody:
+  //       return React.cloneElement(child, {
+  //         blue,
+  //         striped,
+  //         plain,
+  //         noTable,
+  //         justified,
+  //         noCol,
+  //         noRow
+  //       });
+  //     case TableHeader:
+  //       return React.cloneElement(child, {
+  //         blue,
+  //         plain,
+  //         noTable,
+  //         justified,
+  //         noCol,
+  //         noRow
+  //       });
+  //     default:
+  //       return child;
+  //   }
+  // });
+
+  return (
+    <TableContext.Provider value={{ tableContext }}>
+      <StyledTable
+        blue={blue}
+        plain={plain}
+        noTable={noTable}
+        noCol={noCol}
+        noRow={noRow}
+        {...other}
+      >
+        {children}
+      </StyledTable>
+    </TableContext.Provider>
   );
-
-  return table;
 };
 
 Table.propTypes = {
@@ -80,4 +99,4 @@ Table.propTypes = {
 
 Table.defaultProps = {};
 
-export default Table;
+export { Table as default, TableContext };

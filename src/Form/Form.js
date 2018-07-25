@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
 import { StyledForm } from './Form-styled';
 
-const FormContext = createContext();
+const FormContext = createContext({ formContext: { noValidation: false } });
 
 const Form = ({ children, horizontal, noValidation, ...other }) => {
   const formContext = {

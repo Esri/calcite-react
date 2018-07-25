@@ -2,31 +2,26 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledTableHeaderCell } from './Table-styled';
 
-const TableHeaderCell = ({
-  children,
-  blue,
-  plain,
-  noTable,
-  justified,
-  noCol,
-  noRow,
-  ...other
-}) => {
-  const tableHeaderCell = (
-    <StyledTableHeaderCell
-      blue={blue}
-      plain={plain}
-      noTable={noTable}
-      justified={justified}
-      noCol={noCol}
-      noRow={noRow}
-      {...other}
-    >
-      {children}
-    </StyledTableHeaderCell>
-  );
+import { TableContext } from './Table';
 
-  return tableHeaderCell;
+const TableHeaderCell = ({ children, ...other }) => {
+  return (
+    <TableContext.Consumer>
+      {({ tableContext }) => (
+        <StyledTableHeaderCell
+          blue={tableContext.blue}
+          plain={tableContext.plain}
+          noTable={tableContext.noTable}
+          justified={tableContext.justified}
+          noCol={tableContext.noCol}
+          noRow={tableContext.noRow}
+          {...other}
+        >
+          {children}
+        </StyledTableHeaderCell>
+      )}
+    </TableContext.Consumer>
+  );
 };
 
 TableHeaderCell.propTypes = {

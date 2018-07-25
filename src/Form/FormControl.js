@@ -4,7 +4,14 @@ import uniqid from 'uniqid';
 import { StyledFormControl } from './Form-styled';
 
 import { FormContext } from './Form';
-const FormControlContext = createContext();
+const FormControlContext = createContext({
+  formControlContext: {
+    horizontal: undefined,
+    error: undefined,
+    success: undefined,
+    _generatedId: undefined
+  }
+});
 
 const FormControl = ({
   children,

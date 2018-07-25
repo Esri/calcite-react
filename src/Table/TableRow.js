@@ -1,54 +1,45 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getChildType } from '../utils/helpers';
 import { StyledTableRow } from './Table-styled';
 
-import { TableCell } from './';
+import { TableContext } from './Table';
 
-const TableRow = ({
-  children,
-  blue,
-  striped,
-  plain,
-  noTable,
-  justified,
-  noCol,
-  noRow,
-  ...other
-}) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case TableCell:
-        return React.cloneElement(child, {
-          blue,
-          striped,
-          plain,
-          noTable,
-          justified,
-          noCol,
-          noRow
-        });
-      default:
-        return child;
-    }
-  });
+const TableRow = ({ children, ...other }) => {
+  // const childArray = React.Children.toArray(children);
+  // const childrenWithProps = childArray.map((child, i) => {
+  //   switch (getChildType(child)) {
+  //     case TableCell:
+  //       return React.cloneElement(child, {
+  //         blue,
+  //         striped,
+  //         plain,
+  //         noTable,
+  //         justified,
+  //         noCol,
+  //         noRow
+  //       });
+  //     default:
+  //       return child;
+  //   }
+  // });
 
-  const tableRow = (
-    <StyledTableRow
-      blue={blue}
-      striped={striped}
-      plain={plain}
-      noTable={noTable}
-      noCol={noCol}
-      noRow={noRow}
-      {...other}
-    >
-      {childrenWithProps}
-    </StyledTableRow>
+  return (
+    <TableContext.Consumer>
+      {({ tableContext }) => (
+        <StyledTableRow
+          blue={tableContext.blue}
+          striped={tableContext.striped}
+          plain={tableContext.plain}
+          noTable={tableContext.noTable}
+          noCol={tableContext.noCol}
+          noRow={tableContext.noRow}
+          {...other}
+        >
+          {children}
+        </StyledTableRow>
+      )}
+    </TableContext.Consumer>
   );
-
-  return tableRow;
 };
 
 TableRow.propTypes = {

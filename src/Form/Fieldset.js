@@ -4,7 +4,11 @@ import React, { createContext } from 'react';
 import { StyledFieldset } from './Form-styled';
 
 import { FormControlContext } from './FormControl';
-const FieldsetContext = createContext();
+const FieldsetContext = createContext({
+  fieldsetContext: {
+    name: undefined
+  }
+});
 
 const Fieldset = ({ children, name, ...other }) => {
   const fieldsetContext = {

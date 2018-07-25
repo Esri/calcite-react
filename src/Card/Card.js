@@ -2,7 +2,12 @@ import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
 import { StyledCard } from './Card-styled';
 
-const CardContext = createContext();
+const CardContext = createContext({
+  cardContext: {
+    shaped: undefined,
+    wide: undefined
+  }
+});
 
 const Card = ({ children, bar, shaped, wide, withComponent, ...other }) => {
   const cardContext = {

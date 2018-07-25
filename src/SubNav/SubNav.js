@@ -5,7 +5,11 @@ import { StyledSubNav, StyledSubNavLeftContent } from './SubNav-styled';
 
 import { SubNavTitle, SubNavList, SubNavActions } from './';
 
-const SubNavContext = createContext();
+const SubNavContext = createContext({
+  subNavContext: {
+    blue: undefined
+  }
+});
 
 const SubNav = ({ children, blue, overlayGradient, ...other }) => {
   const subNavContext = {

@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 
 import { StyledList } from './List-styled';
 
-const ListContext = createContext();
+const ListContext = createContext({
+  listContext: {
+    nested: undefined,
+    open: undefined
+  }
+});
 
 class List extends Component {
   render() {

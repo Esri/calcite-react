@@ -9,19 +9,17 @@ import {
 
 import Button from '../Button';
 
+import { FormControlContext } from '../Form/FormControl';
+
 const TextField = ({
   children,
   type,
   value,
-  error,
-  success,
   search,
   fullWidth,
   minimal,
   horizontal,
   id,
-  _generatedId,
-  name,
   onChange,
   leftAdornment,
   rightAdornment,
@@ -53,36 +51,44 @@ const TextField = ({
 
   if (!leftAdornment && !rightAdornment) {
     return (
-      <TextFieldArea
-        value={value}
-        error={error}
-        success={success}
-        search={search}
-        fullWidth={fullWidth}
-        minimal={minimal}
-        id={id || _generatedId}
-        onChange={onChange}
-        {...other}
-      />
+      <FormControlContext.Consumer>
+        {({ formControlContext }) => (
+          <TextFieldArea
+            value={value}
+            error={formControlContext.error}
+            success={formControlContext.success}
+            search={search}
+            fullWidth={fullWidth}
+            minimal={minimal}
+            id={id || formControlContext._generatedId}
+            onChange={onChange}
+            {...other}
+          />
+        )}
+      </FormControlContext.Consumer>
     );
   }
 
   return (
-    <StyledTextFieldAdornmentWrapper>
-      {getAdornment(leftAdornment)}
-      <TextFieldArea
-        value={value}
-        error={error}
-        success={success}
-        search={search}
-        fullWidth={fullWidth}
-        minimal={minimal}
-        id={id || _generatedId}
-        onChange={onChange}
-        {...other}
-      />
-      {getAdornment(rightAdornment)}
-    </StyledTextFieldAdornmentWrapper>
+    <FormControlContext.Consumer>
+      {({ formControlContext }) => (
+        <StyledTextFieldAdornmentWrapper>
+          {getAdornment(leftAdornment)}
+          <TextFieldArea
+            value={value}
+            error={formControlContext.error}
+            success={formControlContext.success}
+            search={search}
+            fullWidth={fullWidth}
+            minimal={minimal}
+            id={id || formControlContext._generatedId}
+            onChange={onChange}
+            {...other}
+          />
+          {getAdornment(rightAdornment)}
+        </StyledTextFieldAdornmentWrapper>
+      )}
+    </FormControlContext.Consumer>
   );
 };
 

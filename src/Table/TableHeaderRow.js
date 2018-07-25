@@ -1,44 +1,41 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getChildType } from '../utils/helpers';
 import { StyledTableHeaderRow } from './Table-styled';
 
-import { TableHeaderCell } from './';
+import { TableContext } from './Table';
 
-const TableHeaderRow = ({
-  children,
-  blue,
-  plain,
-  noTable,
-  justified,
-  noCol,
-  noRow,
-  ...other
-}) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case TableHeaderCell:
-        return React.cloneElement(child, {
-          blue,
-          plain,
-          noTable,
-          justified,
-          noCol,
-          noRow
-        });
-      default:
-        return child;
-    }
-  });
+const TableHeaderRow = ({ children, ...other }) => {
+  // const childArray = React.Children.toArray(children);
+  // const childrenWithProps = childArray.map((child, i) => {
+  //   switch (getChildType(child)) {
+  //     case TableHeaderCell:
+  //       return React.cloneElement(child, {
+  //         blue,
+  //         plain,
+  //         noTable,
+  //         justified,
+  //         noCol,
+  //         noRow
+  //       });
+  //     default:
+  //       return child;
+  //   }
+  // });
 
-  const tableHeaderRow = (
-    <StyledTableHeaderRow blue={blue} noCol={noCol} noRow={noRow} {...other}>
-      {childrenWithProps}
-    </StyledTableHeaderRow>
+  return (
+    <TableContext.Consumer>
+      {({ tableContext }) => (
+        <StyledTableHeaderRow
+          blue={tableContext.blue}
+          noCol={tableContext.noCol}
+          noRow={tableContext.noRow}
+          {...other}
+        >
+          {children}
+        </StyledTableHeaderRow>
+      )}
+    </TableContext.Consumer>
   );
-
-  return tableHeaderRow;
 };
 
 TableHeaderRow.propTypes = {

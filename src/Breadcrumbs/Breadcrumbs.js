@@ -2,7 +2,11 @@ import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
 import { StyledBreadcrumbs } from './Breadcrumbs-styled';
 
-const BreadcrumbsContext = createContext();
+const BreadcrumbsContext = createContext({
+  breadcrumbsContext: {
+    white: undefined
+  }
+});
 
 const Breadcrumbs = ({ children, white, ...other }) => {
   const breadcrumbsContext = {
