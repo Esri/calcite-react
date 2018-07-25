@@ -5,23 +5,6 @@ import { StyledTableHeaderRow } from './Table-styled';
 import { TableContext } from './Table';
 
 const TableHeaderRow = ({ children, ...other }) => {
-  // const childArray = React.Children.toArray(children);
-  // const childrenWithProps = childArray.map((child, i) => {
-  //   switch (getChildType(child)) {
-  //     case TableHeaderCell:
-  //       return React.cloneElement(child, {
-  //         blue,
-  //         plain,
-  //         noTable,
-  //         justified,
-  //         noCol,
-  //         noRow
-  //       });
-  //     default:
-  //       return child;
-  //   }
-  // });
-
   return (
     <TableContext.Consumer>
       {({ tableContext }) => (

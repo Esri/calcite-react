@@ -9,22 +9,6 @@ import {
 import { ListContext } from './List';
 
 const ListItem = ({ children, leftNode, rightNode, ...other }) => {
-  // const childArray = React.Children.toArray(children);
-  // const childrenWithProps = childArray.map((child, i) => {
-  //   switch (getChildType(child)) {
-  //     case ListItemTitle:
-  //       return React.cloneElement(child, {
-  //         nested
-  //       });
-  //     case ListItemSubtitle:
-  //       return React.cloneElement(child, {
-  //         nested
-  //       });
-  //     default:
-  //       return child;
-  //   }
-  // });
-
   const getLeftNode = (listContext, leftNode) => {
     if (leftNode) {
       return (

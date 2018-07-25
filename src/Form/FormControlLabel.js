@@ -5,19 +5,7 @@ import { StyledFormControlLabel } from './Form-styled';
 import { FormControlContext } from './FormControl';
 
 const FormControlLabel = ({ children, htmlFor, ...other }) => {
-  // const childArray = React.Children.toArray(children);
-  // const childrenWithProps = childArray.map((child, i) => {
-  //   switch (getChildType(child)) {
-  //     case StyledFormControlLabelText:
-  //       return React.cloneElement(child, {
-  //         horizontal
-  //       });
-  //     default:
-  //       return child;
-  //   }
-  // });
-
-  const formControlLabel = (
+  return (
     <FormControlContext.Consumer>
       {({ formControlContext }) => (
         <StyledFormControlLabel
@@ -32,8 +20,6 @@ const FormControlLabel = ({ children, htmlFor, ...other }) => {
       )}
     </FormControlContext.Consumer>
   );
-
-  return formControlLabel;
 };
 
 FormControlLabel.propTypes = {

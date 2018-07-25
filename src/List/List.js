@@ -16,25 +16,6 @@ class List extends Component {
       nested: this.props.nested,
       open: this.props.open
     };
-    // const childArray = React.Children.toArray(this.props.children);
-    // const childrenWithProps = childArray.map((child, i) => {
-    //   switch (getChildType(child)) {
-    //     case ListHeader:
-    //       return React.cloneElement(child, {
-    //         nested: this.props.nested,
-    //         open: this.props.open
-    //       });
-    //     case ListItem:
-    //       return React.cloneElement(child, {
-    //         nested: this.props.nested,
-    //         open: this.props.open
-    //       });
-    //     default:
-    //       return React.cloneElement(child, {
-    //         nested: true
-    //       });
-    //   }
-    // });
 
     let listMaxHeight = 'none';
     if (this.props.open === false) {

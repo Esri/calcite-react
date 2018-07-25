@@ -14,31 +14,6 @@ const Fieldset = ({ children, name, ...other }) => {
   const fieldsetContext = {
     name
   };
-  // const childArray = React.Children.toArray(children);
-  // const childrenWithProps = childArray.map((child, i) => {
-  //   switch (getChildType(child)) {
-  //     case Radio:
-  //       return React.cloneElement(child, {
-  //         name: child.props.name || name,
-  //         error,
-  //         success
-  //       });
-  //     case Legend:
-  //       return React.cloneElement(child, {
-  //         horizontal,
-  //         error,
-  //         success
-  //       });
-  //     case FormHelperText:
-  //       return React.cloneElement(child, {
-  //         horizontal,
-  //         error,
-  //         success
-  //       });
-  //     default:
-  //       return child;
-  //   }
-  // });
 
   return (
     <FormControlContext.Consumer>

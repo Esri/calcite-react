@@ -35,33 +35,6 @@ const Table = ({
     noRow
   };
 
-  // const childArray = React.Children.toArray(children);
-  // const childrenWithProps = childArray.map((child, i) => {
-  //   switch (getChildType(child)) {
-  //     case TableBody:
-  //       return React.cloneElement(child, {
-  //         blue,
-  //         striped,
-  //         plain,
-  //         noTable,
-  //         justified,
-  //         noCol,
-  //         noRow
-  //       });
-  //     case TableHeader:
-  //       return React.cloneElement(child, {
-  //         blue,
-  //         plain,
-  //         noTable,
-  //         justified,
-  //         noCol,
-  //         noRow
-  //       });
-  //     default:
-  //       return child;
-  //   }
-  // });
-
   return (
     <TableContext.Provider value={{ tableContext }}>
       <StyledTable

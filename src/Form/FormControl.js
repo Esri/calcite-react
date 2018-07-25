@@ -29,40 +29,6 @@ const FormControl = ({
     _generatedId
   };
 
-  // const childArray = React.Children.toArray(children);
-  // const childrenWithProps = childArray.map((child, i) => {
-  //   switch (getChildType(child)) {
-  //     case FormControlLabel:
-  //       return React.cloneElement(child, {
-  //         error,
-  //         success,
-  //         _generatedId
-  //       });
-  //     case FormHelperText:
-  //       return React.cloneElement(child, {
-  //         error,
-  //         success
-  //       });
-  //     case TextField:
-  //       return React.cloneElement(child, {
-  //         error,
-  //         success,
-  //         _generatedId
-  //       });
-  //     case Select:
-  //       return React.cloneElement(child, {
-  //         _generatedId
-  //       });
-  //     case Fieldset:
-  //       return React.cloneElement(child, {
-  //         error,
-  //         success
-  //       });
-  //     default:
-  //       return child;
-  //   }
-  // });
-
   const formControl = (
     <FormContext.Consumer>
       {({ formContext }) => (

@@ -15,17 +15,6 @@ const SubNav = ({ children, blue, overlayGradient, ...other }) => {
   const subNavContext = {
     blue
   };
-  // const childArray = React.Children.toArray(children);
-  // const childrenWithProps = childArray.map((child, i) => {
-  //   switch (getChildType(child)) {
-  //     case SubNavTitle:
-  //       return React.cloneElement(child, {
-  //         blue
-  //       });
-  //     default:
-  //       return child;
-  //   }
-  // });
 
   const getLeftContent = function() {
     return children.filter(child => {

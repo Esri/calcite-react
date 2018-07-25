@@ -1,27 +1,23 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { getChildType } from '../utils/helpers';
+import React, { createContext } from 'react';
 import { StyledButtonGroup } from './Button-styled';
-import Button from './';
+
+const ButtonGroupContext = createContext({
+  buttonGroupContext: {
+    grouped: undefined
+  }
+});
 
 const ButtonGroup = ({ children, ...other }) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case Button:
-        return React.cloneElement(child, {
-          grouped: true
-        });
-      default:
-        return child;
-    }
-  });
+  const buttonGroupContext = {
+    grouped: true
+  };
 
-  const buttonGroup = (
-    <StyledButtonGroup {...other}>{childrenWithProps}</StyledButtonGroup>
+  return (
+    <ButtonGroupContext.Provider value={{ buttonGroupContext }}>
+      <StyledButtonGroup {...other}>{children}</StyledButtonGroup>
+    </ButtonGroupContext.Provider>
   );
-
-  return buttonGroup;
 };
 
 ButtonGroup.propTypes = {
@@ -31,4 +27,4 @@ ButtonGroup.propTypes = {
 
 ButtonGroup.defaultProps = {};
 
-export default ButtonGroup;
+export { ButtonGroup as default, ButtonGroupContext };
