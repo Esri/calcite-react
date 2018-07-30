@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
-import { Manager, Target, Popper } from 'react-popper';
+import { Manager, Reference, Popper } from 'react-popper';
 import matchSorter from 'match-sorter';
+import uniqid from 'uniqid';
 
 import {
   StyledSearchContainer,
@@ -27,6 +28,14 @@ class Search extends Component {
       itemsToShow: this.props.children || this.props.items
     };
     this.userInputtedValue = '';
+    this._generatedId = uniqid();
+  }
+
+  componentDidMount() {
+    this.props.inputRef &&
+      this.props.inputRef(
+        document.getElementById(`${this._generatedId}Reference`)
+      );
   }
 
   itemToString = item => {
@@ -92,9 +101,9 @@ class Search extends Component {
     }
     if (changes.hasOwnProperty('inputValue')) {
       if (changes.type === Downshift.stateChangeTypes.keyDownEscape) {
-        inputValue = this.userInputtedValue;
+        inputValue = this.userInputtedValue || '';
       } else {
-        inputValue = changes.inputValue;
+        inputValue = changes.inputValue || '';
         this.userInputtedValue = changes.inputValue;
       }
     }
@@ -120,10 +129,11 @@ class Search extends Component {
       (changes.type === Downshift.stateChangeTypes.keyDownArrowUp ||
         changes.type === Downshift.stateChangeTypes.keyDownArrowDown)
     ) {
-      inputValue = this.itemToString(newItemsToShow[changes.highlightedIndex]);
+      inputValue =
+        this.itemToString(newItemsToShow[changes.highlightedIndex]) || '';
     }
     if (isClosingMenu) {
-      inputValue = this.itemToString(selectedItemVal);
+      inputValue = this.itemToString(selectedItemVal) || '';
       this.userInputtedValue = selectedItemVal;
     }
 
@@ -136,7 +146,13 @@ class Search extends Component {
 
   getClearSearchIcon = () => {
     if (this.props.inputValue || this.props.selectedItem) {
-      return <StyledCloseCircleIcon onClick={this.props.onRequestClear} />;
+      return (
+        <StyledCloseCircleIcon
+          onClick={() => {
+            this.props.onRequestClear();
+          }}
+        />
+      );
     }
   };
 
@@ -231,36 +247,48 @@ class Search extends Component {
               <StyledSearchInputWrapper
                 {...getRootProps({ refKey: 'innerRef' })}
               >
-                <Target>
-                  <StyledSearch
-                    {...getInputProps({
-                      placeholder: placeholder,
-                      minimal: minimal,
-                      ...other
-                    })}
-                  />
-                </Target>
+                <Reference style={{ display: 'inline-block' }}>
+                  {({ ref }) => (
+                    <StyledSearch
+                      {...getInputProps({
+                        placeholder: placeholder,
+                        minimal: minimal,
+                        ...other
+                      })}
+                      innerRef={ref}
+                      id={`${this._generatedId}Reference`}
+                    />
+                  )}
+                </Reference>
 
                 {isOpen && this.state.itemsToShow ? (
                   <Popper
+                    positionFixed={this.props.positionFixed}
                     style={{
                       ...this.getFullWidthStyle(fullWidth),
                       ...PopperStyle
                     }}
                     placement={'bottom-start'}
                   >
-                    <Menu
-                      fullWidth={fullWidth}
-                      style={menuStyle}
-                      withComponent={<StyledSelectMenu />}
-                    >
-                      {this.getMenuItems(
-                        this.state.itemsToShow,
-                        getItemProps,
-                        highlightedIndex,
-                        selectedItem
-                      )}
-                    </Menu>
+                    {({ ref, style, placement, arrowProps }) => (
+                      <Menu
+                        innerRef={ref}
+                        fullWidth={fullWidth}
+                        style={{
+                          ...style,
+                          ...menuStyle
+                        }}
+                        data-placement={placement}
+                        withComponent={<StyledSelectMenu />}
+                      >
+                        {this.getMenuItems(
+                          this.state.itemsToShow,
+                          getItemProps,
+                          highlightedIndex,
+                          selectedItem
+                        )}
+                      </Menu>
+                    )}
                   </Popper>
                 ) : null}
               </StyledSearchInputWrapper>
