@@ -331,6 +331,8 @@ Search.propTypes = {
   shortcutCharacter: PropTypes.string,
   /** Text used in the shortcut tooltip to describe what the shortcut is */
   shortcutTooltip: PropTypes.node,
+  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
+  positionFixed: PropTypes.bool,
   /** You can add search options as children if you want more control over the item rendering. Search MenuItems can take either an item object that maps to your dataSourceConfig or you can manually set the label and value props on MenuItems */
   children: PropTypes.node
 };
