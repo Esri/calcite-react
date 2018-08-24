@@ -86,6 +86,7 @@ class ArcgisAccount extends Component {
         open={this.state.open}
         onRequestClose={this.closeAccountControl}
         placement="bottom-end"
+        positionFixed
       >
         <ArcgisAccountMenu
           user={this.props.user}

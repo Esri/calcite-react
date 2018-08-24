@@ -141,7 +141,9 @@ Select.propTypes = {
   /** A style variant for select inputs */
   minimal: PropTypes.bool,
   /** Style prop applied to the menu wrapper */
-  menuStyle: PropTypes.object
+  menuStyle: PropTypes.object,
+  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
+  positionFixed: PropTypes.bool
 };
 
 Select.defaultProps = {

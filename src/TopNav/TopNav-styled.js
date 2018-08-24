@@ -17,7 +17,8 @@ const StyledTopNavActions = styled.div`
   align-items: center;
   padding: 0 ${props => props.theme.baseline};
 
-  > * {
+  > a,
+  > button {
     margin-left: 0.75em;
 
     &:first-child {

@@ -130,7 +130,9 @@ Popover.propTypes = {
   /** Styles passed onto the target element container div */
   targetContainerStyles: PropTypes.object,
   /** Styles passed onto the popover container div */
-  popoverContainerStyles: PropTypes.object
+  popoverContainerStyles: PropTypes.object,
+  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
+  positionFixed: PropTypes.bool
 };
 
 Popover.defaultProps = {
