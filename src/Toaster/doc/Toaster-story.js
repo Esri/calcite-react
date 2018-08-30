@@ -169,6 +169,7 @@ storiesOf('Toaster', module)
                   <Toaster
                     open={this.state.toasterOpen}
                     onClose={this.hideToaster}
+                    autoClose={false}
                   >
                     default
                   </Toaster>
@@ -176,6 +177,7 @@ storiesOf('Toaster', module)
                     type="success"
                     open={this.state.toasterOpen}
                     onClose={this.hideToaster}
+                    autoClose={false}
                   >
                     success
                   </Toaster>
@@ -183,6 +185,7 @@ storiesOf('Toaster', module)
                     type="info"
                     open={this.state.toasterOpen}
                     onClose={this.hideToaster}
+                    autoClose={false}
                   >
                     info
                   </Toaster>
@@ -190,6 +193,7 @@ storiesOf('Toaster', module)
                     type="warning"
                     open={this.state.toasterOpen}
                     onClose={this.hideToaster}
+                    autoClose={false}
                   >
                     warning
                   </Toaster>
@@ -197,6 +201,7 @@ storiesOf('Toaster', module)
                     type="error"
                     open={this.state.toasterOpen}
                     onClose={this.hideToaster}
+                    autoClose={false}
                   >
                     error
                   </Toaster>

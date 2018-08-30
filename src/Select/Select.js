@@ -13,6 +13,8 @@ import {
 } from './Select-styled';
 import Menu from '../Menu';
 
+import { FormControlContext } from '../Form/FormControl';
+
 const Select = ({
   children,
   filterable,
@@ -20,7 +22,6 @@ const Select = ({
   minimal,
   style,
   id,
-  _generatedId,
   placeholder,
   selectedItem,
   selectedValue,
@@ -43,33 +44,43 @@ const Select = ({
 
     if (filterable) {
       return (
-        <StyledSelectInput
-          onClick={getButtonProps().onClick}
-          {...getInputProps({
-            placeholder: placeholder,
-            id: id || _generatedId,
-            fullWidth: fullWidth,
-            minimal: minimal,
-            style: style,
-            ...other
-          })}
-          innerRef={ref}
-        />
+        <FormControlContext.Consumer>
+          {({ formControlContext }) => (
+            <StyledSelectInput
+              onClick={getButtonProps().onClick}
+              {...getInputProps({
+                placeholder: placeholder,
+                id: id || formControlContext._generatedId,
+                fullWidth: fullWidth,
+                minimal: minimal,
+                style: style,
+                ...other
+              })}
+              innerRef={ref}
+            />
+          )}
+        </FormControlContext.Consumer>
       );
     }
     return (
-      <StyledSelectButton
-        {...getButtonProps()}
-        {...getInputProps()}
-        fullWidth={fullWidth}
-        minimal={minimal}
-        innerRef={ref}
-        id={id || _generatedId}
-        style={style}
-        {...other}
-      >
-        {itemToString(selectedItem) ? itemToString(selectedItem) : placeholder}
-      </StyledSelectButton>
+      <FormControlContext.Consumer>
+        {({ formControlContext }) => (
+          <StyledSelectButton
+            {...getButtonProps()}
+            {...getInputProps()}
+            fullWidth={fullWidth}
+            minimal={minimal}
+            innerRef={ref}
+            id={id || formControlContext._generatedId}
+            style={style}
+            {...other}
+          >
+            {itemToString(selectedItem)
+              ? itemToString(selectedItem)
+              : placeholder}
+          </StyledSelectButton>
+        )}
+      </FormControlContext.Consumer>
     );
   }
 

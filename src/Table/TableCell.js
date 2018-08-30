@@ -2,33 +2,27 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledTableCell } from './Table-styled';
 
-const TableCell = ({
-  children,
-  blue,
-  striped,
-  plain,
-  noTable,
-  justified,
-  noCol,
-  noRow,
-  ...other
-}) => {
-  const tableCell = (
-    <StyledTableCell
-      blue={blue}
-      striped={striped}
-      plain={plain}
-      noTable={noTable}
-      justified={justified}
-      noCol={noCol}
-      noRow={noRow}
-      {...other}
-    >
-      {children}
-    </StyledTableCell>
-  );
+import { TableContext } from './Table';
 
-  return tableCell;
+const TableCell = ({ children, ...other }) => {
+  return (
+    <TableContext.Consumer>
+      {({ tableContext }) => (
+        <StyledTableCell
+          blue={tableContext.blue}
+          striped={tableContext.striped}
+          plain={tableContext.plain}
+          noTable={tableContext.noTable}
+          justified={tableContext.justified}
+          noCol={tableContext.noCol}
+          noRow={tableContext.noRow}
+          {...other}
+        >
+          {children}
+        </StyledTableCell>
+      )}
+    </TableContext.Consumer>
+  );
 };
 
 TableCell.propTypes = {

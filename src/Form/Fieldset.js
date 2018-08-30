@@ -1,46 +1,31 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { getChildType } from '../utils/helpers';
+import React, { createContext } from 'react';
 
 import { StyledFieldset } from './Form-styled';
 
-import { Legend, FormHelperText } from './';
-import Radio from '../Radio';
+import { FormControlContext } from './FormControl';
+const FieldsetContext = createContext({
+  fieldsetContext: {
+    name: undefined
+  }
+});
 
-const Fieldset = ({ children, name, horizontal, error, success, ...other }) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case Radio:
-        return React.cloneElement(child, {
-          name: child.props.name || name,
-          error,
-          success
-        });
-      case Legend:
-        return React.cloneElement(child, {
-          horizontal,
-          error,
-          success
-        });
-      case FormHelperText:
-        return React.cloneElement(child, {
-          horizontal,
-          error,
-          success
-        });
-      default:
-        return child;
-    }
-  });
+const Fieldset = ({ children, name, ...other }) => {
+  const fieldsetContext = {
+    name
+  };
 
-  const fieldset = (
-    <StyledFieldset horizontal={horizontal} {...other}>
-      {childrenWithProps}
-    </StyledFieldset>
+  return (
+    <FormControlContext.Consumer>
+      {({ formControlContext }) => (
+        <FieldsetContext.Provider value={{ fieldsetContext }}>
+          <StyledFieldset horizontal={formControlContext.horizontal} {...other}>
+            {children}
+          </StyledFieldset>
+        </FieldsetContext.Provider>
+      )}
+    </FormControlContext.Consumer>
   );
-
-  return fieldset;
 };
 
 Fieldset.propTypes = {
@@ -52,4 +37,4 @@ Fieldset.propTypes = {
 
 Fieldset.defaultProps = {};
 
-export default Fieldset;
+export { Fieldset as default, FieldsetContext };

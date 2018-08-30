@@ -36,7 +36,7 @@ storiesOf('Form', module)
             </FormControl>
             <FormControl>
               <FormControlLabel>State:</FormControlLabel>
-              <Select selectedValue="co" fullWidth>
+              <Select selectedValue="co" onChange={() => true} fullWidth>
                 <MenuItem value="ca">California</MenuItem>
                 <MenuItem value="co">Colorado</MenuItem>
               </Select>
@@ -46,7 +46,11 @@ storiesOf('Form', module)
               <FormHelperText>City checks out</FormHelperText>
             </FormControl>
             <FormControl>
-              <DatePicker date={null} focused={false} />
+              <DatePicker
+                date={null}
+                focused={false}
+                onFocusChange={() => true}
+              />
             </FormControl>
             <FormControl>
               <Fieldset name="storyRadioGroup">

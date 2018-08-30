@@ -1,31 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getChildType } from '../utils/helpers';
 import { StyledCardContent } from './Card-styled';
 
-import { CardTitle } from './';
+import { CardContext } from './Card';
 
-const CardContent = ({ children, wide, shaped, ...other }) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case CardTitle:
-        return React.cloneElement(child, {
-          wide,
-          shaped
-        });
-      default:
-        return child;
-    }
-  });
-
-  const panelText = (
-    <StyledCardContent shaped={shaped} wide={wide} {...other}>
-      {childrenWithProps}
-    </StyledCardContent>
+const CardContent = ({ children, ...other }) => {
+  return (
+    <CardContext.Consumer>
+      {({ cardContext }) => (
+        <StyledCardContent {...cardContext} {...other}>
+          {children}
+        </StyledCardContent>
+      )}
+    </CardContext.Consumer>
   );
-
-  return panelText;
 };
 
 CardContent.propTypes = {

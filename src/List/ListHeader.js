@@ -2,10 +2,22 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledListHeader } from './List-styled';
 
-const ListHeader = ({ children, ...other }) => {
-  const listHeader = <StyledListHeader {...other}>{children}</StyledListHeader>;
+import { ListContext } from './List';
 
-  return listHeader;
+const ListHeader = ({ children, ...other }) => {
+  return (
+    <ListContext.Consumer>
+      {({ listContext }) => (
+        <StyledListHeader
+          nested={listContext.nested}
+          open={listContext.open}
+          {...other}
+        >
+          {children}
+        </StyledListHeader>
+      )}
+    </ListContext.Consumer>
+  );
 };
 
 ListHeader.propTypes = {

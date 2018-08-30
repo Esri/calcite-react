@@ -1,31 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
-import { getChildType } from '../utils/helpers';
 
 import { StyledList } from './List-styled';
-import { ListHeader, ListItem } from './';
+
+const ListContext = createContext({
+  listContext: {
+    nested: undefined,
+    open: undefined
+  }
+});
 
 class List extends Component {
   render() {
-    const childArray = React.Children.toArray(this.props.children);
-    const childrenWithProps = childArray.map((child, i) => {
-      switch (getChildType(child)) {
-        case ListHeader:
-          return React.cloneElement(child, {
-            nested: this.props.nested,
-            open: this.props.open
-          });
-        case ListItem:
-          return React.cloneElement(child, {
-            nested: this.props.nested,
-            open: this.props.open
-          });
-        default:
-          return React.cloneElement(child, {
-            nested: true
-          });
-      }
-    });
+    const listContext = {
+      nested: this.props.nested,
+      open: this.props.open
+    };
 
     let listMaxHeight = 'none';
     if (this.props.open === false) {
@@ -39,21 +29,21 @@ class List extends Component {
       listMaxHeight = listMaxHeight + 'px';
     }
 
-    const list = (
-      <StyledList
-        nested={this.props.nested}
-        open={this.props.open}
-        innerRef={el => {
-          this.listNode = el;
-        }}
-        maxHeight={listMaxHeight}
-        {...this.props}
-      >
-        {childrenWithProps}
-      </StyledList>
+    return (
+      <ListContext.Provider value={{ listContext }}>
+        <StyledList
+          nested={this.props.nested}
+          open={this.props.open}
+          innerRef={el => {
+            this.listNode = el;
+          }}
+          maxHeight={listMaxHeight}
+          {...this.props}
+        >
+          {this.props.children}
+        </StyledList>
+      </ListContext.Provider>
     );
-
-    return list;
   }
 }
 
@@ -68,4 +58,4 @@ List.propTypes = {
 
 List.defaultProps = {};
 
-export default List;
+export { List as default, ListContext };
