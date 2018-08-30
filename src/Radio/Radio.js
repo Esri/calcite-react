@@ -6,26 +6,31 @@ import {
   StyledRadioGroup
 } from './Radio-styled';
 
-const Radio = ({ children, value, name, checked, onChange, ...other }) => {
+import { FieldsetContext } from '../Form/Fieldset';
+
+const Radio = ({ children, value, checked, onChange, ...other }) => {
   let radioLabel;
   if (children) {
     radioLabel = <StyledRadioLabel>{children}</StyledRadioLabel>;
   }
-  const radio = (
-    <StyledRadioGroup>
-      <StyledRadio
-        value={value}
-        name={name}
-        checked={checked}
-        onChange={onChange}
-        type="radio"
-        {...other}
-      />
-      {radioLabel}
-    </StyledRadioGroup>
-  );
 
-  return radio;
+  return (
+    <FieldsetContext.Consumer>
+      {({ fieldsetContext }) => (
+        <StyledRadioGroup>
+          <StyledRadio
+            value={value}
+            name={fieldsetContext.name}
+            checked={checked}
+            onChange={onChange}
+            type="radio"
+            {...other}
+          />
+          {radioLabel}
+        </StyledRadioGroup>
+      )}
+    </FieldsetContext.Consumer>
+  );
 };
 
 Radio.propTypes = {

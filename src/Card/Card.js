@@ -1,47 +1,27 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { getChildType } from '../utils/helpers';
+import React, { createContext } from 'react';
 import { StyledCard } from './Card-styled';
 
-import { CardImage, CardContent } from './';
+const CardContext = createContext({
+  cardContext: {
+    shaped: undefined,
+    wide: undefined
+  }
+});
 
 const Card = ({ children, bar, shaped, wide, withComponent, ...other }) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case CardImage:
-        return React.cloneElement(child, {
-          shaped,
-          wide
-        });
-      case CardContent:
-        return React.cloneElement(child, {
-          shaped,
-          wide
-        });
-      default:
-        return child;
-    }
-  });
+  const cardContext = {
+    shaped,
+    wide
+  };
 
-  let customCard;
-  if (withComponent) {
-    customCard = React.cloneElement(withComponent, {
-      bar: bar,
-      shaped: shaped,
-      wide: wide,
-      ...other,
-      children: childrenWithProps
-    });
-  }
-
-  const card = (
-    <StyledCard bar={bar} shaped={shaped} wide={wide} {...other}>
-      {childrenWithProps}
-    </StyledCard>
+  return (
+    <CardContext.Provider value={{ cardContext }}>
+      <StyledCard bar={bar} shaped={shaped} wide={wide} {...other}>
+        {children}
+      </StyledCard>
+    </CardContext.Provider>
   );
-
-  return withComponent ? customCard : card;
 };
 
 Card.propTypes = {
@@ -59,4 +39,4 @@ Card.propTypes = {
 
 Card.defaultProps = {};
 
-export default Card;
+export { Card as default, CardContext };

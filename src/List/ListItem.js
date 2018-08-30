@@ -1,65 +1,49 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getChildType } from '../utils/helpers';
 import {
   StyledListItem,
   StyledListTextContainer,
   StyledListSideContainer
 } from './List-styled';
 
-import { ListItemTitle, ListItemSubtitle } from './';
+import { ListContext } from './List';
 
-const ListItem = ({
-  children,
-  leftNode,
-  rightNode,
-  nested,
-  open,
-  ...other
-}) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case ListItemTitle:
-        return React.cloneElement(child, {
-          nested
-        });
-      case ListItemSubtitle:
-        return React.cloneElement(child, {
-          nested
-        });
-      default:
-        return child;
+const ListItem = ({ children, leftNode, rightNode, ...other }) => {
+  const getLeftNode = (listContext, leftNode) => {
+    if (leftNode) {
+      return (
+        <StyledListSideContainer nested={listContext.nested}>
+          {leftNode}
+        </StyledListSideContainer>
+      );
     }
-  });
+  };
 
-  let _leftNode;
-  if (leftNode) {
-    _leftNode = (
-      <StyledListSideContainer nested={nested}>
-        {leftNode}
-      </StyledListSideContainer>
-    );
-  }
+  const getRightNode = (listContext, rightNode) => {
+    if (rightNode) {
+      return (
+        <StyledListSideContainer nested={listContext.nested}>
+          {rightNode}
+        </StyledListSideContainer>
+      );
+    }
+  };
 
-  let _rightNode;
-  if (rightNode) {
-    _rightNode = (
-      <StyledListSideContainer nested={nested}>
-        {rightNode}
-      </StyledListSideContainer>
-    );
-  }
-
-  const listItem = (
-    <StyledListItem open={open} nested={nested} {...other}>
-      {_leftNode}
-      <StyledListTextContainer>{childrenWithProps}</StyledListTextContainer>
-      {_rightNode}
-    </StyledListItem>
+  return (
+    <ListContext.Consumer>
+      {({ listContext }) => (
+        <StyledListItem
+          open={listContext.open}
+          nested={listContext.nested}
+          {...other}
+        >
+          {getLeftNode(listContext, leftNode)}
+          <StyledListTextContainer>{children}</StyledListTextContainer>
+          {getRightNode(listContext, rightNode)}
+        </StyledListItem>
+      )}
+    </ListContext.Consumer>
   );
-
-  return listItem;
 };
 
 ListItem.propTypes = {

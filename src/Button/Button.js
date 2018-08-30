@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledButton } from './Button-styled';
 
+import { ButtonGroupContext } from './ButtonGroup';
+
 const Button = ({
   children,
   transparent,
@@ -50,52 +52,62 @@ const Button = ({
   }
 
   const link = (
-    <StyledLink
-      transparent={transparent}
-      clear={clear}
-      clearGray={clearGray}
-      clearWhite={clearWhite}
-      white={white}
-      small={small}
-      large={large}
-      fullWidth={fullWidth}
-      half={half}
-      red={red}
-      green={green}
-      iconButton={iconButton}
-      href={href}
-      {...other}
-      disabled={disabled}
-      type={type}
-    >
-      {iconPosition === 'before' ? wrappedIcon : null}
-      {children}
-      {iconPosition === 'after' ? wrappedIcon : null}
-    </StyledLink>
+    <ButtonGroupContext.Consumer>
+      {({ buttonGroupContext }) => (
+        <StyledLink
+          transparent={transparent}
+          clear={clear}
+          clearGray={clearGray}
+          clearWhite={clearWhite}
+          white={white}
+          small={small}
+          large={large}
+          fullWidth={fullWidth}
+          half={half}
+          red={red}
+          green={green}
+          iconButton={iconButton}
+          href={href}
+          disabled={disabled}
+          type={type}
+          grouped={buttonGroupContext.grouped}
+          {...other}
+        >
+          {iconPosition === 'before' ? wrappedIcon : null}
+          {children}
+          {iconPosition === 'after' ? wrappedIcon : null}
+        </StyledLink>
+      )}
+    </ButtonGroupContext.Consumer>
   );
 
   const button = (
-    <StyledButton
-      transparent={transparent}
-      clear={clear}
-      clearGray={clearGray}
-      clearWhite={clearWhite}
-      white={white}
-      small={small}
-      large={large}
-      fullWidth={fullWidth}
-      half={half}
-      red={red}
-      green={green}
-      iconButton={iconButton}
-      {...other}
-      disabled={disabled}
-      type={type}
-    >
-      {iconPosition === 'before' ? wrappedIcon : null}
-      {children}
-      {iconPosition === 'after' ? wrappedIcon : null}
-    </StyledButton>
+    <ButtonGroupContext.Consumer>
+      {({ buttonGroupContext }) => (
+        <StyledButton
+          transparent={transparent}
+          clear={clear}
+          clearGray={clearGray}
+          clearWhite={clearWhite}
+          white={white}
+          small={small}
+          large={large}
+          fullWidth={fullWidth}
+          half={half}
+          red={red}
+          green={green}
+          iconButton={iconButton}
+          disabled={disabled}
+          type={type}
+          grouped={buttonGroupContext.grouped}
+          {...other}
+        >
+          {iconPosition === 'before' ? wrappedIcon : null}
+          {children}
+          {iconPosition === 'after' ? wrappedIcon : null}
+        </StyledButton>
+      )}
+    </ButtonGroupContext.Consumer>
   );
 
   return href ? link : button;

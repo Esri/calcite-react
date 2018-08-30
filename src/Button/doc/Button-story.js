@@ -234,6 +234,18 @@ storiesOf('Button', module)
         <GuideExample label="iconButton">
           <Button iconButton icon={<AppsIcon />} onClick={action('clicked')} />
         </GuideExample>
+
+        <GuideExample
+          label="iconButton"
+          style={{ background: CalciteTheme.palette.offBlack }}
+        >
+          <Button
+            iconButton
+            white
+            icon={<AppsIcon />}
+            onClick={action('clicked')}
+          />
+        </GuideExample>
       </div>
     ))
   );

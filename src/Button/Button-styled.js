@@ -214,10 +214,20 @@ const StyledButton = styled.button`
       color: ${props => props.theme.palette.darkGray};
       border: none;
       padding: ${props => unitCalc(props.theme.baseline, 5, '/')};
+      ${props =>
+        props.white &&
+        css`
+          color: ${props => props.theme.palette.white};
+        `};
 
       &:hover {
         color: ${props => props.theme.palette.offBlack};
         background: transparent;
+        ${props =>
+          props.white &&
+          css`
+            color: ${props => props.theme.palette.lightestGray};
+          `};
       }
     `};
 

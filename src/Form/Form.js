@@ -1,26 +1,20 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { getChildType } from '../utils/helpers';
+import React, { createContext } from 'react';
 import { StyledForm } from './Form-styled';
-import { FormControl } from './';
+
+const FormContext = createContext({ formContext: { noValidation: false } });
 
 const Form = ({ children, horizontal, noValidation, ...other }) => {
-  const childArray = React.Children.toArray(children);
-  const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case FormControl:
-        return React.cloneElement(child, {
-          noValidation: child.props.noValidation || noValidation
-        });
-      default:
-        return child;
-    }
-  });
+  const formContext = {
+    noValidation
+  };
 
   const form = (
-    <StyledForm horizontal={horizontal} {...other}>
-      {childrenWithProps}
-    </StyledForm>
+    <FormContext.Provider value={{ formContext }}>
+      <StyledForm horizontal={horizontal} {...other}>
+        {children}
+      </StyledForm>
+    </FormContext.Provider>
   );
 
   return form;
@@ -37,4 +31,4 @@ Form.propTypes = {
 
 Form.defaultProps = {};
 
-export default Form;
+export { Form as default, FormContext };
