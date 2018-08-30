@@ -7,6 +7,7 @@ const StyledArcgisShare = styled.div``;
 const StyledGroupContainer = styled.div`
   border: 1px solid ${props => props.theme.palette.lightestGray};
   padding: ${props => unitCalc(props.theme.baseline, 6, '/')};
+  min-width: 180px;
   max-height: 150px;
   min-height: 95px;
   overflow-y: auto;

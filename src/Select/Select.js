@@ -227,7 +227,9 @@ Select.propTypes = {
   /** HTML prop for the Select, works together with a label's `for` prop */
   id: PropTypes.string,
   /** Style prop applied to the menu wrapper */
-  menuStyle: PropTypes.object
+  menuStyle: PropTypes.object,
+  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
+  positionFixed: PropTypes.bool
 };
 
 Select.defaultProps = {

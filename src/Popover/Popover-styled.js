@@ -10,6 +10,7 @@ const StyledPopover = styled.div`
   transition: opacity ${props => props.transitionDuration}ms
     cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2000;
+  pointer-events: none;
 
   &[data-x-out-of-boundaries] {
     display: none;
@@ -19,13 +20,14 @@ const StyledPopover = styled.div`
     props.transitionState === 'entering' &&
     css`
       opacity: 0;
+      pointer-events: auto;
     `};
 
   ${props =>
     props.transitionState === 'entered' &&
     css`
       opacity: 1;
-      pointer-events: 'auto';
+      pointer-events: auto;
     `};
 `;
 
