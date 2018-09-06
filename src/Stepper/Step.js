@@ -14,7 +14,6 @@ const Step = ({
   error,
   icon,
   vertical,
-  selectable,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
@@ -41,8 +40,8 @@ const Step = ({
     }
   });
 
-  const step = (
-    <StyledStep selectable={selectable} vertical={vertical} {...other}>
+  return (
+    <StyledStep vertical={vertical} {...other}>
       <StepIcon
         icon={icon}
         active={active}
@@ -58,8 +57,6 @@ const Step = ({
       </StyledStepTextContainer>
     </StyledStep>
   );
-
-  return step;
 };
 
 Step.propTypes = {

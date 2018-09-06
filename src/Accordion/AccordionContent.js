@@ -2,14 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledAccordionContent } from './Accordion-styled';
 
-const AccordionContent = ({ children, ...props }) => {
-  const accordionContent = (
-    <StyledAccordionContent active={props.active}>
-      {children}
-    </StyledAccordionContent>
-  );
-
-  return accordionContent;
+const AccordionContent = ({ children, ...other }) => {
+  return <StyledAccordionContent {...other}>{children}</StyledAccordionContent>;
 };
 
 AccordionContent.propTypes = {

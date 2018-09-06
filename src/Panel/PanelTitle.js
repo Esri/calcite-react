@@ -3,13 +3,11 @@ import React from 'react';
 import { StyledPanelTitle } from './Panel-styled';
 
 const PanelTitle = ({ children, ...other }) => {
-  const panelTitle = <StyledPanelTitle {...other}>{children}</StyledPanelTitle>;
-
-  return panelTitle;
+  return <StyledPanelTitle {...other}>{children}</StyledPanelTitle>;
 };
 
 PanelTitle.propTypes = {
-  /** Description TBD */
+  /** Content of the PanelTitle */
   children: PropTypes.node
 };
 

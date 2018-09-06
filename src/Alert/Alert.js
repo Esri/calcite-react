@@ -2,31 +2,21 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledAlert, StyledAlertClose } from './Alert-styled';
 
-const Alert = ({
-  children,
-  red,
-  yellow,
-  green,
-  full,
-  closeLabel,
-  onClose,
-  ...other
-}) => {
-  let alertClose;
-  if (closeLabel) {
-    alertClose = (
-      <StyledAlertClose onClick={onClose}>{closeLabel}</StyledAlertClose>
-    );
-  }
+const Alert = ({ children, closeLabel, onClose, ...other }) => {
+  const getAlertClose = closeLabel => {
+    if (closeLabel) {
+      return (
+        <StyledAlertClose onClick={onClose}>{closeLabel}</StyledAlertClose>
+      );
+    }
+  };
 
-  const alert = (
-    <StyledAlert red={red} yellow={yellow} green={green} full={full} {...other}>
+  return (
+    <StyledAlert {...other}>
       {children}
-      {alertClose}
+      {getAlertClose(closeLabel)}
     </StyledAlert>
   );
-
-  return alert;
 };
 
 Alert.propTypes = {

@@ -3,11 +3,7 @@ import React from 'react';
 import { StyledSubNavActions } from './SubNav-styled';
 
 const SubNavActions = ({ children, ...other }) => {
-  const subNavActions = (
-    <StyledSubNavActions {...other}>{children}</StyledSubNavActions>
-  );
-
-  return subNavActions;
+  return <StyledSubNavActions {...other}>{children}</StyledSubNavActions>;
 };
 
 SubNavActions.propTypes = {

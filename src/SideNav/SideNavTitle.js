@@ -3,11 +3,7 @@ import React from 'react';
 import { StyledSideNavTitle } from './SideNav-styled';
 
 const SideNavTitle = ({ children, ...other }) => {
-  const sideNavTitle = (
-    <StyledSideNavTitle {...other}>{children}</StyledSideNavTitle>
-  );
-
-  return sideNavTitle;
+  return <StyledSideNavTitle {...other}>{children}</StyledSideNavTitle>;
 };
 
 SideNavTitle.propTypes = {

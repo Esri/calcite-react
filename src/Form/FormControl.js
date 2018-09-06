@@ -29,7 +29,7 @@ const FormControl = ({
     _generatedId
   };
 
-  const formControl = (
+  return (
     <FormContext.Consumer>
       {({ formContext }) => (
         <FormControlContext.Provider value={{ formControlContext }}>
@@ -46,8 +46,6 @@ const FormControl = ({
       )}
     </FormContext.Consumer>
   );
-
-  return formControl;
 };
 
 FormControl.propTypes = {

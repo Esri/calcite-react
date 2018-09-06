@@ -3,9 +3,7 @@ import React from 'react';
 import { StyledTopNavList } from './TopNav-styled';
 
 const TopNavList = ({ children, ...other }) => {
-  const topNavList = <StyledTopNavList {...other}>{children}</StyledTopNavList>;
-
-  return topNavList;
+  return <StyledTopNavList {...other}>{children}</StyledTopNavList>;
 };
 
 TopNavList.propTypes = {

@@ -22,11 +22,11 @@ const Crumb = ({ children, href, hasLink, ...other }) => {
 };
 
 Crumb.propTypes = {
-  /** Description TBD */
+  /** Text content of the bread crumb */
   children: PropTypes.node,
-  /** Description TBD */
+  /** Boolean to toggle the light style for breadcrumbs */
   white: PropTypes.bool,
-  /** Description TBD */
+  /** href html prop */
   href: PropTypes.string
 };
 

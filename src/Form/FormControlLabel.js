@@ -9,7 +9,7 @@ const FormControlLabel = ({ children, htmlFor, ...other }) => {
     <FormControlContext.Consumer>
       {({ formControlContext }) => (
         <StyledFormControlLabel
-          htmlFor={htmlFor || formControlContext._generatedId}
+          htmlFor={formControlContext._generatedId}
           error={formControlContext.error}
           success={formControlContext.success}
           horizontal={formControlContext.horizontal}

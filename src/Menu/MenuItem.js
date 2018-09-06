@@ -3,23 +3,22 @@ import React from 'react';
 import { StyledMenuItem, StyledMenuItemSubtitle } from './Menu-styled';
 
 const MenuItem = ({ children, subtitle, ...other }) => {
-  let _subtitle;
-  if (subtitle) {
-    _subtitle = <StyledMenuItemSubtitle>{subtitle}</StyledMenuItemSubtitle>;
-  }
+  const getSubtitle = subtitle => {
+    if (subtitle) {
+      return <StyledMenuItemSubtitle>{subtitle}</StyledMenuItemSubtitle>;
+    }
+  };
 
-  const menuItem = (
+  return (
     <StyledMenuItem {...other}>
       <span>{children}</span>
-      {_subtitle}
+      {getSubtitle(subtitle)}
     </StyledMenuItem>
   );
-
-  return menuItem;
 };
 
 MenuItem.propTypes = {
-  /** Description TBD */
+  /** Content of the MenuItem */
   children: PropTypes.node,
   /** A container for content to be displayed right aligned in the menu item */
   subtitle: PropTypes.node

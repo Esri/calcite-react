@@ -17,8 +17,10 @@ const ListTitle = ({ children, ...other }) => {
 };
 
 ListTitle.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node
+  /** Content of the ItemTitle */
+  children: PropTypes.node,
+  /** Applied when the list is imbedded inside another list */
+  nested: PropTypes.bool
 };
 
 ListTitle.defaultProps = {};

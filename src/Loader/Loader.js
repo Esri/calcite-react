@@ -7,23 +7,22 @@ import {
 } from './Loader-styled';
 
 const Loader = ({ text, ...other }) => {
-  let loaderText;
-  if (text) {
-    loaderText = <StyledLoaderText>{text}</StyledLoaderText>;
-  }
+  const getLoaderText = text => {
+    if (text) {
+      return <StyledLoaderText>{text}</StyledLoaderText>;
+    }
+  };
 
-  const loader = (
+  return (
     <StyledLoader {...other}>
       <StyledLoaderBars />
-      {loaderText}
+      {getLoaderText(text)}
     </StyledLoader>
   );
-
-  return loader;
 };
 
 Loader.propTypes = {
-  /** Description TBD */
+  /** Text displayed below the loading bars */
   text: PropTypes.string
 };
 

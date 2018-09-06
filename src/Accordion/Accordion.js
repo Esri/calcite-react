@@ -4,7 +4,12 @@ import { getChildType } from '../utils/helpers';
 import { StyledAccordion } from './Accordion-styled';
 import AccordionSection from './AccordionSection';
 
-const Accordion = ({ children, ...props }) => {
+const Accordion = ({
+  children,
+  activeSectionIndexes,
+  onAccordionChange,
+  ...other
+}) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (getChildType(child)) {
@@ -12,9 +17,9 @@ const Accordion = ({ children, ...props }) => {
         let section;
         section = React.cloneElement(child, {
           key: i,
-          active: props.activeSectionIndexes.includes(i),
+          active: activeSectionIndexes.includes(i),
           sectionIndex: i,
-          onAccordionChange: props.onAccordionChange
+          onAccordionChange: onAccordionChange
         });
         return section;
       default:
@@ -22,7 +27,7 @@ const Accordion = ({ children, ...props }) => {
     }
   });
 
-  return <StyledAccordion>{childrenWithProps}</StyledAccordion>;
+  return <StyledAccordion {...other}>{childrenWithProps}</StyledAccordion>;
 };
 
 Accordion.propTypes = {

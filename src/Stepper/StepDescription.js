@@ -3,11 +3,7 @@ import React from 'react';
 import { StyledStepDescription } from './Stepper-styled';
 
 const StepDescription = ({ children, ...other }) => {
-  const stepDescription = (
-    <StyledStepDescription {...other}>{children}</StyledStepDescription>
-  );
-
-  return stepDescription;
+  return <StyledStepDescription {...other}>{children}</StyledStepDescription>;
 };
 
 StepDescription.propTypes = {

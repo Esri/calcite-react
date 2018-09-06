@@ -7,36 +7,21 @@ import {
   StyledSwitchLabel
 } from './Switch-styled';
 
-const Switch = ({
-  children,
-  name,
-  checked,
-  onChange,
-  labelPosition,
-  destructive,
-  ...other
-}) => {
-  let switchLabel;
-  if (children) {
-    switchLabel = <StyledSwitchLabel>{children}</StyledSwitchLabel>;
-  }
+const Switch = ({ children, labelPosition, destructive, ...other }) => {
+  const getSwitchLabel = children => {
+    if (children) {
+      return <StyledSwitchLabel>{children}</StyledSwitchLabel>;
+    }
+  };
 
-  const switchComponent = (
+  return (
     <StyledSwitch>
-      {labelPosition === 'before' ? switchLabel : null}
-      <StyledSwitchInput
-        name={name}
-        checked={checked}
-        onChange={onChange}
-        type="checkbox"
-        {...other}
-      />
+      {labelPosition === 'before' ? getSwitchLabel(children) : null}
+      <StyledSwitchInput {...other} type="checkbox" />
       <StyledSwitchTrack destructive={destructive} />
-      {labelPosition === 'after' ? switchLabel : null}
+      {labelPosition === 'after' ? getSwitchLabel(children) : null}
     </StyledSwitch>
   );
-
-  return switchComponent;
 };
 
 Switch.propTypes = {

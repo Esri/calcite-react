@@ -3,9 +3,7 @@ import React from 'react';
 import { StyledStepTitle } from './Stepper-styled';
 
 const StepTitle = ({ children, ...other }) => {
-  const stepTitle = <StyledStepTitle {...other}>{children}</StyledStepTitle>;
-
-  return stepTitle;
+  return <StyledStepTitle {...other}>{children}</StyledStepTitle>;
 };
 
 StepTitle.propTypes = {

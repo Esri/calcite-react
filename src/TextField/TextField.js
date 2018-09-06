@@ -14,11 +14,7 @@ import { FormControlContext } from '../Form/FormControl';
 const TextField = ({
   children,
   type,
-  value,
-  search,
-  fullWidth,
   minimal,
-  horizontal,
   id,
   onChange,
   leftAdornment,
@@ -54,11 +50,9 @@ const TextField = ({
       <FormControlContext.Consumer>
         {({ formControlContext }) => (
           <TextFieldArea
-            value={value}
+            type={type}
             error={formControlContext.error}
             success={formControlContext.success}
-            search={search}
-            fullWidth={fullWidth}
             minimal={minimal}
             id={id || formControlContext._generatedId}
             onChange={onChange}
@@ -75,11 +69,9 @@ const TextField = ({
         <StyledTextFieldAdornmentWrapper>
           {getAdornment(leftAdornment)}
           <TextFieldArea
-            value={value}
+            type={type}
             error={formControlContext.error}
             success={formControlContext.success}
-            search={search}
-            fullWidth={fullWidth}
             minimal={minimal}
             id={id || formControlContext._generatedId}
             onChange={onChange}

@@ -29,6 +29,7 @@ const ArcgisAccountMenu = ({ user, portal, avatar, ...other }) => {
       marginBottom: CalciteTheme.baseline
     }
   });
+
   return (
     <StyledArcgisAccountContentInfo {...other}>
       {_avatar}
@@ -46,6 +47,7 @@ const ArcgisAccountMenu = ({ user, portal, avatar, ...other }) => {
 };
 
 ArcgisAccountMenu.propTypes = {
+  /** AGOL user object */
   user: PropTypes.object
 };
 

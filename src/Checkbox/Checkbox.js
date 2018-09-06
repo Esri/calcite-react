@@ -6,36 +6,20 @@ import {
   StyledCheckboxGroup
 } from './Checkbox-styled';
 
-const Checkbox = ({
-  children,
-  value,
-  name,
-  checked,
-  labelStyle,
-  onChange,
-  ...other
-}) => {
+const Checkbox = ({ children, labelStyle, ...other }) => {
   let checkboxLabel;
   if (children) {
     checkboxLabel = (
       <StyledCheckboxLabel style={labelStyle}>{children}</StyledCheckboxLabel>
     );
   }
-  const checkbox = (
+
+  return (
     <StyledCheckboxGroup>
-      <StyledCheckbox
-        value={value}
-        name={name}
-        checked={checked}
-        onChange={onChange}
-        type="checkbox"
-        {...other}
-      />
+      <StyledCheckbox {...other} type="checkbox" />
       {checkboxLabel}
     </StyledCheckboxGroup>
   );
-
-  return checkbox;
 };
 
 Checkbox.propTypes = {

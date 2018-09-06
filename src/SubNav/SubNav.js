@@ -11,7 +11,7 @@ const SubNavContext = createContext({
   }
 });
 
-const SubNav = ({ children, blue, overlayGradient, ...other }) => {
+const SubNav = ({ children, blue, ...other }) => {
   const subNavContext = {
     blue
   };
@@ -33,7 +33,7 @@ const SubNav = ({ children, blue, overlayGradient, ...other }) => {
 
   return (
     <SubNavContext.Provider value={{ subNavContext }}>
-      <StyledSubNav blue={blue} overlayGradient={overlayGradient} {...other}>
+      <StyledSubNav blue={blue} {...other}>
         <StyledSubNavLeftContent>{getLeftContent()}</StyledSubNavLeftContent>
         {getSubNavActions()}
       </StyledSubNav>

@@ -8,16 +8,7 @@ const TableCell = ({ children, ...other }) => {
   return (
     <TableContext.Consumer>
       {({ tableContext }) => (
-        <StyledTableCell
-          blue={tableContext.blue}
-          striped={tableContext.striped}
-          plain={tableContext.plain}
-          noTable={tableContext.noTable}
-          justified={tableContext.justified}
-          noCol={tableContext.noCol}
-          noRow={tableContext.noRow}
-          {...other}
-        >
+        <StyledTableCell {...tableContext} {...other}>
           {children}
         </StyledTableCell>
       )}

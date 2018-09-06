@@ -17,13 +17,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // CSS
 
-const ToastContainer = ({ showProgress, ...other }) => {
+const ToastContainer = ({ ...other }) => {
   return (
     <StyledToastContainer
       closeButton={
         <StyledCloseButton type="button" iconButton icon={<CloseIcon />} />
       }
-      showProgress={showProgress}
       {...other}
     />
   );

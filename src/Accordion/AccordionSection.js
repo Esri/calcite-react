@@ -5,7 +5,13 @@ import { StyledAccordionSection } from './Accordion-styled';
 import AccordionTitle from './AccordionTitle';
 import AccordionContent from './AccordionContent';
 
-const AccordionSection = ({ children, ...props }) => {
+const AccordionSection = ({
+  children,
+  active,
+  sectionIndex,
+  onAccordionChange,
+  ...other
+}) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (getChildType(child)) {
@@ -13,18 +19,18 @@ const AccordionSection = ({ children, ...props }) => {
         let title;
         title = React.cloneElement(child, {
           key: i,
-          active: props.active,
-          sectionIndex: props.sectionIndex,
-          onAccordionChange: props.onAccordionChange
+          active: active,
+          sectionIndex: sectionIndex,
+          onAccordionChange: onAccordionChange
         });
         return title;
       case AccordionContent:
         let content;
         content = React.cloneElement(child, {
           key: i,
-          active: props.active,
-          sectionIndex: props.sectionIndex,
-          onAccordionChange: props.onAccordionChange
+          active: active,
+          sectionIndex: sectionIndex,
+          onAccordionChange: onAccordionChange
         });
         return content;
       default:
@@ -32,7 +38,11 @@ const AccordionSection = ({ children, ...props }) => {
     }
   });
 
-  return <StyledAccordionSection>{childrenWithProps}</StyledAccordionSection>;
+  return (
+    <StyledAccordionSection {...other}>
+      {childrenWithProps}
+    </StyledAccordionSection>
+  );
 };
 AccordionSection.propTypes = {
   /** Description TBD */

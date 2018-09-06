@@ -7,22 +7,14 @@ const TabTitle = ({
   index,
   activeTabIndex,
   setActiveTabIndex,
-  gray,
-  transparent,
-  translucent,
-  dark,
   ...other
 }) => {
   const handleSetActiveTabIndex = e => {
     setActiveTabIndex(e, index);
   };
 
-  const tabTitle = (
+  return (
     <StyledTabTitle
-      gray={gray}
-      transparent={transparent}
-      translucent={translucent}
-      dark={dark}
       onClick={handleSetActiveTabIndex}
       active={activeTabIndex === index}
       {...other}
@@ -30,8 +22,6 @@ const TabTitle = ({
       {children}
     </StyledTabTitle>
   );
-
-  return tabTitle;
 };
 
 TabTitle.propTypes = {
@@ -40,9 +30,13 @@ TabTitle.propTypes = {
   index: PropTypes.number,
   activeTabIndex: PropTypes.number,
   setActiveTabIndex: PropTypes.func,
+  /** Gray style TabSection */
   gray: PropTypes.bool,
+  /** Transparent style TabSection */
   transparent: PropTypes.bool,
+  /** Translucent style TabSection */
   translucent: PropTypes.bool,
+  /** Dark style TabSection */
   dark: PropTypes.bool
 };
 

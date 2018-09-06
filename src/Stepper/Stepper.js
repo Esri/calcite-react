@@ -24,13 +24,11 @@ const Stepper = ({ children, currentStep, small, vertical, ...other }) => {
     }
   });
 
-  const stepper = (
+  return (
     <StyledStepper vertical={vertical} {...other}>
       {childrenWithProps}
     </StyledStepper>
   );
-
-  return stepper;
 };
 
 Stepper.propTypes = {

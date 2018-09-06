@@ -17,8 +17,10 @@ const ListSubtitle = ({ children, ...other }) => {
 };
 
 ListSubtitle.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node
+  /** Content of the SubTitle */
+  children: PropTypes.node,
+  /** Applied when the list is imbedded inside another list */
+  nested: PropTypes.bool
 };
 
 ListSubtitle.defaultProps = {};

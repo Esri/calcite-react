@@ -4,20 +4,16 @@ import { StyledForm } from './Form-styled';
 
 const FormContext = createContext({ formContext: { noValidation: false } });
 
-const Form = ({ children, horizontal, noValidation, ...other }) => {
+const Form = ({ children, noValidation, ...other }) => {
   const formContext = {
     noValidation
   };
 
-  const form = (
+  return (
     <FormContext.Provider value={{ formContext }}>
-      <StyledForm horizontal={horizontal} {...other}>
-        {children}
-      </StyledForm>
+      <StyledForm {...other}>{children}</StyledForm>
     </FormContext.Provider>
   );
-
-  return form;
 };
 
 Form.propTypes = {

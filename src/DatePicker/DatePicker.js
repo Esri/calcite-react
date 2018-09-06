@@ -13,22 +13,10 @@ import DatePickerTheme from '../theme/DatePickerTheme';
 ThemedStyleSheet.registerInterface(aphroditeInterface);
 ThemedStyleSheet.registerTheme(DatePickerTheme);
 
-const DatePicker = ({
-  date,
-  onDateChange,
-  focused,
-  onFocusChange,
-  ...other
-}) => {
+const DatePicker = ({ ...other }) => {
   return (
     <StyledDatePickerContainer>
-      <SingleDatePicker
-        date={date}
-        onDateChange={onDateChange}
-        focused={focused}
-        onFocusChange={onFocusChange}
-        {...other}
-      />
+      <SingleDatePicker {...other} />
     </StyledDatePickerContainer>
   );
 };
