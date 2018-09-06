@@ -7,16 +7,16 @@ import {
 } from '../Card/Card-styled';
 import { fontSize, unitCalc } from '../utils/helpers';
 
-const StyledItemCard = StyledCard.extend``;
+const StyledItemCard = styled(StyledCard)``;
 
-const StyledItemCardContent = StyledCardContent.extend`
+const StyledItemCardContent = styled(StyledCardContent)`
   white-space: normal;
   flex: 3 1 75px;
   padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
   box-sizing: border-box;
 `;
 
-const StyledItemCardImageWrap = StyledCardImageWrap.extend`
+const StyledItemCardImageWrap = styled(StyledCardImageWrap)`
   display: flex;
   flex: 1 1 25px;
   height: auto;
@@ -29,7 +29,7 @@ const StyledItemCardImageWrap = StyledCardImageWrap.extend`
   background-size: cover;
 `;
 
-const StyledCardItemTitle = StyledCardTitle.extend`
+const StyledCardItemTitle = styled(StyledCardTitle)`
   ${fontSize(1)};
   margin-bottom: ${props => unitCalc(props.theme.baseline, 5, '/')};
 `;
@@ -51,7 +51,7 @@ const StyledCardItemText = styled.p`
   margin: ${props => unitCalc(props.theme.baseline, 3, '/')} 0 0;
 `;
 
-const StyledCardItemIconLabelText = StyledCardItemText.extend`
+const StyledCardItemIconLabelText = styled(StyledCardItemText)`
   display: flex;
   align-items: center;
   margin: 0;

@@ -39,7 +39,7 @@ const StyledSubNavLeftContent = styled.div`
   flex-direction: column;
 `;
 
-const StyledSubNavLink = CalciteA.extend`
+const StyledSubNavLink = styled(CalciteA)`
   padding: 0.25em 0.75em;
   margin: 0 0 0 0.25em;
   font-family: ${props => props.theme.avenirFamily};
@@ -95,7 +95,7 @@ const StyledSubNavActions = styled.nav`
   align-items: center;
 `;
 
-const StyledSubNavTitle = CalciteH1.extend`
+const StyledSubNavTitle = styled(CalciteH1)`
   ${fontSize(4)};
   padding-left: 0.25em;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};

@@ -3,7 +3,7 @@ import { fontSize, unitCalc } from '../utils/helpers';
 
 import { baseRadioCheckbox } from '../utils/commonElements';
 
-const StyledCheckbox = baseRadioCheckbox.extend`
+const StyledCheckbox = styled(baseRadioCheckbox)`
   -webkit-appearance: checkbox;
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
   cursor: pointer;

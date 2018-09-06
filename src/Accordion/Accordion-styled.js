@@ -2,11 +2,11 @@ import styled, { css } from 'styled-components';
 import { transition } from '../utils/helpers';
 import { StyledSideNav, StyledSideNavTitle } from '../SideNav/SideNav-styled';
 
-const StyledAccordion = StyledSideNav.extend``;
+const StyledAccordion = styled(StyledSideNav)``;
 
 const StyledAccordionSection = styled.div``;
 
-const StyledAccordionTitle = StyledSideNavTitle.extend`
+const StyledAccordionTitle = styled(StyledSideNavTitle)`
   display: flex;
   align-items: center;
   cursor: pointer;

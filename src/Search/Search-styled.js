@@ -84,7 +84,7 @@ const StyledSearchInputWrapper = styled.div`
   flex: 1 0 50px;
 `;
 
-const StyledSearch = CalciteInput.extend`
+const StyledSearch = styled(CalciteInput)`
   padding-left: ${props => unitCalc(props.theme.baseline, 1.2, '*')};
   padding-right: ${props => props.theme.baseline};
   background: transparent;

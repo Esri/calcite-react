@@ -38,7 +38,7 @@ const StyledTopNavBrandImg = styled.img`
   height: 30px;
 `;
 
-const StyledTopNavLink = CalciteA.extend`
+const StyledTopNavLink = styled(CalciteA)`
   ${fontSize(0)};
   color: ${props => props.theme.palette.darkGray};
   padding-top: 1.1625rem;
@@ -86,7 +86,7 @@ const StyledTopNavList = styled.nav`
     `};
 `;
 
-const StyledTopNavTitle = CalciteA.extend`
+const StyledTopNavTitle = styled(CalciteA)`
   margin-right: 1.5rem;
   padding-top: 1.125rem;
   padding-bottom: 1.25rem;

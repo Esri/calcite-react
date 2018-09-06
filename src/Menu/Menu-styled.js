@@ -3,7 +3,7 @@ import { StyledSideNav } from '../SideNav/SideNav-styled';
 import { CalciteA } from '../Elements';
 import { unitCalc, fontSize } from '../utils/helpers';
 
-const StyledMenu = StyledSideNav.extend`
+const StyledMenu = styled(StyledSideNav)`
   min-width: 200px;
   box-shadow: ${props => props.theme.boxShadow};
   z-index: 1000;
@@ -16,7 +16,7 @@ const StyledMenu = StyledSideNav.extend`
     `};
 `;
 
-const StyledMenuItem = CalciteA.extend`
+const StyledMenuItem = styled(CalciteA)`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -55,12 +55,10 @@ const StyledMenuItem = CalciteA.extend`
     `};
 `;
 
-const StyledMenuTitleLink = StyledMenuItem.extend`
+const StyledMenuTitle = styled(StyledMenuItem.withComponent('span'))`
   background-color: ${props => props.theme.palette.offWhite};
   cursor: auto;
 `;
-
-const StyledMenuTitle = StyledMenuTitleLink.withComponent('span');
 
 const StyledMenuItemSubtitle = styled.span`
   ${fontSize(-3)};

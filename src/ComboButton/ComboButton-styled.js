@@ -6,11 +6,11 @@ const StyledComboButtonContainer = styled.div`
   flex-wrap: nowrap;
 `;
 
-const StyledComboButton = StyledButton.extend`
+const StyledComboButton = styled(StyledButton)`
   border-right-width: 0;
 `;
 
-const StyledComboButtonDropdown = StyledButton.extend`
+const StyledComboButtonDropdown = styled(StyledButton)`
   height: 100%;
   fill: currentColor;
   padding-left: 0.3rem;

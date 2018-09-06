@@ -19,7 +19,7 @@ const StyledCopyToClipboard = styled.div`
   }
 `;
 
-const StyledCopyToClipboardInput = CalciteInput.extend`
+const StyledCopyToClipboardInput = styled(CalciteInput)`
   flex: 1 0 50px;
   width: auto;
   margin: 0;

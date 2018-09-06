@@ -50,34 +50,29 @@ const baseH = styled.h1`
   margin: 0 0 ${props => props.theme.baseline} 0;
 `;
 
-const h1 = baseH.extend`
+const h1 = styled(baseH)`
   ${fontSize(5)};
 `;
 
-let h2 = baseH.extend`
+let h2 = styled(baseH.withComponent('h2'))`
   ${fontSize(4)};
 `;
-h2 = h2.withComponent('h2');
 
-let h3 = baseH.extend`
+let h3 = styled(baseH.withComponent('h3'))`
   ${fontSize(3)};
 `;
-h3 = h3.withComponent('h3');
 
-let h4 = baseH.extend`
+let h4 = styled(baseH.withComponent('h4'))`
   ${fontSize(2)};
 `;
-h4 = h4.withComponent('h4');
 
-let h5 = baseH.extend`
+let h5 = styled(baseH.withComponent('h5'))`
   ${fontSize(1)};
 `;
-h5 = h5.withComponent('h5');
 
-let h6 = baseH.extend`
+let h6 = styled(baseH.withComponent('h6'))`
   ${fontSize(0)};
 `;
-h6 = h6.withComponent('h6');
 
 const baseList = styled.div`
   margin-top: 0;

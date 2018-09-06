@@ -13,7 +13,7 @@ const StyledTab = styled.div`
     `};
 `;
 
-const StyledTabTitle = CalciteA.extend`
+const StyledTabTitle = styled(CalciteA)`
   box-sizing: border-box;
   ${fontSize(-2)};
   transition: background ${transition()};

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { StyledSideNav } from '../SideNav/SideNav-styled';
 import { unitCalc, fontSize } from '../utils/helpers';
 
-const StyledList = StyledSideNav.extend`
+const StyledList = styled(StyledSideNav)`
   min-width: 200px;
   overflow: hidden;
   max-height: ${props => props.maxHeight};
@@ -71,12 +71,10 @@ const StyledListItem = styled.div`
     `};
 `;
 
-const StyledListHeaderLink = StyledListItem.extend`
+const StyledListHeader = styled(StyledListItem.withComponent('span'))`
   background-color: ${props => props.theme.palette.offWhite};
   cursor: auto;
 `;
-
-const StyledListHeader = StyledListHeaderLink.withComponent('span');
 
 const StyledListTitle = styled.p`
   ${fontSize(-1)};

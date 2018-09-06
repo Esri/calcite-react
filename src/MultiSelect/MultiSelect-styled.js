@@ -8,7 +8,7 @@ const StyledMultiSelectWrapper = styled.div`
 `;
 
 let StyledMultiSelectButton = CalciteSelect.withComponent('button');
-StyledMultiSelectButton = StyledMultiSelectButton.extend`
+StyledMultiSelectButton = styled(StyledMultiSelectButton)`
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
@@ -16,7 +16,7 @@ StyledMultiSelectButton = StyledMultiSelectButton.extend`
   text-align: left;
 `;
 
-const StyledMultiSelectMenu = StyledMenu.extend`
+const StyledMultiSelectMenu = styled(StyledMenu)`
   transition: opacity ${transition()},
   z-index: 2000;
 
