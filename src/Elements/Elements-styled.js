@@ -1,3 +1,4 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { fontSize, unitCalc } from '../utils/helpers';
 
@@ -50,29 +51,67 @@ const baseH = styled.h1`
   margin: 0 0 ${props => props.theme.baseline} 0;
 `;
 
-const h1 = styled(baseH)`
+const H1 = styled(baseH)`
   ${fontSize(5)};
 `;
+const CalciteH1 = ({ children, ...props }) => {
+  return <H1 {...props}>{children}</H1>;
+};
 
-let h2 = styled(baseH.withComponent('h2'))`
+const H2 = styled(baseH)`
   ${fontSize(4)};
 `;
+const CalciteH2 = ({ children, ...props }) => {
+  return (
+    <H2 as="h2" {...props}>
+      {children}
+    </H2>
+  );
+};
 
-let h3 = styled(baseH.withComponent('h3'))`
+const H3 = styled(baseH)`
   ${fontSize(3)};
 `;
+const CalciteH3 = ({ children, ...props }) => {
+  return (
+    <H3 as="h3" {...props}>
+      {children}
+    </H3>
+  );
+};
 
-let h4 = styled(baseH.withComponent('h4'))`
+const H4 = styled(baseH)`
   ${fontSize(2)};
 `;
+const CalciteH4 = ({ children, ...props }) => {
+  return (
+    <H4 as="h4" {...props}>
+      {children}
+    </H4>
+  );
+};
 
-let h5 = styled(baseH.withComponent('h5'))`
+const H5 = styled(baseH)`
   ${fontSize(1)};
 `;
+const CalciteH5 = ({ children, ...props }) => {
+  return (
+    <H5 as="h5" {...props}>
+      {children}
+    </H5>
+  );
+};
 
-let h6 = styled(baseH.withComponent('h6'))`
+const H6 = styled(baseH)`
   ${fontSize(0)};
 `;
+const CalciteH6 = ({ children, ...props }) => {
+  return (
+    <H6 as="h6" {...props}>
+      {children}
+    </H6>
+  );
+};
 
 const baseList = styled.div`
   margin-top: 0;
@@ -124,12 +163,12 @@ export {
   body as CalciteBody,
   p as CalciteP,
   a as CalciteA,
-  h1 as CalciteH1,
-  h2 as CalciteH2,
-  h3 as CalciteH3,
-  h4 as CalciteH4,
-  h5 as CalciteH5,
-  h6 as CalciteH6,
+  CalciteH1,
+  CalciteH2,
+  CalciteH3,
+  CalciteH4,
+  CalciteH5,
+  CalciteH6,
   ol as CalciteOl,
   ul as CalciteUl,
   li as CalciteLi,

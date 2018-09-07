@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
-import CalciteTheme from '../src/theme/CalciteTheme';
+import CalciteTheme, {
+  CalciteReactGlobalStyles
+} from '../src/theme/CalciteTheme';
 
 import './stories.css';
 
@@ -14,7 +16,12 @@ export default class Container extends Component {
 
     return (
       <div>
-        <ThemeProvider theme={CalciteTheme}>{story()}</ThemeProvider>
+        <ThemeProvider theme={CalciteTheme}>
+          <Fragment>
+            <CalciteReactGlobalStyles />
+            {story()}
+          </Fragment>
+        </ThemeProvider>
       </div>
     );
   }

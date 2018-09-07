@@ -1,4 +1,4 @@
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import EsriColors from './EsriColors';
 
 const CalciteTheme = {
@@ -171,7 +171,7 @@ const CalciteTheme = {
 };
 
 //Do the global styles stuff
-injectGlobal`
+const CalciteReactGlobalStyles = createGlobalStyle`
   html {
     height: 100%;
     font-size: 100%;
@@ -628,4 +628,4 @@ injectGlobal`
   }
 `;
 
-export default CalciteTheme;
+export { CalciteTheme as default, CalciteReactGlobalStyles };
