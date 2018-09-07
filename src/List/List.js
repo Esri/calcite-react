@@ -32,7 +32,7 @@ class List extends Component {
     return (
       <ListContext.Provider value={{ listContext }}>
         <StyledList
-          innerRef={el => {
+          ref={el => {
             this.listNode = el;
           }}
           maxHeight={listMaxHeight}

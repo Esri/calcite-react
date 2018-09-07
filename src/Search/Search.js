@@ -17,7 +17,7 @@ import {
 } from './Search-styled';
 
 import { StyledSelectMenu } from '../Select/Select-styled';
-import Menu, { MenuItem } from '../Menu';
+import { MenuItem } from '../Menu';
 import Tooltip from '../Tooltip';
 
 class Search extends Component {
@@ -250,12 +250,13 @@ class Search extends Component {
                 <Reference style={{ display: 'inline-block' }}>
                   {({ ref }) => (
                     <StyledSearch
+                      as="input"
                       {...getInputProps({
                         placeholder: placeholder,
                         minimal: minimal,
                         ...other
                       })}
-                      innerRef={ref}
+                      ref={ref}
                       id={`${this._generatedId}Reference`}
                     />
                   )}
@@ -271,7 +272,7 @@ class Search extends Component {
                     placement={'bottom-start'}
                   >
                     {({ ref, style, placement, arrowProps }) => (
-                      <Menu
+                      <StyledSelectMenu
                         innerRef={ref}
                         fullWidth={fullWidth}
                         style={{
@@ -279,7 +280,6 @@ class Search extends Component {
                           ...menuStyle
                         }}
                         data-placement={placement}
-                        withComponent={<StyledSelectMenu />}
                       >
                         {this.getMenuItems(
                           this.state.itemsToShow,
@@ -287,7 +287,7 @@ class Search extends Component {
                           highlightedIndex,
                           selectedItem
                         )}
-                      </Menu>
+                      </StyledSelectMenu>
                     )}
                   </Popper>
                 ) : null}

@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components';
 import { CalciteSelect } from '../utils/commonElements';
-import { StyledMenu } from '../Menu/Menu-styled';
+import Menu from '../Menu';
 import { transition } from '../utils/helpers';
 
 const StyledMultiSelectWrapper = styled.div`
   position: relative;
 `;
 
-let StyledMultiSelectButton = CalciteSelect.withComponent('button');
-StyledMultiSelectButton = styled(StyledMultiSelectButton)`
+const StyledMultiSelectButton = styled(CalciteSelect)`
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
@@ -16,7 +15,7 @@ StyledMultiSelectButton = styled(StyledMultiSelectButton)`
   text-align: left;
 `;
 
-const StyledMultiSelectMenu = styled(StyledMenu)`
+const StyledMultiSelectMenu = styled(Menu)`
   transition: opacity ${transition()},
   z-index: 2000;
 

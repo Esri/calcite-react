@@ -3,7 +3,7 @@ import React from 'react';
 import { StyledFileUploader } from './FileUploader-styled';
 
 const FileUploader = ({ children, ...other }) => {
-  return <StyledFileUploader {...other} type="file" />;
+  return <StyledFileUploader as="input" {...other} type="file" />;
 };
 
 FileUploader.propTypes = {

@@ -5,6 +5,7 @@ import { StyledSlider } from './Slider-styled';
 const Slider = ({ value, min, max, ...other }) => {
   return (
     <StyledSlider
+      as="input"
       aria-valuemin={min}
       aria-valuemax={max}
       aria-valuenow={value}

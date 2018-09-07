@@ -8,7 +8,9 @@ const ListHeader = ({ children, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
-        <StyledListHeader {...other}>{children}</StyledListHeader>
+        <StyledListHeader as="span" {...other}>
+          {children}
+        </StyledListHeader>
       )}
     </ListContext.Consumer>
   );

@@ -74,7 +74,7 @@ class CopyToClipboard extends Component {
 
     const copyToClipboard = (
       <StyledCopyToClipboard {...other}>
-        <StyledCopyToClipboardInput value={children} readOnly />
+        <StyledCopyToClipboardInput as="input" value={children} readOnly />
         <Tooltip title={this.getTooltipText()}>
           <Button
             clear

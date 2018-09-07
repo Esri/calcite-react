@@ -11,7 +11,6 @@ import {
   StyledSelectMenu,
   PopperManagerStyles
 } from './Select-styled';
-import Menu from '../Menu';
 
 import { FormControlContext } from '../Form/FormControl';
 
@@ -47,6 +46,7 @@ const Select = ({
         <FormControlContext.Consumer>
           {({ formControlContext }) => (
             <StyledSelectInput
+              as="input"
               onClick={getButtonProps().onClick}
               {...getInputProps({
                 placeholder: placeholder,
@@ -56,7 +56,7 @@ const Select = ({
                 style: style,
                 ...other
               })}
-              innerRef={ref}
+              ref={ref}
             />
           )}
         </FormControlContext.Consumer>
@@ -68,9 +68,10 @@ const Select = ({
           <StyledSelectButton
             {...getButtonProps()}
             {...getInputProps()}
+            as="button"
             fullWidth={fullWidth}
             minimal={minimal}
-            innerRef={ref}
+            ref={ref}
             id={id || formControlContext._generatedId}
             style={style}
             {...other}
@@ -183,15 +184,15 @@ const Select = ({
                 placement={this.props.placement}
               >
                 {({ ref, style, placement }) => (
-                  <Menu
-                    innerRef={ref}
+                  <StyledSelectMenu
+                    ref={ref}
                     style={{
                       ...style,
                       ...getFullWidthStyle(),
                       ...menuStyle
                     }}
                     data-placement={placement}
-                    withComponent={<StyledSelectMenu fullWidth={fullWidth} />}
+                    fullWidth={fullWidth}
                   >
                     {getMenuItems(
                       inputValue,
@@ -199,7 +200,7 @@ const Select = ({
                       highlightedIndex,
                       selectedItem
                     )}
-                  </Menu>
+                  </StyledSelectMenu>
                 )}
               </Popper>
             ) : null}

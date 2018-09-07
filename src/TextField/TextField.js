@@ -50,6 +50,7 @@ const TextField = ({
       <FormControlContext.Consumer>
         {({ formControlContext }) => (
           <TextFieldArea
+            as={type === 'textarea' ? 'textarea' : 'input'}
             type={type}
             error={formControlContext.error}
             success={formControlContext.success}
@@ -69,6 +70,7 @@ const TextField = ({
         <StyledTextFieldAdornmentWrapper>
           {getAdornment(leftAdornment)}
           <TextFieldArea
+            as={type === 'textarea' ? 'textarea' : 'input'}
             type={type}
             error={formControlContext.error}
             success={formControlContext.success}

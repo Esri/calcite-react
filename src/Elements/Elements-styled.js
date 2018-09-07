@@ -139,9 +139,21 @@ const baseList = styled.div`
     `};
 `;
 
-let ol = baseList.withComponent('ol');
+const CalciteOl = ({ children, ...props }) => {
+  return (
+    <baseList as="ol" {...props}>
+      {children}
+    </baseList>
+  );
+};
 
-let ul = baseList.withComponent('ul');
+const CalciteUl = ({ children, ...props }) => {
+  return (
+    <baseList as="ul" {...props}>
+      {children}
+    </baseList>
+  );
+};
 
 let li = styled.li`
   list-style-position: outside;
@@ -169,8 +181,8 @@ export {
   CalciteH4,
   CalciteH5,
   CalciteH6,
-  ol as CalciteOl,
-  ul as CalciteUl,
+  CalciteOl,
+  CalciteUl,
   li as CalciteLi,
   figure as CalciteFigure
 };

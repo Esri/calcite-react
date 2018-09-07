@@ -3,7 +3,11 @@ import React from 'react';
 import { StyledMenuTitle } from './Menu-styled';
 
 const MenuTitle = ({ children, ...other }) => {
-  return <StyledMenuTitle {...other}>{children}</StyledMenuTitle>;
+  return (
+    <StyledMenuTitle as="span" {...other}>
+      {children}
+    </StyledMenuTitle>
+  );
 };
 
 MenuTitle.propTypes = {

@@ -100,7 +100,7 @@ const select = styled(formSelectInputTextarea)`
   }
 `;
 
-const input = styled(formSelectInputTextarea.withComponent('input'))`
+const input = styled(formSelectInputTextarea)`
   -webkit-appearance: none;
 
   ${props =>
@@ -174,7 +174,7 @@ const fieldset = styled.fieldset`
   }
 `;
 
-const textarea = styled(formSelectInputTextarea.withComponent('textarea'))`
+const textarea = styled(formSelectInputTextarea)`
   height: auto;
   padding-top: ${props => unitCalc(props.theme.baseline, 5, '/')};
 `;

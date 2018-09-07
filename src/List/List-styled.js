@@ -71,7 +71,7 @@ const StyledListItem = styled.div`
     `};
 `;
 
-const StyledListHeader = styled(StyledListItem.withComponent('span'))`
+const StyledListHeader = styled(StyledListItem)`
   background-color: ${props => props.theme.palette.offWhite};
   cursor: auto;
 `;

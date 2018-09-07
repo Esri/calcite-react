@@ -6,14 +6,12 @@ import { ButtonGroupContext } from './ButtonGroup';
 
 const Button = ({
   children,
-  iconButton,
   href,
+  iconButton,
   icon,
   iconPosition,
   ...other
 }) => {
-  const StyledLink = StyledButton.withComponent('a');
-
   function getIconMargin() {
     if (iconButton) {
       return;
@@ -25,53 +23,37 @@ const Button = ({
     }
   }
 
-  let wrappedIcon;
-  if (icon) {
-    wrappedIcon = React.cloneElement(icon, {
-      ...icon.props,
-      style: {
-        fill: 'currentColor',
-        verticalAlign: 'bottom',
-        ...getIconMargin(),
-        ...icon.props.style
-      }
-    });
-  }
+  const getIcon = icon => {
+    if (icon) {
+      return React.cloneElement(icon, {
+        ...icon.props,
+        style: {
+          fill: 'currentColor',
+          verticalAlign: 'bottom',
+          ...getIconMargin(),
+          ...icon.props.style
+        }
+      });
+    }
+  };
 
-  const link = (
-    <ButtonGroupContext.Consumer>
-      {({ buttonGroupContext }) => (
-        <StyledLink
-          href={href}
-          iconButton={iconButton}
-          grouped={buttonGroupContext.grouped}
-          {...other}
-        >
-          {iconPosition === 'before' ? wrappedIcon : null}
-          {children}
-          {iconPosition === 'after' ? wrappedIcon : null}
-        </StyledLink>
-      )}
-    </ButtonGroupContext.Consumer>
-  );
-
-  const button = (
+  return (
     <ButtonGroupContext.Consumer>
       {({ buttonGroupContext }) => (
         <StyledButton
           iconButton={iconButton}
           grouped={buttonGroupContext.grouped}
+          as={href ? 'a' : 'button'}
+          href={href}
           {...other}
         >
-          {iconPosition === 'before' ? wrappedIcon : null}
+          {iconPosition === 'before' ? getIcon(icon) : null}
           {children}
-          {iconPosition === 'after' ? wrappedIcon : null}
+          {iconPosition === 'after' ? getIcon(icon) : null}
         </StyledButton>
       )}
     </ButtonGroupContext.Consumer>
   );
-
-  return href ? link : button;
 };
 
 Button.propTypes = {

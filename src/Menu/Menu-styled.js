@@ -55,7 +55,7 @@ const StyledMenuItem = styled(CalciteA)`
     `};
 `;
 
-const StyledMenuTitle = styled(StyledMenuItem.withComponent('span'))`
+const StyledMenuTitle = styled(StyledMenuItem)`
   background-color: ${props => props.theme.palette.offWhite};
   cursor: auto;
 `;

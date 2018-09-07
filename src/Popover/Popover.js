@@ -62,7 +62,7 @@ class Popover extends Component {
         <Reference style={{ display: 'inline-block' }}>
           {({ ref }) => (
             <StyledTargetWrapper
-              innerRef={ref}
+              ref={ref}
               id={`${this._generatedId}Target`}
               style={this.props.targetContainerStyles}
             >
@@ -78,7 +78,7 @@ class Popover extends Component {
             >
               {({ ref, style, placement }) => (
                 <StyledPopover
-                  innerRef={ref}
+                  ref={ref}
                   id={`${this._generatedId}Popover`}
                   style={{
                     ...style,
