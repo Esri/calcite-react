@@ -2,14 +2,14 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { fontSize, unitCalc } from '../utils/helpers';
 
-const html = styled.html`
+const CalciteHtml = styled.html`
   height: 100%;
   font-size: 100%;
   font-family: 'Avenir Next W01', 'Avenir Next W00', 'Avenir Next', 'Avenir',
     'Helvetica Neue', sans-serif;
 `;
 
-const body = styled.body`
+const CalciteBody = styled.body`
   min-height: 100%;
   margin: 0;
 
@@ -29,12 +29,12 @@ const body = styled.body`
   font-feature-settings: 'liga' 1, 'calt' 0;
 `;
 
-const p = styled.p`
+const CalciteP = styled.p`
   margin-top: 0;
   margin-bottom: 1.55rem;
 `;
 
-const a = styled.a`
+const CalciteA = styled.a`
   color: ${props => props.theme.linkColor};
   text-decoration: none;
   cursor: pointer;
@@ -113,7 +113,7 @@ const CalciteH6 = ({ children, ...props }) => {
   );
 };
 
-const baseList = styled.div`
+const BaseList = styled.div`
   margin-top: 0;
   margin-bottom: ${props => props.theme.baseline};
   padding: 0;
@@ -141,21 +141,21 @@ const baseList = styled.div`
 
 const CalciteOl = ({ children, ...props }) => {
   return (
-    <baseList as="ol" {...props}>
+    <BaseList as="ol" {...props}>
       {children}
-    </baseList>
+    </BaseList>
   );
 };
 
 const CalciteUl = ({ children, ...props }) => {
   return (
-    <baseList as="ul" {...props}>
+    <BaseList as="ul" {...props}>
       {children}
-    </baseList>
+    </BaseList>
   );
 };
 
-let li = styled.li`
+const CalciteLi = styled.li`
   list-style-position: outside;
   margin: ${props => unitCalc(props.theme.baseline, 4, '/')} 0
     ${props => unitCalc(props.theme.baseline, 4, '/')} 1.5rem;
@@ -166,15 +166,15 @@ let li = styled.li`
   }
 `;
 
-const figure = styled.figure`
+const CalciteFigure = styled.figure`
   margin: 0 0 1.55rem 0;
 `;
 
 export {
-  html as CalciteHtml,
-  body as CalciteBody,
-  p as CalciteP,
-  a as CalciteA,
+  CalciteHtml,
+  CalciteBody,
+  CalciteP,
+  CalciteA,
   CalciteH1,
   CalciteH2,
   CalciteH3,
@@ -183,6 +183,6 @@ export {
   CalciteH6,
   CalciteOl,
   CalciteUl,
-  li as CalciteLi,
-  figure as CalciteFigure
+  CalciteLi,
+  CalciteFigure
 };

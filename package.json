@@ -60,19 +60,19 @@
     ]
   },
   "dependencies": {
-    "aphrodite": "^2.2.2",
+    "aphrodite": "^2.2.3",
     "downshift": "^1.28.2",
-    "match-sorter": "^2.2.3",
+    "match-sorter": "^2.3.0",
     "outy": "^0.1.2",
-    "polished": "^1.9.2",
-    "react-dates": "^17.1.1",
-    "react-modal": "^3.3.1",
-    "react-popper": "^1.0.0",
-    "react-toastify": "^4.1.0",
-    "react-transition-group": "^2.2.1",
-    "react-with-styles-interface-aphrodite": "^5.0.0",
+    "polished": "^1.9.3",
+    "react-dates": "^18.0.2",
+    "react-modal": "^3.5.1",
+    "react-popper": "^1.0.2",
+    "react-toastify": "^4.3.0",
+    "react-transition-group": "^2.4.0",
+    "react-with-styles-interface-aphrodite": "^5.0.1",
     "styled-components": "^4.0.0-beta.1",
-    "uniqid": "^4.1.1"
+    "uniqid": "^5.0.3"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^3.4.6",
@@ -104,16 +104,16 @@
     "lint-staged": "^6.0.0",
     "mdi-react": "^2.1.19",
     "prettier": "^1.9.2",
-    "prop-types": "^15.6.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-test-renderer": "^16.4.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "react-test-renderer": "^16.5.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.56.3",
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-node-resolve": "^3.0.3"
   },
   "peerDependencies": {
-    "react": "^16.4.1"
+    "react": "^16.5.0"
   }
 }
