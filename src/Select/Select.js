@@ -35,7 +35,7 @@ const Select = ({
   function getAnchorElement(params) {
     const {
       ref,
-      getButtonProps,
+      getToggleButtonProps,
       getInputProps,
       placeholder,
       selectedItem
@@ -47,7 +47,7 @@ const Select = ({
           {({ formControlContext }) => (
             <StyledSelectInput
               as="input"
-              onClick={getButtonProps().onClick}
+              onClick={getToggleButtonProps().onClick}
               {...getInputProps({
                 placeholder: placeholder,
                 id: id || formControlContext._generatedId,
@@ -66,7 +66,7 @@ const Select = ({
       <FormControlContext.Consumer>
         {({ formControlContext }) => (
           <StyledSelectButton
-            {...getButtonProps()}
+            {...getToggleButtonProps()}
             {...getInputProps()}
             as="button"
             fullWidth={fullWidth}
@@ -154,9 +154,10 @@ const Select = ({
         itemToString={itemToString}
         onChange={downshiftOnChange}
         selectedItem={selectedItem || _getItemFromValue(selectedValue)}
-        render={({
+      >
+        {({
           getRootProps,
-          getButtonProps,
+          getToggleButtonProps,
           getInputProps,
           getItemProps,
           isOpen,
@@ -169,44 +170,40 @@ const Select = ({
               {({ ref }) => {
                 return getAnchorElement({
                   ref,
-                  getButtonProps,
+                  getToggleButtonProps,
                   getInputProps,
-                  placeholder: placeholder,
+                  placeholder,
                   selectedItem,
                   labelEl: label,
-                  horizontal: horizontal
+                  horizontal
                 });
               }}
             </Reference>
-            {isOpen ? (
-              <Popper
-                positionFixed={positionFixed}
-                placement={this.props.placement}
-              >
-                {({ ref, style, placement }) => (
-                  <StyledSelectMenu
-                    ref={ref}
-                    style={{
-                      ...style,
-                      ...getFullWidthStyle(),
-                      ...menuStyle
-                    }}
-                    data-placement={placement}
-                    fullWidth={fullWidth}
-                  >
-                    {getMenuItems(
-                      inputValue,
-                      getItemProps,
-                      highlightedIndex,
-                      selectedItem
-                    )}
-                  </StyledSelectMenu>
-                )}
-              </Popper>
-            ) : null}
+            <Popper positionFixed={positionFixed} placement={other.placement}>
+              {({ ref, style, placement }) => (
+                <StyledSelectMenu
+                  ref={ref}
+                  isOpen={isOpen}
+                  style={{
+                    ...style,
+                    ...getFullWidthStyle(),
+                    ...menuStyle
+                  }}
+                  data-placement={placement}
+                  fullWidth={fullWidth}
+                >
+                  {getMenuItems(
+                    inputValue,
+                    getItemProps,
+                    highlightedIndex,
+                    selectedItem
+                  )}
+                </StyledSelectMenu>
+              )}
+            </Popper>
           </StyledSelectWrapper>
         )}
-      />
+      </Downshift>
     </Manager>
   );
 };

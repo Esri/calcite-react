@@ -66,9 +66,10 @@ const Select = ({
         itemToString={itemToString}
         onChange={downshiftOnChange}
         selectedItem={_getItemsFromValues(selectedValues)}
-        render={({
+      >
+        {({
           getRootProps,
-          getButtonProps,
+          getToggleButtonProps,
           getInputProps,
           getItemProps,
           isOpen,
@@ -83,7 +84,7 @@ const Select = ({
               {({ ref }) => (
                 <StyledMultiSelectButton
                   ref={ref}
-                  {...getButtonProps()}
+                  {...getToggleButtonProps()}
                   {...getInputProps()}
                   fullWidth={fullWidth}
                   minimal={minimal}
@@ -119,7 +120,7 @@ const Select = ({
             ) : null}
           </StyledMultiSelectWrapper>
         )}
-      />
+      </Downshift>
     </Manager>
   );
 };

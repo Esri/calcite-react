@@ -273,7 +273,7 @@ class Search extends Component {
                   >
                     {({ ref, style, placement, arrowProps }) => (
                       <StyledSelectMenu
-                        innerRef={ref}
+                        ref={ref}
                         fullWidth={fullWidth}
                         style={{
                           ...style,
