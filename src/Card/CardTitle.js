@@ -3,9 +3,7 @@ import React from 'react';
 import { StyledCardTitle } from './Card-styled';
 
 const CardTitle = ({ children, ...other }) => {
-  const cardTitle = <StyledCardTitle {...other}>{children}</StyledCardTitle>;
-
-  return cardTitle;
+  return <StyledCardTitle {...other}>{children}</StyledCardTitle>;
 };
 
 CardTitle.propTypes = {

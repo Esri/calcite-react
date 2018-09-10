@@ -3,9 +3,7 @@ import React from 'react';
 import { StyledSideNavLink } from './SideNav-styled';
 
 const SideNavLink = ({ children, ...other }) => {
-  const sideNav = <StyledSideNavLink {...other}>{children}</StyledSideNavLink>;
-
-  return sideNav;
+  return <StyledSideNavLink {...other}>{children}</StyledSideNavLink>;
 };
 
 SideNavLink.propTypes = {

@@ -20,55 +20,56 @@ const StepIcon = ({
   vertical,
   ...other
 }) => {
-  let iconContent;
-  if (icon) {
-    //Use custom icon if they give it to us
-    const smallStyle = small ? { ...StepCustomIconStyles.small } : null;
-    const completeStyle = complete
-      ? { ...StepCustomIconStyles.complete }
-      : null;
-    const activeStyle = active ? { ...StepCustomIconStyles.active } : null;
-    const errorStyle = error ? { ...StepCustomIconStyles.error } : null;
+  const getIconContent = icon => {
+    if (icon) {
+      //Use custom icon if they give it to us
+      const smallStyle = small ? { ...StepCustomIconStyles.small } : null;
+      const completeStyle = complete
+        ? { ...StepCustomIconStyles.complete }
+        : null;
+      const activeStyle = active ? { ...StepCustomIconStyles.active } : null;
+      const errorStyle = error ? { ...StepCustomIconStyles.error } : null;
 
-    iconContent = React.cloneElement(icon, {
-      style: {
-        ...StepCustomIconStyles.default,
-        ...completeStyle,
-        ...activeStyle,
-        ...errorStyle,
-        ...smallStyle
-      }
-    });
-  } else {
-    //Otherwise create an avatar based on the settings
-    let avatarContent;
-    const smallStyle = small ? { ...StepAvatarStyles.small } : null;
-    const completeStyle = complete ? { ...StepAvatarStyles.complete } : null;
-    const activeStyle = active ? { ...StepAvatarStyles.active } : null;
-    const errorStyle = error ? { ...StepAvatarStyles.error } : null;
-
-    if (error) {
-      avatarContent = <CloseIcon style={{ ...StepIconStyle }} />;
-    } else if (complete) {
-      avatarContent = <CheckIcon style={{ ...StepIconStyle }} />;
-    } else {
-      avatarContent = children;
-    }
-
-    iconContent = (
-      <Avatar
-        style={{
-          ...StepAvatarStyles.default,
+      return React.cloneElement(icon, {
+        style: {
+          ...StepCustomIconStyles.default,
           ...completeStyle,
           ...activeStyle,
           ...errorStyle,
           ...smallStyle
-        }}
-      >
-        {avatarContent}
-      </Avatar>
-    );
-  }
+        }
+      });
+    } else {
+      //Otherwise create an avatar based on the settings
+      let avatarContent;
+      const smallStyle = small ? { ...StepAvatarStyles.small } : null;
+      const completeStyle = complete ? { ...StepAvatarStyles.complete } : null;
+      const activeStyle = active ? { ...StepAvatarStyles.active } : null;
+      const errorStyle = error ? { ...StepAvatarStyles.error } : null;
+
+      if (error) {
+        avatarContent = <CloseIcon style={{ ...StepIconStyle }} />;
+      } else if (complete) {
+        avatarContent = <CheckIcon style={{ ...StepIconStyle }} />;
+      } else {
+        avatarContent = children;
+      }
+
+      return (
+        <Avatar
+          style={{
+            ...StepAvatarStyles.default,
+            ...completeStyle,
+            ...activeStyle,
+            ...errorStyle,
+            ...smallStyle
+          }}
+        >
+          {avatarContent}
+        </Avatar>
+      );
+    }
+  };
 
   return (
     <StyledStepIcon
@@ -77,7 +78,7 @@ const StepIcon = ({
       vertical={vertical}
       {...other}
     >
-      {iconContent}
+      {getIconContent(icon)}
     </StyledStepIcon>
   );
 };

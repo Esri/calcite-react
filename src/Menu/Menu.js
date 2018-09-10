@@ -7,7 +7,7 @@ const Menu = ({ children, ...other }) => {
 };
 
 Menu.propTypes = {
-  /** Description TBD */
+  /** Content node for the Menu */
   children: PropTypes.node
 };
 

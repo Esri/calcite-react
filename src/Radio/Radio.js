@@ -8,25 +8,19 @@ import {
 
 import { FieldsetContext } from '../Form/Fieldset';
 
-const Radio = ({ children, value, checked, onChange, ...other }) => {
-  let radioLabel;
-  if (children) {
-    radioLabel = <StyledRadioLabel>{children}</StyledRadioLabel>;
-  }
+const Radio = ({ children, ...other }) => {
+  const getRadioLabel = children => {
+    if (children) {
+      return <StyledRadioLabel>{children}</StyledRadioLabel>;
+    }
+  };
 
   return (
     <FieldsetContext.Consumer>
       {({ fieldsetContext }) => (
         <StyledRadioGroup>
-          <StyledRadio
-            value={value}
-            name={fieldsetContext.name}
-            checked={checked}
-            onChange={onChange}
-            type="radio"
-            {...other}
-          />
-          {radioLabel}
+          <StyledRadio name={fieldsetContext.name} {...other} type="radio" />
+          {getRadioLabel(children)}
         </StyledRadioGroup>
       )}
     </FieldsetContext.Consumer>

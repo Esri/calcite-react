@@ -2,29 +2,26 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledSlider } from './Slider-styled';
 
-const Slider = ({ children, value, min, max, step, ...other }) => {
-  const slider = (
+const Slider = ({ value, min, max, ...other }) => {
+  return (
     <StyledSlider
-      type="range"
-      value={value}
-      min={min}
-      max={max}
       aria-valuemin={min}
       aria-valuemax={max}
       aria-valuenow={value}
-      step={step}
       {...other}
+      type="range"
     />
   );
-
-  return slider;
 };
 
 Slider.propTypes = {
-  children: PropTypes.node,
-  value: PropTypes.node,
+  /** Numeric value of the current value of the Slider */
+  value: PropTypes.number,
+  /** Minimum allowable value */
   min: PropTypes.number,
+  /** Maximum allowable value */
   max: PropTypes.number,
+  /** Size of the steps on the Slider */
   step: PropTypes.number
 };
 

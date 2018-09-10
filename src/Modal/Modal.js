@@ -15,22 +15,15 @@ const Modal = ({
   children,
   open,
   title,
-  onAfterOpen,
-  onRequestClose,
-  shouldCloseOnOverlayClick,
-  shouldCloseOnEsc,
-  parentSelector,
   overlayStyle,
   dialogStyle,
   ...other
 }) => {
-  const modal = (
+  return (
     <Transition in={open} timeout={0}>
       {state => (
         <ReactModal
           isOpen={open}
-          onAfterOpen={onAfterOpen}
-          onRequestClose={onRequestClose}
           closeTimeoutMS={300}
           style={{
             overlay: {
@@ -45,10 +38,7 @@ const Modal = ({
             }
           }}
           contentLabel={title}
-          shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
-          shouldCloseOnEsc={shouldCloseOnEsc}
           role="dialog"
-          parentSelector={parentSelector}
           {...other}
         >
           {children}
@@ -56,8 +46,6 @@ const Modal = ({
       )}
     </Transition>
   );
-
-  return modal;
 };
 
 Modal.propTypes = {

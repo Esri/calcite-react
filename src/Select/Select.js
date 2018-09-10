@@ -178,7 +178,10 @@ const Select = ({
               }}
             </Reference>
             {isOpen ? (
-              <Popper positionFixed={positionFixed} placement={'bottom-start'}>
+              <Popper
+                positionFixed={positionFixed}
+                placement={this.props.placement}
+              >
                 {({ ref, style, placement }) => (
                   <Menu
                     innerRef={ref}
@@ -229,11 +232,28 @@ Select.propTypes = {
   /** Style prop applied to the menu wrapper */
   menuStyle: PropTypes.object,
   /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
-  positionFixed: PropTypes.bool
+  positionFixed: PropTypes.bool,
+  /** Specify where the menu should appear in relation to the Select element */
+  placement: PropTypes.oneOf([
+    'auto',
+    'top',
+    'top-start',
+    'top-end',
+    'right',
+    'right-start',
+    'right-end',
+    'bottom',
+    'bottom-start',
+    'bottom-end',
+    'left',
+    'left-start',
+    'left-end'
+  ])
 };
 
 Select.defaultProps = {
-  placeholder: 'Select...'
+  placeholder: 'Select...',
+  placement: 'bottom-start'
 };
 
 export default Select;

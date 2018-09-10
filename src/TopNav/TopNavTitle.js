@@ -2,14 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledTopNavTitle } from './TopNav-styled';
 
-const TopNavTitle = ({ children, href, ...other }) => {
-  const topNavTitle = (
-    <StyledTopNavTitle {...other} href={href}>
-      {children}
-    </StyledTopNavTitle>
-  );
-
-  return topNavTitle;
+const TopNavTitle = ({ children, ...other }) => {
+  return <StyledTopNavTitle {...other}>{children}</StyledTopNavTitle>;
 };
 
 TopNavTitle.propTypes = {

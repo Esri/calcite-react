@@ -46,9 +46,13 @@ const ArcgisAccountControl = ({
 };
 
 ArcgisAccountControl.propTypes = {
-  thumbnail: PropTypes.node,
+  /** User profile avatar image */
+  avatar: PropTypes.node,
+  /** User's full name */
   fullName: PropTypes.string,
+  /** User's AGOL username */
   username: PropTypes.string,
+  /** Boolean toggle for popover visibility */
   open: PropTypes.bool
 };
 

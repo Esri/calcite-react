@@ -3,9 +3,7 @@ import React from 'react';
 import { StyledSubNavList } from './SubNav-styled';
 
 const SubNavList = ({ children, ...other }) => {
-  const subNavList = <StyledSubNavList {...other}>{children}</StyledSubNavList>;
-
-  return subNavList;
+  return <StyledSubNavList {...other}>{children}</StyledSubNavList>;
 };
 
 SubNavList.propTypes = {

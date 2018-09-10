@@ -17,12 +17,16 @@ import { StyledArcgisAccountContentMenu } from './ArcgisAccount-styled';
 
 const ArcgisAccountMenu = ({ children, user, ...other }) => {
   return (
-    <StyledArcgisAccountContentMenu>{children}</StyledArcgisAccountContentMenu>
+    <StyledArcgisAccountContentMenu {...other}>
+      {children}
+    </StyledArcgisAccountContentMenu>
   );
 };
 
 ArcgisAccountMenu.propTypes = {
+  /** Content of the StyledArcgisAccountContentMenu */
   children: PropTypes.node,
+  /** AGOL user object */
   user: PropTypes.object
 };
 

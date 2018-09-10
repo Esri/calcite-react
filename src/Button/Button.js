@@ -6,21 +6,8 @@ import { ButtonGroupContext } from './ButtonGroup';
 
 const Button = ({
   children,
-  transparent,
-  clear,
-  clearGray,
-  clearWhite,
-  white,
-  small,
-  large,
-  fullWidth,
-  half,
-  red,
-  green,
-  disabled,
-  href,
-  type,
   iconButton,
+  href,
   icon,
   iconPosition,
   ...other
@@ -55,21 +42,8 @@ const Button = ({
     <ButtonGroupContext.Consumer>
       {({ buttonGroupContext }) => (
         <StyledLink
-          transparent={transparent}
-          clear={clear}
-          clearGray={clearGray}
-          clearWhite={clearWhite}
-          white={white}
-          small={small}
-          large={large}
-          fullWidth={fullWidth}
-          half={half}
-          red={red}
-          green={green}
-          iconButton={iconButton}
           href={href}
-          disabled={disabled}
-          type={type}
+          iconButton={iconButton}
           grouped={buttonGroupContext.grouped}
           {...other}
         >
@@ -85,20 +59,7 @@ const Button = ({
     <ButtonGroupContext.Consumer>
       {({ buttonGroupContext }) => (
         <StyledButton
-          transparent={transparent}
-          clear={clear}
-          clearGray={clearGray}
-          clearWhite={clearWhite}
-          white={white}
-          small={small}
-          large={large}
-          fullWidth={fullWidth}
-          half={half}
-          red={red}
-          green={green}
           iconButton={iconButton}
-          disabled={disabled}
-          type={type}
           grouped={buttonGroupContext.grouped}
           {...other}
         >

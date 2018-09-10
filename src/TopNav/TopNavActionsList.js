@@ -3,11 +3,7 @@ import React from 'react';
 import { StyledTopNavActions } from './TopNav-styled';
 
 const TopNav = ({ children, ...other }) => {
-  const topNavActions = (
-    <StyledTopNavActions {...other}>{children}</StyledTopNavActions>
-  );
-
-  return topNavActions;
+  return <StyledTopNavActions {...other}>{children}</StyledTopNavActions>;
 };
 
 TopNav.propTypes = {

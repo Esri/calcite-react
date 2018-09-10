@@ -32,8 +32,6 @@ class List extends Component {
     return (
       <ListContext.Provider value={{ listContext }}>
         <StyledList
-          nested={this.props.nested}
-          open={this.props.open}
           innerRef={el => {
             this.listNode = el;
           }}

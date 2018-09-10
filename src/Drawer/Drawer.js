@@ -31,10 +31,7 @@ const Drawer = ({
     </StyledDrawer>
   );
 
-  return ReactDOM.createPortal(
-    drawer,
-    document.getElementsByTagName('body')[0]
-  );
+  return ReactDOM.createPortal(drawer, document.body);
 };
 
 Drawer.propTypes = {

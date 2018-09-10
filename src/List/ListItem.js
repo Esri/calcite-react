@@ -32,11 +32,7 @@ const ListItem = ({ children, leftNode, rightNode, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
-        <StyledListItem
-          open={listContext.open}
-          nested={listContext.nested}
-          {...other}
-        >
+        <StyledListItem nested={listContext.nested} {...other}>
           {getLeftNode(listContext, leftNode)}
           <StyledListTextContainer>{children}</StyledListTextContainer>
           {getRightNode(listContext, rightNode)}
@@ -47,8 +43,12 @@ const ListItem = ({ children, leftNode, rightNode, ...other }) => {
 };
 
 ListItem.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node
+  /** Content of the ListItem */
+  children: PropTypes.node,
+  /** Content placed to the left of the ListItem */
+  leftNode: PropTypes.node,
+  /** Content placed to the right of the ListItem */
+  rightNode: PropTypes.node
 };
 
 ListItem.defaultProps = {};

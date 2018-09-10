@@ -57,8 +57,7 @@ storiesOf('Form', module)
                 <Legend>Gender:</Legend>
                 <Radio>Male</Radio>
                 <Radio>Female</Radio>
-                <Radio>Non-binary, genderqueer, or gender non-conforming</Radio>
-                <Radio>Transgender</Radio>
+                <Radio>Other</Radio>
               </Fieldset>
             </FormControl>
             <FormControl>

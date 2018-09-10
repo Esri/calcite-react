@@ -8,13 +8,7 @@ const ListHeader = ({ children, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
-        <StyledListHeader
-          nested={listContext.nested}
-          open={listContext.open}
-          {...other}
-        >
-          {children}
-        </StyledListHeader>
+        <StyledListHeader {...other}>{children}</StyledListHeader>
       )}
     </ListContext.Consumer>
   );

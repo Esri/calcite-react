@@ -24,6 +24,7 @@ const ArcgisAccountMenuItem = ({ children, ...other }) => {
 };
 
 ArcgisAccountMenuItem.propTypes = {
+  /** Content node of the menu item */
   children: PropTypes.node
 };
 
