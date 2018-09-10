@@ -114,15 +114,13 @@ storiesOf('Select', module)
         constructor(props) {
           super(props);
           this.state = {
-            selectedValue: null,
-            selectedItem: null
+            selectedValue: null
           };
         }
 
         handleSelectChange = (value, item) => {
           this.setState({
-            selectedValue: value,
-            selectedItem: item
+            selectedValue: value
           });
         };
 

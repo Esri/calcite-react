@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledMenuItem, StyledMenuItemSubtitle } from './Menu-styled';
+import withRefs from '../utils/withRefs';
 
-const MenuItem = ({ children, subtitle, ...other }) => {
+const MenuItem = ({ children, subtitle, forwardedRef, ...other }) => {
   const getSubtitle = subtitle => {
     if (subtitle) {
       return <StyledMenuItemSubtitle>{subtitle}</StyledMenuItemSubtitle>;
@@ -10,7 +11,7 @@ const MenuItem = ({ children, subtitle, ...other }) => {
   };
 
   return (
-    <StyledMenuItem {...other}>
+    <StyledMenuItem ref={forwardedRef} {...other}>
       <span>{children}</span>
       {getSubtitle(subtitle)}
     </StyledMenuItem>
@@ -26,4 +27,4 @@ MenuItem.propTypes = {
 
 MenuItem.defaultProps = {};
 
-export default MenuItem;
+export default withRefs(MenuItem);
