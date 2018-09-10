@@ -216,6 +216,8 @@ class Search extends Component {
       inputValue,
       selectedItem,
       onChange,
+      onUserAction,
+      onRequestClear,
       placeholder,
       containerStyle,
       menuStyle,
@@ -237,7 +239,8 @@ class Search extends Component {
             selectedItem={selectedItem}
             onChange={onChange}
             onUserAction={this.handleOnUserAction}
-            render={({
+          >
+            {({
               getRootProps,
               getInputProps,
               getItemProps,
@@ -245,19 +248,19 @@ class Search extends Component {
               isOpen
             }) => (
               <StyledSearchInputWrapper
-                {...getRootProps({ refKey: 'innerRef' })}
+                {...getRootProps({}, { suppressRefError: true })}
               >
                 <Reference style={{ display: 'inline-block' }}>
                   {({ ref }) => (
                     <StyledSearch
                       as="input"
                       {...getInputProps({
-                        placeholder: placeholder,
-                        minimal: minimal,
+                        id: `${this._generatedId}Reference`,
+                        placeholder,
+                        minimal,
+                        ref,
                         ...other
                       })}
-                      ref={ref}
-                      id={`${this._generatedId}Reference`}
                     />
                   )}
                 </Reference>
@@ -293,7 +296,7 @@ class Search extends Component {
                 ) : null}
               </StyledSearchInputWrapper>
             )}
-          />
+          </Downshift>
         </Manager>
         {this.getShortcutIcon()}
         {this.getClearSearchIcon()}
