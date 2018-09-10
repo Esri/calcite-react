@@ -77,7 +77,7 @@ const Select = ({
           highlightedIndex
         }) => (
           <StyledMultiSelectWrapper
-            {...getRootProps({ refKey: 'innerRef' })}
+            {...getRootProps({}, { suppressRefError: true })}
             style={wrapperStyle}
           >
             <Reference style={{ display: 'inline-block' }}>
