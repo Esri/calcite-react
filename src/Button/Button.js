@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledButton } from './Button-styled';
+import withRefs from '../utils/withRefs';
 
 import { ButtonGroupContext } from './ButtonGroup';
 
@@ -10,6 +11,7 @@ const Button = ({
   iconButton,
   icon,
   iconPosition,
+  forwardedRef,
   ...other
 }) => {
   function getIconMargin() {
@@ -45,6 +47,7 @@ const Button = ({
           grouped={buttonGroupContext.grouped}
           as={href ? 'a' : 'button'}
           href={href}
+          ref={forwardedRef}
           {...other}
         >
           {iconPosition === 'before' ? getIcon(icon) : null}
@@ -98,4 +101,4 @@ Button.defaultProps = {
   iconPosition: 'after'
 };
 
-export default Button;
+export default withRefs(Button);
