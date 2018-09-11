@@ -1,10 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledSubNavLink } from './SubNav-styled';
 
-const SubNavLink = ({ children, active, withComponent, ...other }) => {
+const SubNavLink = ({
+  children,
+  active,
+  withComponent,
+  forwardedRef,
+  ...other
+}) => {
   const subNavLink = (
-    <StyledSubNavLink active={active} {...other}>
+    <StyledSubNavLink ref={forwardedRef} active={active} {...other}>
       {children}
     </StyledSubNavLink>
   );
@@ -12,6 +20,7 @@ const SubNavLink = ({ children, active, withComponent, ...other }) => {
   let customSubNavLink;
   if (withComponent) {
     customSubNavLink = React.cloneElement(withComponent, {
+      ref: forwardedRef,
       active,
       ...other,
       children: children
@@ -32,4 +41,4 @@ SubNavLink.defaultProps = {
   active: undefined
 };
 
-export default SubNavLink;
+export default withRefs(SubNavLink);

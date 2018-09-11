@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
 import {
   StyledCheckbox,
   StyledCheckboxLabel,
   StyledCheckboxGroup
 } from './Checkbox-styled';
 
-const Checkbox = ({ children, labelStyle, ...other }) => {
+const Checkbox = ({ children, labelStyle, forwardedRef, ...other }) => {
   let checkboxLabel;
   if (children) {
     checkboxLabel = (
@@ -16,7 +17,7 @@ const Checkbox = ({ children, labelStyle, ...other }) => {
 
   return (
     <StyledCheckboxGroup>
-      <StyledCheckbox {...other} type="checkbox" />
+      <StyledCheckbox ref={forwardedRef} {...other} type="checkbox" />
       {checkboxLabel}
     </StyledCheckboxGroup>
   );
@@ -39,4 +40,4 @@ Checkbox.propTypes = {
 
 Checkbox.defaultProps = {};
 
-export default Checkbox;
+export default withRefs(Checkbox);

@@ -1,14 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledListSubtitle } from './List-styled';
 
 import { ListContext } from './List';
 
-const ListSubtitle = ({ children, ...other }) => {
+const ListSubtitle = ({ children, forwardedRef, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
-        <StyledListSubtitle nested={listContext.nested} {...other}>
+        <StyledListSubtitle
+          ref={forwardedRef}
+          nested={listContext.nested}
+          {...other}
+        >
           {children}
         </StyledListSubtitle>
       )}
@@ -25,4 +31,4 @@ ListSubtitle.propTypes = {
 
 ListSubtitle.defaultProps = {};
 
-export default ListSubtitle;
+export default withRefs(ListSubtitle);

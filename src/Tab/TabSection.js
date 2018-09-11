@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withRefs from '../utils/withRefs';
+
 import { StyledTabSection } from './Tab-styled';
 
-const TabSection = ({ children, ...other }) => {
-  return <StyledTabSection {...other}>{children}</StyledTabSection>;
+const TabSection = ({ children, forwardedRef, ...other }) => {
+  return (
+    <StyledTabSection ref={forwardedRef} {...other}>
+      {children}
+    </StyledTabSection>
+  );
 };
 
 TabSection.propTypes = {
@@ -19,4 +25,4 @@ TabSection.propTypes = {
   dark: PropTypes.bool
 };
 
-export default TabSection;
+export default withRefs(TabSection);

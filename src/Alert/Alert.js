@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
 import { StyledAlert, StyledAlertClose } from './Alert-styled';
 
-const Alert = ({ children, closeLabel, onClose, ...other }) => {
+const Alert = ({ children, closeLabel, onClose, forwardedRef, ...other }) => {
   const getAlertClose = closeLabel => {
     if (closeLabel) {
       return (
@@ -12,7 +13,7 @@ const Alert = ({ children, closeLabel, onClose, ...other }) => {
   };
 
   return (
-    <StyledAlert {...other}>
+    <StyledAlert ref={forwardedRef} {...other}>
       {children}
       {getAlertClose(closeLabel)}
     </StyledAlert>
@@ -40,4 +41,4 @@ Alert.propTypes = {
 
 Alert.defaultProps = {};
 
-export default Alert;
+export default withRefs(Alert);

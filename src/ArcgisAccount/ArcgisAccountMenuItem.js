@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
+import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import { StyledArcgisAccountMenuItem } from './ArcgisAccount-styled';
@@ -15,9 +16,9 @@ import { StyledArcgisAccountMenuItem } from './ArcgisAccount-styled';
 
 // CSS
 
-const ArcgisAccountMenuItem = ({ children, ...other }) => {
+const ArcgisAccountMenuItem = ({ children, forwardedRef, ...other }) => {
   return (
-    <StyledArcgisAccountMenuItem {...other}>
+    <StyledArcgisAccountMenuItem ref={forwardedRef} {...other}>
       {children}
     </StyledArcgisAccountMenuItem>
   );
@@ -30,4 +31,4 @@ ArcgisAccountMenuItem.propTypes = {
 
 ArcgisAccountMenuItem.defaultProps = {};
 
-export default ArcgisAccountMenuItem;
+export default withRefs(ArcgisAccountMenuItem);

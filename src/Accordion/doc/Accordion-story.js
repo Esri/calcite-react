@@ -89,7 +89,10 @@ storiesOf('Accordion', module)
     'Basic',
     withInfo(doc)(() => (
       <GuideExample>
-        <Accordion activeSectionIndexes={[0]}>
+        <Accordion
+          onAccordionChange={() => console.log('onAccordionChange')}
+          activeSectionIndexes={[0]}
+        >
           <AccordionSection>
             <AccordionTitle>Accordion Title 1</AccordionTitle>
             <AccordionContent>

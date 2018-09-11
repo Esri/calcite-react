@@ -1,5 +1,7 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
+import withRefs from '../utils/withRefs';
+import uniqid from 'uniqid';
 
 import { StyledList } from './List-styled';
 
@@ -11,19 +13,25 @@ const ListContext = createContext({
 });
 
 class List extends Component {
+  constructor(props) {
+    super(props);
+    this.listId = this.props.id || uniqid();
+  }
+
   render() {
     const listContext = {
       nested: this.props.nested,
       open: this.props.open
     };
+    const listNode = document.getElementById(this.listId);
 
     let listMaxHeight = 'none';
     if (this.props.open === false) {
       listMaxHeight = '0px';
-    } else if (this.listNode && this.props.nested) {
+    } else if (listNode && this.props.nested) {
       listMaxHeight = 0;
-      for (let i = 0; i < this.listNode.childNodes.length; i++) {
-        const child = this.listNode.childNodes[i];
+      for (let i = 0; i < listNode.childNodes.length; i++) {
+        const child = listNode.childNodes[i];
         listMaxHeight = listMaxHeight + child.clientHeight;
       }
       listMaxHeight = listMaxHeight + 'px';
@@ -32,9 +40,8 @@ class List extends Component {
     return (
       <ListContext.Provider value={{ listContext }}>
         <StyledList
-          ref={el => {
-            this.listNode = el;
-          }}
+          ref={this.props.forwardedRef}
+          id={this.listId}
           maxHeight={listMaxHeight}
           {...this.props}
         >
@@ -56,4 +63,6 @@ List.propTypes = {
 
 List.defaultProps = {};
 
-export { List as default, ListContext };
+const ListWithRefs = withRefs(List);
+
+export { ListWithRefs as default, ListContext };

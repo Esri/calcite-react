@@ -1,9 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
 import { StyledLabel } from './Label-styled';
 
-const Label = ({ children, ...other }) => {
-  return <StyledLabel {...other}>{children}</StyledLabel>;
+const Label = ({ children, forwardedRef, ...other }) => {
+  return (
+    <StyledLabel ref={forwardedRef} {...other}>
+      {children}
+    </StyledLabel>
+  );
 };
 
 Label.propTypes = {
@@ -21,4 +26,4 @@ Label.propTypes = {
 
 Label.defaultProps = {};
 
-export default Label;
+export default withRefs(Label);

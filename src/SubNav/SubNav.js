@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
 import { getChildType } from '../utils/helpers';
+import withRefs from '../utils/withRefs';
+
 import { StyledSubNav, StyledSubNavLeftContent } from './SubNav-styled';
 
 import { SubNavTitle, SubNavList, SubNavActions } from './';
@@ -11,7 +13,7 @@ const SubNavContext = createContext({
   }
 });
 
-const SubNav = ({ children, blue, ...other }) => {
+const SubNav = ({ children, blue, forwardedRef, ...other }) => {
   const subNavContext = {
     blue
   };
@@ -33,7 +35,7 @@ const SubNav = ({ children, blue, ...other }) => {
 
   return (
     <SubNavContext.Provider value={{ subNavContext }}>
-      <StyledSubNav blue={blue} {...other}>
+      <StyledSubNav ref={forwardedRef} blue={blue} {...other}>
         <StyledSubNavLeftContent>{getLeftContent()}</StyledSubNavLeftContent>
         {getSubNavActions()}
       </StyledSubNav>
@@ -54,4 +56,6 @@ SubNav.defaultProps = {
   overlayGradient: true
 };
 
-export { SubNav as default, SubNavContext };
+const SubNavWithRefs = withRefs(SubNav);
+
+export { SubNavWithRefs as default, SubNavContext };

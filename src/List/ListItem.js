@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import {
   StyledListItem,
   StyledListTextContainer,
@@ -8,7 +10,13 @@ import {
 
 import { ListContext } from './List';
 
-const ListItem = ({ children, leftNode, rightNode, ...other }) => {
+const ListItem = ({
+  children,
+  leftNode,
+  rightNode,
+  forwardedRef,
+  ...other
+}) => {
   const getLeftNode = (listContext, leftNode) => {
     if (leftNode) {
       return (
@@ -32,7 +40,11 @@ const ListItem = ({ children, leftNode, rightNode, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
-        <StyledListItem nested={listContext.nested} {...other}>
+        <StyledListItem
+          ref={forwardedRef}
+          nested={listContext.nested}
+          {...other}
+        >
           {getLeftNode(listContext, leftNode)}
           <StyledListTextContainer>{children}</StyledListTextContainer>
           {getRightNode(listContext, rightNode)}
@@ -53,4 +65,4 @@ ListItem.propTypes = {
 
 ListItem.defaultProps = {};
 
-export default ListItem;
+export default withRefs(ListItem);

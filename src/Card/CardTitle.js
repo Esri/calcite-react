@@ -1,9 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
 import { StyledCardTitle } from './Card-styled';
 
-const CardTitle = ({ children, ...other }) => {
-  return <StyledCardTitle {...other}>{children}</StyledCardTitle>;
+const CardTitle = ({ children, forwardedRef, ...other }) => {
+  return (
+    <StyledCardTitle ref={forwardedRef} {...other}>
+      {children}
+    </StyledCardTitle>
+  );
 };
 
 CardTitle.propTypes = {
@@ -13,4 +18,4 @@ CardTitle.propTypes = {
 
 CardTitle.defaultProps = {};
 
-export default CardTitle;
+export default withRefs(CardTitle);

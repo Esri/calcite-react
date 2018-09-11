@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import {
   StyledTextField,
   StyledTextArea,
@@ -19,6 +21,7 @@ const TextField = ({
   onChange,
   leftAdornment,
   rightAdornment,
+  forwardedRef,
   ...other
 }) => {
   const getAdornment = function(adornment) {
@@ -50,6 +53,7 @@ const TextField = ({
       <FormControlContext.Consumer>
         {({ formControlContext }) => (
           <TextFieldArea
+            ref={forwardedRef}
             as={type === 'textarea' ? 'textarea' : 'input'}
             type={type}
             error={formControlContext.error}
@@ -70,6 +74,7 @@ const TextField = ({
         <StyledTextFieldAdornmentWrapper>
           {getAdornment(leftAdornment)}
           <TextFieldArea
+            ref={forwardedRef}
             as={type === 'textarea' ? 'textarea' : 'input'}
             type={type}
             error={formControlContext.error}
@@ -126,4 +131,4 @@ TextField.defaultProps = {
   type: 'text'
 };
 
-export default TextField;
+export default withRefs(TextField);

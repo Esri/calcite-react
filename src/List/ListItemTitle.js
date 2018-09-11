@@ -1,14 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledListTitle } from './List-styled';
 
 import { ListContext } from './List';
 
-const ListTitle = ({ children, ...other }) => {
+const ListTitle = ({ children, forwardedRef, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
-        <StyledListTitle nested={listContext.nested} {...other}>
+        <StyledListTitle
+          ref={forwardedRef}
+          nested={listContext.nested}
+          {...other}
+        >
           {children}
         </StyledListTitle>
       )}
@@ -25,4 +31,4 @@ ListTitle.propTypes = {
 
 ListTitle.defaultProps = {};
 
-export default ListTitle;
+export default withRefs(ListTitle);

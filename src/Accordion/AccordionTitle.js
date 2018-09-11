@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
 import { StyledAccordionTitle, ArrowIconStyles } from './Accordion-styled';
 import ChevronDownIcon from '../icons/ChevronDownIcon';
 import ChevronRightIcon from '../icons/ChevronRightIcon';
@@ -9,6 +10,7 @@ const AccordionTitle = ({
   active,
   sectionIndex,
   onAccordionChange,
+  forwardedRef,
   ...other
 }) => {
   const setActiveAccordionIndex = e => {
@@ -19,6 +21,7 @@ const AccordionTitle = ({
     <StyledAccordionTitle
       onClick={setActiveAccordionIndex}
       active={active}
+      ref={forwardedRef}
       {...other}
     >
       {active ? (
@@ -40,4 +43,4 @@ AccordionTitle.propTypes = {
 
 AccordionTitle.defaultProps = {};
 
-export default AccordionTitle;
+export default withRefs(AccordionTitle);

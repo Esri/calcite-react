@@ -1,4 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import EsriColors from './EsriColors';
 
 const CalciteTheme = {
@@ -628,4 +630,24 @@ const CalciteReactGlobalStyles = createGlobalStyle`
   }
 `;
 
-export { CalciteTheme as default, CalciteReactGlobalStyles };
+const CalciteThemeProvider = ({ children, theme, ...other }) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        <CalciteReactGlobalStyles />
+        {children}
+      </Fragment>
+    </ThemeProvider>
+  );
+};
+
+CalciteThemeProvider.propTypes = {
+  children: PropTypes.node,
+  theme: PropTypes.node
+};
+
+CalciteThemeProvider.defaultProps = {
+  theme: CalciteTheme
+};
+
+export { CalciteTheme as default, CalciteThemeProvider };

@@ -1,10 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { getChildType } from '../utils/helpers';
+import withRefs from '../utils/withRefs';
+
 import { StyledStepper } from './Stepper-styled';
 import { Step } from './';
 
-const Stepper = ({ children, currentStep, small, vertical, ...other }) => {
+const Stepper = ({
+  children,
+  currentStep,
+  small,
+  vertical,
+  forwardedRef,
+  ...other
+}) => {
   const childArray = React.Children.toArray(children);
   let currentChildStepNumber = 0;
   const childrenWithProps = childArray.map((child, i) => {
@@ -25,7 +34,7 @@ const Stepper = ({ children, currentStep, small, vertical, ...other }) => {
   });
 
   return (
-    <StyledStepper vertical={vertical} {...other}>
+    <StyledStepper ref={forwardedRef} vertical={vertical} {...other}>
       {childrenWithProps}
     </StyledStepper>
   );
@@ -40,4 +49,4 @@ Stepper.propTypes = {
 
 Stepper.defaultProps = {};
 
-export default Stepper;
+export default withRefs(Stepper);

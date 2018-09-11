@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import withRefs from '../utils/withRefs';
 
 import {
   StyledComboButtonContainer,
@@ -37,6 +38,7 @@ class ComboButton extends Component {
       label,
       icon,
       iconPosition,
+      forwardedRef,
       ...other
     } = this.props;
 
@@ -56,7 +58,7 @@ class ComboButton extends Component {
 
     const comboButton = (
       <StyledComboButtonContainer>
-        <StyledComboButton onClick={onClick} {...other}>
+        <StyledComboButton ref={forwardedRef} onClick={onClick} {...other}>
           {iconPosition === 'before' ? wrappedIcon : null}
           {label}
           {iconPosition === 'after' ? wrappedIcon : null}
@@ -117,4 +119,4 @@ ComboButton.defaultProps = {
   iconPosition: 'after'
 };
 
-export default ComboButton;
+export default withRefs(ComboButton);
