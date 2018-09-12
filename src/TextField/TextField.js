@@ -16,14 +16,27 @@ import { FormControlContext } from '../Form/FormControl';
 const TextField = ({
   children,
   type,
+  value,
   minimal,
   id,
   onChange,
+  onBlur,
   leftAdornment,
   rightAdornment,
   forwardedRef,
+  disabled,
+  field,
+  form,
   ...other
 }) => {
+  let name, touched, errors, isSubmitting;
+  if (field) {
+    name = field.name;
+    touched = form.touched;
+    errors = form.errors;
+    isSubmitting = form.isSubmitting;
+  }
+
   const getAdornment = function(adornment) {
     if (adornment && adornment.type === Button) {
       return React.cloneElement(adornment, {
@@ -42,6 +55,44 @@ const TextField = ({
     );
   };
 
+  const getValue = () => {
+    return (field && field.value) || value;
+  };
+
+  const handleChange = e => {
+    if (field) {
+      field.onChange(e);
+    }
+
+    onChange(e);
+  };
+
+  const handleBlur = e => {
+    if (field) {
+      field.onBlur(e);
+    }
+
+    onBlur(e);
+  };
+
+  const isSuccess = formControlContext => {
+    if (touched) {
+      return touched[name] && !errors[name] ? true : false;
+    }
+    return formControlContext.success;
+  };
+
+  const isError = formControlContext => {
+    if (touched) {
+      return touched[name] && errors[name] ? true : false;
+    }
+    return formControlContext.error;
+  };
+
+  const isDisabled = () => {
+    return isSubmitting || disabled;
+  };
+
   let TextFieldArea = StyledTextField;
 
   if (type === 'textarea') {
@@ -56,11 +107,14 @@ const TextField = ({
             ref={forwardedRef}
             as={type === 'textarea' ? 'textarea' : 'input'}
             type={type}
-            error={formControlContext.error}
-            success={formControlContext.success}
+            value={getValue()}
             minimal={minimal}
             id={id || formControlContext._generatedId}
-            onChange={onChange}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            success={isSuccess(formControlContext)}
+            error={isError(formControlContext)}
+            disabled={isDisabled()}
             {...other}
           />
         )}
@@ -77,11 +131,14 @@ const TextField = ({
             ref={forwardedRef}
             as={type === 'textarea' ? 'textarea' : 'input'}
             type={type}
-            error={formControlContext.error}
-            success={formControlContext.success}
+            value={getValue()}
             minimal={minimal}
             id={id || formControlContext._generatedId}
-            onChange={onChange}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            success={isSuccess(formControlContext)}
+            error={isError(formControlContext)}
+            disabled={isDisabled()}
             {...other}
           />
           {getAdornment(rightAdornment)}

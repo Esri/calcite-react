@@ -7,7 +7,31 @@ import {
   StyledCheckboxGroup
 } from './Checkbox-styled';
 
-const Checkbox = ({ children, labelStyle, forwardedRef, ...other }) => {
+const Checkbox = ({
+  children,
+  labelStyle,
+  forwardedRef,
+  checked,
+  field,
+  form,
+  value,
+  arrayHelpers = null,
+  success = false,
+  error = false,
+  disabled = false,
+  onChange,
+  ...other
+}) => {
+  let name, touched, errors, values, isSubmitting, setFieldValue;
+  if (field) {
+    name = field.name;
+    touched = form.touched;
+    errors = form.errors;
+    values = form.values;
+    isSubmitting = form.isSubmitting;
+    setFieldValue = form.setFieldValue;
+  }
+
   let checkboxLabel;
   if (children) {
     checkboxLabel = (
@@ -15,9 +39,64 @@ const Checkbox = ({ children, labelStyle, forwardedRef, ...other }) => {
     );
   }
 
+  const handleChange = e => {
+    if (arrayHelpers) {
+      if (e.target.checked) {
+        arrayHelpers.push(value);
+      } else {
+        const i = values[name].indexOf(value);
+        arrayHelpers.remove(i);
+      }
+    } else {
+      if (setFieldValue) {
+        setFieldValue(name, e.target.checked);
+      } else {
+        onChange(e);
+      }
+    }
+  };
+
+  const isChecked = () => {
+    if (arrayHelpers) {
+      return values[name].includes(value);
+    }
+    if (values) {
+      return values[name] === true;
+    }
+
+    return checked;
+  };
+
+  const isSuccess = () => {
+    if (touched) {
+      return touched[name] && !errors[name] ? true : false;
+    }
+    return success;
+  };
+
+  const isError = () => {
+    if (touched) {
+      return touched[name] && errors[name] ? true : false;
+    }
+    return error;
+  };
+
+  const isDisabled = () => {
+    return isSubmitting || disabled;
+  };
+
   return (
     <StyledCheckboxGroup>
-      <StyledCheckbox ref={forwardedRef} {...other} type="checkbox" />
+      <StyledCheckbox
+        ref={forwardedRef}
+        onChange={handleChange}
+        checked={isChecked()}
+        success={isSuccess()}
+        error={isError()}
+        disabled={isDisabled()}
+        {...other}
+        type="checkbox"
+      />
       {checkboxLabel}
     </StyledCheckboxGroup>
   );

@@ -39,7 +39,7 @@ storiesOf('Slider', module)
         }
 
         updateSliderValue = event => {
-          this.setState({ value: event.target.value });
+          this.setState({ value: parseInt(event.target.value, 10) });
         };
 
         render() {
@@ -48,6 +48,7 @@ storiesOf('Slider', module)
               <Form horizontal>
                 <FormControl>
                   <TextField
+                    type="number"
                     value={this.state.value}
                     onChange={this.updateSliderValue}
                   />
