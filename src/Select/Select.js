@@ -30,8 +30,20 @@ const Select = ({
   label,
   onChange,
   positionFixed,
+  disabled,
+  onBlur,
+  field,
+  form,
   ...other
 }) => {
+  let name, touched, errors, isSubmitting;
+  if (field) {
+    name = field.name;
+    touched = form.touched;
+    errors = form.errors;
+    isSubmitting = form.isSubmitting;
+  }
+
   function getAnchorElement(params) {
     const {
       ref,
@@ -48,6 +60,9 @@ const Select = ({
             <StyledSelectInput
               as="input"
               onClick={getToggleButtonProps().onClick}
+              success={isSuccess(formControlContext)}
+              error={isError(formControlContext)}
+              disabled={isDisabled()}
               {...getInputProps({
                 placeholder: placeholder,
                 id: id || formControlContext._generatedId,
@@ -74,6 +89,9 @@ const Select = ({
             ref={ref}
             id={id || formControlContext._generatedId}
             style={style}
+            success={isSuccess(formControlContext)}
+            error={isError(formControlContext)}
+            disabled={isDisabled()}
             {...other}
           >
             {itemToString(selectedItem)
@@ -96,7 +114,14 @@ const Select = ({
 
   function downshiftOnChange(selectedItem, downshiftProps) {
     const value = selectedItem.props.value;
-    onChange(value, selectedItem);
+
+    if (form) {
+      form.setFieldValue(name, value);
+    }
+
+    if (onChange) {
+      onChange(value, selectedItem);
+    }
   }
 
   function _getItemFromValue(value) {
@@ -152,12 +177,45 @@ const Select = ({
     }
   }
 
+  function getSelectedValue() {
+    return (field && field.value) || selectedValue;
+  }
+
+  function handleBlur(e) {
+    if (field) {
+      field.onBlur(e);
+    }
+
+    if (onBlur) {
+      onBlur(e);
+    }
+  }
+
+  function isSuccess(formControlContext) {
+    if (touched) {
+      return touched[name] && !errors[name] ? true : false;
+    }
+    return formControlContext.success;
+  }
+
+  function isError(formControlContext) {
+    if (touched) {
+      return touched[name] && errors[name] ? true : false;
+    }
+    return formControlContext.error;
+  }
+
+  function isDisabled() {
+    return isSubmitting || disabled;
+  }
+
   return (
     <Manager style={{ ...PopperManagerStyles, ...wrapperStyle }}>
       <Downshift
         itemToString={itemToString}
         onChange={downshiftOnChange}
-        selectedItem={selectedItem || _getItemFromValue(selectedValue)}
+        onBlur={handleBlur}
+        selectedItem={selectedItem || _getItemFromValue(getSelectedValue())}
       >
         {({
           getRootProps,

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
+import { Formik, Field } from 'formik';
 
 import GuideExample from '../../../stories/GuideExample';
 import doc from './Select.md';
@@ -11,8 +12,12 @@ import Alert from '../../Alert';
 import Card, { CardTitle, CardContent } from '../../Card';
 import { MenuItem } from '../../Menu';
 import Select from '../';
-
-import { FormControl, FormControlLabel } from '../../Form';
+import Button from '../../Button';
+import Form, {
+  FormControl,
+  FormHelperText,
+  FormControlLabel
+} from '../../Form';
 
 import statesJson from '../../../stories/_sampleJson/states.json';
 
@@ -197,4 +202,104 @@ storiesOf('Select', module)
         </GuideExample>
       </div>
     ))
+  )
+  .add(
+    'with Formik',
+    withInfo({
+      text: doc,
+      propTables: [Select]
+    })(() => {
+      class SelectWithFormikStory extends Component {
+        state = {
+          selectedValue: 10,
+          selectedItem: null
+        };
+
+        user = {
+          state: ''
+        };
+
+        handleSelectChange = (value, item) => {
+          this.setState({
+            selectedValue: value,
+            selectedItem: item
+          });
+        };
+
+        onSubmit = (values, actions) => {
+          console.log(values);
+          setTimeout(() => {
+            actions.setSubmitting(false);
+          }, 1000);
+        };
+
+        onValidate = values => {
+          const errors = {};
+          if (!values.state) {
+            errors.state = 'Required 🤨';
+          } else if (values.state !== 'CO') {
+            errors.state = 'You have to live in Colorado to use this form 😉';
+          }
+
+          return errors;
+        };
+
+        render() {
+          return (
+            <div>
+              <Formik
+                initialValues={this.user}
+                validate={this.onValidate}
+                onSubmit={this.onSubmit}
+              >
+                {({
+                  values,
+                  errors,
+                  touched,
+                  handleBlur,
+                  handleChange,
+                  handleSubmit,
+                  isSubmitting
+                }) => (
+                  <GuideExample label="selectedItem={this.state.selectedItem}">
+                    <Form onSubmit={handleSubmit}>
+                      {/* state */}
+
+                      <FormControl
+                        success={touched.state && !errors.state ? true : false}
+                        error={touched.state && errors.state ? true : false}
+                      >
+                        <FormControlLabel htmlFor="state">
+                          State:
+                        </FormControlLabel>
+                        <Field component={Select} name="state">
+                          <MenuItem value="CA">California</MenuItem>
+                          <MenuItem value="CO">Colorado</MenuItem>
+                          <MenuItem value="MD">Maryland</MenuItem>
+                        </Field>
+                        <FormHelperText>
+                          {(touched.state && errors.state) || null}
+                        </FormHelperText>
+                      </FormControl>
+
+                      <FormControl>
+                        <Button type="submit" disabled={isSubmitting}>
+                          {isSubmitting ? 'Submitting.......' : 'Submit'}
+                        </Button>
+                      </FormControl>
+                      <pre>{JSON.stringify(values, null, 2)}</pre>
+                    </Form>
+                  </GuideExample>
+                )}
+              </Formik>
+            </div>
+          );
+        }
+      }
+
+      SelectWithFormikStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <SelectWithFormikStory />;
+    })
   );
