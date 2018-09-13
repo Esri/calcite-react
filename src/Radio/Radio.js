@@ -24,7 +24,7 @@ const Radio = ({
   ...other
 }) => {
   let name, touched, errors, values, isSubmitting, setFieldValue;
-  if (field) {
+  if (field && form) {
     name = field.name;
     touched = form.touched;
     errors = form.errors;
@@ -49,7 +49,7 @@ const Radio = ({
 
   const isChecked = () => {
     if (values) {
-      return values[name] === true;
+      return values[name] === value;
     }
 
     return checked;
