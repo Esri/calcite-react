@@ -14,10 +14,60 @@ import DatePickerTheme from '../theme/DatePickerTheme';
 ThemedStyleSheet.registerInterface(aphroditeInterface);
 ThemedStyleSheet.registerTheme(DatePickerTheme);
 
-const DatePicker = ({ ...other }) => {
+const DatePicker = ({
+  field,
+  form,
+  onFocusChange,
+  onDatesChange,
+  disabled,
+  name,
+  value,
+  children,
+  ...other
+}) => {
+  let isSubmitting, setFieldValue, setTouched;
+  if (field) {
+    value = field.value;
+    name = field.name;
+    isSubmitting = form.isSubmitting;
+    setFieldValue = form.setFieldValue;
+    setTouched = form.setTouched;
+  }
+
+  const _onDatesChange = dates => {
+    if (setFieldValue) {
+      const { startDate, endDate } = dates;
+      setFieldValue(name, {
+        startDate,
+        endDate
+      });
+    }
+
+    if (onDatesChange) {
+      onDatesChange(dates);
+    }
+  };
+
+  const _onFocusChange = focusedInput => {
+    if (setTouched && !focusedInput) {
+      setTouched({ [name]: true });
+    }
+
+    if (onFocusChange) {
+      onFocusChange(focusedInput);
+    }
+  };
+
   return (
     <StyledDatePickerContainer>
-      <DateRangePicker {...other} />
+      <DateRangePicker
+        startDate={value && value.startDate}
+        endDate={value && value.endDate}
+        onDatesChange={_onDatesChange}
+        onFocusChange={_onFocusChange}
+        disabled={isSubmitting || disabled}
+        {...other}
+      />
     </StyledDatePickerContainer>
   );
 };
