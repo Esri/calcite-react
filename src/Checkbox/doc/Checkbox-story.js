@@ -113,18 +113,10 @@ storiesOf('Checkbox', module)
           validate={onValidate}
           onSubmit={onSubmit}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-            isSubmitting
-          }) => (
+          {({ values, errors, touched, handleSubmit, isSubmitting }) => (
             <GuideExample>
               <Form onSubmit={handleSubmit}>
-                {/* sdks - FormikCheckbox */}
+                {/* sdks */}
 
                 <FormControl
                   success={touched.sdks && !errors.sdks ? true : false}

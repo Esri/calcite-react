@@ -93,6 +93,8 @@ storiesOf('Radio', module)
       const onValidate = values => {
         const errors = {};
 
+        // No validation logic for for this form...
+
         return errors;
       };
 
@@ -102,15 +104,7 @@ storiesOf('Radio', module)
           validate={onValidate}
           onSubmit={onSubmit}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-            isSubmitting
-          }) => (
+          {({ values, errors, touched, handleSubmit, isSubmitting }) => (
             <GuideExample>
               <Form onSubmit={handleSubmit}>
                 {/* subscription */}

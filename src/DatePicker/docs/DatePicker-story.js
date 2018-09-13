@@ -196,8 +196,8 @@ storiesOf('DatePicker', module)
         };
 
         onSubmit = (values, actions) => {
-          console.log(values);
           setTimeout(() => {
+            console.log(values);
             actions.setSubmitting(false);
           }, 1000);
         };
@@ -218,15 +218,7 @@ storiesOf('DatePicker', module)
               validate={this.onValidate}
               onSubmit={this.onSubmit}
             >
-              {({
-                values,
-                errors,
-                touched,
-                handleBlur,
-                handleChange,
-                handleSubmit,
-                isSubmitting
-              }) => (
+              {({ values, errors, touched, handleSubmit, isSubmitting }) => (
                 <GuideExample>
                   <Form onSubmit={handleSubmit}>
                     {/* birthday */}
@@ -299,8 +291,8 @@ storiesOf('DatePicker', module)
         };
 
         onSubmit = (values, actions) => {
-          console.log(values);
           setTimeout(() => {
+            console.log(values);
             actions.setSubmitting(false);
           }, 1000);
         };
@@ -325,15 +317,7 @@ storiesOf('DatePicker', module)
               validate={this.onValidate}
               onSubmit={this.onSubmit}
             >
-              {({
-                values,
-                errors,
-                touched,
-                handleBlur,
-                handleChange,
-                handleSubmit,
-                isSubmitting
-              }) => (
+              {({ values, errors, touched, handleSubmit, isSubmitting }) => (
                 <GuideExample>
                   <Form onSubmit={handleSubmit}>
                     {/* booking */}

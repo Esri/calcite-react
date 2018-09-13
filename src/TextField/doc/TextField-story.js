@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-
 import { Formik, Field } from 'formik';
 
 import GuideExample from '../../../stories/GuideExample';
@@ -130,8 +129,8 @@ storiesOf('TextField', module)
       };
 
       const onSubmit = (values, actions) => {
-        console.log(values);
         setTimeout(() => {
+          console.log(values);
           actions.setSubmitting(false);
         }, 1000);
       };
@@ -155,20 +154,13 @@ storiesOf('TextField', module)
       };
 
       const handleNameChanged = e => {
+        // You can still attach your own onChange handlers (they will be invoked right after the Formik ones)
         console.log('Hello ', e.target.value);
       };
 
       return (
         <Formik initialValues={user} validate={onValidate} onSubmit={onSubmit}>
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-            isSubmitting
-          }) => (
+          {({ values, errors, touched, handleSubmit, isSubmitting }) => (
             <GuideExample>
               <Form onSubmit={handleSubmit}>
                 {/* name */}

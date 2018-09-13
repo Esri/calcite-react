@@ -193,8 +193,8 @@ storiesOf('MultiSelect', module)
       ];
 
       const onSubmit = (values, actions) => {
-        console.log(values);
         setTimeout(() => {
+          console.log(values);
           actions.setSubmitting(false);
         }, 1000);
       };

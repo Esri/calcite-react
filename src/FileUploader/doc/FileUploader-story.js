@@ -37,8 +37,8 @@ storiesOf('FileUploader', module)
       };
 
       const onSubmit = (values, actions) => {
-        console.log(values);
         setTimeout(() => {
+          console.log(values);
           actions.setSubmitting(false);
         }, 1000);
       };
@@ -61,6 +61,7 @@ storiesOf('FileUploader', module)
             <GuideExample>
               <Form onSubmit={handleSubmit}>
                 {/* avatar */}
+
                 <FormControl
                   success={touched.avatar && !errors.avatar ? true : false}
                   error={touched.avatar && errors.avatar ? true : false}

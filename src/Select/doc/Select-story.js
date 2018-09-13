@@ -12,12 +12,13 @@ import Alert from '../../Alert';
 import Card, { CardTitle, CardContent } from '../../Card';
 import { MenuItem } from '../../Menu';
 import Select from '../';
-import Button from '../../Button';
+
 import Form, {
   FormControl,
   FormHelperText,
   FormControlLabel
 } from '../../Form';
+import Button from '../../Button';
 
 import statesJson from '../../../stories/_sampleJson/states.json';
 
@@ -215,7 +216,7 @@ storiesOf('Select', module)
           selectedItem: null
         };
 
-        user = {
+        formValues = {
           state: ''
         };
 
@@ -227,8 +228,8 @@ storiesOf('Select', module)
         };
 
         onSubmit = (values, actions) => {
-          console.log(values);
           setTimeout(() => {
+            console.log(values);
             actions.setSubmitting(false);
           }, 1000);
         };
@@ -248,19 +249,11 @@ storiesOf('Select', module)
           return (
             <div>
               <Formik
-                initialValues={this.user}
+                initialValues={this.formValues}
                 validate={this.onValidate}
                 onSubmit={this.onSubmit}
               >
-                {({
-                  values,
-                  errors,
-                  touched,
-                  handleBlur,
-                  handleChange,
-                  handleSubmit,
-                  isSubmitting
-                }) => (
+                {({ values, errors, touched, handleSubmit, isSubmitting }) => (
                   <GuideExample label="selectedItem={this.state.selectedItem}">
                     <Form onSubmit={handleSubmit}>
                       {/* state */}
