@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
 
 import { StyledDatePickerContainer } from './DatePicker-styled';
 
@@ -26,11 +27,13 @@ DatePicker.propTypes = {
   onDateChange: PropTypes.func.isRequired,
   focused: PropTypes.bool,
   onFocusChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  id: PropTypes.string.isRequired
 };
 
 DatePicker.defaultProps = {
-  placeholder: 'Date'
+  placeholder: 'Date',
+  id: uniqid()
 };
 
 export default DatePicker;

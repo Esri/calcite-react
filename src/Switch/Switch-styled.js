@@ -62,14 +62,12 @@ const StyledSwitch = styled.label`
   margin: 0 0 ${props => props.theme.baseline} 0;
 `;
 
-const StyledSwitchInput = baseRadioCheckbox.extend`
+const StyledSwitchInput = styled(baseRadioCheckbox)`
   opacity: 0;
   height: 0;
   width: 0;
   margin: 0;
   position: absolute;
-
-
 `;
 
 const StyledSwitchTrack = styled.span`

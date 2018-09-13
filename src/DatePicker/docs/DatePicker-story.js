@@ -39,7 +39,7 @@ storiesOf('DatePicker', module)
         render() {
           return (
             <div>
-              <GuideExample label="selectedItem={this.state.selectedValues}">
+              <GuideExample>
                 <DatePicker
                   date={this.state.date}
                   onDateChange={this.onDateChange}

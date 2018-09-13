@@ -1,14 +1,15 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { fontSize, unitCalc } from '../utils/helpers';
 
-const html = styled.html`
+const CalciteHtml = styled.html`
   height: 100%;
   font-size: 100%;
   font-family: 'Avenir Next W01', 'Avenir Next W00', 'Avenir Next', 'Avenir',
     'Helvetica Neue', sans-serif;
 `;
 
-const body = styled.body`
+const CalciteBody = styled.body`
   min-height: 100%;
   margin: 0;
 
@@ -28,12 +29,12 @@ const body = styled.body`
   font-feature-settings: 'liga' 1, 'calt' 0;
 `;
 
-const p = styled.p`
+const CalciteP = styled.p`
   margin-top: 0;
   margin-bottom: 1.55rem;
 `;
 
-const a = styled.a`
+const CalciteA = styled.a`
   color: ${props => props.theme.linkColor};
   text-decoration: none;
   cursor: pointer;
@@ -50,36 +51,69 @@ const baseH = styled.h1`
   margin: 0 0 ${props => props.theme.baseline} 0;
 `;
 
-const h1 = baseH.extend`
+const H1 = styled(baseH)`
   ${fontSize(5)};
 `;
+const CalciteH1 = ({ children, ...props }) => {
+  return <H1 {...props}>{children}</H1>;
+};
 
-let h2 = baseH.extend`
+const H2 = styled(baseH)`
   ${fontSize(4)};
 `;
-h2 = h2.withComponent('h2');
+const CalciteH2 = ({ children, ...props }) => {
+  return (
+    <H2 as="h2" {...props}>
+      {children}
+    </H2>
+  );
+};
 
-let h3 = baseH.extend`
+const H3 = styled(baseH)`
   ${fontSize(3)};
 `;
-h3 = h3.withComponent('h3');
+const CalciteH3 = ({ children, ...props }) => {
+  return (
+    <H3 as="h3" {...props}>
+      {children}
+    </H3>
+  );
+};
 
-let h4 = baseH.extend`
+const H4 = styled(baseH)`
   ${fontSize(2)};
 `;
-h4 = h4.withComponent('h4');
+const CalciteH4 = ({ children, ...props }) => {
+  return (
+    <H4 as="h4" {...props}>
+      {children}
+    </H4>
+  );
+};
 
-let h5 = baseH.extend`
+const H5 = styled(baseH)`
   ${fontSize(1)};
 `;
-h5 = h5.withComponent('h5');
+const CalciteH5 = ({ children, ...props }) => {
+  return (
+    <H5 as="h5" {...props}>
+      {children}
+    </H5>
+  );
+};
 
-let h6 = baseH.extend`
+const H6 = styled(baseH)`
   ${fontSize(0)};
 `;
-h6 = h6.withComponent('h6');
+const CalciteH6 = ({ children, ...props }) => {
+  return (
+    <H6 as="h6" {...props}>
+      {children}
+    </H6>
+  );
+};
 
-const baseList = styled.div`
+const BaseList = styled.div`
   margin-top: 0;
   margin-bottom: ${props => props.theme.baseline};
   padding: 0;
@@ -105,11 +139,23 @@ const baseList = styled.div`
     `};
 `;
 
-let ol = baseList.withComponent('ol');
+const CalciteOl = ({ children, ...props }) => {
+  return (
+    <BaseList as="ol" {...props}>
+      {children}
+    </BaseList>
+  );
+};
 
-let ul = baseList.withComponent('ul');
+const CalciteUl = ({ children, ...props }) => {
+  return (
+    <BaseList as="ul" {...props}>
+      {children}
+    </BaseList>
+  );
+};
 
-let li = styled.li`
+const CalciteLi = styled.li`
   list-style-position: outside;
   margin: ${props => unitCalc(props.theme.baseline, 4, '/')} 0
     ${props => unitCalc(props.theme.baseline, 4, '/')} 1.5rem;
@@ -120,23 +166,23 @@ let li = styled.li`
   }
 `;
 
-const figure = styled.figure`
+const CalciteFigure = styled.figure`
   margin: 0 0 1.55rem 0;
 `;
 
 export {
-  html as CalciteHtml,
-  body as CalciteBody,
-  p as CalciteP,
-  a as CalciteA,
-  h1 as CalciteH1,
-  h2 as CalciteH2,
-  h3 as CalciteH3,
-  h4 as CalciteH4,
-  h5 as CalciteH5,
-  h6 as CalciteH6,
-  ol as CalciteOl,
-  ul as CalciteUl,
-  li as CalciteLi,
-  figure as CalciteFigure
+  CalciteHtml,
+  CalciteBody,
+  CalciteP,
+  CalciteA,
+  CalciteH1,
+  CalciteH2,
+  CalciteH3,
+  CalciteH4,
+  CalciteH5,
+  CalciteH6,
+  CalciteOl,
+  CalciteUl,
+  CalciteLi,
+  CalciteFigure
 };

@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledSlider } from './Slider-styled';
 
-const Slider = ({ value, min, max, ...other }) => {
+const Slider = ({ value, min, max, forwardedRef, ...other }) => {
   return (
     <StyledSlider
+      ref={forwardedRef}
+      as="input"
       aria-valuemin={min}
       aria-valuemax={max}
       aria-valuenow={value}
@@ -31,4 +35,4 @@ Slider.defaultProps = {
   step: 1
 };
 
-export default Slider;
+export default withRefs(Slider);

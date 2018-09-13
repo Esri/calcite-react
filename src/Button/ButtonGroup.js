@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
+import withRefs from '../utils/withRefs';
 import { StyledButtonGroup } from './Button-styled';
 
 const ButtonGroupContext = createContext({
@@ -8,17 +9,19 @@ const ButtonGroupContext = createContext({
   }
 });
 
-const ButtonGroup = ({ children, ...other }) => {
+const ButtonGroup = withRefs(({ children, forwardedRef, ...other }) => {
   const buttonGroupContext = {
     grouped: true
   };
 
   return (
     <ButtonGroupContext.Provider value={{ buttonGroupContext }}>
-      <StyledButtonGroup {...other}>{children}</StyledButtonGroup>
+      <StyledButtonGroup ref={forwardedRef} {...other}>
+        {children}
+      </StyledButtonGroup>
     </ButtonGroupContext.Provider>
   );
-};
+});
 
 ButtonGroup.propTypes = {
   /** Description TBD */

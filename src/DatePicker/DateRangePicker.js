@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
 
 import { StyledDatePickerContainer } from './DatePicker-styled';
 
@@ -35,7 +36,9 @@ DatePicker.propTypes = {
 
 DatePicker.defaultProps = {
   startDatePlaceholderText: 'Start Date',
-  endDatePlaceholderText: 'End Date'
+  endDatePlaceholderText: 'End Date',
+  startDateId: uniqid(),
+  endDateId: uniqid()
 };
 
 export default DatePicker;

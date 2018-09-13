@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import {
   StyledRadio,
   StyledRadioLabel,
@@ -8,7 +10,7 @@ import {
 
 import { FieldsetContext } from '../Form/Fieldset';
 
-const Radio = ({ children, ...other }) => {
+const Radio = ({ children, forwardedRef, ...other }) => {
   const getRadioLabel = children => {
     if (children) {
       return <StyledRadioLabel>{children}</StyledRadioLabel>;
@@ -19,7 +21,12 @@ const Radio = ({ children, ...other }) => {
     <FieldsetContext.Consumer>
       {({ fieldsetContext }) => (
         <StyledRadioGroup>
-          <StyledRadio name={fieldsetContext.name} {...other} type="radio" />
+          <StyledRadio
+            ref={forwardedRef}
+            name={fieldsetContext.name}
+            {...other}
+            type="radio"
+          />
           {getRadioLabel(children)}
         </StyledRadioGroup>
       )}
@@ -42,4 +49,4 @@ Radio.propTypes = {
 
 Radio.defaultProps = {};
 
-export default Radio;
+export default withRefs(Radio);

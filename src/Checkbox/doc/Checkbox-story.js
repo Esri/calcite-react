@@ -34,7 +34,7 @@ storiesOf('Checkbox', module).add(
           <FormControl>
             <Fieldset name="storyCheckboxGroup2" horizontal>
               <Legend>Horizontal Checkbox List:</Legend>
-              <Checkbox checked={true}>Checkbox 1</Checkbox>
+              <Checkbox defaultChecked={true}>Checkbox 1</Checkbox>
               <Checkbox>Checkbox 2</Checkbox>
             </Fieldset>
           </FormControl>

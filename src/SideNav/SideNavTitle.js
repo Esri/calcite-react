@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledSideNavTitle } from './SideNav-styled';
 
-const SideNavTitle = ({ children, ...other }) => {
-  return <StyledSideNavTitle {...other}>{children}</StyledSideNavTitle>;
+const SideNavTitle = ({ children, forwardedRef, ...other }) => {
+  return (
+    <StyledSideNavTitle ref={forwardedRef} {...other}>
+      {children}
+    </StyledSideNavTitle>
+  );
 };
 
 SideNavTitle.propTypes = {
@@ -13,4 +19,4 @@ SideNavTitle.propTypes = {
 
 SideNavTitle.defaultProps = {};
 
-export default SideNavTitle;
+export default withRefs(SideNavTitle);

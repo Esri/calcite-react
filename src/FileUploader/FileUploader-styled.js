@@ -1,7 +1,8 @@
+import styled from 'styled-components';
 import { CalciteInput } from '../utils/commonElements';
 import { unitCalc, fontSize } from '../utils/helpers';
 
-const StyledFileUploader = CalciteInput.extend`
+const StyledFileUploader = styled(CalciteInput)`
   height: auto;
 
   &:active {

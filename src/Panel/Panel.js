@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledPanel } from './Panel-styled';
 
-const Panel = ({ children, ...other }) => {
-  return <StyledPanel {...other}>{children}</StyledPanel>;
+const Panel = ({ children, forwardedRef, ...other }) => {
+  return (
+    <StyledPanel ref={forwardedRef} {...other}>
+      {children}
+    </StyledPanel>
+  );
 };
 
 Panel.propTypes = {
@@ -29,4 +35,4 @@ Panel.propTypes = {
 
 Panel.defaultProps = {};
 
-export default Panel;
+export default withRefs(Panel);

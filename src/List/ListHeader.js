@@ -1,14 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledListHeader } from './List-styled';
 
 import { ListContext } from './List';
 
-const ListHeader = ({ children, ...other }) => {
+const ListHeader = ({ children, forwardedRef, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
-        <StyledListHeader {...other}>{children}</StyledListHeader>
+        <StyledListHeader ref={forwardedRef} as="span" {...other}>
+          {children}
+        </StyledListHeader>
       )}
     </ListContext.Consumer>
   );
@@ -21,4 +25,4 @@ ListHeader.propTypes = {
 
 ListHeader.defaultProps = {};
 
-export default ListHeader;
+export default withRefs(ListHeader);

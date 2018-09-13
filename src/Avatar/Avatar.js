@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
 import {
   StyledAvatar,
   StyledAvatarImage,
@@ -7,7 +8,15 @@ import {
   StyledAvatarText
 } from './Avatar-styled';
 
-const Avatar = ({ children, src, alt, size, fontSize, ...other }) => {
+const Avatar = ({
+  children,
+  src,
+  alt,
+  size,
+  fontSize,
+  forwardedRef,
+  ...other
+}) => {
   const getWrappedChildren = children => {
     if (children) {
       if (React.isValidElement(children)) {
@@ -30,7 +39,12 @@ const Avatar = ({ children, src, alt, size, fontSize, ...other }) => {
   };
 
   return (
-    <StyledAvatar aSize={size} fontSize={fontSize} {...other}>
+    <StyledAvatar
+      ref={forwardedRef}
+      aSize={size}
+      fontSize={fontSize}
+      {...other}
+    >
       {getWrappedChildren(children)}
     </StyledAvatar>
   );
@@ -52,4 +66,4 @@ Avatar.defaultProps = {
   size: 40
 };
 
-export default Avatar;
+export default withRefs(Avatar);

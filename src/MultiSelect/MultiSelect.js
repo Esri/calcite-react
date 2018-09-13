@@ -8,7 +8,6 @@ import {
   StyledMultiSelectButton,
   StyledMultiSelectMenu
 } from './MultiSelect-styled';
-import Menu from '../Menu';
 
 const Select = ({
   children,
@@ -67,9 +66,10 @@ const Select = ({
         itemToString={itemToString}
         onChange={downshiftOnChange}
         selectedItem={_getItemsFromValues(selectedValues)}
-        render={({
+      >
+        {({
           getRootProps,
-          getButtonProps,
+          getToggleButtonProps,
           getInputProps,
           getItemProps,
           isOpen,
@@ -77,17 +77,18 @@ const Select = ({
           highlightedIndex
         }) => (
           <StyledMultiSelectWrapper
-            {...getRootProps({ refKey: 'innerRef' })}
+            {...getRootProps({}, { suppressRefError: true })}
             style={wrapperStyle}
           >
             <Reference style={{ display: 'inline-block' }}>
               {({ ref }) => (
                 <StyledMultiSelectButton
-                  innerRef={ref}
-                  {...getButtonProps()}
+                  ref={ref}
+                  {...getToggleButtonProps()}
                   {...getInputProps()}
                   fullWidth={fullWidth}
                   minimal={minimal}
+                  as="button"
                   {...other}
                 >
                   {downshiftRenderValue(selectedItem)}
@@ -96,12 +97,11 @@ const Select = ({
             </Reference>
             {isOpen ? (
               <Popper positionFixed={positionFixed} placement={'bottom-start'}>
-                {({ ref, style, placement }) => (
-                  <Menu
-                    innerRef={ref}
+                {({ ref: popperRef, style, placement }) => (
+                  <StyledMultiSelectMenu
+                    ref={popperRef}
                     style={{ ...style, ...menuStyle }}
                     fullWidth={fullWidth}
-                    withComponent={<StyledMultiSelectMenu />}
                     data-placement={placement}
                   >
                     {children.map((child, index) =>
@@ -114,13 +114,13 @@ const Select = ({
                         key: index
                       })
                     )}
-                  </Menu>
+                  </StyledMultiSelectMenu>
                 )}
               </Popper>
             ) : null}
           </StyledMultiSelectWrapper>
         )}
-      />
+      </Downshift>
     </Manager>
   );
 };

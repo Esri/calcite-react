@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
 import { StyledFileUploader } from './FileUploader-styled';
 
-const FileUploader = ({ children, ...other }) => {
-  return <StyledFileUploader {...other} type="file" />;
+const FileUploader = ({ children, forwardedRef, ...other }) => {
+  return (
+    <StyledFileUploader ref={forwardedRef} as="input" {...other} type="file" />
+  );
 };
 
 FileUploader.propTypes = {
@@ -13,4 +16,4 @@ FileUploader.propTypes = {
 
 FileUploader.defaultProps = {};
 
-export default FileUploader;
+export default withRefs(FileUploader);

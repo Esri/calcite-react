@@ -76,11 +76,11 @@ const StyledPanel = styled.div`
     `};
 `;
 
-const StyledPanelText = CalciteP.extend`
+const StyledPanelText = styled(CalciteP)`
   margin-bottom: 0rem;
 `;
 
-const StyledPanelTitle = CalciteH4.extend`
+const StyledPanelTitle = styled(CalciteH4)`
   margin-bottom: 0.775rem;
 `;
 

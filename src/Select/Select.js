@@ -11,7 +11,6 @@ import {
   StyledSelectMenu,
   PopperManagerStyles
 } from './Select-styled';
-import Menu from '../Menu';
 
 import { FormControlContext } from '../Form/FormControl';
 
@@ -36,7 +35,7 @@ const Select = ({
   function getAnchorElement(params) {
     const {
       ref,
-      getButtonProps,
+      getToggleButtonProps,
       getInputProps,
       placeholder,
       selectedItem
@@ -47,7 +46,8 @@ const Select = ({
         <FormControlContext.Consumer>
           {({ formControlContext }) => (
             <StyledSelectInput
-              onClick={getButtonProps().onClick}
+              as="input"
+              onClick={getToggleButtonProps().onClick}
               {...getInputProps({
                 placeholder: placeholder,
                 id: id || formControlContext._generatedId,
@@ -56,7 +56,7 @@ const Select = ({
                 style: style,
                 ...other
               })}
-              innerRef={ref}
+              ref={ref}
             />
           )}
         </FormControlContext.Consumer>
@@ -66,11 +66,12 @@ const Select = ({
       <FormControlContext.Consumer>
         {({ formControlContext }) => (
           <StyledSelectButton
-            {...getButtonProps()}
+            {...getToggleButtonProps()}
             {...getInputProps()}
+            as="button"
             fullWidth={fullWidth}
             minimal={minimal}
-            innerRef={ref}
+            ref={ref}
             id={id || formControlContext._generatedId}
             style={style}
             {...other}
@@ -99,9 +100,13 @@ const Select = ({
   }
 
   function _getItemFromValue(value) {
-    return children.filter(child => {
-      return child.props.value === value;
-    })[0];
+    if (!value) return null;
+
+    return (
+      children.filter(child => {
+        return child.props.value === value;
+      })[0] || null
+    );
   }
 
   function getMenuItems(
@@ -122,9 +127,9 @@ const Select = ({
           ...getItemProps({
             item: child,
             active: highlightedIndex === index,
-            selected: selectedItem === child
-          }),
-          key: index
+            selected: selectedItem === child,
+            key: index
+          })
         })
       );
     }
@@ -134,9 +139,9 @@ const Select = ({
         ...getItemProps({
           item: child,
           active: highlightedIndex === index,
-          selected: selectedItem === child
-        }),
-        key: index
+          selected: selectedItem === child,
+          key: index
+        })
       })
     );
   }
@@ -153,9 +158,10 @@ const Select = ({
         itemToString={itemToString}
         onChange={downshiftOnChange}
         selectedItem={selectedItem || _getItemFromValue(selectedValue)}
-        render={({
+      >
+        {({
           getRootProps,
-          getButtonProps,
+          getToggleButtonProps,
           getInputProps,
           getItemProps,
           isOpen,
@@ -163,49 +169,50 @@ const Select = ({
           highlightedIndex,
           inputValue
         }) => (
-          <StyledSelectWrapper {...getRootProps({ refKey: 'innerRef' })}>
+          <StyledSelectWrapper
+            {...getRootProps({}, { suppressRefError: true })}
+          >
             <Reference style={{ display: 'inline-block' }}>
               {({ ref }) => {
                 return getAnchorElement({
                   ref,
-                  getButtonProps,
+                  getToggleButtonProps,
                   getInputProps,
-                  placeholder: placeholder,
+                  placeholder,
                   selectedItem,
                   labelEl: label,
-                  horizontal: horizontal
+                  horizontal
                 });
               }}
             </Reference>
             {isOpen ? (
-              <Popper
-                positionFixed={positionFixed}
-                placement={this.props.placement}
-              >
-                {({ ref, style, placement }) => (
-                  <Menu
-                    innerRef={ref}
-                    style={{
-                      ...style,
-                      ...getFullWidthStyle(),
-                      ...menuStyle
-                    }}
-                    data-placement={placement}
-                    withComponent={<StyledSelectMenu fullWidth={fullWidth} />}
-                  >
-                    {getMenuItems(
-                      inputValue,
-                      getItemProps,
-                      highlightedIndex,
-                      selectedItem
-                    )}
-                  </Menu>
-                )}
+              <Popper positionFixed={positionFixed} placement={other.placement}>
+                {({ ref, style, placement }) => {
+                  return (
+                    <StyledSelectMenu
+                      ref={ref}
+                      style={{
+                        ...style,
+                        ...getFullWidthStyle(),
+                        ...menuStyle
+                      }}
+                      data-placement={placement}
+                      fullWidth={fullWidth}
+                    >
+                      {getMenuItems(
+                        inputValue,
+                        getItemProps,
+                        highlightedIndex,
+                        selectedItem
+                      )}
+                    </StyledSelectMenu>
+                  );
+                }}
               </Popper>
             ) : null}
           </StyledSelectWrapper>
         )}
-      />
+      </Downshift>
     </Manager>
   );
 };

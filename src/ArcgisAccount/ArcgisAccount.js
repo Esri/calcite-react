@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
+import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import ArcgisAccountControl from './ArcgisAccountControl';
@@ -79,6 +80,7 @@ class ArcgisAccount extends Component {
       onRequestSwitchAccount,
       onRequestSignOut,
       children,
+      forwardedRef,
       ...other
     } = this.props;
 
@@ -98,6 +100,7 @@ class ArcgisAccount extends Component {
         onRequestClose={this.closeAccountControl}
         placement="bottom-end"
         positionFixed
+        ref={forwardedRef}
       >
         <ArcgisAccountMenu
           user={user}
@@ -129,4 +132,4 @@ ArcgisAccount.propTypes = {
 
 ArcgisAccount.defaultProps = {};
 
-export default ArcgisAccount;
+export default withRefs(ArcgisAccount);

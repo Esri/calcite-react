@@ -147,6 +147,7 @@ const DatePickerTheme = {
     },
 
     spacing: {
+      dayPickerHorizontalPadding: 9,
       captionPaddingTop: 22,
       captionPaddingBottom: 37,
       inputPadding: 0,

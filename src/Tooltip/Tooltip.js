@@ -35,7 +35,7 @@ class Tooltip extends Component {
         <Reference style={{ display: 'inline-block' }}>
           {({ ref }) => (
             <StyledTargetWrapper
-              innerRef={ref}
+              ref={ref}
               onMouseEnter={this._handleReferenceEnter}
               onMouseLeave={this._handleReferenceLeave}
             >
@@ -51,7 +51,7 @@ class Tooltip extends Component {
             >
               {({ ref, style, placement, arrowProps }) => (
                 <StyledTooltip
-                  innerRef={ref}
+                  ref={ref}
                   style={{
                     ...style,
                     ...this.props.style
@@ -62,7 +62,7 @@ class Tooltip extends Component {
                 >
                   {this.props.title}
                   <StyledTooltipArrow
-                    innerRef={arrowProps.ref}
+                    ref={arrowProps.ref}
                     data-placement={placement}
                     style={{ ...arrowProps.style, ...this.props.arrowStyle }}
                   />

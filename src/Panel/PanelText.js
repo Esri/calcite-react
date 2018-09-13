@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledPanelText } from './Panel-styled';
 
-const PanelText = ({ children, ...other }) => {
-  return <StyledPanelText {...other}>{children}</StyledPanelText>;
+const PanelText = ({ children, forwardedRef, ...other }) => {
+  return (
+    <StyledPanelText ref={forwardedRef} {...other}>
+      {children}
+    </StyledPanelText>
+  );
 };
 
 PanelText.propTypes = {
@@ -13,4 +19,4 @@ PanelText.propTypes = {
 
 PanelText.defaultProps = {};
 
-export default PanelText;
+export default withRefs(PanelText);

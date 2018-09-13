@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 import { CalciteInput, CalciteTextarea } from '../utils/commonElements';
 import { unitCalc } from '../utils/helpers';
 
-const StyledTextField = CalciteInput.extend``;
+const StyledTextField = styled(CalciteInput)``;
 
-const StyledTextArea = CalciteTextarea.extend``;
+const StyledTextArea = styled(CalciteTextarea)``;
 
 const StyledTextFieldAdornmentWrapper = styled.div`
   display: flex;

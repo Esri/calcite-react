@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Transition from 'react-transition-group/Transition';
+import withRefs from '../utils/withRefs';
 
 import ReactModal from 'react-modal';
 
@@ -17,12 +18,14 @@ const Modal = ({
   title,
   overlayStyle,
   dialogStyle,
+  forwardedRef,
   ...other
 }) => {
   return (
     <Transition in={open} timeout={0}>
       {state => (
         <ReactModal
+          ref={forwardedRef}
           isOpen={open}
           closeTimeoutMS={300}
           style={{
@@ -73,4 +76,4 @@ Modal.propTypes = {
 
 Modal.defaultProps = {};
 
-export default Modal;
+export default withRefs(Modal);

@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import {
   StyledSwitch,
   StyledSwitchInput,
@@ -7,7 +9,13 @@ import {
   StyledSwitchLabel
 } from './Switch-styled';
 
-const Switch = ({ children, labelPosition, destructive, ...other }) => {
+const Switch = ({
+  children,
+  labelPosition,
+  destructive,
+  forwardedRef,
+  ...other
+}) => {
   const getSwitchLabel = children => {
     if (children) {
       return <StyledSwitchLabel>{children}</StyledSwitchLabel>;
@@ -17,7 +25,7 @@ const Switch = ({ children, labelPosition, destructive, ...other }) => {
   return (
     <StyledSwitch>
       {labelPosition === 'before' ? getSwitchLabel(children) : null}
-      <StyledSwitchInput {...other} type="checkbox" />
+      <StyledSwitchInput ref={forwardedRef} {...other} type="checkbox" />
       <StyledSwitchTrack destructive={destructive} />
       {labelPosition === 'after' ? getSwitchLabel(children) : null}
     </StyledSwitch>
@@ -43,4 +51,4 @@ Switch.defaultProps = {
   labelPosition: 'after'
 };
 
-export default Switch;
+export default withRefs(Switch);
