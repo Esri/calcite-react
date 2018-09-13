@@ -29,7 +29,10 @@ const FileUploader = ({
       setTouched({ [name]: true });
       setFieldValue(name, e.currentTarget.files);
     }
-    onChange(e);
+
+    if (onChange) {
+      onChange(e);
+    }
   };
 
   const isSuccess = () => {
