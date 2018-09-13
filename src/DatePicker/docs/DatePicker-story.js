@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
+import { Formik, Field } from 'formik';
 
 import GuideExample from '../../../stories/GuideExample';
 import doc from './DatePicker.md';
 
 import DatePicker, { DateRangePicker } from '../';
+
+import Form, {
+  FormControl,
+  FormHelperText,
+  FormControlLabel
+} from '../../Form';
+import Button from '../../Button';
 
 storiesOf('DatePicker', module)
   .add(
@@ -152,6 +160,107 @@ storiesOf('DatePicker', module)
                 />
               </GuideExample>
             </div>
+          );
+        }
+      }
+
+      DatePickerStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <DatePickerStory />;
+    })
+  )
+  .add(
+    'Single Date with Formik',
+    withInfo(doc)(() => {
+      class DatePickerStory extends Component {
+        state = {
+          date: null,
+          datePickerFocused: false
+        };
+
+        formValues = {
+          birthday: null
+        };
+
+        onDateChange = date => {
+          this.setState({
+            date
+          });
+        };
+
+        onFocusChange = ({ focused }) => {
+          this.setState({
+            datePickerFocused: focused
+          });
+        };
+
+        onSubmit = (values, actions) => {
+          console.log(values);
+          setTimeout(() => {
+            actions.setSubmitting(false);
+          }, 1000);
+        };
+
+        onValidate = values => {
+          const errors = {};
+          if (!values.birthday) {
+            errors.birthday = 'You must have a birthday 🤨';
+          }
+
+          return errors;
+        };
+
+        render() {
+          return (
+            <Formik
+              initialValues={this.formValues}
+              validate={this.onValidate}
+              onSubmit={this.onSubmit}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                handleBlur,
+                handleChange,
+                handleSubmit,
+                isSubmitting
+              }) => (
+                <GuideExample>
+                  <Form onSubmit={handleSubmit}>
+                    {/* birthday */}
+
+                    <FormControl
+                      success={
+                        touched.birthday && !errors.birthday ? true : false
+                      }
+                      error={touched.birthday && errors.birthday ? true : false}
+                    >
+                      <FormControlLabel>Select your birthday:</FormControlLabel>
+                      <Field
+                        component={DatePicker}
+                        name="birthday"
+                        date={this.state.date}
+                        onDateChange={this.onDateChange}
+                        focused={this.state.datePickerFocused}
+                        onFocusChange={this.onFocusChange}
+                      />
+                      <FormHelperText>
+                        {(touched.birthday && errors.birthday) || null}
+                      </FormHelperText>
+                    </FormControl>
+
+                    <FormControl>
+                      <Button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? 'Submitting.......' : 'Submit'}
+                      </Button>
+                    </FormControl>
+                    <pre>{JSON.stringify(values, null, 2)}</pre>
+                  </Form>
+                </GuideExample>
+              )}
+            </Formik>
           );
         }
       }
