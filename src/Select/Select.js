@@ -36,12 +36,13 @@ const Select = ({
   form,
   ...other
 }) => {
-  let name, touched, errors, isSubmitting;
+  let name, touched, errors, isSubmitting, setFieldValue;
   if (field) {
     name = field.name;
     touched = form.touched;
     errors = form.errors;
     isSubmitting = form.isSubmitting;
+    setFieldValue = form.setFieldValue;
   }
 
   function getAnchorElement(params) {
@@ -115,8 +116,8 @@ const Select = ({
   function downshiftOnChange(selectedItem, downshiftProps) {
     const value = selectedItem.props.value;
 
-    if (form) {
-      form.setFieldValue(name, value);
+    if (setFieldValue) {
+      setFieldValue(name, value);
     }
 
     if (onChange) {
@@ -178,7 +179,7 @@ const Select = ({
   }
 
   function getSelectedValue() {
-    return (field && field.value) || selectedValue;
+    return field ? field.value : selectedValue;
   }
 
   function handleBlur(e) {
