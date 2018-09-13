@@ -9,6 +9,8 @@ import {
   StyledMultiSelectMenu
 } from './MultiSelect-styled';
 
+import { FormControlContext } from '../Form/FormControl';
+
 const Select = ({
   children,
   selectedValues,
@@ -20,8 +22,21 @@ const Select = ({
   onChange,
   renderValue,
   positionFixed,
+  disabled,
+  onBlur,
+  field,
+  form,
   ...other
 }) => {
+  let name, touched, errors, isSubmitting, setFieldValue;
+  if (field) {
+    name = field.name;
+    touched = form.touched;
+    errors = form.errors;
+    isSubmitting = form.isSubmitting;
+    setFieldValue = form.setFieldValue;
+  }
+
   function itemToString(item) {
     let label = item;
     if (item && item.props) {
@@ -40,17 +55,24 @@ const Select = ({
 
   function downshiftOnChange(selectedItem, downshiftProps) {
     const { selectedItem: selectedItems } = downshiftProps;
-
+    let values;
     if (selectedItems.indexOf(selectedItem) !== -1) {
       // Already selected item was clicked, remove it
-      const values = selectedItems
+      values = selectedItems
         .filter(item => item !== selectedItem)
         .map(item => item.props.value);
-      onChange(values);
     } else {
       // An unselected item was clicked, add it selection
-      const values = selectedItems.map(item => item.props.value);
-      onChange([...values, selectedItem.props.value]);
+      const existingValues = selectedItems.map(item => item.props.value);
+      values = [...existingValues, selectedItem.props.value];
+    }
+
+    if (setFieldValue) {
+      setFieldValue(name, values);
+    }
+
+    if (onChange) {
+      onChange(values);
     }
   }
 
@@ -60,12 +82,45 @@ const Select = ({
     });
   }
 
+  function getSelectedValues() {
+    return field ? field.value : selectedValues;
+  }
+
+  function handleBlur(e) {
+    if (field) {
+      field.onBlur(e);
+    }
+
+    if (onBlur) {
+      onBlur(e);
+    }
+  }
+
+  function isSuccess(formControlContext) {
+    if (touched) {
+      return touched[name] && !errors[name] ? true : false;
+    }
+    return formControlContext.success;
+  }
+
+  function isError(formControlContext) {
+    if (touched) {
+      return touched[name] && errors[name] ? true : false;
+    }
+    return formControlContext.error;
+  }
+
+  function isDisabled() {
+    return isSubmitting || disabled;
+  }
+
   return (
     <Manager>
       <Downshift
         itemToString={itemToString}
         onChange={downshiftOnChange}
-        selectedItem={_getItemsFromValues(selectedValues)}
+        onBlur={handleBlur}
+        selectedItem={_getItemsFromValues(getSelectedValues())}
       >
         {({
           getRootProps,
@@ -82,17 +137,24 @@ const Select = ({
           >
             <Reference style={{ display: 'inline-block' }}>
               {({ ref }) => (
-                <StyledMultiSelectButton
-                  ref={ref}
-                  {...getToggleButtonProps()}
-                  {...getInputProps()}
-                  fullWidth={fullWidth}
-                  minimal={minimal}
-                  as="button"
-                  {...other}
-                >
-                  {downshiftRenderValue(selectedItem)}
-                </StyledMultiSelectButton>
+                <FormControlContext.Consumer>
+                  {({ formControlContext }) => (
+                    <StyledMultiSelectButton
+                      ref={ref}
+                      {...getToggleButtonProps()}
+                      {...getInputProps()}
+                      fullWidth={fullWidth}
+                      minimal={minimal}
+                      as="button"
+                      success={isSuccess(formControlContext)}
+                      error={isError(formControlContext)}
+                      disabled={isDisabled()}
+                      {...other}
+                    >
+                      {downshiftRenderValue(selectedItem)}
+                    </StyledMultiSelectButton>
+                  )}
+                </FormControlContext.Consumer>
               )}
             </Reference>
             {isOpen ? (

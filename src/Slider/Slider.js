@@ -4,15 +4,59 @@ import withRefs from '../utils/withRefs';
 
 import { StyledSlider } from './Slider-styled';
 
-const Slider = ({ value, min, max, forwardedRef, ...other }) => {
+const Slider = ({
+  value,
+  min,
+  max,
+  forwardedRef,
+  field,
+  form,
+  success = false,
+  error = false,
+  disabled = false,
+  ...other
+}) => {
+  let name, touched, errors, isSubmitting;
+  if (field) {
+    name = field.name;
+    touched = form.touched;
+    errors = form.errors;
+    isSubmitting = form.isSubmitting;
+  }
+
+  const isSuccess = () => {
+    if (touched) {
+      return touched[name] && !errors[name] ? true : false;
+    }
+    return success;
+  };
+
+  const isError = () => {
+    if (touched) {
+      return touched[name] && errors[name] ? true : false;
+    }
+    return error;
+  };
+
+  const isDisabled = () => {
+    return isSubmitting || disabled;
+  };
+
   return (
     <StyledSlider
       ref={forwardedRef}
       as="input"
-      aria-valuemin={min}
-      aria-valuemax={max}
+      value={value}
       aria-valuenow={value}
+      min={min}
+      aria-valuemin={min}
+      max={max}
+      aria-valuemax={max}
+      success={isSuccess()}
+      error={isError()}
+      disabled={isDisabled()}
       {...other}
+      {...field}
       type="range"
     />
   );
