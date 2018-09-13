@@ -24,12 +24,13 @@ const TextField = ({
   leftAdornment,
   rightAdornment,
   forwardedRef,
+  name,
   disabled,
   field,
   form,
   ...other
 }) => {
-  let name, touched, errors, isSubmitting;
+  let touched, errors, isSubmitting;
   if (field) {
     name = field.name;
     touched = form.touched;
@@ -56,7 +57,7 @@ const TextField = ({
   };
 
   const getValue = () => {
-    return (field && field.value) || value;
+    return field ? field.value : value;
   };
 
   const handleChange = e => {
@@ -64,7 +65,9 @@ const TextField = ({
       field.onChange(e);
     }
 
-    onChange(e);
+    if (onChange) {
+      onChange(e);
+    }
   };
 
   const handleBlur = e => {
@@ -72,7 +75,9 @@ const TextField = ({
       field.onBlur(e);
     }
 
-    onBlur(e);
+    if (onBlur) {
+      onBlur(e);
+    }
   };
 
   const isSuccess = formControlContext => {
@@ -105,6 +110,7 @@ const TextField = ({
         {({ formControlContext }) => (
           <TextFieldArea
             ref={forwardedRef}
+            name={name}
             as={type === 'textarea' ? 'textarea' : 'input'}
             type={type}
             value={getValue()}
@@ -129,6 +135,7 @@ const TextField = ({
           {getAdornment(leftAdornment)}
           <TextFieldArea
             ref={forwardedRef}
+            name={name}
             as={type === 'textarea' ? 'textarea' : 'input'}
             type={type}
             value={getValue()}

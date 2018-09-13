@@ -2,6 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
+import { Formik, Field } from 'formik';
+
 import GuideExample from '../../../stories/GuideExample';
 import doc from './TextField.md';
 
@@ -117,4 +119,115 @@ storiesOf('TextField', module)
         </GuideExample>
       </div>
     ))
+  )
+  .add(
+    'with Formik',
+    withInfo(doc)(() => {
+      const user = {
+        name: '',
+        email: '',
+        password: ''
+      };
+
+      const onSubmit = (values, actions) => {
+        console.log(values);
+        setTimeout(() => {
+          actions.setSubmitting(false);
+        }, 1000);
+      };
+
+      const onValidate = values => {
+        const errors = {};
+        if (!values.name) {
+          errors.name = 'You must have a name 🤨';
+        }
+
+        if (!values.email.includes('@')) {
+          errors.email = 'Most emails have an @...';
+        }
+
+        if (values.password.length < 10) {
+          errors.password =
+            'That password is weak. You need at least 10 characters.';
+        }
+
+        return errors;
+      };
+
+      const handleNameChanged = e => {
+        console.log('Hello ', e.target.value);
+      };
+
+      return (
+        <Formik initialValues={user} validate={onValidate} onSubmit={onSubmit}>
+          {({
+            values,
+            errors,
+            touched,
+            handleBlur,
+            handleChange,
+            handleSubmit,
+            isSubmitting
+          }) => (
+            <GuideExample>
+              <Form onSubmit={handleSubmit}>
+                {/* name */}
+
+                <FormControl
+                  success={touched.name && !errors.name ? true : false}
+                  error={touched.name && errors.name ? true : false}
+                >
+                  <FormControlLabel htmlFor="name">Name:</FormControlLabel>
+                  <Field
+                    component={TextField}
+                    type="text"
+                    name="name"
+                    leftAdornment={<AccountIcon />}
+                    onChange={handleNameChanged}
+                  />
+                  <FormHelperText>
+                    {(touched.name && errors.name) || null}
+                  </FormHelperText>
+                </FormControl>
+
+                {/* email */}
+
+                <FormControl
+                  success={touched.email && !errors.email ? true : false}
+                  error={touched.email && errors.email ? true : false}
+                >
+                  <FormControlLabel htmlFor="email">Email:</FormControlLabel>
+                  <Field component={TextField} type="text" name="email" />
+                  <FormHelperText>
+                    {(touched.email && errors.email) || null}
+                  </FormHelperText>
+                </FormControl>
+
+                {/* password */}
+
+                <FormControl
+                  success={touched.password && !errors.password ? true : false}
+                  error={touched.password && errors.password ? true : false}
+                >
+                  <FormControlLabel htmlFor="password">
+                    Password:
+                  </FormControlLabel>
+                  <Field component={TextField} type="text" name="password" />
+                  <FormHelperText>
+                    {(touched.password && errors.password) || null}
+                  </FormHelperText>
+                </FormControl>
+
+                <FormControl>
+                  <Button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? 'Submitting.......' : 'Submit'}
+                  </Button>
+                </FormControl>
+                <pre>{JSON.stringify(values, null, 2)}</pre>
+              </Form>
+            </GuideExample>
+          )}
+        </Formik>
+      );
+    })
   );
