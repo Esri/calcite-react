@@ -241,9 +241,7 @@ storiesOf('MultiSelect', module)
                     {isSubmitting ? 'Submitting.......' : 'Submit'}
                   </Button>
                 </FormControl>
-                Touched: <pre>{JSON.stringify(touched, null, 2)}</pre>
-                Errors: <pre>{JSON.stringify(errors, null, 2)}</pre>
-                Values: <pre>{JSON.stringify(values, null, 2)}</pre>
+                <pre>{JSON.stringify(values, null, 2)}</pre>
               </Form>
             </GuideExample>
           )}
