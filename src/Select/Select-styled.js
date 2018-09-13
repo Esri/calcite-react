@@ -1,20 +1,18 @@
 import styled, { css } from 'styled-components';
 import { CalciteSelect } from '../utils/commonElements';
-import { StyledMenu } from '../Menu/Menu-styled';
+import Menu from '../Menu';
 import { transition } from '../utils/helpers';
 
 const StyledSelectWrapper = styled.div`
   position: relative;
 `;
 
-let StyledSelectInput = CalciteSelect.withComponent('input');
-StyledSelectInput = StyledSelectInput.extend`
+const StyledSelectInput = styled(CalciteSelect)`
   cursor: pointer;
   text-overflow: ellipsis;
 `;
 
-let StyledSelectButton = CalciteSelect.withComponent('button');
-StyledSelectButton = StyledSelectButton.extend`
+const StyledSelectButton = styled(CalciteSelect)`
   cursor: pointer;
   text-align: left;
   overflow: hidden;
@@ -22,7 +20,7 @@ StyledSelectButton = StyledSelectButton.extend`
   text-overflow: ellipsis;
 `;
 
-const StyledSelectMenu = StyledMenu.extend`
+const StyledSelectMenu = styled(Menu)`
   transition: opacity ${transition()};
   z-index: 2000;
 

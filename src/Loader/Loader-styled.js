@@ -1,5 +1,6 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { unitCalc } from '../utils/helpers';
+import CalciteTheme from '../theme/CalciteTheme';
 
 const loaderVariables = {
   loaderWidth: '0.85rem',
@@ -7,51 +8,46 @@ const loaderVariables = {
   loaderZoom: '0.5rem',
   loaderSpacing: '1.25rem',
   loaderSpeed: '0.8s',
-  loaderDelay: '0.16s'
+  loaderDelay: '0.16s',
+  loaderBlue: CalciteTheme.palette.blue
 };
 
-const loadAnimation = props => {
-  return keyframes`
+const loadKeyframes = keyframes`
   0%,
   80%,
   100% {
-    opacity: .75;
-    box-shadow: 0 0 ${props.theme.palette.blue};
-    height: ${loaderVariables.loaderHeight};
+   opacity: .75;
+   box-shadow: 0 0 ${loaderVariables.loaderBlue};
+   height: ${loaderVariables.loaderHeight};
   }
   40% {
-    opacity: 1;
-    box-shadow: 0 ${unitCalc(loaderVariables.loaderZoom, -1, '*')} ${
-    props.theme.palette.blue
-  };
-    height: ${unitCalc(
-      loaderVariables.loaderHeight,
-      loaderVariables.loaderZoom,
-      '+'
-    )};
+   opacity: 1;
+   box-shadow: 0 -0.5rem ${loaderVariables.loaderBlue};
+   height: ${unitCalc(
+     loaderVariables.loaderHeight,
+     loaderVariables.loaderZoom,
+     '+'
+   )};
   }
-  `;
-};
+`;
 
-const loaderStyles = props => {
-  return `
-    background: ${props.theme.palette.blue};
-    animation: ${loadAnimation(props)} ${
-    loaderVariables.loaderSpeed
-  } infinite ease-in-out;
-    width: ${loaderVariables.loaderWidth};
-    height: ${loaderVariables.loaderHeight};
-  `;
-};
+const loadAnimation = css`
+  ${loadKeyframes} ${loaderVariables.loaderSpeed} infinite ease-in-out;
+`;
 
-const loaderPseudoElements = props => {
-  return `
-    ${loaderStyles(props)};
-    position: absolute;
-    top: 0;
-    content: '';
-  `;
-};
+const loaderStyles = css`
+  background: ${loaderVariables.loaderBlue};
+  animation: ${loadAnimation};
+  width: ${loaderVariables.loaderWidth};
+  height: ${loaderVariables.loaderHeight};
+`;
+
+const loaderPseudoElements = css`
+  ${loaderStyles};
+  position: absolute;
+  top: 0;
+  content: '';
+`;
 
 const StyledLoader = styled.div`
   position: relative;
@@ -59,7 +55,7 @@ const StyledLoader = styled.div`
 `;
 
 const StyledLoaderBars = styled.div`
-  ${props => loaderStyles(props)};
+  ${loaderStyles};
 
   text-indent: -9999em;
   margin: auto;
@@ -71,12 +67,12 @@ const StyledLoaderBars = styled.div`
   margin: ${props => unitCalc(loaderVariables.loaderHeight, 0.25, '*')} 0 0;
 
   &:before {
-    ${props => loaderPseudoElements(props)};
+    ${loaderPseudoElements};
     left: -${loaderVariables.loaderSpacing};
   }
 
   &:after {
-    ${props => loaderPseudoElements(props)};
+    ${loaderPseudoElements};
     left: ${loaderVariables.loaderSpacing};
     animation-delay: ${unitCalc(loaderVariables.loaderDelay, 2, '*')};
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
 
 import { StyledDatePickerContainer } from './DatePicker-styled';
 
@@ -14,19 +15,52 @@ ThemedStyleSheet.registerInterface(aphroditeInterface);
 ThemedStyleSheet.registerTheme(DatePickerTheme);
 
 const DatePicker = ({
-  date,
-  onDateChange,
-  focused,
+  field,
+  form,
   onFocusChange,
+  onDateChange,
+  disabled,
+  name,
+  value,
+  children,
   ...other
 }) => {
+  let isSubmitting, setFieldValue, setTouched;
+  if (field) {
+    value = field.value;
+    name = field.name;
+    isSubmitting = form.isSubmitting;
+    setFieldValue = form.setFieldValue;
+    setTouched = form.setTouched;
+  }
+
+  const _onDateChange = date => {
+    if (setFieldValue) {
+      setFieldValue(name, date);
+    }
+
+    if (onDateChange) {
+      onDateChange(date);
+    }
+  };
+
+  const _onFocusChange = options => {
+    if (setTouched && !options.focused) {
+      setTouched({ [name]: true });
+    }
+
+    if (onFocusChange) {
+      onFocusChange(options);
+    }
+  };
+
   return (
     <StyledDatePickerContainer>
       <SingleDatePicker
-        date={date}
-        onDateChange={onDateChange}
-        focused={focused}
-        onFocusChange={onFocusChange}
+        date={value}
+        onDateChange={_onDateChange}
+        onFocusChange={_onFocusChange}
+        disabled={isSubmitting || disabled}
         {...other}
       />
     </StyledDatePickerContainer>
@@ -38,11 +72,13 @@ DatePicker.propTypes = {
   onDateChange: PropTypes.func.isRequired,
   focused: PropTypes.bool,
   onFocusChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  id: PropTypes.string.isRequired
 };
 
 DatePicker.defaultProps = {
-  placeholder: 'Date'
+  placeholder: 'Date',
+  id: uniqid()
 };
 
 export default DatePicker;

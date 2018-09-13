@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
 import {
   StyledAvatar,
   StyledAvatarImage,
@@ -7,35 +8,46 @@ import {
   StyledAvatarText
 } from './Avatar-styled';
 
-const Avatar = ({ children, src, alt, size, fontSize, ...other }) => {
-  let wrappedChildren;
-
-  if (children) {
-    if (React.isValidElement(children)) {
-      //Assume the element is an SVG icon
-      const _fontSize = fontSize ? { fontSize: fontSize } : null;
-      wrappedChildren = React.cloneElement(children, {
-        ...children.props,
-        style: {
-          ...StyledAvatarSvg,
-          ...children.props.style,
-          ..._fontSize
-        }
-      });
-    } else {
-      wrappedChildren = <StyledAvatarText>{children}</StyledAvatarText>;
+const Avatar = ({
+  children,
+  src,
+  alt,
+  size,
+  fontSize,
+  forwardedRef,
+  ...other
+}) => {
+  const getWrappedChildren = children => {
+    if (children) {
+      if (React.isValidElement(children)) {
+        //Assume the element is an SVG icon
+        const _fontSize = fontSize ? { fontSize: fontSize } : null;
+        return React.cloneElement(children, {
+          ...children.props,
+          style: {
+            ...StyledAvatarSvg,
+            ...children.props.style,
+            ..._fontSize
+          }
+        });
+      } else {
+        return <StyledAvatarText>{children}</StyledAvatarText>;
+      }
+    } else if (src) {
+      return <StyledAvatarImage src={src} alt={alt || ''} />;
     }
-  } else if (src) {
-    wrappedChildren = <StyledAvatarImage src={src} alt={alt || ''} />;
-  }
+  };
 
-  const avatar = (
-    <StyledAvatar aSize={size} fontSize={fontSize} {...other}>
-      {wrappedChildren}
+  return (
+    <StyledAvatar
+      ref={forwardedRef}
+      aSize={size}
+      fontSize={fontSize}
+      {...other}
+    >
+      {getWrappedChildren(children)}
     </StyledAvatar>
   );
-
-  return avatar;
 };
 
 Avatar.propTypes = {
@@ -54,4 +66,4 @@ Avatar.defaultProps = {
   size: 40
 };
 
-export default Avatar;
+export default withRefs(Avatar);

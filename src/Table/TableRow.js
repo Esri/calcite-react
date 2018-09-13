@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledTableRow } from './Table-styled';
 
 import { TableContext } from './Table';
 
-const TableRow = ({ children, ...other }) => {
+const TableRow = ({ children, forwardedRef, ...other }) => {
   return (
     <TableContext.Consumer>
       {({ tableContext }) => (
         <StyledTableRow
+          ref={forwardedRef}
           blue={tableContext.blue}
           striped={tableContext.striped}
           plain={tableContext.plain}
@@ -45,4 +48,4 @@ TableRow.propTypes = {
 
 TableRow.defaultProps = {};
 
-export default TableRow;
+export default withRefs(TableRow);

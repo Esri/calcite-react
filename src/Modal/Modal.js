@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Transition from 'react-transition-group/Transition';
+import withRefs from '../utils/withRefs';
 
 import ReactModal from 'react-modal';
 
@@ -15,22 +16,17 @@ const Modal = ({
   children,
   open,
   title,
-  onAfterOpen,
-  onRequestClose,
-  shouldCloseOnOverlayClick,
-  shouldCloseOnEsc,
-  parentSelector,
   overlayStyle,
   dialogStyle,
+  forwardedRef,
   ...other
 }) => {
-  const modal = (
+  return (
     <Transition in={open} timeout={0}>
       {state => (
         <ReactModal
+          ref={forwardedRef}
           isOpen={open}
-          onAfterOpen={onAfterOpen}
-          onRequestClose={onRequestClose}
           closeTimeoutMS={300}
           style={{
             overlay: {
@@ -45,10 +41,7 @@ const Modal = ({
             }
           }}
           contentLabel={title}
-          shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
-          shouldCloseOnEsc={shouldCloseOnEsc}
           role="dialog"
-          parentSelector={parentSelector}
           {...other}
         >
           {children}
@@ -56,8 +49,6 @@ const Modal = ({
       )}
     </Transition>
   );
-
-  return modal;
 };
 
 Modal.propTypes = {
@@ -85,4 +76,4 @@ Modal.propTypes = {
 
 Modal.defaultProps = {};
 
-export default Modal;
+export default withRefs(Modal);

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
 
 import { StyledDatePickerContainer } from './DatePicker-styled';
 
@@ -14,25 +15,57 @@ ThemedStyleSheet.registerInterface(aphroditeInterface);
 ThemedStyleSheet.registerTheme(DatePickerTheme);
 
 const DatePicker = ({
-  startDate,
-  startDateId,
-  endDate,
-  endDateId,
-  onDatesChange,
-  focusedInput,
+  field,
+  form,
   onFocusChange,
+  onDatesChange,
+  disabled,
+  name,
+  value,
+  children,
   ...other
 }) => {
+  let isSubmitting, setFieldValue, setTouched;
+  if (field) {
+    value = field.value;
+    name = field.name;
+    isSubmitting = form.isSubmitting;
+    setFieldValue = form.setFieldValue;
+    setTouched = form.setTouched;
+  }
+
+  const _onDatesChange = dates => {
+    if (setFieldValue) {
+      const { startDate, endDate } = dates;
+      setFieldValue(name, {
+        startDate,
+        endDate
+      });
+    }
+
+    if (onDatesChange) {
+      onDatesChange(dates);
+    }
+  };
+
+  const _onFocusChange = focusedInput => {
+    if (setTouched && !focusedInput) {
+      setTouched({ [name]: true });
+    }
+
+    if (onFocusChange) {
+      onFocusChange(focusedInput);
+    }
+  };
+
   return (
     <StyledDatePickerContainer>
       <DateRangePicker
-        startDate={startDate}
-        startDateId={startDateId}
-        endDate={endDate}
-        endDateId={endDateId}
-        onDatesChange={onDatesChange}
-        focusedInput={focusedInput}
-        onFocusChange={onFocusChange}
+        startDate={value && value.startDate}
+        endDate={value && value.endDate}
+        onDatesChange={_onDatesChange}
+        onFocusChange={_onFocusChange}
+        disabled={isSubmitting || disabled}
         {...other}
       />
     </StyledDatePickerContainer>
@@ -53,7 +86,9 @@ DatePicker.propTypes = {
 
 DatePicker.defaultProps = {
   startDatePlaceholderText: 'Start Date',
-  endDatePlaceholderText: 'End Date'
+  endDatePlaceholderText: 'End Date',
+  startDateId: uniqid(),
+  endDateId: uniqid()
 };
 
 export default DatePicker;

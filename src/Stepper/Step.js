@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { getChildType } from '../utils/helpers';
+import withRefs from '../utils/withRefs';
+
 import { StyledStep, StyledStepTextContainer } from './Stepper-styled';
 import { StepTitle, StepDescription } from './';
 import StepIcon from './StepIcon';
@@ -14,7 +16,7 @@ const Step = ({
   error,
   icon,
   vertical,
-  selectable,
+  forwardedRef,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
@@ -41,8 +43,8 @@ const Step = ({
     }
   });
 
-  const step = (
-    <StyledStep selectable={selectable} vertical={vertical} {...other}>
+  return (
+    <StyledStep ref={forwardedRef} vertical={vertical} {...other}>
       <StepIcon
         icon={icon}
         active={active}
@@ -58,8 +60,6 @@ const Step = ({
       </StyledStepTextContainer>
     </StyledStep>
   );
-
-  return step;
 };
 
 Step.propTypes = {
@@ -73,4 +73,4 @@ Step.propTypes = {
 
 Step.defaultProps = {};
 
-export default Step;
+export default withRefs(Step);

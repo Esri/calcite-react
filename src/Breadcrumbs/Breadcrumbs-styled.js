@@ -8,7 +8,7 @@ const StyledBreadcrumbs = styled.nav`
   color: ${props => props.theme.palette.darkerGray};
 `;
 
-const StyledCrumb = CalciteA.extend`
+const StyledCrumb = styled(CalciteA)`
   color: ${props => props.theme.palette.darkerGray};
 
   &::before {

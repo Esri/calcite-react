@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledSubNavActions } from './SubNav-styled';
 
-const SubNavActions = ({ children, ...other }) => {
-  const subNavActions = (
-    <StyledSubNavActions {...other}>{children}</StyledSubNavActions>
+const SubNavActions = ({ children, forwardedRef, ...other }) => {
+  return (
+    <StyledSubNavActions ref={forwardedRef} {...other}>
+      {children}
+    </StyledSubNavActions>
   );
-
-  return subNavActions;
 };
 
 SubNavActions.propTypes = {
@@ -17,4 +19,4 @@ SubNavActions.propTypes = {
 
 SubNavActions.defaultProps = {};
 
-export default SubNavActions;
+export default withRefs(SubNavActions);

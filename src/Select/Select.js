@@ -11,7 +11,6 @@ import {
   StyledSelectMenu,
   PopperManagerStyles
 } from './Select-styled';
-import Menu from '../Menu';
 
 import { FormControlContext } from '../Form/FormControl';
 
@@ -31,12 +30,25 @@ const Select = ({
   label,
   onChange,
   positionFixed,
+  disabled,
+  onBlur,
+  field,
+  form,
   ...other
 }) => {
+  let name, touched, errors, isSubmitting, setFieldValue;
+  if (field) {
+    name = field.name;
+    touched = form.touched;
+    errors = form.errors;
+    isSubmitting = form.isSubmitting;
+    setFieldValue = form.setFieldValue;
+  }
+
   function getAnchorElement(params) {
     const {
       ref,
-      getButtonProps,
+      getToggleButtonProps,
       getInputProps,
       placeholder,
       selectedItem
@@ -47,7 +59,11 @@ const Select = ({
         <FormControlContext.Consumer>
           {({ formControlContext }) => (
             <StyledSelectInput
-              onClick={getButtonProps().onClick}
+              as="input"
+              onClick={getToggleButtonProps().onClick}
+              success={isSuccess(formControlContext)}
+              error={isError(formControlContext)}
+              disabled={isDisabled()}
               {...getInputProps({
                 placeholder: placeholder,
                 id: id || formControlContext._generatedId,
@@ -56,7 +72,7 @@ const Select = ({
                 style: style,
                 ...other
               })}
-              innerRef={ref}
+              ref={ref}
             />
           )}
         </FormControlContext.Consumer>
@@ -66,13 +82,17 @@ const Select = ({
       <FormControlContext.Consumer>
         {({ formControlContext }) => (
           <StyledSelectButton
-            {...getButtonProps()}
+            {...getToggleButtonProps()}
             {...getInputProps()}
+            as="button"
             fullWidth={fullWidth}
             minimal={minimal}
-            innerRef={ref}
+            ref={ref}
             id={id || formControlContext._generatedId}
             style={style}
+            success={isSuccess(formControlContext)}
+            error={isError(formControlContext)}
+            disabled={isDisabled()}
             {...other}
           >
             {itemToString(selectedItem)
@@ -95,13 +115,24 @@ const Select = ({
 
   function downshiftOnChange(selectedItem, downshiftProps) {
     const value = selectedItem.props.value;
-    onChange(value, selectedItem);
+
+    if (setFieldValue) {
+      setFieldValue(name, value);
+    }
+
+    if (onChange) {
+      onChange(value, selectedItem);
+    }
   }
 
   function _getItemFromValue(value) {
-    return children.filter(child => {
-      return child.props.value === value;
-    })[0];
+    if (!value) return null;
+
+    return (
+      children.filter(child => {
+        return child.props.value === value;
+      })[0] || null
+    );
   }
 
   function getMenuItems(
@@ -122,9 +153,9 @@ const Select = ({
           ...getItemProps({
             item: child,
             active: highlightedIndex === index,
-            selected: selectedItem === child
-          }),
-          key: index
+            selected: selectedItem === child,
+            key: index
+          })
         })
       );
     }
@@ -134,9 +165,9 @@ const Select = ({
         ...getItemProps({
           item: child,
           active: highlightedIndex === index,
-          selected: selectedItem === child
-        }),
-        key: index
+          selected: selectedItem === child,
+          key: index
+        })
       })
     );
   }
@@ -147,15 +178,49 @@ const Select = ({
     }
   }
 
+  function getSelectedValue() {
+    return field ? field.value : selectedValue;
+  }
+
+  function handleBlur(e) {
+    if (field) {
+      field.onBlur(e);
+    }
+
+    if (onBlur) {
+      onBlur(e);
+    }
+  }
+
+  function isSuccess(formControlContext) {
+    if (touched) {
+      return touched[name] && !errors[name] ? true : false;
+    }
+    return formControlContext.success;
+  }
+
+  function isError(formControlContext) {
+    if (touched) {
+      return touched[name] && errors[name] ? true : false;
+    }
+    return formControlContext.error;
+  }
+
+  function isDisabled() {
+    return isSubmitting || disabled;
+  }
+
   return (
     <Manager style={{ ...PopperManagerStyles, ...wrapperStyle }}>
       <Downshift
         itemToString={itemToString}
         onChange={downshiftOnChange}
-        selectedItem={selectedItem || _getItemFromValue(selectedValue)}
-        render={({
+        onBlur={handleBlur}
+        selectedItem={selectedItem || _getItemFromValue(getSelectedValue())}
+      >
+        {({
           getRootProps,
-          getButtonProps,
+          getToggleButtonProps,
           getInputProps,
           getItemProps,
           isOpen,
@@ -163,46 +228,50 @@ const Select = ({
           highlightedIndex,
           inputValue
         }) => (
-          <StyledSelectWrapper {...getRootProps({ refKey: 'innerRef' })}>
+          <StyledSelectWrapper
+            {...getRootProps({}, { suppressRefError: true })}
+          >
             <Reference style={{ display: 'inline-block' }}>
               {({ ref }) => {
                 return getAnchorElement({
                   ref,
-                  getButtonProps,
+                  getToggleButtonProps,
                   getInputProps,
-                  placeholder: placeholder,
+                  placeholder,
                   selectedItem,
                   labelEl: label,
-                  horizontal: horizontal
+                  horizontal
                 });
               }}
             </Reference>
             {isOpen ? (
-              <Popper positionFixed={positionFixed} placement={'bottom-start'}>
-                {({ ref, style, placement }) => (
-                  <Menu
-                    innerRef={ref}
-                    style={{
-                      ...style,
-                      ...getFullWidthStyle(),
-                      ...menuStyle
-                    }}
-                    data-placement={placement}
-                    withComponent={<StyledSelectMenu fullWidth={fullWidth} />}
-                  >
-                    {getMenuItems(
-                      inputValue,
-                      getItemProps,
-                      highlightedIndex,
-                      selectedItem
-                    )}
-                  </Menu>
-                )}
+              <Popper positionFixed={positionFixed} placement={other.placement}>
+                {({ ref, style, placement }) => {
+                  return (
+                    <StyledSelectMenu
+                      ref={ref}
+                      style={{
+                        ...style,
+                        ...getFullWidthStyle(),
+                        ...menuStyle
+                      }}
+                      data-placement={placement}
+                      fullWidth={fullWidth}
+                    >
+                      {getMenuItems(
+                        inputValue,
+                        getItemProps,
+                        highlightedIndex,
+                        selectedItem
+                      )}
+                    </StyledSelectMenu>
+                  );
+                }}
               </Popper>
             ) : null}
           </StyledSelectWrapper>
         )}
-      />
+      </Downshift>
     </Manager>
   );
 };
@@ -229,11 +298,28 @@ Select.propTypes = {
   /** Style prop applied to the menu wrapper */
   menuStyle: PropTypes.object,
   /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
-  positionFixed: PropTypes.bool
+  positionFixed: PropTypes.bool,
+  /** Specify where the menu should appear in relation to the Select element */
+  placement: PropTypes.oneOf([
+    'auto',
+    'top',
+    'top-start',
+    'top-end',
+    'right',
+    'right-start',
+    'right-end',
+    'bottom',
+    'bottom-start',
+    'bottom-end',
+    'left',
+    'left-start',
+    'left-end'
+  ])
 };
 
 Select.defaultProps = {
-  placeholder: 'Select...'
+  placeholder: 'Select...',
+  placement: 'bottom-start'
 };
 
 export default Select;

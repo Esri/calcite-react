@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledTopNavActions } from './TopNav-styled';
 
-const TopNav = ({ children, ...other }) => {
-  const topNavActions = (
-    <StyledTopNavActions {...other}>{children}</StyledTopNavActions>
+const TopNav = ({ children, forwardedRef, ...other }) => {
+  return (
+    <StyledTopNavActions ref={forwardedRef} {...other}>
+      {children}
+    </StyledTopNavActions>
   );
-
-  return topNavActions;
 };
 
 TopNav.propTypes = {
@@ -17,4 +19,4 @@ TopNav.propTypes = {
 
 TopNav.defaultProps = {};
 
-export default TopNav;
+export default withRefs(TopNav);

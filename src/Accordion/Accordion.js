@@ -3,8 +3,15 @@ import React from 'react';
 import { getChildType } from '../utils/helpers';
 import { StyledAccordion } from './Accordion-styled';
 import AccordionSection from './AccordionSection';
+import withRefs from '../utils/withRefs';
 
-const Accordion = ({ children, ...props }) => {
+const Accordion = ({
+  children,
+  activeSectionIndexes,
+  onAccordionChange,
+  forwardedRef,
+  ...other
+}) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (getChildType(child)) {
@@ -12,9 +19,9 @@ const Accordion = ({ children, ...props }) => {
         let section;
         section = React.cloneElement(child, {
           key: i,
-          active: props.activeSectionIndexes.includes(i),
+          active: activeSectionIndexes.includes(i),
           sectionIndex: i,
-          onAccordionChange: props.onAccordionChange
+          onAccordionChange: onAccordionChange
         });
         return section;
       default:
@@ -22,7 +29,11 @@ const Accordion = ({ children, ...props }) => {
     }
   });
 
-  return <StyledAccordion>{childrenWithProps}</StyledAccordion>;
+  return (
+    <StyledAccordion ref={forwardedRef} {...other}>
+      {childrenWithProps}
+    </StyledAccordion>
+  );
 };
 
 Accordion.propTypes = {
@@ -36,4 +47,4 @@ Accordion.defaultProps = {
   activeSectionIndexes: []
 };
 
-export default Accordion;
+export default withRefs(Accordion);

@@ -1,20 +1,30 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
 import { StyledAccordionTitle, ArrowIconStyles } from './Accordion-styled';
 import ChevronDownIcon from '../icons/ChevronDownIcon';
 import ChevronRightIcon from '../icons/ChevronRightIcon';
 
-const AccordionTitle = ({ children, ...props }) => {
+const AccordionTitle = ({
+  children,
+  active,
+  sectionIndex,
+  onAccordionChange,
+  forwardedRef,
+  ...other
+}) => {
   const setActiveAccordionIndex = e => {
-    props.onAccordionChange(e, props.sectionIndex);
+    onAccordionChange(e, sectionIndex);
   };
 
-  const accordionTitle = (
+  return (
     <StyledAccordionTitle
       onClick={setActiveAccordionIndex}
-      active={props.active}
+      active={active}
+      ref={forwardedRef}
+      {...other}
     >
-      {props.active ? (
+      {active ? (
         <ChevronDownIcon style={ArrowIconStyles} />
       ) : (
         <ChevronRightIcon style={ArrowIconStyles} />
@@ -22,8 +32,6 @@ const AccordionTitle = ({ children, ...props }) => {
       {children}
     </StyledAccordionTitle>
   );
-
-  return accordionTitle;
 };
 
 AccordionTitle.propTypes = {
@@ -35,4 +43,4 @@ AccordionTitle.propTypes = {
 
 AccordionTitle.defaultProps = {};
 
-export default AccordionTitle;
+export default withRefs(AccordionTitle);

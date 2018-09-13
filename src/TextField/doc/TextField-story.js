@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
+import { Formik, Field } from 'formik';
 
 import GuideExample from '../../../stories/GuideExample';
 import doc from './TextField.md';
@@ -28,25 +29,25 @@ storiesOf('TextField', module)
         </GuideExample>
         <GuideExample label="value">
           <FormControl>
-            <TextField value="James T Kirk" />
+            <TextField defaultValue="James T Kirk" />
           </FormControl>
         </GuideExample>
         <GuideExample label="error">
           <FormControl error>
-            <TextField value="jkirk@gmail.com" type="email" />
+            <TextField defaultValue="jkirk@gmail.com" type="email" />
             <FormHelperText>Needs to be .gov</FormHelperText>
           </FormControl>
         </GuideExample>
         <GuideExample label="success">
           <FormControl success>
-            <TextField value={1} type="number" />
+            <TextField defaultValue={1} type="number" />
             <FormHelperText>That's a number!</FormHelperText>
           </FormControl>
         </GuideExample>
         <GuideExample label={`type="textarea"`}>
           <FormControl>
             <TextField
-              value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              defaultValue="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
               type="textarea"
             />
           </FormControl>
@@ -61,13 +62,13 @@ storiesOf('TextField', module)
             </FormControl>
             <FormControl>
               <TextField
-                value="Dr. Leonard McCoy"
+                defaultValue="Dr. Leonard McCoy"
                 leftAdornment={<AccountIcon />}
               />
             </FormControl>
             <FormControl success>
               <TextField
-                value="500.00"
+                defaultValue="500.00"
                 leftAdornment="$"
                 rightAdornment={<Button>Submit</Button>}
               />
@@ -84,13 +85,13 @@ storiesOf('TextField', module)
         <GuideExample label="htmlFor & id">
           <FormControl>
             <FormControlLabel htmlFor="name">Name:</FormControlLabel>
-            <TextField id="name" value="James Kirk" />
+            <TextField id="name" defaultValue="James Kirk" />
           </FormControl>
         </GuideExample>
         <GuideExample label="auto generated id">
           <FormControl>
             <FormControlLabel>Name:</FormControlLabel>
-            <TextField value="James Kirk" />
+            <TextField defaultValue="James Kirk" />
           </FormControl>
         </GuideExample>
       </div>
@@ -102,14 +103,14 @@ storiesOf('TextField', module)
       <div>
         <GuideExample>
           <FormControl>
-            <TextField minimal value="James T Kirk" />
+            <TextField minimal defaultValue="James T Kirk" />
           </FormControl>
         </GuideExample>
         <GuideExample>
           <FormControl>
             <TextField
               minimal
-              value="500.00"
+              defaultValue="500.00"
               leftAdornment="$"
               rightAdornment={<Button>Submit</Button>}
             />
@@ -117,4 +118,108 @@ storiesOf('TextField', module)
         </GuideExample>
       </div>
     ))
+  )
+  .add(
+    'with Formik',
+    withInfo(doc)(() => {
+      const user = {
+        name: '',
+        email: '',
+        password: ''
+      };
+
+      const onSubmit = (values, actions) => {
+        setTimeout(() => {
+          console.log(values);
+          actions.setSubmitting(false);
+        }, 1000);
+      };
+
+      const onValidate = values => {
+        const errors = {};
+        if (!values.name) {
+          errors.name = 'You must have a name 🤨';
+        }
+
+        if (!values.email.includes('@')) {
+          errors.email = 'Most emails have an @...';
+        }
+
+        if (values.password.length < 10) {
+          errors.password =
+            'That password is weak. You need at least 10 characters.';
+        }
+
+        return errors;
+      };
+
+      const handleNameChanged = e => {
+        // You can still attach your own onChange handlers (they will be invoked right after the Formik ones)
+        console.log('Hello ', e.target.value);
+      };
+
+      return (
+        <Formik initialValues={user} validate={onValidate} onSubmit={onSubmit}>
+          {({ values, errors, touched, handleSubmit, isSubmitting }) => (
+            <GuideExample>
+              <Form onSubmit={handleSubmit}>
+                {/* name */}
+
+                <FormControl
+                  success={touched.name && !errors.name ? true : false}
+                  error={touched.name && errors.name ? true : false}
+                >
+                  <FormControlLabel htmlFor="name">Name:</FormControlLabel>
+                  <Field
+                    component={TextField}
+                    type="text"
+                    name="name"
+                    leftAdornment={<AccountIcon />}
+                    onChange={handleNameChanged}
+                  />
+                  <FormHelperText>
+                    {(touched.name && errors.name) || null}
+                  </FormHelperText>
+                </FormControl>
+
+                {/* email */}
+
+                <FormControl
+                  success={touched.email && !errors.email ? true : false}
+                  error={touched.email && errors.email ? true : false}
+                >
+                  <FormControlLabel htmlFor="email">Email:</FormControlLabel>
+                  <Field component={TextField} type="text" name="email" />
+                  <FormHelperText>
+                    {(touched.email && errors.email) || null}
+                  </FormHelperText>
+                </FormControl>
+
+                {/* password */}
+
+                <FormControl
+                  success={touched.password && !errors.password ? true : false}
+                  error={touched.password && errors.password ? true : false}
+                >
+                  <FormControlLabel htmlFor="password">
+                    Password:
+                  </FormControlLabel>
+                  <Field component={TextField} type="text" name="password" />
+                  <FormHelperText>
+                    {(touched.password && errors.password) || null}
+                  </FormHelperText>
+                </FormControl>
+
+                <FormControl>
+                  <Button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? 'Submitting.......' : 'Submit'}
+                  </Button>
+                </FormControl>
+                <pre>{JSON.stringify(values, null, 2)}</pre>
+              </Form>
+            </GuideExample>
+          )}
+        </Formik>
+      );
+    })
   );

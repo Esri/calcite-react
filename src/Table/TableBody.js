@@ -1,14 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledTableBody } from './Table-styled';
 
 import { TableContext } from './Table';
 
-const TableBody = ({ children, ...other }) => {
+const TableBody = ({ children, forwardedRef, ...other }) => {
   return (
     <TableContext.Consumer>
       {({ tableContext }) => (
-        <StyledTableBody noTable={tableContext.noTable} {...other}>
+        <StyledTableBody
+          ref={forwardedRef}
+          noTable={tableContext.noTable}
+          {...other}
+        >
           {children}
         </StyledTableBody>
       )}
@@ -37,4 +43,4 @@ TableBody.propTypes = {
 
 TableBody.defaultProps = {};
 
-export default TableBody;
+export default withRefs(TableBody);

@@ -28,10 +28,10 @@ storiesOf('Form', module)
         <GuideExample>
           <Form>
             <FormControl>
-              <TextField value="Map Man" label="Name:" />
+              <TextField defaultValue="Map Man" label="Name:" />
             </FormControl>
             <FormControl error>
-              <TextField value="map_man@yahoo.com" label="Email:" />
+              <TextField defaultValue="map_man@yahoo.com" label="Email:" />
               <FormHelperText>Really... Yahoo?</FormHelperText>
             </FormControl>
             <FormControl>
@@ -42,7 +42,7 @@ storiesOf('Form', module)
               </Select>
             </FormControl>
             <FormControl success>
-              <TextField value="Denver" label="City:" />
+              <TextField defaultValue="Denver" label="City:" />
               <FormHelperText>City checks out</FormHelperText>
             </FormControl>
             <FormControl>
@@ -57,8 +57,7 @@ storiesOf('Form', module)
                 <Legend>Gender:</Legend>
                 <Radio>Male</Radio>
                 <Radio>Female</Radio>
-                <Radio>Non-binary, genderqueer, or gender non-conforming</Radio>
-                <Radio>Transgender</Radio>
+                <Radio>Other</Radio>
               </Fieldset>
             </FormControl>
             <FormControl>
@@ -81,21 +80,21 @@ storiesOf('Form', module)
         <GuideExample>
           <Form horizontal>
             <FormControl>
-              <TextField value="James" label="First Name:" />
+              <TextField defaultValue="James" label="First Name:" />
             </FormControl>
             <FormControl>
-              <TextField value="Kirk" label="Last Name:" />
+              <TextField defaultValue="Kirk" label="Last Name:" />
             </FormControl>
             <FormControl error>
               <TextField
-                value="jKirk_1701@gmail.com"
+                defaultValue="jKirk_1701@gmail.com"
                 type="email"
                 label="Email:"
               />
               <FormHelperText>Must be a .gov email</FormHelperText>
             </FormControl>
             <FormControl>
-              <TextField value="Denver" label="City:" />
+              <TextField defaultValue="Denver" label="City:" />
             </FormControl>
           </Form>
         </GuideExample>

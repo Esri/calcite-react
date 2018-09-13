@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import {
   StyledTextField,
   StyledTextArea,
@@ -15,16 +17,27 @@ const TextField = ({
   children,
   type,
   value,
-  search,
-  fullWidth,
   minimal,
-  horizontal,
   id,
   onChange,
+  onBlur,
   leftAdornment,
   rightAdornment,
+  forwardedRef,
+  name,
+  disabled,
+  field,
+  form,
   ...other
 }) => {
+  let touched, errors, isSubmitting;
+  if (field) {
+    name = field.name;
+    touched = form.touched;
+    errors = form.errors;
+    isSubmitting = form.isSubmitting;
+  }
+
   const getAdornment = function(adornment) {
     if (adornment && adornment.type === Button) {
       return React.cloneElement(adornment, {
@@ -43,6 +56,48 @@ const TextField = ({
     );
   };
 
+  const getValue = () => {
+    return field ? field.value : value;
+  };
+
+  const handleChange = e => {
+    if (field) {
+      field.onChange(e);
+    }
+
+    if (onChange) {
+      onChange(e);
+    }
+  };
+
+  const handleBlur = e => {
+    if (field) {
+      field.onBlur(e);
+    }
+
+    if (onBlur) {
+      onBlur(e);
+    }
+  };
+
+  const isSuccess = formControlContext => {
+    if (touched) {
+      return touched[name] && !errors[name] ? true : false;
+    }
+    return formControlContext.success;
+  };
+
+  const isError = formControlContext => {
+    if (touched) {
+      return touched[name] && errors[name] ? true : false;
+    }
+    return formControlContext.error;
+  };
+
+  const isDisabled = () => {
+    return isSubmitting || disabled;
+  };
+
   let TextFieldArea = StyledTextField;
 
   if (type === 'textarea') {
@@ -54,14 +109,18 @@ const TextField = ({
       <FormControlContext.Consumer>
         {({ formControlContext }) => (
           <TextFieldArea
-            value={value}
-            error={formControlContext.error}
-            success={formControlContext.success}
-            search={search}
-            fullWidth={fullWidth}
+            ref={forwardedRef}
+            name={name}
+            as={type === 'textarea' ? 'textarea' : 'input'}
+            type={type}
+            value={getValue()}
             minimal={minimal}
             id={id || formControlContext._generatedId}
-            onChange={onChange}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            success={isSuccess(formControlContext)}
+            error={isError(formControlContext)}
+            disabled={isDisabled()}
             {...other}
           />
         )}
@@ -75,14 +134,18 @@ const TextField = ({
         <StyledTextFieldAdornmentWrapper>
           {getAdornment(leftAdornment)}
           <TextFieldArea
-            value={value}
-            error={formControlContext.error}
-            success={formControlContext.success}
-            search={search}
-            fullWidth={fullWidth}
+            ref={forwardedRef}
+            name={name}
+            as={type === 'textarea' ? 'textarea' : 'input'}
+            type={type}
+            value={getValue()}
             minimal={minimal}
             id={id || formControlContext._generatedId}
-            onChange={onChange}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            success={isSuccess(formControlContext)}
+            error={isError(formControlContext)}
+            disabled={isDisabled()}
             {...other}
           />
           {getAdornment(rightAdornment)}
@@ -132,4 +195,4 @@ TextField.defaultProps = {
   type: 'text'
 };
 
-export default TextField;
+export default withRefs(TextField);

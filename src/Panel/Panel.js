@@ -1,59 +1,38 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
+
 import { StyledPanel } from './Panel-styled';
 
-const Panel = ({
-  children,
-  noBorder,
-  noPadding,
-  dark,
-  black,
-  white,
-  lightBlue,
-  blue,
-  darkBlue,
-  ...other
-}) => {
-  const panel = (
-    <StyledPanel
-      noBorder={noBorder}
-      noPadding={noPadding}
-      dark={dark}
-      black={black}
-      white={white}
-      lightBlue={lightBlue}
-      blue={blue}
-      darkBlue={darkBlue}
-      {...other}
-    >
+const Panel = ({ children, forwardedRef, ...other }) => {
+  return (
+    <StyledPanel ref={forwardedRef} {...other}>
       {children}
     </StyledPanel>
   );
-
-  return panel;
 };
 
 Panel.propTypes = {
-  /** Description TBD */
+  /** Content of the Panel */
   children: PropTypes.node,
-  /** Description TBD */
+  /** Hide the border of the panel */
   noBorder: PropTypes.bool,
-  /** Description TBD */
+  /** Remove the padding from the panel */
   noPadding: PropTypes.bool,
-  /** Description TBD */
+  /** Dark style panel */
   dark: PropTypes.bool,
-  /** Description TBD */
+  /** Black style panel */
   black: PropTypes.bool,
-  /** Description TBD */
+  /** White style panel */
   white: PropTypes.bool,
-  /** Description TBD */
+  /** Light Blue style panel */
   lightBlue: PropTypes.bool,
-  /** Description TBD */
+  /** Blue style panel */
   blue: PropTypes.bool,
-  /** Description TBD */
+  /** Dark Blue style panel */
   darkBlue: PropTypes.bool
 };
 
 Panel.defaultProps = {};
 
-export default Panel;
+export default withRefs(Panel);

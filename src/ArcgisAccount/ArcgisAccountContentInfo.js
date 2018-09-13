@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
+import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import {
@@ -21,7 +22,13 @@ import CalciteTheme from '../theme/CalciteTheme';
 
 // CSS
 
-const ArcgisAccountMenu = ({ user, portal, avatar, ...other }) => {
+const ArcgisAccountMenu = ({
+  user,
+  portal,
+  avatar,
+  forwardedRef,
+  ...other
+}) => {
   const _avatar = React.cloneElement(avatar, {
     style: {
       border: `2px solid ${CalciteTheme.palette.white}`,
@@ -29,8 +36,9 @@ const ArcgisAccountMenu = ({ user, portal, avatar, ...other }) => {
       marginBottom: CalciteTheme.baseline
     }
   });
+
   return (
-    <StyledArcgisAccountContentInfo {...other}>
+    <StyledArcgisAccountContentInfo ref={forwardedRef} {...other}>
       {_avatar}
       <StyledArcgisAccountContentName>
         {user.fullName}
@@ -46,9 +54,10 @@ const ArcgisAccountMenu = ({ user, portal, avatar, ...other }) => {
 };
 
 ArcgisAccountMenu.propTypes = {
+  /** AGOL user object */
   user: PropTypes.object
 };
 
 ArcgisAccountMenu.defaultProps = {};
 
-export default ArcgisAccountMenu;
+export default withRefs(ArcgisAccountMenu);

@@ -54,7 +54,7 @@ const StyledCardContent = styled.div`
     `};
 `;
 
-const StyledCardImageWrap = CalciteFigure.extend`
+const StyledCardImageWrap = styled(CalciteFigure)`
   width: 100%;
   position: relative;
   margin-bottom: 0;
@@ -111,7 +111,7 @@ const StyledCardImageCaption = styled.figcaption`
   padding: 0.35rem 1.25rem 0.35rem 1.25rem;
 `;
 
-const StyledCardTitle = CalciteH4.extend`
+const StyledCardTitle = styled(CalciteH4)`
   margin-bottom: 0.775rem;
 `;
 

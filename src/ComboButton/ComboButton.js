@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import withRefs from '../utils/withRefs';
 
 import {
   StyledComboButtonContainer,
@@ -35,18 +36,9 @@ class ComboButton extends Component {
       children,
       onClick,
       label,
-      clear,
-      clearGray,
-      small,
-      large,
-      fullWidth,
-      half,
-      red,
-      green,
-      disabled,
-      type,
       icon,
       iconPosition,
+      forwardedRef,
       ...other
     } = this.props;
 
@@ -66,20 +58,7 @@ class ComboButton extends Component {
 
     const comboButton = (
       <StyledComboButtonContainer>
-        <StyledComboButton
-          onClick={onClick}
-          clear={clear}
-          clearGray={clearGray}
-          small={small}
-          large={large}
-          fullWidth={fullWidth}
-          half={half}
-          red={red}
-          green={green}
-          disabled={disabled}
-          type={type}
-          {...other}
-        >
+        <StyledComboButton ref={forwardedRef} onClick={onClick} {...other}>
           {iconPosition === 'before' ? wrappedIcon : null}
           {label}
           {iconPosition === 'after' ? wrappedIcon : null}
@@ -90,20 +69,7 @@ class ComboButton extends Component {
           placement="bottom-end"
           targetContainerStyles={{ display: 'block', height: '100%' }}
           targetEl={
-            <StyledComboButtonDropdown
-              onClick={this.togglePopover}
-              clear={clear}
-              clearGray={clearGray}
-              small={small}
-              large={large}
-              fullWidth={fullWidth}
-              half={half}
-              red={red}
-              green={green}
-              disabled={disabled}
-              type={type}
-              {...other}
-            >
+            <StyledComboButtonDropdown onClick={this.togglePopover} {...other}>
               <ChevronDownIcon />
             </StyledComboButtonDropdown>
           }
@@ -153,4 +119,4 @@ ComboButton.defaultProps = {
   iconPosition: 'after'
 };
 
-export default ComboButton;
+export default withRefs(ComboButton);

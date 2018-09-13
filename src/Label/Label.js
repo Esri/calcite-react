@@ -1,30 +1,29 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
 import { StyledLabel } from './Label-styled';
 
-const Label = ({ children, blue, green, yellow, red, ...other }) => {
-  const label = (
-    <StyledLabel blue={blue} green={green} yellow={yellow} red={red} {...other}>
+const Label = ({ children, forwardedRef, ...other }) => {
+  return (
+    <StyledLabel ref={forwardedRef} {...other}>
       {children}
     </StyledLabel>
   );
-
-  return label;
 };
 
 Label.propTypes = {
-  /** Description TBD */
+  /** Content of the label */
   children: PropTypes.node,
-  /** Description TBD */
+  /** Blue style label */
   blue: PropTypes.bool,
-  /** Description TBD */
+  /** Green style label */
   green: PropTypes.bool,
-  /** Description TBD */
+  /** Yellow style label */
   yellow: PropTypes.bool,
-  /** Description TBD */
+  /** Red style label */
   red: PropTypes.bool
 };
 
 Label.defaultProps = {};
 
-export default Label;
+export default withRefs(Label);

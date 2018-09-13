@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { transparentize } from 'polished';
 
 import CalciteTheme from '../theme/CalciteTheme';
@@ -114,7 +115,7 @@ const thumbFocusHoverStyle = () => {
   `;
 };
 
-const StyledSlider = CalciteInput.extend`
+const StyledSlider = styled(CalciteInput)`
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   ${rangeStyle()};
 

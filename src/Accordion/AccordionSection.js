@@ -4,8 +4,16 @@ import { getChildType } from '../utils/helpers';
 import { StyledAccordionSection } from './Accordion-styled';
 import AccordionTitle from './AccordionTitle';
 import AccordionContent from './AccordionContent';
+import withRefs from '../utils/withRefs';
 
-const AccordionSection = ({ children, ...props }) => {
+const AccordionSection = ({
+  children,
+  active,
+  sectionIndex,
+  onAccordionChange,
+  forwardedRef,
+  ...other
+}) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (getChildType(child)) {
@@ -13,18 +21,17 @@ const AccordionSection = ({ children, ...props }) => {
         let title;
         title = React.cloneElement(child, {
           key: i,
-          active: props.active,
-          sectionIndex: props.sectionIndex,
-          onAccordionChange: props.onAccordionChange
+          active: active,
+          sectionIndex: sectionIndex,
+          onAccordionChange: onAccordionChange
         });
         return title;
       case AccordionContent:
         let content;
         content = React.cloneElement(child, {
           key: i,
-          active: props.active,
-          sectionIndex: props.sectionIndex,
-          onAccordionChange: props.onAccordionChange
+          active: active,
+          sectionIndex: sectionIndex
         });
         return content;
       default:
@@ -32,11 +39,15 @@ const AccordionSection = ({ children, ...props }) => {
     }
   });
 
-  return <StyledAccordionSection>{childrenWithProps}</StyledAccordionSection>;
+  return (
+    <StyledAccordionSection ref={forwardedRef} {...other}>
+      {childrenWithProps}
+    </StyledAccordionSection>
+  );
 };
 AccordionSection.propTypes = {
   /** Description TBD */
   children: PropTypes.node
 };
 
-export default AccordionSection;
+export default withRefs(AccordionSection);

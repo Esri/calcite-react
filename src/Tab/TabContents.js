@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getChildType } from '../utils/helpers';
+import withRefs from '../utils/withRefs';
+
 import { StyledTabContents } from './Tab-styled';
 import TabSection from './TabSection';
 
@@ -11,6 +13,7 @@ const TabContents = ({
   transparent,
   translucent,
   dark,
+  forwardedRef,
   ...other
 }) => {
   const childrenWithProps = children.map((child, itemIndex) => {
@@ -35,6 +38,7 @@ const TabContents = ({
   });
   return (
     <StyledTabContents
+      ref={forwardedRef}
       gray={gray}
       transparent={transparent}
       translucent={translucent}
@@ -56,4 +60,4 @@ TabContents.propTypes = {
   dark: PropTypes.bool
 };
 
-export default TabContents;
+export default withRefs(TabContents);

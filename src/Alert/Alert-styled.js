@@ -44,7 +44,7 @@ const StyledAlert = styled.div`
     `};
 `;
 
-const StyledAlertClose = CalciteA.extend`
+const StyledAlertClose = styled(CalciteA)`
   position: absolute;
   right: ${props => unitCalc(props.theme.baseline, 2, '/')};
   color: ${props => props.theme.palette.offBlack};

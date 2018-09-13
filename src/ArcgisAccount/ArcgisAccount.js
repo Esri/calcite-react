@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
+import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import ArcgisAccountControl from './ArcgisAccountControl';
@@ -72,31 +73,44 @@ class ArcgisAccount extends Component {
   };
 
   render() {
+    const {
+      user,
+      portal,
+      token,
+      onRequestSwitchAccount,
+      onRequestSignOut,
+      children,
+      forwardedRef,
+      ...other
+    } = this.props;
+
     return (
       <Popover
         targetEl={
           <ArcgisAccountControl
             onClick={this.toggleAccountControl}
             avatar={this._getAvatar(this.props.user, this.props.token, 32)}
-            fullName={this.props.user.fullName}
-            username={this.props.user.username}
+            fullName={user.fullName}
+            username={user.username}
             open={this.state.open}
+            {...other}
           />
         }
         open={this.state.open}
         onRequestClose={this.closeAccountControl}
         placement="bottom-end"
         positionFixed
+        ref={forwardedRef}
       >
         <ArcgisAccountMenu
-          user={this.props.user}
-          portal={this.props.portal}
-          avatar={this._getAvatar(this.props.user, this.props.token, 120)}
+          user={user}
+          portal={portal}
+          avatar={this._getAvatar(user, token, 120)}
           style={{ width: '410px' }}
-          onRequestSwitchAccount={this.props.onRequestSwitchAccount}
-          onRequestSignOut={this.props.onRequestSignOut}
+          onRequestSwitchAccount={onRequestSwitchAccount}
+          onRequestSignOut={onRequestSignOut}
         >
-          {this.props.children}
+          {children}
         </ArcgisAccountMenu>
       </Popover>
     );
@@ -104,12 +118,18 @@ class ArcgisAccount extends Component {
 }
 
 ArcgisAccount.propTypes = {
+  /** AGOL user object */
   user: PropTypes.object.isRequired,
+  /** AGOL portal object */
+  portal: PropTypes.object.isRequired,
+  /** AGOL login token */
   token: PropTypes.string,
+  /** Callback when the user selects the Switch Account button */
   onRequestSwitchAccount: PropTypes.func,
+  /** Callback when the user selects the Sign Out button */
   onRequestSignOut: PropTypes.func
 };
 
 ArcgisAccount.defaultProps = {};
 
-export default ArcgisAccount;
+export default withRefs(ArcgisAccount);

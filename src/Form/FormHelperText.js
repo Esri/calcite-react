@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withRefs from '../utils/withRefs';
 import { StyledFormHelperText } from './Form-styled';
 
 import { FormControlContext } from './FormControl';
 
-const FormHelperText = ({ children, ...other }) => {
+const FormHelperText = ({ children, forwardedRef, ...other }) => {
   return (
     <FormControlContext>
       {({ formControlContext }) => (
         <StyledFormHelperText
+          ref={forwardedRef}
           error={formControlContext.error}
           success={formControlContext.success}
           {...other}
@@ -31,4 +33,4 @@ FormHelperText.propTypes = {
 
 FormHelperText.defaultProps = {};
 
-export default FormHelperText;
+export default withRefs(FormHelperText);

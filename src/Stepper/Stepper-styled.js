@@ -58,7 +58,7 @@ const StyledStepTextContainer = styled.div`
   align-items: flex-start;
 `;
 
-const StyledStepTitle = CalciteH6.extend`
+const StyledStepTitle = styled(CalciteH6)`
   margin: 0;
   line-height: 32px;
   position: relative;
@@ -127,7 +127,7 @@ const StyledStepTitle = CalciteH6.extend`
     `};
 `;
 
-const StyledStepDescription = CalciteP.extend`
+const StyledStepDescription = styled(CalciteP)`
   ${fontSize(-2)};
   color: ${props => props.theme.palette.gray};
   font-weight: 300;

@@ -1,32 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledButton } from './Button-styled';
+import withRefs from '../utils/withRefs';
 
 import { ButtonGroupContext } from './ButtonGroup';
 
 const Button = ({
   children,
-  transparent,
-  clear,
-  clearGray,
-  clearWhite,
-  white,
-  small,
-  large,
-  fullWidth,
-  half,
-  red,
-  green,
-  disabled,
   href,
-  type,
   iconButton,
   icon,
   iconPosition,
+  forwardedRef,
   ...other
 }) => {
-  const StyledLink = StyledButton.withComponent('a');
-
   function getIconMargin() {
     if (iconButton) {
       return;
@@ -38,79 +25,38 @@ const Button = ({
     }
   }
 
-  let wrappedIcon;
-  if (icon) {
-    wrappedIcon = React.cloneElement(icon, {
-      ...icon.props,
-      style: {
-        fill: 'currentColor',
-        verticalAlign: 'bottom',
-        ...getIconMargin(),
-        ...icon.props.style
-      }
-    });
-  }
+  const getIcon = icon => {
+    if (icon) {
+      return React.cloneElement(icon, {
+        ...icon.props,
+        style: {
+          fill: 'currentColor',
+          verticalAlign: 'bottom',
+          ...getIconMargin(),
+          ...icon.props.style
+        }
+      });
+    }
+  };
 
-  const link = (
-    <ButtonGroupContext.Consumer>
-      {({ buttonGroupContext }) => (
-        <StyledLink
-          transparent={transparent}
-          clear={clear}
-          clearGray={clearGray}
-          clearWhite={clearWhite}
-          white={white}
-          small={small}
-          large={large}
-          fullWidth={fullWidth}
-          half={half}
-          red={red}
-          green={green}
-          iconButton={iconButton}
-          href={href}
-          disabled={disabled}
-          type={type}
-          grouped={buttonGroupContext.grouped}
-          {...other}
-        >
-          {iconPosition === 'before' ? wrappedIcon : null}
-          {children}
-          {iconPosition === 'after' ? wrappedIcon : null}
-        </StyledLink>
-      )}
-    </ButtonGroupContext.Consumer>
-  );
-
-  const button = (
+  return (
     <ButtonGroupContext.Consumer>
       {({ buttonGroupContext }) => (
         <StyledButton
-          transparent={transparent}
-          clear={clear}
-          clearGray={clearGray}
-          clearWhite={clearWhite}
-          white={white}
-          small={small}
-          large={large}
-          fullWidth={fullWidth}
-          half={half}
-          red={red}
-          green={green}
           iconButton={iconButton}
-          disabled={disabled}
-          type={type}
           grouped={buttonGroupContext.grouped}
+          as={href ? 'a' : 'button'}
+          href={href}
+          ref={forwardedRef}
           {...other}
         >
-          {iconPosition === 'before' ? wrappedIcon : null}
+          {iconPosition === 'before' ? getIcon(icon) : null}
           {children}
-          {iconPosition === 'after' ? wrappedIcon : null}
+          {iconPosition === 'after' ? getIcon(icon) : null}
         </StyledButton>
       )}
     </ButtonGroupContext.Consumer>
   );
-
-  return href ? link : button;
 };
 
 Button.propTypes = {
@@ -155,4 +101,4 @@ Button.defaultProps = {
   iconPosition: 'after'
 };
 
-export default Button;
+export default withRefs(Button);

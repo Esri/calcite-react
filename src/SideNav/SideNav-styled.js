@@ -12,7 +12,7 @@ const StyledSideNav = styled.aside`
   background-color: ${props => props.theme.palette.white};
 `;
 
-const StyledSideNavTitle = CalciteH4.extend`
+const StyledSideNavTitle = styled(CalciteH4)`
   margin: 0;
   padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
   ${avenirRegular()};
@@ -21,7 +21,7 @@ const StyledSideNavTitle = CalciteH4.extend`
   border-top: 1px solid ${props => props.theme.palette.lightestGray};
 `;
 
-const StyledSideNavLink = CalciteA.extend`
+const StyledSideNavLink = styled(CalciteA)`
   position: relative;
   display: block;
   box-sizing: border-box;
