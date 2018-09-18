@@ -52,9 +52,13 @@ const StepIcon = ({
       const errorStyle = error ? { ...StepAvatarStyles.error } : null;
 
       if (error) {
-        avatarContent = <XIcon style={{ ...StepIconStyle }} />;
+        avatarContent = (
+          <XIcon size={small ? 16 : 24} style={{ ...StepIconStyle }} />
+        );
       } else if (complete) {
-        avatarContent = <CheckIcon style={{ ...StepIconStyle }} />;
+        avatarContent = (
+          <CheckIcon size={small ? 16 : 24} style={{ ...StepIconStyle }} />
+        );
       } else {
         avatarContent = children;
       }

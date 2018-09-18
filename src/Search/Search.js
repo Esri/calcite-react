@@ -148,6 +148,7 @@ class Search extends Component {
     if (this.props.inputValue || this.props.selectedItem) {
       return (
         <StyledCloseCircleIcon
+          filled
           size={16}
           onClick={() => {
             this.props.onRequestClear();
@@ -232,7 +233,7 @@ class Search extends Component {
         fullWidth={fullWidth}
         minimal={minimal}
       >
-        <StyledMagnifyIcon size={22} />
+        <StyledMagnifyIcon filled size={16} />
         <Manager style={ManagerStyle}>
           <Downshift
             itemToString={this.itemToString}

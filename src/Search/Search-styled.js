@@ -3,25 +3,25 @@ import { CalciteInput } from '../utils/commonElements';
 import { fontSize, unitCalc, transition } from '../utils/helpers';
 
 import XCircleIcon from 'calcite-ui-icons-react/XCircleIcon';
-import SearchIcon from 'calcite-ui-icons-react/SearchIcon';
+import MagnifyingGlassIcon from 'calcite-ui-icons-react/MagnifyingGlassIcon';
 
 const StyledCloseCircleIcon = styled(XCircleIcon)`
   display: none;
   position: absolute;
   right: ${props => unitCalc(props.theme.baseline, 4, '/')};
   bottom: 0.55em;
-  color: ${props => props.theme.palette.darkGray};
+  color: ${props => props.theme.palette.lighterGray};
   cursor: pointer;
 
   &:hover {
-    color: ${props => props.theme.palette.black};
+    color: ${props => props.theme.palette.gray};
   }
 `;
 
-const StyledMagnifyIcon = styled(SearchIcon)`
+const StyledMagnifyIcon = styled(MagnifyingGlassIcon)`
   position: absolute;
-  bottom: 0.45em;
-  left: 0.25em;
+  bottom: 0.65em;
+  left: 0.5em;
   color: ${props => props.theme.palette.darkerGray};
 `;
 
@@ -48,8 +48,8 @@ const StyledSearchContainer = styled.div`
     ${props =>
       props.minimal &&
       css`
-        bottom: 0.55em;
-        left: auto;
+        bottom: 0.75em;
+        left: 0.1rem;
       `};
   }
 
