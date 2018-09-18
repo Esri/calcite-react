@@ -1,31 +1,28 @@
 import styled, { css } from 'styled-components';
 import { CalciteInput } from '../utils/commonElements';
 import { fontSize, unitCalc, transition } from '../utils/helpers';
-import CloseCircleIcon from '../icons/CloseCircleIcon';
-import MagnifyIcon from '../icons/MagnifyIcon';
 
-const StyledCloseCircleIcon = styled(CloseCircleIcon)`
+import XCircleIcon from 'calcite-ui-icons-react/XCircleIcon';
+import MagnifyingGlassIcon from 'calcite-ui-icons-react/MagnifyingGlassIcon';
+
+const StyledCloseCircleIcon = styled(XCircleIcon)`
   display: none;
   position: absolute;
   right: ${props => unitCalc(props.theme.baseline, 4, '/')};
   bottom: 0.55em;
-  width: 18px;
-  height: 18px;
-  fill: ${props => props.theme.palette.lightGray};
+  color: ${props => props.theme.palette.lighterGray};
   cursor: pointer;
 
   &:hover {
-    fill: ${props => props.theme.palette.darkGray};
+    color: ${props => props.theme.palette.gray};
   }
 `;
 
-const StyledMagnifyIcon = styled(MagnifyIcon)`
+const StyledMagnifyIcon = styled(MagnifyingGlassIcon)`
   position: absolute;
-  bottom: 0.45em;
-  left: 0.25em;
-  width: 22px;
-  height: 22px;
-  fill: ${props => props.theme.palette.darkerGray};
+  bottom: 0.65em;
+  left: 0.5em;
+  color: ${props => props.theme.palette.darkerGray};
 `;
 
 const StyledShortcutCharacter = styled.div`
@@ -51,8 +48,8 @@ const StyledSearchContainer = styled.div`
     ${props =>
       props.minimal &&
       css`
-        bottom: 0.55em;
-        left: auto;
+        bottom: 0.75em;
+        left: 0.1rem;
       `};
   }
 

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { StyledToastContainer, StyledCloseButton } from './Toaster-styled';
 
 // App components
-import CloseIcon from '../icons/CloseIcon';
+import XIcon from 'calcite-ui-icons-react/XIcon';
 
 // Third-party components (buttons, icons, etc.)
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,7 +21,11 @@ const ToastContainer = ({ ...other }) => {
   return (
     <StyledToastContainer
       closeButton={
-        <StyledCloseButton type="button" iconButton icon={<CloseIcon />} />
+        <StyledCloseButton
+          type="button"
+          iconButton
+          icon={<XIcon size={20} />}
+        />
       }
       {...other}
     />

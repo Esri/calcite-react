@@ -11,7 +11,7 @@ import Search from '../';
 import { MenuItem } from '../../Menu';
 import { ListItem, ListItemTitle, ListItemSubtitle } from '../../List';
 
-import ThumbUpIcon from 'mdi-react/ThumbUpIcon';
+import GlobeIcon from 'calcite-ui-icons-react/GlobeIcon';
 
 import statesJson from '../../../stories/_sampleJson/states.json';
 import statesJson2 from '../../../stories/_sampleJson/states_objects.json';
@@ -301,7 +301,7 @@ storiesOf('Search', module)
                         key={item.abbrev}
                         value={item.abbrev}
                         label={item.name}
-                        leftNode={<ThumbUpIcon />}
+                        leftNode={<GlobeIcon size={32} />}
                       >
                         <ListItemTitle>{item.name}</ListItemTitle>
                         <ListItemSubtitle>{item.abbrev}</ListItemSubtitle>

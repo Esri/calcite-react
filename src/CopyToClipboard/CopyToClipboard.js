@@ -10,8 +10,8 @@ import {
 
 import Button from '../Button';
 import Tooltip from '../Tooltip';
-import ClipboardOutlineIcon from '../icons/ClipboardOutlineIcon';
-import CheckIcon from '../icons/CheckIcon';
+import CopyToClipboardIcon from 'calcite-ui-icons-react/CopyToClipboardIcon';
+import CheckIcon from 'calcite-ui-icons-react/CheckIcon';
 
 class CopyToClipboard extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class CopyToClipboard extends Component {
       return <CheckIcon style={ClipboardIconStyles} />;
     }
 
-    return <ClipboardOutlineIcon style={ClipboardIconStyles} />;
+    return <CopyToClipboardIcon style={ClipboardIconStyles} />;
   };
 
   resetCopySuccess = () => {

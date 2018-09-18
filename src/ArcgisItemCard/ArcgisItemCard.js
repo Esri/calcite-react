@@ -7,13 +7,12 @@ import {
   StyledCardItemTitle,
   StyledCardItemMetrics,
   StyledCardItemText,
-  StyledCardItemIconLabelText
+  StyledCardItemIconLabelText,
+  StyledUserIcon,
+  StyledCalendarIcon
 } from './ArcgisItemCard-styled';
 
 import withRefs from '../utils/withRefs';
-
-import AccountIcon from '../icons/AccountIcon';
-import CalendarBlankIcon from '../icons/CalendarBlankIcon';
 
 const ArcgisItemCard = ({
   item,
@@ -75,11 +74,11 @@ const ArcgisItemCard = ({
         </StyledCardItemTitle>
         <StyledCardItemMetrics>
           <StyledCardItemIconLabelText>
-            <AccountIcon />
+            <StyledUserIcon size={16} />
             <span>{item.owner}</span>
           </StyledCardItemIconLabelText>
           <StyledCardItemIconLabelText>
-            <CalendarBlankIcon />
+            <StyledCalendarIcon size={16} />
             <span>{_dateFormatter(item.created)}</span>
           </StyledCardItemIconLabelText>
         </StyledCardItemMetrics>

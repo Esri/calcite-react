@@ -9,8 +9,9 @@ import {
   StepCustomIconStyles
 } from './Stepper-styled';
 import Avatar from '../Avatar';
-import CheckIcon from '../icons/CheckIcon';
-import CloseIcon from '../icons/CloseIcon';
+
+import CheckIcon from 'calcite-ui-icons-react/CheckIcon';
+import XIcon from 'calcite-ui-icons-react/XIcon';
 
 const StepIcon = ({
   children,
@@ -51,9 +52,13 @@ const StepIcon = ({
       const errorStyle = error ? { ...StepAvatarStyles.error } : null;
 
       if (error) {
-        avatarContent = <CloseIcon style={{ ...StepIconStyle }} />;
+        avatarContent = (
+          <XIcon size={small ? 16 : 24} style={{ ...StepIconStyle }} />
+        );
       } else if (complete) {
-        avatarContent = <CheckIcon style={{ ...StepIconStyle }} />;
+        avatarContent = (
+          <CheckIcon size={small ? 16 : 24} style={{ ...StepIconStyle }} />
+        );
       } else {
         avatarContent = children;
       }

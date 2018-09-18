@@ -15,7 +15,7 @@ import Form, {
 } from '../../Form';
 import Button from '../../Button';
 
-import AccountIcon from 'mdi-react/AccountIcon';
+import UserIcon from 'calcite-ui-icons-react/UserIcon';
 
 storiesOf('TextField', module)
   .add(
@@ -63,7 +63,7 @@ storiesOf('TextField', module)
             <FormControl>
               <TextField
                 defaultValue="Dr. Leonard McCoy"
-                leftAdornment={<AccountIcon />}
+                leftAdornment={<UserIcon size={16} />}
               />
             </FormControl>
             <FormControl success>

@@ -643,7 +643,7 @@ const CalciteThemeProvider = ({ children, theme, ...other }) => {
 
 CalciteThemeProvider.propTypes = {
   children: PropTypes.node,
-  theme: PropTypes.node
+  theme: PropTypes.object
 };
 
 CalciteThemeProvider.defaultProps = {

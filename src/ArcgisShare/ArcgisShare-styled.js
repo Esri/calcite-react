@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import CalciteTheme from '../theme/CalciteTheme';
 import { unitCalc } from '../utils/helpers';
+import StarIcon from 'calcite-ui-icons-react/StarIcon';
 
 const StyledArcgisShare = styled.div``;
 
@@ -28,13 +29,11 @@ const GroupFieldsetStyles = {
   alignItems: 'flex-start'
 };
 
-const GroupFavStyles = {
-  width: 14,
-  height: 14,
-  fill: CalciteTheme.palette.lighterGray,
-  verticalAlign: 'text-top',
-  marginLeft: '2px'
-};
+const StyledStarIcon = styled(StarIcon)`
+  fill: ${props => props.theme.palette.lighterGray};
+  vertical-align: text-top;
+  margin-left: 2px;
+`;
 
 export {
   StyledArcgisShare,
@@ -42,5 +41,5 @@ export {
   PrimaryCheckboxLabelStyles,
   GroupCheckboxLabelStyles,
   GroupFieldsetStyles,
-  GroupFavStyles
+  StyledStarIcon
 };

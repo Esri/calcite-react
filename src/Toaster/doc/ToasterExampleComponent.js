@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Button from '../../Button';
 import Tooltip from '../../Tooltip';
 
-import InformationIcon from 'mdi-react/InformationIcon';
+import InformationIcon from 'calcite-ui-icons-react/InformationIcon';
 
 const StyledToasterExample = styled.div`
   display: flex;

@@ -12,7 +12,7 @@ import {
   PrimaryCheckboxLabelStyles,
   GroupCheckboxLabelStyles,
   GroupFieldsetStyles,
-  GroupFavStyles
+  StyledStarIcon
 } from './ArcgisShare-styled';
 
 // App components
@@ -20,7 +20,6 @@ import Checkbox from '../Checkbox';
 import { Fieldset, Legend } from '../Form';
 
 // Third-party components (buttons, icons, etc.)
-import StarIcon from '../icons/StarIcon';
 
 // JSON
 
@@ -69,7 +68,7 @@ class ArcgisShare extends Component {
     return _groups.map(group => {
       let favIcon;
       if (group.isFav && this.props.promoteFavorites) {
-        favIcon = <StarIcon style={{ ...GroupFavStyles }} />;
+        favIcon = <StyledStarIcon filled size={16} />;
       }
       return (
         <Checkbox
