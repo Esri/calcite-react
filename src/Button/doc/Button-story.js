@@ -9,9 +9,9 @@ import CalciteTheme from '../../theme/CalciteTheme';
 import doc from './Button.md';
 import Button, { ButtonGroup } from '../';
 
-import DownloadIcon from 'mdi-react/DownloadIcon';
-import ContentSaveIcon from 'mdi-react/ContentSaveIcon';
-import AppsIcon from 'mdi-react/AppsIcon';
+import DownloadToIcon from 'calcite-ui-icons-react/DownloadToIcon';
+import SaveIcon from 'calcite-ui-icons-react/SaveIcon';
+import AppLauncherIcon from 'calcite-ui-icons-react/AppLauncherIcon';
 
 storiesOf('Button', module)
   .add(
@@ -217,14 +217,17 @@ storiesOf('Button', module)
     withInfo(doc)(() => (
       <div>
         <GuideExample>
-          <Button onClick={action('clicked')} icon={<DownloadIcon />}>
+          <Button
+            onClick={action('clicked')}
+            icon={<DownloadToIcon size={16} />}
+          >
             Download
           </Button>
         </GuideExample>
         <GuideExample label={`iconPosition="before"`}>
           <Button
             onClick={action('clicked')}
-            icon={<ContentSaveIcon />}
+            icon={<SaveIcon size={16} />}
             iconPosition="before"
           >
             Save
@@ -232,17 +235,21 @@ storiesOf('Button', module)
         </GuideExample>
 
         <GuideExample label="iconButton">
-          <Button iconButton icon={<AppsIcon />} onClick={action('clicked')} />
+          <Button
+            iconButton
+            icon={<AppLauncherIcon />}
+            onClick={action('clicked')}
+          />
         </GuideExample>
 
         <GuideExample
-          label="iconButton"
+          label="iconButton white"
           style={{ background: CalciteTheme.palette.offBlack }}
         >
           <Button
             iconButton
             white
-            icon={<AppsIcon />}
+            icon={<AppLauncherIcon filled />}
             onClick={action('clicked')}
           />
         </GuideExample>

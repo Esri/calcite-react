@@ -6,6 +6,8 @@ import {
   StyledCardImageWrap
 } from '../Card/Card-styled';
 import { fontSize, unitCalc } from '../utils/helpers';
+import UserIcon from 'calcite-ui-icons-react/UserIcon';
+import CalendarIcon from 'calcite-ui-icons-react/CalendarIcon';
 
 const StyledItemCard = styled(StyledCard)``;
 
@@ -68,6 +70,14 @@ const StyledCardItemIconLabelText = styled(StyledCardItemText)`
   }
 `;
 
+const StyledUserIcon = styled(UserIcon)`
+  margin-right: ${props => unitCalc(props.theme.baseline, 6, '/')};
+`;
+
+const StyledCalendarIcon = styled(CalendarIcon)`
+  margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
+`;
+
 export {
   StyledItemCard,
   StyledItemCardContent,
@@ -75,5 +85,7 @@ export {
   StyledCardItemTitle,
   StyledCardItemMetrics,
   StyledCardItemText,
-  StyledCardItemIconLabelText
+  StyledCardItemIconLabelText,
+  StyledUserIcon,
+  StyledCalendarIcon
 };

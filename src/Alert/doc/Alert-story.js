@@ -7,7 +7,7 @@ import GuideExample from '../../../stories/GuideExample';
 import doc from './Alert.md';
 import Alert from '../';
 
-import CloseIcon from '../../icons/CloseIcon';
+import XIcon from 'calcite-ui-icons-react/XIcon';
 
 storiesOf('Alert', module).add(
   'Basic',
@@ -17,7 +17,7 @@ storiesOf('Alert', module).add(
         <Alert>Something Happened!</Alert>
       </GuideExample>
       <GuideExample label="closeLabel=&quot;close&quot;">
-        <Alert closeLabel={<CloseIcon />} onClose={action('clicked')}>
+        <Alert closeLabel={<XIcon />} onClose={action('clicked')}>
           Has close link!
         </Alert>
       </GuideExample>

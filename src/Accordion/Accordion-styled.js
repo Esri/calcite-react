@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { transition } from '../utils/helpers';
 import { StyledSideNav, StyledSideNavTitle } from '../SideNav/SideNav-styled';
+import ChevronRightIcon from 'calcite-ui-icons-react/ChevronRightIcon';
 
 const StyledAccordion = styled(StyledSideNav)``;
 
@@ -36,15 +37,23 @@ const StyledAccordionContent = styled.div`
     `};
 `;
 
-const ArrowIconStyles = {
-  width: 20,
-  height: 20
-};
+const StyledChevronIcon = styled(ChevronRightIcon)`
+  width: 20;
+  height: 20;
+
+  transition: transform ${transition()};
+
+  ${props =>
+    props.isActive &&
+    css`
+      transform: rotate(90deg);
+    `};
+`;
 
 export {
   StyledAccordion,
   StyledAccordionTitle,
   StyledAccordionSection,
   StyledAccordionContent,
-  ArrowIconStyles
+  StyledChevronIcon
 };

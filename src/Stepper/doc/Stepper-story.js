@@ -9,10 +9,10 @@ import Stepper, { Step, StepTitle, StepDescription } from '../';
 
 import Button from '../../Button';
 
-import AccountOutlineIcon from 'mdi-react/AccountOutlineIcon';
-import LockOutlineIcon from 'mdi-react/LockOutlineIcon';
-import TuneIcon from 'mdi-react/TuneIcon';
-import EmoticonIcon from 'mdi-react/EmoticonIcon';
+import UserIcon from 'calcite-ui-icons-react/UserIcon';
+import ExclamationMarkCircleIcon from 'calcite-ui-icons-react/ExclamationMarkCircleIcon';
+import SlidersIcon from 'calcite-ui-icons-react/SlidersIcon';
+import BananaIcon from 'calcite-ui-icons-react/BananaIcon';
 
 storiesOf('Stepper', module)
   .add(
@@ -107,32 +107,32 @@ storiesOf('Stepper', module)
       <div>
         <GuideExample>
           <Stepper currentStep={3}>
-            <Step icon={<AccountOutlineIcon />}>
+            <Step icon={<UserIcon />}>
               <StepTitle>Complete Step</StepTitle>
             </Step>
-            <Step error icon={<LockOutlineIcon />}>
+            <Step error icon={<ExclamationMarkCircleIcon />}>
               <StepTitle>Error Step</StepTitle>
             </Step>
-            <Step icon={<TuneIcon />}>
+            <Step icon={<SlidersIcon />}>
               <StepTitle>Current Step</StepTitle>
             </Step>
-            <Step icon={<EmoticonIcon />}>
+            <Step icon={<BananaIcon />}>
               <StepTitle>Pending Step</StepTitle>
             </Step>
           </Stepper>
         </GuideExample>
         <GuideExample label="small">
           <Stepper small currentStep={3}>
-            <Step icon={<AccountOutlineIcon />}>
+            <Step icon={<UserIcon />}>
               <StepTitle>Complete Step</StepTitle>
             </Step>
-            <Step error icon={<LockOutlineIcon />}>
+            <Step error icon={<ExclamationMarkCircleIcon />}>
               <StepTitle>Error Step</StepTitle>
             </Step>
-            <Step icon={<TuneIcon />}>
+            <Step icon={<SlidersIcon />}>
               <StepTitle>Current Step</StepTitle>
             </Step>
-            <Step icon={<EmoticonIcon />}>
+            <Step icon={<BananaIcon />}>
               <StepTitle>Pending Step</StepTitle>
             </Step>
           </Stepper>
