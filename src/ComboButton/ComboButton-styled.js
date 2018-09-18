@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { StyledButton } from '../Button/Button-styled';
+import { unitCalc } from '../utils/helpers';
 
 const StyledComboButtonContainer = styled.div`
   display: flex;
@@ -13,8 +14,8 @@ const StyledComboButton = styled(StyledButton)`
 const StyledComboButtonDropdown = styled(StyledButton)`
   height: 100%;
   fill: currentColor;
-  padding-left: 0.3rem;
-  padding-right: 0.3rem;
+  padding-left: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  padding-right: ${props => unitCalc(props.theme.baseline, 3, '/')};
   display: flex;
   border-left: 1px solid ${props => props.theme.palette.darkBlue};
 

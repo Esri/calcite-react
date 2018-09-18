@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import withRefs from '../utils/withRefs';
-import { StyledAccordionTitle, ArrowIconStyles } from './Accordion-styled';
-import ChevronDownIcon from '../icons/ChevronDownIcon';
-import ChevronRightIcon from '../icons/ChevronRightIcon';
+import { StyledAccordionTitle, StyledChevronIcon } from './Accordion-styled';
 
 const AccordionTitle = ({
   children,
@@ -24,11 +22,7 @@ const AccordionTitle = ({
       ref={forwardedRef}
       {...other}
     >
-      {active ? (
-        <ChevronDownIcon style={ArrowIconStyles} />
-      ) : (
-        <ChevronRightIcon style={ArrowIconStyles} />
-      )}
+      <StyledChevronIcon isActive={active} />
       {children}
     </StyledAccordionTitle>
   );
