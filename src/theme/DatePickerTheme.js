@@ -9,10 +9,19 @@ const core = {
   grayLightest: '#f2f2f2',
 
   borderMedium: '#c4c4c4',
-  border: CalciteTheme.palette.lightGray,
+  border: CalciteTheme.palette.lighterGray,
   borderLight: '#e4e7e7',
   borderLighter: '#eceeee',
   borderBright: '#f4f5f5',
+
+  primary: CalciteTheme.palette.blue,
+  primaryShade_1: CalciteTheme.palette.darkBlue,
+  primaryShade_2: CalciteTheme.palette.lightBlue,
+  primaryShade_3: CalciteTheme.palette.lighterBlue,
+  primaryShade_4: CalciteTheme.palette.lightestBlue,
+  primary_dark: CalciteTheme.palette.darkerBlue,
+
+  secondary: CalciteTheme.palette.Brand_Blue_200,
 
   yellow: '#ffe8bc',
   yellow_dark: '#ffce71'
@@ -34,7 +43,8 @@ const DatePickerTheme = {
         borderLeftFocused: 0,
         borderBottomFocused: `2px solid ${CalciteTheme.palette.blue}`,
         borderRightFocused: 0,
-        borderWidth: 1
+        borderWidth: 1,
+        borderRadius: 0
       },
       pickerInput: {
         borderWidth: 1,
@@ -152,8 +162,8 @@ const DatePickerTheme = {
       captionPaddingBottom: 37,
       inputPadding: 0,
       displayTextPaddingVertical: undefined,
-      displayTextPaddingTop: 5,
-      displayTextPaddingBottom: 3,
+      displayTextPaddingTop: 9,
+      displayTextPaddingBottom: 7,
       displayTextPaddingHorizontal: undefined,
       displayTextPaddingLeft: '0.31rem',
       displayTextPaddingRight: '0.31rem',
@@ -172,14 +182,17 @@ const DatePickerTheme = {
       arrowWidth_small: 15
     },
 
+    noScrollBarOnVerticalScrollable: false,
+
     font: {
       size: '0.875rem',
       captionSize: '0.9375rem',
       input: {
         size: '0.9375rem',
-        lineHeight: '1.55rem',
-        size_small: '0.875rem',
-        lineHeight_small: '1.55rem',
+        lineHeight: '0rem',
+        size_small: '0rem',
+        lineHeight_small: '0rem',
+        letterSpacing_small: '0.2px',
         styleDisabled: 'italic'
       }
     }
