@@ -75,7 +75,7 @@ class ArcgisShare extends Component {
           key={group.id}
           id={group.id}
           labelStyle={{ ...GroupCheckboxLabelStyles }}
-          checked={this.state.groups[group.id]}
+          checked={this.state.groups[group.id] || false}
           onChange={this.groupChange}
         >
           {group.title} {favIcon}
@@ -128,7 +128,7 @@ class ArcgisShare extends Component {
         <Checkbox
           id="public"
           labelStyle={{ ...PrimaryCheckboxLabelStyles }}
-          checked={this.state.public}
+          checked={this.state.public || false}
           onChange={this.publicChange}
         >
           {this.props.publicLabel}
@@ -136,7 +136,7 @@ class ArcgisShare extends Component {
         <Checkbox
           id="org"
           labelStyle={{ ...PrimaryCheckboxLabelStyles }}
-          checked={this.state.org}
+          checked={this.state.org || false}
           onChange={this.orgChange}
         >
           {this.props.portal.name}

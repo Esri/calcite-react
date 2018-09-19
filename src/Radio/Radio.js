@@ -42,7 +42,7 @@ const Radio = ({
   const handleChange = e => {
     if (setFieldValue) {
       setFieldValue(name, value);
-    } else {
+    } else if (onChange) {
       onChange(e);
     }
   };

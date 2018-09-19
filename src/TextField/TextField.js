@@ -10,6 +10,7 @@ import {
 } from './TextField-styled';
 
 import Button from '../Button';
+import Select from '../Select';
 
 import { FormControlContext } from '../Form/FormControl';
 
@@ -39,7 +40,7 @@ const TextField = ({
   }
 
   const getAdornment = function(adornment) {
-    if (adornment && adornment.type === Button) {
+    if (adornment && (adornment.type === Button || adornment.type === Select)) {
       return React.cloneElement(adornment, {
         ...adornment.props,
         minimal,
@@ -140,6 +141,8 @@ const TextField = ({
             type={type}
             value={getValue()}
             minimal={minimal}
+            hasAdornmentLeft={leftAdornment !== undefined}
+            hasAdornmentRight={rightAdornment !== undefined}
             id={id || formControlContext._generatedId}
             onChange={handleChange}
             onBlur={handleBlur}

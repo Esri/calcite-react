@@ -5,27 +5,32 @@ import { StyledButtonGroup } from './Button-styled';
 
 const ButtonGroupContext = createContext({
   buttonGroupContext: {
-    grouped: undefined
+    grouped: undefined,
+    isToggle: undefined
   }
 });
 
-const ButtonGroup = withRefs(({ children, forwardedRef, ...other }) => {
-  const buttonGroupContext = {
-    grouped: true
-  };
+const ButtonGroup = withRefs(
+  ({ children, forwardedRef, isToggle, ...other }) => {
+    const buttonGroupContext = {
+      grouped: true,
+      isToggle: isToggle
+    };
 
-  return (
-    <ButtonGroupContext.Provider value={{ buttonGroupContext }}>
-      <StyledButtonGroup ref={forwardedRef} {...other}>
-        {children}
-      </StyledButtonGroup>
-    </ButtonGroupContext.Provider>
-  );
-});
+    return (
+      <ButtonGroupContext.Provider value={{ buttonGroupContext }}>
+        <StyledButtonGroup ref={forwardedRef} isToggle={isToggle} {...other}>
+          {children}
+        </StyledButtonGroup>
+      </ButtonGroupContext.Provider>
+    );
+  }
+);
 
 ButtonGroup.propTypes = {
   /** Description TBD */
-  children: PropTypes.node
+  children: PropTypes.node,
+  isToggle: PropTypes.bool
 };
 
 ButtonGroup.defaultProps = {};
