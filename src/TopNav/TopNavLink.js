@@ -4,44 +4,17 @@ import withRefs from '../utils/withRefs';
 
 import { StyledTopNavLink } from './TopNav-styled';
 
-const TopNavLink = ({
-  children,
-  href,
-  withComponent,
-  forwardedRef,
-  ...other
-}) => {
-  const StyledDiv = StyledTopNavLink.withComponent('div');
-
-  const div = (
-    <StyledDiv ref={forwardedRef} {...other}>
-      {children}
-    </StyledDiv>
-  );
-
-  const link = (
-    <StyledTopNavLink ref={forwardedRef} {...other} href={href}>
+const TopNavLink = ({ children, href, forwardedRef, ...other }) => {
+  return (
+    <StyledTopNavLink
+      ref={forwardedRef}
+      href={href}
+      as={href ? 'a' : 'span'}
+      {...other}
+    >
       {children}
     </StyledTopNavLink>
   );
-
-  let customTopNavLink;
-  if (withComponent) {
-    customTopNavLink = React.cloneElement(withComponent, {
-      ref: forwardedRef,
-      href,
-      ...other,
-      children: children
-    });
-  }
-
-  if (withComponent) {
-    return customTopNavLink;
-  } else if (href) {
-    return link;
-  } else {
-    return div;
-  }
 };
 
 TopNavLink.propTypes = {

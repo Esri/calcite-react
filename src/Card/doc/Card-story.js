@@ -62,7 +62,10 @@ storiesOf('Card', module).add(
             <p>
               Every color in calcite can be used as a colored "bar" along the
               top of a card to provide a bit of visual punch with{' '}
-              <code>bar="{'{color}'}"</code>
+              <code>
+                bar="
+                {'{color}'}"
+              </code>
             </p>
             <Button clear>What Colors?</Button>
           </CardContent>
@@ -73,7 +76,10 @@ storiesOf('Card', module).add(
             <p>
               Every color in calcite can be used as a colored "bar" along the
               top of a card to provide a bit of visual punch with{' '}
-              <code>bar="{'{color}'}"</code>
+              <code>
+                bar="
+                {'{color}'}"
+              </code>
             </p>
             <Button clear>What Colors?</Button>
           </CardContent>
@@ -84,7 +90,10 @@ storiesOf('Card', module).add(
             <p>
               Every color in calcite can be used as a colored "bar" along the
               top of a card to provide a bit of visual punch with{' '}
-              <code>bar="{'{color}'}"</code>
+              <code>
+                bar="
+                {'{color}'}"
+              </code>
             </p>
             <Button clear>What Colors?</Button>
           </CardContent>
@@ -95,7 +104,10 @@ storiesOf('Card', module).add(
             <p>
               Every color in calcite can be used as a colored "bar" along the
               top of a card to provide a bit of visual punch with{' '}
-              <code>bar="{'{color}'}"</code>
+              <code>
+                bar="
+                {'{color}'}"
+              </code>
             </p>
             <Button clear>What Colors?</Button>
           </CardContent>
@@ -126,7 +138,7 @@ storiesOf('Card', module).add(
         </Card>
       </GuideExample>
 
-      <GuideExample label="withComponent">
+      <GuideExample label="styled(Card)">
         <CustomStyledCard>
           <CardImage
             src={cardImage}
@@ -136,8 +148,10 @@ storiesOf('Card', module).add(
           <CardContent>
             <CardTitle>Card with a Custom Component</CardTitle>
             <p>
-              Cards can take a <code>withComponent</code> property, allowing you
-              to pass in a custom StyledComponent to render the card with.
+              Components can be styled using the <code>styled(Card)</code>{' '}
+              syntax provided by styled-components. The new component will
+              inherit the functionality of the component and add your new styles
+              on top of the default styles.
             </p>
             <Button>View Examples</Button>
           </CardContent>

@@ -2,9 +2,33 @@ import styled, { css } from 'styled-components';
 import { CalciteInput, CalciteTextarea } from '../utils/commonElements';
 import { unitCalc } from '../utils/helpers';
 
-const StyledTextField = styled(CalciteInput)``;
+const StyledTextField = styled(CalciteInput)`
+  ${props =>
+    props.hasAdornmentLeft &&
+    css`
+      border-left: none;
+    `};
 
-const StyledTextArea = styled(CalciteTextarea)``;
+  ${props =>
+    props.hasAdornmentRight &&
+    css`
+      border-right: none;
+    `};
+`;
+
+const StyledTextArea = styled(CalciteTextarea)`
+  ${props =>
+    props.hasAdornmentLeft &&
+    css`
+      border-left: none;
+    `};
+
+  ${props =>
+    props.hasAdornmentRight &&
+    css`
+      border-right: none;
+    `};
+`;
 
 const StyledTextFieldAdornmentWrapper = styled.div`
   display: flex;
@@ -20,11 +44,9 @@ const StyledAdornmentWrapper = styled.div`
   color: ${props => props.theme.palette.darkerGray};
   fill: currentColor;
   border: 1px solid ${props => props.theme.palette.lightGray};
-  border-right: none;
   min-width: ${props => props.theme.baseline};
 
   input + & {
-    border-left: none;
     border-right: 1px solid ${props => props.theme.palette.lightGray};
   }
 

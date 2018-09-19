@@ -159,9 +159,9 @@ storiesOf('Button', module)
         render() {
           return (
             <GuideExample label="grouped">
-              <ButtonGroup>
+              <ButtonGroup isToggle>
                 <Button
-                  clear={this.state.selected === 1}
+                  clear={this.state.selected !== 1}
                   onClick={() => {
                     this.selectButton(1);
                   }}
@@ -169,7 +169,7 @@ storiesOf('Button', module)
                   One
                 </Button>
                 <Button
-                  clear={this.state.selected === 2}
+                  clear={this.state.selected !== 2}
                   onClick={() => {
                     this.selectButton(2);
                   }}
@@ -177,7 +177,7 @@ storiesOf('Button', module)
                   Two
                 </Button>
                 <Button
-                  clear={this.state.selected === 3}
+                  clear={this.state.selected !== 3}
                   onClick={() => {
                     this.selectButton(3);
                   }}
@@ -185,7 +185,7 @@ storiesOf('Button', module)
                   Three
                 </Button>
                 <Button
-                  clear={this.state.selected === 4}
+                  clear={this.state.selected !== 4}
                   onClick={() => {
                     this.selectButton(4);
                   }}
@@ -193,7 +193,7 @@ storiesOf('Button', module)
                   Four
                 </Button>
                 <Button
-                  clear={this.state.selected === 5}
+                  clear={this.state.selected !== 5}
                   onClick={() => {
                     this.selectButton(5);
                   }}
