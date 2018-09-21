@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
@@ -10,60 +10,168 @@ import Popover from '../Popover';
 import Button from '../../Button';
 import Menu, { MenuTitle, MenuItem } from '../../Menu';
 
-storiesOf('Popover', module).add(
-  'Basic',
-  withInfo({
-    text: doc,
-    propTables: [Popover]
-  })(() => {
-    class PopoverStory extends Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          open: false
+storiesOf('Popover', module)
+  .add(
+    'Basic',
+    withInfo({
+      text: doc,
+      propTables: [Popover]
+    })(() => {
+      class PopoverStory extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            open: false
+          };
+        }
+
+        togglePopover = () => {
+          this.setState({
+            open: !this.state.open
+          });
         };
+
+        closePopover = () => {
+          this.setState({
+            open: false
+          });
+        };
+
+        render() {
+          return (
+            <GuideExample>
+              <Popover
+                targetEl={
+                  <Button onClick={this.togglePopover}>Click Here</Button>
+                }
+                open={this.state.open}
+                onRequestClose={this.closePopover}
+              >
+                <Menu style={{ maxWidth: '280px' }}>
+                  <MenuTitle>Some Options</MenuTitle>
+                  <MenuItem>Option 1 that has a really long text.</MenuItem>
+                  <MenuItem>Option 2</MenuItem>
+                  <MenuItem>Option 3</MenuItem>
+                  <MenuTitle>More Options</MenuTitle>
+                  <MenuItem>Option 4</MenuItem>
+                  <MenuItem>Option 5</MenuItem>
+                </Menu>
+              </Popover>
+            </GuideExample>
+          );
+        }
       }
 
-      togglePopover = () => {
-        this.setState({
-          open: !this.state.open
-        });
+      PopoverStory.propTypes = {
+        isStory: PropTypes.bool
       };
+      return <PopoverStory />;
+    })
+  )
+  .add(
+    'Overflow Container',
+    withInfo({
+      text: doc,
+      propTables: [Popover]
+    })(() => {
+      class PopoverStory extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            open1: false,
+            open2: false,
+            open3: false
+          };
+        }
 
-      closePopover = () => {
-        this.setState({
-          open: false
-        });
-      };
+        togglePopover = openId => {
+          this.setState({
+            [openId]: !this.state[openId]
+          });
+        };
 
-      render() {
-        return (
-          <GuideExample>
-            <Popover
-              targetEl={
-                <Button onClick={this.togglePopover}>Click Here</Button>
-              }
-              open={this.state.open}
-              onRequestClose={this.closePopover}
-            >
-              <Menu style={{ maxWidth: '280px' }}>
-                <MenuTitle>Some Options</MenuTitle>
-                <MenuItem>Option 1 that has a really long text.</MenuItem>
-                <MenuItem>Option 2</MenuItem>
-                <MenuItem>Option 3</MenuItem>
-                <MenuTitle>More Options</MenuTitle>
-                <MenuItem>Option 4</MenuItem>
-                <MenuItem>Option 5</MenuItem>
-              </Menu>
-            </Popover>
-          </GuideExample>
-        );
+        closePopover = openId => {
+          this.setState({
+            [openId]: false
+          });
+        };
+
+        render() {
+          return (
+            <Fragment>
+              <GuideExample style={{ overflow: 'auto' }}>
+                <Popover
+                  targetEl={
+                    <Button onClick={() => this.togglePopover('open1')}>
+                      Click Here
+                    </Button>
+                  }
+                  open={this.state.open1}
+                  onRequestClose={() => this.closePopover('open1')}
+                >
+                  <Menu style={{ maxWidth: '280px' }}>
+                    <MenuTitle>Some Options</MenuTitle>
+                    <MenuItem>Option 1 that has a really long text.</MenuItem>
+                    <MenuItem>Option 2</MenuItem>
+                    <MenuItem>Option 3</MenuItem>
+                    <MenuTitle>More Options</MenuTitle>
+                    <MenuItem>Option 4</MenuItem>
+                    <MenuItem>Option 5</MenuItem>
+                  </Menu>
+                </Popover>
+              </GuideExample>
+              <GuideExample style={{ overflow: 'auto' }} label="positionFixed">
+                <Popover
+                  targetEl={
+                    <Button onClick={() => this.togglePopover('open2')}>
+                      Click Here
+                    </Button>
+                  }
+                  open={this.state.open2}
+                  onRequestClose={() => this.closePopover('open2')}
+                  positionFixed
+                >
+                  <Menu style={{ maxWidth: '280px' }}>
+                    <MenuTitle>Some Options</MenuTitle>
+                    <MenuItem>Option 1 that has a really long text.</MenuItem>
+                    <MenuItem>Option 2</MenuItem>
+                    <MenuItem>Option 3</MenuItem>
+                    <MenuTitle>More Options</MenuTitle>
+                    <MenuItem>Option 4</MenuItem>
+                    <MenuItem>Option 5</MenuItem>
+                  </Menu>
+                </Popover>
+              </GuideExample>
+              <GuideExample style={{ overflow: 'auto' }} label="appendToBody">
+                <Popover
+                  targetEl={
+                    <Button onClick={() => this.togglePopover('open3')}>
+                      Click Here
+                    </Button>
+                  }
+                  open={this.state.open3}
+                  onRequestClose={() => this.closePopover('open3')}
+                  appendToBody
+                >
+                  <Menu style={{ maxWidth: '280px' }}>
+                    <MenuTitle>Some Options</MenuTitle>
+                    <MenuItem>Option 1 that has a really long text.</MenuItem>
+                    <MenuItem>Option 2</MenuItem>
+                    <MenuItem>Option 3</MenuItem>
+                    <MenuTitle>More Options</MenuTitle>
+                    <MenuItem>Option 4</MenuItem>
+                    <MenuItem>Option 5</MenuItem>
+                  </Menu>
+                </Popover>
+              </GuideExample>
+            </Fragment>
+          );
+        }
       }
-    }
 
-    PopoverStory.propTypes = {
-      isStory: PropTypes.bool
-    };
-    return <PopoverStory />;
-  })
-);
+      PopoverStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <PopoverStory />;
+    })
+  );

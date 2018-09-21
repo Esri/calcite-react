@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Downshift from 'downshift';
 import { Manager, Reference, Popper } from 'react-popper';
 
@@ -22,6 +23,7 @@ const Select = ({
   onChange,
   renderValue,
   positionFixed,
+  appendToBody,
   disabled,
   onBlur,
   field,
@@ -114,6 +116,14 @@ const Select = ({
     return isSubmitting || disabled;
   }
 
+  function _getPopper(popper, appendToBody) {
+    if (appendToBody) {
+      return ReactDOM.createPortal(popper, document.body);
+    }
+
+    return popper;
+  }
+
   return (
     <Manager>
       <Downshift
@@ -157,29 +167,43 @@ const Select = ({
                 </FormControlContext.Consumer>
               )}
             </Reference>
-            {isOpen ? (
-              <Popper positionFixed={positionFixed} placement={'bottom-start'}>
-                {({ ref: popperRef, style, placement }) => (
-                  <StyledMultiSelectMenu
-                    ref={popperRef}
-                    style={{ ...style, ...menuStyle }}
-                    fullWidth={fullWidth}
-                    data-placement={placement}
+            {isOpen
+              ? _getPopper(
+                  <Popper
+                    positionFixed={positionFixed}
+                    placement={other.placement}
+                    modifiers={{
+                      preventOverflow: {
+                        enabled: appendToBody || positionFixed ? false : true
+                      },
+                      hide: {
+                        enabled: appendToBody || positionFixed ? false : true
+                      }
+                    }}
                   >
-                    {children.map((child, index) =>
-                      React.cloneElement(child, {
-                        ...getItemProps({
-                          item: child,
-                          active: highlightedIndex === index,
-                          selected: selectedItem.indexOf(child) !== -1
-                        }),
-                        key: index
-                      })
+                    {({ ref: popperRef, style, placement }) => (
+                      <StyledMultiSelectMenu
+                        ref={popperRef}
+                        style={{ ...style, ...menuStyle }}
+                        fullWidth={fullWidth}
+                        data-placement={placement}
+                      >
+                        {children.map((child, index) =>
+                          React.cloneElement(child, {
+                            ...getItemProps({
+                              item: child,
+                              active: highlightedIndex === index,
+                              selected: selectedItem.indexOf(child) !== -1
+                            }),
+                            key: index
+                          })
+                        )}
+                      </StyledMultiSelectMenu>
                     )}
-                  </StyledMultiSelectMenu>
-                )}
-              </Popper>
-            ) : null}
+                  </Popper>,
+                  appendToBody
+                )
+              : null}
           </StyledMultiSelectWrapper>
         )}
       </Downshift>
@@ -196,6 +220,21 @@ Select.propTypes = {
   selectedItem: PropTypes.node,
   /** Value of the selected item */
   selectedValue: PropTypes.node,
+  /** Placement of the popover in relation to the target */
+  placement: PropTypes.oneOf([
+    'top',
+    'right',
+    'bottom',
+    'left',
+    'top-start',
+    'right-start',
+    'bottom-start',
+    'left-start',
+    'top-end',
+    'right-end',
+    'bottom-end',
+    'left-end'
+  ]),
   /** Placeholder text for the input */
   placeholder: PropTypes.string,
   /** Whether or not the select will fill its container's width */
@@ -209,7 +248,8 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
-  placeholder: 'Select...'
+  placeholder: 'Select...',
+  placement: 'bottom-start'
 };
 
 export default Select;

@@ -74,7 +74,19 @@ storiesOf('Search', module)
                   inputValue={this.state.inputValue}
                   selectedItem={this.state.selectedItem}
                   items={this.items}
-                  minimal={true}
+                  minimal
+                  onChange={this.searchChanged}
+                  onUserAction={this.onUserAction}
+                  onRequestClear={this.clearSearch}
+                  menuStyle={{ maxHeight: '400px' }}
+                />
+              </GuideExample>
+              <GuideExample label="appendToBody">
+                <Search
+                  inputValue={this.state.inputValue}
+                  selectedItem={this.state.selectedItem}
+                  items={this.items}
+                  appendToBody
                   onChange={this.searchChanged}
                   onUserAction={this.onUserAction}
                   onRequestClear={this.clearSearch}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
 import { Manager, Reference, Popper } from 'react-popper';
@@ -211,6 +212,14 @@ class Search extends Component {
     }
   };
 
+  _getPopper = (popper, appendToBody) => {
+    if (appendToBody) {
+      return ReactDOM.createPortal(popper, document.body);
+    }
+
+    return popper;
+  };
+
   render() {
     const {
       minimal,
@@ -223,9 +232,13 @@ class Search extends Component {
       placeholder,
       containerStyle,
       menuStyle,
+      appendToBody,
+      positionFixed,
       children,
       ...other
     } = this.props;
+
+    const usePreventOverflow = appendToBody || positionFixed ? false : true;
 
     return (
       <StyledSearchContainer
@@ -267,35 +280,46 @@ class Search extends Component {
                   )}
                 </Reference>
 
-                {isOpen && this.state.itemsToShow ? (
-                  <Popper
-                    positionFixed={this.props.positionFixed}
-                    style={{
-                      ...this.getFullWidthStyle(fullWidth),
-                      ...PopperStyle
-                    }}
-                    placement={'bottom-start'}
-                  >
-                    {({ ref, style, placement, arrowProps }) => (
-                      <StyledSelectMenu
-                        ref={ref}
-                        fullWidth={fullWidth}
+                {isOpen && this.state.itemsToShow
+                  ? this._getPopper(
+                      <Popper
+                        positionFixed={positionFixed}
                         style={{
-                          ...style,
-                          ...menuStyle
+                          ...this.getFullWidthStyle(fullWidth),
+                          ...PopperStyle
                         }}
-                        data-placement={placement}
+                        placement={this.props.placement}
+                        modifiers={{
+                          preventOverflow: {
+                            enabled: usePreventOverflow
+                          },
+                          hide: {
+                            enabled: usePreventOverflow
+                          }
+                        }}
                       >
-                        {this.getMenuItems(
-                          this.state.itemsToShow,
-                          getItemProps,
-                          highlightedIndex,
-                          selectedItem
+                        {({ ref, style, placement, arrowProps }) => (
+                          <StyledSelectMenu
+                            ref={ref}
+                            fullWidth={fullWidth}
+                            style={{
+                              ...style,
+                              ...menuStyle
+                            }}
+                            data-placement={placement}
+                          >
+                            {this.getMenuItems(
+                              this.state.itemsToShow,
+                              getItemProps,
+                              highlightedIndex,
+                              selectedItem
+                            )}
+                          </StyledSelectMenu>
                         )}
-                      </StyledSelectMenu>
-                    )}
-                  </Popper>
-                ) : null}
+                      </Popper>,
+                      appendToBody
+                    )
+                  : null}
               </StyledSearchInputWrapper>
             )}
           </Downshift>
@@ -324,6 +348,21 @@ Search.propTypes = {
   onUserAction: PropTypes.func,
   /** Function called when the user clicks the clear button */
   onRequestClear: PropTypes.func,
+  /** Placement of the popover in relation to the target */
+  placement: PropTypes.oneOf([
+    'top',
+    'right',
+    'bottom',
+    'left',
+    'top-start',
+    'right-start',
+    'bottom-start',
+    'left-start',
+    'top-end',
+    'right-end',
+    'bottom-end',
+    'left-end'
+  ]),
   /** Toggle minimal style on the input */
   minimal: PropTypes.bool,
   /** Whether or not the search and its menu will fill the container's width */
@@ -348,6 +387,7 @@ Search.defaultProps = {
     label: 'label',
     value: 'value'
   },
+  placement: 'bottom-start',
   shortcutTooltip: 'Press  /  to search'
 };
 
