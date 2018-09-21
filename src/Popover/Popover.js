@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import outy from 'outy';
@@ -56,7 +57,18 @@ class Popover extends Component {
     this.props.onRequestClose();
   };
 
+  _getPopper = (popper, appendToBody) => {
+    if (appendToBody) {
+      return ReactDOM.createPortal(popper, document.body);
+    }
+
+    return popper;
+  };
+
   render() {
+    const usePreventOverflow =
+      this.props.appendToBody || this.props.positionFixed ? false : true;
+
     return (
       <Manager>
         <Reference style={{ display: 'inline-block' }}>
@@ -71,28 +83,41 @@ class Popover extends Component {
           )}
         </Reference>
         <Transition in={this.props.open} timeout={0}>
-          {state => (
-            <Popper
-              positionFixed={this.props.positionFixed}
-              placement={this.props.placement}
-            >
-              {({ ref, style, placement }) => (
-                <StyledPopover
-                  ref={ref}
-                  id={`${this._generatedId}Popover`}
-                  style={{
-                    ...style,
-                    ...this.props.style
-                  }}
-                  transitionState={state}
-                  transitionDuration={this.props.transitionDuration}
-                  data-placement={placement}
-                >
-                  {this.props.children}
-                </StyledPopover>
-              )}
-            </Popper>
-          )}
+          {state =>
+            this._getPopper(
+              <Popper
+                positionFixed={this.props.positionFixed}
+                placement={this.props.placement}
+                modifiers={{
+                  preventOverflow: {
+                    enabled: usePreventOverflow
+                  },
+                  hide: {
+                    enabled: usePreventOverflow
+                  }
+                }}
+              >
+                {({ ref, style, placement }) => {
+                  return (
+                    <StyledPopover
+                      ref={ref}
+                      id={`${this._generatedId}Popover`}
+                      style={{
+                        ...style,
+                        ...this.props.style
+                      }}
+                      transitionState={state}
+                      transitionDuration={this.props.transitionDuration}
+                      data-placement={placement}
+                    >
+                      {this.props.children}
+                    </StyledPopover>
+                  );
+                }}
+              </Popper>,
+              this.props.appendToBody
+            )
+          }
         </Transition>
       </Manager>
     );

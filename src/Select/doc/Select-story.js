@@ -51,6 +51,13 @@ storiesOf('Select', module)
             </Select>
           </FormControl>
         </GuideExample>
+        <GuideExample label="appendToBody">
+          <Select appendToBody onChange={action('onChange')}>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </GuideExample>
       </div>
     ))
   )
@@ -181,7 +188,10 @@ storiesOf('Select', module)
                 <p>
                   Every color in calcite can be used as a colored "bar" along
                   the top of a card to provide a bit of visual punch with{' '}
-                  <code>bar="{'{color}'}"</code>
+                  <code>
+                    bar="
+                    {'{color}'}"
+                  </code>
                 </p>
               </CardContent>
             </Card>
