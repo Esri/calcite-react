@@ -120,7 +120,7 @@ const Select = ({
     const value = selectedItem.props.value;
 
     if (setFieldValue) {
-      setTouched({ [name]: true });
+      setTouched({ ...touched, [name]: true });
       setFieldValue(name, value);
     }
 
