@@ -26,7 +26,7 @@ const FileUploader = ({
 
   const handleChange = e => {
     if (setFieldValue) {
-      setTouched({ [name]: true });
+      setTouched({ ...touched, [name]: true });
       setFieldValue(name, e.currentTarget.files);
     }
 

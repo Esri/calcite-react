@@ -25,10 +25,11 @@ const DatePicker = ({
   children,
   ...other
 }) => {
-  let isSubmitting, setFieldValue, setTouched;
+  let touched, isSubmitting, setFieldValue, setTouched;
   if (field) {
     value = field.value;
     name = field.name;
+    touched = form.touched;
     isSubmitting = form.isSubmitting;
     setFieldValue = form.setFieldValue;
     setTouched = form.setTouched;
@@ -50,7 +51,7 @@ const DatePicker = ({
 
   const _onFocusChange = focusedInput => {
     if (setTouched && !focusedInput) {
-      setTouched({ [name]: true });
+      setTouched({ ...touched, [name]: true });
     }
 
     if (onFocusChange) {
