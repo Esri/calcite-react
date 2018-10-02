@@ -36,12 +36,13 @@ const Select = ({
   form,
   ...other
 }) => {
-  let name, touched, errors, isSubmitting, setFieldValue;
+  let name, touched, errors, isSubmitting, setTouched, setFieldValue;
   if (field) {
     name = field.name;
     touched = form.touched;
     errors = form.errors;
     isSubmitting = form.isSubmitting;
+    setTouched = form.setTouched;
     setFieldValue = form.setFieldValue;
   }
 
@@ -117,6 +118,7 @@ const Select = ({
     const value = selectedItem.props.value;
 
     if (setFieldValue) {
+      setTouched({ [name]: true });
       setFieldValue(name, value);
     }
 
