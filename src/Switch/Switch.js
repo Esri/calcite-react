@@ -43,7 +43,7 @@ const Switch = ({
   const handleChange = e => {
     if (setFieldValue) {
       setFieldValue(name, e.target.checked);
-    } else {
+    } else if (onChange) {
       onChange(e);
     }
   };

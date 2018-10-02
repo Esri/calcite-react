@@ -14,7 +14,7 @@ import Popover from '../Popover';
 import Avatar from '../Avatar';
 
 // Third-party components (buttons, icons, etc.)
-import AccountIcon from '../icons/AccountIcon';
+import UserIcon from 'calcite-ui-icons-react/UserIcon';
 
 // JSON
 
@@ -66,7 +66,7 @@ class ArcgisAccount extends Component {
     } else {
       return (
         <Avatar size={size} fontSize={size * 0.7}>
-          <AccountIcon />
+          <UserIcon />
         </Avatar>
       );
     }

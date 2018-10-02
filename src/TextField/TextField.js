@@ -10,6 +10,7 @@ import {
 } from './TextField-styled';
 
 import Button from '../Button';
+import Select from '../Select';
 
 import { FormControlContext } from '../Form/FormControl';
 
@@ -22,7 +23,9 @@ const TextField = ({
   onChange,
   onBlur,
   leftAdornment,
+  leftAdornmentNoWrap,
   rightAdornment,
+  rightAdornmentNoWrap,
   forwardedRef,
   name,
   disabled,
@@ -38,8 +41,13 @@ const TextField = ({
     isSubmitting = form.isSubmitting;
   }
 
-  const getAdornment = function(adornment) {
-    if (adornment && adornment.type === Button) {
+  const getAdornment = function(adornment, adornmentNoWrap) {
+    if (
+      adornment &&
+      (adornment.type === Button ||
+        adornment.type === Select ||
+        adornmentNoWrap)
+    ) {
       return React.cloneElement(adornment, {
         ...adornment.props,
         minimal,
@@ -132,7 +140,7 @@ const TextField = ({
     <FormControlContext.Consumer>
       {({ formControlContext }) => (
         <StyledTextFieldAdornmentWrapper>
-          {getAdornment(leftAdornment)}
+          {getAdornment(leftAdornment, leftAdornmentNoWrap)}
           <TextFieldArea
             ref={forwardedRef}
             name={name}
@@ -140,6 +148,8 @@ const TextField = ({
             type={type}
             value={getValue()}
             minimal={minimal}
+            hasAdornmentLeft={leftAdornment !== undefined}
+            hasAdornmentRight={rightAdornment !== undefined}
             id={id || formControlContext._generatedId}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -148,7 +158,7 @@ const TextField = ({
             disabled={isDisabled()}
             {...other}
           />
-          {getAdornment(rightAdornment)}
+          {getAdornment(rightAdornment, rightAdornmentNoWrap)}
         </StyledTextFieldAdornmentWrapper>
       )}
     </FormControlContext.Consumer>

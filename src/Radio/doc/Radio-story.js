@@ -38,7 +38,7 @@ storiesOf('Radio', module)
             <FormControl>
               <Fieldset name="storyRadioGroup2" horizontal>
                 <Legend>Horizontal Radio List:</Legend>
-                <Radio checked={true}>Radio 1</Radio>
+                <Radio defaultChecked={true}>Radio 1</Radio>
                 <Radio>Radio 2</Radio>
               </Fieldset>
             </FormControl>

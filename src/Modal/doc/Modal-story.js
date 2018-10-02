@@ -22,6 +22,7 @@ storiesOf('Modal', module)
           open={true}
           parentSelector={() => document.getElementById('modalGuideExample')}
           overlayStyle={{ position: 'absolute' }}
+          appElement={document.body}
         >
           <CalciteH1>Modal!</CalciteH1>
           <CalciteP>
@@ -71,7 +72,11 @@ storiesOf('Modal', module)
           return (
             <GuideExample>
               <Button onClick={this.openModal}>Open Modal</Button>
-              <Modal open={this.state.open} onRequestClose={this.closeModal}>
+              <Modal
+                open={this.state.open}
+                onRequestClose={this.closeModal}
+                appElement={document.body}
+              >
                 <CalciteH1>Modal!</CalciteH1>
                 <CalciteP>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import { Manager, Reference, Popper } from 'react-popper';
@@ -29,7 +30,18 @@ class Tooltip extends Component {
     });
   };
 
+  _getPopper = (popper, appendToBody) => {
+    if (appendToBody) {
+      return ReactDOM.createPortal(popper, document.body);
+    }
+
+    return popper;
+  };
+
   render() {
+    const usePreventOverflow =
+      this.props.appendToBody || this.props.positionFixed ? false : true;
+
     return (
       <Manager>
         <Reference style={{ display: 'inline-block' }}>
@@ -44,32 +56,46 @@ class Tooltip extends Component {
           )}
         </Reference>
         <Transition in={this.state.open} timeout={this.props.enterDelay}>
-          {state => (
-            <Popper
-              positionFixed={this.props.positionFixed}
-              placement={this.props.placement}
-            >
-              {({ ref, style, placement, arrowProps }) => (
-                <StyledTooltip
-                  ref={ref}
-                  style={{
-                    ...style,
-                    ...this.props.style
-                  }}
-                  transitionState={state}
-                  transitionDuration={this.props.transitionDuration}
-                  data-placement={placement}
-                >
-                  {this.props.title}
-                  <StyledTooltipArrow
-                    ref={arrowProps.ref}
+          {state =>
+            this._getPopper(
+              <Popper
+                positionFixed={this.props.positionFixed}
+                placement={this.props.placement}
+                modifiers={{
+                  preventOverflow: {
+                    enabled: usePreventOverflow
+                  },
+                  hide: {
+                    enabled: usePreventOverflow
+                  }
+                }}
+              >
+                {({ ref, style, placement, arrowProps }) => (
+                  <StyledTooltip
+                    ref={ref}
+                    style={{
+                      ...style,
+                      ...this.props.style
+                    }}
+                    transitionState={state}
+                    transitionDuration={this.props.transitionDuration}
                     data-placement={placement}
-                    style={{ ...arrowProps.style, ...this.props.arrowStyle }}
-                  />
-                </StyledTooltip>
-              )}
-            </Popper>
-          )}
+                  >
+                    {this.props.title}
+                    <StyledTooltipArrow
+                      ref={arrowProps.ref}
+                      data-placement={placement}
+                      style={{
+                        ...arrowProps.style,
+                        ...this.props.arrowStyle
+                      }}
+                    />
+                  </StyledTooltip>
+                )}
+              </Popper>,
+              this.props.appendToBody
+            )
+          }
         </Transition>
       </Manager>
     );

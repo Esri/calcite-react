@@ -234,23 +234,20 @@ const StyledButton = styled.button`
   ${props =>
     props.grouped &&
     css`
-      margin-left: 1px;
+      margin-left: -1px;
 
       &:first-of-type {
         margin-left: 0;
       }
 
       ${props =>
-        props.clear &&
+        !props.isToggle &&
+        !props.clear &&
         css`
-          box-shadow: 1px 0 0 currentColor, -1px 0 0 currentColor;
+          margin-left: 1px;
 
           &:first-of-type {
-            box-shadow: 1px 0 0 currentColor;
-          }
-
-          &:last-of-type {
-            box-shadow: -1px 0 0 currentColor;
+            margin-left: 0;
           }
         `};
     `};

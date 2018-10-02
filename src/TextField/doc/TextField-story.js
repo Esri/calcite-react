@@ -14,8 +14,10 @@ import Form, {
   FormControlLabel
 } from '../../Form';
 import Button from '../../Button';
+import Select from '../../Select';
+import { MenuItem } from '../../Menu';
 
-import AccountIcon from 'mdi-react/AccountIcon';
+import UserIcon from 'calcite-ui-icons-react/UserIcon';
 
 storiesOf('TextField', module)
   .add(
@@ -63,7 +65,7 @@ storiesOf('TextField', module)
             <FormControl>
               <TextField
                 defaultValue="Dr. Leonard McCoy"
-                leftAdornment={<AccountIcon />}
+                leftAdornment={<UserIcon size={16} />}
               />
             </FormControl>
             <FormControl success>
@@ -71,6 +73,18 @@ storiesOf('TextField', module)
                 defaultValue="500.00"
                 leftAdornment="$"
                 rightAdornment={<Button>Submit</Button>}
+              />
+            </FormControl>
+            <FormControl>
+              <TextField
+                defaultValue="500.00"
+                rightAdornment={
+                  <Select placement="bottom-end" selectedValue="usd">
+                    <MenuItem value="usd">USD</MenuItem>
+                    <MenuItem value="eur">EUR</MenuItem>
+                    <MenuItem value="jpy">JPY</MenuItem>
+                  </Select>
+                }
               />
             </FormControl>
           </Form>
@@ -174,7 +188,7 @@ storiesOf('TextField', module)
                     component={TextField}
                     type="text"
                     name="name"
-                    leftAdornment={<AccountIcon />}
+                    leftAdornment={<UserIcon size={16} />}
                     onChange={handleNameChanged}
                   />
                   <FormHelperText>

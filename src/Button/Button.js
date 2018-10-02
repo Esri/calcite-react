@@ -45,6 +45,7 @@ const Button = ({
         <StyledButton
           iconButton={iconButton}
           grouped={buttonGroupContext.grouped}
+          isToggle={buttonGroupContext.isToggle}
           as={href ? 'a' : 'button'}
           href={href}
           ref={forwardedRef}

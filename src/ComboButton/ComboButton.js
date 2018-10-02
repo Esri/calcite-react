@@ -9,7 +9,7 @@ import {
 } from './ComboButton-styled';
 
 import Popover from '../Popover';
-import ChevronDownIcon from '../icons/ChevronDownIcon';
+import CaretDownIcon from 'calcite-ui-icons-react/CaretDownIcon';
 
 class ComboButton extends Component {
   constructor(props) {
@@ -67,10 +67,10 @@ class ComboButton extends Component {
           open={this.state.open}
           onRequestClose={this.closePopover}
           placement="bottom-end"
-          targetContainerStyles={{ display: 'block', height: '100%' }}
+          targetContainerStyles={{ display: 'block' }}
           targetEl={
             <StyledComboButtonDropdown onClick={this.togglePopover} {...other}>
-              <ChevronDownIcon />
+              <CaretDownIcon filled size={14} />
             </StyledComboButtonDropdown>
           }
         >

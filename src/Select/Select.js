@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Downshift from 'downshift';
 import { Manager, Reference, Popper } from 'react-popper';
 import matchSorter from 'match-sorter';
@@ -30,6 +31,7 @@ const Select = ({
   label,
   onChange,
   positionFixed,
+  appendToBody,
   disabled,
   onBlur,
   field,
@@ -212,6 +214,14 @@ const Select = ({
     return isSubmitting || disabled;
   }
 
+  function _getPopper(popper, appendToBody) {
+    if (appendToBody) {
+      return ReactDOM.createPortal(popper, document.body);
+    }
+
+    return popper;
+  }
+
   return (
     <Manager style={{ ...PopperManagerStyles, ...wrapperStyle }}>
       <Downshift
@@ -246,31 +256,45 @@ const Select = ({
                 });
               }}
             </Reference>
-            {isOpen ? (
-              <Popper positionFixed={positionFixed} placement={other.placement}>
-                {({ ref, style, placement }) => {
-                  return (
-                    <StyledSelectMenu
-                      ref={ref}
-                      style={{
-                        ...style,
-                        ...getFullWidthStyle(),
-                        ...menuStyle
-                      }}
-                      data-placement={placement}
-                      fullWidth={fullWidth}
-                    >
-                      {getMenuItems(
-                        inputValue,
-                        getItemProps,
-                        highlightedIndex,
-                        selectedItem
-                      )}
-                    </StyledSelectMenu>
-                  );
-                }}
-              </Popper>
-            ) : null}
+            {isOpen
+              ? _getPopper(
+                  <Popper
+                    positionFixed={positionFixed}
+                    placement={other.placement}
+                    modifiers={{
+                      preventOverflow: {
+                        enabled: appendToBody || positionFixed ? false : true
+                      },
+                      hide: {
+                        enabled: appendToBody || positionFixed ? false : true
+                      }
+                    }}
+                  >
+                    {({ ref, style, placement }) => {
+                      return (
+                        <StyledSelectMenu
+                          ref={ref}
+                          style={{
+                            ...style,
+                            ...getFullWidthStyle(),
+                            ...menuStyle
+                          }}
+                          data-placement={placement}
+                          fullWidth={fullWidth}
+                        >
+                          {getMenuItems(
+                            inputValue,
+                            getItemProps,
+                            highlightedIndex,
+                            selectedItem
+                          )}
+                        </StyledSelectMenu>
+                      );
+                    }}
+                  </Popper>,
+                  appendToBody
+                )
+              : null}
           </StyledSelectWrapper>
         )}
       </Downshift>

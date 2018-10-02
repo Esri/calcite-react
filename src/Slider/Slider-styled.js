@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
 
 import CalciteTheme from '../theme/CalciteTheme';
@@ -8,15 +8,20 @@ import { CalciteInput } from '../utils/commonElements';
 
 const rangeProps = {
   rangeBorder: '1px solid transparent',
-  trackBgcolor: CalciteTheme.palette.lighterGray,
+  trackBgColor: CalciteTheme.palette.lighterGray,
+  trackErrorBgColor: CalciteTheme.palette.lightRed,
   trackHeight: '2px',
   trackHoverBgcolor: CalciteTheme.palette.lightGray,
+  trackErrorHoverBgcolor: CalciteTheme.palette.darkRed200,
   trackActiveBgcolor: CalciteTheme.palette.gray,
+  trackErrorActiveBgcolor: CalciteTheme.palette.darkRed,
   thumbHeight: '18px',
   thumbWidth: '18px',
   thumbBorder: '2px solid',
   thumbBorderColor: CalciteTheme.palette.gray,
+  thumbErrorBorderColor: CalciteTheme.palette.darkRed200,
   thumbBorderHoverColor: CalciteTheme.palette.Brand_Blue_200,
+  thumbErrorBorderHoverColor: CalciteTheme.palette.darkRed200,
   thumbShadowHover: `0 0 4px 1px ${transparentize(
     0.1,
     CalciteTheme.palette.lighterGray
@@ -27,7 +32,9 @@ const rangeProps = {
   )}`,
   thumbBgDefault: CalciteTheme.palette.white,
   thumbBgHover: CalciteTheme.palette.Brand_Blue_200,
-  thumbBgActive: EsriColors.Calcite_Blue_a250
+  thumbErrorBgHover: CalciteTheme.palette.darkRed200,
+  thumbBgActive: EsriColors.Calcite_Blue_a250,
+  thumbErrorBgActive: CalciteTheme.palette.darkRed
 };
 
 const rangeStyle = () => {
@@ -42,75 +49,113 @@ const rangeStyle = () => {
   `;
 };
 
-const trackStyle = () => {
+const trackStyle = error => {
   return `
     width: 100%;
     height: ${rangeProps.trackHeight};
     border-radius: 0;
     z-index: 2;
-    background-color: ${rangeProps.trackBgcolor};
+    background-color: ${
+      error ? rangeProps.trackErrorBgColor : rangeProps.trackBgColor
+    };
   `;
 };
 
-const thumbStyle = () => {
+const thumbStyle = error => {
   return `
-    height: ${rangeProps.thumbHeight};
-    width: ${rangeProps.thumbWidth};
-    border-radius: 50px;
-    margin-top: -8px;
-    cursor: pointer;
-    background-color: ${rangeProps.thumbBgDefault};
-    border: ${rangeProps.thumbBorder};
-    border-color: ${rangeProps.thumbBorderColor};
-    z-index: 3;
-    -webkit-appearance: none;
+  height: ${rangeProps.thumbHeight};
+  width: ${rangeProps.thumbWidth};
+  border-radius: 50px;
+  margin-top: -8px;
+  cursor: pointer;
+  background-color: ${rangeProps.thumbBgDefault};
+  border: ${rangeProps.thumbBorder};
+  border-color: ${
+    error ? rangeProps.thumbErrorBorderColor : rangeProps.thumbBorderColor
+  };
+  z-index: 3;
+  -webkit-appearance: none;
   `;
 };
 
-const thumbHoverStyle = () => {
+const thumbHoverStyle = error => {
   return `
-    background-color: ${rangeProps.thumbBgHover};
-    border-color: ${rangeProps.thumbBorderHoverColor};
+    background-color: ${
+      error ? rangeProps.thumbErrorBgHover : rangeProps.thumbBgHover
+    };
+    border-color: ${
+      error
+        ? rangeProps.thumbErrorBorderHoverColor
+        : rangeProps.thumbBorderHoverColor
+    };
     box-shadow: ${rangeProps.thumbShadowHover};
   `;
 };
 
-const thumbFocusStyle = () => {
+const thumbFocusStyle = error => {
   return `
-    background-color: ${rangeProps.thumbBgActive};
-    border-color: ${rangeProps.thumbBorderHoverColor};
+    background-color: ${
+      error ? rangeProps.thumbErrorBgActive : rangeProps.thumbBgActive
+    };
+    border-color: ${
+      error
+        ? rangeProps.thumbErrorBorderHoverColor
+        : rangeProps.thumbBorderHoverColor
+    };
     box-shadow: ${rangeProps.thumbShadowActive};
   `;
 };
 
-const rangeHoverThumbStyle = () => {
+const rangeHoverThumbStyle = error => {
   return `
     background-color: ${rangeProps.thumbBgDefault};
-    border-color: ${rangeProps.thumbBorderHoverColor};
+    border-color: ${
+      error
+        ? rangeProps.thumbErrorBorderHoverColor
+        : rangeProps.thumbBorderHoverColor
+    };
     box-shadow: ${rangeProps.thumbShadowHover};
   `;
 };
 
-const rangeFocusThumbStyle = () => {
+const rangeFocusThumbStyle = error => {
   return `
-    background-color: ${rangeProps.thumbBgHover};
-    border-color: ${rangeProps.thumbBorderHoverColor};
+    background-color: ${
+      error ? rangeProps.thumbErrorBgHover : rangeProps.thumbBgHover
+    };
+    border-color: ${
+      error
+        ? rangeProps.thumbErrorBorderHoverColor
+        : rangeProps.thumbBorderHoverColor
+    };
     outline: none;
     box-shadow: ${rangeProps.thumbShadowActive};
   `;
 };
 
-const rangeFocusThumbHoverStyle = () => {
+const rangeFocusThumbHoverStyle = error => {
   return `
-    background-color: ${rangeProps.thumbBgActive};
-    border-color: ${rangeProps.thumbBorderHoverColor};
+    background-color: ${
+      error ? rangeProps.thumbErrorBgActive : rangeProps.thumbBgActive
+    };
+    border-color: ${
+      error
+        ? rangeProps.thumbErrorBorderHoverColor
+        : rangeProps.thumbBorderHoverColor
+    };
   `;
 };
 
-const thumbFocusHoverStyle = () => {
+const thumbFocusHoverStyle = error => {
   return `
-    background-color: ${rangeProps.thumbBgActive};
-    border-color: ${rangeProps.thumbBorderHoverColor};
+    background-color: ${
+      error ? rangeProps.thumbErrorBgActive : rangeProps.thumbBgActive
+    };
+    border-color: ${
+      error
+        ? rangeProps.thumbErrorBorderHoverColor
+        : rangeProps.thumbBorderHoverColor
+    };
     box-shadow: ${rangeProps.thumbShadowActive};
   `;
 };
@@ -119,30 +164,55 @@ const StyledSlider = styled(CalciteInput)`
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   ${rangeStyle()};
 
+  ${props =>
+    (props.error || props.success) &&
+    css`
+      border-color: transparent;
+      padding-right: 0;
+      background-image: none;
+
+      &:focus {
+        border-color: transparent;
+        box-shadow: none;
+      }
+    `};
+
   &:hover {
     // webkit
     &::-webkit-slider-runnable-track {
-      background-color: ${rangeProps.trackHoverBgcolor};
+      background-color: ${props =>
+        props.error
+          ? rangeProps.trackErrorHoverBgcolor
+          : rangeProps.trackHoverBgcolor};
     }
     &::-webkit-slider-thumb {
-      ${rangeHoverThumbStyle()};
+      ${props => rangeHoverThumbStyle(props.error)};
     }
     // ff
     &::-moz-range-track {
-      background-color: ${rangeProps.trackHoverBgcolor};
+      background-color: ${props =>
+        props.error
+          ? rangeProps.trackErrorHoverBgcolor
+          : rangeProps.trackHoverBgcolor};
     }
     &::-moz-range-thumb {
-      ${rangeHoverThumbStyle()};
+      ${props => rangeHoverThumbStyle(props.error)};
     }
     // ie
     &::-ms-fill-upper {
-      background-color: ${rangeProps.trackHoverBgcolor};
+      background-color: ${props =>
+        props.error
+          ? rangeProps.trackErrorHoverBgcolor
+          : rangeProps.trackHoverBgcolor};
     }
     &::-ms-fill-lower {
-      background-color: ${rangeProps.trackHoverBgcolor};
+      background-color: ${props =>
+        props.error
+          ? rangeProps.trackErrorHoverBgcolor
+          : rangeProps.trackHoverBgcolor};
     }
     &::-ms-thumb {
-      ${rangeHoverThumbStyle()};
+      ${props => rangeHoverThumbStyle(props.error)};
     }
   }
 
@@ -153,54 +223,66 @@ const StyledSlider = styled(CalciteInput)`
 
     // webkit
     &::-webkit-slider-runnable-track {
-      background-color: ${rangeProps.trackHoverBgcolor};
+      background-color: ${props =>
+        props.error
+          ? rangeProps.trackErrorHoverBgcolor
+          : rangeProps.trackHoverBgcolor};
     }
     &::-webkit-slider-thumb {
-      ${rangeFocusThumbStyle()};
+      ${props => rangeFocusThumbStyle(props.error)};
     }
     &::-webkit-slider-thumb:hover {
-      ${rangeFocusThumbHoverStyle()};
+      ${props => rangeFocusThumbHoverStyle(props.error)};
     }
     // ff
     &::-moz-range-track {
-      background-color: ${rangeProps.trackHoverBgcolor};
+      background-color: ${props =>
+        props.error
+          ? rangeProps.trackErrorHoverBgcolor
+          : rangeProps.trackHoverBgcolor};
     }
     &::-moz-range-thumb {
-      ${rangeFocusThumbStyle()};
+      ${props => rangeFocusThumbStyle(props.error)};
     }
     &::-moz-range-thumb:hover {
-      ${rangeFocusThumbHoverStyle()};
+      ${props => rangeFocusThumbHoverStyle(props.error)};
     }
     // ie
     &::-ms-fill-upper {
-      background-color: ${rangeProps.trackHoverBgcolor};
+      background-color: ${props =>
+        props.error
+          ? rangeProps.trackErrorHoverBgcolor
+          : rangeProps.trackHoverBgcolor};
     }
     &::-ms-fill-lower {
-      background-color: ${rangeProps.trackHoverBgcolor};
+      background-color: ${props =>
+        props.error
+          ? rangeProps.trackErrorHoverBgcolor
+          : rangeProps.trackHoverBgcolor};
     }
     &::-ms-thumb {
-      ${rangeFocusThumbStyle()};
+      ${props => rangeFocusThumbStyle(props.error)};
     }
     &::-ms-thumb:hover {
-      ${rangeFocusThumbHoverStyle()};
+      ${props => rangeFocusThumbHoverStyle(props.error)};
     }
   }
 
   //webkit styles
   &::-webkit-slider-runnable-track {
     background-color: red;
-    ${trackStyle()};
+    ${props => trackStyle(props.error)};
   }
   &::-webkit-slider-thumb {
-    ${thumbStyle()};
+    ${props => thumbStyle(props.error)};
     &:hover {
-      ${thumbHoverStyle()};
+      ${props => thumbHoverStyle(props.error)};
     }
     &:focus,
     &:active {
-      ${thumbFocusStyle()};
+      ${props => thumbFocusStyle(props.error)};
       &:hover {
-        ${thumbFocusHoverStyle()};
+        ${props => thumbFocusHoverStyle(props.error)};
       }
     }
   }
@@ -215,20 +297,20 @@ const StyledSlider = styled(CalciteInput)`
 
   // ff styles
   &::-moz-range-track {
-    ${trackStyle()};
+    ${props => trackStyle(props.error)};
   }
   &::-moz-range-thumb {
-    ${trackStyle()};
+    ${props => trackStyle(props.error)};
     height: 14px;
     width: 14px;
     &:hover {
-      ${thumbHoverStyle()};
+      ${props => thumbHoverStyle(props.error)};
     }
     &:focus,
     &:active {
-      ${thumbFocusStyle()};
+      ${props => thumbFocusStyle(props.error)};
       &:hover {
-        ${thumbFocusHoverStyle()};
+        ${props => thumbFocusHoverStyle(props.error)};
       }
     }
   }
@@ -239,25 +321,25 @@ const StyledSlider = styled(CalciteInput)`
     background-color: ${rangeProps.trackBgcolor};
   }
   &::-ms-track {
-    ${trackStyle()};
+    ${props => trackStyle(props.error)};
     height: ${rangeProps.trackHeight};
     border: 0px solid transparent;
     color: transparent;
   }
 
   &::-ms-thumb {
-    ${thumbStyle()};
+    ${props => thumbStyle(props.error)};
     height: 14px;
     width: 14px;
     margin-top: 0px;
     &:hover {
-      ${thumbHoverStyle()};
+      ${props => thumbHoverStyle(props.error)};
     }
     &:focus,
     &:active {
-      ${thumbFocusStyle()};
+      ${props => thumbFocusStyle(props.error)};
       &:hover {
-        ${thumbFocusHoverStyle()};
+        ${props => thumbFocusHoverStyle(props.error)};
       }
     }
   }
