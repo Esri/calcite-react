@@ -32,6 +32,13 @@ storiesOf('Select', module)
             <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={40}>Fourty</MenuItem>
+            <MenuItem value={50}>Fifty</MenuItem>
+            <MenuItem value={60}>Sixty</MenuItem>
+            <MenuItem value={70}>Seventy</MenuItem>
+            <MenuItem value={80}>Eighty</MenuItem>
+            <MenuItem value={90}>Ninety</MenuItem>
+            <MenuItem value={100}>One Hundred</MenuItem>
           </Select>
         </GuideExample>
         <GuideExample label="fullWidth">
@@ -39,6 +46,13 @@ storiesOf('Select', module)
             <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={40}>Fourty</MenuItem>
+            <MenuItem value={50}>Fifty</MenuItem>
+            <MenuItem value={60}>Sixty</MenuItem>
+            <MenuItem value={70}>Seventy</MenuItem>
+            <MenuItem value={80}>Eighty</MenuItem>
+            <MenuItem value={90}>Ninety</MenuItem>
+            <MenuItem value={100}>One Hundred</MenuItem>
           </Select>
         </GuideExample>
         <GuideExample label="FormControlLabel">
@@ -48,6 +62,13 @@ storiesOf('Select', module)
               <MenuItem value={10}>Ten</MenuItem>
               <MenuItem value={20}>Twenty</MenuItem>
               <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={40}>Fourty</MenuItem>
+              <MenuItem value={50}>Fifty</MenuItem>
+              <MenuItem value={60}>Sixty</MenuItem>
+              <MenuItem value={70}>Seventy</MenuItem>
+              <MenuItem value={80}>Eighty</MenuItem>
+              <MenuItem value={90}>Ninety</MenuItem>
+              <MenuItem value={100}>One Hundred</MenuItem>
             </Select>
           </FormControl>
         </GuideExample>
@@ -56,6 +77,30 @@ storiesOf('Select', module)
             <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={40}>Fourty</MenuItem>
+            <MenuItem value={50}>Fifty</MenuItem>
+            <MenuItem value={60}>Sixty</MenuItem>
+            <MenuItem value={70}>Seventy</MenuItem>
+            <MenuItem value={80}>Eighty</MenuItem>
+            <MenuItem value={90}>Ninety</MenuItem>
+            <MenuItem value={100}>One Hundred</MenuItem>
+          </Select>
+        </GuideExample>
+        <GuideExample label="menuStyle={{maxHeight: 'none'}}">
+          <Select
+            menuStyle={{ maxHeight: 'none' }}
+            onChange={action('onChange')}
+          >
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={40}>Fourty</MenuItem>
+            <MenuItem value={50}>Fifty</MenuItem>
+            <MenuItem value={60}>Sixty</MenuItem>
+            <MenuItem value={70}>Seventy</MenuItem>
+            <MenuItem value={80}>Eighty</MenuItem>
+            <MenuItem value={90}>Ninety</MenuItem>
+            <MenuItem value={100}>One Hundred</MenuItem>
           </Select>
         </GuideExample>
       </div>
@@ -94,6 +139,13 @@ storiesOf('Select', module)
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={40}>Fourty</MenuItem>
+                  <MenuItem value={50}>Fifty</MenuItem>
+                  <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
                 </Select>
               </GuideExample>
               <GuideExample label="selectedItem={this.state.selectedItem}">
@@ -104,6 +156,13 @@ storiesOf('Select', module)
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={40}>Fourty</MenuItem>
+                  <MenuItem value={50}>Fifty</MenuItem>
+                  <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
                 </Select>
               </GuideExample>
             </div>
@@ -209,6 +268,13 @@ storiesOf('Select', module)
             <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={40}>Fourty</MenuItem>
+            <MenuItem value={50}>Fifty</MenuItem>
+            <MenuItem value={60}>Sixty</MenuItem>
+            <MenuItem value={70}>Seventy</MenuItem>
+            <MenuItem value={80}>Eighty</MenuItem>
+            <MenuItem value={90}>Ninety</MenuItem>
+            <MenuItem value={100}>One Hundred</MenuItem>
           </Select>
         </GuideExample>
       </div>

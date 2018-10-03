@@ -19,6 +19,7 @@ const StyledFormControl = styled.div`
   position: relative;
   display: inline-flex;
   flex-direction: column;
+  align-items: flex-start;
   margin: 0 ${props => unitCalc(props.theme.baseline, 4, '/')}
     ${props => unitCalc(props.theme.baseline, 1.25, '*')}
     ${props => unitCalc(props.theme.baseline, 4, '/')};
@@ -28,6 +29,13 @@ const StyledFormControl = styled.div`
     css`
       flex-direction: row;
       align-items: baseline;
+      margin: 0 ${props => unitCalc(props.theme.baseline, 4, '/')}
+        ${props => unitCalc(props.theme.baseline, 2, '/')}
+        ${props => unitCalc(props.theme.baseline, 4, '/')};
+
+      ${StyledFormHelperText} {
+        margin-left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+      }
     `};
 
   ${props =>

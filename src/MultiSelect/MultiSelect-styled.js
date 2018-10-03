@@ -16,8 +16,16 @@ const StyledMultiSelectButton = styled(CalciteSelect)`
 `;
 
 const StyledMultiSelectMenu = styled(Menu)`
+  max-height: 300px;
   transition: opacity ${transition()},
   z-index: 2000;
+  display: none;
+
+  ${props =>
+    props.isOpen &&
+    css`
+      display: block;
+    `};
 
   ${props =>
     props.fullWidth &&
