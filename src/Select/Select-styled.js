@@ -5,6 +5,12 @@ import { transition } from '../utils/helpers';
 
 const StyledSelectWrapper = styled.div`
   position: relative;
+
+  ${props =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+    `};
 `;
 
 const StyledSelectInput = styled(CalciteSelect)`
@@ -21,8 +27,16 @@ const StyledSelectButton = styled(CalciteSelect)`
 `;
 
 const StyledSelectMenu = styled(Menu)`
+  max-height: 300px;
+  display: none;
   transition: opacity ${transition()};
   z-index: 2000;
+
+  ${props =>
+    props.isOpen &&
+    css`
+      display: block;
+    `};
 
   ${props =>
     props.fullWidth &&

@@ -11,6 +11,7 @@ import {
 } from './MultiSelect-styled';
 
 import { FormControlContext } from '../Form/FormControl';
+import { PopoverContext } from '../Popover/Popover';
 
 const Select = ({
   children,
@@ -18,6 +19,7 @@ const Select = ({
   placeholder,
   wrapperStyle,
   menuStyle,
+  id,
   fullWidth,
   minimal,
   onChange,
@@ -28,6 +30,7 @@ const Select = ({
   onBlur,
   field,
   form,
+  closeOnSelect,
   ...other
 }) => {
   let name, touched, errors, isSubmitting, setFieldValue;
@@ -116,12 +119,32 @@ const Select = ({
     return isSubmitting || disabled;
   }
 
-  function _getPopper(popper, appendToBody) {
-    if (appendToBody) {
-      return ReactDOM.createPortal(popper, document.body);
+  function _getPopper(popper, isOpen, isInPopover, appendToBody) {
+    if (isOpen || isInPopover) {
+      if (appendToBody) {
+        return ReactDOM.createPortal(popper, document.body);
+      }
+
+      return popper;
+    }
+  }
+
+  function _stateReducer(state, changes) {
+    if (closeOnSelect) {
+      return changes;
     }
 
-    return popper;
+    switch (changes.type) {
+      case Downshift.stateChangeTypes.keyDownEnter:
+      case Downshift.stateChangeTypes.clickItem:
+        return {
+          ...changes,
+          isOpen: state.isOpen,
+          highlightedIndex: state.highlightedIndex
+        };
+      default:
+        return changes;
+    }
   }
 
   return (
@@ -130,6 +153,7 @@ const Select = ({
         itemToString={itemToString}
         onChange={downshiftOnChange}
         onBlur={handleBlur}
+        stateReducer={_stateReducer}
         selectedItem={_getItemsFromValues(getSelectedValues())}
       >
         {({
@@ -151,14 +175,16 @@ const Select = ({
                   {({ formControlContext }) => (
                     <StyledMultiSelectButton
                       ref={ref}
-                      {...getToggleButtonProps()}
-                      {...getInputProps()}
-                      fullWidth={fullWidth}
-                      minimal={minimal}
-                      as="button"
                       success={isSuccess(formControlContext)}
                       error={isError(formControlContext)}
                       disabled={isDisabled()}
+                      as="button"
+                      {...getToggleButtonProps()}
+                      {...getInputProps({
+                        id: id || formControlContext._generatedId,
+                        fullWidth: fullWidth,
+                        minimal: minimal
+                      })}
                       {...other}
                     >
                       {downshiftRenderValue(selectedItem)}
@@ -167,8 +193,9 @@ const Select = ({
                 </FormControlContext.Consumer>
               )}
             </Reference>
-            {isOpen
-              ? _getPopper(
+            <PopoverContext.Consumer>
+              {({ popoverContext }) => {
+                return _getPopper(
                   <Popper
                     positionFixed={positionFixed}
                     placement={other.placement}
@@ -187,6 +214,7 @@ const Select = ({
                         style={{ ...style, ...menuStyle }}
                         fullWidth={fullWidth}
                         data-placement={placement}
+                        isOpen={isOpen}
                       >
                         {children.map((child, index) =>
                           React.cloneElement(child, {
@@ -201,9 +229,12 @@ const Select = ({
                       </StyledMultiSelectMenu>
                     )}
                   </Popper>,
+                  isOpen,
+                  popoverContext.isInPopover,
                   appendToBody
-                )
-              : null}
+                );
+              }}
+            </PopoverContext.Consumer>
           </StyledMultiSelectWrapper>
         )}
       </Downshift>
@@ -244,12 +275,15 @@ Select.propTypes = {
   /** Style prop applied to the menu wrapper */
   menuStyle: PropTypes.object,
   /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
-  positionFixed: PropTypes.bool
+  positionFixed: PropTypes.bool,
+  /** Whether or not to close the menu on each selection */
+  closeOnSelect: PropTypes.bool
 };
 
 Select.defaultProps = {
   placeholder: 'Select...',
-  placement: 'bottom-start'
+  placement: 'bottom-start',
+  closeOnSelect: true
 };
 
 export default Select;

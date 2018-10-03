@@ -14,6 +14,7 @@ import {
 } from './Select-styled';
 
 import { FormControlContext } from '../Form/FormControl';
+import { PopoverContext } from '../Popover/Popover';
 
 const Select = ({
   children,
@@ -214,12 +215,14 @@ const Select = ({
     return isSubmitting || disabled;
   }
 
-  function _getPopper(popper, appendToBody) {
-    if (appendToBody) {
-      return ReactDOM.createPortal(popper, document.body);
-    }
+  function _getPopper(popper, isOpen, isInPopover, appendToBody) {
+    if (isOpen || isInPopover) {
+      if (appendToBody) {
+        return ReactDOM.createPortal(popper, document.body);
+      }
 
-    return popper;
+      return popper;
+    }
   }
 
   return (
@@ -241,6 +244,7 @@ const Select = ({
           inputValue
         }) => (
           <StyledSelectWrapper
+            fullWidth={fullWidth}
             {...getRootProps({}, { suppressRefError: true })}
           >
             <Reference style={{ display: 'inline-block' }}>
@@ -256,8 +260,9 @@ const Select = ({
                 });
               }}
             </Reference>
-            {isOpen
-              ? _getPopper(
+            <PopoverContext.Consumer>
+              {({ popoverContext }) => {
+                return _getPopper(
                   <Popper
                     positionFixed={positionFixed}
                     placement={other.placement}
@@ -279,6 +284,7 @@ const Select = ({
                             ...getFullWidthStyle(),
                             ...menuStyle
                           }}
+                          isOpen={isOpen}
                           data-placement={placement}
                           fullWidth={fullWidth}
                         >
@@ -292,9 +298,12 @@ const Select = ({
                       );
                     }}
                   </Popper>,
+                  isOpen,
+                  popoverContext.isInPopover,
                   appendToBody
-                )
-              : null}
+                );
+              }}
+            </PopoverContext.Consumer>
           </StyledSelectWrapper>
         )}
       </Downshift>

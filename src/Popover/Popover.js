@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createContext } from 'react';
 import ReactDOM from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
@@ -8,10 +8,19 @@ import uniqid from 'uniqid';
 
 import { StyledTargetWrapper, StyledPopover } from './Popover-styled';
 
+const PopoverContext = createContext({
+  popoverContext: {
+    isInPopover: undefined
+  }
+});
+
 class Popover extends Component {
   constructor(props) {
     super(props);
 
+    this.popoverContext = {
+      isInPopover: true
+    };
     this._generatedId = uniqid();
   }
 
@@ -53,8 +62,9 @@ class Popover extends Component {
     }
   };
 
-  _handleOutsideTap = () => {
-    this.props.onRequestClose();
+  _handleOutsideTap = e => {
+    console.log(`${this._generatedId}Popover`);
+    this.props.onRequestClose(e);
   };
 
   _getPopper = (popper, appendToBody) => {
@@ -70,56 +80,58 @@ class Popover extends Component {
       this.props.appendToBody || this.props.positionFixed ? false : true;
 
     return (
-      <Manager>
-        <Reference style={{ display: 'inline-block' }}>
-          {({ ref }) => (
-            <StyledTargetWrapper
-              ref={ref}
-              id={`${this._generatedId}Target`}
-              style={this.props.targetContainerStyles}
-            >
-              {this.props.targetEl}
-            </StyledTargetWrapper>
-          )}
-        </Reference>
-        <Transition in={this.props.open} timeout={0}>
-          {state =>
-            this._getPopper(
-              <Popper
-                positionFixed={this.props.positionFixed}
-                placement={this.props.placement}
-                modifiers={{
-                  preventOverflow: {
-                    enabled: usePreventOverflow
-                  },
-                  hide: {
-                    enabled: usePreventOverflow
-                  }
-                }}
+      <PopoverContext.Provider value={{ popoverContext: this.popoverContext }}>
+        <Manager>
+          <Reference style={{ display: 'inline-block' }}>
+            {({ ref }) => (
+              <StyledTargetWrapper
+                ref={ref}
+                id={`${this._generatedId}Target`}
+                style={this.props.targetContainerStyles}
               >
-                {({ ref, style, placement }) => {
-                  return (
-                    <StyledPopover
-                      ref={ref}
-                      id={`${this._generatedId}Popover`}
-                      style={{
-                        ...style,
-                        ...this.props.style
-                      }}
-                      transitionState={state}
-                      transitionDuration={this.props.transitionDuration}
-                      data-placement={placement}
-                    >
-                      {this.props.children}
-                    </StyledPopover>
-                  );
-                }}
-              </Popper>,
-              this.props.appendToBody
-            )
-          }
-        </Transition>
-      </Manager>
+                {this.props.targetEl}
+              </StyledTargetWrapper>
+            )}
+          </Reference>
+          <Transition in={this.props.open} timeout={0}>
+            {state =>
+              this._getPopper(
+                <Popper
+                  positionFixed={this.props.positionFixed}
+                  placement={this.props.placement}
+                  modifiers={{
+                    preventOverflow: {
+                      enabled: usePreventOverflow
+                    },
+                    hide: {
+                      enabled: usePreventOverflow
+                    }
+                  }}
+                >
+                  {({ ref, style, placement }) => {
+                    return (
+                      <StyledPopover
+                        ref={ref}
+                        id={`${this._generatedId}Popover`}
+                        style={{
+                          ...style,
+                          ...this.props.style
+                        }}
+                        transitionState={state}
+                        transitionDuration={this.props.transitionDuration}
+                        data-placement={placement}
+                      >
+                        {this.props.children}
+                      </StyledPopover>
+                    );
+                  }}
+                </Popper>,
+                this.props.appendToBody
+              )
+            }
+          </Transition>
+        </Manager>
+      </PopoverContext.Provider>
     );
   }
 }
@@ -167,4 +179,4 @@ Popover.defaultProps = {
   true: true
 };
 
-export default Popover;
+export { Popover as default, PopoverContext };

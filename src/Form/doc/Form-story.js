@@ -42,7 +42,7 @@ storiesOf('Form', module)
               </Select>
             </FormControl>
             <FormControl success>
-              <TextField defaultValue="Denver" label="City:" />
+              <TextField fullWidth defaultValue="Denver" label="City:" />
               <FormHelperText>City checks out</FormHelperText>
             </FormControl>
             <FormControl>
@@ -80,21 +80,58 @@ storiesOf('Form', module)
         <GuideExample>
           <Form horizontal>
             <FormControl>
-              <TextField defaultValue="James" label="First Name:" />
+              <TextField defaultValue="James" />
             </FormControl>
             <FormControl>
-              <TextField defaultValue="Kirk" label="Last Name:" />
+              <TextField defaultValue="Kirk" />
             </FormControl>
             <FormControl error>
-              <TextField
-                defaultValue="jKirk_1701@gmail.com"
-                type="email"
-                label="Email:"
-              />
+              <TextField defaultValue="jKirk_1701@gmail.com" type="email" />
               <FormHelperText>Must be a .gov email</FormHelperText>
             </FormControl>
             <FormControl>
-              <TextField defaultValue="Denver" label="City:" />
+              <TextField defaultValue="Denver" />
+            </FormControl>
+          </Form>
+        </GuideExample>
+        <GuideExample label="horizontal FormControl">
+          <Form>
+            <FormControl horizontal>
+              <FormControlLabel style={{ minWidth: '120px' }}>
+                First Name:
+              </FormControlLabel>
+              <TextField defaultValue="James" />
+            </FormControl>
+            <FormControl horizontal>
+              <FormControlLabel style={{ minWidth: '120px' }}>
+                Last Name:
+              </FormControlLabel>
+              <TextField fullWidth defaultValue="Kirk" />
+            </FormControl>
+            <FormControl horizontal error>
+              <FormControlLabel style={{ minWidth: '120px' }}>
+                Email:
+              </FormControlLabel>
+              <TextField defaultValue="jKirk_1701@gmail.com" type="email" />
+              <FormHelperText>Must be a .gov email</FormHelperText>
+            </FormControl>
+            <FormControl horizontal>
+              <FormControlLabel style={{ minWidth: '120px' }}>
+                State:
+              </FormControlLabel>
+              <Select selectedValue="co" onChange={() => true}>
+                <MenuItem value="ca">California</MenuItem>
+                <MenuItem value="co">Colorado</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl horizontal>
+              <FormControlLabel style={{ minWidth: '120px' }}>
+                City:
+              </FormControlLabel>
+              <Select selectedValue="co" onChange={() => true} fullWidth>
+                <MenuItem value="ca">Denver</MenuItem>
+                <MenuItem value="co">Boulder</MenuItem>
+              </Select>
             </FormControl>
           </Form>
         </GuideExample>
