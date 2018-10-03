@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { unitCalc, clearfix } from '../utils/helpers';
-import { CalciteP, CalciteH4 } from '../Elements';
+import { CalciteH4 } from '../Elements';
 
 const StyledPanel = styled.div`
   ${clearfix()};
@@ -76,9 +76,7 @@ const StyledPanel = styled.div`
     `};
 `;
 
-const StyledPanelText = styled(CalciteP)`
-  margin-bottom: 0rem;
-`;
+const StyledPanelText = styled.div``;
 
 const StyledPanelTitle = styled(CalciteH4)`
   margin-bottom: 0.775rem;

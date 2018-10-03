@@ -49,6 +49,13 @@ storiesOf('MultiSelect', module)
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={40}>Fourty</MenuItem>
+                  <MenuItem value={50}>Fifty</MenuItem>
+                  <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
                 </MultiSelect>
               </GuideExample>
               <GuideExample label="fullWidth">
@@ -60,6 +67,13 @@ storiesOf('MultiSelect', module)
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={40}>Fourty</MenuItem>
+                  <MenuItem value={50}>Fifty</MenuItem>
+                  <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
                 </MultiSelect>
               </GuideExample>
               <GuideExample label="appendToBody">
@@ -71,6 +85,31 @@ storiesOf('MultiSelect', module)
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={40}>Fourty</MenuItem>
+                  <MenuItem value={50}>Fifty</MenuItem>
+                  <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
+                </MultiSelect>
+              </GuideExample>
+              <GuideExample label="closeOnSelect={false}">
+                <MultiSelect
+                  onChange={this.handleMultiSelectChange}
+                  selectedValues={this.state.selectedValues}
+                  closeOnSelect={false}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={40}>Fourty</MenuItem>
+                  <MenuItem value={50}>Fifty</MenuItem>
+                  <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
                 </MultiSelect>
               </GuideExample>
             </div>
@@ -94,7 +133,7 @@ storiesOf('MultiSelect', module)
         constructor(props) {
           super(props);
           this.state = {
-            selectedValues: [10]
+            selectedValues: [10, 20, 30]
           };
         }
 
@@ -129,6 +168,10 @@ storiesOf('MultiSelect', module)
                   <MenuItem value={40}>Fourty</MenuItem>
                   <MenuItem value={50}>Fifty</MenuItem>
                   <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
                 </MultiSelect>
               </GuideExample>
             </div>
@@ -174,6 +217,13 @@ storiesOf('MultiSelect', module)
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={40}>Fourty</MenuItem>
+                  <MenuItem value={50}>Fifty</MenuItem>
+                  <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
                 </MultiSelect>
               </GuideExample>
             </div>
@@ -198,7 +248,9 @@ storiesOf('MultiSelect', module)
         { name: 'Afghan Hound', value: 'afghanhound' },
         { name: 'Basenji', value: 'basenji' },
         { name: 'Bulldog', value: 'bulldog' },
+        { name: 'Chihuahua', value: 'chihuahua' },
         { name: 'Great Dane', value: 'greatdane' },
+        { name: 'Labrador Retriever', value: 'labrador' },
         { name: 'Yorkie', value: 'yorkie' },
         { name: 'Whippet', value: 'whippet' }
       ];

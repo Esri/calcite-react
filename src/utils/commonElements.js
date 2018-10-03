@@ -5,7 +5,6 @@ const formSelectInputTextarea = styled.select`
   position: relative;
   display: block;
   height: 2.25rem;
-  width: 100%;
   max-width: 100%;
   margin: 0.25rem 0 0 0;
   padding: 0 ${props => unitCalc(props.theme.baseline, 5, '/')};
@@ -39,7 +38,6 @@ const select = styled(formSelectInputTextarea)`
   background-position: center right;
   background-repeat: no-repeat;
   background-size: 0.9rem;
-  width: auto;
   padding-right: ${props => props.theme.baseline};
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -177,6 +175,12 @@ const fieldset = styled.fieldset`
 const textarea = styled(formSelectInputTextarea)`
   height: auto;
   padding-top: ${props => unitCalc(props.theme.baseline, 5, '/')};
+
+  ${props =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+    `};
 `;
 
 const baseRadioCheckbox = styled.input`
