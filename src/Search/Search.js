@@ -273,13 +273,13 @@ class Search extends Component {
                         id: `${this._generatedId}Reference`,
                         placeholder,
                         minimal,
+                        fullWidth,
                         ref,
                         ...other
                       })}
                     />
                   )}
                 </Reference>
-
                 {isOpen && this.state.itemsToShow
                   ? this._getPopper(
                       <Popper
@@ -306,6 +306,7 @@ class Search extends Component {
                               ...style,
                               ...menuStyle
                             }}
+                            isOpen={isOpen}
                             data-placement={placement}
                           >
                             {this.getMenuItems(

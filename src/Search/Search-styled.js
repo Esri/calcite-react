@@ -40,9 +40,15 @@ const StyledShortcutCharacter = styled.div`
 `;
 
 const StyledSearchContainer = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   position: relative;
+
+  ${props =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+    `};
 
   ${StyledMagnifyIcon} {
     ${props =>
