@@ -35,7 +35,7 @@ const StyledModalDialog = {
   overflowY: 'auto',
   display: 'inline-block',
   verticalAlign: 'middle',
-  borderRadius: 0,
+  borderRadius: theme.borderRadius,
   border: 'none',
   transition: `margin-top 300ms cubic-bezier(0.4, 0.0, 0.2, 1)`,
   marginTop: '30px'

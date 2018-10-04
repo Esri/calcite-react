@@ -9,13 +9,14 @@ import withRefs from '../utils/withRefs';
 import {
   StyledArcgisAccountMenu,
   StyledArcgisAccountContent,
-  StyledArcgisAccountSignInMenu
+  StyledArcgisAccountSignInMenu,
+  StyledSwitchAccountButton,
+  StyledSignOutButton
 } from './ArcgisAccount-styled';
 import ArcgisAccountContentInfo from './ArcgisAccountContentInfo';
 import ArcgisAccountContentMenu from './ArcgisAccountContentMenu';
 
 // App components
-import Button from '../Button';
 
 // Third-party components (buttons, icons, etc.)
 
@@ -42,12 +43,23 @@ const ArcgisAccountMenu = ({
         <ArcgisAccountContentMenu>{children}</ArcgisAccountContentMenu>
       </StyledArcgisAccountContent>
       <StyledArcgisAccountSignInMenu>
-        <Button grouped half extraLarge onClick={onRequestSwitchAccount}>
+        <StyledSwitchAccountButton
+          grouped
+          half
+          extraLarge
+          onClick={onRequestSwitchAccount}
+        >
           {switchAccountLabel}
-        </Button>
-        <Button halo grouped half extraLarge onClick={onRequestSignOut}>
+        </StyledSwitchAccountButton>
+        <StyledSignOutButton
+          halo
+          grouped
+          half
+          extraLarge
+          onClick={onRequestSignOut}
+        >
           {signOutLabel}
-        </Button>
+        </StyledSignOutButton>
       </StyledArcgisAccountSignInMenu>
     </StyledArcgisAccountMenu>
   );

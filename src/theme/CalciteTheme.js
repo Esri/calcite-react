@@ -120,7 +120,7 @@ const CalciteTheme = {
   easingFunc: 'linear',
   boxShadow: '0 0 16px 0 rgba(0,0,0,.05)',
   drawerWidth: '280px',
-  easingFunction: 'cubic-bezier(0.215, 0.440, 0.420, 0.880)',
+  borderRadius: 0,
 
   // ┌─────────────┐
   // │ TYPE COLORS │

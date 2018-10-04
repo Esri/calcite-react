@@ -7,6 +7,7 @@ const StyledPanel = styled.div`
   background-color: ${props => props.theme.palette.offWhite};
   border: 1px solid ${props => props.theme.palette.lightestGray};
   padding: ${props => unitCalc(props.theme.baseline, 0.66, '*')};
+  border-radius: ${props => props.theme.borderRadius};
 
   code {
     background-color: ${props => props.theme.palette.white};

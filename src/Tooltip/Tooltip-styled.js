@@ -12,7 +12,7 @@ const StyledTooltip = styled.div`
   color: ${props => props.theme.palette.white};
   text-align: center;
   background: ${props => props.theme.palette.transparentBlack};
-  border-radius: 3px;
+  border-radius: ${props => props.theme.borderRadius || '3px'};
   max-width: 400px;
   opacity: 0;
   transition: opacity ${props => props.transitionDuration}ms

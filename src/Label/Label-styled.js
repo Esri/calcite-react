@@ -4,7 +4,7 @@ import { fontSize } from '../utils/helpers';
 const StyledLabel = styled.mark`
   background-color: ${props => props.theme.palette.lightestGray};
   padding: 0.25em 0.5em;
-  border-radius: 3px;
+  border-radius: ${props => props.theme.borderRadius || '3px'};
   ${fontSize(-2)};
   white-space: nowrap;
 

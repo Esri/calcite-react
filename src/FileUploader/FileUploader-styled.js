@@ -24,7 +24,7 @@ const StyledFileUploader = styled(CalciteInput)`
     color: ${props => props.theme.palette.blue};
     background: ${props => props.theme.palette.white};
     border: 1px solid ${props => props.theme.palette.blue};
-    border-radius: 0;
+    border-radius: ${props => props.theme.borderRadius};
     box-sizing: border-box;
     transition: all 0.15s ease-in-out;
     cursor: pointer;
@@ -58,7 +58,7 @@ const StyledFileUploader = styled(CalciteInput)`
     color: ${props => props.theme.palette.blue};
     background: ${props => props.theme.palette.white};
     border: 1px solid ${props => props.theme.palette.blue};
-    border-radius: 0;
+    border-radius: ${props => props.theme.borderRadius};
     box-sizing: border-box;
     transition: all 0.15s ease-in-out;
     cursor: pointer;

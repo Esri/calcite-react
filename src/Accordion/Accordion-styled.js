@@ -3,7 +3,9 @@ import { transition } from '../utils/helpers';
 import { StyledSideNav, StyledSideNavTitle } from '../SideNav/SideNav-styled';
 import ChevronRightIcon from 'calcite-ui-icons-react/ChevronRightIcon';
 
-const StyledAccordion = styled(StyledSideNav)``;
+const StyledAccordion = styled(StyledSideNav)`
+  border-radius: ${props => props.theme.borderRadius};
+`;
 
 const StyledAccordionSection = styled.div``;
 
@@ -11,6 +13,16 @@ const StyledAccordionTitle = styled(StyledSideNavTitle)`
   display: flex;
   align-items: center;
   cursor: pointer;
+
+  ${StyledAccordionSection}:first-child & {
+    border-top-left-radius: ${props => props.theme.borderRadius};
+    border-top-right-radius: ${props => props.theme.borderRadius};
+  }
+
+  ${StyledAccordionSection}:last-child & {
+    border-bottom-left-radius: ${props => props.theme.borderRadius};
+    border-bottom-right-radius: ${props => props.theme.borderRadius};
+  }
 
   &:hover,
   &:focus {
