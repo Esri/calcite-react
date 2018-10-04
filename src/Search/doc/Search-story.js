@@ -66,7 +66,6 @@ storiesOf('Search', module)
                   onChange={this.searchChanged}
                   onUserAction={this.onUserAction}
                   onRequestClear={this.clearSearch}
-                  menuStyle={{ maxHeight: '400px' }}
                 />
               </GuideExample>
               <GuideExample>
@@ -78,7 +77,6 @@ storiesOf('Search', module)
                   onChange={this.searchChanged}
                   onUserAction={this.onUserAction}
                   onRequestClear={this.clearSearch}
-                  menuStyle={{ maxHeight: '400px' }}
                 />
               </GuideExample>
               <GuideExample label="appendToBody">
@@ -90,7 +88,17 @@ storiesOf('Search', module)
                   onChange={this.searchChanged}
                   onUserAction={this.onUserAction}
                   onRequestClear={this.clearSearch}
-                  menuStyle={{ maxHeight: '400px' }}
+                />
+              </GuideExample>
+              <GuideExample label="fullWidth">
+                <Search
+                  inputValue={this.state.inputValue}
+                  selectedItem={this.state.selectedItem}
+                  items={this.items}
+                  fullWidth
+                  onChange={this.searchChanged}
+                  onUserAction={this.onUserAction}
+                  onRequestClear={this.clearSearch}
                 />
               </GuideExample>
             </Fragment>
@@ -160,7 +168,6 @@ storiesOf('Search', module)
                   onChange={this.searchChanged}
                   onUserAction={this.onUserAction}
                   onRequestClear={this.clearSearch}
-                  menuStyle={{ maxHeight: '400px' }}
                 />
               </GuideExample>
             </Fragment>
@@ -229,7 +236,6 @@ storiesOf('Search', module)
                   onChange={this.searchChanged}
                   onUserAction={this.onUserAction}
                   onRequestClear={this.clearSearch}
-                  menuStyle={{ maxHeight: '400px' }}
                 >
                   {this.items.map(item => {
                     return (
@@ -305,7 +311,6 @@ storiesOf('Search', module)
                   onChange={this.searchChanged}
                   onUserAction={this.onUserAction}
                   onRequestClear={this.clearSearch}
-                  menuStyle={{ maxHeight: '400px' }}
                 >
                   {this.items.map(item => {
                     return (
@@ -412,7 +417,6 @@ storiesOf('Search', module)
                   onChange={this.searchChanged}
                   onUserAction={this.onUserAction}
                   onRequestClear={this.clearSearch}
-                  menuStyle={{ maxHeight: '400px' }}
                 />
               </GuideExample>
             </Fragment>
