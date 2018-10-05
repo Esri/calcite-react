@@ -263,6 +263,17 @@ const StyledButton = styled.button`
       }
 
       ${props =>
+        props.isToggle &&
+        !props.clear &&
+        css`
+          cursor: default;
+
+          &:hover {
+            background-color: ${props => props.theme.palette.blue};
+          }
+        `};
+
+      ${props =>
         !props.isToggle &&
         !props.clear &&
         css`
