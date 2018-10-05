@@ -5,10 +5,10 @@ import withRefs from '../utils/withRefs';
 import {
   StyledCopyToClipboard,
   StyledCopyToClipboardInput,
-  ClipboardIconStyles
+  ClipboardIconStyles,
+  StyledCopyButton
 } from './CopyToClipboard-styled';
 
-import Button from '../Button';
 import Tooltip from '../Tooltip';
 import CopyToClipboardIcon from 'calcite-ui-icons-react/CopyToClipboardIcon';
 import CheckIcon from 'calcite-ui-icons-react/CheckIcon';
@@ -82,7 +82,7 @@ class CopyToClipboard extends Component {
           readOnly
         />
         <Tooltip title={this.getTooltipText()}>
-          <Button
+          <StyledCopyButton
             clear
             onClick={() => this.copyTextToClipboard(children)}
             onBlur={this.resetCopySuccess}
