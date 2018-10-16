@@ -10,7 +10,7 @@ const StyledButton = styled.button`
   width: auto;
   color: ${props => props.theme.palette.white};
   border: 1px solid ${props => props.theme.palette.blue};
-  border-radius: 0;
+  border-radius: ${props => props.theme.borderRadius};
   background-color: ${props => props.theme.palette.blue};
   box-sizing: border-box;
   transition: all 0.15s ease-in-out;
@@ -44,6 +44,20 @@ const StyledButton = styled.button`
             background: none;
             text-decoration: underline;
           }
+        `};
+
+      ${props =>
+        props.adornmentDirection === 'left' &&
+        css`
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        `};
+
+      ${props =>
+        props.adornmentDirection === 'right' &&
+        css`
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
         `};
     `};
 
@@ -235,10 +249,29 @@ const StyledButton = styled.button`
     props.grouped &&
     css`
       margin-left: -1px;
+      border-radius: 0;
 
-      &:first-of-type {
+      &:first-child {
         margin-left: 0;
+        border-top-left-radius: ${props => props.theme.borderRadius};
+        border-bottom-left-radius: ${props => props.theme.borderRadius};
       }
+
+      &:last-child {
+        border-top-right-radius: ${props => props.theme.borderRadius};
+        border-bottom-right-radius: ${props => props.theme.borderRadius};
+      }
+
+      ${props =>
+        props.isToggle &&
+        !props.clear &&
+        css`
+          cursor: default;
+
+          &:hover {
+            background-color: ${props => props.theme.palette.blue};
+          }
+        `};
 
       ${props =>
         !props.isToggle &&
@@ -257,6 +290,12 @@ const StyledButton = styled.button`
     props.half &&
     css`
       margin-left: 0;
+    `};
+
+  ${props =>
+    props.noBorderRadius &&
+    css`
+      border-radius: 0;
     `};
 `;
 

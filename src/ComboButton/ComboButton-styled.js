@@ -9,6 +9,8 @@ const StyledComboButtonContainer = styled.div`
 
 const StyledComboButton = styled(StyledButton)`
   border-right-width: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 `;
 
 const StyledComboButtonDropdown = styled(StyledButton)`
@@ -18,6 +20,8 @@ const StyledComboButtonDropdown = styled(StyledButton)`
   padding-right: ${props => unitCalc(props.theme.baseline, 3, '/')};
   display: flex;
   border-left: 1px solid ${props => props.theme.palette.darkBlue};
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 
   ${props =>
     props.clear &&

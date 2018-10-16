@@ -44,12 +44,12 @@ const DatePickerTheme = {
         borderBottomFocused: `2px solid ${CalciteTheme.palette.blue}`,
         borderRightFocused: 0,
         borderWidth: 1,
-        borderRadius: 0
+        borderRadius: CalciteTheme.borderRadius
       },
       pickerInput: {
         borderWidth: 1,
         borderStyle: 'solid',
-        borderRadius: 0
+        borderRadius: CalciteTheme.borderRadius
       }
     },
 

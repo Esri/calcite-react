@@ -41,7 +41,7 @@ const TextField = ({
     isSubmitting = form.isSubmitting;
   }
 
-  const getAdornment = function(adornment, adornmentNoWrap) {
+  const getAdornment = function(adornment, adornmentNoWrap, direction) {
     if (
       adornment &&
       (adornment.type === Button ||
@@ -51,13 +51,17 @@ const TextField = ({
       return React.cloneElement(adornment, {
         ...adornment.props,
         minimal,
-        isAdornment: true
+        isAdornment: true,
+        adornmentDirection: direction
       });
     }
 
     return (
       adornment && (
-        <StyledAdornmentWrapper minimal={minimal}>
+        <StyledAdornmentWrapper
+          adornmentDirection={direction}
+          minimal={minimal}
+        >
           {adornment}
         </StyledAdornmentWrapper>
       )
@@ -139,8 +143,8 @@ const TextField = ({
   return (
     <FormControlContext.Consumer>
       {({ formControlContext }) => (
-        <StyledTextFieldAdornmentWrapper>
-          {getAdornment(leftAdornment, leftAdornmentNoWrap)}
+        <StyledTextFieldAdornmentWrapper minimal={minimal}>
+          {getAdornment(leftAdornment, leftAdornmentNoWrap, 'left')}
           <TextFieldArea
             ref={forwardedRef}
             name={name}
@@ -158,7 +162,7 @@ const TextField = ({
             disabled={isDisabled()}
             {...other}
           />
-          {getAdornment(rightAdornment, rightAdornmentNoWrap)}
+          {getAdornment(rightAdornment, rightAdornmentNoWrap, 'right')}
         </StyledTextFieldAdornmentWrapper>
       )}
     </FormControlContext.Consumer>
