@@ -12,6 +12,7 @@ const StyledGroupContainer = styled.div`
   max-height: 150px;
   min-height: 95px;
   overflow-y: auto;
+  border-radius: ${props => props.theme.borderRadius};
 `;
 
 const PrimaryCheckboxLabelStyles = {

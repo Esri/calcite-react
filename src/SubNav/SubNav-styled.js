@@ -47,6 +47,8 @@ const StyledSubNavLink = styled(CalciteA)`
   ${fontSize(-1)};
   background-color: ${props => props.theme.palette.transparentOffBlack};
   box-sizing: border-box;
+  border-radius: ${props => props.theme.borderRadius}
+    ${props => props.theme.borderRadius} 0 0;
   transition: background-color ${transition()}, color ${transition('150ms')};
   display: inline-block;
 

@@ -9,7 +9,9 @@ import { fontSize, unitCalc } from '../utils/helpers';
 import UserIcon from 'calcite-ui-icons-react/UserIcon';
 import CalendarIcon from 'calcite-ui-icons-react/CalendarIcon';
 
-const StyledItemCard = styled(StyledCard)``;
+const StyledItemCard = styled(StyledCard)`
+  border-radius: ${props => props.theme.borderRadius};
+`;
 
 const StyledItemCardContent = styled(StyledCardContent)`
   white-space: normal;

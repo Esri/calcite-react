@@ -27,6 +27,14 @@ const StyledTabTitle = styled(CalciteA)`
   margin-right: -1px;
   cursor: pointer;
 
+  &:first-child {
+    border-top-left-radius: ${props => props.theme.borderRadius};
+  }
+
+  &:last-child {
+    border-top-right-radius: ${props => props.theme.borderRadius};
+  }
+
   &:focus {
     outline: none;
   }
@@ -86,6 +94,8 @@ const StyledTabTitle = styled(CalciteA)`
             background-color: transparent;
             border: 1px solid ${props => props.theme.palette.lighterGray};
             border-bottom: 1px solid ${props => props.theme.palette.white};
+            border-radius: ${props => props.theme.borderRadius}
+              ${props => props.theme.borderRadius} 0 0;
 
             &:hover {
               border-bottom: 1px solid ${props => props.theme.palette.white};
@@ -104,6 +114,12 @@ const StyledTabTitle = styled(CalciteA)`
           margin-right: 2px;
           margin-bottom: 3px;
           transition: none;
+
+          &:first-child,
+          &:last-child {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+          }
 
           &:hover,
           &:focus {
@@ -175,6 +191,8 @@ const StyledTabNav = styled.nav`
 const StyledTabContents = styled.div`
   box-sizing: border-box;
   border: 1px solid ${props => props.theme.palette.lighterGray};
+  border-radius: 0 0 ${props => props.theme.borderRadius}
+    ${props => props.theme.borderRadius};
   margin-top: -1px;
 
   ${props =>
@@ -202,6 +220,8 @@ const StyledTabSection = styled.article`
   box-sizing: border-box;
   background-color: ${props => props.theme.palette.white};
   padding: ${props => unitCalc(props.theme.baseline, 2, '/')};
+  border-radius: 0 0 ${props => props.theme.borderRadius}
+    ${props => props.theme.borderRadius};
 
   pre {
     margin: 0;

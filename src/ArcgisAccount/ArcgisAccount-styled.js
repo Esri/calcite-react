@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { fontSize, unitCalc } from '../utils/helpers';
+import Button from '../Button';
 
 const StyledArcgisAccountControl = styled.div`
   display: flex;
@@ -59,6 +60,7 @@ const StyledArcgisAccountControlUsername = styled.span`
 const StyledArcgisAccountMenu = styled.div`
   background: ${props => props.theme.palette.white};
   box-shadow: ${props => props.theme.boxShadow};
+  border-radius: ${props => props.theme.borderRadius};
 `;
 
 const StyledArcgisAccountContent = styled.div`
@@ -138,6 +140,14 @@ const StyledArcgisAccountMenuItem = styled.a`
   }
 `;
 
+const StyledSwitchAccountButton = styled(Button)`
+  border-radius: 0 0 0 ${props => props.theme.borderRadius};
+`;
+
+const StyledSignOutButton = styled(Button)`
+  border-radius: 0 0 ${props => props.theme.borderRadius} 0;
+`;
+
 export {
   StyledArcgisAccountControl,
   StyledArcgisAccountControlAvatar,
@@ -152,5 +162,7 @@ export {
   StyledArcgisAccountContentGroup,
   StyledArcgisAccountContentMenu,
   StyledArcgisAccountSignInMenu,
-  StyledArcgisAccountMenuItem
+  StyledArcgisAccountMenuItem,
+  StyledSwitchAccountButton,
+  StyledSignOutButton
 };

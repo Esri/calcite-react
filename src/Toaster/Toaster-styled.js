@@ -21,6 +21,7 @@ const StyledToastContainer = styled(ToastContainer)`
     padding: ${props => unitCalc(props.theme.baseline, 2, '/')};
     box-shadow: ${props => props.theme.boxShadow};
     border: 1px solid ${props => props.theme.palette.lightestGray};
+    border-radius: ${props => props.theme.borderRadius};
     font-family: ${props => props.theme.type.avenirFamily};
 
     &--default {

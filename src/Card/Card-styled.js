@@ -9,6 +9,7 @@ const StyledCard = styled.div`
   background: ${props => props.theme.palette.white};
   box-shadow: 0 0 0 1px ${props => props.theme.palette.transparentOffWhite},
     ${props => props.theme.boxShadow};
+  border-radius: ${props => props.theme.borderRadius};
 
   ${props =>
     props.wide &&
@@ -51,6 +52,7 @@ const StyledCardContent = styled.div`
       border: 1px solid ${props => props.theme.palette.transparentOffWhite};
       box-shadow: ${props => props.theme.boxShadow};
       padding-top: 4rem;
+      border-radius: ${props => props.theme.borderRadius};
     `};
 `;
 

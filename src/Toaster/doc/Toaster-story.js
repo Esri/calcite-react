@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
+import { Slide, Zoom, Flip } from 'react-toastify';
 
 import GuideExample from '../../../stories/GuideExample';
 import doc from './Toaster.md';
@@ -349,6 +350,127 @@ storiesOf('Toaster', module)
                     position="bottom-left"
                   >
                     This toaster is positioned at "bottom-left"!
+                  </Toaster>
+                </GuideExample>
+              </div>
+            </Fragment>
+          );
+        }
+      }
+
+      ToasterStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <ToasterStory />;
+    })
+  )
+  .add(
+    'Transitions',
+    withInfo({
+      text: doc,
+      propTables: [ToastContainer, Toaster]
+    })(() => {
+      class ToasterStory extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            toasterOpen: false,
+            toaster2Open: false,
+            toaster3Open: false,
+            toaster4Open: false
+          };
+        }
+
+        showToaster = () => {
+          this.setState({
+            toasterOpen: true
+          });
+        };
+
+        hideToaster = () => {
+          this.setState({
+            toasterOpen: false
+          });
+        };
+
+        showToaster2 = () => {
+          this.setState({
+            toaster2Open: true
+          });
+        };
+
+        hideToaster2 = () => {
+          this.setState({
+            toaster2Open: false
+          });
+        };
+
+        showToaster3 = () => {
+          this.setState({
+            toaster3Open: true
+          });
+        };
+
+        hideToaster3 = () => {
+          this.setState({
+            toaster3Open: false
+          });
+        };
+
+        showToaster4 = () => {
+          this.setState({
+            toaster4Open: true
+          });
+        };
+
+        hideToaster4 = () => {
+          this.setState({
+            toaster4Open: false
+          });
+        };
+
+        render() {
+          return (
+            <Fragment>
+              <ToastContainer />
+              <div>
+                <GuideExample>
+                  <Button onClick={this.showToaster}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toasterOpen}
+                    onClose={this.hideToaster}
+                  >
+                    The Toaster with the Bounce transition!
+                  </Toaster>
+                </GuideExample>
+                <GuideExample label={`transition={Slide}`}>
+                  <Button onClick={this.showToaster2}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toaster2Open}
+                    onClose={this.hideToaster2}
+                    transition={Slide}
+                  >
+                    The Toaster with the Slide transition!
+                  </Toaster>
+                </GuideExample>
+                <GuideExample label={`transition={Zoom}`}>
+                  <Button onClick={this.showToaster3}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toaster3Open}
+                    onClose={this.hideToaster3}
+                    transition={Zoom}
+                  >
+                    The Toaster with the Zoom transition!
+                  </Toaster>
+                </GuideExample>
+                <GuideExample label={`transition={Flip}`}>
+                  <Button onClick={this.showToaster4}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toaster4Open}
+                    onClose={this.hideToaster4}
+                    transition={Flip}
+                  >
+                    The Toaster with the Flip transition!
                   </Toaster>
                 </GuideExample>
               </div>

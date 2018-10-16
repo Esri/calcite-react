@@ -10,6 +10,7 @@ const StyledSideNav = styled.aside`
   border-top: none;
   font-family: ${props => props.theme.fontFamily};
   background-color: ${props => props.theme.palette.white};
+  border-radius: ${props => props.theme.borderRadius};
 `;
 
 const StyledSideNavTitle = styled(CalciteH4)`

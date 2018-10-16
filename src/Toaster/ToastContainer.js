@@ -18,18 +18,16 @@ import 'react-toastify/dist/ReactToastify.css';
 // CSS
 
 const ToastContainer = ({ ...other }) => {
-  return (
-    <StyledToastContainer
-      closeButton={
-        <StyledCloseButton
-          type="button"
-          iconButton
-          icon={<XIcon size={20} />}
-        />
-      }
-      {...other}
+  const CloseButton = ({ closeToast }) => (
+    <StyledCloseButton
+      type="button"
+      iconButton
+      icon={<XIcon size={20} />}
+      onClick={closeToast}
     />
   );
+
+  return <StyledToastContainer closeButton={<CloseButton />} {...other} />;
 };
 
 ToastContainer.propTypes = {

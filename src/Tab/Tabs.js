@@ -33,7 +33,6 @@ const Tabs = ({
       case TabContents:
         return React.cloneElement(child, {
           activeTabIndex,
-          onTabChange,
           gray,
           transparent,
           translucent,

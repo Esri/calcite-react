@@ -13,6 +13,8 @@ const StyledList = styled(StyledSideNav)`
     css`
       border: none;
       border-top: 1px solid ${props => props.theme.palette.lightestGray};
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
       padding-left: ${props => props.theme.baseline};
 
       ${props =>

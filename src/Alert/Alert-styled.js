@@ -12,6 +12,7 @@ const StyledAlert = styled.div`
   max-width: 40em;
   border: 1px solid ${props => props.theme.palette.blue};
   box-shadow: ${props => props.theme.boxShadow};
+  border-radius: ${props => props.theme.borderRadius};
 
   ${props =>
     linkColor(props.theme.palette.offBlack, props.theme.palette.black)};

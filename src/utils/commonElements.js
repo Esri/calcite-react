@@ -17,7 +17,7 @@ const formSelectInputTextarea = styled.select`
   outline-offset: 0;
   background-color: ${props => props.theme.palette.white};
   border: 1px solid ${props => props.theme.palette.lightGray};
-  border-radius: 0;
+  border-radius: ${props => props.theme.borderRadius};
   transition: border-color ${transition()};
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
 
@@ -63,6 +63,7 @@ const select = styled(formSelectInputTextarea)`
     css`
       display: inline-block;
       border: none;
+      border-radius: 0;
       box-shadow: none;
       background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNTRweCIg
   aGVpZ2h0PSI3NHB4IiB2aWV3Qm94PSIwIDAgNTQgNzQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0
@@ -85,6 +86,22 @@ const select = styled(formSelectInputTextarea)`
       &:hover {
         text-decoration: underline;
       }
+    `};
+
+  ${props =>
+    props.adornmentDirection &&
+    props.adornmentDirection === 'left' &&
+    css`
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    `};
+
+  ${props =>
+    props.adornmentDirection &&
+    props.adornmentDirection === 'right' &&
+    css`
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     `};
 
   @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
@@ -120,6 +137,7 @@ const input = styled(formSelectInputTextarea)`
       border-left: none;
       border-bottom-color: ${props => props.theme.palette.lighterGray};
       box-shadow: none;
+      border-radius: 0;
 
       &:focus {
         border-bottom-color: ${props => props.theme.palette.gray};
