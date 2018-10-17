@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { createContext } from 'react';
+import React, { Children, createContext } from 'react';
 import { getChildType } from '../utils/helpers';
 import withRefs from '../utils/withRefs';
 
@@ -19,7 +19,7 @@ const SubNav = ({ children, blue, forwardedRef, ...other }) => {
   };
 
   const getLeftContent = function() {
-    return children.filter(child => {
+    return Children.toArray(children).filter(child => {
       return (
         getChildType(child) === SubNavTitle ||
         getChildType(child) === SubNavList
@@ -28,7 +28,7 @@ const SubNav = ({ children, blue, forwardedRef, ...other }) => {
   };
 
   const getSubNavActions = function() {
-    return children.filter(child => {
+    return Children.toArray(children).filter(child => {
       return getChildType(child) === SubNavActions;
     });
   };

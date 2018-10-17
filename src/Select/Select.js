@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
@@ -134,7 +134,7 @@ const Select = ({
     if (!value) return null;
 
     return (
-      children.filter(child => {
+      Children.toArray(children).filter(child => {
         return child.props.value === value;
       })[0] || null
     );
@@ -165,13 +165,13 @@ const Select = ({
       );
     }
 
-    return children.map((child, index) =>
+    return Children.map(children, (child, index) =>
       React.cloneElement(child, {
         ...getItemProps({
           item: child,
           active: highlightedIndex === index,
           selected: selectedItem === child,
-          key: index
+          key: child.props.value
         })
       })
     );

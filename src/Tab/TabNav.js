@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import PropTypes from 'prop-types';
 import { getChildType } from '../utils/helpers';
 import withRefs from '../utils/withRefs';
@@ -17,7 +17,7 @@ const TabNav = ({
   forwardedRef,
   ...other
 }) => {
-  const childrenWithProps = children.map((child, itemIndex) => {
+  const childrenWithProps = Children.map(children, (child, itemIndex) => {
     switch (getChildType(child)) {
       case TabTitle:
         return React.cloneElement(child, {
