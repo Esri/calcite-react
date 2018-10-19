@@ -193,7 +193,7 @@ class Select extends Component {
         item,
         index,
         active: highlightedIndex === index,
-        selected: selectedItem === item,
+        selected: selectedItem && selectedItem.props.value === item.props.value,
         key: item.props.value
       })
     });

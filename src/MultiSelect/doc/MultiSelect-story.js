@@ -17,6 +17,8 @@ import Form, {
 } from '../../Form';
 import Button from '../../Button';
 
+import statesJson from '../../../stories/_sampleJson/states.json';
+
 storiesOf('MultiSelect', module)
   .add(
     'Controlled MultiSelect',
@@ -224,6 +226,56 @@ storiesOf('MultiSelect', module)
                   <MenuItem value={80}>Eighty</MenuItem>
                   <MenuItem value={90}>Ninety</MenuItem>
                   <MenuItem value={100}>One Hundred</MenuItem>
+                </MultiSelect>
+              </GuideExample>
+            </div>
+          );
+        }
+      }
+
+      MultiSelectStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <MultiSelectStory />;
+    })
+  )
+  .add(
+    'Virtualized',
+    withInfo({
+      text: doc,
+      propTables: [MultiSelect]
+    })(() => {
+      class MultiSelectStory extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValues: []
+          };
+        }
+
+        handleMultiSelectChange = (values, items) => {
+          this.setState({
+            selectedValues: values
+          });
+        };
+
+        render() {
+          return (
+            <div>
+              <GuideExample label="virtualized">
+                <MultiSelect
+                  virtualized
+                  virtualizedMenuWidth={250}
+                  onChange={this.handleMultiSelectChange}
+                  selectedValues={this.state.selectedValues}
+                >
+                  {statesJson.states.map(state => {
+                    return (
+                      <MenuItem key={state} value={state}>
+                        {state}
+                      </MenuItem>
+                    );
+                  })}
                 </MultiSelect>
               </GuideExample>
             </div>

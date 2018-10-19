@@ -186,7 +186,7 @@ storiesOf('Select', module)
         constructor(props) {
           super(props);
           this.state = {
-            selectedValue: null
+            selectedValue: ''
           };
         }
 
@@ -198,40 +198,70 @@ storiesOf('Select', module)
 
         render() {
           return (
-            <div>
-              <GuideExample label="filterable">
-                <Select
-                  filterable
-                  onChange={this.handleSelectChange}
-                  selectedValue={this.state.selectedValue}
-                >
-                  {statesJson.states.map(state => {
-                    return (
-                      <MenuItem key={state} value={state}>
-                        {state}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </GuideExample>
-              <GuideExample label="virtualized">
-                <Select
-                  filterable
-                  virtualized
-                  virtualizedMenuWidth={250}
-                  onChange={this.handleSelectChange}
-                  selectedValue={this.state.selectedValue}
-                >
-                  {statesJson.states.map(state => {
-                    return (
-                      <MenuItem key={state} value={state}>
-                        {state}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </GuideExample>
-            </div>
+            <GuideExample label="filterable">
+              <Select
+                filterable
+                onChange={this.handleSelectChange}
+                selectedValue={this.state.selectedValue}
+              >
+                {statesJson.states.map(state => {
+                  return (
+                    <MenuItem key={state} value={state}>
+                      {state}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </GuideExample>
+          );
+        }
+      }
+
+      SelectStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <SelectStory />;
+    })
+  )
+  .add(
+    'Virtualized',
+    withInfo({
+      text: doc,
+      propTables: [Select]
+    })(() => {
+      class SelectStory extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValue: ''
+          };
+        }
+
+        handleSelectChange = (value, item) => {
+          this.setState({
+            selectedValue: value
+          });
+        };
+
+        render() {
+          return (
+            <GuideExample label="virtualized">
+              <Select
+                filterable
+                virtualized
+                virtualizedMenuWidth={250}
+                onChange={this.handleSelectChange}
+                selectedValue={this.state.selectedValue}
+              >
+                {statesJson.states.map(state => {
+                  return (
+                    <MenuItem key={state} value={state}>
+                      {state}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </GuideExample>
           );
         }
       }
