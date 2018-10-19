@@ -29,6 +29,9 @@ const StyledSelectButton = styled(CalciteSelect)`
 const StyledSelectMenu = styled(Menu)`
   max-height: 300px;
   display: none;
+  border-bottom: none;
+  box-shadow: ${props => props.theme.boxShadow},
+    0 1px 0 ${props => props.theme.palette.lightestGray};
   transition: opacity ${transition()};
   z-index: 2000;
 
