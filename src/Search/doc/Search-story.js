@@ -339,6 +339,70 @@ storiesOf('Search', module)
     })
   )
   .add(
+    'Virtualized',
+    withInfo({
+      text: doc,
+      propTables: [Search]
+    })(() => {
+      class SearchStory extends Component {
+        items = [...statesJson.states];
+
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: '',
+            selectedItem: ''
+          };
+        }
+
+        searchChanged = e => {
+          this.setState({
+            selectedItem: e
+          });
+        };
+
+        clearSearch = () => {
+          this.setState({
+            inputValue: '',
+            selectedItem: ''
+          });
+        };
+
+        onUserAction = (inputValue, selectedItemVal) => {
+          this.setState({
+            inputValue: inputValue,
+            selectedItem: selectedItemVal
+          });
+        };
+
+        render() {
+          return (
+            <Fragment>
+              <GuideExample>
+                <Search
+                  virtualized
+                  virtualizedMenuWidth={250}
+                  inputValue={this.state.inputValue}
+                  selectedItem={this.state.selectedItem}
+                  items={this.items}
+                  onChange={this.searchChanged}
+                  onUserAction={this.onUserAction}
+                  onRequestClear={this.clearSearch}
+                />
+              </GuideExample>
+            </Fragment>
+          );
+        }
+      }
+
+      SearchStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <SearchStory />;
+    })
+  )
+  .add(
     'Shortcut Character',
     withInfo({
       text: doc,

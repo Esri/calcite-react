@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
+import { List } from 'react-virtualized';
 import { Manager, Reference, Popper } from 'react-popper';
 import matchSorter from 'match-sorter';
 import uniqid from 'uniqid';
@@ -175,35 +176,88 @@ class Search extends Component {
     }
   };
 
-  getMenuItems = (
-    itemsToShow,
-    getItemProps,
-    highlightedIndex,
-    selectedItem
-  ) => {
-    return itemsToShow.map((item, index) => {
-      if (React.isValidElement(item)) {
-        return React.cloneElement(item, {
-          ...getItemProps({
-            item: item.props.item || item.props,
-            active: highlightedIndex === index,
-            selected: this.itemToValue(selectedItem) === this.itemToValue(item)
-          })
-        });
-      }
+  getMenuItems = (itemsToShow, virtualized, params) => {
+    const {
+      getItemProps,
+      highlightedIndex,
+      selectedItem,
+      menuHeight,
+      virtualizedRowHeight,
+      virtualizedMenuWidth
+    } = params;
+
+    if (virtualized) {
       return (
-        <MenuItem
-          key={this.itemToValue(item)}
-          {...getItemProps({
-            item,
-            active: highlightedIndex === index,
-            selected: selectedItem === item
-          })}
-        >
-          {this.itemToString(item)}
-        </MenuItem>
+        <List
+          width={virtualizedMenuWidth || 9999}
+          autoWidth={!virtualizedMenuWidth}
+          scrollToIndex={highlightedIndex || 0}
+          scrollToAlignment="auto"
+          height={
+            itemsToShow.length < 7
+              ? itemsToShow.length * virtualizedRowHeight
+              : menuHeight
+          }
+          rowCount={itemsToShow.length}
+          rowHeight={virtualizedRowHeight}
+          rowRenderer={({ index, style: rowRenderStyle }) => {
+            return this.getMenuItem(itemsToShow[index], {
+              getItemProps,
+              highlightedIndex,
+              index,
+              selectedItem,
+              rowRenderStyle
+            });
+          }}
+        />
       );
-    });
+    }
+
+    return itemsToShow.map((item, index) =>
+      this.getMenuItem(item, {
+        getItemProps,
+        highlightedIndex,
+        index,
+        selectedItem
+      })
+    );
+  };
+
+  getMenuItem = (item, params) => {
+    const {
+      getItemProps,
+      highlightedIndex,
+      index,
+      selectedItem,
+      rowRenderStyle
+    } = params;
+
+    if (React.isValidElement(item)) {
+      return React.cloneElement(item, {
+        ...getItemProps({
+          style: { ...item.props.style, ...rowRenderStyle },
+          item: item.props.item || item.props,
+          index,
+          active: highlightedIndex === index,
+          selected: this.itemToValue(selectedItem) === this.itemToValue(item),
+          key: this.itemToValue(item)
+        })
+      });
+    }
+    return (
+      <MenuItem
+        {...getItemProps({
+          style: { ...rowRenderStyle },
+          item,
+          index,
+          active: highlightedIndex === index,
+          selected: selectedItem === item,
+          key: this.itemToValue(item)
+        })}
+      >
+        {this.itemToString(item)}
+      </MenuItem>
+    );
   };
 
   getFullWidthStyle = fullWidth => {
@@ -235,10 +289,17 @@ class Search extends Component {
       appendToBody,
       positionFixed,
       children,
+      virtualized,
+      virtualizedRowHeight,
+      virtualizedMenuWidth,
       ...other
     } = this.props;
 
     const usePreventOverflow = appendToBody || positionFixed ? false : true;
+    const menuHeight =
+      (menuStyle && parseInt(menuStyle.height, 10)) ||
+      (menuStyle && parseInt(menuStyle.maxHeight, 10)) ||
+      300;
 
     return (
       <StyledSearchContainer
@@ -311,9 +372,15 @@ class Search extends Component {
                           >
                             {this.getMenuItems(
                               this.state.itemsToShow,
-                              getItemProps,
-                              highlightedIndex,
-                              selectedItem
+                              virtualized,
+                              {
+                                highlightedIndex,
+                                menuHeight,
+                                virtualizedRowHeight,
+                                virtualizedMenuWidth,
+                                getItemProps,
+                                selectedItem
+                              }
                             )}
                           </StyledSelectMenu>
                         )}
@@ -379,7 +446,13 @@ Search.propTypes = {
   /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
   positionFixed: PropTypes.bool,
   /** You can add search options as children if you want more control over the item rendering. Search MenuItems can take either an item object that maps to your dataSourceConfig or you can manually set the label and value props on MenuItems */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** Use react-virtualized to render rows as the user scrolls */
+  virtualized: PropTypes.bool,
+  /** (virtualized only) Row height used to calculate how many rows to render in a virtualized menu */
+  virtualizedRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
+  /** (virtualized only) Width of the menu, unloaded rows may be wider than the initial set */
+  virtualizedMenuWidth: PropTypes.number
 };
 
 Search.defaultProps = {
@@ -389,7 +462,8 @@ Search.defaultProps = {
     value: 'value'
   },
   placement: 'bottom-start',
-  shortcutTooltip: 'Press  /  to search'
+  shortcutTooltip: 'Press  /  to search',
+  virtualizedRowHeight: 42
 };
 
 export default Search;
