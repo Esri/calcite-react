@@ -247,7 +247,6 @@ storiesOf('Select', module)
           return (
             <GuideExample label="virtualized">
               <Select
-                filterable
                 virtualized
                 virtualizedMenuWidth={250}
                 onChange={this.handleSelectChange}
