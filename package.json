@@ -1,6 +1,6 @@
 {
   "name": "calcite-react",
-  "version": "0.21.2",
+  "version": "0.22.0",
   "description": "Calcite components for React",
   "repository": {
     "type": "git",
@@ -72,7 +72,7 @@
     "react-toastify": "^4.3.0",
     "react-transition-group": "^2.4.0",
     "react-with-styles-interface-aphrodite": "^5.0.1",
-    "styled-components": "^4.0.0-beta.9",
+    "styled-components": "^4.0.0",
     "uniqid": "^5.0.3"
   },
   "devDependencies": {

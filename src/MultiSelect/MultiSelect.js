@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
@@ -82,7 +82,7 @@ const Select = ({
   }
 
   function _getItemsFromValues(values) {
-    return children.filter(child => {
+    return Children.toArray(children).filter(child => {
       return values.indexOf(child.props.value) !== -1;
     });
   }
@@ -216,7 +216,7 @@ const Select = ({
                         data-placement={placement}
                         isOpen={isOpen}
                       >
-                        {children.map((child, index) =>
+                        {Children.map(children, (child, index) =>
                           React.cloneElement(child, {
                             ...getItemProps({
                               item: child,
