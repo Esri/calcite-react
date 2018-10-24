@@ -2,6 +2,8 @@ import React, { Children } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
+import memoize from 'memoize-one';
+import { List } from 'react-virtualized';
 import { Manager, Reference, Popper } from 'react-popper';
 
 import {
@@ -31,6 +33,9 @@ const Select = ({
   field,
   form,
   closeOnSelect,
+  virtualized,
+  virtualizedRowHeight,
+  virtualizedMenuWidth,
   ...other
 }) => {
   let name, touched, errors, isSubmitting, setFieldValue;
@@ -41,6 +46,10 @@ const Select = ({
     isSubmitting = form.isSubmitting;
     setFieldValue = form.setFieldValue;
   }
+  const menuHeight =
+    (menuStyle && parseInt(menuStyle.height, 10)) ||
+    (menuStyle && parseInt(menuStyle.maxHeight, 10)) ||
+    300;
 
   function itemToString(item) {
     let label = item;
@@ -147,6 +156,71 @@ const Select = ({
     }
   }
 
+  const getValues = memoize(selectedItems => {
+    return selectedItems.map(selectedItem => selectedItem.props.value);
+  });
+
+  function getMenuItems(filteredList, params) {
+    const { getItemProps, highlightedIndex, selectedValues } = params;
+
+    if (virtualized) {
+      return (
+        <List
+          width={virtualizedMenuWidth || 9999}
+          autoWidth={!virtualizedMenuWidth}
+          scrollToIndex={highlightedIndex || 0}
+          scrollToAlignment="auto"
+          height={
+            filteredList.length < 7
+              ? filteredList.length * virtualizedRowHeight
+              : menuHeight
+          }
+          rowCount={filteredList.length}
+          rowHeight={virtualizedRowHeight}
+          rowRenderer={({ index, style: rowRenderStyle }) => {
+            return getMenuItem(filteredList[index], {
+              getItemProps,
+              highlightedIndex,
+              index,
+              selectedValues,
+              rowRenderStyle
+            });
+          }}
+        />
+      );
+    }
+
+    return filteredList.map((item, index) =>
+      getMenuItem(item, {
+        getItemProps,
+        highlightedIndex,
+        index,
+        selectedValues
+      })
+    );
+  }
+
+  function getMenuItem(item, params) {
+    const {
+      getItemProps,
+      highlightedIndex,
+      index,
+      selectedValues,
+      rowRenderStyle
+    } = params;
+
+    return React.cloneElement(item, {
+      ...getItemProps({
+        style: { ...item.props.style, ...rowRenderStyle },
+        item,
+        index,
+        active: highlightedIndex === index,
+        selected: selectedValues.indexOf(item.props.value) > -1,
+        key: item.props.value
+      })
+    });
+  }
+
   return (
     <Manager>
       <Downshift
@@ -164,79 +238,89 @@ const Select = ({
           isOpen,
           selectedItem,
           highlightedIndex
-        }) => (
-          <StyledMultiSelectWrapper
-            {...getRootProps({}, { suppressRefError: true })}
-            style={wrapperStyle}
-          >
-            <Reference style={{ display: 'inline-block' }}>
-              {({ ref }) => (
-                <FormControlContext.Consumer>
-                  {({ formControlContext }) => (
-                    <StyledMultiSelectButton
-                      ref={ref}
-                      success={isSuccess(formControlContext)}
-                      error={isError(formControlContext)}
-                      disabled={isDisabled()}
-                      as="button"
-                      {...getToggleButtonProps()}
-                      {...getInputProps({
-                        id: id || formControlContext._generatedId,
-                        fullWidth: fullWidth,
-                        minimal: minimal
-                      })}
-                      {...other}
-                    >
-                      {downshiftRenderValue(selectedItem)}
-                    </StyledMultiSelectButton>
-                  )}
-                </FormControlContext.Consumer>
-              )}
-            </Reference>
-            <PopoverContext.Consumer>
-              {({ popoverContext }) => {
-                return _getPopper(
-                  <Popper
-                    positionFixed={positionFixed}
-                    placement={other.placement}
-                    modifiers={{
-                      preventOverflow: {
-                        enabled: appendToBody || positionFixed ? false : true
-                      },
-                      hide: {
-                        enabled: appendToBody || positionFixed ? false : true
-                      }
-                    }}
-                  >
-                    {({ ref: popperRef, style, placement }) => (
-                      <StyledMultiSelectMenu
-                        ref={popperRef}
-                        style={{ ...style, ...menuStyle }}
-                        fullWidth={fullWidth}
-                        data-placement={placement}
-                        isOpen={isOpen}
+        }) => {
+          const selectedValues = getValues(selectedItem);
+
+          return (
+            <StyledMultiSelectWrapper
+              {...getRootProps({}, { suppressRefError: true })}
+              style={wrapperStyle}
+            >
+              <Reference style={{ display: 'inline-block' }}>
+                {({ ref }) => (
+                  <FormControlContext.Consumer>
+                    {({ formControlContext }) => (
+                      <StyledMultiSelectButton
+                        ref={ref}
+                        success={isSuccess(formControlContext)}
+                        error={isError(formControlContext)}
+                        disabled={isDisabled()}
+                        as="button"
+                        {...getToggleButtonProps()}
+                        {...getInputProps({
+                          id: id || formControlContext._generatedId,
+                          fullWidth: fullWidth,
+                          minimal: minimal
+                        })}
+                        {...other}
                       >
-                        {Children.map(children, (child, index) =>
-                          React.cloneElement(child, {
-                            ...getItemProps({
-                              item: child,
-                              active: highlightedIndex === index,
-                              selected: selectedItem.indexOf(child) !== -1
-                            }),
-                            key: index
-                          })
-                        )}
-                      </StyledMultiSelectMenu>
+                        {downshiftRenderValue(selectedItem)}
+                      </StyledMultiSelectButton>
                     )}
-                  </Popper>,
-                  isOpen,
-                  popoverContext.isInPopover,
-                  appendToBody
-                );
-              }}
-            </PopoverContext.Consumer>
-          </StyledMultiSelectWrapper>
-        )}
+                  </FormControlContext.Consumer>
+                )}
+              </Reference>
+              <PopoverContext.Consumer>
+                {({ popoverContext }) => {
+                  return _getPopper(
+                    <Popper
+                      positionFixed={positionFixed}
+                      placement={other.placement}
+                      modifiers={{
+                        preventOverflow: {
+                          enabled: appendToBody || positionFixed ? false : true
+                        },
+                        hide: {
+                          enabled: appendToBody || positionFixed ? false : true
+                        }
+                      }}
+                    >
+                      {({ ref: popperRef, style, placement }) => (
+                        <StyledMultiSelectMenu
+                          ref={popperRef}
+                          style={{ ...style, ...menuStyle }}
+                          fullWidth={fullWidth}
+                          data-placement={placement}
+                          isOpen={isOpen}
+                        >
+                          {getMenuItems(children, {
+                            getItemProps,
+                            highlightedIndex,
+                            selectedValues
+                          })}
+                          {/*Children.map(children, (child, index) =>
+                            React.cloneElement(child, {
+                              ...getItemProps({
+                            item: child,
+                            active: highlightedIndex === index,
+                            selected:
+                            selectedValues.indexOf(child.props.value) > -1
+                              }),
+                              key: index
+                            })
+                          )*/}
+                        </StyledMultiSelectMenu>
+                      )}
+                    </Popper>,
+                    isOpen,
+                    popoverContext.isInPopover,
+                    appendToBody
+                  );
+                }}
+              </PopoverContext.Consumer>
+            </StyledMultiSelectWrapper>
+          );
+        }}
       </Downshift>
     </Manager>
   );
@@ -277,13 +361,20 @@ Select.propTypes = {
   /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
   positionFixed: PropTypes.bool,
   /** Whether or not to close the menu on each selection */
-  closeOnSelect: PropTypes.bool
+  closeOnSelect: PropTypes.bool,
+  /** Use react-virtualized to render rows as the user scrolls */
+  virtualized: PropTypes.bool,
+  /** (virtualized only) Row height used to calculate how many rows to render in a virtualized menu */
+  virtualizedRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
+  /** (virtualized only) Width of the menu, unloaded rows may be wider than the initial set */
+  virtualizedMenuWidth: PropTypes.number
 };
 
 Select.defaultProps = {
   placeholder: 'Select...',
   placement: 'bottom-start',
-  closeOnSelect: true
+  closeOnSelect: true,
+  virtualizedRowHeight: 42
 };
 
 export default Select;
