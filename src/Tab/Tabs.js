@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Children } from 'react';
 import { getChildType } from '../utils/helpers';
 import withRefs from '../utils/withRefs';
 
@@ -18,7 +18,7 @@ const Tabs = ({
   forwardedRef,
   ...other
 }) => {
-  const childArray = React.Children.toArray(children);
+  const childArray = Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
     switch (getChildType(child)) {
       case TabNav:

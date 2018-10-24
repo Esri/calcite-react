@@ -20,6 +20,7 @@ const StyledMenuItem = styled(CalciteA)`
   position: relative;
   display: flex;
   justify-content: space-between;
+  min-height: 42px;
   box-sizing: border-box;
   padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
   ${fontSize(-1)};
