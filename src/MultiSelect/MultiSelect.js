@@ -69,15 +69,16 @@ const Select = ({
 
   function downshiftOnChange(selectedItem, downshiftProps) {
     const { selectedItem: selectedItems } = downshiftProps;
+    const existingValues = selectedItems.map(item => item.props.value);
     let values;
-    if (selectedItems.indexOf(selectedItem) !== -1) {
+
+    if (existingValues.indexOf(selectedItem.props.value) !== -1) {
       // Already selected item was clicked, remove it
       values = selectedItems
-        .filter(item => item !== selectedItem)
+        .filter(item => item.props.value !== selectedItem.props.value)
         .map(item => item.props.value);
     } else {
       // An unselected item was clicked, add it selection
-      const existingValues = selectedItems.map(item => item.props.value);
       values = [...existingValues, selectedItem.props.value];
     }
 
