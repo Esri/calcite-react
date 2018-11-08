@@ -299,17 +299,6 @@ const Select = ({
                             highlightedIndex,
                             selectedValues
                           })}
-                          {/*Children.map(children, (child, index) =>
-                            React.cloneElement(child, {
-                              ...getItemProps({
-                            item: child,
-                            active: highlightedIndex === index,
-                            selected:
-                            selectedValues.indexOf(child.props.value) > -1
-                              }),
-                              key: index
-                            })
-                          )*/}
                         </StyledMultiSelectMenu>
                       )}
                     </Popper>,
