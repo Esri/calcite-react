@@ -50,7 +50,8 @@ const Checkbox = ({
     } else {
       if (setFieldValue) {
         setFieldValue(name, e.target.checked);
-      } else if (onChange) {
+      }
+      if (onChange) {
         onChange(e);
       }
     }
