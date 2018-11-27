@@ -40,6 +40,12 @@ const StyledTextArea = styled(CalciteTextarea)`
 
 const StyledTextFieldAdornmentWrapper = styled.div`
   display: flex;
+
+  ${props =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+    `};
 `;
 
 const StyledAdornmentWrapper = styled.div`

@@ -112,7 +112,7 @@ class Search extends Component {
 
     // If the component is just being used as an input filter
     if (!this.props.children && !this.props.items) {
-      this.props.onUserAction(inputValue || this.props.inputValue);
+      this.props.onUserAction(inputValue);
       return;
     }
 
