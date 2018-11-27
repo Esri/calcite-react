@@ -68,8 +68,9 @@ storiesOf('TextField', module)
                 leftAdornment={<UserIcon size={16} />}
               />
             </FormControl>
-            <FormControl success>
+            <FormControl fullWidth success>
               <TextField
+                fullWidth
                 defaultValue="500.00"
                 leftAdornment="$"
                 rightAdornment={<Button>Submit</Button>}

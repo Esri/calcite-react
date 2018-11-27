@@ -19,6 +19,7 @@ const TextField = ({
   type,
   value,
   minimal,
+  fullWidth,
   id,
   onChange,
   onBlur,
@@ -143,7 +144,10 @@ const TextField = ({
   return (
     <FormControlContext.Consumer>
       {({ formControlContext }) => (
-        <StyledTextFieldAdornmentWrapper minimal={minimal}>
+        <StyledTextFieldAdornmentWrapper
+          fullWidth={fullWidth}
+          minimal={minimal}
+        >
           {getAdornment(leftAdornment, leftAdornmentNoWrap, 'left')}
           <TextFieldArea
             ref={forwardedRef}
@@ -152,6 +156,7 @@ const TextField = ({
             type={type}
             value={getValue()}
             minimal={minimal}
+            fullWidth={fullWidth}
             hasAdornmentLeft={leftAdornment !== undefined}
             hasAdornmentRight={rightAdornment !== undefined}
             id={id || formControlContext._generatedId}
