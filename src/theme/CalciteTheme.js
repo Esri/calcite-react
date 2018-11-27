@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { css, ThemeProvider, createGlobalStyle } from 'styled-components';
 import EsriColors from './EsriColors';
+import { unitCalc } from '../utils/helpers';
 
 const CalciteTheme = {
   palette: {
@@ -251,6 +252,71 @@ const CalciteReactGlobalStyles = createGlobalStyle`
     select {
       padding-right: 8px;
     }
+  }
+
+  /* Toastify */
+
+  .Toastify__toast-container.Toastify__toast-container {
+    width: 450px;
+
+    &--top-center {
+      margin-left: ${props => unitCalc('450px', -0.5, '*')};
+    }
+
+    &--bottom-center {
+      margin-left: ${props => unitCalc('450px', -0.5, '*')};
+    }
+  }
+
+  .Toastify__toast.Toastify__toast {
+    padding: ${unitCalc(CalciteTheme.baseline, 2, '/')};
+    box-shadow: ${CalciteTheme.boxShadow};
+    border: 1px solid ${CalciteTheme.palette.lightestGray};
+    border-radius: ${CalciteTheme.borderRadius};
+    font-family: ${CalciteTheme.type.avenirFamily};
+
+    &--default {
+      background: ${CalciteTheme.palette.white};
+      color: ${CalciteTheme.palette.offBlack};
+    }
+    &--info {
+      background: ${CalciteTheme.palette.blue};
+      border-color: transparent;
+    }
+    &--success {
+      background: ${CalciteTheme.palette.darkGreen};
+      border-color: transparent;
+    }
+    &--warning {
+      background: ${CalciteTheme.palette.darkYellow};
+      border-color: transparent;
+    }
+    &--error {
+      background: ${CalciteTheme.palette.red};
+      border-color: transparent;
+    }
+  }
+
+  .Toastify__progress-bar.Toastify__progress-bar {
+    visibility: hidden;
+
+    &--default {
+      background: ${CalciteTheme.palette.blue};
+    }
+
+    &.progress-visible {
+      visibility: visible;
+    }
+
+    ${props =>
+      props.showProgress &&
+      css`
+        visibility: visible;
+
+        &.progress-hidden {
+          visibility: hidden;
+        }
+      `};
   }
 
   /* FORM PSEUDO ELEMENTS */

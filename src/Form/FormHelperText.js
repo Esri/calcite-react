@@ -7,7 +7,7 @@ import { FormControlContext } from './FormControl';
 
 const FormHelperText = ({ children, forwardedRef, ...other }) => {
   return (
-    <FormControlContext>
+    <FormControlContext.Consumer>
       {({ formControlContext }) => (
         <StyledFormHelperText
           ref={forwardedRef}
@@ -18,7 +18,7 @@ const FormHelperText = ({ children, forwardedRef, ...other }) => {
           {children}
         </StyledFormHelperText>
       )}
-    </FormControlContext>
+    </FormControlContext.Consumer>
   );
 };
 

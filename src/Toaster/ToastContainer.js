@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 // Redux operations and local helpers/utils/modules
 
 // Component specific modules (Component-styled, etc.)
-import { StyledToastContainer, StyledCloseButton } from './Toaster-styled';
+import { StyledCloseButton } from './Toaster-styled';
 
 // App components
 import XIcon from 'calcite-ui-icons-react/XIcon';
 
 // Third-party components (buttons, icons, etc.)
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer as ToasterContainer } from 'react-toastify';
 
 // JSON
 
@@ -27,7 +27,7 @@ const ToastContainer = ({ ...other }) => {
     />
   );
 
-  return <StyledToastContainer closeButton={<CloseButton />} {...other} />;
+  return <ToasterContainer closeButton={<CloseButton />} {...other} />;
 };
 
 ToastContainer.propTypes = {
