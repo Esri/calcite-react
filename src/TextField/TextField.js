@@ -128,6 +128,7 @@ const TextField = ({
             type={type}
             value={getValue()}
             minimal={minimal}
+            fullWidth={fullWidth}
             id={id || formControlContext._generatedId}
             onChange={handleChange}
             onBlur={handleBlur}
