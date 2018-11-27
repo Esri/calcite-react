@@ -46,6 +46,11 @@ storiesOf('TextField', module)
             <FormHelperText>That's a number!</FormHelperText>
           </FormControl>
         </GuideExample>
+        <GuideExample label="fullWidth">
+          <FormControl fullWidth>
+            <TextField fullWidth defaultValue="Full Width TextField" />
+          </FormControl>
+        </GuideExample>
         <GuideExample label={`type="textarea"`}>
           <FormControl>
             <TextField

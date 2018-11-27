@@ -43,6 +43,12 @@ const StyledFormControl = styled.div`
     css`
       margin-bottom: ${props => unitCalc(props.theme.baseline, 4, '/')};
     `};
+
+  ${props =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+    `};
 `;
 
 const StyledFormControlLabel = styled.label`
