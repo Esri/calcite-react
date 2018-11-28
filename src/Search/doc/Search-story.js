@@ -523,13 +523,18 @@ storiesOf('Search', module)
 
         render() {
           return (
-            <GuideExample>
-              <Search
-                inputValue={this.state.inputValue}
-                onUserAction={this.onUserAction}
-                onRequestClear={this.clearSearch}
-              />
-            </GuideExample>
+            <Fragment>
+              <GuideExample>
+                <Search
+                  inputValue={this.state.inputValue}
+                  onUserAction={this.onUserAction}
+                  onRequestClear={this.clearSearch}
+                />
+              </GuideExample>
+              <GuideExample label="uncontrolled">
+                <Search />
+              </GuideExample>
+            </Fragment>
           );
         }
       }

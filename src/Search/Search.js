@@ -112,11 +112,12 @@ class Search extends Component {
 
     // If the component is just being used as an input filter
     if (!this.props.children && !this.props.items) {
-      this.props.onUserAction(
-        changes.inputValue === undefined
-          ? downshiftProps.inputValue
-          : changes.inputValue
-      );
+      this.props.onUserAction &&
+        this.props.onUserAction(
+          changes.inputValue === undefined
+            ? downshiftProps.inputValue
+            : changes.inputValue
+        );
       return;
     }
 
@@ -147,7 +148,8 @@ class Search extends Component {
       itemsToShow: newItemsToShow
     });
 
-    this.props.onUserAction(inputValue, selectedItemVal);
+    this.props.onUserAction &&
+      this.props.onUserAction(inputValue, selectedItemVal);
   };
 
   getClearSearchIcon = () => {
@@ -157,7 +159,7 @@ class Search extends Component {
           filled
           size={16}
           onClick={() => {
-            this.props.onRequestClear();
+            this.props.onRequestClear && this.props.onRequestClear();
           }}
         />
       );
