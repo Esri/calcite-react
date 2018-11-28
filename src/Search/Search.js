@@ -88,7 +88,7 @@ class Search extends Component {
     return item.value;
   };
 
-  handleOnUserAction = changes => {
+  handleOnUserAction = (changes, downshiftProps) => {
     let selectedItemVal = changes.selectedItem || this.props.selectedItem || '';
     let inputValue = this.props.inputValue || '';
     let newItemsToShow;
@@ -112,7 +112,11 @@ class Search extends Component {
 
     // If the component is just being used as an input filter
     if (!this.props.children && !this.props.items) {
-      this.props.onUserAction(inputValue);
+      this.props.onUserAction(
+        changes.inputValue === undefined
+          ? downshiftProps.inputValue
+          : changes.inputValue
+      );
       return;
     }
 
