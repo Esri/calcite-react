@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { css, ThemeProvider, createGlobalStyle } from 'styled-components';
 import EsriColors from './EsriColors';
-import { unitCalc } from '../utils/helpers';
 
 const CalciteTheme = {
   palette: {
@@ -260,16 +259,16 @@ const CalciteReactGlobalStyles = createGlobalStyle`
     width: 450px;
 
     &--top-center {
-      margin-left: ${props => unitCalc('450px', -0.5, '*')};
+      margin-left: 225px;
     }
 
     &--bottom-center {
-      margin-left: ${props => unitCalc('450px', -0.5, '*')};
+      margin-left: 225px;
     }
   }
 
   .Toastify__toast.Toastify__toast {
-    padding: ${unitCalc(CalciteTheme.baseline, 2, '/')};
+    padding: 0.775rem;
     box-shadow: ${CalciteTheme.boxShadow};
     border: 1px solid ${CalciteTheme.palette.lightestGray};
     border-radius: ${CalciteTheme.borderRadius};
