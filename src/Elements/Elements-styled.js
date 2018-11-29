@@ -8,6 +8,7 @@ const CalciteHtml = styled.html`
   font-family: 'Avenir Next W01', 'Avenir Next W00', 'Avenir Next', 'Avenir',
     'Helvetica Neue', sans-serif;
 `;
+CalciteHtml.displayName = 'CalciteHtml';
 
 const CalciteBody = styled.body`
   min-height: 100%;
@@ -28,11 +29,13 @@ const CalciteBody = styled.body`
   text-rendering: optimizeLegibility;
   font-feature-settings: 'liga' 1, 'calt' 0;
 `;
+CalciteBody.displayName = 'CalciteBody';
 
 const CalciteP = styled.p`
   margin-top: 0;
   margin-bottom: 1.55rem;
 `;
+CalciteP.displayName = 'CalciteP';
 
 const CalciteA = styled.a`
   color: ${props => props.theme.linkColor};
@@ -44,6 +47,7 @@ const CalciteA = styled.a`
     text-decoration: underline;
   }
 `;
+CalciteA.displayName = 'CalciteA';
 
 const baseH = styled.h1`
   font-weight: 300;
@@ -57,6 +61,7 @@ const H1 = styled(baseH)`
 const CalciteH1 = ({ children, ...props }) => {
   return <H1 {...props}>{children}</H1>;
 };
+CalciteH1.displayName = 'CalciteH1';
 
 const H2 = styled(baseH)`
   ${fontSize(4)};
@@ -68,6 +73,7 @@ const CalciteH2 = ({ children, ...props }) => {
     </H2>
   );
 };
+CalciteH2.displayName = 'CalciteH2';
 
 const H3 = styled(baseH)`
   ${fontSize(3)};
@@ -79,6 +85,7 @@ const CalciteH3 = ({ children, ...props }) => {
     </H3>
   );
 };
+CalciteH3.displayName = 'CalciteH3';
 
 const H4 = styled(baseH)`
   ${fontSize(2)};
@@ -90,6 +97,7 @@ const CalciteH4 = ({ children, ...props }) => {
     </H4>
   );
 };
+CalciteH4.displayName = 'CalciteH4';
 
 const H5 = styled(baseH)`
   ${fontSize(1)};
@@ -101,6 +109,7 @@ const CalciteH5 = ({ children, ...props }) => {
     </H5>
   );
 };
+CalciteH5.displayName = 'CalciteH5';
 
 const H6 = styled(baseH)`
   ${fontSize(0)};
@@ -112,6 +121,7 @@ const CalciteH6 = ({ children, ...props }) => {
     </H6>
   );
 };
+CalciteH6.displayName = 'CalciteH6';
 
 const BaseList = styled.div`
   margin-top: 0;
@@ -146,6 +156,7 @@ const CalciteOl = ({ children, ...props }) => {
     </BaseList>
   );
 };
+CalciteOl.displayName = 'CalciteOl';
 
 const CalciteUl = ({ children, ...props }) => {
   return (
@@ -154,6 +165,7 @@ const CalciteUl = ({ children, ...props }) => {
     </BaseList>
   );
 };
+CalciteUl.displayName = 'CalciteUl';
 
 const CalciteLi = styled.li`
   list-style-position: outside;
@@ -165,10 +177,12 @@ const CalciteLi = styled.li`
     margin-bottom: 0;
   }
 `;
+CalciteLi.displayName = 'CalciteLi';
 
 const CalciteFigure = styled.figure`
   margin: 0 0 1.55rem 0;
 `;
+CalciteFigure.displayName = 'CalciteFigure';
 
 export {
   CalciteHtml,
