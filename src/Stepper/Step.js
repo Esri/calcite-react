@@ -73,4 +73,6 @@ Step.propTypes = {
 
 Step.defaultProps = {};
 
+Step.displayName = 'Step';
+
 export default withRefs(Step);

@@ -41,4 +41,6 @@ Alert.propTypes = {
 
 Alert.defaultProps = {};
 
+Alert.displayName = 'Alert';
+
 export default withRefs(Alert);

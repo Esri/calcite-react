@@ -56,4 +56,6 @@ Drawer.defaultProps = {
   drawerWidth: 280
 };
 
+Drawer.displayName = 'Drawer';
+
 export default withRefs(Drawer);

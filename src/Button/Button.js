@@ -102,4 +102,6 @@ Button.defaultProps = {
   iconPosition: 'after'
 };
 
+Button.displayName = 'Button';
+
 export default withRefs(Button);

@@ -104,4 +104,6 @@ ArcgisItemCard.defaultProps = {
   maxDescriptionLength: 90
 };
 
+ArcgisItemCard.displayName = 'ArcgisItemCard';
+
 export default withRefs(ArcgisItemCard);

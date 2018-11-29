@@ -50,4 +50,6 @@ AccordionSection.propTypes = {
   children: PropTypes.node
 };
 
+AccordionSection.displayName = 'AccordionSection';
+
 export default withRefs(AccordionSection);

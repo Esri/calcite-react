@@ -15,7 +15,7 @@ import {
 import { FormControlContext } from '../Form/FormControl';
 import { PopoverContext } from '../Popover/Popover';
 
-const Select = ({
+const MultiSelect = ({
   children,
   selectedValues,
   placeholder,
@@ -316,7 +316,7 @@ const Select = ({
   );
 };
 
-Select.propTypes = {
+MultiSelect.propTypes = {
   /** Nodes to be used as options in the Select */
   children: PropTypes.node,
   /** Callback function fired when the value of the Select changes. */
@@ -360,11 +360,13 @@ Select.propTypes = {
   virtualizedMenuWidth: PropTypes.number
 };
 
-Select.defaultProps = {
+MultiSelect.defaultProps = {
   placeholder: 'Select...',
   placement: 'bottom-start',
   closeOnSelect: true,
   virtualizedRowHeight: 42
 };
 
-export default Select;
+MultiSelect.displayName = 'MultiSelect';
+
+export default MultiSelect;

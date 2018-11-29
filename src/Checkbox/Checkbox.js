@@ -120,4 +120,6 @@ Checkbox.propTypes = {
 
 Checkbox.defaultProps = {};
 
+Checkbox.displayName = 'Checkbox';
+
 export default withRefs(Checkbox);

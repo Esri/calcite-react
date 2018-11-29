@@ -472,4 +472,6 @@ Search.defaultProps = {
   virtualizedRowHeight: 42
 };
 
+Search.displayName = 'Search';
+
 export default Search;

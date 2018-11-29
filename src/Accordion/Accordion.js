@@ -47,4 +47,6 @@ Accordion.defaultProps = {
   activeSectionIndexes: []
 };
 
+Accordion.displayName = 'Accordion';
+
 export default withRefs(Accordion);

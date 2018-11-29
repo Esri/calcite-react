@@ -19,4 +19,6 @@ ModalActions.propTypes = {
 
 ModalActions.defaultProps = {};
 
+ModalActions.displayName = 'ModalActions';
+
 export default withRefs(ModalActions);

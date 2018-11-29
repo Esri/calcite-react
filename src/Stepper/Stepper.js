@@ -49,4 +49,6 @@ Stepper.propTypes = {
 
 Stepper.defaultProps = {};
 
+Stepper.displayName = 'Stepper';
+
 export default withRefs(Stepper);

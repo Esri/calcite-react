@@ -110,4 +110,6 @@ Radio.propTypes = {
 
 Radio.defaultProps = {};
 
+Radio.displayName = 'Radio';
+
 export default withRefs(Radio);

@@ -30,4 +30,6 @@ Legend.propTypes = {
 
 Legend.defaultProps = {};
 
+Legend.displayName = 'Legend';
+
 export default withRefs(Legend);

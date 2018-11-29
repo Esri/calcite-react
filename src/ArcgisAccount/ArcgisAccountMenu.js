@@ -79,4 +79,6 @@ ArcgisAccountMenu.defaultProps = {
   signOutLabel: 'Sign Out'
 };
 
+ArcgisAccountMenu.displayName = 'ArcgisAccountMenu';
+
 export default withRefs(ArcgisAccountMenu);

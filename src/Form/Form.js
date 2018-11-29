@@ -30,4 +30,6 @@ Form.propTypes = {
 
 Form.defaultProps = {};
 
+Form.displayName = 'Form';
+
 export { Form as default, FormContext };

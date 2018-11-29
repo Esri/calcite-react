@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { Formik, Field } from 'formik';
@@ -138,6 +139,36 @@ storiesOf('TextField', module)
         </GuideExample>
       </div>
     ))
+  )
+  .add(
+    'With a ref',
+    withInfo(doc)(() => {
+      class TextFieldWithRef extends Component {
+        constructor(props) {
+          super();
+          this.inputRef = React.createRef();
+        }
+
+        handleClick = () => {
+          console.log('click', this.inputRef);
+          this.inputRef.current.focus();
+        };
+
+        render() {
+          return (
+            <GuideExample>
+              <Button onClick={this.handleClick}>Click me</Button>
+              <TextField ref={this.inputRef} />
+            </GuideExample>
+          );
+        }
+      }
+
+      TextFieldWithRef.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <TextFieldWithRef />;
+    })
   )
   .add(
     'with Formik',

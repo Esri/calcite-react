@@ -180,4 +180,6 @@ Popover.defaultProps = {
   true: true
 };
 
+Popover.displayName = 'Popover';
+
 export { Popover as default, PopoverContext };

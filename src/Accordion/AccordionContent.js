@@ -19,4 +19,6 @@ AccordionContent.propTypes = {
 
 AccordionContent.defaultProps = {};
 
+AccordionContent.displayName = 'AccordionContent';
+
 export default withRefs(AccordionContent);

@@ -19,4 +19,6 @@ PanelText.propTypes = {
 
 PanelText.defaultProps = {};
 
+PanelText.displayName = 'PanelText';
+
 export default withRefs(PanelText);

@@ -19,4 +19,6 @@ SideNavLink.propTypes = {
 
 SideNavLink.defaultProps = {};
 
+SideNavLink.displayName = 'SideNavLink';
+
 export default withRefs(SideNavLink);

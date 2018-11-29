@@ -66,4 +66,6 @@ Avatar.defaultProps = {
   size: 40
 };
 
+Avatar.displayName = 'Avatar';
+
 export default withRefs(Avatar);

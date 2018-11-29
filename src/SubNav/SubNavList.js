@@ -4,13 +4,13 @@ import withRefs from '../utils/withRefs';
 
 import { StyledSubNavList } from './SubNav-styled';
 
-const SubNavList = ({ children, forwardedRef, ...other }) => {
+const SubNavList = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledSubNavList ref={forwardedRef} {...other}>
       {children}
     </StyledSubNavList>
   );
-};
+});
 
 SubNavList.propTypes = {
   /** Description TBD */
@@ -19,4 +19,6 @@ SubNavList.propTypes = {
 
 SubNavList.defaultProps = {};
 
-export default withRefs(SubNavList);
+SubNavList.displayName = 'SubNavList';
+
+export default SubNavList;

@@ -19,4 +19,6 @@ SideNav.propTypes = {
 
 SideNav.defaultProps = {};
 
+SideNav.displayName = 'SideNav';
+
 export default withRefs(SideNav);

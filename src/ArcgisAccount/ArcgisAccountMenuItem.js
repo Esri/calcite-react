@@ -31,4 +31,6 @@ ArcgisAccountMenuItem.propTypes = {
 
 ArcgisAccountMenuItem.defaultProps = {};
 
+ArcgisAccountMenuItem.displayName = 'ArcgisAccountMenuItem';
+
 export default withRefs(ArcgisAccountMenuItem);

@@ -19,4 +19,6 @@ SideNavTitle.propTypes = {
 
 SideNavTitle.defaultProps = {};
 
+SideNavTitle.displayName = 'SideNavTitle';
+
 export default withRefs(SideNavTitle);

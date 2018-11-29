@@ -68,4 +68,6 @@ FormControl.propTypes = {
 
 FormControl.defaultProps = {};
 
+FormControl.displayName = 'FormControl';
+
 export { FormControl as default, FormControlContext };

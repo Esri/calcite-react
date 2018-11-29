@@ -172,4 +172,6 @@ ArcgisShare.defaultProps = {
   groupsLabel: 'These groups'
 };
 
+ArcgisShare.displayName = 'ArcgisShare';
+
 export default withRefs(ArcgisShare);

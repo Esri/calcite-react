@@ -31,4 +31,6 @@ ListTitle.propTypes = {
 
 ListTitle.defaultProps = {};
 
+ListTitle.displayName = 'ListTitle';
+
 export default withRefs(ListTitle);

@@ -31,4 +31,6 @@ ListSubtitle.propTypes = {
 
 ListSubtitle.defaultProps = {};
 
+ListSubtitle.displayName = 'ListSubtitle';
+
 export default withRefs(ListSubtitle);

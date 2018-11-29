@@ -18,4 +18,6 @@ Menu.propTypes = {
 
 Menu.defaultProps = {};
 
+Menu.displayName = 'Menu';
+
 export default withRefs(Menu);

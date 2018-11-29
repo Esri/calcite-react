@@ -74,4 +74,6 @@ FileUploader.propTypes = {
 
 FileUploader.defaultProps = {};
 
+FileUploader.displayName = 'FileUploader';
+
 export default withRefs(FileUploader);

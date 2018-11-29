@@ -35,4 +35,6 @@ Panel.propTypes = {
 
 Panel.defaultProps = {};
 
+Panel.displayName = 'Panel';
+
 export default withRefs(Panel);

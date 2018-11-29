@@ -19,4 +19,6 @@ StepDescription.propTypes = {
 
 StepDescription.defaultProps = {};
 
+StepDescription.displayName = 'StepDescription';
+
 export default withRefs(StepDescription);

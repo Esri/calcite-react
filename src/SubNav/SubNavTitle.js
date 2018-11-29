@@ -6,7 +6,7 @@ import { StyledSubNavTitle } from './SubNav-styled';
 
 import { SubNavContext } from './SubNav';
 
-const SubNavTitle = ({ children, forwardedRef, ...other }) => {
+const SubNavTitle = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <SubNavContext.Consumer>
       {({ subNavContext }) => (
@@ -20,7 +20,7 @@ const SubNavTitle = ({ children, forwardedRef, ...other }) => {
       )}
     </SubNavContext.Consumer>
   );
-};
+});
 
 SubNavTitle.propTypes = {
   /** Description TBD */
@@ -31,4 +31,6 @@ SubNavTitle.propTypes = {
 
 SubNavTitle.defaultProps = {};
 
-export default withRefs(SubNavTitle);
+SubNavTitle.displayName = 'SubNavTitle';
+
+export default SubNavTitle;

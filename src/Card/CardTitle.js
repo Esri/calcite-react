@@ -18,4 +18,6 @@ CardTitle.propTypes = {
 
 CardTitle.defaultProps = {};
 
+CardTitle.displayName = 'CardTitle';
+
 export default withRefs(CardTitle);

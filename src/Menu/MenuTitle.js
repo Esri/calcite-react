@@ -19,4 +19,6 @@ MenuTitle.propTypes = {
 
 MenuTitle.defaultProps = {};
 
+MenuTitle.displayName = 'MenuTitle';
+
 export default withRefs(MenuTitle);

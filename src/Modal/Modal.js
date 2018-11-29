@@ -76,4 +76,6 @@ Modal.propTypes = {
 
 Modal.defaultProps = {};
 
+Modal.displayName = 'Modal';
+
 export default withRefs(Modal);

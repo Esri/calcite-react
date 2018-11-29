@@ -37,4 +37,6 @@ AccordionTitle.propTypes = {
 
 AccordionTitle.defaultProps = {};
 
+AccordionTitle.displayName = 'AccordionTitle';
+
 export default withRefs(AccordionTitle);

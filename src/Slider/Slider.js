@@ -79,4 +79,6 @@ Slider.defaultProps = {
   step: 1
 };
 
+Slider.displayName = 'Slider';
+
 export default withRefs(Slider);

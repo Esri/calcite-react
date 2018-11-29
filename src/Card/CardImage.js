@@ -45,4 +45,6 @@ CardImage.propTypes = {
 
 CardImage.defaultProps = {};
 
+CardImage.displayName = 'CardImage';
+
 export default withRefs(CardImage);

@@ -13,7 +13,7 @@ const SubNavContext = createContext({
   }
 });
 
-const SubNav = ({ children, blue, forwardedRef, ...other }) => {
+const SubNav = withRefs(({ children, blue, forwardedRef, ...other }) => {
   const subNavContext = {
     blue
   };
@@ -41,7 +41,7 @@ const SubNav = ({ children, blue, forwardedRef, ...other }) => {
       </StyledSubNav>
     </SubNavContext.Provider>
   );
-};
+});
 
 SubNav.propTypes = {
   /** Description TBD */
@@ -56,6 +56,6 @@ SubNav.defaultProps = {
   overlayGradient: true
 };
 
-const SubNavWithRefs = withRefs(SubNav);
+SubNav.displayName = 'SubNav';
 
-export { SubNavWithRefs as default, SubNavContext };
+export { SubNav as default, SubNavContext };

@@ -3,13 +3,13 @@ import React from 'react';
 import withRefs from '../utils/withRefs';
 import { StyledLabel } from './Label-styled';
 
-const Label = ({ children, forwardedRef, ...other }) => {
+const Label = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledLabel ref={forwardedRef} {...other}>
       {children}
     </StyledLabel>
   );
-};
+});
 
 Label.propTypes = {
   /** Content of the label */
@@ -26,4 +26,6 @@ Label.propTypes = {
 
 Label.defaultProps = {};
 
-export default withRefs(Label);
+Label.displayName = 'Label';
+
+export default Label;

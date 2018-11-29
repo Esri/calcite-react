@@ -25,4 +25,6 @@ ListHeader.propTypes = {
 
 ListHeader.defaultProps = {};
 
+ListHeader.displayName = 'ListHeader';
+
 export default withRefs(ListHeader);

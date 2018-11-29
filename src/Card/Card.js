@@ -38,4 +38,6 @@ Card.propTypes = {
 
 Card.defaultProps = {};
 
+Card.displayName = 'Card';
+
 export { Card as default, CardContext };

@@ -28,4 +28,6 @@ CardContent.propTypes = {
 
 CardContent.defaultProps = {};
 
+CardContent.displayName = 'CardContent';
+
 export default withRefs(CardContent);

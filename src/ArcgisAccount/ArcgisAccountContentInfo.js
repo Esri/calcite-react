@@ -60,4 +60,6 @@ ArcgisAccountMenu.propTypes = {
 
 ArcgisAccountMenu.defaultProps = {};
 
+ArcgisAccountMenu.displayName = 'ArcgisAccountMenu';
+
 export default withRefs(ArcgisAccountMenu);

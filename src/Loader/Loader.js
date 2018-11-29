@@ -30,4 +30,6 @@ Loader.propTypes = {
 
 Loader.defaultProps = {};
 
+Loader.displayName = 'Loader';
+
 export default withRefs(Loader);

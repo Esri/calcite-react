@@ -63,6 +63,8 @@ List.propTypes = {
 
 List.defaultProps = {};
 
+List.displayName = 'List';
+
 const ListWithRefs = withRefs(List);
 
 export { ListWithRefs as default, ListContext };

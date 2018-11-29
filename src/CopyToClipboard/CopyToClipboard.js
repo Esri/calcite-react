@@ -110,4 +110,6 @@ CopyToClipboard.defaultProps = {
   successTooltip: 'Copied!'
 };
 
+CopyToClipboard.displayName = 'CopyToClipboard';
+
 export default withRefs(CopyToClipboard);

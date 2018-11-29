@@ -19,4 +19,6 @@ PanelTitle.propTypes = {
 
 PanelTitle.defaultProps = {};
 
+PanelTitle.displayName = 'PanelTitle';
+
 export default withRefs(PanelTitle);

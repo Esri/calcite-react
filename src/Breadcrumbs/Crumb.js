@@ -38,4 +38,6 @@ Crumb.propTypes = {
 
 Crumb.defaultProps = {};
 
+Crumb.displayName = 'Crumb';
+
 export default withRefs(Crumb);

@@ -33,4 +33,6 @@ FormHelperText.propTypes = {
 
 FormHelperText.defaultProps = {};
 
+FormHelperText.displayName = 'FormHelperText';
+
 export default withRefs(FormHelperText);

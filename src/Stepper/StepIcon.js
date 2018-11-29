@@ -102,4 +102,6 @@ StepIcon.propTypes = {
 
 StepIcon.defaultProps = {};
 
+StepIcon.displayName = 'StepIcon';
+
 export default withRefs(StepIcon);

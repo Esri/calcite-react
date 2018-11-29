@@ -65,4 +65,6 @@ ListItem.propTypes = {
 
 ListItem.defaultProps = {};
 
+ListItem.displayName = 'ListItem';
+
 export default withRefs(ListItem);

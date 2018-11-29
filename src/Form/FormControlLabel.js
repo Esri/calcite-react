@@ -39,4 +39,6 @@ FormControlLabel.propTypes = {
 
 FormControlLabel.defaultProps = {};
 
+FormControlLabel.displayName = 'FormControlLabel';
+
 export default withRefs(FormControlLabel);

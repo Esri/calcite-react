@@ -4,29 +4,31 @@ import withRefs from '../utils/withRefs';
 
 import { StyledTabTitle } from './Tab-styled';
 
-const TabTitle = ({
-  children,
-  index,
-  activeTabIndex,
-  setActiveTabIndex,
-  forwardedRef,
-  ...other
-}) => {
-  const handleSetActiveTabIndex = e => {
-    setActiveTabIndex(e, index);
-  };
+const TabTitle = withRefs(
+  ({
+    children,
+    index,
+    activeTabIndex,
+    setActiveTabIndex,
+    forwardedRef,
+    ...other
+  }) => {
+    const handleSetActiveTabIndex = e => {
+      setActiveTabIndex(e, index);
+    };
 
-  return (
-    <StyledTabTitle
-      ref={forwardedRef}
-      onClick={handleSetActiveTabIndex}
-      active={activeTabIndex === index}
-      {...other}
-    >
-      {children}
-    </StyledTabTitle>
-  );
-};
+    return (
+      <StyledTabTitle
+        ref={forwardedRef}
+        onClick={handleSetActiveTabIndex}
+        active={activeTabIndex === index}
+        {...other}
+      >
+        {children}
+      </StyledTabTitle>
+    );
+  }
+);
 
 TabTitle.propTypes = {
   /** Description TBD */
@@ -46,4 +48,6 @@ TabTitle.propTypes = {
 
 TabTitle.defaultProps = {};
 
-export default withRefs(TabTitle);
+TabTitle.displayName = 'TabTitle';
+
+export default TabTitle;

@@ -60,4 +60,6 @@ ArcgisAccountControl.propTypes = {
 
 ArcgisAccountControl.defaultProps = {};
 
+ArcgisAccountControl.displayName = 'ArcgisAccountControl';
+
 export default withRefs(ArcgisAccountControl);

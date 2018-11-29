@@ -32,4 +32,6 @@ Breadcrumbs.propTypes = {
 
 Breadcrumbs.defaultProps = {};
 
+Breadcrumbs.displayName = 'Breadcrumbs';
+
 export { Breadcrumbs as default, BreadcrumbsContext };

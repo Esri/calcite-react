@@ -119,4 +119,6 @@ ComboButton.defaultProps = {
   iconPosition: 'after'
 };
 
+ComboButton.displayName = 'ComboButton';
+
 export default withRefs(ComboButton);

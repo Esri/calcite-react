@@ -132,4 +132,6 @@ ArcgisAccount.propTypes = {
 
 ArcgisAccount.defaultProps = {};
 
+ArcgisAccount.displayName = 'ArcgisAccount';
+
 export default withRefs(ArcgisAccount);
