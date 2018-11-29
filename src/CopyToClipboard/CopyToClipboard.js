@@ -96,7 +96,9 @@ class CopyToClipboard extends Component {
   }
 }
 
-CopyToClipboard.propTypes = {
+const CopyToClipboardWithRefs = withRefs(CopyToClipboard);
+
+CopyToClipboardWithRefs.propTypes = {
   /** Text to be copied */
   children: PropTypes.string,
   /** The tooltip label before the text is copied */
@@ -105,11 +107,11 @@ CopyToClipboard.propTypes = {
   successTooltip: PropTypes.string
 };
 
-CopyToClipboard.defaultProps = {
+CopyToClipboardWithRefs.defaultProps = {
   tooltip: 'Copy',
   successTooltip: 'Copied!'
 };
 
-CopyToClipboard.displayName = 'CopyToClipboard';
+CopyToClipboardWithRefs.displayName = 'CopyToClipboard';
 
-export default withRefs(CopyToClipboard);
+export default CopyToClipboardWithRefs;

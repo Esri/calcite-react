@@ -9,24 +9,26 @@ import {
 
 import { CardContext } from './Card';
 
-const CardImage = ({ children, src, caption, alt, forwardedRef, ...other }) => {
-  function getFigcaption(shaped) {
-    if (!shaped && caption) {
-      return <StyledCardImageCaption>{caption}</StyledCardImageCaption>;
+const CardImage = withRefs(
+  ({ children, src, caption, alt, forwardedRef, ...other }) => {
+    function getFigcaption(shaped) {
+      if (!shaped && caption) {
+        return <StyledCardImageCaption>{caption}</StyledCardImageCaption>;
+      }
     }
-  }
 
-  return (
-    <CardContext.Consumer>
-      {({ cardContext }) => (
-        <StyledCardImageWrap ref={forwardedRef} {...cardContext} {...other}>
-          <StyledCardImage {...cardContext} src={src} alt={alt} />
-          {getFigcaption(cardContext.shaped)}
-        </StyledCardImageWrap>
-      )}
-    </CardContext.Consumer>
-  );
-};
+    return (
+      <CardContext.Consumer>
+        {({ cardContext }) => (
+          <StyledCardImageWrap ref={forwardedRef} {...cardContext} {...other}>
+            <StyledCardImage {...cardContext} src={src} alt={alt} />
+            {getFigcaption(cardContext.shaped)}
+          </StyledCardImageWrap>
+        )}
+      </CardContext.Consumer>
+    );
+  }
+);
 
 CardImage.propTypes = {
   /** Description TBD */
@@ -47,4 +49,4 @@ CardImage.defaultProps = {};
 
 CardImage.displayName = 'CardImage';
 
-export default withRefs(CardImage);
+export default CardImage;

@@ -4,13 +4,13 @@ import withRefs from '../utils/withRefs';
 
 import { StyledTopNav } from './TopNav-styled';
 
-const TopNav = ({ children, forwardedRef, ...other }) => {
+const TopNav = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledTopNav ref={forwardedRef} {...other}>
       {children}
     </StyledTopNav>
   );
-};
+});
 
 TopNav.propTypes = {
   /** Description TBD */
@@ -19,4 +19,6 @@ TopNav.propTypes = {
 
 TopNav.defaultProps = {};
 
-export default withRefs(TopNav);
+TopNav.displayName = 'TopNav';
+
+export default TopNav;

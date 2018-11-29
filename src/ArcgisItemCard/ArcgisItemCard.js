@@ -14,79 +14,81 @@ import {
 
 import withRefs from '../utils/withRefs';
 
-const ArcgisItemCard = ({
-  item,
-  showThumbnail,
-  dateFormatter,
-  maxDescriptionLength,
-  forwardedRef,
-  ...other
-}) => {
-  let imageEl;
-  if (showThumbnail) {
-    const imageSource = `https://arcgis.com/sharing/rest/content/items/${
-      item.id
-    }/info/${item.thumbnail}`;
-    imageEl = <StyledItemCardImageWrap imageSource={imageSource} />;
-  }
-
-  function _dateFormatter(date) {
-    if (dateFormatter) {
-      return dateFormatter(date);
+const ArcgisItemCard = withRefs(
+  ({
+    item,
+    showThumbnail,
+    dateFormatter,
+    maxDescriptionLength,
+    forwardedRef,
+    ...other
+  }) => {
+    let imageEl;
+    if (showThumbnail) {
+      const imageSource = `https://arcgis.com/sharing/rest/content/items/${
+        item.id
+      }/info/${item.thumbnail}`;
+      imageEl = <StyledItemCardImageWrap imageSource={imageSource} />;
     }
 
-    const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-    const language =
-      navigator.userLanguage ||
-      navigator.language ||
-      navigator.browserLanguage ||
-      navigator.systemLanguage;
-    return new Date(date).toLocaleDateString(language, dateOptions);
-  }
+    function _dateFormatter(date) {
+      if (dateFormatter) {
+        return dateFormatter(date);
+      }
 
-  function _textShortener(text, maxLength) {
-    let suffix = '';
-    const _text = text || '';
-    if (_text.length > maxLength || _text.length > maxDescriptionLength) {
-      suffix = '...';
+      const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+      const language =
+        navigator.userLanguage ||
+        navigator.language ||
+        navigator.browserLanguage ||
+        navigator.systemLanguage;
+      return new Date(date).toLocaleDateString(language, dateOptions);
     }
-    return _text.substr(0, maxLength || maxDescriptionLength) + suffix;
-  }
 
-  function _getDescription() {
-    if (item.snippet) {
-      return (
-        <StyledCardItemText title={item.snippet}>
-          {_textShortener(item.snippet)}
-        </StyledCardItemText>
-      );
-    } else {
-      return null;
+    function _textShortener(text, maxLength) {
+      let suffix = '';
+      const _text = text || '';
+      if (_text.length > maxLength || _text.length > maxDescriptionLength) {
+        suffix = '...';
+      }
+      return _text.substr(0, maxLength || maxDescriptionLength) + suffix;
     }
-  }
 
-  return (
-    <StyledItemCard ref={forwardedRef} wide {...other}>
-      {imageEl}
-      <StyledItemCardContent>
-        <StyledCardItemTitle title={item.title}>
-          {_textShortener(item.title, 70)}
-        </StyledCardItemTitle>
-        <StyledCardItemMetrics>
-          <StyledCardItemIconLabelText>
-            <StyledUserIcon size={16} />
-            <span>{item.owner}</span>
-          </StyledCardItemIconLabelText>
-          <StyledCardItemIconLabelText>
-            <StyledCalendarIcon size={16} />
-            <span>{_dateFormatter(item.created)}</span>
-          </StyledCardItemIconLabelText>
-        </StyledCardItemMetrics>
-        {_getDescription()}
-      </StyledItemCardContent>
-    </StyledItemCard>
-  );
-};
+    function _getDescription() {
+      if (item.snippet) {
+        return (
+          <StyledCardItemText title={item.snippet}>
+            {_textShortener(item.snippet)}
+          </StyledCardItemText>
+        );
+      } else {
+        return null;
+      }
+    }
+
+    return (
+      <StyledItemCard ref={forwardedRef} wide {...other}>
+        {imageEl}
+        <StyledItemCardContent>
+          <StyledCardItemTitle title={item.title}>
+            {_textShortener(item.title, 70)}
+          </StyledCardItemTitle>
+          <StyledCardItemMetrics>
+            <StyledCardItemIconLabelText>
+              <StyledUserIcon size={16} />
+              <span>{item.owner}</span>
+            </StyledCardItemIconLabelText>
+            <StyledCardItemIconLabelText>
+              <StyledCalendarIcon size={16} />
+              <span>{_dateFormatter(item.created)}</span>
+            </StyledCardItemIconLabelText>
+          </StyledCardItemMetrics>
+          {_getDescription()}
+        </StyledItemCardContent>
+      </StyledItemCard>
+    );
+  }
+);
 
 ArcgisItemCard.propTypes = {
   /** The ArcGIS item used to populate the ui */
@@ -106,4 +108,4 @@ ArcgisItemCard.defaultProps = {
 
 ArcgisItemCard.displayName = 'ArcgisItemCard';
 
-export default withRefs(ArcgisItemCard);
+export default ArcgisItemCard;

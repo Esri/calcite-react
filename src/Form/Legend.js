@@ -5,7 +5,7 @@ import { StyledLegend } from './Form-styled';
 
 import { FormControlContext } from './FormControl';
 
-const Legend = ({ children, forwardedRef, ...other }) => {
+const Legend = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <FormControlContext.Consumer>
       {({ formControlContext }) => (
@@ -19,7 +19,7 @@ const Legend = ({ children, forwardedRef, ...other }) => {
       )}
     </FormControlContext.Consumer>
   );
-};
+});
 
 Legend.propTypes = {
   /** Description TBD */
@@ -32,4 +32,4 @@ Legend.defaultProps = {};
 
 Legend.displayName = 'Legend';
 
-export default withRefs(Legend);
+export default Legend;

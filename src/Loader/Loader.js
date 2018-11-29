@@ -8,7 +8,7 @@ import {
   StyledLoaderBars
 } from './Loader-styled';
 
-const Loader = ({ text, forwardedRef, ...other }) => {
+const Loader = withRefs(({ text, forwardedRef, ...other }) => {
   const getLoaderText = text => {
     if (text) {
       return <StyledLoaderText>{text}</StyledLoaderText>;
@@ -21,7 +21,7 @@ const Loader = ({ text, forwardedRef, ...other }) => {
       {getLoaderText(text)}
     </StyledLoader>
   );
-};
+});
 
 Loader.propTypes = {
   /** Text displayed below the loading bars */
@@ -32,4 +32,4 @@ Loader.defaultProps = {};
 
 Loader.displayName = 'Loader';
 
-export default withRefs(Loader);
+export default Loader;

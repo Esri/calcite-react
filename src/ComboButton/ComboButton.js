@@ -83,7 +83,9 @@ class ComboButton extends Component {
   }
 }
 
-ComboButton.propTypes = {
+const ComboButtonWithRefs = withRefs(ComboButton);
+
+ComboButtonWithRefs.propTypes = {
   /** Description TBD */
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
   /** Description TBD */
@@ -114,11 +116,11 @@ ComboButton.propTypes = {
   iconPosition: PropTypes.oneOf(['after', 'before'])
 };
 
-ComboButton.defaultProps = {
+ComboButtonWithRefs.defaultProps = {
   type: 'button',
   iconPosition: 'after'
 };
 
-ComboButton.displayName = 'ComboButton';
+ComboButtonWithRefs.displayName = 'ComboButton';
 
-export default withRefs(ComboButton);
+export default ComboButtonWithRefs;

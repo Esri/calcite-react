@@ -6,7 +6,7 @@ import { StyledListHeader } from './List-styled';
 
 import { ListContext } from './List';
 
-const ListHeader = ({ children, forwardedRef, ...other }) => {
+const ListHeader = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
@@ -16,7 +16,7 @@ const ListHeader = ({ children, forwardedRef, ...other }) => {
       )}
     </ListContext.Consumer>
   );
-};
+});
 
 ListHeader.propTypes = {
   /** Description TBD */
@@ -27,4 +27,4 @@ ListHeader.defaultProps = {};
 
 ListHeader.displayName = 'ListHeader';
 
-export default withRefs(ListHeader);
+export default ListHeader;

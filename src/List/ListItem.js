@@ -10,49 +10,45 @@ import {
 
 import { ListContext } from './List';
 
-const ListItem = ({
-  children,
-  leftNode,
-  rightNode,
-  forwardedRef,
-  ...other
-}) => {
-  const getLeftNode = (listContext, leftNode) => {
-    if (leftNode) {
-      return (
-        <StyledListSideContainer nested={listContext.nested}>
-          {leftNode}
-        </StyledListSideContainer>
-      );
-    }
-  };
+const ListItem = withRefs(
+  ({ children, leftNode, rightNode, forwardedRef, ...other }) => {
+    const getLeftNode = (listContext, leftNode) => {
+      if (leftNode) {
+        return (
+          <StyledListSideContainer nested={listContext.nested}>
+            {leftNode}
+          </StyledListSideContainer>
+        );
+      }
+    };
 
-  const getRightNode = (listContext, rightNode) => {
-    if (rightNode) {
-      return (
-        <StyledListSideContainer nested={listContext.nested}>
-          {rightNode}
-        </StyledListSideContainer>
-      );
-    }
-  };
+    const getRightNode = (listContext, rightNode) => {
+      if (rightNode) {
+        return (
+          <StyledListSideContainer nested={listContext.nested}>
+            {rightNode}
+          </StyledListSideContainer>
+        );
+      }
+    };
 
-  return (
-    <ListContext.Consumer>
-      {({ listContext }) => (
-        <StyledListItem
-          ref={forwardedRef}
-          nested={listContext.nested}
-          {...other}
-        >
-          {getLeftNode(listContext, leftNode)}
-          <StyledListTextContainer>{children}</StyledListTextContainer>
-          {getRightNode(listContext, rightNode)}
-        </StyledListItem>
-      )}
-    </ListContext.Consumer>
-  );
-};
+    return (
+      <ListContext.Consumer>
+        {({ listContext }) => (
+          <StyledListItem
+            ref={forwardedRef}
+            nested={listContext.nested}
+            {...other}
+          >
+            {getLeftNode(listContext, leftNode)}
+            <StyledListTextContainer>{children}</StyledListTextContainer>
+            {getRightNode(listContext, rightNode)}
+          </StyledListItem>
+        )}
+      </ListContext.Consumer>
+    );
+  }
+);
 
 ListItem.propTypes = {
   /** Content of the ListItem */
@@ -67,4 +63,4 @@ ListItem.defaultProps = {};
 
 ListItem.displayName = 'ListItem';
 
-export default withRefs(ListItem);
+export default ListItem;

@@ -8,47 +8,41 @@ import {
   StyledAvatarText
 } from './Avatar-styled';
 
-const Avatar = ({
-  children,
-  src,
-  alt,
-  size,
-  fontSize,
-  forwardedRef,
-  ...other
-}) => {
-  const getWrappedChildren = children => {
-    if (children) {
-      if (React.isValidElement(children)) {
-        //Assume the element is an SVG icon
-        const _fontSize = fontSize ? { fontSize: fontSize } : null;
-        return React.cloneElement(children, {
-          ...children.props,
-          style: {
-            ...StyledAvatarSvg,
-            ...children.props.style,
-            ..._fontSize
-          }
-        });
-      } else {
-        return <StyledAvatarText>{children}</StyledAvatarText>;
+const Avatar = withRefs(
+  ({ children, src, alt, size, fontSize, forwardedRef, ...other }) => {
+    const getWrappedChildren = children => {
+      if (children) {
+        if (React.isValidElement(children)) {
+          //Assume the element is an SVG icon
+          const _fontSize = fontSize ? { fontSize: fontSize } : null;
+          return React.cloneElement(children, {
+            ...children.props,
+            style: {
+              ...StyledAvatarSvg,
+              ...children.props.style,
+              ..._fontSize
+            }
+          });
+        } else {
+          return <StyledAvatarText>{children}</StyledAvatarText>;
+        }
+      } else if (src) {
+        return <StyledAvatarImage src={src} alt={alt || ''} />;
       }
-    } else if (src) {
-      return <StyledAvatarImage src={src} alt={alt || ''} />;
-    }
-  };
+    };
 
-  return (
-    <StyledAvatar
-      ref={forwardedRef}
-      aSize={size}
-      fontSize={fontSize}
-      {...other}
-    >
-      {getWrappedChildren(children)}
-    </StyledAvatar>
-  );
-};
+    return (
+      <StyledAvatar
+        ref={forwardedRef}
+        aSize={size}
+        fontSize={fontSize}
+        {...other}
+      >
+        {getWrappedChildren(children)}
+      </StyledAvatar>
+    );
+  }
+);
 
 Avatar.propTypes = {
   /** Description TBD */
@@ -68,4 +62,4 @@ Avatar.defaultProps = {
 
 Avatar.displayName = 'Avatar';
 
-export default withRefs(Avatar);
+export default Avatar;

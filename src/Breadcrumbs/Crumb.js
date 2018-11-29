@@ -4,28 +4,30 @@ import withRefs from '../utils/withRefs';
 import { StyledCrumb, StyledSpanCrumb } from './Breadcrumbs-styled';
 import { BreadcrumbsContext } from './Breadcrumbs';
 
-const Crumb = ({ children, href, hasLink, forwardedRef, ...other }) => {
-  let Crumb = StyledSpanCrumb;
+const Crumb = withRefs(
+  ({ children, href, hasLink, forwardedRef, ...other }) => {
+    let Crumb = StyledSpanCrumb;
 
-  if (href || hasLink) {
-    Crumb = StyledCrumb;
+    if (href || hasLink) {
+      Crumb = StyledCrumb;
+    }
+
+    return (
+      <BreadcrumbsContext.Consumer>
+        {({ breadcrumbsContext }) => (
+          <Crumb
+            ref={forwardedRef}
+            {...breadcrumbsContext}
+            {...other}
+            href={href}
+          >
+            {children}
+          </Crumb>
+        )}
+      </BreadcrumbsContext.Consumer>
+    );
   }
-
-  return (
-    <BreadcrumbsContext.Consumer>
-      {({ breadcrumbsContext }) => (
-        <Crumb
-          ref={forwardedRef}
-          {...breadcrumbsContext}
-          {...other}
-          href={href}
-        >
-          {children}
-        </Crumb>
-      )}
-    </BreadcrumbsContext.Consumer>
-  );
-};
+);
 
 Crumb.propTypes = {
   /** Text content of the bread crumb */
@@ -40,4 +42,4 @@ Crumb.defaultProps = {};
 
 Crumb.displayName = 'Crumb';
 
-export default withRefs(Crumb);
+export default Crumb;

@@ -22,30 +22,25 @@ import {
 
 // CSS
 
-const ArcgisAccountControl = ({
-  avatar,
-  fullName,
-  username,
-  open,
-  forwardedRef,
-  ...other
-}) => {
-  return (
-    <StyledArcgisAccountControl ref={forwardedRef} open={open} {...other}>
-      <StyledArcgisAccountControlAvatar>
-        {avatar}
-      </StyledArcgisAccountControlAvatar>
-      <StyledArcgisAccountControlNames>
-        <StyledArcgisAccountControlFriendlyName>
-          {fullName}
-        </StyledArcgisAccountControlFriendlyName>
-        <StyledArcgisAccountControlUsername>
-          {username}
-        </StyledArcgisAccountControlUsername>
-      </StyledArcgisAccountControlNames>
-    </StyledArcgisAccountControl>
-  );
-};
+const ArcgisAccountControl = withRefs(
+  ({ avatar, fullName, username, open, forwardedRef, ...other }) => {
+    return (
+      <StyledArcgisAccountControl ref={forwardedRef} open={open} {...other}>
+        <StyledArcgisAccountControlAvatar>
+          {avatar}
+        </StyledArcgisAccountControlAvatar>
+        <StyledArcgisAccountControlNames>
+          <StyledArcgisAccountControlFriendlyName>
+            {fullName}
+          </StyledArcgisAccountControlFriendlyName>
+          <StyledArcgisAccountControlUsername>
+            {username}
+          </StyledArcgisAccountControlUsername>
+        </StyledArcgisAccountControlNames>
+      </StyledArcgisAccountControl>
+    );
+  }
+);
 
 ArcgisAccountControl.propTypes = {
   /** User profile avatar image */
@@ -62,4 +57,4 @@ ArcgisAccountControl.defaultProps = {};
 
 ArcgisAccountControl.displayName = 'ArcgisAccountControl';
 
-export default withRefs(ArcgisAccountControl);
+export default ArcgisAccountControl;

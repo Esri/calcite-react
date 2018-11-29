@@ -24,46 +24,52 @@ import ArcgisAccountContentMenu from './ArcgisAccountContentMenu';
 
 // CSS
 
-const ArcgisAccountMenu = ({
-  children,
-  user,
-  portal,
-  avatar,
-  switchAccountLabel,
-  signOutLabel,
-  onRequestSwitchAccount,
-  onRequestSignOut,
-  forwardedRef,
-  ...other
-}) => {
-  return (
-    <StyledArcgisAccountMenu ref={forwardedRef} {...other}>
-      <StyledArcgisAccountContent>
-        <ArcgisAccountContentInfo user={user} portal={portal} avatar={avatar} />
-        <ArcgisAccountContentMenu>{children}</ArcgisAccountContentMenu>
-      </StyledArcgisAccountContent>
-      <StyledArcgisAccountSignInMenu>
-        <StyledSwitchAccountButton
-          grouped
-          half
-          extraLarge
-          onClick={onRequestSwitchAccount}
-        >
-          {switchAccountLabel}
-        </StyledSwitchAccountButton>
-        <StyledSignOutButton
-          halo
-          grouped
-          half
-          extraLarge
-          onClick={onRequestSignOut}
-        >
-          {signOutLabel}
-        </StyledSignOutButton>
-      </StyledArcgisAccountSignInMenu>
-    </StyledArcgisAccountMenu>
-  );
-};
+const ArcgisAccountMenu = withRefs(
+  ({
+    children,
+    user,
+    portal,
+    avatar,
+    switchAccountLabel,
+    signOutLabel,
+    onRequestSwitchAccount,
+    onRequestSignOut,
+    forwardedRef,
+    ...other
+  }) => {
+    return (
+      <StyledArcgisAccountMenu ref={forwardedRef} {...other}>
+        <StyledArcgisAccountContent>
+          <ArcgisAccountContentInfo
+            user={user}
+            portal={portal}
+            avatar={avatar}
+          />
+          <ArcgisAccountContentMenu>{children}</ArcgisAccountContentMenu>
+        </StyledArcgisAccountContent>
+        <StyledArcgisAccountSignInMenu>
+          <StyledSwitchAccountButton
+            grouped
+            half
+            extraLarge
+            onClick={onRequestSwitchAccount}
+          >
+            {switchAccountLabel}
+          </StyledSwitchAccountButton>
+          <StyledSignOutButton
+            halo
+            grouped
+            half
+            extraLarge
+            onClick={onRequestSignOut}
+          >
+            {signOutLabel}
+          </StyledSignOutButton>
+        </StyledArcgisAccountSignInMenu>
+      </StyledArcgisAccountMenu>
+    );
+  }
+);
 
 ArcgisAccountMenu.propTypes = {
   /** AGOL user object */
@@ -81,4 +87,4 @@ ArcgisAccountMenu.defaultProps = {
 
 ArcgisAccountMenu.displayName = 'ArcgisAccountMenu';
 
-export default withRefs(ArcgisAccountMenu);
+export default ArcgisAccountMenu;

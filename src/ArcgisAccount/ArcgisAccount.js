@@ -117,7 +117,9 @@ class ArcgisAccount extends Component {
   }
 }
 
-ArcgisAccount.propTypes = {
+const ArcgisAccountWithRef = withRefs(ArcgisAccount);
+
+ArcgisAccountWithRef.propTypes = {
   /** AGOL user object */
   user: PropTypes.object.isRequired,
   /** AGOL portal object */
@@ -130,8 +132,8 @@ ArcgisAccount.propTypes = {
   onRequestSignOut: PropTypes.func
 };
 
-ArcgisAccount.defaultProps = {};
+ArcgisAccountWithRef.defaultProps = {};
 
-ArcgisAccount.displayName = 'ArcgisAccount';
+ArcgisAccountWithRef.displayName = 'ArcgisAccount';
 
-export default withRefs(ArcgisAccount);
+export default ArcgisAccountWithRef;

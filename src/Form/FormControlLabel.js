@@ -5,24 +5,26 @@ import { StyledFormControlLabel } from './Form-styled';
 
 import { FormControlContext } from './FormControl';
 
-const FormControlLabel = ({ children, htmlFor, forwardedRef, ...other }) => {
-  return (
-    <FormControlContext.Consumer>
-      {({ formControlContext }) => (
-        <StyledFormControlLabel
-          ref={forwardedRef}
-          htmlFor={formControlContext._generatedId}
-          error={formControlContext.error}
-          success={formControlContext.success}
-          horizontal={formControlContext.horizontal}
-          {...other}
-        >
-          {children}
-        </StyledFormControlLabel>
-      )}
-    </FormControlContext.Consumer>
-  );
-};
+const FormControlLabel = withRefs(
+  ({ children, htmlFor, forwardedRef, ...other }) => {
+    return (
+      <FormControlContext.Consumer>
+        {({ formControlContext }) => (
+          <StyledFormControlLabel
+            ref={forwardedRef}
+            htmlFor={formControlContext._generatedId}
+            error={formControlContext.error}
+            success={formControlContext.success}
+            horizontal={formControlContext.horizontal}
+            {...other}
+          >
+            {children}
+          </StyledFormControlLabel>
+        )}
+      </FormControlContext.Consumer>
+    );
+  }
+);
 
 FormControlLabel.propTypes = {
   /** Description TBD */
@@ -41,4 +43,4 @@ FormControlLabel.defaultProps = {};
 
 FormControlLabel.displayName = 'FormControlLabel';
 
-export default withRefs(FormControlLabel);
+export default FormControlLabel;

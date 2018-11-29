@@ -6,7 +6,7 @@ import { StyledTableBody } from './Table-styled';
 
 import { TableContext } from './Table';
 
-const TableBody = ({ children, forwardedRef, ...other }) => {
+const TableBody = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <TableContext.Consumer>
       {({ tableContext }) => (
@@ -20,7 +20,7 @@ const TableBody = ({ children, forwardedRef, ...other }) => {
       )}
     </TableContext.Consumer>
   );
-};
+});
 
 TableBody.propTypes = {
   /** Description TBD */
@@ -43,4 +43,6 @@ TableBody.propTypes = {
 
 TableBody.defaultProps = {};
 
-export default withRefs(TableBody);
+TableBody.displayName = 'TableBody';
+
+export default TableBody;

@@ -4,13 +4,13 @@ import withRefs from '../utils/withRefs';
 
 import { StyledSideNavLink } from './SideNav-styled';
 
-const SideNavLink = ({ children, forwardedRef, ...other }) => {
+const SideNavLink = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledSideNavLink ref={forwardedRef} {...other}>
       {children}
     </StyledSideNavLink>
   );
-};
+});
 
 SideNavLink.propTypes = {
   /** Description TBD */
@@ -21,4 +21,4 @@ SideNavLink.defaultProps = {};
 
 SideNavLink.displayName = 'SideNavLink';
 
-export default withRefs(SideNavLink);
+export default SideNavLink;

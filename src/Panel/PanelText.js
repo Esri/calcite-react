@@ -4,13 +4,13 @@ import withRefs from '../utils/withRefs';
 
 import { StyledPanelText } from './Panel-styled';
 
-const PanelText = ({ children, forwardedRef, ...other }) => {
+const PanelText = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledPanelText ref={forwardedRef} {...other}>
       {children}
     </StyledPanelText>
   );
-};
+});
 
 PanelText.propTypes = {
   /** Content of the PanelText */
@@ -21,4 +21,4 @@ PanelText.defaultProps = {};
 
 PanelText.displayName = 'PanelText';
 
-export default withRefs(PanelText);
+export default PanelText;

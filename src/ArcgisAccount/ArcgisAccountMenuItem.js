@@ -16,13 +16,15 @@ import { StyledArcgisAccountMenuItem } from './ArcgisAccount-styled';
 
 // CSS
 
-const ArcgisAccountMenuItem = ({ children, forwardedRef, ...other }) => {
-  return (
-    <StyledArcgisAccountMenuItem ref={forwardedRef} {...other}>
-      {children}
-    </StyledArcgisAccountMenuItem>
-  );
-};
+const ArcgisAccountMenuItem = withRefs(
+  ({ children, forwardedRef, ...other }) => {
+    return (
+      <StyledArcgisAccountMenuItem ref={forwardedRef} {...other}>
+        {children}
+      </StyledArcgisAccountMenuItem>
+    );
+  }
+);
 
 ArcgisAccountMenuItem.propTypes = {
   /** Content node of the menu item */
@@ -33,4 +35,4 @@ ArcgisAccountMenuItem.defaultProps = {};
 
 ArcgisAccountMenuItem.displayName = 'ArcgisAccountMenuItem';
 
-export default withRefs(ArcgisAccountMenuItem);
+export default ArcgisAccountMenuItem;

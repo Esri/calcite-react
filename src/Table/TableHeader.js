@@ -6,7 +6,7 @@ import { StyledTableHeader } from './Table-styled';
 
 import { TableContext } from './Table';
 
-const TableHeader = ({ children, forwardedRef, ...other }) => {
+const TableHeader = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <TableContext.Consumer>
       {({ tableContext }) => (
@@ -24,7 +24,7 @@ const TableHeader = ({ children, forwardedRef, ...other }) => {
       )}
     </TableContext.Consumer>
   );
-};
+});
 
 TableHeader.propTypes = {
   /** Description TBD */
@@ -45,4 +45,6 @@ TableHeader.propTypes = {
 
 TableHeader.defaultProps = {};
 
-export default withRefs(TableHeader);
+TableHeader.displayName = 'TableHeader';
+
+export default TableHeader;

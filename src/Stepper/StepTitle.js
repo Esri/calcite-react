@@ -4,13 +4,13 @@ import withRefs from '../utils/withRefs';
 
 import { StyledStepTitle } from './Stepper-styled';
 
-const StepTitle = ({ children, forwardedRef, ...other }) => {
+const StepTitle = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledStepTitle ref={forwardedRef} {...other}>
       {children}
     </StyledStepTitle>
   );
-};
+});
 
 StepTitle.propTypes = {
   /** Description TBD */
@@ -21,4 +21,4 @@ StepTitle.defaultProps = {};
 
 StepTitle.displayName = 'StepTitle';
 
-export default withRefs(StepTitle);
+export default StepTitle;

@@ -4,38 +4,40 @@ import withRefs from '../utils/withRefs';
 import ReactDOM from 'react-dom';
 import { StyledDrawer, StyledDrawerNav } from './Drawer-styled';
 
-const Drawer = ({
-  children,
-  active,
-  right,
-  drawerWidth,
-  onRequestClose,
-  drawerNavStyle,
-  forwardedRef,
-  ...other
-}) => {
-  function gutterClicked(e) {
-    if (e.target === e.currentTarget) {
-      onRequestClose(e);
+const Drawer = withRefs(
+  ({
+    children,
+    active,
+    right,
+    drawerWidth,
+    onRequestClose,
+    drawerNavStyle,
+    forwardedRef,
+    ...other
+  }) => {
+    function gutterClicked(e) {
+      if (e.target === e.currentTarget) {
+        onRequestClose(e);
+      }
     }
+
+    const drawer = (
+      <StyledDrawer active={active} onClick={gutterClicked} {...other}>
+        <StyledDrawerNav
+          ref={forwardedRef}
+          active={active}
+          right={right}
+          drawerWidth={drawerWidth}
+          style={drawerNavStyle}
+        >
+          {children}
+        </StyledDrawerNav>
+      </StyledDrawer>
+    );
+
+    return ReactDOM.createPortal(drawer, document.body);
   }
-
-  const drawer = (
-    <StyledDrawer active={active} onClick={gutterClicked} {...other}>
-      <StyledDrawerNav
-        ref={forwardedRef}
-        active={active}
-        right={right}
-        drawerWidth={drawerWidth}
-        style={drawerNavStyle}
-      >
-        {children}
-      </StyledDrawerNav>
-    </StyledDrawer>
-  );
-
-  return ReactDOM.createPortal(drawer, document.body);
-};
+);
 
 Drawer.propTypes = {
   /** Child elements to be rendered inside the Drawer */
@@ -58,4 +60,4 @@ Drawer.defaultProps = {
 
 Drawer.displayName = 'Drawer';
 
-export default withRefs(Drawer);
+export default Drawer;
