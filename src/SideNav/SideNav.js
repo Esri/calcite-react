@@ -4,13 +4,13 @@ import withRefs from '../utils/withRefs';
 
 import { StyledSideNav } from './SideNav-styled';
 
-const SideNav = ({ children, forwardedRef, ...other }) => {
+const SideNav = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledSideNav ref={forwardedRef} {...other}>
       {children}
     </StyledSideNav>
   );
-};
+});
 
 SideNav.propTypes = {
   /** Description TBD */
@@ -19,4 +19,6 @@ SideNav.propTypes = {
 
 SideNav.defaultProps = {};
 
-export default withRefs(SideNav);
+SideNav.displayName = 'SideNav';
+
+export default SideNav;

@@ -6,7 +6,7 @@ import { StyledListTitle } from './List-styled';
 
 import { ListContext } from './List';
 
-const ListTitle = ({ children, forwardedRef, ...other }) => {
+const ListTitle = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
@@ -20,7 +20,7 @@ const ListTitle = ({ children, forwardedRef, ...other }) => {
       )}
     </ListContext.Consumer>
   );
-};
+});
 
 ListTitle.propTypes = {
   /** Content of the ItemTitle */
@@ -31,4 +31,6 @@ ListTitle.propTypes = {
 
 ListTitle.defaultProps = {};
 
-export default withRefs(ListTitle);
+ListTitle.displayName = 'ListTitle';
+
+export default ListTitle;

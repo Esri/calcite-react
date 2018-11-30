@@ -4,13 +4,13 @@ import withRefs from '../utils/withRefs';
 
 import { StyledModalActions } from './Modal-styled';
 
-const ModalActions = ({ children, forwardedRef, ...other }) => {
+const ModalActions = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledModalActions ref={forwardedRef} {...other}>
       {children}
     </StyledModalActions>
   );
-};
+});
 
 ModalActions.propTypes = {
   /** Description TBD */
@@ -19,4 +19,6 @@ ModalActions.propTypes = {
 
 ModalActions.defaultProps = {};
 
-export default withRefs(ModalActions);
+ModalActions.displayName = 'ModalActions';
+
+export default ModalActions;

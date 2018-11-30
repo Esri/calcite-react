@@ -491,4 +491,6 @@ Select.defaultProps = {
   virtualizedRowHeight: 42
 };
 
+Select.displayName = 'Select';
+
 export default Select;

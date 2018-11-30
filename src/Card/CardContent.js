@@ -5,7 +5,7 @@ import { StyledCardContent } from './Card-styled';
 
 import { CardContext } from './Card';
 
-const CardContent = ({ children, forwardedRef, ...other }) => {
+const CardContent = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <CardContext.Consumer>
       {({ cardContext }) => (
@@ -15,7 +15,7 @@ const CardContent = ({ children, forwardedRef, ...other }) => {
       )}
     </CardContext.Consumer>
   );
-};
+});
 
 CardContent.propTypes = {
   /** Description TBD */
@@ -28,4 +28,6 @@ CardContent.propTypes = {
 
 CardContent.defaultProps = {};
 
-export default withRefs(CardContent);
+CardContent.displayName = 'CardContent';
+
+export default CardContent;

@@ -4,13 +4,13 @@ import withRefs from '../utils/withRefs';
 
 import { StyledPanel } from './Panel-styled';
 
-const Panel = ({ children, forwardedRef, ...other }) => {
+const Panel = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledPanel ref={forwardedRef} {...other}>
       {children}
     </StyledPanel>
   );
-};
+});
 
 Panel.propTypes = {
   /** Content of the Panel */
@@ -35,4 +35,6 @@ Panel.propTypes = {
 
 Panel.defaultProps = {};
 
-export default withRefs(Panel);
+Panel.displayName = 'Panel';
+
+export default Panel;

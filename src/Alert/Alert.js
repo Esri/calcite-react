@@ -3,22 +3,24 @@ import React from 'react';
 import withRefs from '../utils/withRefs';
 import { StyledAlert, StyledAlertClose } from './Alert-styled';
 
-const Alert = ({ children, closeLabel, onClose, forwardedRef, ...other }) => {
-  const getAlertClose = closeLabel => {
-    if (closeLabel) {
-      return (
-        <StyledAlertClose onClick={onClose}>{closeLabel}</StyledAlertClose>
-      );
-    }
-  };
+const Alert = withRefs(
+  ({ children, closeLabel, onClose, forwardedRef, ...other }) => {
+    const getAlertClose = closeLabel => {
+      if (closeLabel) {
+        return (
+          <StyledAlertClose onClick={onClose}>{closeLabel}</StyledAlertClose>
+        );
+      }
+    };
 
-  return (
-    <StyledAlert ref={forwardedRef} {...other}>
-      {children}
-      {getAlertClose(closeLabel)}
-    </StyledAlert>
-  );
-};
+    return (
+      <StyledAlert ref={forwardedRef} {...other}>
+        {children}
+        {getAlertClose(closeLabel)}
+      </StyledAlert>
+    );
+  }
+);
 
 const AlertWithRefs = withRefs(Alert);
 
@@ -43,4 +45,6 @@ AlertWithRefs.propTypes = {
 
 AlertWithRefs.defaultProps = {};
 
-export default AlertWithRefs;
+Alert.displayName = 'Alert';
+
+export default Alert;

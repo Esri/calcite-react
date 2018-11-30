@@ -5,7 +5,7 @@ import { StyledFormHelperText } from './Form-styled';
 
 import { FormControlContext } from './FormControl';
 
-const FormHelperText = ({ children, forwardedRef, ...other }) => {
+const FormHelperText = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <FormControlContext.Consumer>
       {({ formControlContext }) => (
@@ -20,7 +20,7 @@ const FormHelperText = ({ children, forwardedRef, ...other }) => {
       )}
     </FormControlContext.Consumer>
   );
-};
+});
 
 FormHelperText.propTypes = {
   /** Description TBD */
@@ -33,4 +33,6 @@ FormHelperText.propTypes = {
 
 FormHelperText.defaultProps = {};
 
-export default withRefs(FormHelperText);
+FormHelperText.displayName = 'FormHelperText';
+
+export default FormHelperText;

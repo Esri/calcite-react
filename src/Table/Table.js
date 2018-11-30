@@ -55,7 +55,9 @@ const Table = ({
   );
 };
 
-Table.propTypes = {
+const TableWithRefs = withRefs(Table);
+
+TableWithRefs.propTypes = {
   /** Description TBD */
   children: PropTypes.node,
   /** Description TBD */
@@ -74,8 +76,8 @@ Table.propTypes = {
   noRow: PropTypes.bool
 };
 
-Table.defaultProps = {};
+TableWithRefs.defaultProps = {};
 
-const TableWithRefs = withRefs(Table);
+TableWithRefs.displayName = 'Table';
 
 export { TableWithRefs as default, TableContext };

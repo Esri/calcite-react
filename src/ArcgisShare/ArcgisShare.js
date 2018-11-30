@@ -152,7 +152,9 @@ class ArcgisShare extends Component {
   }
 }
 
-ArcgisShare.propTypes = {
+const ArcgisShareWithRefs = withRefs(ArcgisShare);
+
+ArcgisShareWithRefs.propTypes = {
   /** AGOL user object */
   user: PropTypes.object.isRequired,
   /** AGOL portal object */
@@ -167,9 +169,11 @@ ArcgisShare.propTypes = {
   promoteFavorites: PropTypes.bool
 };
 
-ArcgisShare.defaultProps = {
+ArcgisShareWithRefs.defaultProps = {
   publicLabel: 'Everyone (public)',
   groupsLabel: 'These groups'
 };
 
-export default withRefs(ArcgisShare);
+ArcgisShareWithRefs.displayName = 'ArcgisShare';
+
+export default ArcgisShareWithRefs;

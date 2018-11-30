@@ -6,7 +6,7 @@ import { StyledListSubtitle } from './List-styled';
 
 import { ListContext } from './List';
 
-const ListSubtitle = ({ children, forwardedRef, ...other }) => {
+const ListSubtitle = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
@@ -20,7 +20,7 @@ const ListSubtitle = ({ children, forwardedRef, ...other }) => {
       )}
     </ListContext.Consumer>
   );
-};
+});
 
 ListSubtitle.propTypes = {
   /** Content of the SubTitle */
@@ -31,4 +31,6 @@ ListSubtitle.propTypes = {
 
 ListSubtitle.defaultProps = {};
 
-export default withRefs(ListSubtitle);
+ListSubtitle.displayName = 'ListSubtitle';
+
+export default ListSubtitle;

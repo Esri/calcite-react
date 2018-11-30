@@ -3,13 +3,13 @@ import React from 'react';
 import { StyledMenu } from './Menu-styled';
 import withRefs from '../utils/withRefs';
 
-const Menu = ({ children, forwardedRef, ...other }) => {
+const Menu = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledMenu ref={forwardedRef} {...other}>
       {children}
     </StyledMenu>
   );
-};
+});
 
 Menu.propTypes = {
   /** Content node for the Menu */
@@ -18,4 +18,6 @@ Menu.propTypes = {
 
 Menu.defaultProps = {};
 
-export default withRefs(Menu);
+Menu.displayName = 'Menu';
+
+export default Menu;

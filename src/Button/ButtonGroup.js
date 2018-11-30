@@ -35,4 +35,6 @@ ButtonGroup.propTypes = {
 
 ButtonGroup.defaultProps = {};
 
+ButtonGroup.displayName = 'ButtonGroup';
+
 export { ButtonGroup as default, ButtonGroupContext };

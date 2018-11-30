@@ -82,4 +82,6 @@ DatePicker.defaultProps = {
   id: uniqid()
 };
 
+DatePicker.displayName = 'DatePicker';
+
 export default DatePicker;

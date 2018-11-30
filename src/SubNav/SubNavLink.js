@@ -4,13 +4,13 @@ import withRefs from '../utils/withRefs';
 
 import { StyledSubNavLink } from './SubNav-styled';
 
-const SubNavLink = ({ children, active, forwardedRef, ...other }) => {
+const SubNavLink = withRefs(({ children, active, forwardedRef, ...other }) => {
   return (
     <StyledSubNavLink ref={forwardedRef} active={active} {...other}>
       {children}
     </StyledSubNavLink>
   );
-};
+});
 
 SubNavLink.propTypes = {
   /** Description TBD */
@@ -23,4 +23,6 @@ SubNavLink.defaultProps = {
   active: undefined
 };
 
-export default withRefs(SubNavLink);
+SubNavLink.displayName = 'SubNavLink';
+
+export default SubNavLink;

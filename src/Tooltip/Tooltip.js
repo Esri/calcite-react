@@ -9,6 +9,7 @@ import {
   StyledTooltip,
   StyledTooltipArrow
 } from './Tooltip-styled';
+import withRefs from '../utils/withRefs';
 
 class Tooltip extends Component {
   constructor(props) {
@@ -104,7 +105,9 @@ class Tooltip extends Component {
   }
 }
 
-Tooltip.propTypes = {
+const TooltipWithRef = withRefs(Tooltip);
+
+TooltipWithRef.propTypes = {
   /** Nodes to be used as the target of the tooltip */
   children: PropTypes.node,
   /** Nodes to be used as tooltip content */
@@ -124,11 +127,13 @@ Tooltip.propTypes = {
   arrowStyle: PropTypes.object
 };
 
-Tooltip.defaultProps = {
+TooltipWithRef.defaultProps = {
   title: '',
   placement: undefined,
   transitionDuration: 200,
   enterDelay: 0
 };
 
-export default Tooltip;
+TooltipWithRef.displayName = 'Tooltip';
+
+export default TooltipWithRef;

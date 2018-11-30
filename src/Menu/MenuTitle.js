@@ -4,13 +4,13 @@ import withRefs from '../utils/withRefs';
 
 import { StyledMenuTitle } from './Menu-styled';
 
-const MenuTitle = ({ children, forwardedRef, ...other }) => {
+const MenuTitle = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledMenuTitle ref={forwardedRef} as="span" {...other}>
       {children}
     </StyledMenuTitle>
   );
-};
+});
 
 MenuTitle.propTypes = {
   /** Content of the MenuTitle */
@@ -19,4 +19,6 @@ MenuTitle.propTypes = {
 
 MenuTitle.defaultProps = {};
 
-export default withRefs(MenuTitle);
+MenuTitle.displayName = 'MenuTitle';
+
+export default MenuTitle;

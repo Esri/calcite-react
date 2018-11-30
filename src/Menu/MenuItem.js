@@ -3,7 +3,7 @@ import React from 'react';
 import { StyledMenuItem, StyledMenuItemSubtitle } from './Menu-styled';
 import withRefs from '../utils/withRefs';
 
-const MenuItem = ({ children, subtitle, forwardedRef, ...other }) => {
+const MenuItem = withRefs(({ children, subtitle, forwardedRef, ...other }) => {
   const getSubtitle = subtitle => {
     if (subtitle) {
       return <StyledMenuItemSubtitle>{subtitle}</StyledMenuItemSubtitle>;
@@ -16,7 +16,7 @@ const MenuItem = ({ children, subtitle, forwardedRef, ...other }) => {
       {getSubtitle(subtitle)}
     </StyledMenuItem>
   );
-};
+});
 
 MenuItem.propTypes = {
   /** Content of the MenuItem */
@@ -27,4 +27,6 @@ MenuItem.propTypes = {
 
 MenuItem.defaultProps = {};
 
-export default withRefs(MenuItem);
+MenuItem.displayName = 'MenuItem';
+
+export default MenuItem;

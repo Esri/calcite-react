@@ -12,44 +12,46 @@ import {
   DialogTransition
 } from './Modal-styled';
 
-const Modal = ({
-  children,
-  open,
-  title,
-  overlayStyle,
-  dialogStyle,
-  forwardedRef,
-  ...other
-}) => {
-  return (
-    <Transition in={open} timeout={0}>
-      {state => (
-        <ReactModal
-          ref={forwardedRef}
-          isOpen={open}
-          closeTimeoutMS={300}
-          style={{
-            overlay: {
-              ...StyledModalOverlay,
-              ...overlayStyle,
-              ...OverlayTransition[state]
-            },
-            content: {
-              ...StyledModalDialog,
-              ...dialogStyle,
-              ...DialogTransition[state]
-            }
-          }}
-          contentLabel={title}
-          role="dialog"
-          {...other}
-        >
-          {children}
-        </ReactModal>
-      )}
-    </Transition>
-  );
-};
+const Modal = withRefs(
+  ({
+    children,
+    open,
+    title,
+    overlayStyle,
+    dialogStyle,
+    forwardedRef,
+    ...other
+  }) => {
+    return (
+      <Transition in={open} timeout={0}>
+        {state => (
+          <ReactModal
+            ref={forwardedRef}
+            isOpen={open}
+            closeTimeoutMS={300}
+            style={{
+              overlay: {
+                ...StyledModalOverlay,
+                ...overlayStyle,
+                ...OverlayTransition[state]
+              },
+              content: {
+                ...StyledModalDialog,
+                ...dialogStyle,
+                ...DialogTransition[state]
+              }
+            }}
+            contentLabel={title}
+            role="dialog"
+            {...other}
+          >
+            {children}
+          </ReactModal>
+        )}
+      </Transition>
+    );
+  }
+);
 
 Modal.propTypes = {
   /** Description TBD */
@@ -76,4 +78,6 @@ Modal.propTypes = {
 
 Modal.defaultProps = {};
 
-export default withRefs(Modal);
+Modal.displayName = 'Modal';
+
+export default Modal;

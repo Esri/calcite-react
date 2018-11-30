@@ -52,7 +52,9 @@ class List extends Component {
   }
 }
 
-List.propTypes = {
+const ListWithRefs = withRefs(List);
+
+ListWithRefs.propTypes = {
   /** Description TBD */
   children: PropTypes.node,
   /** Applied when the list is imbedded inside another list */
@@ -61,8 +63,8 @@ List.propTypes = {
   open: PropTypes.bool
 };
 
-List.defaultProps = {};
+ListWithRefs.defaultProps = {};
 
-const ListWithRefs = withRefs(List);
+ListWithRefs.displayName = 'List';
 
 export { ListWithRefs as default, ListContext };

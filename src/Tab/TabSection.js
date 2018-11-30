@@ -4,13 +4,13 @@ import withRefs from '../utils/withRefs';
 
 import { StyledTabSection } from './Tab-styled';
 
-const TabSection = ({ children, forwardedRef, ...other }) => {
+const TabSection = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledTabSection ref={forwardedRef} {...other}>
       {children}
     </StyledTabSection>
   );
-};
+});
 
 TabSection.propTypes = {
   /** Description TBD */
@@ -25,4 +25,6 @@ TabSection.propTypes = {
   dark: PropTypes.bool
 };
 
-export default withRefs(TabSection);
+TabSection.displayName = 'TabSection';
+
+export default TabSection;

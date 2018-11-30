@@ -3,13 +3,13 @@ import React from 'react';
 import withRefs from '../utils/withRefs';
 import { StyledTopNavList } from './TopNav-styled';
 
-const TopNavList = ({ children, forwardedRef, ...other }) => {
+const TopNavList = withRefs(({ children, forwardedRef, ...other }) => {
   return (
     <StyledTopNavList ref={forwardedRef} {...other}>
       {children}
     </StyledTopNavList>
   );
-};
+});
 
 TopNavList.propTypes = {
   /** Description TBD */
@@ -18,4 +18,6 @@ TopNavList.propTypes = {
 
 TopNavList.defaultProps = {};
 
-export default withRefs(TopNavList);
+TopNavList.displayName = 'TopNavList';
+
+export default TopNavList;

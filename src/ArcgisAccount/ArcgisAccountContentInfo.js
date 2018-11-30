@@ -22,36 +22,32 @@ import CalciteTheme from '../theme/CalciteTheme';
 
 // CSS
 
-const ArcgisAccountMenu = ({
-  user,
-  portal,
-  avatar,
-  forwardedRef,
-  ...other
-}) => {
-  const _avatar = React.cloneElement(avatar, {
-    style: {
-      border: `2px solid ${CalciteTheme.palette.white}`,
-      boxShadow: `0 0 0 3px ${CalciteTheme.palette.blue}`,
-      marginBottom: CalciteTheme.baseline
-    }
-  });
+const ArcgisAccountMenu = withRefs(
+  ({ user, portal, avatar, forwardedRef, ...other }) => {
+    const _avatar = React.cloneElement(avatar, {
+      style: {
+        border: `2px solid ${CalciteTheme.palette.white}`,
+        boxShadow: `0 0 0 3px ${CalciteTheme.palette.blue}`,
+        marginBottom: CalciteTheme.baseline
+      }
+    });
 
-  return (
-    <StyledArcgisAccountContentInfo ref={forwardedRef} {...other}>
-      {_avatar}
-      <StyledArcgisAccountContentName>
-        {user.fullName}
-      </StyledArcgisAccountContentName>
-      <StyledArcgisAccountContentId>
-        {user.username}
-      </StyledArcgisAccountContentId>
-      <StyledArcgisAccountContentGroup>
-        {portal.name}
-      </StyledArcgisAccountContentGroup>
-    </StyledArcgisAccountContentInfo>
-  );
-};
+    return (
+      <StyledArcgisAccountContentInfo ref={forwardedRef} {...other}>
+        {_avatar}
+        <StyledArcgisAccountContentName>
+          {user.fullName}
+        </StyledArcgisAccountContentName>
+        <StyledArcgisAccountContentId>
+          {user.username}
+        </StyledArcgisAccountContentId>
+        <StyledArcgisAccountContentGroup>
+          {portal.name}
+        </StyledArcgisAccountContentGroup>
+      </StyledArcgisAccountContentInfo>
+    );
+  }
+);
 
 ArcgisAccountMenu.propTypes = {
   /** AGOL user object */
@@ -60,4 +56,6 @@ ArcgisAccountMenu.propTypes = {
 
 ArcgisAccountMenu.defaultProps = {};
 
-export default withRefs(ArcgisAccountMenu);
+ArcgisAccountMenu.displayName = 'ArcgisAccountMenu';
+
+export default ArcgisAccountMenu;
