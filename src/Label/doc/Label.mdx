@@ -1,0 +1,38 @@
+---
+name: Label
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import Label from '../';
+
+# Label
+
+Labels are a way to call attention to a word. The mark element, a notification
+count, or an important indicator (like marking a technology as 'beta' or
+'private') are all use cases for labels.
+
+## Basic Usage
+
+<Playground>
+  <GuideExample>
+    <Label>default</Label>
+  </GuideExample>
+  <GuideExample label="blue">
+    <Label blue>blue</Label>
+  </GuideExample>
+  <GuideExample label="green">
+    <Label green>green</Label>
+  </GuideExample>
+  <GuideExample label="yellow">
+    <Label yellow>yellow</Label>
+  </GuideExample>
+  <GuideExample label="red">
+    <Label red>red</Label>
+  </GuideExample>
+</Playground>
+
+## Props
+
+<PropsTable of={Label} />

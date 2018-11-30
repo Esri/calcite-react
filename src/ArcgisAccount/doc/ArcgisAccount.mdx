@@ -3,9 +3,6 @@ name: ArcgisAccount
 ---
 
 import { Playground, PropsTable } from 'docz';
-import Doc from './ArcgisAccount.md';
-
-import ArcgisAccount, { ArcgisAccountMenuItem } from '../';
 
 import TopNav, {
   TopNavBrand,
@@ -15,13 +12,15 @@ import TopNav, {
   TopNavActionsList
 } from '../../TopNav';
 import EsriLogo from '../../../stories/images/ESRI_Logo_Black.svg';
+import ArcgisAccount, { ArcgisAccountMenuItem } from '../';
 
 import user from './user.json';
 import portal from './portal.json';
 
 # ArcgisAccount
 
-<Doc />
+A header UI element to display the currently logged in user and provide a
+popover to show actions related to account management.
 
 ## Basic Usage
 
