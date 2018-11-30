@@ -1,0 +1,115 @@
+---
+name: Accordion
+---
+
+import { Playground, PropsTable } from 'docz';
+
+import { CalciteP } from '../../Elements';
+
+import Accordion, {
+  AccordionSection,
+  AccordionTitle,
+  AccordionContent
+} from '../';
+
+# Accordion
+
+Accordion comprises of vertically stacked items/sections that can be expanded or
+collapsed to reveal the related content. There can be more than one expanded
+section at the same time. The sections can be expanded or collapsed by clicking
+on their title.
+
+## Basic Usage
+
+<Playground>
+  <Accordion
+    onAccordionChange={() => console.log('onAccordionChange')}
+    activeSectionIndexes={[0]}
+  >
+    <AccordionSection>
+      <AccordionTitle>Accordion Title 1</AccordionTitle>
+      <AccordionContent>
+        <CalciteP>Accordion Content 1</CalciteP>
+      </AccordionContent>
+    </AccordionSection>
+    <AccordionSection>
+      <AccordionTitle>Accordion Title 2</AccordionTitle>
+      <AccordionContent>
+        <CalciteP>Accordion Content 2</CalciteP>
+      </AccordionContent>
+    </AccordionSection>
+    <AccordionSection>
+      <AccordionTitle>Accordion Title 3</AccordionTitle>
+      <AccordionContent>
+        <CalciteP>Accordion Content 3</CalciteP>
+      </AccordionContent>
+    </AccordionSection>
+  </Accordion>
+</Playground>
+
+## Controlled Usage
+
+<Playground>
+  {() => {
+      class AccordionExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            activeSectionIndexes: [0]
+          };
+
+          this.onAccordionChange = this.onAccordionChange.bind(this);
+        }
+
+        onAccordionChange(evt, index) {
+          this.state.activeSectionIndexes.includes(index)
+            ? this.setState({
+                activeSectionIndexes: this.state.activeSectionIndexes.filter(
+                  item => index !== item
+                )
+              })
+            : this.setState({
+                activeSectionIndexes: [
+                  ...this.state.activeSectionIndexes,
+                  index
+                ]
+              });
+        };
+
+        render() {
+          return (
+            <Accordion
+              onAccordionChange={this.onAccordionChange}
+              activeSectionIndexes={this.state.activeSectionIndexes}
+            >
+              <AccordionSection>
+                <AccordionTitle>Accordion Title 1</AccordionTitle>
+                <AccordionContent>
+                  <CalciteP>Accordion Content 1</CalciteP>
+                </AccordionContent>
+              </AccordionSection>
+              <AccordionSection>
+                <AccordionTitle>Accordion Title 2</AccordionTitle>
+                <AccordionContent>
+                  <CalciteP>Accordion Content 2</CalciteP>
+                </AccordionContent>
+              </AccordionSection>
+              <AccordionSection>
+                <AccordionTitle>Accordion Title 3</AccordionTitle>
+                <AccordionContent>
+                  <CalciteP>Accordion Content 3</CalciteP>
+                </AccordionContent>
+              </AccordionSection>
+            </Accordion>
+          );
+        }
+      }
+
+      return <AccordionExample />;
+    }}
+
+</Playground>
+
+## Props
+
+<PropsTable of={Accordion} />

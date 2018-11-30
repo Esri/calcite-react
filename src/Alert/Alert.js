@@ -20,7 +20,9 @@ const Alert = ({ children, closeLabel, onClose, forwardedRef, ...other }) => {
   );
 };
 
-Alert.propTypes = {
+const AlertWithRefs = withRefs(Alert);
+
+AlertWithRefs.propTypes = {
   /** Components to be rendered within the Alert. */
   children: PropTypes.node,
   /** Color modifier for the Alert. */
@@ -39,6 +41,6 @@ Alert.propTypes = {
   onClose: PropTypes.func
 };
 
-Alert.defaultProps = {};
+AlertWithRefs.defaultProps = {};
 
-export default withRefs(Alert);
+export default AlertWithRefs;

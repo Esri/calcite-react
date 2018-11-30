@@ -1,0 +1,48 @@
+---
+name: ArcgisShare
+---
+
+import { Playground, PropsTable } from 'docz';
+import Doc from './ArcgisShare.md';
+
+import ArcgisShare from '../';
+
+import user from './user.json';
+import portal from './portal.json';
+import item from './item.json';
+
+# ArcgisShare
+
+<Doc />
+
+## Basic Usage
+
+<Playground>
+  <ArcgisShare user={user} portal={portal} onChange={e => console.log(e)} />
+</Playground>
+
+## Populated with an ArcGIS Item
+
+<Playground>
+  <ArcgisShare
+    user={user}
+    portal={portal}
+    sharing={item.sharing}
+    onChange={e => console.log(e)}
+  />
+</Playground>
+
+## Promote Favorites
+
+<Playground>
+  <ArcgisShare
+    user={user}
+    portal={portal}
+    promoteFavorites
+    onChange={e => console.log(e)}
+  />
+</Playground>
+
+## Props
+
+<PropsTable of={ArcgisShare} />

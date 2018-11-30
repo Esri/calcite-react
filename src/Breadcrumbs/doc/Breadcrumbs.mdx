@@ -1,0 +1,42 @@
+---
+name: Breadcrumbs
+---
+
+import { Playground, PropsTable } from 'docz';
+import Doc from './Breadcrumbs.md';
+import GuideExample from '../../../docz/GuideExample';
+import CalciteTheme from '../../../src/theme/CalciteTheme';
+
+import Breadcrumbs, { Crumb } from '../';
+
+# Breadcrumbs
+
+<Doc />
+
+## Basic Usage
+
+<Playground>
+  <GuideExample>
+    <Breadcrumbs>
+      <Crumb href="#">Thing</Crumb>
+      <Crumb>Thing</Crumb>
+      <Crumb href="#">Thing</Crumb>
+      <Crumb href="#">Current</Crumb>
+    </Breadcrumbs>
+  </GuideExample>
+  <GuideExample
+    label="white"
+    style={{ background: CalciteTheme.palette.offBlack }}
+  >
+    <Breadcrumbs white>
+      <Crumb href="#">Thing</Crumb>
+      <Crumb>Thing</Crumb>
+      <Crumb href="#">Thing</Crumb>
+      <Crumb href="#">Current</Crumb>
+    </Breadcrumbs>
+  </GuideExample>
+</Playground>
+
+## Props
+
+<PropsTable of={Breadcrumbs} />

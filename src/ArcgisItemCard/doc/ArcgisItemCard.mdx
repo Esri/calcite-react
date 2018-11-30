@@ -1,0 +1,30 @@
+---
+name: ArcgisItemCard
+---
+
+import { Playground, PropsTable } from 'docz';
+import Doc from './ArcgisItemCard.md';
+
+import ArcgisItemCard from '../';
+import item from './item.json';
+
+# ArcgisItemCard
+
+<Doc />
+
+## Basic Usage
+
+<Playground>
+  <div>
+    <div>
+      <ArcgisItemCard item={item} />
+    </div>
+    <div>
+      <ArcgisItemCard item={item} style={{ maxWidth: '420px' }} />
+    </div>
+  </div>
+</Playground>
+
+## Props
+
+<PropsTable of={ArcgisItemCard} />

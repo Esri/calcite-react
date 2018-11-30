@@ -1,0 +1,258 @@
+---
+name: Button
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../stories/GuideExample';
+import CalciteTheme from '../../theme/CalciteTheme';
+import DownloadToIcon from 'calcite-ui-icons-react/DownloadToIcon';
+import SaveIcon from 'calcite-ui-icons-react/SaveIcon';
+import AppLauncherIcon from 'calcite-ui-icons-react/AppLauncherIcon';
+
+import Button, { ButtonGroup } from '../';
+
+# Button
+
+Buttons communicate the action that will occur when the user touches them.
+
+## Basic Usage
+
+<Playground>
+  <GuideExample>
+    <Button onClick={() => console.log('clicked')}>default</Button>
+  </GuideExample>
+
+<GuideExample label="transparent">
+  <Button transparent onClick={() => console.log('clicked')}>
+    transparent
+  </Button>
+</GuideExample>
+
+<GuideExample label="clear">
+  <Button clear onClick={() => console.log('clicked')}>
+    clear
+  </Button>
+</GuideExample>
+
+<GuideExample label="clearGray">
+  <Button clearGray onClick={() => console.log('clicked')}>
+    clear-gray
+  </Button>
+</GuideExample>
+
+<GuideExample
+  label="clearWhite"
+  style={{ background: CalciteTheme.palette.offBlack }}
+>
+  <Button clearWhite onClick={() => console.log('clicked')}>
+    clear-white
+  </Button>
+</GuideExample>
+
+<GuideExample
+  label="white"
+  style={{ background: CalciteTheme.palette.offBlack }}
+>
+  <Button white onClick={() => console.log('clicked')}>
+    white
+  </Button>
+</GuideExample>
+
+<GuideExample label="halo">
+  <Button halo onClick={() => console.log('clicked')}>
+    halo
+  </Button>
+</GuideExample>
+
+<GuideExample label="extraSmall">
+  <Button extraSmall onClick={() => console.log('clicked')}>
+    extraSmall
+  </Button>
+</GuideExample>
+
+<GuideExample label="small">
+  <Button small onClick={() => console.log('clicked')}>
+    small
+  </Button>
+</GuideExample>
+
+<GuideExample label="large">
+  <Button large onClick={() => console.log('clicked')}>
+    large
+  </Button>
+</GuideExample>
+
+<GuideExample label="extraLarge">
+  <Button extraLarge onClick={() => console.log('clicked')}>
+    extraLarge
+  </Button>
+</GuideExample>
+
+<GuideExample label="fullWidth">
+  <Button fullWidth onClick={() => console.log('clicked')}>
+    fullWidth
+  </Button>
+</GuideExample>
+
+  <GuideExample label="half">
+    <Button half onClick={() => console.log('clicked')}>
+      half
+    </Button>
+  </GuideExample>
+  <GuideExample label="red">
+    <Button red onClick={() => console.log('clicked')}>
+      red
+    </Button>
+  </GuideExample>
+  <GuideExample label="green">
+    <Button green onClick={() => console.log('clicked')}>
+      green
+    </Button>
+  </GuideExample>
+
+<GuideExample label="disabled">
+  <Button disabled onClick={() => console.log('clicked')}>
+    disabled
+  </Button>
+</GuideExample>
+
+<GuideExample label="grouped">
+  <ButtonGroup>
+    <Button onClick={() => console.log('clicked')}>One</Button>
+    <Button onClick={() => console.log('clicked')}>Two</Button>
+    <Button onClick={() => console.log('clicked')}>Three</Button>
+  </ButtonGroup>
+</GuideExample>
+
+  <GuideExample label="href=&quot;&quot;">
+    <Button
+      href="https://esri.com"
+      target="_blank"
+      onClick={() => console.log('clicked')}
+    >
+      link button
+    </Button>
+  </GuideExample>
+</Playground>
+
+## Toggle Button Group
+
+<Playground>
+{() => {
+      class ButtonGroupStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selected: 1
+          };
+
+          this.selectButton = this.selectButton.bind(this);
+        }
+
+        selectButton(selected) {
+          this.setState({
+            selected
+          });
+        };
+
+        render() {
+          return (
+            <GuideExample label="grouped">
+              <ButtonGroup isToggle>
+                <Button
+                  clear={this.state.selected !== 1}
+                  onClick={() => {
+                    this.selectButton(1);
+                  }}
+                >
+                  One
+                </Button>
+                <Button
+                  clear={this.state.selected !== 2}
+                  onClick={() => {
+                    this.selectButton(2);
+                  }}
+                >
+                  Two
+                </Button>
+                <Button
+                  clear={this.state.selected !== 3}
+                  onClick={() => {
+                    this.selectButton(3);
+                  }}
+                >
+                  Three
+                </Button>
+                <Button
+                  clear={this.state.selected !== 4}
+                  onClick={() => {
+                    this.selectButton(4);
+                  }}
+                >
+                  Four
+                </Button>
+                <Button
+                  clear={this.state.selected !== 5}
+                  onClick={() => {
+                    this.selectButton(5);
+                  }}
+                >
+                  Five
+                </Button>
+              </ButtonGroup>
+            </GuideExample>
+          );
+        }
+      }
+
+
+      return <ButtonGroupStory />;
+    }}
+
+</Playground>
+
+## With Icon
+
+<Playground>
+  <GuideExample>
+    <Button
+      onClick={() => console.log('clicked')}
+      icon={<DownloadToIcon size={16} />}
+    >
+      Download
+    </Button>
+  </GuideExample>
+  <GuideExample label={`iconPosition="before"`}>
+    <Button
+      onClick={() => console.log('clicked')}
+      icon={<SaveIcon size={16} />}
+      iconPosition="before"
+    >
+      Save
+    </Button>
+  </GuideExample>
+
+<GuideExample label="iconButton">
+  <Button
+    iconButton
+    icon={<AppLauncherIcon />}
+    onClick={() => console.log('clicked')}
+  />
+</GuideExample>
+
+  <GuideExample
+    label="iconButton white"
+    style={{ background: CalciteTheme.palette.offBlack }}
+  >
+    <Button
+      iconButton
+      white
+      icon={<AppLauncherIcon filled />}
+      onClick={() => console.log('clicked')}
+    />
+  </GuideExample>
+</Playground>
+
+## Props
+
+<PropsTable of={Button} />

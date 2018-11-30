@@ -37,6 +37,8 @@
     "build-storybook": "build-storybook -o docs",
     "lint": "eslint src/**",
     "test": "jest --coverage",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
     "release:patch": "npm version patch && npm run build && npm publish dist",
     "release:minor": "npm version minor && npm run build && npm publish dist",
     "release:major": "npm version major && npm run build && npm publish dist"
@@ -62,6 +64,7 @@
   "dependencies": {
     "aphrodite": "^2.2.3",
     "calcite-ui-icons-react": "^0.1.4",
+    "docz": "^0.12.13",
     "downshift": "^3.1.1",
     "match-sorter": "^2.3.0",
     "memoize-one": "^4.0.2",

@@ -1,0 +1,41 @@
+---
+name: Alert
+---
+
+import { Playground, PropsTable } from 'docz';
+
+import Alert from '../';
+import XIcon from 'calcite-ui-icons-react/XIcon';
+
+# Alert
+
+Alerts are used to inform users of state changes, errors, or successful actions.
+
+## Basic Usage
+
+<Playground>
+  <div>
+    <Alert>Something Happened!</Alert>
+  </div>
+  <div label='closeLabel="close"'>
+    <Alert closeLabel={<XIcon />} onClose={() => console.log('clicked')}>
+      Has close link!
+    </Alert>
+  </div>
+  <div label="red">
+    <Alert red>Something Happened!</Alert>
+  </div>
+  <div label="yellow">
+    <Alert yellow>Something Happened!</Alert>
+  </div>
+  <div label="green">
+    <Alert green>Something Happened!</Alert>
+  </div>
+  <div label="full">
+    <Alert full>Something Happened!</Alert>
+  </div>
+</Playground>
+
+## Props
+
+<PropsTable of={Alert} />
