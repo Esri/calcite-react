@@ -1,0 +1,28 @@
+---
+name: Loader
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import Loader from '../';
+
+# Loader
+
+The loader element is a placeholder while content is being retrieved or
+rendered.
+
+## Basic Usage
+
+<Playground>
+  <GuideExample>
+    <Loader />
+  </GuideExample>
+  <GuideExample label="with text">
+    <Loader text="Loading..." />
+  </GuideExample>
+</Playground>
+
+## Props
+
+<PropsTable of={Loader} />

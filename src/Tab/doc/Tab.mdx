@@ -1,0 +1,138 @@
+---
+name: Tabs
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import Tabs, { TabNav, TabTitle, TabContents, TabSection } from '../';
+
+# Tabs
+
+The Tabs component consists of clickable tabs, that are aligned side by side. The
+`<TabNav/>` should describe the Tab navigation items and `<TabContents/>`
+should describe the sections within. Any DOM node can be passed as children to
+the tab section.
+
+## Basic Usage
+
+<Playground>
+  <GuideExample>
+    <Tabs activeTabIndex={0}>
+      <TabNav>
+        <TabTitle>Tab 1</TabTitle>
+        <TabTitle>Tab 2</TabTitle>
+        <TabTitle>Tab 3</TabTitle>
+      </TabNav>
+      <TabContents>
+        <TabSection>Tab 1 content</TabSection>
+        <TabSection>Tab 2 content</TabSection>
+        <TabSection>Tab 3 content</TabSection>
+      </TabContents>
+    </Tabs>
+  </GuideExample>
+  <GuideExample label="gray">
+    <Tabs gray activeTabIndex={0}>
+      <TabNav>
+        <TabTitle>Tab 1</TabTitle>
+        <TabTitle>Tab 2</TabTitle>
+        <TabTitle>Tab 3</TabTitle>
+      </TabNav>
+      <TabContents>
+        <TabSection>Tab 1 content</TabSection>
+        <TabSection>Tab 2 content</TabSection>
+        <TabSection>Tab 3 content</TabSection>
+      </TabContents>
+    </Tabs>
+  </GuideExample>
+  <GuideExample label="transparent">
+    <Tabs transparent activeTabIndex={0}>
+      <TabNav>
+        <TabTitle>Tab 1</TabTitle>
+        <TabTitle>Tab 2</TabTitle>
+        <TabTitle>Tab 3</TabTitle>
+      </TabNav>
+      <TabContents>
+        <TabSection>Tab 1 content</TabSection>
+        <TabSection>Tab 2 content</TabSection>
+        <TabSection>Tab 3 content</TabSection>
+      </TabContents>
+    </Tabs>
+  </GuideExample>
+  <GuideExample label="translucent">
+    <Tabs translucent activeTabIndex={0}>
+      <TabNav>
+        <TabTitle>Tab 1</TabTitle>
+        <TabTitle>Tab 2</TabTitle>
+        <TabTitle>Tab 3</TabTitle>
+      </TabNav>
+      <TabContents>
+        <TabSection>Tab 1 content</TabSection>
+        <TabSection>Tab 2 content</TabSection>
+        <TabSection>Tab 3 content</TabSection>
+      </TabContents>
+    </Tabs>
+  </GuideExample>
+  <GuideExample label="dark">
+    <Tabs dark activeTabIndex={0}>
+      <TabNav>
+        <TabTitle>Tab 1</TabTitle>
+        <TabTitle>Tab 2</TabTitle>
+        <TabTitle>Tab 3</TabTitle>
+      </TabNav>
+      <TabContents>
+        <TabSection>Tab 1 content</TabSection>
+        <TabSection>Tab 2 content</TabSection>
+        <TabSection>Tab 3 content</TabSection>
+      </TabContents>
+    </Tabs>
+  </GuideExample>
+</Playground>
+
+## Controlled Tabs
+
+<Playground>
+  {() => {    
+      class TabStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            activeTabIndex: 0
+          };
+
+          this.onTabChange = this.onTabChange.bind(this);
+        }
+
+        onTabChange(index) {
+          this.setState({ activeTabIndex: index });
+        };
+
+        render() {
+          return (
+            <Tabs
+              onTabChange={this.onTabChange}
+              activeTabIndex={this.state.activeTabIndex}
+            >
+              <TabNav>
+                <TabTitle>Tab 1</TabTitle>
+                <TabTitle>Tab 2</TabTitle>
+                <TabTitle>Tab 3</TabTitle>
+              </TabNav>
+              <TabContents>
+                <TabSection>Tab 1 content</TabSection>
+                <TabSection>Tab 2 content</TabSection>
+                <TabSection>Tab 3 content</TabSection>
+              </TabContents>
+            </Tabs>
+          );
+        }
+      }
+
+      return <TabStory />;
+    }}
+
+</Playground>
+
+## Props
+
+<PropsTable of={Tabs} />

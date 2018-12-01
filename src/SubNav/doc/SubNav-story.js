@@ -7,16 +7,12 @@ import doc from './SubNav.md';
 import greenBlueBg from '../../../stories/images/subNav-greenBlue-bg.png';
 import grayCityBg from '../../../stories/images/city_map.png';
 import Button from '../../Button';
-import ComboButton from '../../ComboButton';
-import Menu, { MenuItem } from '../../Menu';
 import SubNav, {
   SubNavTitle,
   SubNavList,
   SubNavLink,
   SubNavActions
 } from '../';
-
-import { StyledMultiRowActions } from '../SubNav-styled';
 
 storiesOf('SubNav', module)
   .add(

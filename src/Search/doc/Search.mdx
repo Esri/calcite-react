@@ -3,18 +3,528 @@ name: Search
 ---
 
 import { Playground, PropsTable } from 'docz';
-import Doc from './Search.md';
+import GuideExample from '../../../docz/GuideExample';
 
+import { MenuItem } from '../../Menu';
+import { ListItem, ListItemTitle, ListItemSubtitle } from '../../List';
+
+import GlobeIcon from 'calcite-ui-icons-react/GlobeIcon';
+
+import statesJson from '../../../stories/_sampleJson/states.json';
+import statesJson2 from '../../../stories/_sampleJson/states_objects.json';
 import Search from '../';
 
 # Search
 
-<Doc />
+Search input with specific styles.
 
 ## Basic Usage
 
 <Playground>
-  <Search />
+  {() => {
+      const items = [...statesJson.states];
+        
+      class SearchStory extends React.Component {
+
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: '',
+            selectedItem: ''
+          };
+
+          this.searchChanged = this.searchChanged.bind(this);
+          this.clearSearch = this.clearSearch.bind(this);
+          this.onUserAction = this.onUserAction.bind(this);
+        }
+
+        searchChanged(e) {
+          this.setState({
+            selectedItem: e
+          });
+        };
+
+        clearSearch() {
+          this.setState({
+            inputValue: '',
+            selectedItem: ''
+          });
+        };
+
+        onUserAction(inputValue, selectedItemVal) {
+          this.setState({
+            inputValue: inputValue,
+            selectedItem: selectedItemVal
+          });
+        };
+
+        render() {
+          return (
+            <React.Fragment>
+              <GuideExample>
+                <Search
+                  inputValue={this.state.inputValue}
+                  selectedItem={this.state.selectedItem}
+                  items={items}
+                  onChange={this.searchChanged}
+                  onUserAction={this.onUserAction}
+                  onRequestClear={this.clearSearch}
+                />
+              </GuideExample>
+              <GuideExample>
+                <Search
+                  inputValue={this.state.inputValue}
+                  selectedItem={this.state.selectedItem}
+                  items={items}
+                  minimal
+                  onChange={this.searchChanged}
+                  onUserAction={this.onUserAction}
+                  onRequestClear={this.clearSearch}
+                />
+              </GuideExample>
+              <GuideExample label="appendToBody">
+                <Search
+                  inputValue={this.state.inputValue}
+                  selectedItem={this.state.selectedItem}
+                  items={items}
+                  appendToBody
+                  onChange={this.searchChanged}
+                  onUserAction={this.onUserAction}
+                  onRequestClear={this.clearSearch}
+                />
+              </GuideExample>
+              <GuideExample label="fullWidth">
+                <Search
+                  inputValue={this.state.inputValue}
+                  selectedItem={this.state.selectedItem}
+                  items={items}
+                  fullWidth
+                  onChange={this.searchChanged}
+                  onUserAction={this.onUserAction}
+                  onRequestClear={this.clearSearch}
+                />
+              </GuideExample>
+            </React.Fragment>
+          );
+        }
+      }
+
+      return <SearchStory />;
+    }}
+
+</Playground>
+
+## Array of Objects
+
+<Playground>
+  {() => {
+      const items = [...statesJson2.states];
+      
+      const dataSourceConfig = {
+        label: 'name',
+        value: 'abbrev'
+      };
+
+      class SearchStory extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: '',
+            selectedItem: ''
+          };
+
+          this.searchChanged = this.searchChanged.bind(this);
+          this.clearSearch = this.clearSearch.bind(this);
+          this.onUserAction = this.onUserAction.bind(this);
+        }
+
+        searchChanged(e) {
+          this.setState({
+            selectedItem: e
+          });
+        };
+
+        clearSearch() {
+          this.setState({
+            inputValue: '',
+            selectedItem: ''
+          });
+        };
+
+        onUserAction(inputValue, selectedItemVal) {
+          this.setState({
+            inputValue: inputValue,
+            selectedItem: selectedItemVal
+          });
+        };
+
+        render() {
+          return (
+            <Search
+              dataSourceConfig={dataSourceConfig}
+              inputValue={this.state.inputValue}
+              selectedItem={this.state.selectedItem}
+              items={items}
+              onChange={this.searchChanged}
+              onUserAction={this.onUserAction}
+              onRequestClear={this.clearSearch}
+            />
+          );
+        }
+      }
+
+      return <SearchStory />;
+    }}
+
+</Playground>
+
+## Child Items
+
+<Playground>
+  {() => {
+      const items = [...statesJson2.states];
+      
+      const dataSourceConfig = {
+        label: 'name',
+        value: 'abbrev'
+      };
+
+      class SearchStory extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: '',
+            selectedItem: ''
+          };
+
+          this.searchChanged = this.searchChanged.bind(this);
+          this.clearSearch = this.clearSearch.bind(this);
+          this.onUserAction = this.onUserAction.bind(this);
+        }
+
+        searchChanged(e) {
+          this.setState({
+            selectedItem: e
+          });
+        };
+
+        clearSearch() {
+          this.setState({
+            inputValue: '',
+            selectedItem: ''
+          });
+        };
+
+        onUserAction(inputValue, selectedItemVal) {
+          this.setState({
+            inputValue: inputValue,
+            selectedItem: selectedItemVal
+          });
+        };
+
+        render() {
+          return (
+            <Search
+              dataSourceConfig={dataSourceConfig}
+              inputValue={this.state.inputValue}
+              selectedItem={this.state.selectedItem}
+              onChange={this.searchChanged}
+              onUserAction={this.onUserAction}
+              onRequestClear={this.clearSearch}
+            >
+              {items.map(item => {
+                return (
+                  <MenuItem key={item.abbrev} item={item}>
+                    {item.name}
+                  </MenuItem>
+                );
+              })}
+            </Search>
+          );
+        }
+      }
+
+      return <SearchStory />;
+    }}
+
+</Playground>
+
+## Custom Items
+
+<Playground>
+  {() => {
+      const items = [...statesJson2.states];
+
+      class SearchStory extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: '',
+            selectedItem: ''
+          };
+
+          this.searchChanged = this.searchChanged.bind(this);
+          this.clearSearch = this.clearSearch.bind(this);
+          this.onUserAction = this.onUserAction.bind(this);
+        }
+
+        searchChanged(e) {
+          this.setState({
+            selectedItem: e
+          });
+        };
+
+        clearSearch() {
+          this.setState({
+            inputValue: '',
+            selectedItem: ''
+          });
+        };
+
+        onUserAction(inputValue, selectedItemVal) {
+          this.setState({
+            inputValue: inputValue,
+            selectedItem: selectedItemVal
+          });
+        };
+
+        render() {
+          return (
+            <Search
+              inputValue={this.state.inputValue}
+              selectedItem={this.state.selectedItem}
+              onChange={this.searchChanged}
+              onUserAction={this.onUserAction}
+              onRequestClear={this.clearSearch}
+            >
+              {items.map(item => {
+                return (
+                  <ListItem
+                    key={item.abbrev}
+                    value={item.abbrev}
+                    label={item.name}
+                    leftNode={<GlobeIcon size={32} />}
+                  >
+                    <ListItemTitle>{item.name}</ListItemTitle>
+                    <ListItemSubtitle>{item.abbrev}</ListItemSubtitle>
+                  </ListItem>
+                );
+              })}
+            </Search>
+          );
+        }
+      }
+
+      return <SearchStory />;
+    }}
+
+</Playground>
+
+## Dumb Input
+
+<Playground>
+  {() => {
+      class SearchStory extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: ''
+          };
+
+          this.clearSearch = this.clearSearch.bind(this);
+          this.onUserAction = this.onUserAction.bind(this);
+        }
+
+        clearSearch() {
+          this.setState({
+            inputValue: ''
+          });
+        };
+
+        onUserAction(inputValue) {
+          this.setState({
+            inputValue: inputValue
+          });
+        };
+
+        render() {
+          return (
+            <React.Fragment>
+              <GuideExample>
+                <Search
+                  inputValue={this.state.inputValue}
+                  onUserAction={this.onUserAction}
+                  onRequestClear={this.clearSearch}
+                />
+              </GuideExample>
+              <GuideExample label="uncontrolled">
+                <Search />
+              </GuideExample>
+            </React.Fragment>
+          );
+        }
+      }
+
+      return <SearchStory />;
+    }}
+
+</Playground>
+
+## Shortcut Character
+
+<Playground>
+  {() => {
+      const items = [...statesJson.states];
+
+      class SearchStory extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: '',
+            selectedItem: '',
+            searchInput: null
+          };
+
+          this.handleKeypress = this.handleKeypress.bind(this);
+          this.setSearchInput = this.setSearchInput.bind(this);
+          this.searchChanged = this.searchChanged.bind(this);
+          this.clearSearch = this.clearSearch.bind(this);
+          this.onUserAction = this.onUserAction.bind(this);
+        }
+
+        componentDidMount() {
+          document.body.addEventListener('keypress', this.handleKeypress);
+        }
+
+        componentWillUnmount() {
+          document.body.removeEventListener('keypress', this.handleKeypress);
+        }
+
+        handleKeypress(e) {
+          if (
+            e.key === '/' &&
+            document.activeElement !== this.state.searchInput
+          ) {
+            // Stop the typed character from being inserted in the input
+            e.preventDefault();
+
+            // Focus the input
+            this.state.searchInput.focus();
+          }
+        };
+
+        setSearchInput(searchInput) {
+          this.setState({
+            searchInput
+          });
+        };
+
+        searchChanged(e) {
+          this.setState({
+            selectedItem: e
+          });
+        };
+
+        clearSearch() {
+          this.setState({
+            inputValue: '',
+            selectedItem: ''
+          });
+        };
+
+        onUserAction(inputValue, selectedItemVal) {
+          this.setState({
+            inputValue: inputValue,
+            selectedItem: selectedItemVal
+          });
+        };
+
+        render() {
+          return (
+            <Search
+              inputRef={this.setSearchInput}
+              shortcutCharacter="/"
+              inputValue={this.state.inputValue}
+              selectedItem={this.state.selectedItem}
+              items={items}
+              onChange={this.searchChanged}
+              onUserAction={this.onUserAction}
+              onRequestClear={this.clearSearch}
+            />
+          );
+        }
+      }
+
+      return <SearchStory />;
+    }}
+
+</Playground>
+
+## Virtualized
+
+<Playground>
+  {() => {
+      const items = [...statesJson.states];
+
+      class SearchStory extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: '',
+            selectedItem: ''
+          };
+
+          this.searchChanged = this.searchChanged.bind(this);
+          this.clearSearch = this.clearSearch.bind(this);
+          this.onUserAction = this.onUserAction.bind(this);
+        }
+
+        searchChanged(e) {
+          this.setState({
+            selectedItem: e
+          });
+        };
+
+        clearSearch() {
+          this.setState({
+            inputValue: '',
+            selectedItem: ''
+          });
+        };
+
+        onUserAction(inputValue, selectedItemVal) {
+          this.setState({
+            inputValue: inputValue,
+            selectedItem: selectedItemVal
+          });
+        };
+
+        render() {
+          return (
+            <Search
+              virtualized
+              virtualizedMenuWidth={250}
+              inputValue={this.state.inputValue}
+              selectedItem={this.state.selectedItem}
+              items={items}
+              onChange={this.searchChanged}
+              onUserAction={this.onUserAction}
+              onRequestClear={this.clearSearch}
+            />
+          );
+        }
+      }
+
+      return <SearchStory />;
+    }}
+
 </Playground>
 
 ## Props

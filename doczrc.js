@@ -1,6 +1,8 @@
 import esriColors from './docz/esriColors.json';
+import { css } from 'docz-plugin-css';
 
 export default {
+  plugins: [css()],
   wrapper: __dirname + '/docz/ThemeWrapper',
   menu: ['Getting Started'],
   themeConfig: {

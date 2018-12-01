@@ -1,0 +1,232 @@
+---
+name: Stepper
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import Button from '../../Button';
+import Stepper, { Step, StepTitle, StepDescription } from '../';
+
+import UserIcon from 'calcite-ui-icons-react/UserIcon';
+import ExclamationMarkCircleIcon from 'calcite-ui-icons-react/ExclamationMarkCircleIcon';
+import SlidersIcon from 'calcite-ui-icons-react/SlidersIcon';
+import BananaIcon from 'calcite-ui-icons-react/BananaIcon';
+
+# Stepper
+
+When the task is complicated or has a certain sequence in the series of
+subtasks, we can decompose it into several steps to make things easier.
+
+## Basic Usage
+
+<Playground>
+  <GuideExample>
+    <Stepper currentStep={2}>
+      <Step>
+        <StepTitle>Complete Step</StepTitle>
+        <StepDescription>This is the first step in a series</StepDescription>
+      </Step>
+      <Step>
+        <StepTitle>Current Step</StepTitle>
+        <StepDescription>This is the second step in a series</StepDescription>
+      </Step>
+      <Step>
+        <StepTitle>Pending Step</StepTitle>
+        <StepDescription>This is the third step in a series</StepDescription>
+      </Step>
+    </Stepper>
+  </GuideExample>
+  <GuideExample label="error">
+    <Stepper currentStep={2}>
+      <Step>
+        <StepTitle>Complete Step</StepTitle>
+        <StepDescription>This is the first step in a series</StepDescription>
+      </Step>
+      <Step error>
+        <StepTitle>Error Step</StepTitle>
+        <StepDescription>This is the second step in a series</StepDescription>
+      </Step>
+      <Step>
+        <StepTitle>Pending Step</StepTitle>
+        <StepDescription>This is the third step in a series</StepDescription>
+      </Step>
+    </Stepper>
+  </GuideExample>
+  <GuideExample label="small">
+    <Stepper currentStep={3} small>
+      <Step>
+        <StepTitle>Complete Step</StepTitle>
+      </Step>
+      <Step error>
+        <StepTitle>Error Step</StepTitle>
+      </Step>
+      <Step>
+        <StepTitle>Current Step</StepTitle>
+      </Step>
+    </Stepper>
+  </GuideExample>
+  <GuideExample label="selectable">
+    <Stepper currentStep={1}>
+      <Step>
+        <StepTitle>Complete Step</StepTitle>
+        <StepDescription>This is the first step in a series</StepDescription>
+      </Step>
+      <Step selectable>
+        <StepTitle>Current Step</StepTitle>
+        <StepDescription>This is the second step in a series</StepDescription>
+      </Step>
+      <Step>
+        <StepTitle>Pending Step</StepTitle>
+        <StepDescription>This is the third step in a series</StepDescription>
+      </Step>
+    </Stepper>
+  </GuideExample>
+</Playground>
+
+## Custom Icons
+
+<Playground>
+  <GuideExample>
+    <Stepper currentStep={3}>
+      <Step icon={<UserIcon />}>
+        <StepTitle>Complete Step</StepTitle>
+      </Step>
+      <Step error icon={<ExclamationMarkCircleIcon />}>
+        <StepTitle>Error Step</StepTitle>
+      </Step>
+      <Step icon={<SlidersIcon />}>
+        <StepTitle>Current Step</StepTitle>
+      </Step>
+      <Step icon={<BananaIcon />}>
+        <StepTitle>Pending Step</StepTitle>
+      </Step>
+    </Stepper>
+  </GuideExample>
+  <GuideExample label="small">
+    <Stepper small currentStep={3}>
+      <Step icon={<UserIcon />}>
+        <StepTitle>Complete Step</StepTitle>
+      </Step>
+      <Step error icon={<ExclamationMarkCircleIcon />}>
+        <StepTitle>Error Step</StepTitle>
+      </Step>
+      <Step icon={<SlidersIcon />}>
+        <StepTitle>Current Step</StepTitle>
+      </Step>
+      <Step icon={<BananaIcon />}>
+        <StepTitle>Pending Step</StepTitle>
+      </Step>
+    </Stepper>
+  </GuideExample>
+</Playground>
+
+## Vertical
+
+<Playground>
+  <GuideExample>
+    <Stepper vertical currentStep={2}>
+      <Step>
+        <StepTitle>Complete Step</StepTitle>
+        <StepDescription>This is the first step in a series</StepDescription>
+      </Step>
+      <Step error>
+        <StepTitle>Error Step</StepTitle>
+        <StepDescription>This is the second step in a series</StepDescription>
+      </Step>
+      <Step>
+        <StepTitle>Pending Step</StepTitle>
+        <StepDescription>This is the third step in a series</StepDescription>
+      </Step>
+    </Stepper>
+  </GuideExample>
+  <GuideExample label="small">
+    <Stepper vertical small currentStep={2}>
+      <Step>
+        <StepTitle>Complete Step</StepTitle>
+      </Step>
+      <Step error>
+        <StepTitle>Error Step</StepTitle>
+      </Step>
+      <Step>
+        <StepTitle>Pending Step</StepTitle>
+      </Step>
+    </Stepper>
+  </GuideExample>
+</Playground>
+
+## Controlled Stepper
+
+<Playground>
+  {() => {
+      class StepperStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            currentStep: 1
+          };
+
+          this.nextStep = this.nextStep.bind(this);
+          this.prevStep = this.prevStep.bind(this);
+        }
+
+        nextStep() {
+          this.setState({
+            currentStep: this.state.currentStep + 1
+          });
+        };
+
+        prevStep() {
+          this.setState({
+            currentStep: this.state.currentStep - 1
+          });
+        };
+
+        render() {
+          return (
+            <div>
+              <Stepper currentStep={this.state.currentStep}>
+                <Step>
+                  <StepTitle>Complete Step</StepTitle>
+                  <StepDescription>
+                    This is the first step in a series
+                  </StepDescription>
+                </Step>
+                <Step>
+                  <StepTitle>Current Step</StepTitle>
+                  <StepDescription>
+                    This is the second step in a series
+                  </StepDescription>
+                </Step>
+                <Step>
+                  <StepTitle>Pending Step</StepTitle>
+                  <StepDescription>
+                    This is the third step in a series
+                  </StepDescription>
+                </Step>
+              </Stepper>
+              <div style={{ marginTop: '1.55rem' }}>
+                <Button
+                  clear
+                  onClick={this.prevStep}
+                  style={{ marginRight: '.5rem' }}
+                >
+                  Previous
+                </Button>
+                <Button clear onClick={this.nextStep}>
+                  Next
+                </Button>
+              </div>
+            </div>
+          );
+        }
+      }
+
+      return <StepperStory />;
+    }}
+
+</Playground>
+
+## Props
+
+<PropsTable of={Stepper} />
