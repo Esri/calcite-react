@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
-import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import {
@@ -22,40 +21,38 @@ import CalciteTheme from '../theme/CalciteTheme';
 
 // CSS
 
-const ArcgisAccountMenu = withRefs(
-  ({ user, portal, avatar, forwardedRef, ...other }) => {
-    const _avatar = React.cloneElement(avatar, {
-      style: {
-        border: `2px solid ${CalciteTheme.palette.white}`,
-        boxShadow: `0 0 0 3px ${CalciteTheme.palette.blue}`,
-        marginBottom: CalciteTheme.baseline
-      }
-    });
+const ArcgisAccountContentInfo = ({ user, portal, avatar, ...other }) => {
+  const _avatar = React.cloneElement(avatar, {
+    style: {
+      border: `2px solid ${CalciteTheme.palette.white}`,
+      boxShadow: `0 0 0 3px ${CalciteTheme.palette.blue}`,
+      marginBottom: CalciteTheme.baseline
+    }
+  });
 
-    return (
-      <StyledArcgisAccountContentInfo ref={forwardedRef} {...other}>
-        {_avatar}
-        <StyledArcgisAccountContentName>
-          {user.fullName}
-        </StyledArcgisAccountContentName>
-        <StyledArcgisAccountContentId>
-          {user.username}
-        </StyledArcgisAccountContentId>
-        <StyledArcgisAccountContentGroup>
-          {portal.name}
-        </StyledArcgisAccountContentGroup>
-      </StyledArcgisAccountContentInfo>
-    );
-  }
-);
+  return (
+    <StyledArcgisAccountContentInfo {...other}>
+      {_avatar}
+      <StyledArcgisAccountContentName>
+        {user.fullName}
+      </StyledArcgisAccountContentName>
+      <StyledArcgisAccountContentId>
+        {user.username}
+      </StyledArcgisAccountContentId>
+      <StyledArcgisAccountContentGroup>
+        {portal.name}
+      </StyledArcgisAccountContentGroup>
+    </StyledArcgisAccountContentInfo>
+  );
+};
 
-ArcgisAccountMenu.propTypes = {
+ArcgisAccountContentInfo.propTypes = {
   /** AGOL user object */
   user: PropTypes.object
 };
 
-ArcgisAccountMenu.defaultProps = {};
+ArcgisAccountContentInfo.defaultProps = {};
 
-ArcgisAccountMenu.displayName = 'ArcgisAccountMenu';
+ArcgisAccountContentInfo.displayName = 'ArcgisAccountContentInfo';
 
-export default ArcgisAccountMenu;
+export default ArcgisAccountContentInfo;

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Transition from 'react-transition-group/Transition';
-import withRefs from '../utils/withRefs';
 
 import ReactModal from 'react-modal';
 
@@ -12,46 +11,42 @@ import {
   DialogTransition
 } from './Modal-styled';
 
-const Modal = withRefs(
-  ({
-    children,
-    open,
-    title,
-    overlayStyle,
-    dialogStyle,
-    forwardedRef,
-    ...other
-  }) => {
-    return (
-      <Transition in={open} timeout={0}>
-        {state => (
-          <ReactModal
-            ref={forwardedRef}
-            isOpen={open}
-            closeTimeoutMS={300}
-            style={{
-              overlay: {
-                ...StyledModalOverlay,
-                ...overlayStyle,
-                ...OverlayTransition[state]
-              },
-              content: {
-                ...StyledModalDialog,
-                ...dialogStyle,
-                ...DialogTransition[state]
-              }
-            }}
-            contentLabel={title}
-            role="dialog"
-            {...other}
-          >
-            {children}
-          </ReactModal>
-        )}
-      </Transition>
-    );
-  }
-);
+const Modal = ({
+  children,
+  open,
+  title,
+  overlayStyle,
+  dialogStyle,
+  ...other
+}) => {
+  return (
+    <Transition in={open} timeout={0}>
+      {state => (
+        <ReactModal
+          isOpen={open}
+          closeTimeoutMS={300}
+          style={{
+            overlay: {
+              ...StyledModalOverlay,
+              ...overlayStyle,
+              ...OverlayTransition[state]
+            },
+            content: {
+              ...StyledModalDialog,
+              ...dialogStyle,
+              ...DialogTransition[state]
+            }
+          }}
+          contentLabel={title}
+          role="dialog"
+          {...other}
+        >
+          {children}
+        </ReactModal>
+      )}
+    </Transition>
+  );
+};
 
 Modal.propTypes = {
   /** Description TBD */

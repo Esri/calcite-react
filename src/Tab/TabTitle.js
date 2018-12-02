@@ -1,34 +1,29 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledTabTitle } from './Tab-styled';
 
-const TabTitle = withRefs(
-  ({
-    children,
-    index,
-    activeTabIndex,
-    setActiveTabIndex,
-    forwardedRef,
-    ...other
-  }) => {
-    const handleSetActiveTabIndex = e => {
-      setActiveTabIndex(e, index);
-    };
+const TabTitle = ({
+  children,
+  index,
+  activeTabIndex,
+  setActiveTabIndex,
+  ...other
+}) => {
+  const handleSetActiveTabIndex = e => {
+    setActiveTabIndex(e, index);
+  };
 
-    return (
-      <StyledTabTitle
-        ref={forwardedRef}
-        onClick={handleSetActiveTabIndex}
-        active={activeTabIndex === index}
-        {...other}
-      >
-        {children}
-      </StyledTabTitle>
-    );
-  }
-);
+  return (
+    <StyledTabTitle
+      onClick={handleSetActiveTabIndex}
+      active={activeTabIndex === index}
+      {...other}
+    >
+      {children}
+    </StyledTabTitle>
+  );
+};
 
 TabTitle.propTypes = {
   /** Description TBD */

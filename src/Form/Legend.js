@@ -1,25 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 import { StyledLegend } from './Form-styled';
 
 import { FormControlContext } from './FormControl';
 
-const Legend = withRefs(({ children, forwardedRef, ...other }) => {
+const Legend = ({ children, ...other }) => {
   return (
     <FormControlContext.Consumer>
       {({ formControlContext }) => (
-        <StyledLegend
-          ref={forwardedRef}
-          horizontal={formControlContext.horizontal}
-          {...other}
-        >
+        <StyledLegend horizontal={formControlContext.horizontal} {...other}>
           {children}
         </StyledLegend>
       )}
     </FormControlContext.Consumer>
   );
-});
+};
 
 Legend.propTypes = {
   /** Description TBD */

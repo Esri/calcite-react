@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Children, createContext } from 'react';
 import { getChildType } from '../utils/helpers';
-import withRefs from '../utils/withRefs';
 
 import { StyledSubNav, StyledSubNavLeftContent } from './SubNav-styled';
 
@@ -13,7 +12,7 @@ const SubNavContext = createContext({
   }
 });
 
-const SubNav = withRefs(({ children, blue, forwardedRef, ...other }) => {
+const SubNav = ({ children, blue, ...other }) => {
   const subNavContext = {
     blue
   };
@@ -35,13 +34,13 @@ const SubNav = withRefs(({ children, blue, forwardedRef, ...other }) => {
 
   return (
     <SubNavContext.Provider value={{ subNavContext }}>
-      <StyledSubNav ref={forwardedRef} blue={blue} {...other}>
+      <StyledSubNav blue={blue} {...other}>
         <StyledSubNavLeftContent>{getLeftContent()}</StyledSubNavLeftContent>
         {getSubNavActions()}
       </StyledSubNav>
     </SubNavContext.Provider>
   );
-});
+};
 
 SubNav.propTypes = {
   /** Description TBD */

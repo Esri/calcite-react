@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 import {
   StyledCardImageWrap,
   StyledCardImage,
@@ -9,26 +8,24 @@ import {
 
 import { CardContext } from './Card';
 
-const CardImage = withRefs(
-  ({ children, src, caption, alt, forwardedRef, ...other }) => {
-    function getFigcaption(shaped) {
-      if (!shaped && caption) {
-        return <StyledCardImageCaption>{caption}</StyledCardImageCaption>;
-      }
+const CardImage = ({ children, src, caption, alt, ...other }) => {
+  function getFigcaption(shaped) {
+    if (!shaped && caption) {
+      return <StyledCardImageCaption>{caption}</StyledCardImageCaption>;
     }
-
-    return (
-      <CardContext.Consumer>
-        {({ cardContext }) => (
-          <StyledCardImageWrap ref={forwardedRef} {...cardContext} {...other}>
-            <StyledCardImage {...cardContext} src={src} alt={alt} />
-            {getFigcaption(cardContext.shaped)}
-          </StyledCardImageWrap>
-        )}
-      </CardContext.Consumer>
-    );
   }
-);
+
+  return (
+    <CardContext.Consumer>
+      {({ cardContext }) => (
+        <StyledCardImageWrap {...cardContext} {...other}>
+          <StyledCardImage {...cardContext} src={src} alt={alt} />
+          {getFigcaption(cardContext.shaped)}
+        </StyledCardImageWrap>
+      )}
+    </CardContext.Consumer>
+  );
+};
 
 CardImage.propTypes = {
   /** Description TBD */

@@ -1,16 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledStepDescription } from './Stepper-styled';
 
-const StepDescription = withRefs(({ children, forwardedRef, ...other }) => {
-  return (
-    <StyledStepDescription ref={forwardedRef} {...other}>
-      {children}
-    </StyledStepDescription>
-  );
-});
+const StepDescription = ({ children, ...other }) => {
+  return <StyledStepDescription {...other}>{children}</StyledStepDescription>;
+};
 
 StepDescription.propTypes = {
   /** Description TBD */

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
-import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import {
@@ -124,7 +123,7 @@ class ArcgisShare extends Component {
 
   render() {
     return (
-      <StyledArcgisShare ref={this.props.forwardedRef}>
+      <StyledArcgisShare>
         <Checkbox
           id="public"
           labelStyle={{ ...PrimaryCheckboxLabelStyles }}
@@ -152,9 +151,7 @@ class ArcgisShare extends Component {
   }
 }
 
-const ArcgisShareWithRefs = withRefs(ArcgisShare);
-
-ArcgisShareWithRefs.propTypes = {
+ArcgisShare.propTypes = {
   /** AGOL user object */
   user: PropTypes.object.isRequired,
   /** AGOL portal object */
@@ -169,11 +166,11 @@ ArcgisShareWithRefs.propTypes = {
   promoteFavorites: PropTypes.bool
 };
 
-ArcgisShareWithRefs.defaultProps = {
+ArcgisShare.defaultProps = {
   publicLabel: 'Everyone (public)',
   groupsLabel: 'These groups'
 };
 
-ArcgisShareWithRefs.displayName = 'ArcgisShare';
+ArcgisShare.displayName = 'ArcgisShare';
 
-export default ArcgisShareWithRefs;
+export default ArcgisShare;

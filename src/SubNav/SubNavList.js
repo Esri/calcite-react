@@ -1,16 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledSubNavList } from './SubNav-styled';
 
-const SubNavList = withRefs(({ children, forwardedRef, ...other }) => {
-  return (
-    <StyledSubNavList ref={forwardedRef} {...other}>
-      {children}
-    </StyledSubNavList>
-  );
-});
+const SubNavList = ({ children, ...other }) => {
+  return <StyledSubNavList {...other}>{children}</StyledSubNavList>;
+};
 
 SubNavList.propTypes = {
   /** Description TBD */

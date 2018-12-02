@@ -1,18 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledTopNavBrandLink, StyledTopNavBrandImg } from './TopNav-styled';
 
-const TopNavBrand = withRefs(
-  ({ children, src, alt, imageStyle, forwardedRef, ...other }) => {
-    return (
-      <StyledTopNavBrandLink ref={forwardedRef} {...other}>
-        <StyledTopNavBrandImg src={src} alt={alt} style={imageStyle} />
-      </StyledTopNavBrandLink>
-    );
-  }
-);
+const TopNavBrand = ({ children, src, alt, imageStyle, ...other }) => {
+  return (
+    <StyledTopNavBrandLink {...other}>
+      <StyledTopNavBrandImg src={src} alt={alt} style={imageStyle} />
+    </StyledTopNavBrandLink>
+  );
+};
 
 TopNavBrand.propTypes = {
   /** Description TBD */
