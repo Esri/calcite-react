@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
-import withRefs from '../utils/withRefs';
 import { StyledBreadcrumbs } from './Breadcrumbs-styled';
 
 const BreadcrumbsContext = createContext({
@@ -9,19 +8,17 @@ const BreadcrumbsContext = createContext({
   }
 });
 
-const Breadcrumbs = withRefs(({ children, white, forwardedRef, ...other }) => {
+const Breadcrumbs = ({ children, white, ...other }) => {
   const breadcrumbsContext = {
     white
   };
 
   return (
     <BreadcrumbsContext.Provider value={{ breadcrumbsContext }}>
-      <StyledBreadcrumbs ref={forwardedRef} {...other}>
-        {children}
-      </StyledBreadcrumbs>
+      <StyledBreadcrumbs {...other}>{children}</StyledBreadcrumbs>
     </BreadcrumbsContext.Provider>
   );
-});
+};
 
 Breadcrumbs.propTypes = {
   /** Crumb components to be rendered within Breadcrumbs. */
@@ -31,5 +28,7 @@ Breadcrumbs.propTypes = {
 };
 
 Breadcrumbs.defaultProps = {};
+
+Breadcrumbs.displayName = 'Breadcrumbs';
 
 export { Breadcrumbs as default, BreadcrumbsContext };

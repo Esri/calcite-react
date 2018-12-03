@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 import {
   StyledAvatar,
   StyledAvatarImage,
@@ -14,7 +13,7 @@ const Avatar = ({
   alt,
   size,
   fontSize,
-  forwardedRef,
+
   ...other
 }) => {
   const getWrappedChildren = children => {
@@ -39,12 +38,7 @@ const Avatar = ({
   };
 
   return (
-    <StyledAvatar
-      ref={forwardedRef}
-      aSize={size}
-      fontSize={fontSize}
-      {...other}
-    >
+    <StyledAvatar aSize={size} fontSize={fontSize} {...other}>
       {getWrappedChildren(children)}
     </StyledAvatar>
   );
@@ -66,4 +60,6 @@ Avatar.defaultProps = {
   size: 40
 };
 
-export default withRefs(Avatar);
+Avatar.displayName = 'Avatar';
+
+export default Avatar;

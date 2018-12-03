@@ -1,0 +1,92 @@
+---
+name: Avatar
+route: /avatar
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import Avatar from '../';
+
+import { EsriColors } from '../../CalciteThemeProvider';
+import CodyProfilePic from './codyProfile.jpeg';
+
+import DownloadToIcon from 'calcite-ui-icons-react/DownloadToIcon';
+import SaveIcon from 'calcite-ui-icons-react/SaveIcon';
+import UserIcon from 'calcite-ui-icons-react/UserIcon';
+import SearchIcon from 'calcite-ui-icons-react/SearchIcon';
+
+# Avatar
+
+Avatars can take an image or a short string in order to display a tidy, circular
+element that can be used in your UI. Avatars are commonly seen in user profiles.
+
+## Basic Usage
+
+<Playground style={{ display: 'flex' }}>
+  <Avatar style={{ margin: '10px' }}>A</Avatar>
+  <Avatar
+    style={{
+      margin: '10px',
+      backgroundColor: EsriColors.Calcite_Vibrant_Red_200
+    }}
+  >
+    CL
+  </Avatar>
+  <Avatar
+    style={{
+      margin: '10px',
+      backgroundColor: EsriColors.Calcite_Gray_250,
+      color: '#4c4c4c'
+    }}
+  >
+    JP
+  </Avatar>
+</Playground>
+
+## With Image
+
+<Playground style={{ display: 'flex' }}>
+  <Avatar src={CodyProfilePic} style={{ margin: '10px' }} />
+  <Avatar
+    src="https://avatars2.githubusercontent.com/u/3399064?s=400&v=4"
+    style={{ margin: '10px', width: 60, height: 60 }}
+  />
+</Playground>
+
+## With Icon
+
+<Playground style={{ display: 'flex' }}>
+  <Avatar style={{ margin: '10px' }}>
+    <DownloadToIcon />
+  </Avatar>
+  <Avatar
+    style={{
+      margin: '10px',
+      backgroundColor: EsriColors.Calcite_Green_a100
+    }}
+  >
+    <SaveIcon size={16} />
+  </Avatar>
+  <Avatar
+    style={{
+      margin: '10px',
+      backgroundColor: EsriColors.Calcite_Red_150,
+      color: EsriColors.Calcite_Red_a250
+    }}
+  >
+    <UserIcon />
+  </Avatar>
+  <Avatar
+    style={{
+      margin: '10px',
+      backgroundColor: EsriColors.Calcite_Purple_a200
+    }}
+  >
+    <SearchIcon style={{ fill: EsriColors.Calcite_Purple_150 }} />
+  </Avatar>
+</Playground>
+
+## Props
+
+<PropsTable of={Avatar} />

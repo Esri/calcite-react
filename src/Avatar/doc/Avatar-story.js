@@ -13,7 +13,7 @@ import SaveIcon from 'calcite-ui-icons-react/SaveIcon';
 import UserIcon from 'calcite-ui-icons-react/UserIcon';
 import SearchIcon from 'calcite-ui-icons-react/SearchIcon';
 
-import EsriColors from '../../theme/EsriColors';
+import { EsriColors } from '../../CalciteThemeProvider';
 
 const avatarBaseStyle = {
   margin: '10px'

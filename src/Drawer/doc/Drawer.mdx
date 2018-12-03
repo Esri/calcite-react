@@ -1,0 +1,87 @@
+---
+name: Drawer
+route: /drawer
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import SideNav, { SideNavTitle, SideNavLink } from '../../SideNav';
+import Button from '../../Button';
+import Drawer from '../';
+
+# Drawer
+
+The off-canvas "drawer" pattern is used primarily for top-level mobile
+navigation.
+
+## Basic Usage
+
+<Playground>
+  {() => {
+    class DrawerStory extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          drawerDirection: 'left',
+          active: false
+        };
+      
+        this.showDrawerClicked = this.showDrawerClicked.bind(this);
+        this.hideDrawer = this.hideDrawer.bind(this);
+      }
+
+      showDrawerClicked(drawerDirection) {
+        this.setState({
+          drawerDirection,
+          active: true
+        });
+      };
+
+      hideDrawer() {
+        this.setState({
+          active: false
+        });
+      };
+
+      render() {
+        return (
+          <>
+            <Button onClick={() => this.showDrawerClicked('left')}>
+              Open Left Drawer
+            </Button>
+            <Button
+              onClick={() => this.showDrawerClicked('right')}
+              style={{ float: 'right' }}
+            >
+              Open Right Drawer
+            </Button>
+            <Drawer
+              active={this.state.active}
+              right={this.state.drawerDirection === 'right'}
+              onRequestClose={this.hideDrawer}
+            >
+              <SideNav>
+                <SideNavTitle>Sidenav Group</SideNavTitle>
+                <nav>
+                  <SideNavLink>Agricultural</SideNavLink>
+                  <SideNavLink>Transition</SideNavLink>
+                  <SideNavLink>Perpetual</SideNavLink>
+                  <SideNavLink>Cultural</SideNavLink>
+                </nav>
+              </SideNav>
+            </Drawer>
+          </>
+        );
+      }
+    }
+
+    return <DrawerStory />;
+
+}}
+
+</Playground>
+
+## Props
+
+<PropsTable of={Drawer} />

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledTabTitle } from './Tab-styled';
 
@@ -9,7 +8,6 @@ const TabTitle = ({
   index,
   activeTabIndex,
   setActiveTabIndex,
-  forwardedRef,
   ...other
 }) => {
   const handleSetActiveTabIndex = e => {
@@ -18,7 +16,6 @@ const TabTitle = ({
 
   return (
     <StyledTabTitle
-      ref={forwardedRef}
       onClick={handleSetActiveTabIndex}
       active={activeTabIndex === index}
       {...other}
@@ -46,4 +43,6 @@ TabTitle.propTypes = {
 
 TabTitle.defaultProps = {};
 
-export default withRefs(TabTitle);
+TabTitle.displayName = 'TabTitle';
+
+export default TabTitle;

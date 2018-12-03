@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledTableHeader } from './Table-styled';
 
 import { TableContext } from './Table';
 
-const TableHeader = ({ children, forwardedRef, ...other }) => {
+const TableHeader = ({ children, ...other }) => {
   return (
     <TableContext.Consumer>
       {({ tableContext }) => (
         <StyledTableHeader
-          ref={forwardedRef}
           blue={tableContext.blue}
           plain={tableContext.plain}
           noTable={tableContext.noTable}
@@ -45,4 +43,6 @@ TableHeader.propTypes = {
 
 TableHeader.defaultProps = {};
 
-export default withRefs(TableHeader);
+TableHeader.displayName = 'TableHeader';
+
+export default TableHeader;

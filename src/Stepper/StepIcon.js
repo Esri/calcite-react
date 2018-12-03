@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import {
   StyledStepIcon,
@@ -21,7 +20,6 @@ const StepIcon = ({
   complete,
   error,
   vertical,
-  forwardedRef,
   ...other
 }) => {
   const getIconContent = icon => {
@@ -81,7 +79,6 @@ const StepIcon = ({
 
   return (
     <StyledStepIcon
-      ref={forwardedRef}
       small={small}
       complete={complete}
       vertical={vertical}
@@ -102,4 +99,6 @@ StepIcon.propTypes = {
 
 StepIcon.defaultProps = {};
 
-export default withRefs(StepIcon);
+StepIcon.displayName = 'StepIcon';
+
+export default StepIcon;

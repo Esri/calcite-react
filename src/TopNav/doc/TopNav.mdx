@@ -1,0 +1,71 @@
+---
+name: TopNav
+route: /top-nav
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import EsriLogo from '../../../docz/images/ESRI_Logo_Black.svg';
+import Button from '../../Button';
+
+import TopNav, {
+  TopNavBrand,
+  TopNavTitle,
+  TopNavList,
+  TopNavLink,
+  TopNavActionsList
+} from '../';
+
+# TopNav
+
+TopNav is the primary, header level navigation for a web site or application. It
+contains the root level pages, user logins, and the site title. The main
+navigation should be hidden on screen sizes smaller than the size of the
+navigation.
+
+## Basic Usage
+
+<Playground>
+  <TopNav>
+    <TopNavBrand href="#" src={EsriLogo} />
+    <TopNavTitle href="#">ArcGIS for Developers</TopNavTitle>
+    <TopNavList>
+      <TopNavLink href="#" active>
+        Plans
+      </TopNavLink>
+      <TopNavLink href="#">Community</TopNavLink>
+      <TopNavLink href="#">Docs</TopNavLink>
+    </TopNavList>
+    <TopNavActionsList>
+      <TopNavLink href="#">Sign In</TopNavLink>
+      <Button clear>Sign Up</Button>
+    </TopNavActionsList>
+  </TopNav>
+</Playground>
+
+## Props
+
+### TopNav
+
+<PropsTable of={TopNav} />
+
+### TopNavBrand
+
+<PropsTable of={TopNavBrand} />
+
+### TopNavTitle
+
+<PropsTable of={TopNavTitle} />
+
+### TopNavList
+
+<PropsTable of={TopNavList} />
+
+### TopNavLink
+
+<PropsTable of={TopNavLink} />
+
+### TopNavActionsList
+
+<PropsTable of={TopNavActionsList} />

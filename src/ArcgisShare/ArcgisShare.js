@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
-import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import {
@@ -124,7 +123,7 @@ class ArcgisShare extends Component {
 
   render() {
     return (
-      <StyledArcgisShare ref={this.props.forwardedRef}>
+      <StyledArcgisShare>
         <Checkbox
           id="public"
           labelStyle={{ ...PrimaryCheckboxLabelStyles }}
@@ -172,4 +171,6 @@ ArcgisShare.defaultProps = {
   groupsLabel: 'These groups'
 };
 
-export default withRefs(ArcgisShare);
+ArcgisShare.displayName = 'ArcgisShare';
+
+export default ArcgisShare;

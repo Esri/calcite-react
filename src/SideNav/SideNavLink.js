@@ -1,15 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledSideNavLink } from './SideNav-styled';
 
-const SideNavLink = ({ children, forwardedRef, ...other }) => {
-  return (
-    <StyledSideNavLink ref={forwardedRef} {...other}>
-      {children}
-    </StyledSideNavLink>
-  );
+const SideNavLink = ({ children, ...other }) => {
+  return <StyledSideNavLink {...other}>{children}</StyledSideNavLink>;
 };
 
 SideNavLink.propTypes = {
@@ -19,4 +14,6 @@ SideNavLink.propTypes = {
 
 SideNavLink.defaultProps = {};
 
-export default withRefs(SideNavLink);
+SideNavLink.displayName = 'SideNavLink';
+
+export default SideNavLink;

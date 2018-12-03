@@ -1,6 +1,5 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
-import withRefs from '../utils/withRefs';
 import uniqid from 'uniqid';
 
 import { StyledList } from './List-styled';
@@ -39,12 +38,7 @@ class List extends Component {
 
     return (
       <ListContext.Provider value={{ listContext }}>
-        <StyledList
-          ref={this.props.forwardedRef}
-          id={this.listId}
-          maxHeight={listMaxHeight}
-          {...this.props}
-        >
+        <StyledList id={this.listId} maxHeight={listMaxHeight} {...this.props}>
           {this.props.children}
         </StyledList>
       </ListContext.Provider>
@@ -63,6 +57,6 @@ List.propTypes = {
 
 List.defaultProps = {};
 
-const ListWithRefs = withRefs(List);
+List.displayName = 'List';
 
-export { ListWithRefs as default, ListContext };
+export { List as default, ListContext };

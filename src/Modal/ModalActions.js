@@ -1,15 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledModalActions } from './Modal-styled';
 
-const ModalActions = ({ children, forwardedRef, ...other }) => {
-  return (
-    <StyledModalActions ref={forwardedRef} {...other}>
-      {children}
-    </StyledModalActions>
-  );
+const ModalActions = ({ children, ...other }) => {
+  return <StyledModalActions {...other}>{children}</StyledModalActions>;
 };
 
 ModalActions.propTypes = {
@@ -19,4 +14,6 @@ ModalActions.propTypes = {
 
 ModalActions.defaultProps = {};
 
-export default withRefs(ModalActions);
+ModalActions.displayName = 'ModalActions';
+
+export default ModalActions;

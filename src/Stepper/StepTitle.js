@@ -1,15 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledStepTitle } from './Stepper-styled';
 
-const StepTitle = ({ children, forwardedRef, ...other }) => {
-  return (
-    <StyledStepTitle ref={forwardedRef} {...other}>
-      {children}
-    </StyledStepTitle>
-  );
+const StepTitle = ({ children, ...other }) => {
+  return <StyledStepTitle {...other}>{children}</StyledStepTitle>;
 };
 
 StepTitle.propTypes = {
@@ -19,4 +14,6 @@ StepTitle.propTypes = {
 
 StepTitle.defaultProps = {};
 
-export default withRefs(StepTitle);
+StepTitle.displayName = 'StepTitle';
+
+export default StepTitle;

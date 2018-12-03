@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
-import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import {
@@ -14,7 +13,7 @@ import {
 } from './ArcgisAccount-styled';
 
 // App components
-import CalciteTheme from '../theme/CalciteTheme';
+import { CalciteTheme } from '../CalciteThemeProvider';
 
 // Third-party components (buttons, icons, etc.)
 
@@ -22,13 +21,7 @@ import CalciteTheme from '../theme/CalciteTheme';
 
 // CSS
 
-const ArcgisAccountMenu = ({
-  user,
-  portal,
-  avatar,
-  forwardedRef,
-  ...other
-}) => {
+const ArcgisAccountContentInfo = ({ user, portal, avatar, ...other }) => {
   const _avatar = React.cloneElement(avatar, {
     style: {
       border: `2px solid ${CalciteTheme.palette.white}`,
@@ -38,7 +31,7 @@ const ArcgisAccountMenu = ({
   });
 
   return (
-    <StyledArcgisAccountContentInfo ref={forwardedRef} {...other}>
+    <StyledArcgisAccountContentInfo {...other}>
       {_avatar}
       <StyledArcgisAccountContentName>
         {user.fullName}
@@ -53,11 +46,13 @@ const ArcgisAccountMenu = ({
   );
 };
 
-ArcgisAccountMenu.propTypes = {
+ArcgisAccountContentInfo.propTypes = {
   /** AGOL user object */
   user: PropTypes.object
 };
 
-ArcgisAccountMenu.defaultProps = {};
+ArcgisAccountContentInfo.defaultProps = {};
 
-export default withRefs(ArcgisAccountMenu);
+ArcgisAccountContentInfo.displayName = 'ArcgisAccountContentInfo';
+
+export default ArcgisAccountContentInfo;

@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 import { unitCalc } from '../utils/helpers';
-import CalciteTheme from '../theme/CalciteTheme';
+import { CalciteTheme } from '../CalciteThemeProvider';
 
 const loaderVariables = {
   loaderWidth: '0.85rem',

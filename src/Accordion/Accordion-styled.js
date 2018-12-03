@@ -56,7 +56,7 @@ const StyledChevronIcon = styled(ChevronRightIcon)`
   transition: transform ${transition()};
 
   ${props =>
-    props.isActive &&
+    props.active === 'true' &&
     css`
       transform: rotate(90deg);
     `};

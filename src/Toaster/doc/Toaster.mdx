@@ -1,0 +1,495 @@
+---
+name: Toaster
+route: /toaster
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+import { Slide, Zoom, Flip } from 'react-toastify';
+
+import Button from '../../Button';
+import Toaster from '../';
+
+import ToasterExampleComponent from './ToasterExampleComponent';
+
+# Toaster
+
+Calcite-React Toaster extends the react-toastify library. View the documentation
+to see available props https://github.com/fkhadra/react-toastify.
+
+## Basic Usage
+
+<Playground>
+  {() => {
+      class ToasterStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            toasterOpen: false,
+            toaster2Open: false,
+            toaster3Open: false,
+            toaster4Open: false
+          };
+
+          this.showToaster = this.showToaster.bind(this);
+          this.hideToaster = this.hideToaster.bind(this);
+          this.showToaster2 = this.showToaster2.bind(this);
+          this.hideToaster2 = this.hideToaster2.bind(this);
+          this.showToaster3 = this.showToaster3.bind(this);
+          this.hideToaster3 = this.hideToaster3.bind(this);
+          this.showToaster4 = this.showToaster4.bind(this);
+          this.hideToaster4 = this.hideToaster4.bind(this);
+        }
+
+        showToaster() {
+          this.setState({
+            toasterOpen: true
+          });
+        };
+
+        hideToaster() {
+          this.setState({
+            toasterOpen: false
+          });
+        };
+
+        showToaster2() {
+          this.setState({
+            toaster2Open: true
+          });
+        };
+
+        hideToaster2() {
+          this.setState({
+            toaster2Open: false
+          });
+        };
+
+        showToaster3() {
+          this.setState({
+            toaster3Open: true
+          });
+        };
+
+        hideToaster3() {
+          this.setState({
+            toaster3Open: false
+          });
+        };
+
+        showToaster4() {
+          this.setState({
+            toaster4Open: true
+          });
+        };
+
+        hideToaster4() {
+          this.setState({
+            toaster4Open: false
+          });
+        };
+
+        render() {
+          return (
+            <React.Fragment>
+              <div>
+                <GuideExample>
+                  <Button onClick={this.showToaster}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toasterOpen}
+                    onClose={this.hideToaster}
+                  >
+                    Something Happened!
+                  </Toaster>
+                </GuideExample>
+                <GuideExample label='autoClose={false}'>
+                  <Button onClick={this.showToaster2}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toaster2Open}
+                    onClose={this.hideToaster2}
+                    autoClose={false}
+                  >
+                    This toaster won't close automatically!
+                  </Toaster>
+                </GuideExample>
+                <GuideExample label="autoClose={10000}">
+                  <Button onClick={this.showToaster3}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toaster3Open}
+                    onClose={this.hideToaster3}
+                    autoClose={10000}
+                  >
+                    This toaster will stay open for 10 seconds!
+                  </Toaster>
+                </GuideExample>
+                <GuideExample label="showProgress">
+                  <Button onClick={this.showToaster4}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toaster4Open}
+                    onClose={this.hideToaster4}
+                    showProgress
+                  >
+                    This toaster has a progress bar!
+                  </Toaster>
+                </GuideExample>
+              </div>
+            </React.Fragment>
+          );
+        }
+      }
+
+      return <ToasterStory />;
+    }}
+
+</Playground>
+
+## Type Variations
+
+<Playground>
+  {() => {
+      class ToasterStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            toasterOpen: false
+          };
+
+          this.showToaster = this.showToaster.bind(this);
+          this.hideToaster = this.hideToaster.bind(this);
+        }
+
+        showToaster() {
+          this.setState({
+            toasterOpen: true
+          });
+        };
+
+        hideToaster() {
+          this.setState({
+            toasterOpen: false
+          });
+        };
+
+        render() {
+          return (
+            <React.Fragment>
+              <div>
+                <Button onClick={this.showToaster}>Show Toaster</Button>
+                <Toaster
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                  autoClose={false}
+                >
+                  default
+                </Toaster>
+                <Toaster
+                  type="success"
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                  autoClose={false}
+                >
+                  success
+                </Toaster>
+                <Toaster
+                  type="info"
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                  autoClose={false}
+                >
+                  info
+                </Toaster>
+                <Toaster
+                  type="warning"
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                  autoClose={false}
+                >
+                  warning
+                </Toaster>
+                <Toaster
+                  type="error"
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                  autoClose={false}
+                >
+                  error
+                </Toaster>
+              </div>
+            </React.Fragment>
+          );
+        }
+      }
+
+      return <ToasterStory />;
+    }}
+
+</Playground>
+
+## Component in Content
+
+<Playground>
+  {() => {
+      class ToasterStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            toasterOpen: false
+          };
+
+          this.showToaster = this.showToaster.bind(this);
+          this.hideToaster = this.hideToaster.bind(this);
+        }
+
+        showToaster() {
+          this.setState({
+            toasterOpen: true
+          });
+        };
+
+        hideToaster() {
+          this.setState({
+            toasterOpen: false
+          });
+        };
+
+        render() {
+          return (
+            <React.Fragment>
+              <div>
+                <Button onClick={this.showToaster}>Show Toaster</Button>
+                <Toaster
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                >
+                  <ToasterExampleComponent
+                    onInfoClick={e => {
+                      alert('info clicked');
+                      e.stopPropagation();
+                    }}
+                  />
+                </Toaster>
+              </div>
+            </React.Fragment>
+          );
+        }
+      }
+
+      return <ToasterStory />;
+    }}
+
+</Playground>
+
+## Positions
+
+<Playground>
+  {() => {
+      class ToasterStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            toasterOpen: false
+          };
+
+          this.showToaster = this.showToaster.bind(this);
+          this.hideToaster = this.hideToaster.bind(this);
+        }
+
+        showToaster() {
+          this.setState({
+            toasterOpen: true
+          });
+        };
+
+        hideToaster() {
+          this.setState({
+            toasterOpen: false
+          });
+        };
+
+        render() {
+          return (
+            <React.Fragment>
+              <div>
+                <Button onClick={this.showToaster}>Show Toaster</Button>
+                <Toaster
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                  position="top-left"
+                >
+                  This toaster is positioned at "top-left"!
+                </Toaster>
+                <Toaster
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                  position="top-center"
+                >
+                  This toaster is positioned at "top-center"!
+                </Toaster>
+                <Toaster
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                  position="top-right"
+                >
+                  This toaster is positioned at "top-right"!
+                </Toaster>
+                <Toaster
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                  position="bottom-right"
+                >
+                  This toaster is positioned at "bottom-right"!
+                </Toaster>
+                <Toaster
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                  position="bottom-center"
+                >
+                  This toaster is positioned at "bottom-center"!
+                </Toaster>
+                <Toaster
+                  open={this.state.toasterOpen}
+                  onClose={this.hideToaster}
+                  position="bottom-left"
+                >
+                  This toaster is positioned at "bottom-left"!
+                </Toaster>
+              </div>
+            </React.Fragment>
+          );
+        }
+      }
+
+      return <ToasterStory />;
+    }}
+
+</Playground>
+
+## Transitions
+
+<Playground>
+  {() => {
+      class ToasterStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            toasterOpen: false,
+            toaster2Open: false,
+            toaster3Open: false,
+            toaster4Open: false
+          };
+
+          this.showToaster = this.showToaster.bind(this);
+          this.hideToaster = this.hideToaster.bind(this);
+          this.showToaster2 = this.showToaster2.bind(this);
+          this.hideToaster2 = this.hideToaster2.bind(this);
+          this.showToaster3 = this.showToaster3.bind(this);
+          this.hideToaster3 = this.hideToaster3.bind(this);
+          this.showToaster4 = this.showToaster4.bind(this);
+          this.hideToaster4 = this.hideToaster4.bind(this);
+        }
+
+        showToaster() {
+          this.setState({
+            toasterOpen: true
+          });
+        };
+
+        hideToaster() {
+          this.setState({
+            toasterOpen: false
+          });
+        };
+
+        showToaster2() {
+          this.setState({
+            toaster2Open: true
+          });
+        };
+
+        hideToaster2() {
+          this.setState({
+            toaster2Open: false
+          });
+        };
+
+        showToaster3() {
+          this.setState({
+            toaster3Open: true
+          });
+        };
+
+        hideToaster3() {
+          this.setState({
+            toaster3Open: false
+          });
+        };
+
+        showToaster4() {
+          this.setState({
+            toaster4Open: true
+          });
+        };
+
+        hideToaster4() {
+          this.setState({
+            toaster4Open: false
+          });
+        };
+
+        render() {
+          return (
+            <React.Fragment>
+              <div>
+                <GuideExample>
+                  <Button onClick={this.showToaster}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toasterOpen}
+                    onClose={this.hideToaster}
+                  >
+                    The Toaster with the Bounce transition!
+                  </Toaster>
+                </GuideExample>
+                <GuideExample label="transition={Slide}">
+                  <Button onClick={this.showToaster2}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toaster2Open}
+                    onClose={this.hideToaster2}
+                    transition={Slide}
+                  >
+                    The Toaster with the Slide transition!
+                  </Toaster>
+                </GuideExample>
+                <GuideExample label="transition={Zoom}">
+                  <Button onClick={this.showToaster3}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toaster3Open}
+                    onClose={this.hideToaster3}
+                    transition={Zoom}
+                  >
+                    The Toaster with the Zoom transition!
+                  </Toaster>
+                </GuideExample>
+                <GuideExample label="transition={Flip}">
+                  <Button onClick={this.showToaster4}>Show Toaster</Button>
+                  <Toaster
+                    open={this.state.toaster4Open}
+                    onClose={this.hideToaster4}
+                    transition={Flip}
+                  >
+                    The Toaster with the Flip transition!
+                  </Toaster>
+                </GuideExample>
+              </div>
+            </React.Fragment>
+          );
+        }
+      }
+
+      return <ToasterStory />;
+    }}
+
+</Playground>
+
+## Props
+
+<PropsTable of={Toaster} />

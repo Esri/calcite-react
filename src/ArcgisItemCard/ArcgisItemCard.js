@@ -12,14 +12,11 @@ import {
   StyledCalendarIcon
 } from './ArcgisItemCard-styled';
 
-import withRefs from '../utils/withRefs';
-
 const ArcgisItemCard = ({
   item,
   showThumbnail,
   dateFormatter,
   maxDescriptionLength,
-  forwardedRef,
   ...other
 }) => {
   let imageEl;
@@ -66,7 +63,7 @@ const ArcgisItemCard = ({
   }
 
   return (
-    <StyledItemCard ref={forwardedRef} wide {...other}>
+    <StyledItemCard wide {...other}>
       {imageEl}
       <StyledItemCardContent>
         <StyledCardItemTitle title={item.title}>
@@ -104,4 +101,6 @@ ArcgisItemCard.defaultProps = {
   maxDescriptionLength: 90
 };
 
-export default withRefs(ArcgisItemCard);
+ArcgisItemCard.displayName = 'ArcgisItemCard';
+
+export default ArcgisItemCard;

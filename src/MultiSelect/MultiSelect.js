@@ -15,7 +15,7 @@ import {
 import { FormControlContext } from '../Form/FormControl';
 import { PopoverContext } from '../Popover/Popover';
 
-const Select = ({
+const MultiSelect = ({
   children,
   selectedValues,
   placeholder,
@@ -86,9 +86,7 @@ const Select = ({
       setFieldValue(name, values);
     }
 
-    if (onChange) {
-      onChange(values);
-    }
+    onChange(values);
   }
 
   function _getItemsFromValues(values) {
@@ -106,9 +104,7 @@ const Select = ({
       field.onBlur(e);
     }
 
-    if (onBlur) {
-      onBlur(e);
-    }
+    onBlur(e);
   }
 
   function isSuccess(formControlContext) {
@@ -316,11 +312,13 @@ const Select = ({
   );
 };
 
-Select.propTypes = {
+MultiSelect.propTypes = {
   /** Nodes to be used as options in the Select */
   children: PropTypes.node,
   /** Callback function fired when the value of the Select changes. */
   onChange: PropTypes.func,
+  /** Callback function fired when the Select element is blurred */
+  onBlur: PropTypes.func,
   /** The selected item of the select */
   selectedItem: PropTypes.node,
   /** Value of the selected item */
@@ -360,11 +358,15 @@ Select.propTypes = {
   virtualizedMenuWidth: PropTypes.number
 };
 
-Select.defaultProps = {
+MultiSelect.defaultProps = {
   placeholder: 'Select...',
   placement: 'bottom-start',
   closeOnSelect: true,
-  virtualizedRowHeight: 42
+  virtualizedRowHeight: 42,
+  onChange: () => {},
+  onBlur: () => {}
 };
 
-export default Select;
+MultiSelect.displayName = 'MultiSelect';
+
+export default MultiSelect;

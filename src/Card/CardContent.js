@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 import { StyledCardContent } from './Card-styled';
 
 import { CardContext } from './Card';
 
-const CardContent = ({ children, forwardedRef, ...other }) => {
+const CardContent = ({ children, ...other }) => {
   return (
     <CardContext.Consumer>
       {({ cardContext }) => (
-        <StyledCardContent ref={forwardedRef} {...cardContext} {...other}>
+        <StyledCardContent {...cardContext} {...other}>
           {children}
         </StyledCardContent>
       )}
@@ -28,4 +27,6 @@ CardContent.propTypes = {
 
 CardContent.defaultProps = {};
 
-export default withRefs(CardContent);
+CardContent.displayName = 'CardContent';
+
+export default CardContent;

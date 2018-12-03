@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import withRefs from '../utils/withRefs';
 
 import {
   StyledCopyToClipboard,
@@ -71,16 +70,11 @@ class CopyToClipboard extends Component {
   };
 
   render() {
-    const { children, forwardedRef, ...other } = this.props;
+    const { children, ...other } = this.props;
 
     const copyToClipboard = (
       <StyledCopyToClipboard {...other}>
-        <StyledCopyToClipboardInput
-          ref={forwardedRef}
-          as="input"
-          value={children}
-          readOnly
-        />
+        <StyledCopyToClipboardInput as="input" value={children} readOnly />
         <Tooltip title={this.getTooltipText()}>
           <StyledCopyButton
             clear
@@ -110,4 +104,6 @@ CopyToClipboard.defaultProps = {
   successTooltip: 'Copied!'
 };
 
-export default withRefs(CopyToClipboard);
+CopyToClipboard.displayName = 'CopyToClipboard';
+
+export default CopyToClipboard;

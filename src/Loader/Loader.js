@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import {
   StyledLoaderText,
@@ -8,7 +7,7 @@ import {
   StyledLoaderBars
 } from './Loader-styled';
 
-const Loader = ({ text, forwardedRef, ...other }) => {
+const Loader = ({ text, ...other }) => {
   const getLoaderText = text => {
     if (text) {
       return <StyledLoaderText>{text}</StyledLoaderText>;
@@ -16,7 +15,7 @@ const Loader = ({ text, forwardedRef, ...other }) => {
   };
 
   return (
-    <StyledLoader ref={forwardedRef} {...other}>
+    <StyledLoader {...other}>
       <StyledLoaderBars />
       {getLoaderText(text)}
     </StyledLoader>
@@ -30,4 +29,6 @@ Loader.propTypes = {
 
 Loader.defaultProps = {};
 
-export default withRefs(Loader);
+Loader.displayName = 'Loader';
+
+export default Loader;

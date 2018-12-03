@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
-import withRefs from '../utils/withRefs';
 import { StyledButtonGroup } from './Button-styled';
 
 const ButtonGroupContext = createContext({
@@ -10,22 +9,20 @@ const ButtonGroupContext = createContext({
   }
 });
 
-const ButtonGroup = withRefs(
-  ({ children, forwardedRef, isToggle, ...other }) => {
-    const buttonGroupContext = {
-      grouped: true,
-      isToggle: isToggle
-    };
+const ButtonGroup = ({ children, isToggle, ...other }) => {
+  const buttonGroupContext = {
+    grouped: true,
+    isToggle: isToggle
+  };
 
-    return (
-      <ButtonGroupContext.Provider value={{ buttonGroupContext }}>
-        <StyledButtonGroup ref={forwardedRef} isToggle={isToggle} {...other}>
-          {children}
-        </StyledButtonGroup>
-      </ButtonGroupContext.Provider>
-    );
-  }
-);
+  return (
+    <ButtonGroupContext.Provider value={{ buttonGroupContext }}>
+      <StyledButtonGroup isToggle={isToggle} {...other}>
+        {children}
+      </StyledButtonGroup>
+    </ButtonGroupContext.Provider>
+  );
+};
 
 ButtonGroup.propTypes = {
   /** Description TBD */
@@ -34,5 +31,7 @@ ButtonGroup.propTypes = {
 };
 
 ButtonGroup.defaultProps = {};
+
+ButtonGroup.displayName = 'ButtonGroup';
 
 export { ButtonGroup as default, ButtonGroupContext };

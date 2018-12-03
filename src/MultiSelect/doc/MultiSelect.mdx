@@ -1,0 +1,406 @@
+---
+name: MultiSelect
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+import { Formik, Field } from 'formik';
+
+import { MenuItem } from '../../Menu';
+import MultiSelect from '../';
+
+import Form, {
+  FormControl,
+  FormHelperText,
+  FormControlLabel
+} from '../../Form';
+import Button from '../../Button';
+
+import statesJson from '../../../docz/_sampleJson/states.json';
+
+# MultiSelect
+
+MultiSelect allows users to choose one or more options from a prescribed list.
+
+## Basic Usage
+
+<Playground style={{ height: '220px'}}>
+  {() => {
+      class MultiSelectExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValues: [10]
+          };
+
+          this.handleMultiSelectChange = this.handleMultiSelectChange.bind(this);
+        }
+
+        handleMultiSelectChange(values, items) {
+          this.setState({
+            selectedValues: values
+          });
+        };
+
+        render() {
+          return (
+            <MultiSelect
+              onChange={this.handleMultiSelectChange}
+              selectedValues={this.state.selectedValues}
+            >
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </MultiSelect>
+          );
+        }
+      }
+
+      return <MultiSelectExample />;
+    }}
+
+</Playground>
+
+## Advanced Usage
+
+<Playground>
+  {() => {
+      class MultiSelectExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValues: [10]
+          };
+
+          this.handleMultiSelectChange = this.handleMultiSelectChange.bind(this);
+        }
+
+        handleMultiSelectChange(values, items) {
+          this.setState({
+            selectedValues: values
+          });
+        };
+
+        render() {
+          return (
+            <div>
+              <GuideExample label="selectedItem={this.state.selectedValues}">
+                <MultiSelect
+                  onChange={this.handleMultiSelectChange}
+                  selectedValues={this.state.selectedValues}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={40}>Fourty</MenuItem>
+                  <MenuItem value={50}>Fifty</MenuItem>
+                  <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
+                </MultiSelect>
+              </GuideExample>
+              <GuideExample label="fullWidth">
+                <MultiSelect
+                  fullWidth
+                  onChange={this.handleMultiSelectChange}
+                  selectedValues={this.state.selectedValues}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={40}>Fourty</MenuItem>
+                  <MenuItem value={50}>Fifty</MenuItem>
+                  <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
+                </MultiSelect>
+              </GuideExample>
+              <GuideExample label="appendToBody">
+                <MultiSelect
+                  onChange={this.handleMultiSelectChange}
+                  selectedValues={this.state.selectedValues}
+                  appendToBody
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={40}>Fourty</MenuItem>
+                  <MenuItem value={50}>Fifty</MenuItem>
+                  <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
+                </MultiSelect>
+              </GuideExample>
+              <GuideExample label="closeOnSelect={false}">
+                <MultiSelect
+                  onChange={this.handleMultiSelectChange}
+                  selectedValues={this.state.selectedValues}
+                  closeOnSelect={false}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={40}>Fourty</MenuItem>
+                  <MenuItem value={50}>Fifty</MenuItem>
+                  <MenuItem value={60}>Sixty</MenuItem>
+                  <MenuItem value={70}>Seventy</MenuItem>
+                  <MenuItem value={80}>Eighty</MenuItem>
+                  <MenuItem value={90}>Ninety</MenuItem>
+                  <MenuItem value={100}>One Hundred</MenuItem>
+                </MultiSelect>
+              </GuideExample>
+            </div>
+          );
+        }
+      }
+
+      return <MultiSelectExample />;
+    }}
+
+</Playground>
+
+## Custom Label Renderer
+
+<Playground style={{ height: '400px'}}>
+  {() => {
+      class MultiSelectExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValues: [10, 20, 30]
+          };
+
+          this.handleMultiSelectChange = this.handleMultiSelectChange.bind(this);
+          this.renderValue = this.renderValue.bind(this);
+        }
+
+        handleMultiSelectChange(values) {
+          this.setState({
+            selectedValues: values
+          });
+        };
+
+        renderValue(items) {
+          if (!items || items.length === 0) {
+            return 'Select an Option';
+          } else if (items.length > 2) {
+            // Template literals currently are not supported by MDX:
+            // https://github.com/mdx-js/mdx/issues/218
+            return items.length + ' Items Selected';
+          } else {
+            return items.map(item => item.props.children).join(', ');
+          }
+        };
+
+        render() {
+          return (
+            <div>
+              <MultiSelect
+                renderValue={this.renderValue}
+                onChange={this.handleMultiSelectChange}
+                selectedValues={this.state.selectedValues}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value={40}>Fourty</MenuItem>
+                <MenuItem value={50}>Fifty</MenuItem>
+                <MenuItem value={60}>Sixty</MenuItem>
+                <MenuItem value={70}>Seventy</MenuItem>
+                <MenuItem value={80}>Eighty</MenuItem>
+                <MenuItem value={90}>Ninety</MenuItem>
+                <MenuItem value={100}>One Hundred</MenuItem>
+              </MultiSelect>
+            </div>
+          );
+        }
+      }
+
+      return <MultiSelectExample />;
+    }}
+
+</Playground>
+
+## Minimal
+
+<Playground>
+  {() => {
+      class MultiSelectExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValues: [10]
+          };
+
+          this.handleMultiSelectChange = this.handleMultiSelectChange.bind(this);
+        }
+
+        handleMultiSelectChange(values, items) {
+          this.setState({
+            selectedValues: values
+          });
+        };
+
+        render() {
+          return (
+            <div>
+              <MultiSelect
+                minimal
+                onChange={this.handleMultiSelectChange}
+                selectedValues={this.state.selectedValues}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value={40}>Fourty</MenuItem>
+                <MenuItem value={50}>Fifty</MenuItem>
+                <MenuItem value={60}>Sixty</MenuItem>
+                <MenuItem value={70}>Seventy</MenuItem>
+                <MenuItem value={80}>Eighty</MenuItem>
+                <MenuItem value={90}>Ninety</MenuItem>
+                <MenuItem value={100}>One Hundred</MenuItem>
+              </MultiSelect>
+            </div>
+          );
+        }
+      }
+
+      return <MultiSelectExample />;
+    }}
+
+</Playground>
+
+## Virtualized
+
+<Playground>
+  {() => {
+      class MultiSelectStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValues: []
+          };
+
+          this.handleMultiSelectChange = this.handleMultiSelectChange.bind(this);
+        }
+
+        handleMultiSelectChange(values, items) {
+          this.setState({
+            selectedValues: values
+          });
+        };
+
+        render() {
+          return (
+            <div>
+              <MultiSelect
+                virtualized
+                virtualizedMenuWidth={250}
+                onChange={this.handleMultiSelectChange}
+                selectedValues={this.state.selectedValues}
+              >
+                {statesJson.states.map(state => {
+                  return (
+                    <MenuItem key={state} value={state}>
+                      {state}
+                    </MenuItem>
+                  );
+                })}
+              </MultiSelect>
+            </div>
+          );
+        }
+      }
+
+      return <MultiSelectStory />;
+    }}
+
+</Playground>
+
+## With Formik
+
+<Playground>
+  {() => {
+      const formValues = {
+        dogs: []
+      };
+
+      const dogOptions = [
+        { name: 'Afghan Hound', value: 'afghanhound' },
+        { name: 'Basenji', value: 'basenji' },
+        { name: 'Bulldog', value: 'bulldog' },
+        { name: 'Chihuahua', value: 'chihuahua' },
+        { name: 'Great Dane', value: 'greatdane' },
+        { name: 'Labrador Retriever', value: 'labrador' },
+        { name: 'Yorkie', value: 'yorkie' },
+        { name: 'Whippet', value: 'whippet' }
+      ];
+
+      const onSubmit = (values, actions) => {
+        setTimeout(() => {
+          console.log(values);
+          actions.setSubmitting(false);
+        }, 1000);
+      };
+
+      const onValidate = values => {
+        const errors = {};
+        if (!values.dogs.length) {
+          errors.dogs = 'You must like at least one... 🤨';
+        }
+
+        return errors;
+      };
+
+      return (
+        <Formik
+          initialValues={formValues}
+          validate={onValidate}
+          onSubmit={onSubmit}
+        >
+          {({ values, errors, touched, handleSubmit, isSubmitting }) => (
+            <GuideExample>
+              <Form onSubmit={handleSubmit}>
+                {/* dogs */}
+                <FormControl
+                  success={touched.dogs && !errors.dogs ? true : false}
+                  error={touched.dogs && errors.dogs ? true : false}
+                >
+                  <FormControlLabel htmlFor="token">
+                    Favorite Dogs:
+                  </FormControlLabel>
+                  <Field component={MultiSelect} name="dogs">
+                    {dogOptions.map(dog => (
+                      <MenuItem key={dog.value} value={dog.value}>
+                        {dog.name}
+                      </MenuItem>
+                    ))}
+                  </Field>
+                  <FormHelperText>
+                    {(touched.dogs && errors.dogs) || null}
+                  </FormHelperText>
+                </FormControl>
+                <FormControl>
+                  <Button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? 'Submitting.......' : 'Submit'}
+                  </Button>
+                </FormControl>
+                <pre>{JSON.stringify(values, null, 2)}</pre>
+              </Form>
+            </GuideExample>
+          )}
+        </Formik>
+      );
+    }}
+
+</Playground>
+
+## Props
+
+<PropsTable of={MultiSelect} />

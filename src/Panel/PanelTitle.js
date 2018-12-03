@@ -1,15 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledPanelTitle } from './Panel-styled';
 
-const PanelTitle = ({ children, forwardedRef, ...other }) => {
-  return (
-    <StyledPanelTitle ref={forwardedRef} {...other}>
-      {children}
-    </StyledPanelTitle>
-  );
+const PanelTitle = ({ children, ...other }) => {
+  return <StyledPanelTitle {...other}>{children}</StyledPanelTitle>;
 };
 
 PanelTitle.propTypes = {
@@ -19,4 +14,6 @@ PanelTitle.propTypes = {
 
 PanelTitle.defaultProps = {};
 
-export default withRefs(PanelTitle);
+PanelTitle.displayName = 'PanelTitle';
+
+export default PanelTitle;
