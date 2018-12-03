@@ -1,16 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledPanel } from './Panel-styled';
 
-const Panel = withRefs(({ children, forwardedRef, ...other }) => {
-  return (
-    <StyledPanel ref={forwardedRef} {...other}>
-      {children}
-    </StyledPanel>
-  );
-});
+const Panel = ({ children, ...other }) => {
+  return <StyledPanel {...other}>{children}</StyledPanel>;
+};
 
 Panel.propTypes = {
   /** Content of the Panel */

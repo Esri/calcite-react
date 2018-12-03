@@ -29,7 +29,7 @@ import ReactDOM from 'react-dom';
 
 import App from 'path/to/App';
 
-import { CalciteThemeProvider } from 'calcite-react/theme/CalciteTheme';
+import CalciteThemeProvider from 'calcite-react/CalciteThemeProvider';
 
 ReactDOM.render(
   <CalciteThemeProvider>
@@ -115,9 +115,7 @@ import ReactDOM from 'react-dom';
 
 import App from 'path/to/App';
 
-import CalciteTheme, {
-  CalciteThemeProvider
-} from 'calcite-react/theme/CalciteTheme';
+import CalciteThemeProvider, { CalciteTheme } from 'calcite-react/CalciteThemeProvider';
 
 const CustomTheme = {
   ...CalciteTheme,

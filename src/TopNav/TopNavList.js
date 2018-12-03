@@ -1,15 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 import { StyledTopNavList } from './TopNav-styled';
 
-const TopNavList = withRefs(({ children, forwardedRef, ...other }) => {
-  return (
-    <StyledTopNavList ref={forwardedRef} {...other}>
-      {children}
-    </StyledTopNavList>
-  );
-});
+const TopNavList = ({ children, ...other }) => {
+  return <StyledTopNavList {...other}>{children}</StyledTopNavList>;
+};
 
 TopNavList.propTypes = {
   /** Description TBD */

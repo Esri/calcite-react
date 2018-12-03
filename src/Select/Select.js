@@ -116,9 +116,7 @@ class Select extends Component {
       setFieldValue(name, value);
     }
 
-    if (onChange) {
-      onChange(value, selectedItem);
-    }
+    onChange(value, selectedItem);
   };
 
   _getItemFromValue = (children, value) => {
@@ -227,9 +225,7 @@ class Select extends Component {
       field.onBlur(e);
     }
 
-    if (onBlur) {
-      onBlur(e);
-    }
+    onBlur(e);
   };
 
   isSuccess = params => {
@@ -488,7 +484,9 @@ Select.propTypes = {
 Select.defaultProps = {
   placeholder: 'Select...',
   placement: 'bottom-start',
-  virtualizedRowHeight: 42
+  virtualizedRowHeight: 42,
+  onChange: () => {},
+  onBlur: () => {}
 };
 
 Select.displayName = 'Select';

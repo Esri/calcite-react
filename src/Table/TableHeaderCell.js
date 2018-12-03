@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledTableHeaderCell } from './Table-styled';
 
 import { TableContext } from './Table';
 
-const TableHeaderCell = withRefs(({ children, forwardedRef, ...other }) => {
+const TableHeaderCell = ({ children, ...other }) => {
   return (
     <TableContext.Consumer>
       {({ tableContext }) => (
         <StyledTableHeaderCell
-          ref={forwardedRef}
           blue={tableContext.blue}
           plain={tableContext.plain}
           noTable={tableContext.noTable}
@@ -25,7 +23,7 @@ const TableHeaderCell = withRefs(({ children, forwardedRef, ...other }) => {
       )}
     </TableContext.Consumer>
   );
-});
+};
 
 TableHeaderCell.propTypes = {
   /** Description TBD */

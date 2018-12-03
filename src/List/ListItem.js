@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import {
   StyledListItem,
@@ -10,45 +9,39 @@ import {
 
 import { ListContext } from './List';
 
-const ListItem = withRefs(
-  ({ children, leftNode, rightNode, forwardedRef, ...other }) => {
-    const getLeftNode = (listContext, leftNode) => {
-      if (leftNode) {
-        return (
-          <StyledListSideContainer nested={listContext.nested}>
-            {leftNode}
-          </StyledListSideContainer>
-        );
-      }
-    };
+const ListItem = ({ children, leftNode, rightNode, ...other }) => {
+  const getLeftNode = (listContext, leftNode) => {
+    if (leftNode) {
+      return (
+        <StyledListSideContainer nested={listContext.nested}>
+          {leftNode}
+        </StyledListSideContainer>
+      );
+    }
+  };
 
-    const getRightNode = (listContext, rightNode) => {
-      if (rightNode) {
-        return (
-          <StyledListSideContainer nested={listContext.nested}>
-            {rightNode}
-          </StyledListSideContainer>
-        );
-      }
-    };
+  const getRightNode = (listContext, rightNode) => {
+    if (rightNode) {
+      return (
+        <StyledListSideContainer nested={listContext.nested}>
+          {rightNode}
+        </StyledListSideContainer>
+      );
+    }
+  };
 
-    return (
-      <ListContext.Consumer>
-        {({ listContext }) => (
-          <StyledListItem
-            ref={forwardedRef}
-            nested={listContext.nested}
-            {...other}
-          >
-            {getLeftNode(listContext, leftNode)}
-            <StyledListTextContainer>{children}</StyledListTextContainer>
-            {getRightNode(listContext, rightNode)}
-          </StyledListItem>
-        )}
-      </ListContext.Consumer>
-    );
-  }
-);
+  return (
+    <ListContext.Consumer>
+      {({ listContext }) => (
+        <StyledListItem nested={listContext.nested} {...other}>
+          {getLeftNode(listContext, leftNode)}
+          <StyledListTextContainer>{children}</StyledListTextContainer>
+          {getRightNode(listContext, rightNode)}
+        </StyledListItem>
+      )}
+    </ListContext.Consumer>
+  );
+};
 
 ListItem.propTypes = {
   /** Content of the ListItem */

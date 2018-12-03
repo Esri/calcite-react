@@ -1,22 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledTopNavLink } from './TopNav-styled';
-import TopNav from './TopNav';
 
-const TopNavLink = withRefs(({ children, href, forwardedRef, ...other }) => {
+const TopNavLink = ({ children, href, ...other }) => {
   return (
-    <StyledTopNavLink
-      ref={forwardedRef}
-      href={href}
-      as={href ? 'a' : 'span'}
-      {...other}
-    >
+    <StyledTopNavLink href={href} as={href ? 'a' : 'span'} {...other}>
       {children}
     </StyledTopNavLink>
   );
-});
+};
 
 TopNavLink.propTypes = {
   /** Description TBD */

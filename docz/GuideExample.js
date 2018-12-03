@@ -22,13 +22,15 @@ const GuideExampleContainer = styled.div`
 `;
 
 const GuideExampleLabel = styled.code`
+  background: ${props => props.theme.palette.lightestGray};
+  font-size: 0.85rem;
   border-radius: 0 0 0 3px;
   position: absolute;
   top: -1px;
   right: -1px;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding: 2px 8px;
   z-index: 101;
+  opacity: 0.7;
 
   *:first-child & {
     border-radius: 0 3px 0 3px;

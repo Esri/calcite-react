@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledTableHeaderRow } from './Table-styled';
 
 import { TableContext } from './Table';
 
-const TableHeaderRow = withRefs(({ children, forwardedRef, ...other }) => {
+const TableHeaderRow = ({ children, ...other }) => {
   return (
     <TableContext.Consumer>
       {({ tableContext }) => (
         <StyledTableHeaderRow
-          ref={forwardedRef}
           blue={tableContext.blue}
           noCol={tableContext.noCol}
           noRow={tableContext.noRow}
@@ -22,7 +20,7 @@ const TableHeaderRow = withRefs(({ children, forwardedRef, ...other }) => {
       )}
     </TableContext.Consumer>
   );
-});
+};
 
 TableHeaderRow.propTypes = {
   /** Description TBD */

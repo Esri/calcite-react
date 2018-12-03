@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { CalciteH6, CalciteP } from '../Elements';
 import { fontSize, unitCalc } from '../utils/helpers';
-import CalciteTheme from '../theme/CalciteTheme';
+import { CalciteTheme } from '../CalciteThemeProvider';
 
 const StyledStepper = styled.div`
   display: flex;
