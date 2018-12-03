@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import withRefs from '../utils/withRefs';
+import React, { forwardRef } from 'react';
 
 import {
   StyledTextField,
@@ -11,27 +10,29 @@ import {
 
 import { FormControlContext } from '../Form/FormControl';
 
-const TextField = withRefs(
-  ({
-    children,
-    type,
-    value,
-    minimal,
-    fullWidth,
-    id,
-    onChange,
-    onBlur,
-    leftAdornment,
-    leftAdornmentNoWrap,
-    rightAdornment,
-    rightAdornmentNoWrap,
-    forwardedRef,
-    name,
-    disabled,
-    field,
-    form,
-    ...other
-  }) => {
+const TextField = forwardRef(
+  (
+    {
+      children,
+      type,
+      value,
+      minimal,
+      fullWidth,
+      id,
+      onChange,
+      onBlur,
+      leftAdornment,
+      leftAdornmentNoWrap,
+      rightAdornment,
+      rightAdornmentNoWrap,
+      name,
+      disabled,
+      field,
+      form,
+      ...other
+    },
+    ref
+  ) => {
     let touched, errors, isSubmitting;
     if (field) {
       name = field.name;
@@ -121,7 +122,7 @@ const TextField = withRefs(
         <FormControlContext.Consumer>
           {({ formControlContext }) => (
             <TextFieldArea
-              ref={forwardedRef}
+              ref={ref}
               name={name}
               as={type === 'textarea' ? 'textarea' : 'input'}
               type={type}
@@ -150,7 +151,7 @@ const TextField = withRefs(
           >
             {getAdornment(leftAdornment, leftAdornmentNoWrap, 'left')}
             <TextFieldArea
-              ref={forwardedRef}
+              ref={ref}
               name={name}
               as={type === 'textarea' ? 'textarea' : 'input'}
               type={type}
