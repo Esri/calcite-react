@@ -19,7 +19,7 @@ const AccordionTitle = ({
       active={active}
       {...other}
     >
-      <StyledChevronIcon isActive={active} />
+      <StyledChevronIcon active={`${active}`} />
       {children}
     </StyledAccordionTitle>
   );
