@@ -1,5 +1,5 @@
 import { transparentize } from 'polished';
-import CalciteTheme from '../theme/CalciteTheme';
+import { CalciteTheme } from '../CalciteThemeProvider';
 
 const unitCalc = (operand1, operand2, operator) => {
   let operand1Value = operand1;

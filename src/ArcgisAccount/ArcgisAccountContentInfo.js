@@ -13,7 +13,7 @@ import {
 } from './ArcgisAccount-styled';
 
 // App components
-import CalciteTheme from '../theme/CalciteTheme';
+import { CalciteTheme } from '../CalciteThemeProvider';
 
 // Third-party components (buttons, icons, etc.)
 

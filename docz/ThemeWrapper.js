@@ -1,5 +1,5 @@
 import React from 'react';
-import { CalciteThemeProvider } from '../src/theme/CalciteTheme';
+import CalciteThemeProvider from '../src/CalciteThemeProvider';
 
 const ThemeWrapper = ({ children }) => (
   <CalciteThemeProvider>{children}</CalciteThemeProvider>

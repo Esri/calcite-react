@@ -5,7 +5,7 @@ import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 
 import GuideExample from '../../../stories/GuideExample';
-import CalciteTheme from '../../theme/CalciteTheme';
+import { CalciteTheme } from '../../CalciteThemeProvider';
 import doc from './Button.md';
 import Button, { ButtonGroup } from '../';
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CalciteTheme from '../theme/CalciteTheme';
+import { CalciteTheme } from '../CalciteThemeProvider';
 import { unitCalc } from '../utils/helpers';
 import StarIcon from 'calcite-ui-icons-react/StarIcon';
 

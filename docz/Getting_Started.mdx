@@ -24,7 +24,7 @@ import ReactDOM from 'react-dom';
 
 import App from 'path/to/App';
 
-import { CalciteThemeProvider } from 'calcite-react/theme/CalciteTheme';
+import CalciteThemeProvider from 'calcite-react/CalciteThemeProvider';
 
 ReactDOM.render(
   <CalciteThemeProvider>
@@ -101,14 +101,14 @@ const AdvancedButton = styled(Button)`
 ```
 
 ## Theming
-Some minor theme editing is possible with calcite-react by extending the `CalciteTheme` config before passing it into the `<CalciteThemeProvider />`. The default theme can be found on [github](https://github.com/ArcGIS/calcite-react/blob/develop/src/theme/CalciteTheme.js).
+Some minor theme editing is possible with calcite-react by extending the `CalciteTheme` config before passing it into the `<CalciteThemeProvider />`. The default theme can be found on [github](https://github.com/ArcGIS/calcite-react/blob/develop/src/CalciteThemeProvider/CalciteTheme.js).
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from 'path/to/App';
 
-import CalciteTheme, { CalciteThemeProvider } from 'calcite-react/theme/CalciteTheme';
+import CalciteThemeProvider, { CalciteTheme } from 'calcite-react/CalciteThemeProvider';
 
 const CustomTheme = {
   ...CalciteTheme,

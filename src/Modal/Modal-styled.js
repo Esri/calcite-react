@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from '../theme/CalciteTheme';
+import { CalciteTheme } from '../CalciteThemeProvider';
 
 const StyledModalOverlay = {
   display: 'flex',
@@ -11,7 +11,7 @@ const StyledModalOverlay = {
   right: '0px',
   bottom: '0px',
   textAlign: 'center',
-  background: theme.palette.transparentBlack,
+  background: CalciteTheme.palette.transparentBlack,
   zIndex: 101,
   transition: `opacity 300ms cubic-bezier(0.4, 0.0, 0.2, 1)`,
   opacity: 0
@@ -29,13 +29,13 @@ const StyledModalDialog = {
   outline: 'none',
   boxSizing: 'border-box',
   zIndex: '102',
-  background: theme.palette.white,
-  padding: theme.baseline,
+  background: CalciteTheme.palette.white,
+  padding: CalciteTheme.baseline,
   textAlign: 'left',
   overflowY: 'auto',
   display: 'inline-block',
   verticalAlign: 'middle',
-  borderRadius: theme.borderRadius,
+  borderRadius: CalciteTheme.borderRadius,
   border: 'none',
   transition: `margin-top 300ms cubic-bezier(0.4, 0.0, 0.2, 1)`,
   marginTop: '30px'
