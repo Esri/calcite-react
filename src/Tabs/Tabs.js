@@ -63,7 +63,8 @@ Tabs.propTypes = {
 };
 
 Tabs.defaultProps = {
-  activeTabIndex: 0
+  activeTabIndex: 0,
+  onTabChange: () => {}
 };
 
 Tabs.displayName = 'Tabs';

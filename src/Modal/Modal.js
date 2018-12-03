@@ -71,7 +71,10 @@ Modal.propTypes = {
   dialogStyle: PropTypes.object
 };
 
-Modal.defaultProps = {};
+Modal.defaultProps = {
+  onAfterOpen: () => {},
+  onRequestClose: () => {}
+};
 
 Modal.displayName = 'Modal';
 

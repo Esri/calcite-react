@@ -32,6 +32,8 @@ AccordionTitle.propTypes = {
   onClick: PropTypes.func
 };
 
-AccordionTitle.defaultProps = {};
+AccordionTitle.defaultProps = {
+  onAccordionChange: () => {}
+};
 
 export default AccordionTitle;

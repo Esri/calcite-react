@@ -36,7 +36,8 @@ Accordion.propTypes = {
 };
 
 Accordion.defaultProps = {
-  activeSectionIndexes: []
+  activeSectionIndexes: [],
+  onAccordionChange: () => {}
 };
 
 Accordion.displayName = 'Accordion';

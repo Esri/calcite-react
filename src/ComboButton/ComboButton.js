@@ -115,7 +115,8 @@ ComboButton.propTypes = {
 
 ComboButton.defaultProps = {
   type: 'button',
-  iconPosition: 'after'
+  iconPosition: 'after',
+  onClick: () => {}
 };
 
 ComboButton.displayName = 'ComboButton';

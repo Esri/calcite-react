@@ -28,9 +28,7 @@ const FileUploader = ({
       setFieldValue(name, e.currentTarget.files);
     }
 
-    if (onChange) {
-      onChange(e);
-    }
+    onChange(e);
   };
 
   const isSuccess = () => {
@@ -69,7 +67,9 @@ FileUploader.propTypes = {
   children: PropTypes.node
 };
 
-FileUploader.defaultProps = {};
+FileUploader.defaultProps = {
+  onChange: () => {}
+};
 
 FileUploader.displayName = 'FileUploader';
 

@@ -86,9 +86,7 @@ const MultiSelect = ({
       setFieldValue(name, values);
     }
 
-    if (onChange) {
-      onChange(values);
-    }
+    onChange(values);
   }
 
   function _getItemsFromValues(values) {
@@ -106,9 +104,7 @@ const MultiSelect = ({
       field.onBlur(e);
     }
 
-    if (onBlur) {
-      onBlur(e);
-    }
+    onBlur(e);
   }
 
   function isSuccess(formControlContext) {
@@ -321,6 +317,8 @@ MultiSelect.propTypes = {
   children: PropTypes.node,
   /** Callback function fired when the value of the Select changes. */
   onChange: PropTypes.func,
+  /** Callback function fired when the Select element is blurred */
+  onBlur: PropTypes.func,
   /** The selected item of the select */
   selectedItem: PropTypes.node,
   /** Value of the selected item */
@@ -364,7 +362,9 @@ MultiSelect.defaultProps = {
   placeholder: 'Select...',
   placement: 'bottom-start',
   closeOnSelect: true,
-  virtualizedRowHeight: 42
+  virtualizedRowHeight: 42,
+  onChange: () => {},
+  onBlur: () => {}
 };
 
 MultiSelect.displayName = 'MultiSelect';

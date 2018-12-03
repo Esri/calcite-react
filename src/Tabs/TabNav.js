@@ -54,6 +54,10 @@ TabNav.propTypes = {
   dark: PropTypes.bool
 };
 
+TabNav.defaultProps = {
+  onTabChange: () => {}
+};
+
 TabNav.displayName = 'TabNav';
 
 export default TabNav;

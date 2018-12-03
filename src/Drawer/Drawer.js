@@ -50,7 +50,8 @@ Drawer.propTypes = {
 };
 
 Drawer.defaultProps = {
-  drawerWidth: 280
+  drawerWidth: 280,
+  onRequestClose: () => {}
 };
 
 Drawer.displayName = 'Drawer';

@@ -46,6 +46,10 @@ AccordionSection.propTypes = {
   children: PropTypes.node
 };
 
+AccordionSection.defaultProps = {
+  onAccordionChange: () => {}
+};
+
 AccordionSection.displayName = 'AccordionSection';
 
 export default AccordionSection;
