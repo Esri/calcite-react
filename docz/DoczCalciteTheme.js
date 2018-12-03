@@ -39,6 +39,9 @@ export default {
       fontSize: 16,
       lineHeight: '1.55rem'
     },
+    container: {
+      width: ['100%', '100%', '100%']
+    },
     h1: {
       fontFamily:
         '"Avenir Next W01", "Avenir Next W00", "Avenir Next", "Avenir", "Helvetica Neue", sans-serif',
