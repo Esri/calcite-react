@@ -46,7 +46,8 @@ export default {
       lineHeight: '1.55rem'
     },
     container: {
-      width: ['100%', '100%', '100%']
+      width: ['100%', '100%', '100%'],
+      position: 'relative'
     },
     h1: {
       fontFamily:
