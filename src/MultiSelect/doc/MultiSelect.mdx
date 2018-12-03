@@ -22,7 +22,46 @@ import statesJson from '../../../stories/_sampleJson/states.json';
 
 MultiSelect allows users to choose one or more options from a prescribed list.
 
-## Controlled MultiSelect
+## Basic Usage
+
+<Playground style={{ height: '220px'}}>
+  {() => {
+      class MultiSelectExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValues: [10]
+          };
+
+          this.handleMultiSelectChange = this.handleMultiSelectChange.bind(this);
+        }
+
+        handleMultiSelectChange(values, items) {
+          this.setState({
+            selectedValues: values
+          });
+        };
+
+        render() {
+          return (
+            <MultiSelect
+              onChange={this.handleMultiSelectChange}
+              selectedValues={this.state.selectedValues}
+            >
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </MultiSelect>
+          );
+        }
+      }
+
+      return <MultiSelectExample />;
+    }}
+
+</Playground>
+
+## Advanced Usage
 
 <Playground>
   {() => {
@@ -128,7 +167,7 @@ MultiSelect allows users to choose one or more options from a prescribed list.
 
 ## Custom Label Renderer
 
-<Playground style={{ height: '500px'}}>
+<Playground style={{ height: '400px'}}>
   {() => {
       class MultiSelectExample extends React.Component {
         constructor(props) {

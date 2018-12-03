@@ -20,15 +20,17 @@ Buttons communicate the action that will occur when the user touches them.
 ## Basic Usage
 
 <Playground>
-  <GuideExample>
-    <Button onClick={() => console.log('clicked')}>default</Button>
-  </GuideExample>
+  <Button onClick={() => console.log('clicked')}>default</Button>
+</Playground>
 
-<GuideExample label="transparent">
-  <Button transparent onClick={() => console.log('clicked')}>
-    transparent
-  </Button>
-</GuideExample>
+## Colors
+
+<Playground>
+  <GuideExample label="transparent">
+    <Button transparent onClick={() => console.log('clicked')}>
+      transparent
+    </Button>
+  </GuideExample>
 
 <GuideExample label="clear">
   <Button clear onClick={() => console.log('clicked')}>
@@ -39,6 +41,23 @@ Buttons communicate the action that will occur when the user touches them.
 <GuideExample label="clearGray">
   <Button clearGray onClick={() => console.log('clicked')}>
     clear-gray
+  </Button>
+</GuideExample>
+
+<GuideExample label="halo">
+  <Button halo onClick={() => console.log('clicked')}>
+    halo
+  </Button>
+</GuideExample>
+
+<GuideExample label="red">
+  <Button red onClick={() => console.log('clicked')}>
+    red
+  </Button>
+</GuideExample>
+<GuideExample label="green">
+  <Button green onClick={() => console.log('clicked')}>
+    green
   </Button>
 </GuideExample>
 
@@ -60,17 +79,16 @@ Buttons communicate the action that will occur when the user touches them.
   </Button>
 </GuideExample>
 
-<GuideExample label="halo">
-  <Button halo onClick={() => console.log('clicked')}>
-    halo
-  </Button>
-</GuideExample>
+</Playground>
 
-<GuideExample label="extraSmall">
-  <Button extraSmall onClick={() => console.log('clicked')}>
-    extraSmall
-  </Button>
-</GuideExample>
+## Sizes
+
+<Playground>
+  <GuideExample label="extraSmall">
+    <Button extraSmall onClick={() => console.log('clicked')}>
+      extraSmall
+    </Button>
+  </GuideExample>
 
 <GuideExample label="small">
   <Button small onClick={() => console.log('clicked')}>
@@ -90,127 +108,47 @@ Buttons communicate the action that will occur when the user touches them.
   </Button>
 </GuideExample>
 
+<GuideExample label="half">
+  <Button half onClick={() => console.log('clicked')}>
+    half
+  </Button>
+</GuideExample>
+
 <GuideExample label="fullWidth">
   <Button fullWidth onClick={() => console.log('clicked')}>
     fullWidth
   </Button>
 </GuideExample>
+</Playground>
 
-  <GuideExample label="half">
-    <Button half onClick={() => console.log('clicked')}>
-      half
-    </Button>
-  </GuideExample>
-  <GuideExample label="red">
-    <Button red onClick={() => console.log('clicked')}>
-      red
-    </Button>
-  </GuideExample>
-  <GuideExample label="green">
-    <Button green onClick={() => console.log('clicked')}>
-      green
-    </Button>
-  </GuideExample>
+## Hyperlink
 
-<GuideExample label="disabled">
+<Playground>
+  <Button
+    href="https://esri.com"
+    target="_blank"
+    onClick={() => console.log('clicked')}
+  >
+    link button
+  </Button>
+</Playground>
+
+## Disabled
+
+<Playground>
   <Button disabled onClick={() => console.log('clicked')}>
     disabled
   </Button>
-</GuideExample>
+</Playground>
 
-<GuideExample label="grouped">
+## Grouped
+
+<Playground>
   <ButtonGroup>
     <Button onClick={() => console.log('clicked')}>One</Button>
     <Button onClick={() => console.log('clicked')}>Two</Button>
     <Button onClick={() => console.log('clicked')}>Three</Button>
   </ButtonGroup>
-</GuideExample>
-
-  <GuideExample label="href=&quot;&quot;">
-    <Button
-      href="https://esri.com"
-      target="_blank"
-      onClick={() => console.log('clicked')}
-    >
-      link button
-    </Button>
-  </GuideExample>
-</Playground>
-
-## Toggle Button Group
-
-<Playground>
-{() => {
-      class ButtonGroupStory extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            selected: 1
-          };
-
-          this.selectButton = this.selectButton.bind(this);
-        }
-
-        selectButton(selected) {
-          this.setState({
-            selected
-          });
-        };
-
-        render() {
-          return (
-            <GuideExample label="grouped">
-              <ButtonGroup isToggle>
-                <Button
-                  clear={this.state.selected !== 1}
-                  onClick={() => {
-                    this.selectButton(1);
-                  }}
-                >
-                  One
-                </Button>
-                <Button
-                  clear={this.state.selected !== 2}
-                  onClick={() => {
-                    this.selectButton(2);
-                  }}
-                >
-                  Two
-                </Button>
-                <Button
-                  clear={this.state.selected !== 3}
-                  onClick={() => {
-                    this.selectButton(3);
-                  }}
-                >
-                  Three
-                </Button>
-                <Button
-                  clear={this.state.selected !== 4}
-                  onClick={() => {
-                    this.selectButton(4);
-                  }}
-                >
-                  Four
-                </Button>
-                <Button
-                  clear={this.state.selected !== 5}
-                  onClick={() => {
-                    this.selectButton(5);
-                  }}
-                >
-                  Five
-                </Button>
-              </ButtonGroup>
-            </GuideExample>
-          );
-        }
-      }
-
-
-      return <ButtonGroupStory />;
-    }}
-
 </Playground>
 
 ## With Icon
@@ -253,6 +191,78 @@ Buttons communicate the action that will occur when the user touches them.
       onClick={() => console.log('clicked')}
     />
   </GuideExample>
+</Playground>
+
+## Toggle Button Group
+
+<Playground>
+{() => {
+      class ButtonGroupStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selected: 1
+          };
+
+          this.selectButton = this.selectButton.bind(this);
+        }
+
+        selectButton(selected) {
+          this.setState({
+            selected
+          });
+        };
+
+        render() {
+          return (
+            <ButtonGroup isToggle>
+              <Button
+                clear={this.state.selected !== 1}
+                onClick={() => {
+                  this.selectButton(1);
+                }}
+              >
+                One
+              </Button>
+              <Button
+                clear={this.state.selected !== 2}
+                onClick={() => {
+                  this.selectButton(2);
+                }}
+              >
+                Two
+              </Button>
+              <Button
+                clear={this.state.selected !== 3}
+                onClick={() => {
+                  this.selectButton(3);
+                }}
+              >
+                Three
+              </Button>
+              <Button
+                clear={this.state.selected !== 4}
+                onClick={() => {
+                  this.selectButton(4);
+                }}
+              >
+                Four
+              </Button>
+              <Button
+                clear={this.state.selected !== 5}
+                onClick={() => {
+                  this.selectButton(5);
+                }}
+              >
+                Five
+              </Button>
+            </ButtonGroup>
+          );
+        }
+      }
+      return <ButtonGroupStory />;
+    }}
+
 </Playground>
 
 ## Props

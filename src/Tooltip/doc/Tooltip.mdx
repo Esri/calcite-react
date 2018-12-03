@@ -21,12 +21,15 @@ over an element.
 ## Basic Usage
 
 <Playground>
+  <Tooltip title="Basic Tooltip">
+    <CalciteA>Hover Me</CalciteA>
+  </Tooltip>
+</Playground>
+
+## Tooltip Placement
+
+<Playground>
   <div>
-    <GuideExample>
-      <Tooltip title="Basic Tooltip">
-        <CalciteA>Hover Me</CalciteA>
-      </Tooltip>
-    </GuideExample>
     <GuideExample label={`placement="right"`}>
       <Tooltip title="Basic Tooltip" placement="right">
         <CalciteA>Placement Right</CalciteA>
@@ -75,7 +78,7 @@ over an element.
 ## Delayed Tooltip
 
 <Playground>
-  <Tooltip title="It took me a while to show up..." enterDelay={500}>
+  <Tooltip title="It took me a while to show up..." enterDelay={1000}>
     <CalciteA>Hover Me</CalciteA>
   </Tooltip>
 </Playground>

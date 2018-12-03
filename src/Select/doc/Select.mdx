@@ -26,21 +26,17 @@ Select allows users to choose one option from a prescribed list.
 
 ## Basic Usage
 
-<Playground>
-  <GuideExample>
-    <Select onChange={() => console.log('onChange')}>
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-      <MenuItem value={40}>Fourty</MenuItem>
-      <MenuItem value={50}>Fifty</MenuItem>
-      <MenuItem value={60}>Sixty</MenuItem>
-      <MenuItem value={70}>Seventy</MenuItem>
-      <MenuItem value={80}>Eighty</MenuItem>
-      <MenuItem value={90}>Ninety</MenuItem>
-      <MenuItem value={100}>One Hundred</MenuItem>
-    </Select>
-  </GuideExample>
+<Playground style={{ height: '250px' }}>
+  <Select onChange={() => console.log('onChange')}>
+    <MenuItem value={10}>Ten</MenuItem>
+    <MenuItem value={20}>Twenty</MenuItem>
+    <MenuItem value={30}>Thirty</MenuItem>
+  </Select>
+</Playground>
+
+## Alternate Styles
+
+<Playground style={{ height: '550px' }}>
   <GuideExample label="fullWidth">
     <Select fullWidth onChange={() => console.log('onChange')}>
       <MenuItem value={10}>Ten</MenuItem>
@@ -107,7 +103,7 @@ Select allows users to choose one option from a prescribed list.
 
 ## Controlled Select
 
-<Playground>
+<Playground style={{ height: '400px' }}>
   {() => {
       class SelectStory extends React.Component {
         constructor(props) {
@@ -176,7 +172,7 @@ Select allows users to choose one option from a prescribed list.
 
 ## Filterable
 
-<Playground>
+<Playground style={{ height: '400px' }}>
   {() => {
       class SelectStory extends React.Component {
         constructor(props) {
@@ -220,7 +216,7 @@ Select allows users to choose one option from a prescribed list.
 
 ## Minimal
 
-<Playground>
+<Playground style={{ height: '400px' }}>
   <Select minimal onChange={() => console.log('onChange')}>
     <MenuItem value={10}>Ten</MenuItem>
     <MenuItem value={20}>Twenty</MenuItem>
@@ -237,7 +233,7 @@ Select allows users to choose one option from a prescribed list.
 
 ## Virtualized
 
-<Playground>
+<Playground style={{ height: '400px' }}>
   {() => {
       class SelectStory extends React.Component {
         constructor(props) {
@@ -374,7 +370,7 @@ Select allows users to choose one option from a prescribed list.
 
 ## Ridiculous Example
 
-<Playground>
+<Playground style={{ height: '400px' }}>
   <Select onChange={() => console.log('onChange')}>
     <li value={10}>Go to Online</li>
     <option value={20}>Help</option>

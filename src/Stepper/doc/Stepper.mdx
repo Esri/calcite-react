@@ -21,22 +21,25 @@ subtasks, we can decompose it into several steps to make things easier.
 ## Basic Usage
 
 <Playground>
-  <GuideExample>
-    <Stepper currentStep={2}>
-      <Step>
-        <StepTitle>Complete Step</StepTitle>
-        <StepDescription>This is the first step in a series</StepDescription>
-      </Step>
-      <Step>
-        <StepTitle>Current Step</StepTitle>
-        <StepDescription>This is the second step in a series</StepDescription>
-      </Step>
-      <Step>
-        <StepTitle>Pending Step</StepTitle>
-        <StepDescription>This is the third step in a series</StepDescription>
-      </Step>
-    </Stepper>
-  </GuideExample>
+  <Stepper currentStep={2}>
+    <Step>
+      <StepTitle>Complete Step</StepTitle>
+      <StepDescription>This is the first step in a series</StepDescription>
+    </Step>
+    <Step>
+      <StepTitle>Current Step</StepTitle>
+      <StepDescription>This is the second step in a series</StepDescription>
+    </Step>
+    <Step>
+      <StepTitle>Pending Step</StepTitle>
+      <StepDescription>This is the third step in a series</StepDescription>
+    </Step>
+  </Stepper>
+</Playground>
+
+## Advanced Usage
+
+<Playground>
   <GuideExample label="error">
     <Stepper currentStep={2}>
       <Step>
@@ -45,6 +48,22 @@ subtasks, we can decompose it into several steps to make things easier.
       </Step>
       <Step error>
         <StepTitle>Error Step</StepTitle>
+        <StepDescription>This is the second step in a series</StepDescription>
+      </Step>
+      <Step>
+        <StepTitle>Pending Step</StepTitle>
+        <StepDescription>This is the third step in a series</StepDescription>
+      </Step>
+    </Stepper>
+  </GuideExample>
+  <GuideExample label="selectable">
+    <Stepper currentStep={1}>
+      <Step>
+        <StepTitle>Complete Step</StepTitle>
+        <StepDescription>This is the first step in a series</StepDescription>
+      </Step>
+      <Step selectable>
+        <StepTitle>Current Step</StepTitle>
         <StepDescription>This is the second step in a series</StepDescription>
       </Step>
       <Step>
@@ -63,22 +82,6 @@ subtasks, we can decompose it into several steps to make things easier.
       </Step>
       <Step>
         <StepTitle>Current Step</StepTitle>
-      </Step>
-    </Stepper>
-  </GuideExample>
-  <GuideExample label="selectable">
-    <Stepper currentStep={1}>
-      <Step>
-        <StepTitle>Complete Step</StepTitle>
-        <StepDescription>This is the first step in a series</StepDescription>
-      </Step>
-      <Step selectable>
-        <StepTitle>Current Step</StepTitle>
-        <StepDescription>This is the second step in a series</StepDescription>
-      </Step>
-      <Step>
-        <StepTitle>Pending Step</StepTitle>
-        <StepDescription>This is the third step in a series</StepDescription>
       </Step>
     </Stepper>
   </GuideExample>

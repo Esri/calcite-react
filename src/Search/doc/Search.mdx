@@ -20,7 +20,67 @@ Search input with specific styles.
 
 ## Basic Usage
 
-<Playground>
+<Playground style={{ height: '400px'}}>
+  {() => {
+      const items = [...statesJson.states];
+        
+      class SearchStory extends React.Component {
+
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: '',
+            selectedItem: ''
+          };
+
+          this.searchChanged = this.searchChanged.bind(this);
+          this.clearSearch = this.clearSearch.bind(this);
+          this.onUserAction = this.onUserAction.bind(this);
+        }
+
+        searchChanged(e) {
+          this.setState({
+            selectedItem: e
+          });
+        };
+
+        clearSearch() {
+          this.setState({
+            inputValue: '',
+            selectedItem: ''
+          });
+        };
+
+        onUserAction(inputValue, selectedItemVal) {
+          this.setState({
+            inputValue: inputValue,
+            selectedItem: selectedItemVal
+          });
+        };
+
+        render() {
+          return (
+            <Search
+              inputValue={this.state.inputValue}
+              selectedItem={this.state.selectedItem}
+              items={items}
+              onChange={this.searchChanged}
+              onUserAction={this.onUserAction}
+              onRequestClear={this.clearSearch}
+            />
+          );
+        }
+      }
+
+      return <SearchStory />;
+    }}
+
+</Playground>
+
+## Alternate Styles
+
+<Playground style={{ height: '400px'}}>
   {() => {
       const items = [...statesJson.states];
         
@@ -62,17 +122,7 @@ Search input with specific styles.
         render() {
           return (
             <React.Fragment>
-              <GuideExample>
-                <Search
-                  inputValue={this.state.inputValue}
-                  selectedItem={this.state.selectedItem}
-                  items={items}
-                  onChange={this.searchChanged}
-                  onUserAction={this.onUserAction}
-                  onRequestClear={this.clearSearch}
-                />
-              </GuideExample>
-              <GuideExample>
+              <GuideExample label="minimal">
                 <Search
                   inputValue={this.state.inputValue}
                   selectedItem={this.state.selectedItem}
@@ -117,7 +167,7 @@ Search input with specific styles.
 
 ## Array of Objects
 
-<Playground>
+<Playground style={{ height: '400px'}}>
   {() => {
       const items = [...statesJson2.states];
       
@@ -182,7 +232,7 @@ Search input with specific styles.
 
 ## Child Items
 
-<Playground>
+<Playground style={{ height: '400px'}}>
   {() => {
       const items = [...statesJson2.states];
       
@@ -254,7 +304,7 @@ Search input with specific styles.
 
 ## Custom Items
 
-<Playground>
+<Playground style={{ height: '400px'}}>
   {() => {
       const items = [...statesJson2.states];
 
@@ -377,7 +427,7 @@ Search input with specific styles.
 
 ## Shortcut Character
 
-<Playground>
+<Playground style={{ height: '400px'}}>
   {() => {
       const items = [...statesJson.states];
 
@@ -468,7 +518,7 @@ Search input with specific styles.
 
 ## Virtualized
 
-<Playground>
+<Playground style={{ height: '400px'}}>
   {() => {
       const items = [...statesJson.states];
 

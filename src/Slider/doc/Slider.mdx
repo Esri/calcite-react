@@ -22,12 +22,13 @@ Range input element
 ## Basic Usage
 
 <Playground>
-  <GuideExample>
-    <Slider />
-  </GuideExample>
-  <GuideExample>
-    <Slider defaultValue={20} />
-  </GuideExample>
+  <Slider />
+</Playground>
+
+## Default Value
+
+<Playground>
+  <Slider defaultValue={50} />
 </Playground>
 
 ## Controlled Slider
@@ -106,32 +107,30 @@ Range input element
           onSubmit={onSubmit}
         >
           {({ values, errors, touched, handleSubmit, isSubmitting }) => (
-            <GuideExample>
-              <Form onSubmit={handleSubmit}>
-                {/* volume */}
+            <Form onSubmit={handleSubmit}>
+              {/* volume */}
 
-                <FormControl
-                  success={touched.volume && !errors.volume ? true : false}
-                  error={touched.volume && errors.volume ? true : false}
-                  style={{ flex: '1 0 100px' }}
-                >
-                  <FormControlLabel htmlFor="volume">
-                    Preferred Volume:
-                  </FormControlLabel>
-                  <Field component={Slider} name="volume" />
-                  <FormHelperText>
-                    {values.volume} {(touched.volume && errors.volume) || null}
-                  </FormHelperText>
-                </FormControl>
+              <FormControl
+                success={touched.volume && !errors.volume ? true : false}
+                error={touched.volume && errors.volume ? true : false}
+                style={{ flex: '1 0 100px' }}
+              >
+                <FormControlLabel htmlFor="volume">
+                  Preferred Volume:
+                </FormControlLabel>
+                <Field component={Slider} name="volume" />
+                <FormHelperText>
+                  {values.volume} {(touched.volume && errors.volume) || null}
+                </FormHelperText>
+              </FormControl>
 
-                <FormControl>
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'Submitting.......' : 'Submit'}
-                  </Button>
-                </FormControl>
-                <pre>{JSON.stringify(values, null, 2)}</pre>
-              </Form>
-            </GuideExample>
+              <FormControl>
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Submitting.......' : 'Submit'}
+                </Button>
+              </FormControl>
+              <pre>{JSON.stringify(values, null, 2)}</pre>
+            </Form>
           )}
         </Formik>
       );

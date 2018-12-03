@@ -16,11 +16,12 @@ import DatePicker, { DateRangePicker } from '../';
 
 # DatePicker
 
-A date picker implemented with airbnb's react-dates library.
+A date picker implemented with Airbnb's
+[react-dates](https://github.com/airbnb/react-dates) library.
 
 ## Basic Usage
 
-<Playground>
+<Playground style={{ height: '450px' }}>
   {() => {
       class DatePickerExample extends React.Component {
         constructor(props) {
@@ -67,7 +68,7 @@ A date picker implemented with airbnb's react-dates library.
 
 ## Basic Usage (with Formik)
 
-<Playground>
+<Playground style={{ height: '450px' }}>
   {() => {
       class DatePickerExample extends React.Component {
         constructor(props) {
@@ -123,38 +124,36 @@ A date picker implemented with airbnb's react-dates library.
               onSubmit={this.onSubmit}
             >
               {({ values, errors, touched, handleSubmit, isSubmitting }) => (
-                <GuideExample>
-                  <Form onSubmit={handleSubmit}>
-                    {/* birthday */}
+                <Form onSubmit={handleSubmit}>
+                  {/* birthday */}
 
-                    <FormControl
-                      success={
-                        touched.birthday && !errors.birthday ? true : false
-                      }
-                      error={touched.birthday && errors.birthday ? true : false}
-                    >
-                      <FormControlLabel>Select your birthday:</FormControlLabel>
-                      <Field
-                        component={DatePicker}
-                        name="birthday"
-                        date={this.state.date}
-                        onDateChange={this.onDateChange}
-                        focused={this.state.datePickerFocused}
-                        onFocusChange={this.onFocusChange}
-                      />
-                      <FormHelperText>
-                        {(touched.birthday && errors.birthday) || null}
-                      </FormHelperText>
-                    </FormControl>
+                  <FormControl
+                    success={
+                      touched.birthday && !errors.birthday ? true : false
+                    }
+                    error={touched.birthday && errors.birthday ? true : false}
+                  >
+                    <FormControlLabel>Select your birthday:</FormControlLabel>
+                    <Field
+                      component={DatePicker}
+                      name="birthday"
+                      date={this.state.date}
+                      onDateChange={this.onDateChange}
+                      focused={this.state.datePickerFocused}
+                      onFocusChange={this.onFocusChange}
+                    />
+                    <FormHelperText>
+                      {(touched.birthday && errors.birthday) || null}
+                    </FormHelperText>
+                  </FormControl>
 
-                    <FormControl>
-                      <Button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? 'Submitting.......' : 'Submit'}
-                      </Button>
-                    </FormControl>
-                    <pre>{JSON.stringify(values, null, 2)}</pre>
-                  </Form>
-                </GuideExample>
+                  <FormControl>
+                    <Button type="submit" disabled={isSubmitting}>
+                      {isSubmitting ? 'Submitting.......' : 'Submit'}
+                    </Button>
+                  </FormControl>
+                  <pre>{JSON.stringify(values, null, 2)}</pre>
+                </Form>
               )}
             </Formik>
           );
@@ -167,7 +166,7 @@ A date picker implemented with airbnb's react-dates library.
 
 ## Date Range
 
-<Playground>
+<Playground style={{ height: '450px' }}>
   {() => {
       class DatePickerExample extends React.Component {
         constructor(props) {
@@ -219,7 +218,7 @@ A date picker implemented with airbnb's react-dates library.
 
 ## Date Range (with Formik)
 
-<Playground>
+<Playground style={{ height: '450px' }}>
   {() => {
       class DatePickerExample extends React.Component {
         constructor(props) {
@@ -282,41 +281,39 @@ A date picker implemented with airbnb's react-dates library.
               onSubmit={this.onSubmit}
             >
               {({ values, errors, touched, handleSubmit, isSubmitting }) => (
-                <GuideExample>
-                  <Form onSubmit={handleSubmit}>
-                    {/* booking */}
+                <Form onSubmit={handleSubmit}>
+                  {/* booking */}
 
-                    <FormControl
-                      success={
-                        touched.booking && !errors.booking ? true : false
-                      }
-                      error={touched.booking && errors.booking ? true : false}
-                    >
-                      <FormControlLabel>Booking Dates:</FormControlLabel>
-                      <Field
-                        component={DateRangePicker}
-                        name="booking"
-                        startDate={this.state.startDate}
-                        startDateId="sampleStartDate"
-                        endDate={this.state.endDate}
-                        endDateId="sampleEndDate"
-                        onDatesChange={this.onDatesChange}
-                        focusedInput={this.state.focusedInput}
-                        onFocusChange={this.onFocusChange}
-                      />
-                      <FormHelperText>
-                        {(touched.booking && errors.booking) || null}
-                      </FormHelperText>
-                    </FormControl>
+                  <FormControl
+                    success={
+                      touched.booking && !errors.booking ? true : false
+                    }
+                    error={touched.booking && errors.booking ? true : false}
+                  >
+                    <FormControlLabel>Booking Dates:</FormControlLabel>
+                    <Field
+                      component={DateRangePicker}
+                      name="booking"
+                      startDate={this.state.startDate}
+                      startDateId="sampleStartDate"
+                      endDate={this.state.endDate}
+                      endDateId="sampleEndDate"
+                      onDatesChange={this.onDatesChange}
+                      focusedInput={this.state.focusedInput}
+                      onFocusChange={this.onFocusChange}
+                    />
+                    <FormHelperText>
+                      {(touched.booking && errors.booking) || null}
+                    </FormHelperText>
+                  </FormControl>
 
-                    <FormControl>
-                      <Button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? 'Submitting.......' : 'Submit'}
-                      </Button>
-                    </FormControl>
-                    <pre>{JSON.stringify(values, null, 2)}</pre>
-                  </Form>
-                </GuideExample>
+                  <FormControl>
+                    <Button type="submit" disabled={isSubmitting}>
+                      {isSubmitting ? 'Submitting.......' : 'Submit'}
+                    </Button>
+                  </FormControl>
+                  <pre>{JSON.stringify(values, null, 2)}</pre>
+                </Form>
               )}
             </Formik>
           );

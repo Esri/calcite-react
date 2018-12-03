@@ -16,24 +16,23 @@ options on the right.
 ## Basic Usage
 
 <Playground>
-  <GuideExample>
-    <ComboButton
-      onClick={() => console.log('primary clicked')}
-      label="Export All"
-    >
-      <Menu>
-        <MenuItem onClick={() => console.log('pdf clicked')}>
-          Export PDF
-        </MenuItem>
-        <MenuItem onClick={() => console.log('csv clicked')}>
-          Export CSV
-        </MenuItem>
-        <MenuItem onClick={() => console.log('excel clicked')}>
-          Export Excel
-        </MenuItem>
-      </Menu>
-    </ComboButton>
-  </GuideExample>
+  <ComboButton
+    onClick={() => console.log('primary clicked')}
+    label="Export All"
+  >
+    <Menu>
+      <MenuItem onClick={() => console.log('pdf clicked')}>Export PDF</MenuItem>
+      <MenuItem onClick={() => console.log('csv clicked')}>Export CSV</MenuItem>
+      <MenuItem onClick={() => console.log('excel clicked')}>
+        Export Excel
+      </MenuItem>
+    </Menu>
+  </ComboButton>
+</Playground>
+
+## Colors
+
+<Playground>
   <GuideExample label="clear">
     <ComboButton
       onClick={() => console.log('primary clicked')}

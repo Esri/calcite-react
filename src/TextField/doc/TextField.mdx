@@ -34,6 +34,12 @@ comprehend and complete for the user.
 ## Basic Usage
 
 <Playground>
+  <TextField />
+</Playground>
+
+## Advanced Usage
+
+<Playground>
   <div>
     <GuideExample label="placeholder">
       <FormControl>
@@ -137,7 +143,7 @@ comprehend and complete for the user.
         <TextField minimal defaultValue="James T Kirk" />
       </FormControl>
     </GuideExample>
-    <GuideExample>
+    <GuideExample label="with adornments">
       <FormControl>
         <TextField
           minimal
@@ -152,7 +158,7 @@ comprehend and complete for the user.
 
 ## With a Ref
 
-<Playground>
+<Playground style={{ display: 'flex' }}>
   {() => {
       class TextFieldWithRef extends React.Component {
         constructor(props) {
@@ -169,10 +175,14 @@ comprehend and complete for the user.
 
         render() {
           return (
-            <GuideExample>
-              <Button onClick={this.handleClick}>Click me</Button>
-              <TextField ref={this.inputRef} />
-            </GuideExample>
+            <Form>
+              <FormControl>
+                <Button onClick={this.handleClick}>Click me</Button>
+              </FormControl>
+              <FormControl>
+                <TextField ref={this.inputRef} />
+              </FormControl>
+            </Form>
           );
         }
       }
@@ -225,63 +235,61 @@ comprehend and complete for the user.
       return (
         <Formik initialValues={user} validate={onValidate} onSubmit={onSubmit}>
           {({ values, errors, touched, handleSubmit, isSubmitting }) => (
-            <GuideExample>
-              <Form onSubmit={handleSubmit}>
-                {/* name */}
+            <Form onSubmit={handleSubmit}>
+              {/* name */}
 
-                <FormControl
-                  success={touched.name && !errors.name ? true : false}
-                  error={touched.name && errors.name ? true : false}
-                >
-                  <FormControlLabel htmlFor="name">Name:</FormControlLabel>
-                  <Field
-                    component={TextField}
-                    type="text"
-                    name="name"
-                    leftAdornment={<UserIcon size={16} />}
-                    onChange={handleNameChanged}
-                  />
-                  <FormHelperText>
-                    {(touched.name && errors.name) || null}
-                  </FormHelperText>
-                </FormControl>
+              <FormControl
+                success={touched.name && !errors.name ? true : false}
+                error={touched.name && errors.name ? true : false}
+              >
+                <FormControlLabel htmlFor="name">Name:</FormControlLabel>
+                <Field
+                  component={TextField}
+                  type="text"
+                  name="name"
+                  leftAdornment={<UserIcon size={16} />}
+                  onChange={handleNameChanged}
+                />
+                <FormHelperText>
+                  {(touched.name && errors.name) || null}
+                </FormHelperText>
+              </FormControl>
 
-                {/* email */}
+              {/* email */}
 
-                <FormControl
-                  success={touched.email && !errors.email ? true : false}
-                  error={touched.email && errors.email ? true : false}
-                >
-                  <FormControlLabel htmlFor="email">Email:</FormControlLabel>
-                  <Field component={TextField} type="text" name="email" />
-                  <FormHelperText>
-                    {(touched.email && errors.email) || null}
-                  </FormHelperText>
-                </FormControl>
+              <FormControl
+                success={touched.email && !errors.email ? true : false}
+                error={touched.email && errors.email ? true : false}
+              >
+                <FormControlLabel htmlFor="email">Email:</FormControlLabel>
+                <Field component={TextField} type="text" name="email" />
+                <FormHelperText>
+                  {(touched.email && errors.email) || null}
+                </FormHelperText>
+              </FormControl>
 
-                {/* password */}
+              {/* password */}
 
-                <FormControl
-                  success={touched.password && !errors.password ? true : false}
-                  error={touched.password && errors.password ? true : false}
-                >
-                  <FormControlLabel htmlFor="password">
-                    Password:
-                  </FormControlLabel>
-                  <Field component={TextField} type="text" name="password" />
-                  <FormHelperText>
-                    {(touched.password && errors.password) || null}
-                  </FormHelperText>
-                </FormControl>
+              <FormControl
+                success={touched.password && !errors.password ? true : false}
+                error={touched.password && errors.password ? true : false}
+              >
+                <FormControlLabel htmlFor="password">
+                  Password:
+                </FormControlLabel>
+                <Field component={TextField} type="text" name="password" />
+                <FormHelperText>
+                  {(touched.password && errors.password) || null}
+                </FormHelperText>
+              </FormControl>
 
-                <FormControl>
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'Submitting.......' : 'Submit'}
-                  </Button>
-                </FormControl>
-                <pre>{JSON.stringify(values, null, 2)}</pre>
-              </Form>
-            </GuideExample>
+              <FormControl>
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Submitting.......' : 'Submit'}
+                </Button>
+              </FormControl>
+              <pre>{JSON.stringify(values, null, 2)}</pre>
+            </Form>
           )}
         </Formik>
       );

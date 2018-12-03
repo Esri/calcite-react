@@ -17,21 +17,26 @@ A skin on a checkbox.
 ## Basic Usage
 
 <Playground>
-  <GuideExample>
-    <Form>
-      <FormControl>
-        <Switch>Inline example</Switch>
-      </FormControl>
+  <Switch>Inline example</Switch>
+</Playground>
+
+## Alternate Styles
+
+<Playground>
+  <Form>
+    <GuideExample label="destructive">
       <FormControl>
         <Switch destructive>
           Confirm account deletion. You cannot recover deleted accounts.
         </Switch>
       </FormControl>
+    </GuideExample>
+    <GuideExample label="labelPosition='before'">
       <FormControl>
         <Switch labelPosition="before">Enable Two-Factor Authentication</Switch>
       </FormControl>
-    </Form>
-  </GuideExample>
+    </GuideExample>
+  </Form>
 </Playground>
 
 ## with Formik

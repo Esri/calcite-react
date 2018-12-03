@@ -23,17 +23,20 @@ Radios allow the user to select only one option from a set.
 ## Basic Usage
 
 <Playground>
-  <GuideExample>
-    <Form>
-      <FormControl>
-        <Fieldset name="storyRadioGroup">
-          <Legend>Some Radios:</Legend>
-          <Radio>Radio 1</Radio>
-          <Radio>Radio 2</Radio>
-        </Fieldset>
-      </FormControl>
-    </Form>
-  </GuideExample>
+  <Form>
+    <FormControl>
+      <Fieldset name="storyRadioGroup">
+        <Legend>Some Radios:</Legend>
+        <Radio>Radio 1</Radio>
+        <Radio>Radio 2</Radio>
+      </Fieldset>
+    </FormControl>
+  </Form>
+</Playground>
+
+## Advanced Usage
+
+<Playground>
   <GuideExample label="horizontal">
     <Form>
       <FormControl>
@@ -106,44 +109,42 @@ Radios allow the user to select only one option from a set.
           onSubmit={onSubmit}
         >
           {({ values, errors, touched, handleSubmit, isSubmitting }) => (
-            <GuideExample>
-              <Form onSubmit={handleSubmit}>
-                {/* subscription */}
+            <Form onSubmit={handleSubmit}>
+              {/* subscription */}
 
-                <FormControl
-                  success={
-                    touched.subscription && !errors.subscription ? true : false
-                  }
-                  error={
-                    touched.subscription && errors.subscription ? true : false
-                  }
-                >
-                  <FormControlLabel htmlFor="subscription">
-                    Subscription Type:
-                  </FormControlLabel>
-                  {subscriptionOptions.map(subscription => (
-                    <Field
-                      key={subscription.value}
-                      component={Radio}
-                      name="subscription"
-                      value={subscription.value}
-                    >
-                      {subscription.name}
-                    </Field>
-                  ))}
-                  <FormHelperText>
-                    {(touched.subscription && errors.subscription) || null}
-                  </FormHelperText>
-                </FormControl>
+              <FormControl
+                success={
+                  touched.subscription && !errors.subscription ? true : false
+                }
+                error={
+                  touched.subscription && errors.subscription ? true : false
+                }
+              >
+                <FormControlLabel htmlFor="subscription">
+                  Subscription Type:
+                </FormControlLabel>
+                {subscriptionOptions.map(subscription => (
+                  <Field
+                    key={subscription.value}
+                    component={Radio}
+                    name="subscription"
+                    value={subscription.value}
+                  >
+                    {subscription.name}
+                  </Field>
+                ))}
+                <FormHelperText>
+                  {(touched.subscription && errors.subscription) || null}
+                </FormHelperText>
+              </FormControl>
 
-                <FormControl>
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'Submitting.......' : 'Submit'}
-                  </Button>
-                </FormControl>
-                <pre>{JSON.stringify(values, null, 2)}</pre>
-              </Form>
-            </GuideExample>
+              <FormControl>
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Submitting.......' : 'Submit'}
+                </Button>
+              </FormControl>
+              <pre>{JSON.stringify(values, null, 2)}</pre>
+            </Form>
           )}
         </Formik>
       );
