@@ -36,4 +36,6 @@ AccordionTitle.defaultProps = {
   onAccordionChange: () => {}
 };
 
+AccordionTitle.displayName = 'AccordionTitle';
+
 export default AccordionTitle;

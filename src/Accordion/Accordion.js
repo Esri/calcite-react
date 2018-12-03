@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledAccordion } from './Accordion-styled';
 
+import { getChildType } from '../utils/helpers';
+
 const Accordion = ({
   children,
   activeSectionIndexes,
@@ -10,7 +12,7 @@ const Accordion = ({
 }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type && child.type.displayName) {
+    switch (getChildType(child)) {
       case 'AccordionSection':
         let section;
         section = React.cloneElement(child, {

@@ -3,6 +3,8 @@ import React, { Children } from 'react';
 
 import { StyledTab } from './Tab-styled';
 
+import { getChildType } from '../utils/helpers';
+
 const Tabs = ({
   children,
   activeTabIndex,
@@ -15,7 +17,7 @@ const Tabs = ({
 }) => {
   const childArray = Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type && child.type.displayName) {
+    switch (getChildType(child)) {
       case 'TabNav':
         return React.cloneElement(child, {
           activeTabIndex,

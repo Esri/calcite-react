@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { StyledTabContents } from './Tab-styled';
 
+import { getChildType } from '../utils/helpers';
+
 const TabContents = ({
   children,
   activeTabIndex,
@@ -13,7 +15,7 @@ const TabContents = ({
   ...other
 }) => {
   const childrenWithProps = Children.map(children, (child, itemIndex) => {
-    switch (child.type && child.type.displayName) {
+    switch (getChildType(child)) {
       case 'TabSection':
         let section;
         if (itemIndex === activeTabIndex) {
