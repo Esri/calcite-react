@@ -1,0 +1,80 @@
+---
+name: ArcgisAccount
+route: /arcgis-account
+---
+
+import { Playground, PropsTable } from 'docz';
+
+import TopNav, {
+  TopNavBrand,
+  TopNavTitle,
+  TopNavList,
+  TopNavLink,
+  TopNavActionsList
+} from '../../TopNav';
+import EsriLogo from '../../../docz/images/ESRI_Logo_Black.svg';
+import ArcgisAccount, { ArcgisAccountMenuItem } from '../';
+
+import user from './user.json';
+import portal from './portal.json';
+
+# ArcgisAccount
+
+A header UI element to display the currently logged in user and provide a
+popover to show actions related to account management.
+
+## Basic Usage
+
+<Playground>
+  <TopNav>
+    <TopNavBrand href="#" src={EsriLogo} />
+    <TopNavTitle href="#">ArcGIS for Developers</TopNavTitle>
+    <TopNavList>
+      <TopNavLink href="#" active>
+        Plans
+      </TopNavLink>
+      <TopNavLink href="#">Community</TopNavLink>
+      <TopNavLink href="#">Docs</TopNavLink>
+    </TopNavList>
+    <TopNavActionsList style={{ padding: 0 }}>
+      <ArcgisAccount
+        user={user}
+        portal={portal}
+        onRequestSwitchAccount={() => console.log('switch account clicked')}
+        onRequestSignOut={() => console.log('sign out clicked')}
+      >
+        <ArcgisAccountMenuItem
+          onClick={() => console.log('Profile & Settings clicked')}
+        >
+          Profile & Settings
+        </ArcgisAccountMenuItem>
+        <ArcgisAccountMenuItem onClick={() => console.log('My Esri clicked')}>
+          My Esri
+        </ArcgisAccountMenuItem>
+        <ArcgisAccountMenuItem onClick={() => console.log('Training clicked')}>
+          Training
+        </ArcgisAccountMenuItem>
+        <ArcgisAccountMenuItem
+          onClick={() => console.log('Community & Forums clicked')}
+        >
+          Community & Forums
+        </ArcgisAccountMenuItem>
+        <ArcgisAccountMenuItem
+          onClick={() => console.log('ArcGIS Online clicked')}
+        >
+          ArcGIS Online
+        </ArcgisAccountMenuItem>
+      </ArcgisAccount>
+    </TopNavActionsList>
+  </TopNav>
+</Playground>
+
+## Props
+
+### ArcgisAccount
+
+<PropsTable of={ArcgisAccount} />
+
+### ArcgisAccountMenuItem
+
+<PropsTable of={ArcgisAccountMenuItem} />

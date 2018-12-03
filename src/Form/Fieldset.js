@@ -37,4 +37,6 @@ Fieldset.propTypes = {
 
 Fieldset.defaultProps = {};
 
+Fieldset.displayName = 'Fieldset';
+
 export { Fieldset as default, FieldsetContext };

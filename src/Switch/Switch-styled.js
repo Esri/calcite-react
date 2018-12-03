@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
 
-import CalciteTheme from '../theme/CalciteTheme';
-import EsriColors from '../theme/EsriColors';
+import { CalciteTheme, EsriColors } from '../CalciteThemeProvider';
 
 import { baseRadioCheckbox } from '../utils/commonElements';
 

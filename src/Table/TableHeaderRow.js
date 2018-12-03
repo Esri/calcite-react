@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledTableHeaderRow } from './Table-styled';
 
 import { TableContext } from './Table';
 
-const TableHeaderRow = ({ children, forwardedRef, ...other }) => {
+const TableHeaderRow = ({ children, ...other }) => {
   return (
     <TableContext.Consumer>
       {({ tableContext }) => (
         <StyledTableHeaderRow
-          ref={forwardedRef}
           blue={tableContext.blue}
           noCol={tableContext.noCol}
           noRow={tableContext.noRow}
@@ -43,4 +41,6 @@ TableHeaderRow.propTypes = {
 
 TableHeaderRow.defaultProps = {};
 
-export default withRefs(TableHeaderRow);
+TableHeaderRow.displayName = 'TableHeaderRow';
+
+export default TableHeaderRow;

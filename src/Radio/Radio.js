@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import {
   StyledRadio,
@@ -12,7 +11,6 @@ import { FieldsetContext } from '../Form/Fieldset';
 
 const Radio = ({
   children,
-  forwardedRef,
   checked,
   field,
   form,
@@ -78,7 +76,6 @@ const Radio = ({
       {({ fieldsetContext }) => (
         <StyledRadioGroup>
           <StyledRadio
-            ref={forwardedRef}
             name={fieldsetContext.name}
             onChange={handleChange}
             checked={isChecked()}
@@ -110,4 +107,6 @@ Radio.propTypes = {
 
 Radio.defaultProps = {};
 
-export default withRefs(Radio);
+Radio.displayName = 'Radio';
+
+export default Radio;

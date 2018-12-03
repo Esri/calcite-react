@@ -1,17 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledTopNavLink } from './TopNav-styled';
 
-const TopNavLink = ({ children, href, forwardedRef, ...other }) => {
+const TopNavLink = ({ children, href, ...other }) => {
   return (
-    <StyledTopNavLink
-      ref={forwardedRef}
-      href={href}
-      as={href ? 'a' : 'span'}
-      {...other}
-    >
+    <StyledTopNavLink href={href} as={href ? 'a' : 'span'} {...other}>
       {children}
     </StyledTopNavLink>
   );
@@ -26,4 +20,6 @@ TopNavLink.propTypes = {
 
 TopNavLink.defaultProps = {};
 
-export default withRefs(TopNavLink);
+TopNavLink.displayName = 'TopNavLink';
+
+export default TopNavLink;

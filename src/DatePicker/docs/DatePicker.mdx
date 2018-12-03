@@ -1,0 +1,379 @@
+---
+name: DatePicker
+route: /date-picker
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import { Formik, Field } from 'formik';
+import Form, {
+  FormControl,
+  FormHelperText,
+  FormControlLabel
+} from '../../Form';
+import Button from '../../Button';
+import DatePicker, { DateRangePicker } from '../';
+
+# DatePicker
+
+A date picker implemented with Airbnb's
+[react-dates](https://github.com/airbnb/react-dates) library.
+
+## Basic Usage
+
+<Playground style={{ height: '450px' }}>
+  {() => {
+      class DatePickerExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            date: null,
+            datePickerFocused: false
+          };
+
+          this.onDateChange = this.onDateChange.bind(this);
+          this.onFocusChange = this.onFocusChange.bind(this);
+        }
+
+        onDateChange(date) {
+          this.setState({
+            date
+          });
+        };
+
+        onFocusChange({ focused }) {
+          this.setState({
+            datePickerFocused: focused
+          });
+        };
+
+        render() {
+          return (
+            <div>
+              <DatePicker
+                date={this.state.date}
+                onDateChange={this.onDateChange}
+                focused={this.state.datePickerFocused}
+                onFocusChange={this.onFocusChange}
+              />
+            </div>
+          );
+        }
+      }
+
+      return <DatePickerExample />;
+    }}
+
+</Playground>
+
+## Basic Usage (with Formik)
+
+<Playground style={{ height: '450px' }}>
+  {() => {
+      class DatePickerExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            date: null,
+            datePickerFocused: false
+          };
+
+          this.formValues = {
+            birthday: null
+          };
+
+          this.onDateChange = this.onDateChange.bind(this);
+          this.onFocusChange = this.onFocusChange.bind(this);
+          this.onSubmit = this.onSubmit.bind(this);
+          this.onValidate = this.onValidate.bind(this);
+        }
+
+        onDateChange(date) {
+          this.setState({
+            date
+          });
+        };
+
+        onFocusChange({ focused }) {
+          this.setState({
+            datePickerFocused: focused
+          });
+        };
+
+        onSubmit(values, actions) {
+          setTimeout(() => {
+            console.log(values);
+            actions.setSubmitting(false);
+          }, 1000);
+        };
+
+        onValidate(values) {
+          const errors = {};
+          if (!values.birthday) {
+            errors.birthday = 'You must have a birthday 🤨';
+          }
+
+          return errors;
+        };
+
+        render() {
+          return (
+            <Formik
+              initialValues={this.formValues}
+              validate={this.onValidate}
+              onSubmit={this.onSubmit}
+            >
+              {({ values, errors, touched, handleSubmit, isSubmitting }) => (
+                <Form onSubmit={handleSubmit}>
+                  {/* birthday */}
+
+                  <FormControl
+                    success={
+                      touched.birthday && !errors.birthday ? true : false
+                    }
+                    error={touched.birthday && errors.birthday ? true : false}
+                  >
+                    <FormControlLabel>Select your birthday:</FormControlLabel>
+                    <Field
+                      component={DatePicker}
+                      name="birthday"
+                      date={this.state.date}
+                      onDateChange={this.onDateChange}
+                      focused={this.state.datePickerFocused}
+                      onFocusChange={this.onFocusChange}
+                    />
+                    <FormHelperText>
+                      {(touched.birthday && errors.birthday) || null}
+                    </FormHelperText>
+                  </FormControl>
+
+                  <FormControl>
+                    <Button type="submit" disabled={isSubmitting}>
+                      {isSubmitting ? 'Submitting.......' : 'Submit'}
+                    </Button>
+                  </FormControl>
+                  <pre>{JSON.stringify(values, null, 2)}</pre>
+                </Form>
+              )}
+            </Formik>
+          );
+        }
+      }
+      return <DatePickerExample />;
+    }}
+
+</Playground>
+
+## Date Range
+
+<Playground style={{ height: '450px' }}>
+  {() => {
+      class DatePickerExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            startDate: null,
+            endDate: null,
+            focusedInput: null
+          };
+
+          this.onDatesChange = this.onDatesChange.bind(this);
+          this.onFocusChange = this.onFocusChange.bind(this);
+        }
+
+        onDatesChange({ startDate, endDate }) {
+          this.setState({
+            startDate,
+            endDate
+          });
+        };
+
+        onFocusChange(focusedInput) {
+          this.setState({
+            focusedInput
+          });
+        };
+
+        render() {
+          return (
+            <div>
+              <DateRangePicker
+                startDate={this.state.startDate}
+                startDateId="sampleStartDate"
+                endDate={this.state.endDate}
+                endDateId="sampleEndDate"
+                onDatesChange={this.onDatesChange}
+                focusedInput={this.state.focusedInput}
+                onFocusChange={this.onFocusChange}
+              />
+            </div>
+          );
+        }
+      }
+
+      return <DatePickerExample />;
+    }}
+
+</Playground>
+
+## Date Range (with Formik)
+
+<Playground style={{ height: '450px' }}>
+  {() => {
+      class DatePickerExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            startDate: null,
+            endDate: null,
+            focusedInput: null
+          };
+
+          this.formValues = {
+            booking: { startDate: null, endDate: null }
+          };
+
+          this.onDatesChange = this.onDatesChange.bind(this);
+          this.onFocusChange = this.onFocusChange.bind(this);
+          this.onSubmit = this.onSubmit.bind(this);
+          this.onValidate = this.onValidate.bind(this);
+        }
+
+
+        onDatesChange({ startDate, endDate }) {
+          this.setState({
+            startDate,
+            endDate
+          });
+        };
+
+        onFocusChange(focusedInput) {
+          this.setState({
+            focusedInput
+          });
+        };
+
+        onSubmit(values, actions) {
+          setTimeout(() => {
+            console.log(values);
+            actions.setSubmitting(false);
+          }, 1000);
+        };
+
+        onValidate(values) {
+          const errors = {};
+          if (
+            !values.booking ||
+            !values.booking.startDate ||
+            !values.booking.endDate
+          ) {
+            errors.booking = 'This is required!';
+          }
+
+          return errors;
+        };
+
+        render() {
+          return (
+            <Formik
+              initialValues={this.formValues}
+              validate={this.onValidate}
+              onSubmit={this.onSubmit}
+            >
+              {({ values, errors, touched, handleSubmit, isSubmitting }) => (
+                <Form onSubmit={handleSubmit}>
+                  {/* booking */}
+
+                  <FormControl
+                    success={
+                      touched.booking && !errors.booking ? true : false
+                    }
+                    error={touched.booking && errors.booking ? true : false}
+                  >
+                    <FormControlLabel>Booking Dates:</FormControlLabel>
+                    <Field
+                      component={DateRangePicker}
+                      name="booking"
+                      startDate={this.state.startDate}
+                      startDateId="sampleStartDate"
+                      endDate={this.state.endDate}
+                      endDateId="sampleEndDate"
+                      onDatesChange={this.onDatesChange}
+                      focusedInput={this.state.focusedInput}
+                      onFocusChange={this.onFocusChange}
+                    />
+                    <FormHelperText>
+                      {(touched.booking && errors.booking) || null}
+                    </FormHelperText>
+                  </FormControl>
+
+                  <FormControl>
+                    <Button type="submit" disabled={isSubmitting}>
+                      {isSubmitting ? 'Submitting.......' : 'Submit'}
+                    </Button>
+                  </FormControl>
+                  <pre>{JSON.stringify(values, null, 2)}</pre>
+                </Form>
+              )}
+            </Formik>
+          );
+        }
+      }
+
+      return <DatePickerExample />;
+    }}
+
+</Playground>
+
+## Append to Body
+
+<Playground>
+  {() => {
+      class DatePickerExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            date: null,
+            datePickerFocused: false
+          };
+
+          this.onDateChange = this.onDateChange.bind(this);
+          this.onFocusChange = this.onFocusChange.bind(this);
+        }
+
+        onDateChange(date) {
+          this.setState({
+            date
+          });
+        };
+
+        onFocusChange({ focused }) {
+          this.setState({
+            datePickerFocused: focused
+          });
+        };
+
+        render() {
+          return (
+            <div>
+              <DatePicker
+                date={this.state.date}
+                onDateChange={this.onDateChange}
+                focused={this.state.datePickerFocused}
+                onFocusChange={this.onFocusChange}
+                appendToBody
+              />
+            </div>
+          );
+        }
+      }
+
+      return <DatePickerExample />;
+    }}
+
+</Playground>
+
+## Props
+
+<PropsTable of={DatePicker} />

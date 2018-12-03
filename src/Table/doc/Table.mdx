@@ -1,0 +1,276 @@
+---
+name: Table
+route: /table
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import Table, {
+  TableHeader,
+  TableHeaderRow,
+  TableHeaderCell,
+  TableBody,
+  TableRow,
+  TableCell
+} from '../';
+
+# Table
+
+Tables display sets of raw data.
+
+## Basic Usage
+
+<Playground>
+  <Table>
+    <TableHeader>
+      <TableHeaderRow>
+        <TableHeaderCell>Thing 1</TableHeaderCell>
+        <TableHeaderCell>Thing 2</TableHeaderCell>
+        <TableHeaderCell>Thing 3</TableHeaderCell>
+      </TableHeaderRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>a</TableCell>
+        <TableCell>b</TableCell>
+        <TableCell>c</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>x</TableCell>
+        <TableCell>y</TableCell>
+        <TableCell>z</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</Playground>
+
+## Alternate Styles
+
+<Playground>
+  <div>
+    <GuideExample label="blue">
+      <Table blue>
+        <TableHeader>
+          <TableHeaderRow>
+            <TableHeaderCell>Thing 1</TableHeaderCell>
+            <TableHeaderCell>Thing 2</TableHeaderCell>
+            <TableHeaderCell>Thing 3</TableHeaderCell>
+          </TableHeaderRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>a</TableCell>
+            <TableCell>b</TableCell>
+            <TableCell>c</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>x</TableCell>
+            <TableCell>y</TableCell>
+            <TableCell>z</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </GuideExample>
+
+    <GuideExample label="striped">
+      <Table striped>
+        <TableHeader>
+          <TableHeaderRow>
+            <TableHeaderCell>Thing 1</TableHeaderCell>
+            <TableHeaderCell>Thing 2</TableHeaderCell>
+            <TableHeaderCell>Thing 3</TableHeaderCell>
+          </TableHeaderRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>a</TableCell>
+            <TableCell>b</TableCell>
+            <TableCell>c</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>x</TableCell>
+            <TableCell>y</TableCell>
+            <TableCell>z</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </GuideExample>
+
+    <GuideExample label="plain">
+      <Table plain>
+        <TableHeader>
+          <TableHeaderRow>
+            <TableHeaderCell>Thing 1</TableHeaderCell>
+            <TableHeaderCell>Thing 2</TableHeaderCell>
+            <TableHeaderCell>Thing 3</TableHeaderCell>
+          </TableHeaderRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>a</TableCell>
+            <TableCell>b</TableCell>
+            <TableCell>c</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>x</TableCell>
+            <TableCell>y</TableCell>
+            <TableCell>z</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </GuideExample>
+
+    <GuideExample label="blue striped">
+      <Table blue striped>
+        <TableHeader>
+          <TableHeaderRow>
+            <TableHeaderCell>Thing 1</TableHeaderCell>
+            <TableHeaderCell>Thing 2</TableHeaderCell>
+            <TableHeaderCell>Thing 3</TableHeaderCell>
+          </TableHeaderRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>a</TableCell>
+            <TableCell>b</TableCell>
+            <TableCell>c</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>x</TableCell>
+            <TableCell>y</TableCell>
+            <TableCell>z</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </GuideExample>
+
+    <GuideExample label="noTable">
+      <Table noTable>
+        <TableHeader>
+          <TableHeaderRow>
+            <TableHeaderCell>Thing 1</TableHeaderCell>
+            <TableHeaderCell>Thing 2</TableHeaderCell>
+            <TableHeaderCell>Thing 3</TableHeaderCell>
+          </TableHeaderRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>a</TableCell>
+            <TableCell>b</TableCell>
+            <TableCell>c</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>x</TableCell>
+            <TableCell>y</TableCell>
+            <TableCell>z</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </GuideExample>
+
+    <GuideExample label="plain justified">
+      <Table plain justified>
+        <TableHeader>
+          <TableHeaderRow>
+            <TableHeaderCell>Thing 1</TableHeaderCell>
+            <TableHeaderCell>Thing 2</TableHeaderCell>
+            <TableHeaderCell>Thing 3</TableHeaderCell>
+          </TableHeaderRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>a</TableCell>
+            <TableCell>b</TableCell>
+            <TableCell>c</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>x</TableCell>
+            <TableCell>y</TableCell>
+            <TableCell>z</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </GuideExample>
+
+    <GuideExample label="noCol">
+      <Table noCol>
+        <TableHeader>
+          <TableHeaderRow>
+            <TableHeaderCell>Thing 1</TableHeaderCell>
+            <TableHeaderCell>Thing 2</TableHeaderCell>
+            <TableHeaderCell>Thing 3</TableHeaderCell>
+          </TableHeaderRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>a</TableCell>
+            <TableCell>b</TableCell>
+            <TableCell>c</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>x</TableCell>
+            <TableCell>y</TableCell>
+            <TableCell>z</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </GuideExample>
+
+    <GuideExample label="noRow">
+      <Table noRow>
+        <TableHeader>
+          <TableHeaderRow>
+            <TableHeaderCell>Thing 1</TableHeaderCell>
+            <TableHeaderCell>Thing 2</TableHeaderCell>
+            <TableHeaderCell>Thing 3</TableHeaderCell>
+          </TableHeaderRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>a</TableCell>
+            <TableCell>b</TableCell>
+            <TableCell>c</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>x</TableCell>
+            <TableCell>y</TableCell>
+            <TableCell>z</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </GuideExample>
+
+  </div>
+
+</Playground>
+
+## Props
+
+### Table
+
+<PropsTable of={Table} />
+
+### TableBody
+
+<PropsTable of={TableBody} />
+
+### TableRow
+
+<PropsTable of={TableRow} />
+
+### TableCell
+
+<PropsTable of={TableCell} />
+
+### TableHeader
+
+<PropsTable of={TableHeader} />
+
+### TableHeaderRow
+
+<PropsTable of={TableHeaderRow} />
+
+### TableHeaderCell
+
+<PropsTable of={TableHeaderCell} />

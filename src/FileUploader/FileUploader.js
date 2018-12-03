@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 import { StyledFileUploader } from './FileUploader-styled';
 
 const FileUploader = ({
   children,
-  forwardedRef,
   field,
   form,
   success = false,
@@ -30,9 +28,7 @@ const FileUploader = ({
       setFieldValue(name, e.currentTarget.files);
     }
 
-    if (onChange) {
-      onChange(e);
-    }
+    onChange(e);
   };
 
   const isSuccess = () => {
@@ -56,7 +52,6 @@ const FileUploader = ({
   return (
     <StyledFileUploader
       as="input"
-      ref={forwardedRef}
       success={isSuccess()}
       error={isError()}
       disabled={isDisabled()}
@@ -72,6 +67,10 @@ FileUploader.propTypes = {
   children: PropTypes.node
 };
 
-FileUploader.defaultProps = {};
+FileUploader.defaultProps = {
+  onChange: () => {}
+};
 
-export default withRefs(FileUploader);
+FileUploader.displayName = 'FileUploader';
+
+export default FileUploader;

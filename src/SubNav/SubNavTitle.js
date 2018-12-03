@@ -1,20 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledSubNavTitle } from './SubNav-styled';
 
 import { SubNavContext } from './SubNav';
 
-const SubNavTitle = ({ children, forwardedRef, ...other }) => {
+const SubNavTitle = ({ children, ...other }) => {
   return (
     <SubNavContext.Consumer>
       {({ subNavContext }) => (
-        <StyledSubNavTitle
-          ref={forwardedRef}
-          blue={subNavContext.blue}
-          {...other}
-        >
+        <StyledSubNavTitle blue={subNavContext.blue} {...other}>
           {children}
         </StyledSubNavTitle>
       )}
@@ -31,4 +26,6 @@ SubNavTitle.propTypes = {
 
 SubNavTitle.defaultProps = {};
 
-export default withRefs(SubNavTitle);
+SubNavTitle.displayName = 'SubNavTitle';
+
+export default SubNavTitle;

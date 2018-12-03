@@ -1,0 +1,28 @@
+---
+name: ArcgisItemCard
+route: /arcgis-item-card
+---
+
+import { Playground, PropsTable } from 'docz';
+
+import ArcgisItemCard from '../';
+
+import item from './item.json';
+
+# ArcgisItemCard
+
+A card for ArcGIS items to be displayed as a single UI element.
+
+## Basic Usage
+
+<Playground>
+  <div>
+    <div>
+      <ArcgisItemCard item={item} />
+    </div>
+  </div>
+</Playground>
+
+## Props
+
+<PropsTable of={ArcgisItemCard} />

@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledMenuTitle } from './Menu-styled';
 
-const MenuTitle = ({ children, forwardedRef, ...other }) => {
+const MenuTitle = ({ children, ...other }) => {
   return (
-    <StyledMenuTitle ref={forwardedRef} as="span" {...other}>
+    <StyledMenuTitle as="span" {...other}>
       {children}
     </StyledMenuTitle>
   );
@@ -19,4 +18,6 @@ MenuTitle.propTypes = {
 
 MenuTitle.defaultProps = {};
 
-export default withRefs(MenuTitle);
+MenuTitle.displayName = 'MenuTitle';
+
+export default MenuTitle;

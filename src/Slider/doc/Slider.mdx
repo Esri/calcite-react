@@ -1,0 +1,144 @@
+---
+name: Slider
+route: /slider
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+import { Formik, Field } from 'formik';
+
+import Form, {
+  FormControl,
+  FormHelperText,
+  FormControlLabel
+} from '../../Form';
+import Button from '../../Button';
+import TextField from '../../TextField';
+import Slider from '../';
+
+# Slider
+
+Range input element
+
+## Basic Usage
+
+<Playground>
+  <Slider />
+</Playground>
+
+## Default Value
+
+<Playground>
+  <Slider defaultValue={50} />
+</Playground>
+
+## Controlled Slider
+
+<Playground>
+  {() => {
+      class SliderStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            value: 20
+          };
+
+          this.updateSliderValue = this.updateSliderValue.bind(this);
+        }
+
+        updateSliderValue(event) {
+          this.setState({ value: parseInt(event.target.value, 10) });
+        };
+
+        render() {
+          return (
+            <Form horizontal>
+              <FormControl>
+                <TextField
+                  type="number"
+                  value={this.state.value}
+                  onChange={this.updateSliderValue}
+                />
+              </FormControl>
+              <FormControl style={{ flex: '1 0 100px' }}>
+                <Slider
+                  value={this.state.value}
+                  onChange={this.updateSliderValue}
+                />
+              </FormControl>
+            </Form>
+          );
+        }
+      }
+
+      return <SliderStory />;
+    }}
+
+</Playground>
+
+## with Formik
+
+<Playground>
+  {() => {
+      const formValues = {
+        volume: 0
+      };
+
+      const onSubmit = (values, actions) => {
+        setTimeout(() => {
+          console.log(values);
+          actions.setSubmitting(false);
+        }, 1000);
+      };
+
+      const onValidate = values => {
+        const errors = {};
+
+        if (values.volume > 75) {
+          errors.volume = 'That is way too loud!';
+        }
+
+        return errors;
+      };
+
+      return (
+        <Formik
+          initialValues={formValues}
+          validate={onValidate}
+          onSubmit={onSubmit}
+        >
+          {({ values, errors, touched, handleSubmit, isSubmitting }) => (
+            <Form onSubmit={handleSubmit}>
+              {/* volume */}
+
+              <FormControl
+                success={touched.volume && !errors.volume ? true : false}
+                error={touched.volume && errors.volume ? true : false}
+                style={{ flex: '1 0 100px' }}
+              >
+                <FormControlLabel htmlFor="volume">
+                  Preferred Volume:
+                </FormControlLabel>
+                <Field component={Slider} name="volume" />
+                <FormHelperText>
+                  {values.volume} {(touched.volume && errors.volume) || null}
+                </FormHelperText>
+              </FormControl>
+
+              <FormControl>
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Submitting.......' : 'Submit'}
+                </Button>
+              </FormControl>
+              <pre>{JSON.stringify(values, null, 2)}</pre>
+            </Form>
+          )}
+        </Formik>
+      );
+    }}
+
+</Playground>
+
+## Props
+
+<PropsTable of={Slider} />

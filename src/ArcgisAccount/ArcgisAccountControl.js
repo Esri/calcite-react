@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
-import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import {
@@ -27,11 +26,10 @@ const ArcgisAccountControl = ({
   fullName,
   username,
   open,
-  forwardedRef,
   ...other
 }) => {
   return (
-    <StyledArcgisAccountControl ref={forwardedRef} open={open} {...other}>
+    <StyledArcgisAccountControl open={open} {...other}>
       <StyledArcgisAccountControlAvatar>
         {avatar}
       </StyledArcgisAccountControlAvatar>
@@ -60,4 +58,6 @@ ArcgisAccountControl.propTypes = {
 
 ArcgisAccountControl.defaultProps = {};
 
-export default withRefs(ArcgisAccountControl);
+ArcgisAccountControl.displayName = 'ArcgisAccountControl';
+
+export default ArcgisAccountControl;

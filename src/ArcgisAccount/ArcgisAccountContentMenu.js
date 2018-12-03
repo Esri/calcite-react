@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
-import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import { StyledArcgisAccountContentMenu } from './ArcgisAccount-styled';
@@ -16,21 +15,23 @@ import { StyledArcgisAccountContentMenu } from './ArcgisAccount-styled';
 
 // CSS
 
-const ArcgisAccountMenu = ({ children, user, forwardedRef, ...other }) => {
+const ArcgisAccountContentMenu = ({ children, user, ...other }) => {
   return (
-    <StyledArcgisAccountContentMenu ref={forwardedRef} {...other}>
+    <StyledArcgisAccountContentMenu {...other}>
       {children}
     </StyledArcgisAccountContentMenu>
   );
 };
 
-ArcgisAccountMenu.propTypes = {
+ArcgisAccountContentMenu.propTypes = {
   /** Content of the StyledArcgisAccountContentMenu */
   children: PropTypes.node,
   /** AGOL user object */
   user: PropTypes.object
 };
 
-ArcgisAccountMenu.defaultProps = {};
+ArcgisAccountContentMenu.defaultProps = {};
 
-export default withRefs(ArcgisAccountMenu);
+ArcgisAccountContentMenu.displayName = 'ArcgisAccountContentMenu';
+
+export default ArcgisAccountContentMenu;

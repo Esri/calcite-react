@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import {
   StyledSwitch,
@@ -13,7 +12,6 @@ const Switch = ({
   children,
   labelPosition,
   destructive,
-  forwardedRef,
   checked,
   field,
   form,
@@ -78,7 +76,6 @@ const Switch = ({
     <StyledSwitch>
       {labelPosition === 'before' ? getSwitchLabel(children) : null}
       <StyledSwitchInput
-        ref={forwardedRef}
         onChange={handleChange}
         checked={isChecked()}
         success={isSuccess()}
@@ -112,4 +109,6 @@ Switch.defaultProps = {
   labelPosition: 'after'
 };
 
-export default withRefs(Switch);
+Switch.displayName = 'Switch';
+
+export default Switch;

@@ -1,0 +1,42 @@
+---
+name: SideNav
+route: /side-nav
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import SideNav, { SideNavTitle, SideNavLink } from '../';
+
+# SideNav
+
+SideNav can be used either for in-page navigation, or for lists of articles
+under a given topic.
+
+## Basic Usage
+
+<Playground>
+  <SideNav>
+    <SideNavTitle>Sidenav Group</SideNavTitle>
+    <nav>
+      <SideNavLink>Agricultural</SideNavLink>
+      <SideNavLink>Transition</SideNavLink>
+      <SideNavLink>Perpetual</SideNavLink>
+      <SideNavLink>Cultural</SideNavLink>
+    </nav>
+  </SideNav>
+</Playground>
+
+## Props
+
+### SideNav
+
+<PropsTable of={SideNav} />
+
+### SideNavTitle
+
+<PropsTable of={SideNavTitle} />
+
+### SideNavLink
+
+<PropsTable of={SideNavLink} />

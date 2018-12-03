@@ -1,0 +1,67 @@
+---
+name: Menu
+route: /menu
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import Menu, { MenuTitle, MenuItem } from '../';
+import MenuPropsTable from './Menu-propsTable';
+
+# Menu
+
+Menus are good for showing multiple options under a single call to action. For
+example, if you had a download button, and you needed the user to choose a
+format for the download, you could put several choices in a Menu.
+
+Menus differ from select elements in that they don't have a default state or a
+'current' state. Instead, they offer a jumping off point for a series of related
+actions.
+
+## Basic Usage
+
+<Playground>
+  <Menu style={{ maxWidth: '280px' }}>
+    <MenuTitle>Some Options</MenuTitle>
+    <MenuItem>Option 1 that has a really long text.</MenuItem>
+    <MenuItem>Option 2</MenuItem>
+    <MenuItem>Option 3</MenuItem>
+    <MenuTitle>More Options</MenuTitle>
+    <MenuItem>Option 4</MenuItem>
+    <MenuItem>Option 5</MenuItem>
+  </Menu>
+</Playground>
+
+## With Subtitle
+
+<Playground>
+  <Menu style={{ maxWidth: '280px' }}>
+    <MenuTitle>Metric</MenuTitle>
+    <MenuItem subtitle="Meters">m</MenuItem>
+    <MenuItem subtitle="Kilometers">km</MenuItem>
+    <MenuItem subtitle="Millimeters">mm</MenuItem>
+    <MenuItem subtitle="Centimeters">cm</MenuItem>
+    <MenuItem subtitle="Decimeters">dm</MenuItem>
+    <MenuTitle>Imperial</MenuTitle>
+    <MenuItem subtitle="Feet">ft</MenuItem>
+    <MenuItem subtitle="Inches">in</MenuItem>
+    <MenuItem subtitle="Yards">yd</MenuItem>
+    <MenuItem subtitle="Miles">mi</MenuItem>
+    <MenuItem subtitle="Nautical Miles">NM</MenuItem>
+  </Menu>
+</Playground>
+
+## Props
+
+### Menu
+
+<PropsTable of={MenuPropsTable} />
+
+### MenuItem
+
+<PropsTable of={MenuItem} />
+
+### MenuTitle
+
+<PropsTable of={MenuTitle} />

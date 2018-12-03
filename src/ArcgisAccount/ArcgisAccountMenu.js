@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
-import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import {
@@ -33,11 +32,10 @@ const ArcgisAccountMenu = ({
   signOutLabel,
   onRequestSwitchAccount,
   onRequestSignOut,
-  forwardedRef,
   ...other
 }) => {
   return (
-    <StyledArcgisAccountMenu ref={forwardedRef} {...other}>
+    <StyledArcgisAccountMenu {...other}>
       <StyledArcgisAccountContent>
         <ArcgisAccountContentInfo user={user} portal={portal} avatar={avatar} />
         <ArcgisAccountContentMenu>{children}</ArcgisAccountContentMenu>
@@ -79,4 +77,6 @@ ArcgisAccountMenu.defaultProps = {
   signOutLabel: 'Sign Out'
 };
 
-export default withRefs(ArcgisAccountMenu);
+ArcgisAccountMenu.displayName = 'ArcgisAccountMenu';
+
+export default ArcgisAccountMenu;

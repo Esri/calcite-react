@@ -1,0 +1,117 @@
+---
+name: ComboButton
+route: /combo-button
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import Menu, { MenuItem } from '../../Menu';
+import ComboButton from '../';
+
+# ComboButton
+
+A ComboButton has a button on the left and a dropdown containing a menu of more
+options on the right.
+
+## Basic Usage
+
+<Playground>
+  <ComboButton
+    onClick={() => console.log('primary clicked')}
+    label="Export All"
+  >
+    <Menu>
+      <MenuItem onClick={() => console.log('pdf clicked')}>Export PDF</MenuItem>
+      <MenuItem onClick={() => console.log('csv clicked')}>Export CSV</MenuItem>
+      <MenuItem onClick={() => console.log('excel clicked')}>
+        Export Excel
+      </MenuItem>
+    </Menu>
+  </ComboButton>
+</Playground>
+
+## Colors
+
+<Playground>
+  <GuideExample label="clear">
+    <ComboButton
+      onClick={() => console.log('primary clicked')}
+      label="Export All"
+      clear
+    >
+      <Menu>
+        <MenuItem onClick={() => console.log('pdf clicked')}>
+          Export PDF
+        </MenuItem>
+        <MenuItem onClick={() => console.log('csv clicked')}>
+          Export CSV
+        </MenuItem>
+        <MenuItem onClick={() => console.log('excel clicked')}>
+          Export Excel
+        </MenuItem>
+      </Menu>
+    </ComboButton>
+  </GuideExample>
+  <GuideExample label="clearGray">
+    <ComboButton
+      onClick={() => console.log('primary clicked')}
+      label="Export All"
+      clearGray
+    >
+      <Menu>
+        <MenuItem onClick={() => console.log('pdf clicked')}>
+          Export PDF
+        </MenuItem>
+        <MenuItem onClick={() => console.log('csv clicked')}>
+          Export CSV
+        </MenuItem>
+        <MenuItem onClick={() => console.log('excel clicked')}>
+          Export Excel
+        </MenuItem>
+      </Menu>
+    </ComboButton>
+  </GuideExample>
+  <GuideExample label="red">
+    <ComboButton
+      onClick={() => console.log('primary clicked')}
+      label="Export All"
+      red
+    >
+      <Menu>
+        <MenuItem onClick={() => console.log('pdf clicked')}>
+          Export PDF
+        </MenuItem>
+        <MenuItem onClick={() => console.log('csv clicked')}>
+          Export CSV
+        </MenuItem>
+        <MenuItem onClick={() => console.log('excel clicked')}>
+          Export Excel
+        </MenuItem>
+      </Menu>
+    </ComboButton>
+  </GuideExample>
+  <GuideExample label="green">
+    <ComboButton
+      onClick={() => console.log('primary clicked')}
+      label="Export All"
+      green
+    >
+      <Menu>
+        <MenuItem onClick={() => console.log('pdf clicked')}>
+          Export PDF
+        </MenuItem>
+        <MenuItem onClick={() => console.log('csv clicked')}>
+          Export CSV
+        </MenuItem>
+        <MenuItem onClick={() => console.log('excel clicked')}>
+          Export Excel
+        </MenuItem>
+      </Menu>
+    </ComboButton>
+  </GuideExample>
+</Playground>
+
+## Props
+
+<PropsTable of={ComboButton} />

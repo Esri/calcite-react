@@ -1,23 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getChildType } from '../utils/helpers';
 import { StyledAccordionSection } from './Accordion-styled';
-import AccordionTitle from './AccordionTitle';
-import AccordionContent from './AccordionContent';
-import withRefs from '../utils/withRefs';
 
 const AccordionSection = ({
   children,
   active,
   sectionIndex,
   onAccordionChange,
-  forwardedRef,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case AccordionTitle:
+    switch (child.type && child.type.displayName) {
+      case 'AccordionTitle':
         let title;
         title = React.cloneElement(child, {
           key: i,
@@ -26,7 +21,7 @@ const AccordionSection = ({
           onAccordionChange: onAccordionChange
         });
         return title;
-      case AccordionContent:
+      case 'AccordionContent':
         let content;
         content = React.cloneElement(child, {
           key: i,
@@ -40,14 +35,21 @@ const AccordionSection = ({
   });
 
   return (
-    <StyledAccordionSection ref={forwardedRef} {...other}>
+    <StyledAccordionSection {...other}>
       {childrenWithProps}
     </StyledAccordionSection>
   );
 };
+
 AccordionSection.propTypes = {
   /** Description TBD */
   children: PropTypes.node
 };
 
-export default withRefs(AccordionSection);
+AccordionSection.defaultProps = {
+  onAccordionChange: () => {}
+};
+
+AccordionSection.displayName = 'AccordionSection';
+
+export default AccordionSection;

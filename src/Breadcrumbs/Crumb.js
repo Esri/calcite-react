@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 import { StyledCrumb, StyledSpanCrumb } from './Breadcrumbs-styled';
 import { BreadcrumbsContext } from './Breadcrumbs';
 
-const Crumb = ({ children, href, hasLink, forwardedRef, ...other }) => {
+const Crumb = ({ children, href, hasLink, ...other }) => {
   let Crumb = StyledSpanCrumb;
 
   if (href || hasLink) {
@@ -14,12 +13,7 @@ const Crumb = ({ children, href, hasLink, forwardedRef, ...other }) => {
   return (
     <BreadcrumbsContext.Consumer>
       {({ breadcrumbsContext }) => (
-        <Crumb
-          ref={forwardedRef}
-          {...breadcrumbsContext}
-          {...other}
-          href={href}
-        >
+        <Crumb {...breadcrumbsContext} {...other} href={href}>
           {children}
         </Crumb>
       )}
@@ -38,4 +32,6 @@ Crumb.propTypes = {
 
 Crumb.defaultProps = {};
 
-export default withRefs(Crumb);
+Crumb.displayName = 'Crumb';
+
+export default Crumb;

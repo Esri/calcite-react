@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 import ReactDOM from 'react-dom';
 import { StyledDrawer, StyledDrawerNav } from './Drawer-styled';
 
@@ -11,7 +10,6 @@ const Drawer = ({
   drawerWidth,
   onRequestClose,
   drawerNavStyle,
-  forwardedRef,
   ...other
 }) => {
   function gutterClicked(e) {
@@ -23,7 +21,6 @@ const Drawer = ({
   const drawer = (
     <StyledDrawer active={active} onClick={gutterClicked} {...other}>
       <StyledDrawerNav
-        ref={forwardedRef}
         active={active}
         right={right}
         drawerWidth={drawerWidth}
@@ -53,7 +50,10 @@ Drawer.propTypes = {
 };
 
 Drawer.defaultProps = {
-  drawerWidth: 280
+  drawerWidth: 280,
+  onRequestClose: () => {}
 };
 
-export default withRefs(Drawer);
+Drawer.displayName = 'Drawer';
+
+export default Drawer;

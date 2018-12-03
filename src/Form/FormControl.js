@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
-import withRefs from '../utils/withRefs';
 import uniqid from 'uniqid';
 import { StyledFormControl } from './Form-styled';
 
@@ -14,44 +13,40 @@ const FormControlContext = createContext({
   }
 });
 
-const FormControl = withRefs(
-  ({
-    children,
+const FormControl = ({
+  children,
+  error,
+  success,
+  horizontal,
+  noValidation,
+  ...other
+}) => {
+  const _generatedId = uniqid();
+  const formControlContext = {
+    horizontal,
     error,
     success,
-    horizontal,
-    noValidation,
-    forwardedRef,
-    ...other
-  }) => {
-    const _generatedId = uniqid();
-    const formControlContext = {
-      horizontal,
-      error,
-      success,
-      _generatedId
-    };
+    _generatedId
+  };
 
-    return (
-      <FormContext.Consumer>
-        {({ formContext }) => (
-          <FormControlContext.Provider value={{ formControlContext }}>
-            <StyledFormControl
-              ref={forwardedRef}
-              error={error}
-              success={success}
-              horizontal={horizontal}
-              noValidation={formContext.noValidation}
-              {...other}
-            >
-              {children}
-            </StyledFormControl>
-          </FormControlContext.Provider>
-        )}
-      </FormContext.Consumer>
-    );
-  }
-);
+  return (
+    <FormContext.Consumer>
+      {({ formContext }) => (
+        <FormControlContext.Provider value={{ formControlContext }}>
+          <StyledFormControl
+            error={error}
+            success={success}
+            horizontal={horizontal}
+            noValidation={formContext.noValidation}
+            {...other}
+          >
+            {children}
+          </StyledFormControl>
+        </FormControlContext.Provider>
+      )}
+    </FormContext.Consumer>
+  );
+};
 
 FormControl.propTypes = {
   /** Description TBD */
@@ -67,5 +62,7 @@ FormControl.propTypes = {
 };
 
 FormControl.defaultProps = {};
+
+FormControl.displayName = 'FormControl';
 
 export { FormControl as default, FormControlContext };

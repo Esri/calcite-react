@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledSlider } from './Slider-styled';
 
@@ -8,7 +7,6 @@ const Slider = ({
   value,
   min,
   max,
-  forwardedRef,
   field,
   form,
   success = false,
@@ -44,7 +42,6 @@ const Slider = ({
 
   return (
     <StyledSlider
-      ref={forwardedRef}
       as="input"
       value={value}
       aria-valuenow={value}
@@ -79,4 +76,6 @@ Slider.defaultProps = {
   step: 1
 };
 
-export default withRefs(Slider);
+Slider.displayName = 'Slider';
+
+export default Slider;

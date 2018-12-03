@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 import {
   StyledCheckbox,
   StyledCheckboxLabel,
@@ -10,7 +9,6 @@ import {
 const Checkbox = ({
   children,
   labelStyle,
-  forwardedRef,
   checked,
   field,
   form,
@@ -89,7 +87,6 @@ const Checkbox = ({
   return (
     <StyledCheckboxGroup>
       <StyledCheckbox
-        ref={forwardedRef}
         onChange={handleChange}
         checked={isChecked()}
         success={isSuccess()}
@@ -120,4 +117,6 @@ Checkbox.propTypes = {
 
 Checkbox.defaultProps = {};
 
-export default withRefs(Checkbox);
+Checkbox.displayName = 'Checkbox';
+
+export default Checkbox;

@@ -1,6 +1,7 @@
 # Generated folders
 node_modules
 dist
+.docz
 
 # Editor
 .DS_Store

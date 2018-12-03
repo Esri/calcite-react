@@ -1,1 +1,1 @@
-export default from './ComboButton';
+export { default } from './ComboButton';

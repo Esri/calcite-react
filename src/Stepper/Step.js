@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getChildType } from '../utils/helpers';
-import withRefs from '../utils/withRefs';
 
 import { StyledStep, StyledStepTextContainer } from './Stepper-styled';
-import { StepTitle, StepDescription } from './';
 import StepIcon from './StepIcon';
 
 const Step = ({
@@ -16,13 +13,12 @@ const Step = ({
   error,
   icon,
   vertical,
-  forwardedRef,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case StepTitle:
+    switch (child.type && child.type.displayName) {
+      case 'StepTitle':
         return React.cloneElement(child, {
           active,
           small,
@@ -30,7 +26,7 @@ const Step = ({
           error,
           vertical
         });
-      case StepDescription:
+      case 'StepDescription':
         return React.cloneElement(child, {
           active,
           small,
@@ -44,7 +40,7 @@ const Step = ({
   });
 
   return (
-    <StyledStep ref={forwardedRef} vertical={vertical} {...other}>
+    <StyledStep vertical={vertical} {...other}>
       <StepIcon
         icon={icon}
         active={active}
@@ -73,4 +69,6 @@ Step.propTypes = {
 
 Step.defaultProps = {};
 
-export default withRefs(Step);
+Step.displayName = 'Step';
+
+export default Step;

@@ -1,0 +1,49 @@
+---
+name: Breadcrumbs
+route: /breadcrumbs
+---
+
+import { Playground, PropsTable } from 'docz';
+
+import GuideExample from '../../../docz/GuideExample';
+import { CalciteTheme } from '../../../src/CalciteThemeProvider';
+
+import Breadcrumbs, { Crumb } from '../';
+
+# Breadcrumbs
+
+Breadcrumbs are a set of links or labels used for navigation and context.
+
+## Basic Usage
+
+<Playground>
+  <GuideExample>
+    <Breadcrumbs>
+      <Crumb href="#">Thing</Crumb>
+      <Crumb>Thing</Crumb>
+      <Crumb href="#">Thing</Crumb>
+      <Crumb href="#">Current</Crumb>
+    </Breadcrumbs>
+  </GuideExample>
+  <GuideExample
+    label="white"
+    style={{ background: CalciteTheme.palette.offBlack }}
+  >
+    <Breadcrumbs white>
+      <Crumb href="#">Thing</Crumb>
+      <Crumb>Thing</Crumb>
+      <Crumb href="#">Thing</Crumb>
+      <Crumb href="#">Current</Crumb>
+    </Breadcrumbs>
+  </GuideExample>
+</Playground>
+
+## Props
+
+### Breadcrumbs
+
+<PropsTable of={Breadcrumbs} />
+
+### Crumb
+
+<PropsTable of={Crumb} />

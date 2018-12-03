@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
-import withRefs from '../utils/withRefs';
 
 import { StyledTable } from './Table-styled';
 
@@ -25,7 +24,6 @@ const Table = ({
   justified,
   noCol,
   noRow,
-  forwardedRef,
   ...other
 }) => {
   const tableContext = {
@@ -41,7 +39,6 @@ const Table = ({
   return (
     <TableContext.Provider value={{ tableContext }}>
       <StyledTable
-        ref={forwardedRef}
         blue={blue}
         plain={plain}
         noTable={noTable}
@@ -76,6 +73,6 @@ Table.propTypes = {
 
 Table.defaultProps = {};
 
-const TableWithRefs = withRefs(Table);
+Table.displayName = 'Table';
 
-export { TableWithRefs as default, TableContext };
+export { Table as default, TableContext };

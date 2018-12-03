@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 import { StyledFormControlLabel } from './Form-styled';
 
 import { FormControlContext } from './FormControl';
 
-const FormControlLabel = ({ children, htmlFor, forwardedRef, ...other }) => {
+const FormControlLabel = ({ children, htmlFor, ...other }) => {
   return (
     <FormControlContext.Consumer>
       {({ formControlContext }) => (
         <StyledFormControlLabel
-          ref={forwardedRef}
           htmlFor={formControlContext._generatedId}
           error={formControlContext.error}
           success={formControlContext.success}
@@ -39,4 +37,6 @@ FormControlLabel.propTypes = {
 
 FormControlLabel.defaultProps = {};
 
-export default withRefs(FormControlLabel);
+FormControlLabel.displayName = 'FormControlLabel';
+
+export default FormControlLabel;
