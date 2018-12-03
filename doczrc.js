@@ -1,5 +1,5 @@
 import { css } from 'docz-plugin-css';
-import DoczCalcitetheme from './docz/DoczCalcitetheme';
+import DoczCalcitetheme from './docz/DoczCalciteTheme';
 
 export default {
   plugins: [
