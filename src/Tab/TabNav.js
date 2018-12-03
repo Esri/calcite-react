@@ -1,9 +1,7 @@
 import React, { Children } from 'react';
 import PropTypes from 'prop-types';
-import { getChildType } from '../utils/helpers';
 
 import { StyledTabNav } from './Tab-styled';
-import TabTitle from './TabTitle';
 
 const TabNav = ({
   children,
@@ -16,8 +14,8 @@ const TabNav = ({
   ...other
 }) => {
   const childrenWithProps = Children.map(children, (child, itemIndex) => {
-    switch (getChildType(child)) {
-      case TabTitle:
+    switch (child.type && child.type.displayName) {
+      case 'TabTitle':
         return React.cloneElement(child, {
           key: itemIndex,
           index: itemIndex,

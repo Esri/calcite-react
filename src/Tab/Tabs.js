@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Children } from 'react';
-import { getChildType } from '../utils/helpers';
 
 import { StyledTab } from './Tab-styled';
-import TabNav from './TabNav';
-import TabContents from './TabContents';
 
 const Tabs = ({
   children,
@@ -18,8 +15,8 @@ const Tabs = ({
 }) => {
   const childArray = Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case TabNav:
+    switch (child.type && child.type.displayName) {
+      case 'TabNav':
         return React.cloneElement(child, {
           activeTabIndex,
           onTabChange,
@@ -28,7 +25,7 @@ const Tabs = ({
           translucent,
           dark
         });
-      case TabContents:
+      case 'TabContents':
         return React.cloneElement(child, {
           activeTabIndex,
           gray,

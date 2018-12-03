@@ -1,9 +1,7 @@
 import React, { Children } from 'react';
 import PropTypes from 'prop-types';
-import { getChildType } from '../utils/helpers';
 
 import { StyledTabContents } from './Tab-styled';
-import TabSection from './TabSection';
 
 const TabContents = ({
   children,
@@ -15,8 +13,8 @@ const TabContents = ({
   ...other
 }) => {
   const childrenWithProps = Children.map(children, (child, itemIndex) => {
-    switch (getChildType(child)) {
-      case TabSection:
+    switch (child.type && child.type.displayName) {
+      case 'TabSection':
         let section;
         if (itemIndex === activeTabIndex) {
           section = React.cloneElement(child, {

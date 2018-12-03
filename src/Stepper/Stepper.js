@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getChildType } from '../utils/helpers';
 
 import { StyledStepper } from './Stepper-styled';
-import { Step } from './';
 
 const Stepper = ({ children, currentStep, small, vertical, ...other }) => {
   const childArray = React.Children.toArray(children);
   let currentChildStepNumber = 0;
   const childrenWithProps = childArray.map((child, i) => {
-    switch (getChildType(child)) {
-      case Step:
+    switch (child.type && child.type.displayName) {
+      case 'Step':
         currentChildStepNumber++;
 
         return React.cloneElement(child, {

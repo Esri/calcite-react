@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Children, createContext } from 'react';
-import { getChildType } from '../utils/helpers';
 
 import { StyledSubNav, StyledSubNavLeftContent } from './SubNav-styled';
-
-import { SubNavTitle, SubNavList, SubNavActions } from './';
 
 const SubNavContext = createContext({
   subNavContext: {
@@ -20,15 +17,15 @@ const SubNav = ({ children, blue, ...other }) => {
   const getLeftContent = function() {
     return Children.toArray(children).filter(child => {
       return (
-        getChildType(child) === SubNavTitle ||
-        getChildType(child) === SubNavList
+        (child.type && child.type.displayName === 'SubNavTitle') ||
+        (child.type && child.type.displayName === 'SubNavList')
       );
     });
   };
 
   const getSubNavActions = function() {
     return Children.toArray(children).filter(child => {
-      return getChildType(child) === SubNavActions;
+      return child.type && child.type.displayName === 'SubNavActions';
     });
   };
 
