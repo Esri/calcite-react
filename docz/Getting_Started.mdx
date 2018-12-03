@@ -6,7 +6,10 @@ name: Getting Started
 
 ## Intro
 
-Intro...
+Calcite React is a component library built in React and used by Esri. It is an
+implementation of Calcite, the geo-centric design language of Esri, aimed at
+helping React developers to quickly build components that adhere to the Calcite
+design language.
 
 ## Installation
 
@@ -17,7 +20,9 @@ npm i calcite-react
 ## Usage
 
 ### Theme Provider
+
 Calcite-react components rely on `<CalciteThemeProvider />` to access our theme. All Calcite components must be wrapped in this context provider in order to render properly, as such it's recommended to wrap your entire app at the highest level.
+
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -35,6 +40,7 @@ ReactDOM.render(
 ```
 
 ### Components
+
 ```jsx
 import React, { Component } from 'react';
 
@@ -43,12 +49,12 @@ import { CalciteH1 } from 'calcilte-react/Elements';
 
 class App extends Component {
   render() {
-    return(
+    return (
       <div>
         <CalciteH1>My App uses Calcite headers and buttons!</CalciteH1>
         <Button>A Calcite Button!</Button>
       </div>
-    )
+    );
   }
 }
 
@@ -56,7 +62,9 @@ export default App;
 ```
 
 ## Extending Components
+
 You can extend calcite-react components using the syntax provided by [`styled-components`](https://www.styled-components.com/docs/basics#extending-styles). CSS properties will overwrite the defaults on the calcite-react component.
+
 ```jsx
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -64,22 +72,19 @@ import styled, { css } from 'styled-components';
 import Button from 'calcite-react/Button';
 
 const BoxShadowButton = styled(Button)`
-  box-shadow:
-    0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14),
     0px 1px 14px 0px rgba(0, 0, 0, 0.12);
 `;
 
 const App = () => {
-  return(
-    <BoxShadowButton>My Own Custom Button</BoxShadowButton>
-  )
-}
+  return <BoxShadowButton>My Own Custom Button</BoxShadowButton>;
+};
 
 export default App;
 ```
 
 ### Advanced
+
 ```jsx
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -101,22 +106,26 @@ const AdvancedButton = styled(Button)`
 ```
 
 ## Theming
+
 Some minor theme editing is possible with calcite-react by extending the `CalciteTheme` config before passing it into the `<CalciteThemeProvider />`. The default theme can be found on [github](https://github.com/ArcGIS/calcite-react/blob/develop/src/theme/CalciteTheme.js).
+
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from 'path/to/App';
 
-import CalciteTheme, { CalciteThemeProvider } from 'calcite-react/theme/CalciteTheme';
+import CalciteTheme, {
+  CalciteThemeProvider
+} from 'calcite-react/theme/CalciteTheme';
 
 const CustomTheme = {
   ...CalciteTheme,
   palette: {
     ...CalciteTheme.palette,
-    blue: "#1E5D8C"
+    blue: '#1E5D8C'
   }
-}
+};
 
 ReactDOM.render(
   <CalciteThemeProvider theme={CustomTheme}>

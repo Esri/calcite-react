@@ -1,6 +1,12 @@
 import esriColors from './esriColors.json';
 
 export default {
+  // Removing logo for now as it overwrites the package name, removing any
+  // reference to Calcite React from the page... will revisit this later.
+  // logo: {
+  //   src: '/public/logo.svg',
+  //   width: 100
+  // },
   radii: '2px',
   colors: {
     white: esriColors['blk-000'],
@@ -12,7 +18,7 @@ export default {
     dark: esriColors['blk-220'],
     blue: esriColors['v-bb-160'],
     skyBlue: esriColors['v-bb-150'],
-    /** properties bellow depends on mode select */
+    /** properties below depend on mode select */
     primary: esriColors['v-bb-160'],
     text: esriColors['blk-170'],
     link: esriColors['v-bb-160'],
