@@ -1,30 +1,25 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withRefs from '../utils/withRefs';
 import { StyledAlert, StyledAlertClose } from './Alert-styled';
 
-const Alert = withRefs(
-  ({ children, closeLabel, onClose, forwardedRef, ...other }) => {
-    const getAlertClose = closeLabel => {
-      if (closeLabel) {
-        return (
-          <StyledAlertClose onClick={onClose}>{closeLabel}</StyledAlertClose>
-        );
-      }
-    };
+const Alert = ({ children, closeLabel, onClose, ...other }) => {
+  const getAlertClose = closeLabel => {
+    if (closeLabel) {
+      return (
+        <StyledAlertClose onClick={onClose}>{closeLabel}</StyledAlertClose>
+      );
+    }
+  };
 
-    return (
-      <StyledAlert ref={forwardedRef} {...other}>
-        {children}
-        {getAlertClose(closeLabel)}
-      </StyledAlert>
-    );
-  }
-);
+  return (
+    <StyledAlert {...other}>
+      {children}
+      {getAlertClose(closeLabel)}
+    </StyledAlert>
+  );
+};
 
-const AlertWithRefs = withRefs(Alert);
-
-AlertWithRefs.propTypes = {
+Alert.propTypes = {
   /** Components to be rendered within the Alert. */
   children: PropTypes.node,
   /** Color modifier for the Alert. */
@@ -43,7 +38,7 @@ AlertWithRefs.propTypes = {
   onClose: PropTypes.func
 };
 
-AlertWithRefs.defaultProps = {};
+Alert.defaultProps = {};
 
 Alert.displayName = 'Alert';
 

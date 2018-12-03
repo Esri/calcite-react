@@ -4,9 +4,9 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import GuideExample from '../../../stories/GuideExample';
-import doc from './Tab.md';
+import doc from './Tabs.md';
 
-import Tabs, { TabNav, TabTitle, TabContents, TabSection } from '../';
+import Tabs, { TabNav, TabTitle, TabContents, TabSection } from '..';
 
 storiesOf('Tabs', module)
   .add(

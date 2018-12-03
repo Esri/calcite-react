@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import CalciteTheme from '../../../src/theme/CalciteTheme';
+import { CalciteTheme } from '../../../src/CalciteThemeProvider';
 
 import GuideExample from '../../../stories/GuideExample';
 import doc from './Breadcrumbs.md';

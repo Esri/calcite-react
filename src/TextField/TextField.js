@@ -9,9 +9,6 @@ import {
   StyledAdornmentWrapper
 } from './TextField-styled';
 
-import Button from '../Button';
-import Select from '../Select';
-
 import { FormControlContext } from '../Form/FormControl';
 
 const TextField = withRefs(
@@ -46,8 +43,9 @@ const TextField = withRefs(
     const getAdornment = function(adornment, adornmentNoWrap, direction) {
       if (
         adornment &&
-        (adornment.type === Button ||
-          adornment.type === Select ||
+        adornment.type &&
+        (adornment.type.displayName === 'Button' ||
+          adornment.type.displayName === 'Select' ||
           adornmentNoWrap)
       ) {
         return React.cloneElement(adornment, {

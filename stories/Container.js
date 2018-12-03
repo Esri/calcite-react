@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CalciteThemeProvider } from '../src/theme/CalciteTheme';
+import CalciteThemeProvider from '../src/CalciteThemeProvider';
 
 import './stories.css';
 

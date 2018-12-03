@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
-import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import {
@@ -22,25 +21,29 @@ import {
 
 // CSS
 
-const ArcgisAccountControl = withRefs(
-  ({ avatar, fullName, username, open, forwardedRef, ...other }) => {
-    return (
-      <StyledArcgisAccountControl ref={forwardedRef} open={open} {...other}>
-        <StyledArcgisAccountControlAvatar>
-          {avatar}
-        </StyledArcgisAccountControlAvatar>
-        <StyledArcgisAccountControlNames>
-          <StyledArcgisAccountControlFriendlyName>
-            {fullName}
-          </StyledArcgisAccountControlFriendlyName>
-          <StyledArcgisAccountControlUsername>
-            {username}
-          </StyledArcgisAccountControlUsername>
-        </StyledArcgisAccountControlNames>
-      </StyledArcgisAccountControl>
-    );
-  }
-);
+const ArcgisAccountControl = ({
+  avatar,
+  fullName,
+  username,
+  open,
+  ...other
+}) => {
+  return (
+    <StyledArcgisAccountControl open={open} {...other}>
+      <StyledArcgisAccountControlAvatar>
+        {avatar}
+      </StyledArcgisAccountControlAvatar>
+      <StyledArcgisAccountControlNames>
+        <StyledArcgisAccountControlFriendlyName>
+          {fullName}
+        </StyledArcgisAccountControlFriendlyName>
+        <StyledArcgisAccountControlUsername>
+          {username}
+        </StyledArcgisAccountControlUsername>
+      </StyledArcgisAccountControlNames>
+    </StyledArcgisAccountControl>
+  );
+};
 
 ArcgisAccountControl.propTypes = {
   /** User profile avatar image */

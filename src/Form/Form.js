@@ -1,23 +1,20 @@
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
-import withRefs from '../utils/withRefs';
 import { StyledForm } from './Form-styled';
 
 const FormContext = createContext({ formContext: { noValidation: false } });
 
-const Form = withRefs(({ children, noValidation, forwardedRef, ...other }) => {
+const Form = ({ children, noValidation, ...other }) => {
   const formContext = {
     noValidation
   };
 
   return (
     <FormContext.Provider value={{ formContext }}>
-      <StyledForm ref={forwardedRef} {...other}>
-        {children}
-      </StyledForm>
+      <StyledForm {...other}>{children}</StyledForm>
     </FormContext.Provider>
   );
-});
+};
 
 Form.propTypes = {
   /** Description TBD */

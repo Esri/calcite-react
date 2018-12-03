@@ -1,66 +1,62 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledButton } from './Button-styled';
-import withRefs from '../utils/withRefs';
 
 import { ButtonGroupContext } from './ButtonGroup';
 
-const Button = withRefs(
-  ({
-    children,
-    href,
-    iconButton,
-    icon,
-    iconPosition,
-    forwardedRef,
-    ...other
-  }) => {
-    function getIconMargin() {
-      if (iconButton) {
-        return;
-      } else {
-        return {
-          marginLeft: iconPosition === 'after' ? '0.75em' : '-0.25em',
-          marginRight: iconPosition === 'before' ? '0.75em' : '-0.25em'
-        };
-      }
+const Button = ({
+  children,
+  href,
+  iconButton,
+  icon,
+  iconPosition,
+
+  ...other
+}) => {
+  function getIconMargin() {
+    if (iconButton) {
+      return;
+    } else {
+      return {
+        marginLeft: iconPosition === 'after' ? '0.75em' : '-0.25em',
+        marginRight: iconPosition === 'before' ? '0.75em' : '-0.25em'
+      };
     }
-
-    const getIcon = icon => {
-      if (icon) {
-        return React.cloneElement(icon, {
-          ...icon.props,
-          style: {
-            fill: 'currentColor',
-            verticalAlign: 'bottom',
-            ...getIconMargin(),
-            ...icon.props.style
-          }
-        });
-      }
-    };
-
-    return (
-      <ButtonGroupContext.Consumer>
-        {({ buttonGroupContext }) => (
-          <StyledButton
-            iconButton={iconButton}
-            grouped={buttonGroupContext.grouped}
-            isToggle={buttonGroupContext.isToggle}
-            as={href ? 'a' : 'button'}
-            href={href}
-            ref={forwardedRef}
-            {...other}
-          >
-            {iconPosition === 'before' ? getIcon(icon) : null}
-            {children}
-            {iconPosition === 'after' ? getIcon(icon) : null}
-          </StyledButton>
-        )}
-      </ButtonGroupContext.Consumer>
-    );
   }
-);
+
+  const getIcon = icon => {
+    if (icon) {
+      return React.cloneElement(icon, {
+        ...icon.props,
+        style: {
+          fill: 'currentColor',
+          verticalAlign: 'bottom',
+          ...getIconMargin(),
+          ...icon.props.style
+        }
+      });
+    }
+  };
+
+  return (
+    <ButtonGroupContext.Consumer>
+      {({ buttonGroupContext }) => (
+        <StyledButton
+          iconButton={iconButton}
+          grouped={buttonGroupContext.grouped}
+          isToggle={buttonGroupContext.isToggle}
+          as={href ? 'a' : 'button'}
+          href={href}
+          {...other}
+        >
+          {iconPosition === 'before' ? getIcon(icon) : null}
+          {children}
+          {iconPosition === 'after' ? getIcon(icon) : null}
+        </StyledButton>
+      )}
+    </ButtonGroupContext.Consumer>
+  );
+};
 
 Button.propTypes = {
   /** Description TBD */

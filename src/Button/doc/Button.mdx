@@ -4,8 +4,8 @@ name: Button
 
 import { Playground, PropsTable } from 'docz';
 
-import GuideExample from '../../../stories/GuideExample';
-import CalciteTheme from '../../theme/CalciteTheme';
+import GuideExample from '../../../docz/GuideExample';
+import { CalciteTheme } from '../../CalciteThemeProvider';
 
 import Button, { ButtonGroup } from '../';
 
@@ -267,4 +267,8 @@ Buttons communicate the action that will occur when the user touches them.
 
 ## Props
 
+### Button
 <PropsTable of={Button} />
+
+### ButtonGroup
+<PropsTable of={ButtonGroup} />

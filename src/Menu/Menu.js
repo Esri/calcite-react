@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { StyledMenu } from './Menu-styled';
-import withRefs from '../utils/withRefs';
 
-const Menu = withRefs(({ children, forwardedRef, ...other }) => {
+const Menu = forwardRef(({ children, ...other }, ref) => {
   return (
-    <StyledMenu ref={forwardedRef} {...other}>
+    <StyledMenu ref={ref} {...other}>
       {children}
     </StyledMenu>
   );

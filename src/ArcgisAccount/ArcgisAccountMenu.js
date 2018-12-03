@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Redux operations and local helpers/utils/modules
-import withRefs from '../utils/withRefs';
 
 // Component specific modules (Component-styled, etc.)
 import {
@@ -24,52 +23,45 @@ import ArcgisAccountContentMenu from './ArcgisAccountContentMenu';
 
 // CSS
 
-const ArcgisAccountMenu = withRefs(
-  ({
-    children,
-    user,
-    portal,
-    avatar,
-    switchAccountLabel,
-    signOutLabel,
-    onRequestSwitchAccount,
-    onRequestSignOut,
-    forwardedRef,
-    ...other
-  }) => {
-    return (
-      <StyledArcgisAccountMenu ref={forwardedRef} {...other}>
-        <StyledArcgisAccountContent>
-          <ArcgisAccountContentInfo
-            user={user}
-            portal={portal}
-            avatar={avatar}
-          />
-          <ArcgisAccountContentMenu>{children}</ArcgisAccountContentMenu>
-        </StyledArcgisAccountContent>
-        <StyledArcgisAccountSignInMenu>
-          <StyledSwitchAccountButton
-            grouped
-            half
-            extraLarge
-            onClick={onRequestSwitchAccount}
-          >
-            {switchAccountLabel}
-          </StyledSwitchAccountButton>
-          <StyledSignOutButton
-            halo
-            grouped
-            half
-            extraLarge
-            onClick={onRequestSignOut}
-          >
-            {signOutLabel}
-          </StyledSignOutButton>
-        </StyledArcgisAccountSignInMenu>
-      </StyledArcgisAccountMenu>
-    );
-  }
-);
+const ArcgisAccountMenu = ({
+  children,
+  user,
+  portal,
+  avatar,
+  switchAccountLabel,
+  signOutLabel,
+  onRequestSwitchAccount,
+  onRequestSignOut,
+  ...other
+}) => {
+  return (
+    <StyledArcgisAccountMenu {...other}>
+      <StyledArcgisAccountContent>
+        <ArcgisAccountContentInfo user={user} portal={portal} avatar={avatar} />
+        <ArcgisAccountContentMenu>{children}</ArcgisAccountContentMenu>
+      </StyledArcgisAccountContent>
+      <StyledArcgisAccountSignInMenu>
+        <StyledSwitchAccountButton
+          grouped
+          half
+          extraLarge
+          onClick={onRequestSwitchAccount}
+        >
+          {switchAccountLabel}
+        </StyledSwitchAccountButton>
+        <StyledSignOutButton
+          halo
+          grouped
+          half
+          extraLarge
+          onClick={onRequestSignOut}
+        >
+          {signOutLabel}
+        </StyledSignOutButton>
+      </StyledArcgisAccountSignInMenu>
+    </StyledArcgisAccountMenu>
+  );
+};
 
 ArcgisAccountMenu.propTypes = {
   /** AGOL user object */

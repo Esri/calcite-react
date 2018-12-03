@@ -1,42 +1,32 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getChildType } from '../utils/helpers';
 import { StyledAccordion } from './Accordion-styled';
-import AccordionSection from './AccordionSection';
-import withRefs from '../utils/withRefs';
 
-const Accordion = withRefs(
-  ({
-    children,
-    activeSectionIndexes,
-    onAccordionChange,
-    forwardedRef,
-    ...other
-  }) => {
-    const childArray = React.Children.toArray(children);
-    const childrenWithProps = childArray.map((child, i) => {
-      switch (getChildType(child)) {
-        case AccordionSection:
-          let section;
-          section = React.cloneElement(child, {
-            key: i,
-            active: activeSectionIndexes.includes(i),
-            sectionIndex: i,
-            onAccordionChange: onAccordionChange
-          });
-          return section;
-        default:
-          return child;
-      }
-    });
+const Accordion = ({
+  children,
+  activeSectionIndexes,
+  onAccordionChange,
+  ...other
+}) => {
+  const childArray = React.Children.toArray(children);
+  const childrenWithProps = childArray.map((child, i) => {
+    switch (child.type && child.type.displayName) {
+      case 'AccordionSection':
+        let section;
+        section = React.cloneElement(child, {
+          key: i,
+          active: activeSectionIndexes.includes(i),
+          sectionIndex: i,
+          onAccordionChange: onAccordionChange
+        });
+        return section;
+      default:
+        return child;
+    }
+  });
 
-    return (
-      <StyledAccordion ref={forwardedRef} {...other}>
-        {childrenWithProps}
-      </StyledAccordion>
-    );
-  }
-);
+  return <StyledAccordion {...other}>{childrenWithProps}</StyledAccordion>;
+};
 
 Accordion.propTypes = {
   /** Description TBD */
@@ -46,7 +36,8 @@ Accordion.propTypes = {
 };
 
 Accordion.defaultProps = {
-  activeSectionIndexes: []
+  activeSectionIndexes: [],
+  onAccordionChange: () => {}
 };
 
 Accordion.displayName = 'Accordion';

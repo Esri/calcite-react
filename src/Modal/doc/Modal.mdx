@@ -125,6 +125,10 @@ export class ModalExample extends React.Component {
         };
 
         render() {
+          // For the purpose of this example, we need to set a custom z-index on
+          // the modal so it doesn't interfere with the side panel
+          const docsModalZIndex = {zIndex: 1001};
+
           return (
             <div>
               <Button onClick={this.openModal}>Open Modal</Button>
@@ -132,6 +136,7 @@ export class ModalExample extends React.Component {
                 open={this.state.open}
                 onRequestClose={this.closeModal}
                 appElement={document.body}
+                overlayStyle={docsModalZIndex}
               >
                 <CalciteH1>Modal!</CalciteH1>
                 <CalciteP>
@@ -168,4 +173,8 @@ export class ModalExample extends React.Component {
 
 ## Props
 
+### Modal
 <PropsTable of={Modal} />
+
+### ModalActions
+<PropsTable of={ModalActions} />

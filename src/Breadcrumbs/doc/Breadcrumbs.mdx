@@ -5,7 +5,7 @@ name: Breadcrumbs
 import { Playground, PropsTable } from 'docz';
 
 import GuideExample from '../../../docz/GuideExample';
-import CalciteTheme from '../../../src/theme/CalciteTheme';
+import { CalciteTheme } from '../../../src/CalciteThemeProvider';
 
 import Breadcrumbs, { Crumb } from '../';
 
@@ -39,4 +39,8 @@ Breadcrumbs are a set of links or labels used for navigation and context.
 
 ## Props
 
+### Breadcrumbs
 <PropsTable of={Breadcrumbs} />
+
+### Crumb
+<PropsTable of={Crumb} />

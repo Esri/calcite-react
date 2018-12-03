@@ -92,45 +92,45 @@ class Popover extends Component {
               </StyledTargetWrapper>
             )}
           </Reference>
-          {this.props.open ? (
-            <Transition in={this.props.open} timeout={0}>
-              {state =>
-                this._getPopper(
-                  <Popper
-                    positionFixed={this.props.positionFixed}
-                    placement={this.props.placement}
-                    modifiers={{
-                      preventOverflow: {
-                        enabled: usePreventOverflow
-                      },
-                      hide: {
-                        enabled: usePreventOverflow
-                      }
-                    }}
-                  >
-                    {({ ref, style, placement }) => {
-                      return (
-                        <StyledPopover
-                          ref={ref}
-                          id={`${this._generatedId}Popover`}
-                          style={{
-                            ...style,
-                            ...this.props.style
-                          }}
-                          transitionState={state}
-                          transitionDuration={this.props.transitionDuration}
-                          data-placement={placement}
-                        >
-                          {this.props.children}
-                        </StyledPopover>
-                      );
-                    }}
-                  </Popper>,
-                  this.props.appendToBody
-                )
-              }
-            </Transition>
-          ) : null}
+          <Transition in={this.props.open} timeout={this.props.enterDelay}>
+            {state => {
+              return this.props.open
+                ? this._getPopper(
+                    <Popper
+                      positionFixed={this.props.positionFixed}
+                      placement={this.props.placement}
+                      modifiers={{
+                        preventOverflow: {
+                          enabled: usePreventOverflow
+                        },
+                        hide: {
+                          enabled: usePreventOverflow
+                        }
+                      }}
+                    >
+                      {({ ref, style, placement }) => {
+                        return (
+                          <StyledPopover
+                            ref={ref}
+                            id={`${this._generatedId}Popover`}
+                            style={{
+                              ...style,
+                              ...this.props.style
+                            }}
+                            transitionState={state}
+                            transitionDuration={this.props.transitionDuration}
+                            data-placement={placement}
+                          >
+                            {this.props.children}
+                          </StyledPopover>
+                        );
+                      }}
+                    </Popper>,
+                    this.props.appendToBody
+                  )
+                : null;
+            }}
+          </Transition>
         </Manager>
       </PopoverContext.Provider>
     );
@@ -161,6 +161,8 @@ Popover.propTypes = {
   ]),
   /** Duration of animation in milliseconds */
   transitionDuration: PropTypes.number,
+  /** How long it takes for the popover to show up */
+  enterDelay: PropTypes.number,
   /** Function called when the popover receives an event that may trigger a close */
   onRequestClose: PropTypes.func,
   /** Whether or not the popover should trigger onRequestClose when an element is selected */
@@ -177,6 +179,7 @@ Popover.defaultProps = {
   open: false,
   placement: 'bottom-start',
   transitionDuration: 200,
+  enterDelay: 0,
   true: true
 };
 
