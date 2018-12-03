@@ -208,11 +208,19 @@ const transition = delayTime => {
   `;
 };
 
+const getChildType = child => {
+  return (
+    (child.type && child.type.target && child.type.target.displayName) ||
+    (child.type && child.type.displayName)
+  );
+};
+
 export {
   unitCalc,
   clearfix,
   fontSize,
   subNavUnderline,
   backgroundGradient,
-  transition
+  transition,
+  getChildType
 };

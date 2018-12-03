@@ -50,4 +50,6 @@ Toaster.propTypes = {
 
 Toaster.defaultProps = {};
 
+Toaster.displayName = 'Toaster';
+
 export default Toaster;

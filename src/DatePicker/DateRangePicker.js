@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 
 import { StyledDatePickerContainer } from './DatePicker-styled';
 
-import { DateRangePicker } from 'react-dates';
+import { DateRangePicker as ReactDateRangePicker } from 'react-dates';
 import momentPropTypes from 'react-moment-proptypes';
 import ThemedStyleSheet from 'react-with-styles/lib/ThemedStyleSheet';
 import aphroditeInterface from 'react-with-styles-interface-aphrodite';
@@ -14,7 +14,7 @@ import { DatePickerTheme } from '../CalciteThemeProvider';
 ThemedStyleSheet.registerInterface(aphroditeInterface);
 ThemedStyleSheet.registerTheme(DatePickerTheme);
 
-const DatePicker = ({
+const DateRangePicker = ({
   field,
   form,
   onFocusChange,
@@ -61,7 +61,7 @@ const DatePicker = ({
 
   return (
     <StyledDatePickerContainer>
-      <DateRangePicker
+      <ReactDateRangePicker
         startDate={value && value.startDate}
         endDate={value && value.endDate}
         onDatesChange={_onDatesChange}
@@ -73,7 +73,7 @@ const DatePicker = ({
   );
 };
 
-DatePicker.propTypes = {
+DateRangePicker.propTypes = {
   startDate: momentPropTypes.momentObj,
   startDateId: PropTypes.string.isRequired,
   endDate: momentPropTypes.momentObj,
@@ -85,13 +85,13 @@ DatePicker.propTypes = {
   endDatePlaceholderText: PropTypes.string
 };
 
-DatePicker.defaultProps = {
+DateRangePicker.defaultProps = {
   startDatePlaceholderText: 'Start Date',
   endDatePlaceholderText: 'End Date',
   startDateId: uniqid(),
   endDateId: uniqid()
 };
 
-DatePicker.displayName = 'DatePicker';
+DateRangePicker.displayName = 'DateRangePicker';
 
-export default DatePicker;
+export default DateRangePicker;

@@ -3,6 +3,8 @@ import React, { Children, createContext } from 'react';
 
 import { StyledSubNav, StyledSubNavLeftContent } from './SubNav-styled';
 
+import { getChildType } from '../utils/helpers';
+
 const SubNavContext = createContext({
   subNavContext: {
     blue: undefined
@@ -17,15 +19,15 @@ const SubNav = ({ children, blue, ...other }) => {
   const getLeftContent = function() {
     return Children.toArray(children).filter(child => {
       return (
-        (child.type && child.type.displayName === 'SubNavTitle') ||
-        (child.type && child.type.displayName === 'SubNavList')
+        getChildType(child) === 'SubNavTitle' ||
+        getChildType(child) === 'SubNavList'
       );
     });
   };
 
   const getSubNavActions = function() {
     return Children.toArray(children).filter(child => {
-      return child.type && child.type.displayName === 'SubNavActions';
+      return getChildType(child) === 'SubNavActions';
     });
   };
 

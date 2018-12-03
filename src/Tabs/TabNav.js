@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { StyledTabNav } from './Tab-styled';
 
+import { getChildType } from '../utils/helpers';
+
 const TabNav = ({
   children,
   activeTabIndex,
@@ -14,7 +16,7 @@ const TabNav = ({
   ...other
 }) => {
   const childrenWithProps = Children.map(children, (child, itemIndex) => {
-    switch (child.type && child.type.displayName) {
+    switch (getChildType(child)) {
       case 'TabTitle':
         return React.cloneElement(child, {
           key: itemIndex,

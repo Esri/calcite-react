@@ -37,4 +37,6 @@ ToastContainer.propTypes = {
 
 ToastContainer.defaultProps = {};
 
+ToastContainer.displayName = 'ToastContainer';
+
 export default ToastContainer;

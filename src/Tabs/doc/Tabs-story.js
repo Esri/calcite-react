@@ -6,6 +6,8 @@ import { withInfo } from '@storybook/addon-info';
 import GuideExample from '../../../stories/GuideExample';
 import doc from './Tabs.md';
 
+import styled from 'styled-components';
+
 import Tabs, { TabNav, TabTitle, TabContents, TabSection } from '..';
 
 storiesOf('Tabs', module)
@@ -115,6 +117,58 @@ storiesOf('Tabs', module)
                   <TabTitle>Tab 1</TabTitle>
                   <TabTitle>Tab 2</TabTitle>
                   <TabTitle>Tab 3</TabTitle>
+                </TabNav>
+                <TabContents>
+                  <TabSection>Tab 1 content</TabSection>
+                  <TabSection>Tab 2 content</TabSection>
+                  <TabSection>Tab 3 content</TabSection>
+                </TabContents>
+              </Tabs>
+            </GuideExample>
+          );
+        }
+      }
+
+      TabStory.propTypes = {
+        isStory: PropTypes.bool
+      };
+      return <TabStory />;
+    })
+  )
+  .add(
+    'Styled Tabs',
+    withInfo({
+      text: doc,
+      propTables: [Tabs, TabNav, TabTitle, TabContents, TabSection]
+    })(() => {
+      const StyledTabTitle = styled(TabTitle)`
+        flex: 1 0 0px;
+        text-align: center;
+      `;
+
+      class TabStory extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            activeTabIndex: 0
+          };
+        }
+
+        onTabChange = index => {
+          this.setState({ activeTabIndex: index });
+        };
+
+        render() {
+          return (
+            <GuideExample>
+              <Tabs
+                onTabChange={this.onTabChange}
+                activeTabIndex={this.state.activeTabIndex}
+              >
+                <TabNav>
+                  <StyledTabTitle>Tab 1</StyledTabTitle>
+                  <StyledTabTitle>Tab 2</StyledTabTitle>
+                  <StyledTabTitle>Tab 3</StyledTabTitle>
                 </TabNav>
                 <TabContents>
                   <TabSection>Tab 1 content</TabSection>

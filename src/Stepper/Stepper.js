@@ -3,11 +3,13 @@ import React from 'react';
 
 import { StyledStepper } from './Stepper-styled';
 
+import { getChildType } from '../utils/helpers';
+
 const Stepper = ({ children, currentStep, small, vertical, ...other }) => {
   const childArray = React.Children.toArray(children);
   let currentChildStepNumber = 0;
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type && child.type.displayName) {
+    switch (getChildType(child)) {
       case 'Step':
         currentChildStepNumber++;
 

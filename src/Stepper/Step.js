@@ -4,6 +4,8 @@ import React from 'react';
 import { StyledStep, StyledStepTextContainer } from './Stepper-styled';
 import StepIcon from './StepIcon';
 
+import { getChildType } from '../utils/helpers';
+
 const Step = ({
   children,
   stepNumber,
@@ -17,7 +19,7 @@ const Step = ({
 }) => {
   const childArray = React.Children.toArray(children);
   const childrenWithProps = childArray.map((child, i) => {
-    switch (child.type && child.type.displayName) {
+    switch (getChildType(child)) {
       case 'StepTitle':
         return React.cloneElement(child, {
           active,
