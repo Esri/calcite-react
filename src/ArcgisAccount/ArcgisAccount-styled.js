@@ -104,7 +104,9 @@ const StyledArcgisAccountContentMenu = styled.div`
   align-items: flex-start;
 `;
 
-const StyledArcgisAccountSignInMenu = styled.div``;
+const StyledArcgisAccountSignInMenu = styled.div`
+  display: flex;
+`;
 
 const StyledArcgisAccountMenuItem = styled.a`
   cursor: pointer;
@@ -141,10 +143,13 @@ const StyledArcgisAccountMenuItem = styled.a`
 `;
 
 const StyledSwitchAccountButton = styled(Button)`
+  flex: 1 0 50px;
   border-radius: 0 0 0 ${props => props.theme.borderRadius};
 `;
 
 const StyledSignOutButton = styled(Button)`
+  flex: 1 0 50px;
+  margin-left: 0;
   border-radius: 0 0 ${props => props.theme.borderRadius} 0;
 `;
 
