@@ -13,6 +13,8 @@ import cardImageCircle from '../../../docz/images/bridge-circle.png';
 import Card, { CardTitle, CardContent, CardImage } from '../';
 import Button from '../../Button';
 
+import CardPropsTable from './Card-propsTable';
+
 # Card
 
 A card is a sheet of material that serves as an entry point to more detailed
@@ -21,7 +23,7 @@ information.
 ## Basic Usage
 
 <Playground>
-  <Card style={{ maxWidth: '320px' }}>
+  <Card style={{ maxWidth: '320px' }} ref={e => e}>
     <CardImage
       src={cardImage}
       caption="Florida, January 1954"
@@ -143,7 +145,7 @@ information.
 
 ### Card
 
-<PropsTable of={Card} />
+<PropsTable of={CardPropsTable} />
 
 ### CardContent
 
