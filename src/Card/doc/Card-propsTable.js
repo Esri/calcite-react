@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { createContext, forwardRef } from 'react';
-import { StyledCard } from './Card-styled';
+import React, { createContext } from 'react';
+import { StyledCard } from '../Card-styled';
 
 const CardContext = createContext({
   cardContext: {
@@ -9,7 +9,7 @@ const CardContext = createContext({
   }
 });
 
-const Card = forwardRef(({ children, shaped, wide, ...other }, ref) => {
+const Card = ({ children, shaped, wide, ...other }) => {
   const cardContext = {
     shaped,
     wide
@@ -17,12 +17,12 @@ const Card = forwardRef(({ children, shaped, wide, ...other }, ref) => {
 
   return (
     <CardContext.Provider value={{ cardContext }}>
-      <StyledCard shaped={shaped} wide={wide} ref={ref} {...other}>
+      <StyledCard shaped={shaped} wide={wide} {...other}>
         {children}
       </StyledCard>
     </CardContext.Provider>
   );
-});
+};
 
 Card.propTypes = {
   /** Description TBD */

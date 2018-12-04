@@ -64,8 +64,8 @@ class ArcgisAccount extends Component {
       );
     } else {
       return (
-        <Avatar size={size} fontSize={size * 0.7}>
-          <UserIcon />
+        <Avatar size={size}>
+          <UserIcon size={size * 0.7} />
         </Avatar>
       );
     }
@@ -79,7 +79,7 @@ class ArcgisAccount extends Component {
       onRequestSwitchAccount,
       onRequestSignOut,
       children,
-
+      hideSwitchAccount,
       ...other
     } = this.props;
 
@@ -105,6 +105,7 @@ class ArcgisAccount extends Component {
           portal={portal}
           avatar={this._getAvatar(user, token, 120)}
           style={{ width: '410px' }}
+          hideSwitchAccount={hideSwitchAccount}
           onRequestSwitchAccount={onRequestSwitchAccount}
           onRequestSignOut={onRequestSignOut}
         >
@@ -122,13 +123,18 @@ ArcgisAccount.propTypes = {
   portal: PropTypes.object.isRequired,
   /** AGOL login token */
   token: PropTypes.string,
+  /** Hide the button to switch accounts in the menu */
+  hideSwitchAccount: PropTypes.bool,
   /** Callback when the user selects the Switch Account button */
   onRequestSwitchAccount: PropTypes.func,
   /** Callback when the user selects the Sign Out button */
   onRequestSignOut: PropTypes.func
 };
 
-ArcgisAccount.defaultProps = {};
+ArcgisAccount.defaultProps = {
+  onRequestSwitchAccount: () => {},
+  onRequestSignOut: () => {}
+};
 
 ArcgisAccount.displayName = 'ArcgisAccount';
 

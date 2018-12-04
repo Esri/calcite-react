@@ -28,12 +28,28 @@ const ArcgisAccountMenu = ({
   user,
   portal,
   avatar,
+  hideSwitchAccount,
   switchAccountLabel,
   signOutLabel,
   onRequestSwitchAccount,
   onRequestSignOut,
   ...other
 }) => {
+  function getSwitchAccountBtn() {
+    if (!hideSwitchAccount) {
+      return (
+        <StyledSwitchAccountButton
+          grouped
+          extraLarge
+          onClick={onRequestSwitchAccount}
+        >
+          {switchAccountLabel}
+        </StyledSwitchAccountButton>
+      );
+    }
+    return;
+  }
+
   return (
     <StyledArcgisAccountMenu {...other}>
       <StyledArcgisAccountContent>
@@ -41,21 +57,8 @@ const ArcgisAccountMenu = ({
         <ArcgisAccountContentMenu>{children}</ArcgisAccountContentMenu>
       </StyledArcgisAccountContent>
       <StyledArcgisAccountSignInMenu>
-        <StyledSwitchAccountButton
-          grouped
-          half
-          extraLarge
-          onClick={onRequestSwitchAccount}
-        >
-          {switchAccountLabel}
-        </StyledSwitchAccountButton>
-        <StyledSignOutButton
-          halo
-          grouped
-          half
-          extraLarge
-          onClick={onRequestSignOut}
-        >
+        {getSwitchAccountBtn()}
+        <StyledSignOutButton halo grouped extraLarge onClick={onRequestSignOut}>
           {signOutLabel}
         </StyledSignOutButton>
       </StyledArcgisAccountSignInMenu>
