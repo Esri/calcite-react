@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { CalciteTheme } from '../CalciteThemeProvider';
 import { unitCalc } from '../utils/helpers';
 import StarIcon from 'calcite-ui-icons-react/StarIcon';
+import { Legend } from '../Form';
 
 const StyledArcgisShare = styled.div``;
 
@@ -36,11 +37,16 @@ const StyledStarIcon = styled(StarIcon)`
   margin-left: 2px;
 `;
 
+const StyledLegend = styled(Legend)`
+  font-size: 1rem;
+`;
+
 export {
   StyledArcgisShare,
   StyledGroupContainer,
   PrimaryCheckboxLabelStyles,
   GroupCheckboxLabelStyles,
   GroupFieldsetStyles,
-  StyledStarIcon
+  StyledStarIcon,
+  StyledLegend
 };
