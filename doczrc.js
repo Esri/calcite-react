@@ -1,10 +1,13 @@
 import { css } from 'docz-plugin-css';
 import DoczCalcitetheme from './docz/DoczCalciteTheme';
+import doczPluginNetlify from 'docz-plugin-netlify';
 
 export default {
   plugins: [
     // Enable CSS in mdx files (necessary for Toastify external CSS)
-    css()
+    css(),
+    // Enable Netlify plugin to properly resolve routes
+    doczPluginNetlify()
   ],
 
   htmlContext: {
