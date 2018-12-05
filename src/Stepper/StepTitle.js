@@ -8,7 +8,7 @@ const StepTitle = ({ children, ...other }) => {
 };
 
 StepTitle.propTypes = {
-  /** Description TBD */
+  /** The text content of the component */
   children: PropTypes.node
 };
 

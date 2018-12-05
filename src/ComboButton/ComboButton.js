@@ -37,7 +37,6 @@ class ComboButton extends Component {
       label,
       icon,
       iconPosition,
-
       ...other
     } = this.props;
 
@@ -83,29 +82,33 @@ class ComboButton extends Component {
 }
 
 ComboButton.propTypes = {
-  /** Description TBD */
-  type: PropTypes.oneOf(['button', 'reset', 'submit']),
-  /** Description TBD */
+  /** The content of the component, should be a Menu with MenuItems for the dropdown */
   children: PropTypes.node,
-  /** Description TBD */
+  /** The html type property of the primary button */
+  type: PropTypes.oneOf(['button', 'reset', 'submit']),
+  /** Style prop used to render a clear button */
   clear: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a clear-gray button */
   clearGray: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render an extra small button */
+  extraSmall: PropTypes.bool,
+  /** Style prop used to render a small button */
   small: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a large button */
   large: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render an extra large button */
+  extraLarge: PropTypes.bool,
+  /** Style prop used to render a 100% width button */
   fullWidth: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a 50% width button */
   half: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a red button */
   red: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a green button */
   green: PropTypes.bool,
-  /** Description TBD */
+  /** The html disabled property of the primary button */
   disabled: PropTypes.bool,
-  /** Description TBD */
+  /** The html href property of the primary button, results in rendering an anchor element */
   href: PropTypes.string,
   /** The icon that will be displayed as the content of a ComboButton */
   icon: PropTypes.node,

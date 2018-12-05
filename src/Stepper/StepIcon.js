@@ -90,11 +90,8 @@ const StepIcon = ({
 };
 
 StepIcon.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
-  small: PropTypes.bool,
-  complete: PropTypes.bool,
-  error: PropTypes.bool
+  /** The content of the component */
+  children: PropTypes.node
 };
 
 StepIcon.defaultProps = {};

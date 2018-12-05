@@ -59,38 +59,44 @@ const Button = ({
 };
 
 Button.propTypes = {
-  /** Description TBD */
-  type: PropTypes.oneOf(['button', 'reset', 'submit']),
-  /** Description TBD */
+  /** The content of the component, text or icon */
   children: PropTypes.node,
-  /** Description TBD */
+  /** The html type property of the Button */
+  type: PropTypes.oneOf(['button', 'reset', 'submit']),
+  /** Style prop used to render a transparent button */
   transparent: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a clear button */
   clear: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a clear-gray button */
   clearGray: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a clear-white button */
   clearWhite: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a white button */
   white: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render an extra small button */
+  extraSmall: PropTypes.bool,
+  /** Style prop used to render a small button */
   small: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a large button */
   large: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render an extra large button */
+  extraLarge: PropTypes.bool,
+  /** Style prop used to render a 100% width button */
   fullWidth: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a 50% width button */
   half: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a red button */
   red: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop used to render a green button */
   green: PropTypes.bool,
-  /** Description TBD */
+  /** The html disabled property of the Button */
   disabled: PropTypes.bool,
-  /** Description TBD */
+  /** The html href property of the Button */
   href: PropTypes.string,
   /** The icon that will be displayed as the content of a Button */
   icon: PropTypes.node,
+  /** A style prop used to adjust size and padding of buttons with only an icon as its content */
+  iconButton: PropTypes.bool,
   /** The position of the icon in relation to other children in a Button */
   iconPosition: PropTypes.oneOf(['after', 'before'])
 };

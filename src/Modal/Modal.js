@@ -49,7 +49,7 @@ const Modal = ({
 };
 
 Modal.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node,
   /** Boolean describing if the modal should be shown or not. */
   open: PropTypes.bool,

@@ -8,7 +8,7 @@ const SideNavLink = ({ children, ...other }) => {
 };
 
 SideNavLink.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node
 };
 

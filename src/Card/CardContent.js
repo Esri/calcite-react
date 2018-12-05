@@ -17,12 +17,8 @@ const CardContent = ({ children, ...other }) => {
 };
 
 CardContent.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
-  /** Description TBD */
-  wide: PropTypes.bool,
-  /** Description TBD */
-  shaped: PropTypes.bool
+  /** The content of the component */
+  children: PropTypes.node
 };
 
 CardContent.defaultProps = {};

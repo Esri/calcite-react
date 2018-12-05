@@ -8,7 +8,7 @@ const SubNavList = ({ children, ...other }) => {
 };
 
 SubNavList.propTypes = {
-  /** Description TBD */
+  /** The content of the component, should be SubNavLinks */
   children: PropTypes.node
 };
 

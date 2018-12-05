@@ -45,7 +45,7 @@ const Avatar = ({
 };
 
 Avatar.propTypes = {
-  /** Description TBD */
+  /** The content of the component, can take text, an image, or an icon */
   children: PropTypes.node,
   /** The src attribute for the img element */
   src: PropTypes.string,

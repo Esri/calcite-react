@@ -31,7 +31,7 @@ const Accordion = ({
 };
 
 Accordion.propTypes = {
-  /** Description TBD */
+  /** Used to render AccordionSections inside the Accordion */
   children: PropTypes.node,
   /** Indexes of the sections that are supposed to be active */
   activeSectionIndexes: PropTypes.array

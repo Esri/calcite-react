@@ -17,7 +17,7 @@ const Form = ({ children, noValidation, ...other }) => {
 };
 
 Form.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node,
   /** Display prop to make forms align items horizontally instead of vertically */
   horizontal: PropTypes.bool,

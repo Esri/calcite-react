@@ -93,7 +93,7 @@ const Radio = ({
 };
 
 Radio.propTypes = {
-  /** Description TBD */
+  /** The text label for the Radio */
   children: PropTypes.node,
   /** The form value for this checkbox */
   value: PropTypes.string,

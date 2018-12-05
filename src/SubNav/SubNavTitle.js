@@ -18,10 +18,8 @@ const SubNavTitle = ({ children, ...other }) => {
 };
 
 SubNavTitle.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
-  /** Description TBD */
-  blue: PropTypes.bool
+  /** The text content of the component */
+  children: PropTypes.node
 };
 
 SubNavTitle.defaultProps = {};
