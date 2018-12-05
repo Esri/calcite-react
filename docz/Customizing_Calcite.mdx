@@ -1,0 +1,83 @@
+---
+name: Customization & Theme
+route: /customizing
+---
+
+# Customizing Calcite-React
+
+## Extending Components
+
+You can extend calcite-react components using the syntax provided by [`styled-components`](https://www.styled-components.com/docs/basics#extending-styles). CSS properties will overwrite the defaults on the calcite-react component.
+
+```jsx
+import styled, { css } from 'styled-components';
+
+import Button from 'calcite-react/Button';
+
+const ExtendedButton = styled(Button)`
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+`;
+
+const App = () => {
+  return <ExtendedButton>My Own Custom Button</ExtendedButton>;
+};
+
+export default App;
+```
+
+### Component Theme and Custom Props
+
+As part of extending calcite components you also gain access to the full theme object used in styling our components, including: colors, baseline measurements, border-radius etc.
+```jsx
+const ExtendedButton = styled(Button)`
+  color: ${props => props.theme.palette.offWhite};
+`;
+```
+
+You can also conditionally add styles based on props you pass into your new custom component
+```jsx
+const ExtendedButton = styled(Button)`
+  ${props => props.active && css`
+      background: ${props.theme.palette.darkBlue};
+      color: ${props.theme.palette.white};
+    `;
+  };
+`;
+
+const App = () => {
+  return <ExtendedButton>My Own Custom Button</ExtendedButton>;
+};
+
+export default App;
+```
+
+## Theming
+
+Some minor theme editing is possible with calcite-react by extending the `CalciteTheme` config before passing it into the `<CalciteThemeProvider />`. The default theme can be found on [github](https://github.com/ArcGIS/calcite-react/blob/develop/src/theme/CalciteTheme.js).
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import App from 'path/to/App';
+
+import CalciteThemeProvider, {
+  CalciteTheme
+} from 'calcite-react/CalciteThemeProvider';
+
+const CustomTheme = {
+  ...CalciteTheme,
+  palette: {
+    ...CalciteTheme.palette,
+    blue: '#1E5D8C'
+  }
+};
+
+ReactDOM.render(
+  <CalciteThemeProvider theme={CustomTheme}>
+    <App />
+  </CalciteThemeProvider>,
+  document.getElementById('root')
+);
+```

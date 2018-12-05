@@ -1,0 +1,79 @@
+---
+name: Calcite Icons
+route: /icons
+---
+
+import { Playground } from 'docz';
+
+import LayerBasemapIcon from 'calcite-ui-icons-react/LayerBasemapIcon';
+import MagnifyingGlassIcon from 'calcite-ui-icons-react/MagnifyingGlassIcon';
+import GlobeIcon from 'calcite-ui-icons-react/GlobeIcon';
+
+# Calcite Icons
+
+## Icons as React Components
+
+Calcite-react uses the icons provided by [calcite-ui-icons](https://github.com/Esri/calcite-ui-icons)
+to render elements in some components. Calcite-react also comes packaged with the
+[calcite-ui-icons-react](https://www.npmjs.com/package/calcite-ui-icons-react) to
+make it a little easier to use icons in your react project. You can [browse the icon set](https://esri.github.io/calcite-ui-icons/)
+to see which icon works for you.
+
+## Basic Usage
+
+### Importing Icons
+The name of the React component you will import is simply the icon name in PascalCase suffixed with `Icon`.
+
+```jsx
+/* layer-basemap becomes LayerBasemapIcon */
+import LayerBasemapIcon from 'calcite-ui-icons-react/LayerBasemapIcon';
+
+<LayerBasemapIcon />
+```
+
+### Size
+
+The icons can take a `size` prop to adjust the rendered size of the icon. Calcite-ui-icons
+has three sizes for every icon, we automatically select an icon for you based on the size
+you specify.
+
+<Playground>
+  <LayerBasemapIcon size={16} />
+  <LayerBasemapIcon size={24} />
+  <LayerBasemapIcon size={32} />
+  <LayerBasemapIcon size={64} />
+</Playground>
+
+### Outline vs. Filled
+
+The icons also allow for you to specify whether it should use the outline style or the
+`filled` style. Outline is the default for all calcite-icons
+
+<Playground>
+  <MagnifyingGlassIcon />
+  <MagnifyingGlassIcon filled />
+</Playground>
+
+### Color
+
+All components accept a color prop, which will be applied to the fill attribute on the 
+`svg` element. This means any valid CSS color value can be used 
+(e.g. "red", "#e34f2c", "rgba(255, 0, 0, 0.5)"). If a color prop is not found, 
+we will set it to "currentColor".
+
+<Playground>
+  <GlobeIcon color="red" />
+  <GlobeIcon filled color="#1d5d8c" />
+  <GlobeIcon filled color="rgba(155, 30, 95, 0.5)" />
+</Playground>
+
+### Gotchas
+
+Since JavaScript variables cannot start with a number - we convert any icon name that begins with a number so that the word (or words, in PascalCase) are used instead.
+
+Currently, there are only two such cases:
+
+| Calcite UI Icons name | React Component Name |
+| --------------------- | -------------------- |
+| `2d-explore`          | `TwoDExplore`        |
+| `3d-glasses`          | `ThreeDGlasses`      |
