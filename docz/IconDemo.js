@@ -39,15 +39,15 @@ export default class IconDemo extends Component {
               value={this.state.size}
               style={{ width: '150px' }}
               onChange={e =>
-                this.setState({ size: e.target.valueAsNumber || undefined })
+                this.setState({ size: e.target.value || undefined })
               }
             />
             <Slider
               min={0}
               max={500}
-              value={this.state.size}
+              value={parseInt(this.state.size, 10)}
               onChange={e =>
-                this.setState({ size: e.target.valueAsNumber || undefined })
+                this.setState({ size: e.target.value || undefined })
               }
             />
           </FormControl>
