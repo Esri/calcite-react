@@ -13,29 +13,28 @@ import GlobeIcon from 'calcite-ui-icons-react/GlobeIcon';
 
 ## Icons as React Components
 
-Calcite React uses the icons provided by [calcite-ui-icons](https://github.com/Esri/calcite-ui-icons)
-to render elements in some components. Calcite React also comes packaged with the
-[calcite-ui-icons-react](https://www.npmjs.com/package/calcite-ui-icons-react) to
-make it a little easier to use icons in your react project. You can [browse the icon set](https://esri.github.io/calcite-ui-icons/)
-to see which icon works for you.
+Calcite includes an iconset known as [Calcite UI Icons](https://esri.github.io/calcite-ui-icons).
+To make these icons easier to use in React, we use a library ([calcite-ui-icons-react](https://www.npmjs.com/package/calcite-ui-icons-react))
+that creates React components from the SVG icons.
 
 ## Basic Usage
 
 ### Importing Icons
+
 The name of the React component you will import is simply the icon name in PascalCase suffixed with `Icon`.
 
 ```jsx
 /* layer-basemap becomes LayerBasemapIcon */
 import LayerBasemapIcon from 'calcite-ui-icons-react/LayerBasemapIcon';
 
-<LayerBasemapIcon />
+<LayerBasemapIcon />;
 ```
 
 ### Size
 
-The icons can take a `size` prop to adjust the rendered size of the icon. Calcite-ui-icons
-has three sizes for every icon, we automatically select an icon for you based on the size
-you specify.
+The icons can take a `size` prop to adjust the rendered size of the icon.
+Calcite UI Icons has three unique SVGs for varying sizes for every icon, and we
+automatically select an icon for you based on the size you specify.
 
 <Playground>
   <LayerBasemapIcon size={16} />
@@ -46,8 +45,8 @@ you specify.
 
 ### Outline vs. Filled
 
-The icons also allow for you to specify whether it should use the outline style or the
-`filled` style. Outline is the default for all calcite-icons
+Icons allow you to specify whether they should use the outline style or the
+`filled` style. Outline is the default for all Calcite UI Icons.
 
 <Playground>
   <MagnifyingGlassIcon />
@@ -56,9 +55,9 @@ The icons also allow for you to specify whether it should use the outline style 
 
 ### Color
 
-All components accept a color prop, which will be applied to the fill attribute on the 
-`svg` element. This means any valid CSS color value can be used 
-(e.g. "red", "#e34f2c", "rgba(255, 0, 0, 0.5)"). If a color prop is not found, 
+All icons accept a color prop, which will be applied to the fill attribute on
+the `svg` element. This means any valid CSS color value can be used
+(e.g. "red", "#e34f2c", "rgba(255, 0, 0, 0.5)"). If a color prop is not found,
 we will set it to "currentColor".
 
 <Playground>
@@ -69,7 +68,9 @@ we will set it to "currentColor".
 
 ### Gotchas
 
-Since JavaScript variables cannot start with a number - we convert any icon name that begins with a number so that the word (or words, in PascalCase) are used instead.
+Since JavaScript variables cannot start with a number - we convert any icon name
+that begins with a number so that the word (or words, in PascalCase) are used
+instead.
 
 Currently, there are only two such cases:
 

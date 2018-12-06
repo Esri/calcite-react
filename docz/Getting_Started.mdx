@@ -22,7 +22,11 @@ npm i calcite-react
 
 ### Theme Provider
 
-Calcite-react components rely on `<CalciteThemeProvider />` to access our theme. All Calcite components must be wrapped in this context provider in order to render properly, as such it's recommended to wrap your entire app at the highest level.
+Calcite React components rely on `<CalciteThemeProvider />` to access our theme
+via [React Context](https://reactjs.org/docs/context.html). All Calcite React
+components must be wrapped in this provider component in order to render
+properly. In most cases, it's recommended to wrap your entire app at the highest
+level.
 
 ```jsx
 import React from 'react';
@@ -41,6 +45,8 @@ ReactDOM.render(
 ```
 
 ### Components
+
+Below is a simple example of importing and using two Calcite React components.
 
 ```jsx
 import React, { Component } from 'react';
