@@ -8,9 +8,9 @@ const TopNavTitle = ({ children, ...other }) => {
 };
 
 TopNavTitle.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node,
-  /** Description TBD */
+  /** The html href property of the TopNavTitle */
   href: PropTypes.string
 };
 

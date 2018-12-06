@@ -91,7 +91,7 @@ const Switch = ({
 };
 
 Switch.propTypes = {
-  /** Description TBD */
+  /** The text label of the Switch */
   children: PropTypes.node,
   /** The name to be shared among checkboxes in a group */
   name: PropTypes.string,

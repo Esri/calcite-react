@@ -17,7 +17,7 @@ const Legend = ({ children, ...other }) => {
 };
 
 Legend.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node,
   /** Display prop to make this element align items horizontally instead of vertically */
   horizontal: PropTypes.bool

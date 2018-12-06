@@ -21,7 +21,7 @@ const FormHelperText = ({ children, ...other }) => {
 };
 
 FormHelperText.propTypes = {
-  /** Description TBD */
+  /** The text content of the component */
   children: PropTypes.node,
   /** The form helper text should display as an error */
   error: PropTypes.bool,

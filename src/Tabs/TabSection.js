@@ -8,16 +8,8 @@ const TabSection = ({ children, ...other }) => {
 };
 
 TabSection.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
-  /** Gray style TabSection */
-  gray: PropTypes.bool,
-  /** Transparent style TabSection */
-  transparent: PropTypes.bool,
-  /** Translucent style TabSection */
-  translucent: PropTypes.bool,
-  /** Dark style TabSection */
-  dark: PropTypes.bool
+  /** The content of the component */
+  children: PropTypes.node
 };
 
 TabSection.displayName = 'TabSection';

@@ -29,9 +29,9 @@ const Fieldset = ({ children, name, ...other }) => {
 };
 
 Fieldset.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node,
-  /** Description TBD */
+  /** The html name property applied to the radios and checkboxes contained */
   name: PropTypes.string.isRequired
 };
 

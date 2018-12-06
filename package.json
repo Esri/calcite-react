@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "aphrodite": "^2.2.3",
-    "calcite-ui-icons-react": "^0.1.4",
+    "calcite-ui-icons-react": "^0.2.0",
     "docz": "^0.12.13",
     "downshift": "^3.1.1",
     "match-sorter": "^2.3.0",

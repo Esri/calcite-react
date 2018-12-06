@@ -26,10 +26,8 @@ const AccordionTitle = ({
 };
 
 AccordionTitle.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
-  active: PropTypes.bool,
-  onClick: PropTypes.func
+  /** The content of the component */
+  children: PropTypes.node
 };
 
 AccordionTitle.defaultProps = {

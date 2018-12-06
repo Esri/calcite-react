@@ -7,9 +7,8 @@ const AccordionContent = ({ children, ...other }) => {
 };
 
 AccordionContent.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
-  active: PropTypes.bool
+  /** The content of the component, can be a node or string */
+  children: PropTypes.node
 };
 
 AccordionContent.defaultProps = {};

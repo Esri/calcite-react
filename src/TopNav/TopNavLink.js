@@ -12,9 +12,9 @@ const TopNavLink = ({ children, href, ...other }) => {
 };
 
 TopNavLink.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node,
-  /** Description TBD */
+  /** The html href property of the link, if this property is missing the component will render as a span */
   href: PropTypes.string
 };
 

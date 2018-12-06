@@ -18,7 +18,7 @@ const ListHeader = ({ children, ...other }) => {
 };
 
 ListHeader.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node
 };
 

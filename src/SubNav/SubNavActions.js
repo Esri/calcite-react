@@ -8,7 +8,7 @@ const SubNavActions = ({ children, ...other }) => {
 };
 
 SubNavActions.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node
 };
 

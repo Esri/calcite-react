@@ -74,14 +74,23 @@ const DateRangePicker = ({
 };
 
 DateRangePicker.propTypes = {
+  /** The currently selected moment date object for the start date */
   startDate: momentPropTypes.momentObj,
+  /** Id provided to the start date text field */
   startDateId: PropTypes.string.isRequired,
+  /** The currently selected moment date object for the end date */
   endDate: momentPropTypes.momentObj,
+  /** Id provided to the end date text field */
   endDateId: PropTypes.string.isRequired,
+  /** Callback function when the start or end date is changed */
   onDatesChange: PropTypes.func.isRequired,
+  /** The name of the currently focused text field */
   focusedInput: PropTypes.oneOf(['startDate', 'endDate']),
+  /** Callback function when the focused input is changed */
   onFocusChange: PropTypes.func.isRequired,
+  /** Placeholder text for the start date text field */
   startDatePlaceholderText: PropTypes.string,
+  /** Placeholder text for the end date text field */
   endDatePlaceholderText: PropTypes.string
 };
 

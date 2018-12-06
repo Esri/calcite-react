@@ -38,7 +38,9 @@ Alert.propTypes = {
   onClose: PropTypes.func
 };
 
-Alert.defaultProps = {};
+Alert.defaultProps = {
+  onClose: () => {}
+};
 
 Alert.displayName = 'Alert';
 

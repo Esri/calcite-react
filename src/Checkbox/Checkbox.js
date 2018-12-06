@@ -49,9 +49,8 @@ const Checkbox = ({
       if (setFieldValue) {
         setFieldValue(name, e.target.checked);
       }
-      if (onChange) {
-        onChange(e);
-      }
+
+      onChange(e);
     }
   };
 
@@ -101,7 +100,7 @@ const Checkbox = ({
 };
 
 Checkbox.propTypes = {
-  /** Description TBD */
+  /** The label text of the Checkbox */
   children: PropTypes.node,
   /** The form value for this checkbox */
   value: PropTypes.string,
@@ -115,7 +114,9 @@ Checkbox.propTypes = {
   onChange: PropTypes.func
 };
 
-Checkbox.defaultProps = {};
+Checkbox.defaultProps = {
+  onChange: () => {}
+};
 
 Checkbox.displayName = 'Checkbox';
 
