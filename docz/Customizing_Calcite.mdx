@@ -40,20 +40,24 @@ const ExtendedButton = styled(Button)`
 `;
 ```
 
+### Custom Props
+
 You can also conditionally add styles based on props you pass into your new
 custom component.
 
 ```jsx
+import styled, { css } from 'styled-components';
+
 const ExtendedButton = styled(Button)`
   ${props => props.active && css`
-      background: ${props.theme.palette.darkBlue};
-      color: ${props.theme.palette.white};
+      background: #1d5d8c;
+      color: white;
     `;
   };
 `;
 
 const App = () => {
-  return <ExtendedButton>My Custom Button</ExtendedButton>;
+  return <ExtendedButton active >My Custom Button</ExtendedButton>;
 };
 
 export default App;
