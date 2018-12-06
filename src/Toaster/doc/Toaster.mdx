@@ -8,14 +8,37 @@ import GuideExample from '../../../docz/GuideExample';
 import { Slide, Zoom, Flip } from 'react-toastify';
 
 import Button from '../../Button';
-import Toaster from '../';
+import Toaster, {ToastContainer} from '../';
 
 import ToasterExampleComponent from './ToasterExampleComponent';
 
 # Toaster
 
-Calcite-React Toaster extends the react-toastify library. View the documentation
-to see available props https://github.com/fkhadra/react-toastify.
+Calcite React `Toaster` extends the react-toastify library. View the
+[documentation](https://github.com/fkhadra/react-toastify) to see available props.
+
+#### ⚠️ Important Usage Note ⚠️ 
+
+The `Toaster` requires a supporting component called `ToastContainer` to render properly. 
+Only one `ToastContainer` is allowed per project and it must be higher in the component
+tree than any of the `Toaster`'s you're using.
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import App from 'path/to/App';
+
+import CalciteThemeProvider from 'calcite-react/CalciteThemeProvider';
+import { ToastContainer } from 'calcite-react/Toaster';
+
+ReactDOM.render(
+  <CalciteThemeProvider>
+    <ToastContainer />
+    <App />
+  </CalciteThemeProvider>,
+  document.getElementById('root')
+);
+```
 
 ## Basic Usage
 
@@ -213,60 +236,6 @@ to see available props https://github.com/fkhadra/react-toastify.
                   autoClose={false}
                 >
                   error
-                </Toaster>
-              </div>
-            </React.Fragment>
-          );
-        }
-      }
-
-      return <ToasterStory />;
-    }}
-
-</Playground>
-
-## Component in Content
-
-<Playground>
-  {() => {
-      class ToasterStory extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            toasterOpen: false
-          };
-
-          this.showToaster = this.showToaster.bind(this);
-          this.hideToaster = this.hideToaster.bind(this);
-        }
-
-        showToaster() {
-          this.setState({
-            toasterOpen: true
-          });
-        };
-
-        hideToaster() {
-          this.setState({
-            toasterOpen: false
-          });
-        };
-
-        render() {
-          return (
-            <React.Fragment>
-              <div>
-                <Button onClick={this.showToaster}>Show Toaster</Button>
-                <Toaster
-                  open={this.state.toasterOpen}
-                  onClose={this.hideToaster}
-                >
-                  <ToasterExampleComponent
-                    onInfoClick={e => {
-                      alert('info clicked');
-                      e.stopPropagation();
-                    }}
-                  />
                 </Toaster>
               </div>
             </React.Fragment>
@@ -490,6 +459,103 @@ to see available props https://github.com/fkhadra/react-toastify.
 
 </Playground>
 
+## Component in Content
+
+You can use any text, node or component as the content of a `Toaster`. Below is an example
+using a custom component with an info icon button to add some more functionality to the
+`Toaster`.
+
+##### ToasterExampleComponent.js
+```
+import React from 'react';
+import styled from 'styled-components';
+
+import Button from '../../Button';
+import Tooltip from '../../Tooltip';
+
+import InformationIcon from 'calcite-ui-icons-react/InformationIcon';
+
+const StyledToasterExample = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const ToasterExampleComponent = props => {
+  return (
+    <StyledToasterExample>
+      <span>A Toaster Was Added</span>
+      <Tooltip title="More Info" placement="left">
+        <Button
+          onClick={props.onInfoClick}
+          type="button"
+          iconButton
+          icon={<InformationIcon />}
+        />
+      </Tooltip>
+    </StyledToasterExample>
+  );
+};
+
+export default ToasterExampleComponent;
+```
+
+<Playground>
+  {() => {
+      class ToasterStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            toasterOpen: false
+          };
+
+          this.showToaster = this.showToaster.bind(this);
+          this.hideToaster = this.hideToaster.bind(this);
+        }
+
+        showToaster() {
+          this.setState({
+            toasterOpen: true
+          });
+        };
+
+        hideToaster() {
+          this.setState({
+            toasterOpen: false
+          });
+        };
+
+        render() {
+          return (
+            <React.Fragment>
+              <Button onClick={this.showToaster}>Show Toaster</Button>
+              <Toaster
+                open={this.state.toasterOpen}
+                onClose={this.hideToaster}
+              >
+                <ToasterExampleComponent
+                  onInfoClick={e => {
+                    alert('info clicked');
+                    e.stopPropagation();
+                  }}
+                />
+              </Toaster>
+            </React.Fragment>
+          );
+        }
+      }
+
+      return <ToasterStory />;
+    }}
+
+</Playground>
+
 ## Props
 
+### Toaster `default`
+
 <PropsTable of={Toaster} />
+
+### ToastContainer
+
+<PropsTable of={ToastContainer} />

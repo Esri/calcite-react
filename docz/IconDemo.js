@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import TextField from '../src/TextField';
-import Checkbox from '../src/Checkbox';
+import Switch from '../src/Switch';
 import Slider from '../src/Slider';
 import Form, { FormControl, FormControlLabel } from '../src/Form';
 
@@ -20,7 +20,7 @@ export default class IconDemo extends Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <Form horizontal>
           <FormControl>
             <FormControlLabel>Color:</FormControlLabel>
@@ -28,9 +28,7 @@ export default class IconDemo extends Component {
               type="text"
               value={this.state.color}
               style={{ width: '150px' }}
-              onChange={e =>
-                this.setState({ color: e.target.value || undefined })
-              }
+              onChange={e => this.setState({ color: e.target.value || '' })}
             />
           </FormControl>
 
@@ -41,7 +39,7 @@ export default class IconDemo extends Component {
               value={this.state.size}
               style={{ width: '150px' }}
               onChange={e =>
-                this.setState({ size: e.target.value || undefined })
+                this.setState({ size: e.target.valueAsNumber || undefined })
               }
             />
             <Slider
@@ -49,20 +47,20 @@ export default class IconDemo extends Component {
               max={500}
               value={this.state.size}
               onChange={e =>
-                this.setState({ size: e.target.value || undefined })
+                this.setState({ size: e.target.valueAsNumber || undefined })
               }
             />
           </FormControl>
 
           <FormControl>
             <FormControlLabel>Filled:</FormControlLabel>
-            <Checkbox
+            <Switch
               checked={this.state.filled}
               onChange={e => this.setState({ filled: e.target.checked })}
             />
           </FormControl>
         </Form>
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', height: '220px', overflow: 'auto' }}>
           <BananaIcon
             size={this.state.size}
             color={this.state.color}
@@ -89,7 +87,7 @@ export default class IconDemo extends Component {
             filled={this.state.filled}
           />
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
