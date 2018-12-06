@@ -23,7 +23,7 @@ const FormControlLabel = ({ children, htmlFor, ...other }) => {
 };
 
 FormControlLabel.propTypes = {
-  /** Description TBD */
+  /** The text content of the component */
   children: PropTypes.node,
   /** The for property to be applied to the label, should match a form element id */
   htmlFor: PropTypes.string,

@@ -48,13 +48,8 @@ const TabContents = ({
 };
 
 TabContents.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
-  activeTabIndex: PropTypes.number,
-  gray: PropTypes.bool,
-  transparent: PropTypes.bool,
-  translucent: PropTypes.bool,
-  dark: PropTypes.bool
+  /** The content of the component, should be a number of TabSections */
+  children: PropTypes.node
 };
 
 TabContents.displayName = 'TabContents';

@@ -49,7 +49,7 @@ const FormControl = ({
 };
 
 FormControl.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node,
   /** The form control should show an error */
   error: PropTypes.bool,

@@ -25,13 +25,13 @@ const Card = ({ children, shaped, wide, ...other }) => {
 };
 
 Card.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node,
-  /** Description TBD */
+  /** Style prop to show a colored bar across the top of the Card, can take a string for any color name in EsriColors */
   bar: PropTypes.string,
-  /** Description TBD */
+  /** Style prop to add a shape mask to the CardImage */
   shaped: PropTypes.bool,
-  /** Description TBD */
+  /** Style prop to position Card content horizontally and fill the width of its container */
   wide: PropTypes.bool
 };
 

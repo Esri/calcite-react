@@ -26,19 +26,8 @@ const TabTitle = ({
 };
 
 TabTitle.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
-  index: PropTypes.number,
-  activeTabIndex: PropTypes.number,
-  setActiveTabIndex: PropTypes.func,
-  /** Gray style TabSection */
-  gray: PropTypes.bool,
-  /** Transparent style TabSection */
-  transparent: PropTypes.bool,
-  /** Translucent style TabSection */
-  translucent: PropTypes.bool,
-  /** Dark style TabSection */
-  dark: PropTypes.bool
+  /** The text content of the component */
+  children: PropTypes.node
 };
 
 TabTitle.defaultProps = {};

@@ -21,7 +21,7 @@ export default {
   wrapper: __dirname + '/docz/ThemeWrapper',
 
   // Ordering of the side menu, used here to put "Getting Started" first
-  menu: ['Getting Started'],
+  menu: ['Getting Started', 'Customization & Theme', 'Calcite Icons'],
 
   // Custom theme configuration
   themeConfig: DoczCalcitetheme,

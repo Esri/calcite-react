@@ -26,20 +26,8 @@ const TableHeaderCell = ({ children, ...other }) => {
 };
 
 TableHeaderCell.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
-  /** Description TBD */
-  blue: PropTypes.bool,
-  /** Description TBD */
-  plain: PropTypes.bool,
-  /** Description TBD */
-  noTable: PropTypes.bool,
-  /** Description TBD */
-  justified: PropTypes.bool,
-  /** Description TBD */
-  noCol: PropTypes.bool,
-  /** Description TBD */
-  noRow: PropTypes.bool
+  /** The content of the component */
+  children: PropTypes.node
 };
 
 TableHeaderCell.defaultProps = {};

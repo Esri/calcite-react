@@ -46,14 +46,8 @@ const TabNav = ({
 };
 
 TabNav.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
-  activeTabIndex: PropTypes.number,
-  onTabChange: PropTypes.func,
-  gray: PropTypes.bool,
-  transparent: PropTypes.bool,
-  translucent: PropTypes.bool,
-  dark: PropTypes.bool
+  /** The content of the component, should be a number of TabTitles */
+  children: PropTypes.node
 };
 
 TabNav.defaultProps = {

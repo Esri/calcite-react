@@ -28,18 +28,12 @@ const CardImage = ({ children, src, caption, alt, ...other }) => {
 };
 
 CardImage.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
-  /** Description TBD */
+  /** The html src property of the CardImage */
   src: PropTypes.string,
-  /** Description TBD */
+  /** The text content of the figure caption on the CardImage */
   caption: PropTypes.string,
-  /** Description TBD */
-  alt: PropTypes.string,
-  /** Description TBD */
-  shaped: PropTypes.bool,
-  /** Description TBD */
-  wide: PropTypes.bool
+  /** The html alt property of the component */
+  alt: PropTypes.string
 };
 
 CardImage.defaultProps = {};

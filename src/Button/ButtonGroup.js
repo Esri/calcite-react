@@ -25,8 +25,9 @@ const ButtonGroup = ({ children, isToggle, ...other }) => {
 };
 
 ButtonGroup.propTypes = {
-  /** Description TBD */
+  /** The content of the component, should be a number of Buttons */
   children: PropTypes.node,
+  /** Style prop used to help adjust margins and positioning of buttons when one is active */
   isToggle: PropTypes.bool
 };
 

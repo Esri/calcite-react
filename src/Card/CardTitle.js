@@ -7,7 +7,7 @@ const CardTitle = ({ children, ...other }) => {
 };
 
 CardTitle.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node
 };
 

@@ -170,8 +170,6 @@ const TextField = ({
 };
 
 TextField.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node,
   /** HTML prop to be applied to the input */
   type: PropTypes.oneOf([
     'color',

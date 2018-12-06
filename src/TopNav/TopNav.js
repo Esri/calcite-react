@@ -8,7 +8,7 @@ const TopNav = ({ children, ...other }) => {
 };
 
 TopNav.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node
 };
 

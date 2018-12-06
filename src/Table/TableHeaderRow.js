@@ -23,19 +23,15 @@ const TableHeaderRow = ({ children, ...other }) => {
 };
 
 TableHeaderRow.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node,
-  /** Description TBD */
+  /** A style prop to render a blue Table */
   blue: PropTypes.bool,
-  /** Description TBD */
+  /** A style prop to render Table with no borders or background color */
   plain: PropTypes.bool,
-  /** Description TBD */
-  noTable: PropTypes.bool,
-  /** Description TBD */
-  justified: PropTypes.bool,
-  /** Description TBD */
+  /** A style prop to render a Table with no column borders */
   noCol: PropTypes.bool,
-  /** Description TBD */
+  /** A style prop to render a Table with no row borders */
   noRow: PropTypes.bool
 };
 

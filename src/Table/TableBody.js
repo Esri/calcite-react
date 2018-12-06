@@ -18,21 +18,11 @@ const TableBody = ({ children, ...other }) => {
 };
 
 TableBody.propTypes = {
-  /** Description TBD */
+  /** The content of the component */
   children: PropTypes.node,
-  /** Description TBD */
-  blue: PropTypes.bool,
-  /** Description TBD */
-  striped: PropTypes.bool,
-  /** Description TBD */
-  plain: PropTypes.bool,
-  /** Description TBD */
-  noTable: PropTypes.bool,
-  /** Description TBD */
-  justified: PropTypes.bool,
-  /** Description TBD */
+  /** A style prop to render a TableBody with no column borders */
   noCol: PropTypes.bool,
-  /** Description TBD */
+  /** A style prop to render a TableBody with no row borders */
   noRow: PropTypes.bool
 };
 

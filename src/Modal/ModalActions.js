@@ -8,7 +8,7 @@ const ModalActions = ({ children, ...other }) => {
 };
 
 ModalActions.propTypes = {
-  /** Description TBD */
+  /** The content of teh component */
   children: PropTypes.node
 };
 

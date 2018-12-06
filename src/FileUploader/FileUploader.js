@@ -63,8 +63,8 @@ const FileUploader = ({
 };
 
 FileUploader.propTypes = {
-  /** Description TBD */
-  children: PropTypes.node
+  /** The callback function when the selected file is changed */
+  onChange: PropTypes.func
 };
 
 FileUploader.defaultProps = {

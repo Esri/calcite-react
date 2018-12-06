@@ -17,11 +17,9 @@ Modals are meant to "take over" the screen and focus users attention on a dialog
 
 Note: A modal requires the `appElement` prop to be aria-compliant. Details on how to set this property can be found at http://reactcommunity.org/react-modal/accessibility/
 
-### Example: Create a DOM element dynamically and pass it via `appElement` prop to `Modal`
-
-**`ModalExample.js`**
-
+#### Example: Create a DOM element dynamically and pass it via `appElement` prop to `Modal`
 ```jsx
+/* ModalExample.js */
 import React from 'react';
 import Modal from 'calcite-react';
 
@@ -37,20 +35,16 @@ export class ModalExample extends React.Component {
 }
 ```
 
-### Example: Pass an existing DOM element via `appElement` prop to `Modal`
-
-**`index.html`**
-
+#### Example: Pass an existing DOM element via `appElement` prop to `Modal`
 ```jsx
+/* index.html */
 <body>
   <div id="root" />
   <div id="modal" />
 </body>
 ```
-
-**`ModalExample.js`**
-
 ```jsx
+/* ModalExample.js */
 import React from 'react';
 import Modal from 'calcite-react';
 
@@ -76,6 +70,7 @@ export class ModalExample extends React.Component {
       open={true}
       parentSelector={() => document.getElementById('modalGuideExample')}
       overlayStyle={{ position: 'absolute' }}
+      dialogStyle={{ width: '90%' }}
       appElement={document.body}
     >
       <CalciteH1>Modal!</CalciteH1>
@@ -97,8 +92,6 @@ export class ModalExample extends React.Component {
 </Playground>
 
 ## Open Modal Button
-
-⚠️ This feature works, but the example is a WIP...
 
 <Playground>
   {() => {
@@ -174,7 +167,7 @@ export class ModalExample extends React.Component {
 
 ## Props
 
-### Modal
+### Modal `default`
 
 <PropsTable of={Modal} />
 
