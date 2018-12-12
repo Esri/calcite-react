@@ -12,7 +12,7 @@ const MenuTitle = ({ children, ...other }) => {
 };
 
 MenuTitle.propTypes = {
-  /** Content of the MenuTitle */
+  /** Content of the MenuTitle. */
   children: PropTypes.node
 };
 

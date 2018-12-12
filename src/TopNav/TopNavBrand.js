@@ -12,11 +12,11 @@ const TopNavBrand = ({ children, src, alt, imageStyle, ...other }) => {
 };
 
 TopNavBrand.propTypes = {
-  /** The html src property of the brand image */
+  /** The HTML src property of the brand image. */
   src: PropTypes.node,
-  /** The html alt property of the brand image */
+  /** The HTML alt property of the brand image. */
   alt: PropTypes.node,
-  /** Style property for the underlying img element */
+  /** Style property for the underlying img element. */
   imageStyle: PropTypes.object
 };
 

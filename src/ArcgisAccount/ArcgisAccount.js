@@ -117,17 +117,17 @@ class ArcgisAccount extends Component {
 }
 
 ArcgisAccount.propTypes = {
-  /** AGOL user object */
+  /** AGOL user object. */
   user: PropTypes.object.isRequired,
-  /** AGOL portal object */
+  /** AGOL portal object. */
   portal: PropTypes.object.isRequired,
-  /** AGOL login token */
+  /** AGOL login token. */
   token: PropTypes.string,
-  /** Hide the button to switch accounts in the menu */
+  /** Hide the button to switch accounts in the menu. */
   hideSwitchAccount: PropTypes.bool,
-  /** Callback when the user selects the Switch Account button */
+  /** Callback when the user selects the Switch Account button. */
   onRequestSwitchAccount: PropTypes.func,
-  /** Callback when the user selects the Sign Out button */
+  /** Callback when the user selects the Sign Out button. */
   onRequestSignOut: PropTypes.func
 };
 

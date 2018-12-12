@@ -18,9 +18,9 @@ const MenuItem = ({ children, subtitle, ...other }) => {
 };
 
 MenuItem.propTypes = {
-  /** Content of the MenuItem */
+  /** Content of the MenuItem. */
   children: PropTypes.node,
-  /** A container for content to be displayed right aligned in the menu item */
+  /** A container for content to be displayed right aligned in the MenuItem. */
   subtitle: PropTypes.node
 };
 

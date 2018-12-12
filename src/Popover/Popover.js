@@ -138,13 +138,13 @@ class Popover extends Component {
 }
 
 Popover.propTypes = {
-  /** Nodes to be used as options in the Popover */
+  /** Nodes to be used as options in the Popover. */
   children: PropTypes.node,
-  /** The element that will anchor the popover */
+  /** The element that will anchor the Popover. */
   targetEl: PropTypes.node,
-  /** Whether the popover is visible or not */
+  /** Whether or not the Popover is visible. */
   open: PropTypes.bool,
-  /** Placement of the popover in relation to the target */
+  /** Placement of the Popover in relation to the target. */
   placement: PropTypes.oneOf([
     'top',
     'right',
@@ -159,19 +159,19 @@ Popover.propTypes = {
     'bottom-end',
     'left-end'
   ]),
-  /** Duration of animation in milliseconds */
+  /** Duration of animation in milliseconds. */
   transitionDuration: PropTypes.number,
-  /** How long it takes for the popover to show up */
+  /** How long it takes for the Popover to show up. */
   enterDelay: PropTypes.number,
-  /** Function called when the popover receives an event that may trigger a close */
+  /** Function called when the Popover receives an event that may trigger a close. */
   onRequestClose: PropTypes.func,
-  /** Whether or not the popover should trigger onRequestClose when an element is selected */
+  /** Whether or not the Popover should trigger onRequestClose when an element is selected. */
   closeOnSelect: PropTypes.bool,
-  /** Styles passed onto the target element container div */
+  /** Styles passed onto the target element container div. */
   targetContainerStyles: PropTypes.object,
-  /** Styles passed onto the popover container div */
+  /** Styles passed onto the Popover container div. */
   popoverContainerStyles: PropTypes.object,
-  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
+  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden`. */
   positionFixed: PropTypes.bool
 };
 

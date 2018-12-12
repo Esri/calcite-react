@@ -49,25 +49,25 @@ const Modal = ({
 };
 
 Modal.propTypes = {
-  /** The content of the component */
+  /** The content of the component. */
   children: PropTypes.node,
-  /** Boolean describing if the modal should be shown or not. */
+  /** Boolean describing if the Modal should be shown or not. */
   open: PropTypes.bool,
-  /** String indicating how the content container should be announced to screenreaders */
+  /** String indicating how the content container should be announced to screenreaders. */
   title: PropTypes.string,
-  /** Function that will be run after the modal has opened. */
+  /** Function that will be run after the Modal has opened. */
   onAfterOpen: PropTypes.func,
-  /** Function that will be run when the modal is requested to be closed (either by clicking on overlay or pressing ESC) */
+  /** Function that will be run when the Modal is requested to be closed (either by clicking on overlay or pressing ESC). */
   onRequestClose: PropTypes.func,
-  /** Boolean indicating if the overlay should close the modal */
+  /** Boolean indicating if the overlay should close the Modal. */
   shouldCloseOnOverlayClick: PropTypes.bool,
-  /** Boolean indicating if pressing the esc key should close the modal */
+  /** Boolean indicating if pressing the esc key should close the Modal. */
   shouldCloseOnEsc: PropTypes.bool,
-  /** Function that will be called to get the parent element that the modal will be attached to. */
+  /** Function that will be called to get the parent element to which the Modal will be attached. */
   parentSelector: PropTypes.func,
-  /** Styles applied to the overlay div */
+  /** Styles applied to the overlay div. */
   overlayStyle: PropTypes.object,
-  /** Styles applied to the container dialog div */
+  /** Styles applied to the container dialog div. */
   dialogStyle: PropTypes.object
 };
 

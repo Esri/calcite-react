@@ -313,17 +313,17 @@ const MultiSelect = ({
 };
 
 MultiSelect.propTypes = {
-  /** Nodes to be used as options in the Select */
+  /** Nodes to be used as options in the Select. */
   children: PropTypes.node,
   /** Callback function fired when the value of the Select changes. */
   onChange: PropTypes.func,
-  /** Callback function fired when the Select element is blurred */
+  /** Callback function fired when the Select element is blurred. */
   onBlur: PropTypes.func,
-  /** The selected item of the select */
+  /** The selected item of the Select. */
   selectedItem: PropTypes.node,
-  /** Value of the selected item */
+  /** Value of the selected item. */
   selectedValue: PropTypes.node,
-  /** Placement of the popover in relation to the target */
+  /** Placement of the popover in relation to the target. */
   placement: PropTypes.oneOf([
     'top',
     'right',
@@ -338,23 +338,23 @@ MultiSelect.propTypes = {
     'bottom-end',
     'left-end'
   ]),
-  /** Placeholder text for the input */
+  /** Placeholder text for the input. */
   placeholder: PropTypes.string,
-  /** Whether or not the select will fill its container's width */
+  /** Whether or not the Select will fill its container's width. */
   fullWidth: PropTypes.bool,
-  /** A style variant for select inputs */
+  /** A style variant for Select inputs. */
   minimal: PropTypes.bool,
-  /** Style prop applied to the menu wrapper */
+  /** Style prop applied to the menu wrapper. */
   menuStyle: PropTypes.object,
-  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
+  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden`. */
   positionFixed: PropTypes.bool,
-  /** Whether or not to close the menu on each selection */
+  /** Whether or not to close the menu on each selection. */
   closeOnSelect: PropTypes.bool,
-  /** Use react-virtualized to render rows as the user scrolls */
+  /** Use react-virtualized to render rows as the user scrolls. */
   virtualized: PropTypes.bool,
-  /** (virtualized only) Row height used to calculate how many rows to render in a virtualized menu */
+  /** (virtualized only) Row height used to calculate how many rows to render in a virtualized Menu. */
   virtualizedRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
-  /** (virtualized only) Width of the menu, unloaded rows may be wider than the initial set */
+  /** (virtualized only) Width of the menu; unloaded rows may be wider than the initial set. */
   virtualizedMenuWidth: PropTypes.number
 };
 

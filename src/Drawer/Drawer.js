@@ -35,17 +35,17 @@ const Drawer = ({
 };
 
 Drawer.propTypes = {
-  /** Child elements to be rendered inside the Drawer */
+  /** Child elements to be rendered inside the Drawer. */
   children: PropTypes.node,
-  /** Toggle visibility of the drawer */
+  /** Toggle visibility of the Drawer. */
   active: PropTypes.bool,
-  /** Display the drawer on the right side of the screen */
+  /** Display the Drawer on the right side of the screen. */
   right: PropTypes.bool,
-  /** Width (in px) of the drawer nav */
+  /** Width (in px) of the Drawer nav. */
   drawerWidth: PropTypes.number,
-  /** Function called when the user clicks the overlay area of a drawer */
+  /** Function called when the user clicks the overlay area of a Drawer. */
   onRequestClose: PropTypes.func,
-  /** Styles passed to the DrawerNav sub-component */
+  /** Styles passed to the DrawerNav subcomponent. */
   drawerNavStyle: PropTypes.node
 };
 

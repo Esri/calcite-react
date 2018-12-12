@@ -1,1 +1,1 @@
-Generic html elements
+Generic HTML elements

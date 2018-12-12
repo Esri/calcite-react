@@ -8,7 +8,7 @@ const SideNavTitle = ({ children, ...other }) => {
 };
 
 SideNavTitle.propTypes = {
-  /** The content of the component */
+  /** The content of the component. */
   children: PropTypes.node
 };
 

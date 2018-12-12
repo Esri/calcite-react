@@ -26,19 +26,19 @@ const TableRow = ({ children, ...other }) => {
 };
 
 TableRow.propTypes = {
-  /** The content of the component */
+  /** The content of the component. */
   children: PropTypes.node,
-  /** A style prop to render a blue Table */
+  /** A style prop to render a blue Table. */
   blue: PropTypes.bool,
-  /** A style prop to render a Table with striped rows */
+  /** A style prop to render a Table with striped rows. */
   striped: PropTypes.bool,
-  /** A style prop to render Table with no borders or background color */
+  /** A style prop to render Table with no borders or background color. */
   plain: PropTypes.bool,
-  /** A style prop to render Table with no styling */
+  /** A style prop to render Table with no styling. */
   noTable: PropTypes.bool,
-  /** A style prop to render a Table with no column borders */
+  /** A style prop to render a Table with no column borders. */
   noCol: PropTypes.bool,
-  /** A style prop to render a Table with no row borders */
+  /** A style prop to render a Table with no row borders. */
   noRow: PropTypes.bool
 };
 

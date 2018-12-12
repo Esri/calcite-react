@@ -7,7 +7,7 @@ const AccordionContent = ({ children, ...other }) => {
 };
 
 AccordionContent.propTypes = {
-  /** The content of the component, can be a node or string */
+  /** The content of the component; can be a node or string. */
   children: PropTypes.node
 };
 

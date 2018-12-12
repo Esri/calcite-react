@@ -8,7 +8,7 @@ const PanelTitle = ({ children, ...other }) => {
 };
 
 PanelTitle.propTypes = {
-  /** Content of the PanelTitle */
+  /** Content of the PanelTitle. */
   children: PropTypes.node
 };
 

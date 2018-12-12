@@ -18,7 +18,7 @@ const TableCell = ({ children, ...other }) => {
 };
 
 TableCell.propTypes = {
-  /** The content of the component */
+  /** The content of the component. */
   children: PropTypes.node
 };
 

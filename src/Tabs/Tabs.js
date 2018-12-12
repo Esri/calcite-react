@@ -54,19 +54,19 @@ const Tabs = ({
 };
 
 Tabs.propTypes = {
-  /** The content of the component, should be TabNav and TabContents */
+  /** The content of the component; should be TabNav and TabContents. */
   children: PropTypes.node,
-  /** The index of the tab that should be selected and visible */
+  /** The index of the Tab that should be selected and visible. */
   activeTabIndex: PropTypes.number,
-  /** Function callback when a TabTitle is clicked */
+  /** Function callback when a TabTitle is clicked. */
   onTabChange: PropTypes.func,
-  /** Style prop to render a gray Tab */
+  /** Style prop to render a gray Tab. */
   gray: PropTypes.bool,
-  /** Style prop to render a transparent Tab */
+  /** Style prop to render a transparent Tab. */
   transparent: PropTypes.bool,
-  /** Style prop to render a translucent Tab */
+  /** Style prop to render a translucent Tab. */
   translucent: PropTypes.bool,
-  /** Style prop to render a dark Tab */
+  /** Style prop to render a dark Tab. */
   dark: PropTypes.bool
 };
 

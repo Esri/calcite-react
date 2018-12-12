@@ -18,9 +18,9 @@ const ListSubtitle = ({ children, ...other }) => {
 };
 
 ListSubtitle.propTypes = {
-  /** Content of the SubTitle */
+  /** Content of the Subtitle. */
   children: PropTypes.node,
-  /** Applied when the list is imbedded inside another list */
+  /** Applied when the List is imbedded inside another List. */
   nested: PropTypes.bool
 };
 

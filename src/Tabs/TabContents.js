@@ -48,7 +48,7 @@ const TabContents = ({
 };
 
 TabContents.propTypes = {
-  /** The content of the component, should be a number of TabSections */
+  /** The content of the component; should be a number of TabSections. */
   children: PropTypes.node
 };
 

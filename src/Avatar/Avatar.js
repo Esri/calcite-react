@@ -45,14 +45,14 @@ const Avatar = ({
 };
 
 Avatar.propTypes = {
-  /** The content of the component, can take text, an image, or an icon */
+  /** The content of the component; can take text, an image, or an icon. */
   children: PropTypes.node,
-  /** The src attribute for the img element */
+  /** The src attribute for the img element. */
   src: PropTypes.string,
   /** Used in combination with src to provide
-   an alt attribute for the rendered img element */
+   an alt attribute for the rendered img element. */
   alt: PropTypes.string,
-  /** Diameter of the avatar */
+  /** Diameter of the Avatar. */
   size: PropTypes.number
 };
 

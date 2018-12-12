@@ -49,15 +49,15 @@ const FormControl = ({
 };
 
 FormControl.propTypes = {
-  /** The content of the component */
+  /** The content of the component. */
   children: PropTypes.node,
-  /** The form control should show an error */
+  /** The FormControl should show an error. */
   error: PropTypes.bool,
-  /** The form control should show success */
+  /** The FormControl should show success. */
   success: PropTypes.bool,
-  /** The form control should layout as horizontal elements */
+  /** The FormControl should layout as horizontal elements. */
   horizontal: PropTypes.bool,
-  /** If the FormControl doesn't need validation you can set this to true to tighten up the bottom margin */
+  /** If the FormControl doesn't need validation, you can set this to true to tighten up the bottom margin. */
   noValidation: PropTypes.bool
 };
 

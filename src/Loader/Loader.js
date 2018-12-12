@@ -23,7 +23,7 @@ const Loader = ({ text, ...other }) => {
 };
 
 Loader.propTypes = {
-  /** Text displayed below the loading bars */
+  /** Text displayed below the loading bars. */
   text: PropTypes.string
 };
 

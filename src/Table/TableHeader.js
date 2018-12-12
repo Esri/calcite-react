@@ -25,11 +25,11 @@ const TableHeader = ({ children, ...other }) => {
 };
 
 TableHeader.propTypes = {
-  /** The content of the component */
+  /** The content of the component. */
   children: PropTypes.node,
-  /** A style prop to render a Table with no column borders */
+  /** A style prop to render a Table with no column borders. */
   noCol: PropTypes.bool,
-  /** A style prop to render a Table with no row borders */
+  /** A style prop to render a Table with no row borders. */
   noRow: PropTypes.bool
 };
 
