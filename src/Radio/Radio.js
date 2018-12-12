@@ -93,15 +93,15 @@ const Radio = ({
 };
 
 Radio.propTypes = {
-  /** The text label for the Radio */
+  /** The text label for the Radio. */
   children: PropTypes.node,
-  /** The form value for this checkbox */
+  /** The form value for this Radio button. */
   value: PropTypes.string,
-  /** The name to be shared among checkboxes in a group */
+  /** The name to be shared among Radio buttons in a group. */
   name: PropTypes.string,
-  /** Whether the checkbox is currently checked */
+  /** Whether the Radio button is currently checked. */
   checked: PropTypes.bool,
-  /** Event called when the checkbox value should be toggled */
+  /** Event called when the Radio button value should be toggled. */
   onChange: PropTypes.func
 };
 

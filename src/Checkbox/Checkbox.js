@@ -100,17 +100,17 @@ const Checkbox = ({
 };
 
 Checkbox.propTypes = {
-  /** The label text of the Checkbox */
+  /** The label text of the Checkbox. */
   children: PropTypes.node,
-  /** The form value for this checkbox */
+  /** The form value for this Checkbox. */
   value: PropTypes.string,
-  /** The name to be shared among checkboxes in a group */
+  /** The name to be shared among Checkboxes in a group. */
   name: PropTypes.string,
-  /** Whether the checkbox is currently checked */
+  /** Whether the Checkbox is currently checked. */
   checked: PropTypes.bool,
-  /** Style object passed down to the label */
+  /** Style object passed down to the label. */
   labelStyle: PropTypes.object,
-  /** Event called when the checkbox value should be toggled */
+  /** Event called when the Checkbox value should be toggled. */
   onChange: PropTypes.func
 };
 

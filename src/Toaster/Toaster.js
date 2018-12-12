@@ -44,9 +44,9 @@ class Toaster extends Component {
 Toaster.propTypes = {
   /** Components to be rendered within the Toaster. */
   children: PropTypes.node,
-  /** Type of toaster to render, affects the background color */
+  /** Type of Toaster to render; affects the background color. */
   type: PropTypes.oneOf(['default', 'success', 'info', 'warning', 'error']),
-  /** Position where the toaster will be placed on the screen */
+  /** Position where the Toaster will be placed on the screen. */
   position: PropTypes.oneOf([
     'top-left',
     'top-center',
@@ -55,9 +55,9 @@ Toaster.propTypes = {
     'bottom-center',
     'bottom-left'
   ]),
-  /** How long the toaster should be open for, false if it shouldn't auto close, or a duration in ms for how long it should take to close */
+  /** How long the Toaster should be open for; false if it shouldn't auto close, or a duration in millisecnds for how long it should take to close. */
   autoClose: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
-  /** Toggle default visibility of the progress bar in a Toaster */
+  /** Toggle default visibility of the progress bar in a Toaster. */
   showProgress: PropTypes.bool
 };
 

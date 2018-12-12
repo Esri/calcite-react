@@ -33,11 +33,11 @@ const Stepper = ({ children, currentStep, small, vertical, ...other }) => {
 };
 
 Stepper.propTypes = {
-  /** The content of the component, can be a Step */
+  /** The content of the component; can be a Step. */
   children: PropTypes.node,
-  /** A style prop used to render small Steps */
+  /** A style prop used to render small Steps. */
   small: PropTypes.bool,
-  /** A style prop to position the steps vertically */
+  /** A style prop to position the Steps vertically. */
   vertical: PropTypes.bool
 };
 

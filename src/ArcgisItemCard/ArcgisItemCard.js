@@ -86,13 +86,13 @@ const ArcgisItemCard = ({
 };
 
 ArcgisItemCard.propTypes = {
-  /** The ArcGIS item used to populate the ui */
+  /** The ArcGIS item used to populate the UI. */
   item: PropTypes.object,
-  /** Whether the card should show a thumbnail or not */
+  /** Whether the ArcgisItemCard should show a thumbnail or not. */
   showThumbnail: PropTypes.bool,
-  /** A function that can be provided to customize the formatting of dates */
+  /** A function that can be provided to customize the formatting of dates. */
   dateFormatter: PropTypes.func,
-  /** Number of characters to use before truncating the description text */
+  /** Number of characters to use before truncating the description text. */
   maxDescriptionLength: PropTypes.number
 };
 

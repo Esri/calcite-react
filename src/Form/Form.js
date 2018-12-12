@@ -17,11 +17,11 @@ const Form = ({ children, noValidation, ...other }) => {
 };
 
 Form.propTypes = {
-  /** The content of the component */
+  /** The content of the component. */
   children: PropTypes.node,
-  /** Display prop to make forms align items horizontally instead of vertically */
+  /** Display prop to make Forms align items horizontally instead of vertically. */
   horizontal: PropTypes.bool,
-  /** If the FormControl doesn't need validation you can set this to true to tighten up the bottom margin */
+  /** If the FormControl doesn't need validation, you can set this to true to tighten up the bottom margin. */
   noValidation: PropTypes.bool
 };
 

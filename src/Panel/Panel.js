@@ -8,23 +8,23 @@ const Panel = ({ children, ...other }) => {
 };
 
 Panel.propTypes = {
-  /** Content of the Panel */
+  /** Content of the Panel. */
   children: PropTypes.node,
-  /** Hide the border of the panel */
+  /** Hide the border of the Panel. */
   noBorder: PropTypes.bool,
-  /** Remove the padding from the panel */
+  /** Remove the padding from the Panel. */
   noPadding: PropTypes.bool,
-  /** Dark style panel */
+  /** Dark style Panel. */
   dark: PropTypes.bool,
-  /** Black style panel */
+  /** Black style Panel. */
   black: PropTypes.bool,
-  /** White style panel */
+  /** White style Panel. */
   white: PropTypes.bool,
-  /** Light Blue style panel */
+  /** Light Blue style Panel. */
   lightBlue: PropTypes.bool,
-  /** Blue style panel */
+  /** Blue style Panel. */
   blue: PropTypes.bool,
-  /** Dark Blue style panel */
+  /** Dark Blue style Panel. */
   darkBlue: PropTypes.bool
 };
 

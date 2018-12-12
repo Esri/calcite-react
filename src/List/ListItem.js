@@ -44,11 +44,11 @@ const ListItem = ({ children, leftNode, rightNode, ...other }) => {
 };
 
 ListItem.propTypes = {
-  /** Content of the ListItem */
+  /** Content of the ListItem. */
   children: PropTypes.node,
-  /** Content placed to the left of the ListItem */
+  /** Content placed to the left of the ListItem. */
   leftNode: PropTypes.node,
-  /** Content placed to the right of the ListItem */
+  /** Content placed to the right of the ListItem. */
   rightNode: PropTypes.node
 };
 

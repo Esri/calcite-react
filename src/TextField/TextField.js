@@ -177,7 +177,7 @@ const TextField = forwardRef(
 );
 
 TextField.propTypes = {
-  /** HTML prop to be applied to the input */
+  /** HTML prop to be applied to the input. */
   type: PropTypes.oneOf([
     'color',
     'email',
@@ -190,23 +190,23 @@ TextField.propTypes = {
     'url',
     'textarea'
   ]),
-  /** HTML prop for the current value of the input */
+  /** HTML prop for the current value of the input. */
   value: PropTypes.node,
-  /** The form control should show an error */
+  /** The form control should show an error. */
   error: PropTypes.bool,
-  /** The form control should show success */
+  /** The form control should show success. */
   success: PropTypes.bool,
-  /** Option to display a magnifying glass icon and clear button to the input */
+  /** Option to display a magnifying glass icon and clear button to the input. */
   search: PropTypes.bool,
-  /** Make the TextField 100% width */
+  /** Make the TextField 100% width. */
   fullWidth: PropTypes.bool,
-  /** Display prop to style the TextField with a simplified UI */
+  /** Display prop to style the TextField with a simplified UI. */
   minimal: PropTypes.bool,
-  /** TextField and label should appear side by side instead of stacked */
+  /** TextField and label should appear side by side instead of stacked. */
   horizontal: PropTypes.bool,
-  /** HTML prop for the TextField, works together with a label's `for` prop */
+  /** HTML prop for the TextField; works together with a label's `for` prop. */
   id: PropTypes.string,
-  /** HTML prop to name the form element */
+  /** HTML prop to name the form element. */
   name: PropTypes.string
 };
 

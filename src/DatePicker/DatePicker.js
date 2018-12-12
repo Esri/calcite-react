@@ -69,17 +69,17 @@ const DatePicker = ({
 };
 
 DatePicker.propTypes = {
-  /** The currently selected moment date object for the component */
+  /** The currently selected moment date object for the component. */
   date: momentPropTypes.momentObj,
-  /** Callback function when the selected date is changed */
+  /** Callback function when the selected date is changed. */
   onDateChange: PropTypes.func.isRequired,
-  /** Describe whether the DatePicker is currently focused, displays the calendar dropdown */
+  /** Describe whether the DatePicker is currently focused; displays the calendar dropdown. */
   focused: PropTypes.bool,
-  /** Callback function when the focus state of the DatePicker is changed */
+  /** Callback function when the focus state of the DatePicker is changed. */
   onFocusChange: PropTypes.func.isRequired,
-  /** Placeholder text for the Datepicker textfield */
+  /** Placeholder text for the DatePicker text field. */
   placeholder: PropTypes.string,
-  /** An id supplied to the DatePicker */
+  /** An id supplied to the DatePicker. */
   id: PropTypes.string.isRequired
 };
 

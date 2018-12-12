@@ -435,31 +435,31 @@ class Select extends Component {
 }
 
 Select.propTypes = {
-  /** Nodes to be used as options in the Select */
+  /** Nodes to be used as options in the Select. */
   children: PropTypes.node,
-  /** Toggle the select to use an input and allow filtering of the items */
+  /** Toggle the Select to use an input and allow filtering of the items. */
   filterable: PropTypes.bool,
-  /** Use react-virtualized to render rows as the user scrolls */
+  /** Use react-virtualized to render rows as the user scrolls. */
   virtualized: PropTypes.bool,
   /** Callback function fired when the value of the Select changes. */
   onChange: PropTypes.func,
-  /** The selected item of the select */
+  /** The selected item of the Select. */
   selectedItem: PropTypes.node,
-  /** Value of the selected item */
+  /** Value of the selected item. */
   selectedValue: PropTypes.node,
-  /** Placeholder text for the input */
+  /** Placeholder text for the input. */
   placeholder: PropTypes.string,
-  /** Whether or not the select will fill its container's width */
+  /** Whether or not the Select will fill its container's width. */
   fullWidth: PropTypes.bool,
-  /** A style variant for select inputs */
+  /** A style variant for Select inputs. */
   minimal: PropTypes.bool,
-  /** HTML prop for the Select, works together with a label's `for` prop */
+  /** HTML prop for the Select; works together with a label's `for` prop. */
   id: PropTypes.string,
-  /** Style prop applied to the menu wrapper */
+  /** Style prop applied to the menu wrapper. */
   menuStyle: PropTypes.object,
-  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
+  /** Uses `position: fixed` on the tooltip, allowing it to show up outside of containers that have `overflow: hidden`. */
   positionFixed: PropTypes.bool,
-  /** Specify where the menu should appear in relation to the Select element */
+  /** Specify where the menu should appear in relation to the Select element. */
   placement: PropTypes.oneOf([
     'auto',
     'top',
@@ -475,9 +475,9 @@ Select.propTypes = {
     'left-start',
     'left-end'
   ]),
-  /** (virtualized only) Row height used to calculate how many rows to render in a virtualized menu */
+  /** (virtualized only) Row height used to calculate how many rows to render in a virtualized menu. */
   virtualizedRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
-  /** (virtualized only) Width of the menu, unloaded rows may be wider than the initial set */
+  /** (virtualized only) Width of the menu; unloaded rows may be wider than the initial set. */
   virtualizedMenuWidth: PropTypes.number
 };
 

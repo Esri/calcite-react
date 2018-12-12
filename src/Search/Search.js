@@ -402,23 +402,23 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  /** Array of items */
+  /** Array of items. */
   items: PropTypes.array,
-  /** Text in the input */
+  /** Text in the input. */
   inputValue: PropTypes.string,
-  /** The selected item */
+  /** The selected item. */
   selectedItem: PropTypes.any,
-  /** Text for the placeholder property on the input */
+  /** Text for the placeholder property on the input. */
   placeholder: PropTypes.string,
-  /** An object used to map properties to name and value of items (only applies if `items` is an array of objects) */
+  /** An object used to map properties to the name and value of items (only applies if `items` is an array of objects). */
   dataSourceConfig: PropTypes.object,
-  /** Function called when an item is selected */
+  /** Function called when an item is selected. */
   onChange: PropTypes.func,
-  /** Function called when the input value is changed, items dropdown hides/shows, hovers an item, or clicks on an item */
+  /** Function called when the input value is changed, items dropdown hides/shows, or when the user hovers over or clicks on an item. */
   onUserAction: PropTypes.func,
-  /** Function called when the user clicks the clear button */
+  /** Function called when the user clicks the clear button. */
   onRequestClear: PropTypes.func,
-  /** Placement of the popover in relation to the target */
+  /** Placement of the popover in relation to the target. */
   placement: PropTypes.oneOf([
     'top',
     'right',
@@ -433,27 +433,27 @@ Search.propTypes = {
     'bottom-end',
     'left-end'
   ]),
-  /** Toggle minimal style on the input */
+  /** Toggle minimal style on the input. */
   minimal: PropTypes.bool,
-  /** Whether or not the search and its menu will fill the container's width */
+  /** Whether or not the Search and its menu will fill the container's width. */
   fullWidth: PropTypes.bool,
-  /** Style prop applied to the Search container element */
+  /** Style prop applied to the Search container element. */
   containerStyle: PropTypes.object,
-  /** Style prop applied to the menu wrapper */
+  /** Style prop applied to the menu wrapper. */
   menuStyle: PropTypes.object,
-  /** Character used to display a shortcut icon on the right side of the search input */
+  /** Character used to display a shortcut icon on the right side of the Search input. */
   shortcutCharacter: PropTypes.string,
-  /** Text used in the shortcut tooltip to describe what the shortcut is */
+  /** Text used in the shortcut tooltip to describe what the shortcut is. */
   shortcutTooltip: PropTypes.node,
-  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
+  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden`. */
   positionFixed: PropTypes.bool,
-  /** You can add search options as children if you want more control over the item rendering. Search MenuItems can take either an item object that maps to your dataSourceConfig or you can manually set the label and value props on MenuItems */
+  /** You can add Search options as children if you want more control over the item rendering. Search MenuItems can take either an item object that maps to your dataSourceConfig, or you can manually set the label and value props on MenuItems. */
   children: PropTypes.node,
-  /** Use react-virtualized to render rows as the user scrolls */
+  /** Use react-virtualized to render rows as the user scrolls. */
   virtualized: PropTypes.bool,
-  /** (virtualized only) Row height used to calculate how many rows to render in a virtualized menu */
+  /** (virtualized only) Row height used to calculate how many rows to render in a virtualized menu. */
   virtualizedRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
-  /** (virtualized only) Width of the menu, unloaded rows may be wider than the initial set */
+  /** (virtualized only) Width of the menu; unloaded rows may be wider than the initial set. */
   virtualizedMenuWidth: PropTypes.number
 };
 
