@@ -64,13 +64,12 @@
   "dependencies": {
     "aphrodite": "^2.2.3",
     "calcite-ui-icons-react": "^0.2.0",
-    "docz": "^0.12.13",
     "downshift": "^3.1.1",
     "match-sorter": "^2.3.0",
     "memoize-one": "^4.0.2",
     "outy": "^0.1.2",
     "polished": "^2.3.0",
-    "react-dates": "^18.0.4",
+    "react-dates": "^18.3.1",
     "react-modal": "^3.5.1",
     "react-popper": "^1.0.2",
     "react-toastify": "^4.3.0",
@@ -88,6 +87,8 @@
     "@babel/plugin-proposal-export-default-from": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@emotion/core": "^10.0.5",
+    "@emotion/styled": "^10.0.5",
     "@storybook/addon-a11y": "^4.0.9",
     "@storybook/addon-actions": "^4.0.9",
     "@storybook/addon-info": "^4.0.9",
@@ -102,8 +103,10 @@
     "babel-loader": "^8.0.4",
     "babel-plugin-styled-components": "^1.9.2",
     "cross-env": "^5.1.4",
+    "docz": "^0.13.2",
     "docz-plugin-css": "^0.11.0",
     "docz-plugin-netlify": "^1.1.4",
+    "docz-theme-default": "^0.13.2",
     "eslint": "^4.13.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -121,16 +124,17 @@
     "mdi-react": "^2.1.19",
     "prettier": "^1.13.4",
     "prop-types": "^15.6.2",
-    "react": "^16.5.1",
-    "react-dom": "^16.5.1",
-    "react-test-renderer": "^16.5.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-test-renderer": "^16.6.3",
     "rimraf": "^2.6.2",
     "rollup": "^0.56.3",
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-node-resolve": "^3.0.3",
+    "rxjs-compat": "^6.3.3",
     "yup": "^0.26.5"
   },
   "peerDependencies": {
-    "react": "^16.5.1"
+    "react": "^16.6.3"
   }
 }

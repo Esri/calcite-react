@@ -56,6 +56,7 @@ A date picker implemented with Airbnb's
                 onDateChange={this.onDateChange}
                 focused={this.state.datePickerFocused}
                 onFocusChange={this.onFocusChange}
+                numberOfMonths={1}
               />
             </div>
           );
@@ -365,6 +366,113 @@ A date picker implemented with Airbnb's
                 appendToBody
               />
             </div>
+          );
+        }
+      }
+
+      return <DatePickerExample />;
+    }}
+
+</Playground>
+
+## Month and Year Select
+
+<Playground style={{ height: '450px' }}>
+  {() => {
+      class DatePickerExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            date: null,
+            monthPickerFocused: false,
+            monthYearPickerFocused: false,
+            startDate: null,
+            endDate: null,
+            focusedInput: null
+          };
+
+          this.onDateChange = this.onDateChange.bind(this);
+          this.onMonthFocusChange = this.onMonthFocusChange.bind(this);
+          this.onMonthYearFocusChange = this.onMonthYearFocusChange.bind(this);
+          this.onDatesChange = this.onDatesChange.bind(this);
+          this.onFocusChange = this.onFocusChange.bind(this);
+        }
+
+        onDatesChange({ startDate, endDate }) {
+          this.setState({
+            startDate,
+            endDate
+          });
+        };
+
+        onFocusChange(focusedInput) {
+          this.setState({
+            focusedInput
+          });
+        };
+
+        onDateChange(date) {
+          this.setState({
+            date
+          });
+        };
+
+        onMonthFocusChange({focused}) {
+          this.setState({
+            monthPickerFocused: focused
+          });
+        };
+
+        onMonthYearFocusChange({focused}) {
+          this.setState({
+            monthYearPickerFocused: focused
+          });
+        };
+
+        render() {
+          return (
+            <Form horizontal>
+              <FormControl>
+                <FormControlLabel>Month</FormControlLabel>
+                <DatePicker
+                  id="monthDateSelector"
+                  date={this.state.date}
+                  onDateChange={this.onDateChange}
+                  focused={this.state.monthPickerFocused}
+                  onFocusChange={this.onMonthFocusChange}
+                  numberOfMonths={1}
+                  isOutsideRange={() => {}}
+                  monthYearSelectionMode="MONTH"
+                />
+              </FormControl>
+              <FormControl>
+                <FormControlLabel>Month & Year</FormControlLabel>
+                <DatePicker
+                  id="monthYearDateSelector"
+                  date={this.state.date}
+                  onDateChange={this.onDateChange}
+                  focused={this.state.monthYearPickerFocused}
+                  onFocusChange={this.onMonthYearFocusChange}
+                  numberOfMonths={1}
+                  isOutsideRange={() => {}}
+                  monthYearSelectionMode="MONTH_YEAR"
+                />
+              </FormControl>
+              <FormControl>
+                <FormControlLabel>Date Range Month & Year</FormControlLabel>
+                <DateRangePicker
+                  startDate={this.state.startDate}
+                  startDateId="monthYearStartDate"
+                  endDate={this.state.endDate}
+                  endDateId="monthYearEndDate"
+                  onDatesChange={this.onDatesChange}
+                  focusedInput={this.state.focusedInput}
+                  onFocusChange={this.onFocusChange}
+                  isOutsideRange={() => {}}
+                  monthYearSelectionMode="MONTH_YEAR"
+                />
+              </FormControl>
+            </Form>
           );
         }
       }
