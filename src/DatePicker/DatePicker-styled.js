@@ -19,6 +19,18 @@ const StyledDatePickerContainer = styled.div`
         display: none;
       }
     `};
+
+  [class^='SingleDatePickerInput_calendarIcon'],
+  [class^='DateRangePickerInput_calendarIcon'] {
+    margin: 0 !important;
+    padding: 10px 6px 10px 12px !important;
+    display: inline-flex !important;
+    align-items: center;
+  }
+
+  [class^='DateRangePickerInput'] [class^='DateInput_input'] {
+    text-align: center;
+  }
 `;
 
 const StyledMonthElContainer = styled.div`

@@ -375,6 +375,31 @@ A date picker implemented with Airbnb's
 
 </Playground>
 
+## Hidden Icon
+
+<Playground>
+  {() => {
+      class DatePickerExample extends React.Component {
+
+        render() {
+          return (
+            <Form horizontal>
+              <FormControl>
+                <DatePicker hideInputIcon />
+              </FormControl>
+              <FormControl>
+                <DateRangePicker hideInputIcon /> 
+              </FormControl>
+            </Form>
+          );
+        }
+      }
+
+      return <DatePickerExample />;
+    }}
+
+</Playground>
+
 ## Month and Year Select
 
 <Playground style={{ height: '450px' }}>

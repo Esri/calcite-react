@@ -21,6 +21,7 @@ import aphroditeInterface from 'react-with-styles-interface-aphrodite';
 import { DatePickerTheme } from '../CalciteThemeProvider';
 
 import { MenuItem } from '../Menu';
+import CalendarIcon from 'calcite-ui-icons-react/CalendarIcon';
 
 ThemedStyleSheet.registerInterface(aphroditeInterface);
 ThemedStyleSheet.registerTheme(DatePickerTheme);
@@ -38,6 +39,7 @@ const DatePicker = ({
   yearSelectDates,
   hideKeyboardShortcutsPanel,
   numberOfMonths,
+  hideInputIcon,
   ...other
 }) => {
   let touched, isSubmitting, setFieldValue, setTouched;
@@ -155,6 +157,7 @@ const DatePicker = ({
         }
         hideKeyboardShortcutsPanel={hideKeyboardShortcutsPanel}
         numberOfMonths={numberOfMonths}
+        customInputIcon={hideInputIcon ? undefined : <CalendarIcon size="16" />}
         {...other}
       />
     </StyledDatePickerContainer>
@@ -182,7 +185,9 @@ DatePicker.propTypes = {
     endYear: PropTypes.number
   }),
   /** The number of months to show in the popup */
-  numberOfMonths: PropTypes.number
+  numberOfMonths: PropTypes.number,
+  /** Toggle visibility of the calendar icon in the input */
+  hideInputIcon: PropTypes.bool
 };
 
 DatePicker.defaultProps = {
