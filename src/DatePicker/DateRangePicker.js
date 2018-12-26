@@ -13,18 +13,20 @@ import {
   StyledWeekDay
 } from './DatePicker-styled';
 
+import 'react-dates/initialize';
+
 import { DateRangePicker as ReactDateRangePicker } from 'react-dates';
 import momentPropTypes from 'react-moment-proptypes';
-import ThemedStyleSheet from 'react-with-styles/lib/ThemedStyleSheet';
-import aphroditeInterface from 'react-with-styles-interface-aphrodite';
+// import ThemedStyleSheet from 'react-with-styles/lib/ThemedStyleSheet';
+// import aphroditeInterface from 'react-with-styles-interface-aphrodite';
 
 import { MenuItem } from '../Menu';
 import CalendarIcon from 'calcite-ui-icons-react/CalendarIcon';
 
-import { DatePickerTheme } from '../CalciteThemeProvider';
+// import { DatePickerTheme } from '../CalciteThemeProvider';
 
-ThemedStyleSheet.registerInterface(aphroditeInterface);
-ThemedStyleSheet.registerTheme(DatePickerTheme);
+// ThemedStyleSheet.registerInterface(aphroditeInterface);
+// ThemedStyleSheet.registerTheme(DatePickerTheme);
 
 const DateRangePicker = ({
   field,
@@ -166,6 +168,7 @@ const DateRangePicker = ({
 
   return (
     <StyledDatePickerContainer
+      dateRange
       hideDoWHeader={monthYearSelectionMode !== 'NONE'}
     >
       <ReactDateRangePicker

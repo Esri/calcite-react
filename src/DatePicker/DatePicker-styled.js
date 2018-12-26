@@ -15,22 +15,25 @@ const StyledDatePickerContainer = styled.div`
   ${props =>
     props.hideDoWHeader &&
     css`
-      [class^='DayPicker_weekHeaders'] {
+      [role='presentation'] ul {
         display: none;
       }
     `};
 
-  [class^='SingleDatePickerInput_calendarIcon'],
-  [class^='DateRangePickerInput_calendarIcon'] {
+  > div:first-child > div:first-child > div:first-child button {
     margin: 0 !important;
     padding: 10px 6px 10px 12px !important;
     display: inline-flex !important;
     align-items: center;
   }
 
-  [class^='DateRangePickerInput'] [class^='DateInput_input'] {
-    text-align: center;
-  }
+  ${props =>
+    props.dateRange &&
+    css`
+      input[type='text'] {
+        text-align: center;
+      }
+    `};
 `;
 
 const StyledMonthElContainer = styled.div`
