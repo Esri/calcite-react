@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 import moment from 'moment';
 
+import 'react-dates/lib/css/_datepicker.css';
+
 import {
   StyledDatePickerContainer,
   StyledMonthElContainer,
@@ -20,8 +22,6 @@ import momentPropTypes from 'react-moment-proptypes';
 
 import { MenuItem } from '../Menu';
 import CalendarIcon from 'calcite-ui-icons-react/CalendarIcon';
-
-import 'react-dates/lib/css/_datepicker.css';
 
 const DateRangePicker = ({
   field,
