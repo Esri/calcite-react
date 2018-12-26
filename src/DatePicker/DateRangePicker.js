@@ -17,16 +17,11 @@ import 'react-dates/initialize';
 
 import { DateRangePicker as ReactDateRangePicker } from 'react-dates';
 import momentPropTypes from 'react-moment-proptypes';
-// import ThemedStyleSheet from 'react-with-styles/lib/ThemedStyleSheet';
-// import aphroditeInterface from 'react-with-styles-interface-aphrodite';
 
 import { MenuItem } from '../Menu';
 import CalendarIcon from 'calcite-ui-icons-react/CalendarIcon';
 
-// import { DatePickerTheme } from '../CalciteThemeProvider';
-
-// ThemedStyleSheet.registerInterface(aphroditeInterface);
-// ThemedStyleSheet.registerTheme(DatePickerTheme);
+import 'react-dates/lib/css/_datepicker.css';
 
 const DateRangePicker = ({
   field,
