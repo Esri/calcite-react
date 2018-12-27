@@ -51,6 +51,7 @@ A date picker implemented with Airbnb's
         render() {
           return (
             <DatePicker
+              id="basicDatePicker"
               date={this.state.date}
               onDateChange={this.onDateChange}
               focused={this.state.datePickerFocused}
@@ -137,6 +138,7 @@ A date picker implemented with Airbnb's
                     <Field
                       component={DatePicker}
                       name="birthday"
+                      id="basicFormikDatePicker"
                       date={this.state.date}
                       onDateChange={this.onDateChange}
                       focused={this.state.datePickerFocused}
@@ -199,9 +201,9 @@ A date picker implemented with Airbnb's
             <div>
               <DateRangePicker
                 startDate={this.state.startDate}
-                startDateId="sampleStartDate"
+                startDateId="basicStartDate"
                 endDate={this.state.endDate}
-                endDateId="sampleEndDate"
+                endDateId="basicEndDate"
                 onDatesChange={this.onDatesChange}
                 focusedInput={this.state.focusedInput}
                 onFocusChange={this.onFocusChange}
@@ -295,9 +297,9 @@ A date picker implemented with Airbnb's
                       component={DateRangePicker}
                       name="booking"
                       startDate={this.state.startDate}
-                      startDateId="sampleStartDate"
+                      startDateId="formikStartDate"
                       endDate={this.state.endDate}
-                      endDateId="sampleEndDate"
+                      endDateId="formikEndDate"
                       onDatesChange={this.onDatesChange}
                       focusedInput={this.state.focusedInput}
                       onFocusChange={this.onFocusChange}
@@ -357,6 +359,7 @@ A date picker implemented with Airbnb's
           return (
             <div>
               <DatePicker
+                id="appendToBodyDatePicker"
                 date={this.state.date}
                 onDateChange={this.onDateChange}
                 focused={this.state.datePickerFocused}
@@ -424,7 +427,7 @@ A date picker implemented with Airbnb's
             <Form horizontal>
               <FormControl>
                 <DatePicker
-                  id="monthDateSelector"
+                  id="hiddenIconDatePicker"
                   date={this.state.date}
                   onDateChange={this.onDateChange}
                   focused={this.state.monthPickerFocused}
@@ -435,9 +438,9 @@ A date picker implemented with Airbnb's
               <FormControl>
                 <DateRangePicker
                   startDate={this.state.startDate}
-                  startDateId="monthYearStartDate"
+                  startDateId="hiddenIconStartDate"
                   endDate={this.state.endDate}
-                  endDateId="monthYearEndDate"
+                  endDateId="hiddenIconEndDate"
                   onDatesChange={this.onDatesChange}
                   focusedInput={this.state.focusedInput}
                   onFocusChange={this.onFocusChange}

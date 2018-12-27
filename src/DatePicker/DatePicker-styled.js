@@ -29,9 +29,6 @@ const StyledDatePickerContainer = styled.div`
     display: inline-flex;
     align-items: center;
   }
-  .SingleDatePicker_picker {
-    margin-top: -20px;
-  }
   .DayPickerKeyboardShortcuts_buttonReset {
     font-size: 0.875rem;
   }
@@ -207,9 +204,6 @@ const StyledDatePickerContainer = styled.div`
     padding: 9px 6px 9px 12px;
     display: inline-flex;
     align-items: center;
-  }
-  .DateRangePicker_picker {
-    margin-top: -20px;
   }
 `;
 

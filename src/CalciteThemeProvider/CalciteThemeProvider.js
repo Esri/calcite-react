@@ -85,6 +85,13 @@ const CalciteReactGlobalStyles = createGlobalStyle`
     }
   }
 
+  /* DatePicker */
+
+  .SingleDatePicker_picker,
+  .DateRangePicker_picker {
+    margin-top: -20px;
+  }
+
   /* Toastify */
 
   .Toastify__toast-container.Toastify__toast-container {
