@@ -90,6 +90,117 @@ const CalciteReactGlobalStyles = createGlobalStyle`
   .SingleDatePicker_picker,
   .DateRangePicker_picker {
     margin-top: -20px;
+
+    .DayPickerKeyboardShortcuts_buttonReset {
+      font-size: 0.875rem;
+    }
+    .DayPickerKeyboardShortcuts_show__bottomRight::before {
+      border-right-color: ${props => props.theme.palette.blue};
+    }
+    .DayPickerKeyboardShortcuts_show__bottomRight:hover::before {
+      border-right-color: ${props => props.theme.palette.blue};
+    }
+    .DayPickerKeyboardShortcuts_show__topRight::before {
+      border-right-color: ${props => props.theme.palette.blue};
+    }
+    .DayPickerKeyboardShortcuts_show__topRight:hover::before {
+      border-right-color: ${props => props.theme.palette.blue};
+    }
+    .DayPickerKeyboardShortcuts_show__topLeft::before {
+      border-left-color: ${props => props.theme.palette.blue};
+    }
+    .DayPickerKeyboardShortcuts_show__topLeft:hover::before {
+      border-left-color: ${props => props.theme.palette.blue};
+    }
+    .DayPickerKeyboardShortcuts_panel {
+      border: 1px solid ${props => props.theme.palette.lighterGray};
+      border-radius: ${props => props.theme.borderRadius};
+    }
+    .DayPickerKeyboardShortcuts_list {
+      font-size: 0.875rem;
+    }
+    .CalendarDay {
+      font-size: 0.875rem;
+    }
+    .CalendarDay__default {
+      color: #565a5c;
+    }
+    .CalendarDay__outside {
+      color: #565a5c;
+    }
+    .CalendarDay__highlighted_calendar {
+      color: #565a5c;
+    }
+    .CalendarDay__highlighted_calendar:active,
+    .CalendarDay__highlighted_calendar:hover {
+      color: #565a5c;
+    }
+    .CalendarDay__selected_span {
+      background: ${props => props.theme.palette.lightestBlue};
+      border: 1px double ${props => props.theme.palette.lighterBlue};
+      color: ${props => props.theme.palette.darkBlue};
+    }
+    .CalendarDay__selected_span:active,
+    .CalendarDay__selected_span:hover {
+      background: ${props => props.theme.palette.darkBlue};
+      border: 1px double ${props => props.theme.palette.darkBlue};
+      color: #fff;
+    }
+    .CalendarDay__selected,
+    .CalendarDay__selected:active,
+    .CalendarDay__selected:hover {
+      background: ${props => props.theme.palette.blue};
+      border: 1px double ${props => props.theme.palette.blue};
+      color: #fff;
+    }
+    .CalendarDay__hovered_span,
+    .CalendarDay__hovered_span:hover {
+      background: ${props => props.theme.palette.lightestBlue};
+      border: 1px double ${props => props.theme.palette.lighterBlue};
+      color: ${props => props.theme.palette.Brand_Blue_200};
+    }
+    .CalendarDay__hovered_span:active {
+      background: ${props => props.theme.palette.lighterBlue};
+      border: 1px double ${props => props.theme.palette.lighterBlue};
+      color: ${props => props.theme.palette.Brand_Blue_200};
+    }
+    .CalendarDay__blocked_calendar,
+    .CalendarDay__blocked_calendar:active,
+    .CalendarDay__blocked_calendar:hover {
+      color: #82888a;
+    }
+    .CalendarDay__blocked_out_of_range,
+    .CalendarDay__blocked_out_of_range:active,
+    .CalendarDay__blocked_out_of_range:hover {
+      color: #cacccd;
+    }
+    .CalendarMonth_caption {
+      color: #565a5c;
+      font-size: 0.9375rem;
+    }
+    .DayPickerNavigation_button__horizontalDefault {
+      border-radius: ${props => props.theme.borderRadius};
+    }
+    .DayPickerNavigation_svg__vertical {
+      fill: #565a5c;
+    }
+    .DayPicker__withBorder {
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05),
+        0 0 0 1px ${props => props.theme.palette.lightestGray};
+      border-radius: ${props => props.theme.borderRadius};
+    }
+    .DayPicker_weekHeaders {
+      display: none;
+    }
+    .DayPicker_weekHeader__verticalScrollable {
+      border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
+    }
+    .DayPicker_weekHeader_ul {
+      font-size: 0.875rem;
+    }
+    .DayPicker_transitionContainer {
+      border-radius: ${props => props.theme.borderRadius};
+    }
   }
 
   /* Toastify */

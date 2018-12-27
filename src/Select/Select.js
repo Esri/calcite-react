@@ -127,7 +127,7 @@ class Select extends Component {
   };
 
   _getItemFromValue = (children, value) => {
-    if (!value) return null;
+    if (value === null || value === undefined) return null;
 
     return (
       Children.toArray(children).filter(child => {
