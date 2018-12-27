@@ -11,6 +11,7 @@ import {
   StyledMonthYearSelectContainer,
   StyledMonthSelect,
   StyledYearSelect,
+  StyledMonthYearHeader,
   StyledWeekDayList,
   StyledWeekDay
 } from './DatePicker-styled';
@@ -69,26 +70,12 @@ const DatePicker = ({
     }
   };
 
-  const getMonthEl = ({ month, onMonthSelect, onYearSelect }) => {
+  const getHeaderEl = ({ month, onMonthSelect, onYearSelect }) => {
     const weekdays = moment.weekdaysMin();
     return (
       <StyledMonthElContainer>
         <StyledMonthYearSelectContainer>
-          <StyledMonthSelect
-            selectedValue={month.month()}
-            renderValue={selectedItem =>
-              getMonthRenderValue(selectedItem, month)
-            }
-            onChange={value => {
-              onMonthSelect(month, value);
-            }}
-          >
-            {moment.months().map((label, value) => (
-              <MenuItem value={value} key={value}>
-                {label}
-              </MenuItem>
-            ))}
-          </StyledMonthSelect>
+          {getMonthEl({ month, onMonthSelect })}
           {getYearEl({ month, onYearSelect })}
         </StyledMonthYearSelectContainer>
         <StyledWeekDayList>
@@ -97,6 +84,30 @@ const DatePicker = ({
           ))}
         </StyledWeekDayList>
       </StyledMonthElContainer>
+    );
+  };
+
+  const getMonthEl = ({ month, onMonthSelect }) => {
+    if (monthYearSelectionMode === 'NONE') {
+      return (
+        <StyledMonthYearHeader>{month.format('MMMM')}</StyledMonthYearHeader>
+      );
+    }
+
+    return (
+      <StyledMonthSelect
+        selectedValue={month.month()}
+        renderValue={selectedItem => getMonthRenderValue(selectedItem, month)}
+        onChange={value => {
+          onMonthSelect(month, value);
+        }}
+      >
+        {moment.months().map((label, value) => (
+          <MenuItem value={value} key={value}>
+            {label}
+          </MenuItem>
+        ))}
+      </StyledMonthSelect>
     );
   };
 
@@ -117,24 +128,45 @@ const DatePicker = ({
             onYearSelect(month, value);
           }}
         >
-          {getYears()}
+          {getYears(month.year())}
         </StyledYearSelect>
       );
     }
+
+    if (monthYearSelectionMode === 'NONE') {
+      return <StyledMonthYearHeader>{month.year()}</StyledMonthYearHeader>;
+    }
   };
 
-  const getYears = () => {
+  const getYears = year => {
+    let yearAdded = false;
     const yearsArr = [];
     for (
       let currentYear = yearSelectDates.endYear;
       yearSelectDates.startYear <= currentYear;
       currentYear--
     ) {
+      if (currentYear === year) {
+        yearAdded = true;
+      }
       yearsArr.push(
         <MenuItem value={currentYear} key={currentYear}>
           {currentYear}
         </MenuItem>
       );
+    }
+
+    if (!yearAdded) {
+      yearsArr.unshift(
+        <MenuItem value={year} key={year}>
+          {year}
+        </MenuItem>
+      );
+      yearsArr.sort((a, b) => {
+        if (a.props.value < b.props.value) return 1;
+        if (a.props.value > b.props.value) return -1;
+        return 0;
+      });
     }
 
     return yearsArr;
@@ -149,9 +181,7 @@ const DatePicker = ({
         onDateChange={_onDateChange}
         onFocusChange={_onFocusChange}
         disabled={isSubmitting || disabled}
-        renderMonthElement={
-          monthYearSelectionMode === 'NONE' ? undefined : getMonthEl
-        }
+        renderMonthElement={getHeaderEl}
         hideKeyboardShortcutsPanel={hideKeyboardShortcutsPanel}
         numberOfMonths={numberOfMonths}
         customInputIcon={hideInputIcon ? undefined : <CalendarIcon size="16" />}
@@ -189,7 +219,6 @@ DatePicker.propTypes = {
 
 DatePicker.defaultProps = {
   placeholder: 'Date',
-  id: uniqid(),
   monthYearSelectionMode: 'NONE',
   yearSelectDates: {
     startYear: new moment().subtract('year', 50).year(),
