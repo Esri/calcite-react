@@ -34,6 +34,7 @@ class Select extends Component {
       style,
       field,
       form,
+      renderValue,
       ...other
     } = params;
 
@@ -81,13 +82,19 @@ class Select extends Component {
             disabled={this.isDisabled({ field, form, disabled })}
             {...other}
           >
-            {this.itemToString(selectedItem)
-              ? this.itemToString(selectedItem)
+            {this.downshiftRenderValue({ selectedItem, renderValue })
+              ? this.downshiftRenderValue({ selectedItem, renderValue })
               : placeholder}
           </StyledSelectButton>
         )}
       </FormControlContext.Consumer>
     );
+  };
+
+  downshiftRenderValue = ({ selectedItem, renderValue }) => {
+    if (renderValue) return renderValue(selectedItem);
+
+    return this.itemToString(selectedItem);
   };
 
   itemToString = item => {

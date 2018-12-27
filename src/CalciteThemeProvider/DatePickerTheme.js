@@ -176,7 +176,7 @@ const DatePickerTheme = {
     },
 
     sizing: {
-      inputWidth: 100,
+      inputWidth: 95,
       inputWidth_small: 80,
       arrowWidth: 19,
       arrowWidth_small: 15
