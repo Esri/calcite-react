@@ -61,9 +61,9 @@ const Step = ({
 };
 
 Step.propTypes = {
-  /** The content of the component, can be StepTitle and StepDescription */
+  /** The content of the component; can be StepTitle or StepDescription. */
   children: PropTypes.node,
-  /** A style prop used to render the step in an error state with red text and X icon */
+  /** A style prop used to render the Step in an error state with red text and X icon. */
   error: PropTypes.bool
 };
 

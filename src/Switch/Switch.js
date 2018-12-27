@@ -91,17 +91,17 @@ const Switch = ({
 };
 
 Switch.propTypes = {
-  /** The text label of the Switch */
+  /** The text label of the Switch. */
   children: PropTypes.node,
-  /** The name to be shared among checkboxes in a group */
+  /** The name to be shared among Switches in a group. */
   name: PropTypes.string,
-  /** Whether the checkbox is currently checked */
+  /** Whether the Switch is currently checked. */
   checked: PropTypes.bool,
-  /** Event called when the checkbox value should be toggled */
+  /** Event called when the Switch value should be toggled. */
   onChange: PropTypes.func,
-  /** Should use a red highlight color */
+  /** Should use a red highlight color. */
   destructive: PropTypes.bool,
-  /** Position of the label text in relation to the input */
+  /** Position of the label text in relation to the input. */
   labelPosition: PropTypes.oneOf(['before', 'after'])
 };
 

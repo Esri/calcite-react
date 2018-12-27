@@ -91,11 +91,11 @@ class CopyToClipboard extends Component {
 }
 
 CopyToClipboard.propTypes = {
-  /** Text to be copied */
+  /** Text to be copied. */
   children: PropTypes.string,
-  /** The tooltip label before the text is copied */
+  /** The tooltip label before the text is copied. */
   tooltip: PropTypes.string,
-  /** The tooltip label after the text is copied */
+  /** The tooltip label after the text is copied. */
   successTooltip: PropTypes.string
 };
 

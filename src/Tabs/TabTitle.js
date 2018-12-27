@@ -26,7 +26,7 @@ const TabTitle = ({
 };
 
 TabTitle.propTypes = {
-  /** The text content of the component */
+  /** The text content of the component. */
   children: PropTypes.node
 };
 

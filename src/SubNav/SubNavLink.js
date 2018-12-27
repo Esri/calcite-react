@@ -12,9 +12,9 @@ const SubNavLink = ({ children, active, ...other }) => {
 };
 
 SubNavLink.propTypes = {
-  /** The text content of the component */
+  /** The text content of the component. */
   children: PropTypes.node,
-  /** A style prop to represent a NavLink as active or selected */
+  /** A style prop to represent a NavLink as active or selected. */
   active: PropTypes.bool
 };
 

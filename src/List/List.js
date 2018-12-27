@@ -47,11 +47,11 @@ class List extends Component {
 }
 
 List.propTypes = {
-  /** The content of the component, can contain ListHeader, ListItem, and even another List */
+  /** The content of the component; can contain ListHeader, ListItem, and even another List. */
   children: PropTypes.node,
-  /** Applied when the list is imbedded inside another list */
+  /** Applied when the List is imbedded inside another List. */
   nested: PropTypes.bool,
-  /** Whether the list should be collapsed or expanded */
+  /** Whether the List should be collapsed or expanded. */
   open: PropTypes.bool
 };
 

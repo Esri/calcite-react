@@ -60,13 +60,13 @@ const Slider = ({
 };
 
 Slider.propTypes = {
-  /** Numeric value of the current value of the Slider */
+  /** Numeric value of the current value of the Slider. */
   value: PropTypes.number,
-  /** Minimum allowable value */
+  /** Minimum allowable value. */
   min: PropTypes.number,
-  /** Maximum allowable value */
+  /** Maximum allowable value. */
   max: PropTypes.number,
-  /** Size of the steps on the Slider */
+  /** Size of the steps on the Slider. */
   step: PropTypes.number
 };
 

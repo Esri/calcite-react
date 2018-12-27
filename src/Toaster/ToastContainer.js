@@ -31,7 +31,7 @@ const ToastContainer = ({ ...other }) => {
 };
 
 ToastContainer.propTypes = {
-  /* Toggle default visibility of the progress bar in a Toaster */
+  /* Toggle default visibility of the progress bar in a Toaster. */
   showProgress: PropTypes.bool
 };
 

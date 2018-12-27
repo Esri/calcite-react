@@ -46,7 +46,7 @@ const TabNav = ({
 };
 
 TabNav.propTypes = {
-  /** The content of the component, should be a number of TabTitles */
+  /** The content of the component; should be a number of TabTitles. */
   children: PropTypes.node
 };
 

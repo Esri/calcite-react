@@ -11,7 +11,7 @@ const Menu = forwardRef(({ children, ...other }, ref) => {
 });
 
 Menu.propTypes = {
-  /** Content node for the Menu */
+  /** Content node for the Menu. */
   children: PropTypes.node
 };
 

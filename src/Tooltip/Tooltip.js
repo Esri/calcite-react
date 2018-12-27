@@ -105,22 +105,22 @@ class Tooltip extends Component {
 }
 
 Tooltip.propTypes = {
-  /** Nodes to be used as the target of the tooltip */
+  /** Nodes to be used as the target of the Tooltip. */
   children: PropTypes.node,
-  /** Nodes to be used as tooltip content */
+  /** Nodes to be used as Tooltip content. */
   title: PropTypes.node,
-  /** Placement of the popover in relation to the target. The tooltip will override the placement if there is no room.
-   If this property is not set the tooltip will position itself wherever there is room */
+  /** Placement of the popover in relation to the target. The Tooltip will override the placement if there is no room.
+   If this property is not set, the Tooltip will position itself wherever there is room. */
   placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-  /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden` */
+  /** Uses `position: fixed` on the Tooltip, allowing it to show up outside of containers that have `overflow: hidden`. */
   positionFixed: PropTypes.bool,
-  /** Duration of animation in milliseconds */
+  /** Duration of animation in milliseconds. */
   transitionDuration: PropTypes.number,
-  /** Delay before the tooltip will show up, in milliseconds */
+  /** Delay (in milliseconds) before the Tooltip will show. */
   enterDelay: PropTypes.number,
-  /** Apply styles to the tooltip element */
+  /** Apply styles to the Tooltip element. */
   style: PropTypes.object,
-  /** Apply styles to the tooltip arrow element */
+  /** Apply styles to the Tooltip arrow element. */
   arrowStyle: PropTypes.object
 };
 

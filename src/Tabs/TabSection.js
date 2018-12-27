@@ -8,7 +8,7 @@ const TabSection = ({ children, ...other }) => {
 };
 
 TabSection.propTypes = {
-  /** The content of the component */
+  /** The content of the component. */
   children: PropTypes.node
 };
 

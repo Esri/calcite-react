@@ -59,45 +59,45 @@ const Button = ({
 };
 
 Button.propTypes = {
-  /** The content of the component, text or icon */
+  /** The content of the component; text or icon. */
   children: PropTypes.node,
-  /** The html type property of the Button */
+  /** The HTML type property of the Button. */
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
-  /** Style prop used to render a transparent button */
+  /** Style prop used to render a transparent Button. */
   transparent: PropTypes.bool,
-  /** Style prop used to render a clear button */
+  /** Style prop used to render a clear Button. */
   clear: PropTypes.bool,
-  /** Style prop used to render a clear-gray button */
+  /** Style prop used to render a clear-gray Button. */
   clearGray: PropTypes.bool,
-  /** Style prop used to render a clear-white button */
+  /** Style prop used to render a clear-white Button. */
   clearWhite: PropTypes.bool,
-  /** Style prop used to render a white button */
+  /** Style prop used to render a white Button. */
   white: PropTypes.bool,
-  /** Style prop used to render an extra small button */
+  /** Style prop used to render an extra small Button. */
   extraSmall: PropTypes.bool,
-  /** Style prop used to render a small button */
+  /** Style prop used to render a small Button. */
   small: PropTypes.bool,
-  /** Style prop used to render a large button */
+  /** Style prop used to render a large Button. */
   large: PropTypes.bool,
-  /** Style prop used to render an extra large button */
+  /** Style prop used to render an extra large Button. */
   extraLarge: PropTypes.bool,
-  /** Style prop used to render a 100% width button */
+  /** Style prop used to render a 100% width Button. */
   fullWidth: PropTypes.bool,
-  /** Style prop used to render a 50% width button */
+  /** Style prop used to render a 50% width Button. */
   half: PropTypes.bool,
-  /** Style prop used to render a red button */
+  /** Style prop used to render a red Button. */
   red: PropTypes.bool,
-  /** Style prop used to render a green button */
+  /** Style prop used to render a green Button. */
   green: PropTypes.bool,
-  /** The html disabled property of the Button */
+  /** The HTML disabled property of the Button. */
   disabled: PropTypes.bool,
-  /** The html href property of the Button */
+  /** The HTML href property of the Button. */
   href: PropTypes.string,
-  /** The icon that will be displayed as the content of a Button */
+  /** The icon that will be displayed as the content of a Button. */
   icon: PropTypes.node,
-  /** A style prop used to adjust size and padding of buttons with only an icon as its content */
+  /** A style prop used to adjust size and padding of Buttons with only an icon as its content. */
   iconButton: PropTypes.bool,
-  /** The position of the icon in relation to other children in a Button */
+  /** The position of the icon in relation to other children in a Button. */
   iconPosition: PropTypes.oneOf(['after', 'before'])
 };
 

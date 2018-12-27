@@ -44,7 +44,7 @@ const AccordionSection = ({
 };
 
 AccordionSection.propTypes = {
-  /** The content of the component, should be AccordionTitle and AccordionContent */
+  /** The content of the component; should be AccordionTitle and AccordionContent. */
   children: PropTypes.node
 };
 

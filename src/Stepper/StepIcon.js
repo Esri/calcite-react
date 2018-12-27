@@ -90,7 +90,7 @@ const StepIcon = ({
 };
 
 StepIcon.propTypes = {
-  /** The content of the component */
+  /** The content of the component. */
   children: PropTypes.node
 };
 

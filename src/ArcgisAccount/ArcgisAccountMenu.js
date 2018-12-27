@@ -67,11 +67,11 @@ const ArcgisAccountMenu = ({
 };
 
 ArcgisAccountMenu.propTypes = {
-  /** AGOL user object */
+  /** AGOL user object. */
   user: PropTypes.object,
-  /** Text label for the Switch Account button */
+  /** Text label for the Switch Account button. */
   switchAccountLabel: PropTypes.string,
-  /** Text label for the Sign Out button */
+  /** Text label for the Sign Out button. */
   signOutLabel: PropTypes.string
 };
 

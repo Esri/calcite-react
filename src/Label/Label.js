@@ -7,15 +7,15 @@ const Label = ({ children, ...other }) => {
 };
 
 Label.propTypes = {
-  /** Content of the label */
+  /** Content of the Label. */
   children: PropTypes.node,
-  /** Blue style label */
+  /** Blue style Label. */
   blue: PropTypes.bool,
-  /** Green style label */
+  /** Green style Label. */
   green: PropTypes.bool,
-  /** Yellow style label */
+  /** Yellow style Label. */
   yellow: PropTypes.bool,
-  /** Red style label */
+  /** Red style Label. */
   red: PropTypes.bool
 };
 

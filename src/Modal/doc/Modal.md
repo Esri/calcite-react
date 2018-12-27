@@ -1,6 +1,6 @@
-Modals are meant to "take over" the screen and focus users attention on a dialog which presents the user with an opportunity to add, modify or create content. A modal should always be centered both vertically and horizontally within the browser window. When a modal is opened, the interface darkens and disables all other user interface elements in order to force a user to take an action required by their workflow. Two modals can't be open at once.
+Modals are meant to "take over" the screen and focus users attention on a dialog which presents the user with an opportunity to add, modify or create content. A Modal should always be centered both vertically and horizontally within the browser window. When a Modal is opened, the interface darkens and disables all other user interface elements in order to force a user to take an action required by their workflow. Two Modals can't be open at once.
 
-Note: A modal requires the `appElement` prop to be aria-compliant. Details on how to set this property can be found at http://reactcommunity.org/react-modal/accessibility/
+Note: A Modal requires the `appElement` prop to be aria-compliant. Details on how to set this property can be found at http://reactcommunity.org/react-modal/accessibility/
 
 Example: Create a DOM element dynamically and pass it via `appElement` prop to `Modal`
 

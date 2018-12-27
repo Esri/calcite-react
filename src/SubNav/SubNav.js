@@ -42,17 +42,17 @@ const SubNav = ({ children, blue, ...other }) => {
 };
 
 SubNav.propTypes = {
-  /** The content of the component */
+  /** The content of the component. */
   children: PropTypes.node,
-  /** A style prop to render the SubNav with a blue background */
+  /** A style prop to render the SubNav with a blue background. */
   blue: PropTypes.bool,
-  /** The background image src */
+  /** The background image src. */
   backgroundImage: PropTypes.node,
-  /** If true, the gradient is applied on top of the image */
+  /** If true, the gradient is applied on top of the image. */
   overlayGradient: PropTypes.bool,
-  /** The gradient overlay color to start from the left of the SubNav */
+  /** The gradient overlay color to start from the left of the SubNav. */
   gradientFromColor: PropTypes.string,
-  /** The gradient overlay color to end on the right of the SubNav */
+  /** The gradient overlay color to end on the right of the SubNav. */
   gradientToColor: PropTypes.string
 };
 

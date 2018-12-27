@@ -82,37 +82,37 @@ class ComboButton extends Component {
 }
 
 ComboButton.propTypes = {
-  /** The content of the component, should be a Menu with MenuItems for the dropdown */
+  /** The content of the component; should be a Menu with MenuItems for the dropdown. */
   children: PropTypes.node,
-  /** The html type property of the primary button */
+  /** The HTML type property of the primary ComboButton. */
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
-  /** Style prop used to render a clear button */
+  /** Style prop used to render a clear ComboButton. */
   clear: PropTypes.bool,
-  /** Style prop used to render a clear-gray button */
+  /** Style prop used to render a clear-gray ComboButton. */
   clearGray: PropTypes.bool,
-  /** Style prop used to render an extra small button */
+  /** Style prop used to render an extra small ComboButton. */
   extraSmall: PropTypes.bool,
-  /** Style prop used to render a small button */
+  /** Style prop used to render a small ComboButton. */
   small: PropTypes.bool,
-  /** Style prop used to render a large button */
+  /** Style prop used to render a large ComboButton. */
   large: PropTypes.bool,
-  /** Style prop used to render an extra large button */
+  /** Style prop used to render an extra large ComboButton. */
   extraLarge: PropTypes.bool,
-  /** Style prop used to render a 100% width button */
+  /** Style prop used to render a 100% width ComboButton. */
   fullWidth: PropTypes.bool,
-  /** Style prop used to render a 50% width button */
+  /** Style prop used to render a 50% width ComboButton. */
   half: PropTypes.bool,
-  /** Style prop used to render a red button */
+  /** Style prop used to render a red ComboButton. */
   red: PropTypes.bool,
-  /** Style prop used to render a green button */
+  /** Style prop used to render a green ComboButton. */
   green: PropTypes.bool,
-  /** The html disabled property of the primary button */
+  /** The HTML disabled property of the primary ComboButton. */
   disabled: PropTypes.bool,
-  /** The html href property of the primary button, results in rendering an anchor element */
+  /** The HTML href property of the primary ComboButton; results in rendering an anchor element. */
   href: PropTypes.string,
-  /** The icon that will be displayed as the content of a ComboButton */
+  /** The icon that will be displayed as the content of a ComboButton. */
   icon: PropTypes.node,
-  /** The position of the icon in relation to other children in a ComboButton */
+  /** The position of the icon in relation to other children in a ComboButton. */
   iconPosition: PropTypes.oneOf(['after', 'before'])
 };
 
