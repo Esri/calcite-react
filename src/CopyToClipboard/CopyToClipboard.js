@@ -70,15 +70,22 @@ class CopyToClipboard extends Component {
   };
 
   render() {
-    const { children, ...other } = this.props;
+    const {
+      children,
+      positionFixed,
+      appendToBody,
+      tooltipStyle,
+      ...other
+    } = this.props;
 
     const copyToClipboard = (
       <StyledCopyToClipboard {...other}>
         <StyledCopyToClipboardInput as="input" value={children} readOnly />
         <Tooltip
-          positionFixed={this.props.positionFixed}
-          appendToBody={this.props.appendToBody}
+          positionFixed={positionFixed}
+          appendToBody={appendToBody}
           title={this.getTooltipText()}
+          style={tooltipStyle}
         >
           <StyledCopyButton
             clear
@@ -104,7 +111,9 @@ CopyToClipboard.propTypes = {
   /** The tooltip will use position: fixed */
   positionFixed: PropTypes.bool,
   /** The tooltip will use appendToBody for positioning on the dom */
-  appendToBody: PropTypes.bool
+  appendToBody: PropTypes.bool,
+  /** Style definition passed to the tooltip popover */
+  tooltipStyle: PropTypes.object
 };
 
 CopyToClipboard.defaultProps = {
