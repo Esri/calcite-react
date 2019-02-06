@@ -1,3 +1,6 @@
+# Documentation
+You can find the full docs for Calcite React here: https://calcite-react.netlify.com
+
 # Calcite React
 
 Calcite React is a component library built in React and used by Esri. It is an
