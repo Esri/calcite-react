@@ -45,15 +45,20 @@ class ArcgisAccount extends Component {
     });
   };
 
-  _getThumbnail = (user, token) => {
+  _getThumbnail = (user, token, portal) => {
     const { username, thumbnail } = user;
     const _token = token || '';
-    return `https://www.arcgis.com/sharing/rest/community/users/${username}/info/${thumbnail}?token=${_token}`;
+    const _url = portal.allSSL ? 'https' : 'http';
+    return `${_url}://${
+      portal.portalHostname
+    }/sharing/rest/community/users/${username}/info/${thumbnail}?token=${_token}`;
   };
 
-  _getAvatar = (userInfo, token, size) => {
+  _getAvatar = (userInfo, token, portal, size) => {
     if (userInfo.thumbnail) {
-      return <Avatar src={this._getThumbnail(userInfo, token)} size={size} />;
+      return (
+        <Avatar src={this._getThumbnail(userInfo, token, portal)} size={size} />
+      );
     } else if (userInfo.firstName && userInfo.lastName) {
       let initials = userInfo.firstName[0] + userInfo.lastName[0];
       initials = initials.toUpperCase();
@@ -88,7 +93,12 @@ class ArcgisAccount extends Component {
         targetEl={
           <ArcgisAccountControl
             onClick={this.toggleAccountControl}
-            avatar={this._getAvatar(this.props.user, this.props.token, 32)}
+            avatar={this._getAvatar(
+              this.props.user,
+              this.props.token,
+              this.props.portal,
+              32
+            )}
             fullName={user.fullName}
             username={user.username}
             open={this.state.open}
@@ -103,7 +113,7 @@ class ArcgisAccount extends Component {
         <ArcgisAccountMenu
           user={user}
           portal={portal}
-          avatar={this._getAvatar(user, token, 120)}
+          avatar={this._getAvatar(user, token, portal, 120)}
           style={{ width: '410px' }}
           hideSwitchAccount={hideSwitchAccount}
           onRequestSwitchAccount={onRequestSwitchAccount}
