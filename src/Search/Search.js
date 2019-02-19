@@ -21,6 +21,7 @@ import {
 import { StyledSelectMenu } from '../Select/Select-styled';
 import { MenuItem } from '../Menu';
 import Tooltip from '../Tooltip';
+import { ListContext } from '../List/List';
 
 class Search extends Component {
   constructor(props) {
@@ -304,99 +305,104 @@ class Search extends Component {
       300;
 
     return (
-      <StyledSearchContainer
-        style={containerStyle}
-        fullWidth={fullWidth}
-        minimal={minimal}
-      >
-        <StyledMagnifyIcon filled size={16} />
-        <Manager style={ManagerStyle}>
-          <Downshift
-            itemToString={this.itemToString}
-            inputValue={inputValue}
-            selectedItem={selectedItem}
-            onChange={onChange}
-            onUserAction={this.handleOnUserAction}
+      <ListContext.Consumer>
+        {({ listContext }) => (
+          <StyledSearchContainer
+            style={containerStyle}
+            fullWidth={fullWidth}
+            minimal={minimal}
           >
-            {({
-              getRootProps,
-              getInputProps,
-              getItemProps,
-              highlightedIndex,
-              isOpen
-            }) => (
-              <StyledSearchInputWrapper
-                {...getRootProps({}, { suppressRefError: true })}
+            <StyledMagnifyIcon filled size={16} />
+            <Manager style={ManagerStyle}>
+              <Downshift
+                itemToString={this.itemToString}
+                inputValue={inputValue}
+                selectedItem={selectedItem}
+                onChange={onChange}
+                onUserAction={this.handleOnUserAction}
               >
-                <Reference style={{ display: 'inline-block' }}>
-                  {({ ref }) => (
-                    <StyledSearch
-                      as="input"
-                      {...getInputProps({
-                        id: `${this._generatedId}Reference`,
-                        placeholder,
-                        minimal,
-                        fullWidth,
-                        ref,
-                        ...other
-                      })}
-                    />
-                  )}
-                </Reference>
-                {isOpen && this.state.itemsToShow
-                  ? this._getPopper(
-                      <Popper
-                        positionFixed={positionFixed}
-                        style={{
-                          ...this.getFullWidthStyle(fullWidth),
-                          ...PopperStyle
-                        }}
-                        placement={this.props.placement}
-                        modifiers={{
-                          preventOverflow: {
-                            enabled: usePreventOverflow
-                          },
-                          hide: {
-                            enabled: usePreventOverflow
-                          }
-                        }}
-                      >
-                        {({ ref, style, placement, arrowProps }) => (
-                          <StyledSelectMenu
-                            ref={ref}
-                            fullWidth={fullWidth}
+                {({
+                  getRootProps,
+                  getInputProps,
+                  getItemProps,
+                  highlightedIndex,
+                  isOpen
+                }) => (
+                  <StyledSearchInputWrapper
+                    {...getRootProps({}, { suppressRefError: true })}
+                  >
+                    <Reference style={{ display: 'inline-block' }}>
+                      {({ ref }) => (
+                        <StyledSearch
+                          as="input"
+                          {...getInputProps({
+                            id: `${this._generatedId}Reference`,
+                            placeholder,
+                            minimal,
+                            fullWidth,
+                            ref,
+                            selectableListFilter: listContext.selectable,
+                            ...other
+                          })}
+                        />
+                      )}
+                    </Reference>
+                    {isOpen && this.state.itemsToShow
+                      ? this._getPopper(
+                          <Popper
+                            positionFixed={positionFixed}
                             style={{
-                              ...style,
-                              ...menuStyle
+                              ...this.getFullWidthStyle(fullWidth),
+                              ...PopperStyle
                             }}
-                            isOpen={isOpen}
-                            data-placement={placement}
-                          >
-                            {this.getMenuItems(
-                              this.state.itemsToShow,
-                              virtualized,
-                              {
-                                highlightedIndex,
-                                menuHeight,
-                                virtualizedRowHeight,
-                                virtualizedMenuWidth,
-                                getItemProps,
-                                selectedItem
+                            placement={this.props.placement}
+                            modifiers={{
+                              preventOverflow: {
+                                enabled: usePreventOverflow
+                              },
+                              hide: {
+                                enabled: usePreventOverflow
                               }
+                            }}
+                          >
+                            {({ ref, style, placement, arrowProps }) => (
+                              <StyledSelectMenu
+                                ref={ref}
+                                fullWidth={fullWidth}
+                                style={{
+                                  ...style,
+                                  ...menuStyle
+                                }}
+                                isOpen={isOpen}
+                                data-placement={placement}
+                              >
+                                {this.getMenuItems(
+                                  this.state.itemsToShow,
+                                  virtualized,
+                                  {
+                                    highlightedIndex,
+                                    menuHeight,
+                                    virtualizedRowHeight,
+                                    virtualizedMenuWidth,
+                                    getItemProps,
+                                    selectedItem
+                                  }
+                                )}
+                              </StyledSelectMenu>
                             )}
-                          </StyledSelectMenu>
-                        )}
-                      </Popper>,
-                      appendToBody
-                    )
-                  : null}
-              </StyledSearchInputWrapper>
-            )}
-          </Downshift>
-        </Manager>
-        {this.getShortcutIcon()}
-        {this.getClearSearchIcon()}
-      </StyledSearchContainer>
+                          </Popper>,
+                          appendToBody
+                        )
+                      : null}
+                  </StyledSearchInputWrapper>
+                )}
+              </Downshift>
+            </Manager>
+            {this.getShortcutIcon()}
+            {this.getClearSearchIcon()}
+          </StyledSearchContainer>
+        )}
+      </ListContext.Consumer>
     );
   }
 }

@@ -23,6 +23,8 @@ const StyledMagnifyIcon = styled(MagnifyingGlassIcon)`
   bottom: 0.65em;
   left: 0.5em;
   color: ${props => props.theme.palette.darkerGray};
+  z-index: 1;
+  pointer-events: none;
 `;
 
 const StyledShortcutCharacter = styled.div`
@@ -102,6 +104,19 @@ const StyledSearch = styled(CalciteInput)`
       &:focus {
         box-shadow: none;
         border-bottom-color: ${props => props.theme.palette.blue};
+      }
+    `};
+
+  ${props =>
+    props.selectableListFilter &&
+    css`
+      margin: 0;
+      width: 100%;
+      border-color: ${props => props.theme.palette.lighterGray};
+      box-shadow: none;
+
+      &:focus {
+        background-color: ${props => props.theme.palette.white};
       }
     `};
 `;

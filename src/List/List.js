@@ -7,7 +7,8 @@ import { StyledList } from './List-styled';
 const ListContext = createContext({
   listContext: {
     nested: undefined,
-    open: undefined
+    open: undefined,
+    minmal: undefined
   }
 });
 
@@ -18,16 +19,27 @@ class List extends Component {
   }
 
   render() {
+    const {
+      children,
+      nested,
+      open,
+      minimal,
+      selectable,
+      ...other
+    } = this.props;
+
     const listContext = {
-      nested: this.props.nested,
-      open: this.props.open
+      nested,
+      open,
+      minimal,
+      selectable
     };
     const listNode = document.getElementById(this.listId);
 
     let listMaxHeight = 'none';
-    if (this.props.open === false) {
+    if (open === false) {
       listMaxHeight = '0px';
-    } else if (listNode && this.props.nested) {
+    } else if (listNode && nested) {
       listMaxHeight = 0;
       for (let i = 0; i < listNode.childNodes.length; i++) {
         const child = listNode.childNodes[i];
@@ -38,8 +50,16 @@ class List extends Component {
 
     return (
       <ListContext.Provider value={{ listContext }}>
-        <StyledList id={this.listId} maxHeight={listMaxHeight} {...this.props}>
-          {this.props.children}
+        <StyledList
+          id={this.listId}
+          maxHeight={listMaxHeight}
+          nested={nested}
+          open={open}
+          minimal={minimal}
+          selectable={selectable}
+          {...other}
+        >
+          {children}
         </StyledList>
       </ListContext.Provider>
     );
@@ -52,7 +72,11 @@ List.propTypes = {
   /** Applied when the List is imbedded inside another List. */
   nested: PropTypes.bool,
   /** Whether the List should be collapsed or expanded. */
-  open: PropTypes.bool
+  open: PropTypes.bool,
+  /** Minimal styling for the List */
+  minimal: PropTypes.bool,
+  /** Selectable styling for the List */
+  selectable: PropTypes.bool
 };
 
 List.defaultProps = {};
