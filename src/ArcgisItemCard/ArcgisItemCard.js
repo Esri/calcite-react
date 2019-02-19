@@ -17,11 +17,13 @@ const ArcgisItemCard = ({
   showThumbnail,
   dateFormatter,
   maxDescriptionLength,
+  portal,
   ...other
 }) => {
   let imageEl;
+  let hostname = portal ? portal.portalHostname : 'arcgis.com';
   if (showThumbnail) {
-    const imageSource = `https://arcgis.com/sharing/rest/content/items/${
+    const imageSource = `https://${hostname}/sharing/rest/content/items/${
       item.id
     }/info/${item.thumbnail}`;
     imageEl = <StyledItemCardImageWrap imageSource={imageSource} />;
@@ -93,7 +95,9 @@ ArcgisItemCard.propTypes = {
   /** A function that can be provided to customize the formatting of dates. */
   dateFormatter: PropTypes.func,
   /** Number of characters to use before truncating the description text. */
-  maxDescriptionLength: PropTypes.number
+  maxDescriptionLength: PropTypes.number,
+  /** AGOL portal object - if not specified will default to ArcGIS Online */
+  portal: PropTypes.object
 };
 
 ArcgisItemCard.defaultProps = {
