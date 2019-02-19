@@ -9,7 +9,12 @@ const ListHeader = ({ children, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
-        <StyledListHeader as="span" {...other}>
+        <StyledListHeader
+          as="span"
+          minimal={listContext.minimal}
+          selectable={listContext.selectable}
+          {...other}
+        >
           {children}
         </StyledListHeader>
       )}

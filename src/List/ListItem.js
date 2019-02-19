@@ -9,11 +9,23 @@ import {
 
 import { ListContext } from './List';
 
-const ListItem = ({ children, leftNode, rightNode, ...other }) => {
+const ListItem = ({
+  children,
+  leftNode,
+  rightNode,
+  active,
+  filterItem,
+  ...other
+}) => {
   const getLeftNode = (listContext, leftNode) => {
     if (leftNode) {
       return (
-        <StyledListSideContainer nested={listContext.nested}>
+        <StyledListSideContainer
+          minimal={listContext.minimal}
+          selectable={listContext.selectable}
+          nested={listContext.nested}
+          active={active}
+        >
           {leftNode}
         </StyledListSideContainer>
       );
@@ -23,7 +35,12 @@ const ListItem = ({ children, leftNode, rightNode, ...other }) => {
   const getRightNode = (listContext, rightNode) => {
     if (rightNode) {
       return (
-        <StyledListSideContainer nested={listContext.nested}>
+        <StyledListSideContainer
+          minimal={listContext.minimal}
+          selectable={listContext.selectable}
+          nested={listContext.nested}
+          active={active}
+        >
           {rightNode}
         </StyledListSideContainer>
       );
@@ -33,7 +50,14 @@ const ListItem = ({ children, leftNode, rightNode, ...other }) => {
   return (
     <ListContext.Consumer>
       {({ listContext }) => (
-        <StyledListItem nested={listContext.nested} {...other}>
+        <StyledListItem
+          minimal={listContext.minimal}
+          selectable={listContext.selectable}
+          nested={listContext.nested}
+          filterItem={filterItem}
+          active={active}
+          {...other}
+        >
           {getLeftNode(listContext, leftNode)}
           <StyledListTextContainer>{children}</StyledListTextContainer>
           {getRightNode(listContext, rightNode)}
