@@ -73,7 +73,11 @@ ListItem.propTypes = {
   /** Content placed to the left of the ListItem. */
   leftNode: PropTypes.node,
   /** Content placed to the right of the ListItem. */
-  rightNode: PropTypes.node
+  rightNode: PropTypes.node,
+  /** Toggle the active style of a ListItem */
+  active: PropTypes.bool,
+  /** Add some styles to display a Search element properly inside a ListItem  */
+  filterItem: PropTypes.bool
 };
 
 ListItem.defaultProps = {};

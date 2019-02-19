@@ -74,7 +74,9 @@ List.propTypes = {
   /** Whether the List should be collapsed or expanded. */
   open: PropTypes.bool,
   /** Minimal styling for the List */
-  minimal: PropTypes.bool
+  minimal: PropTypes.bool,
+  /** Selectable styling for the List */
+  selectable: PropTypes.bool
 };
 
 List.defaultProps = {};
