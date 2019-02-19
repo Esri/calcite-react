@@ -7,7 +7,7 @@ import {
   StyledLoaderBars
 } from './Loader-styled';
 
-const Loader = ({ text, ...other }) => {
+const Loader = ({ text, sizeRatio, ...other }) => {
   const getLoaderText = text => {
     if (text) {
       return <StyledLoaderText>{text}</StyledLoaderText>;
@@ -16,7 +16,7 @@ const Loader = ({ text, ...other }) => {
 
   return (
     <StyledLoader {...other}>
-      <StyledLoaderBars />
+      <StyledLoaderBars sizeRatio={sizeRatio} />
       {getLoaderText(text)}
     </StyledLoader>
   );
@@ -24,10 +24,14 @@ const Loader = ({ text, ...other }) => {
 
 Loader.propTypes = {
   /** Text displayed below the loading bars. */
-  text: PropTypes.string
+  text: PropTypes.string,
+  /** Relative size of the Loader component */
+  sizeRatio: PropTypes.number
 };
 
-Loader.defaultProps = {};
+Loader.defaultProps = {
+  sizeRatio: 17
+};
 
 Loader.displayName = 'Loader';
 
