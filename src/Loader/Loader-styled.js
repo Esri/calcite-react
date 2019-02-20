@@ -51,7 +51,7 @@ const loaderPseudoElements = css`
 
 const StyledLoader = styled.div`
   position: relative;
-  min-height: 3rem;
+  min-height: ${props => props.sizeRatio * 3}px;
 `;
 
 const StyledLoaderBars = styled.div`
@@ -80,7 +80,7 @@ const StyledLoaderBars = styled.div`
 
 const StyledLoaderText = styled.div`
   text-align: center;
-  padding-top: 3.5rem;
+  padding-top: ${props => props.sizeRatio * 3.5}px;
 `;
 
 export { StyledLoader, StyledLoaderBars, StyledLoaderText };

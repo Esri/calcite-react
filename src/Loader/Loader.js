@@ -8,15 +8,17 @@ import {
 } from './Loader-styled';
 
 const Loader = ({ text, sizeRatio, ...other }) => {
+  const sizePx = sizeRatio * 17;
+
   const getLoaderText = text => {
     if (text) {
-      return <StyledLoaderText>{text}</StyledLoaderText>;
+      return <StyledLoaderText sizeRatio={sizePx}>{text}</StyledLoaderText>;
     }
   };
 
   return (
-    <StyledLoader {...other}>
-      <StyledLoaderBars sizeRatio={sizeRatio} />
+    <StyledLoader sizeRatio={sizePx} {...other}>
+      <StyledLoaderBars sizeRatio={sizePx} />
       {getLoaderText(text)}
     </StyledLoader>
   );
@@ -25,12 +27,12 @@ const Loader = ({ text, sizeRatio, ...other }) => {
 Loader.propTypes = {
   /** Text displayed below the loading bars. */
   text: PropTypes.string,
-  /** Relative size of the Loader component */
+  /** Relative size of the Loader component. Value must be greater than 0. A value of 1 results in a 50px height Loader */
   sizeRatio: PropTypes.number
 };
 
 Loader.defaultProps = {
-  sizeRatio: 17
+  sizeRatio: 1
 };
 
 Loader.displayName = 'Loader';
