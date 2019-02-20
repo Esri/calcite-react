@@ -3,10 +3,10 @@ import { unitCalc } from '../utils/helpers';
 import { CalciteTheme } from '../CalciteThemeProvider';
 
 const loaderVariables = {
-  loaderWidth: '0.85rem',
-  loaderHeight: '2rem',
-  loaderZoom: '0.5rem',
-  loaderSpacing: '1.25rem',
+  loaderWidth: '0.85em',
+  loaderHeight: '2em',
+  loaderZoom: '0.5em',
+  loaderSpacing: '1.25em',
   loaderSpeed: '0.8s',
   loaderDelay: '0.16s',
   loaderBlue: CalciteTheme.palette.blue
@@ -22,7 +22,7 @@ const loadKeyframes = keyframes`
   }
   40% {
    opacity: 1;
-   box-shadow: 0 -0.5rem ${loaderVariables.loaderBlue};
+   box-shadow: 0 -0.5em ${loaderVariables.loaderBlue};
    height: ${unitCalc(
      loaderVariables.loaderHeight,
      loaderVariables.loaderZoom,
@@ -51,7 +51,7 @@ const loaderPseudoElements = css`
 
 const StyledLoader = styled.div`
   position: relative;
-  min-height: 3rem;
+  min-height: ${props => props.sizeRatio * 3}px;
 `;
 
 const StyledLoaderBars = styled.div`
@@ -61,8 +61,8 @@ const StyledLoaderBars = styled.div`
   margin: auto;
   position: absolute;
   right: ${props =>
-    `calc(50% - ${parseFloat(loaderVariables.loaderWidth) / 2}rem)`};
-  font-size: 11px;
+    `calc(50% - ${parseFloat(loaderVariables.loaderWidth) / 2}em)`};
+  font-size: ${props => props.sizeRatio}px;
   animation-delay: ${loaderVariables.loaderDelay};
   margin: ${props => unitCalc(loaderVariables.loaderHeight, 0.25, '*')} 0 0;
 
@@ -80,7 +80,7 @@ const StyledLoaderBars = styled.div`
 
 const StyledLoaderText = styled.div`
   text-align: center;
-  padding-top: 3.5rem;
+  padding-top: ${props => props.sizeRatio * 3.5}px;
 `;
 
 export { StyledLoader, StyledLoaderBars, StyledLoaderText };
