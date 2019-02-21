@@ -5,6 +5,7 @@ route: /loader
 
 import { Playground, PropsTable } from 'docz';
 import GuideExample from '../../../docz/GuideExample';
+import EsriColors from '../../CalciteThemeProvider/EsriColors';
 
 import Loader from '../';
 
@@ -12,6 +13,12 @@ import Loader from '../';
 
 The Loader element is a placeholder while content is being retrieved or
 rendered.
+
+#### Import Syntax
+
+```js
+import Loader from 'calcite-react/Loader'
+```
 
 ## Basic Usage
 
@@ -23,6 +30,21 @@ rendered.
 
 <Playground>
   <Loader text="Loading..." />
+</Playground>
+
+## Custom Size
+
+<Playground>
+  <Loader sizeRatio={2} />
+  <Loader sizeRatio={0.4} />
+</Playground>
+
+## Custom Color
+
+<Playground>
+  <Loader color="tomato" />
+  <Loader color="#1E90FF" />
+  <Loader color={EsriColors.Calcite_Gray_300} />
 </Playground>
 
 ## Props
