@@ -12,17 +12,17 @@ const loaderVariables = {
   loaderBlue: CalciteTheme.palette.blue
 };
 
-const loadKeyframes = keyframes`
+const loadKeyframes = color => keyframes`
   0%,
   80%,
   100% {
    opacity: .75;
-   box-shadow: 0 0 ${loaderVariables.loaderBlue};
+   box-shadow: 0 0 ${color || loaderVariables.loaderBlue};
    height: ${loaderVariables.loaderHeight};
   }
   40% {
    opacity: 1;
-   box-shadow: 0 -0.5em ${loaderVariables.loaderBlue};
+   box-shadow: 0 -0.5em ${color || loaderVariables.loaderBlue};
    height: ${unitCalc(
      loaderVariables.loaderHeight,
      loaderVariables.loaderZoom,
@@ -31,19 +31,19 @@ const loadKeyframes = keyframes`
   }
 `;
 
-const loadAnimation = css`
-  ${loadKeyframes} ${loaderVariables.loaderSpeed} infinite ease-in-out;
+const loadAnimation = color => css`
+  ${loadKeyframes(color)} ${loaderVariables.loaderSpeed} infinite ease-in-out;
 `;
 
-const loaderStyles = css`
-  background: ${loaderVariables.loaderBlue};
-  animation: ${loadAnimation};
+const loaderStyles = color => css`
+  background: ${color || loaderVariables.loaderBlue};
+  animation: ${loadAnimation(color)};
   width: ${loaderVariables.loaderWidth};
   height: ${loaderVariables.loaderHeight};
 `;
 
-const loaderPseudoElements = css`
-  ${loaderStyles};
+const loaderPseudoElements = color => css`
+  ${loaderStyles(color)};
   position: absolute;
   top: 0;
   content: '';
@@ -55,7 +55,7 @@ const StyledLoader = styled.div`
 `;
 
 const StyledLoaderBars = styled.div`
-  ${loaderStyles};
+  ${props => loaderStyles(props.color)};
 
   text-indent: -9999em;
   margin: auto;
@@ -67,12 +67,12 @@ const StyledLoaderBars = styled.div`
   margin: ${props => unitCalc(loaderVariables.loaderHeight, 0.25, '*')} 0 0;
 
   &:before {
-    ${loaderPseudoElements};
+    ${props => loaderPseudoElements(props.color)};
     left: -${loaderVariables.loaderSpacing};
   }
 
   &:after {
-    ${loaderPseudoElements};
+    ${props => loaderPseudoElements(props.color)};
     left: ${loaderVariables.loaderSpacing};
     animation-delay: ${unitCalc(loaderVariables.loaderDelay, 2, '*')};
   }
