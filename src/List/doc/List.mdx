@@ -12,14 +12,23 @@ import List, {
   ListItemSubtitle
 } from '../';
 
+import {CalciteA} from '../../Elements';
+import Search from '../../Search';
+
 import SendIcon from 'mdi-react/SendIcon';
 import EmailOpenIcon from 'mdi-react/EmailOpenIcon';
 import InboxIcon from 'mdi-react/InboxIcon';
-import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
-import ChevronUpIcon from 'mdi-react/ChevronUpIcon';
+import AngleDownIcon from 'mdi-react/ChevronDownIcon';
+import AngleUpIcon from 'mdi-react/ChevronUpIcon';
 import StarIcon from 'mdi-react/StarIcon';
 import EmailIcon from 'mdi-react/EmailIcon';
 import CommentAlertIcon from 'mdi-react/CommentAlertIcon';
+
+import ChevronDownIcon from 'calcite-ui-icons-react/ChevronDownIcon';
+import ChevronRightIcon from 'calcite-ui-icons-react/ChevronRightIcon';
+import FolderIcon from 'calcite-ui-icons-react/FolderIcon';
+import FolderOpenIcon from 'calcite-ui-icons-react/FolderOpenIcon';
+import HomeIcon from 'calcite-ui-icons-react/HomeIcon';
 
 import AmazonIcon from 'mdi-react/AmazonIcon';
 import AzureIcon from 'mdi-react/AzureIcon';
@@ -38,6 +47,17 @@ and text.
 
 Lists are best suited for similar data types.
 
+#### Import Syntax
+
+```js
+import List, {
+  ListItem,
+  ListHeader,
+  ListItemTitle,
+  ListItemSubtitle
+} from 'calcite-react/List';
+``` 
+
 ## Basic Usage
 
 <Playground>
@@ -52,7 +72,7 @@ Lists are best suited for similar data types.
     </ListItem>
     <ListItem
       leftNode={<InboxIcon />}
-      rightNode={<ChevronUpIcon style={{ width: '24px', height: '24px' }} />}
+      rightNode={<AngleUpIcon style={{ width: '24px', height: '24px' }} />}
     >
       <ListItemTitle>Inbox</ListItemTitle>
       <ListItemSubtitle>3 Items</ListItemSubtitle>
@@ -95,11 +115,11 @@ Lists are best suited for similar data types.
           let arrowIcon;
           if (this.state.open) {
             arrowIcon = (
-              <ChevronUpIcon style={{ width: '24px', height: '24px' }} />
+              <AngleUpIcon style={{ width: '24px', height: '24px' }} />
             );
           } else {
             arrowIcon = (
-              <ChevronDownIcon style={{ width: '24px', height: '24px' }} />
+              <AngleDownIcon style={{ width: '24px', height: '24px' }} />
             );
           }
 
@@ -140,6 +160,64 @@ Lists are best suited for similar data types.
       return <ListExample />;
     }}
 
+</Playground>
+
+## Minimal List
+
+<Playground style={{background: "#F4F4F4"}}>
+  <List minimal style={{ maxWidth: '280px' }}>
+    <ListHeader>Filters</ListHeader>
+    <ListItem leftNode={<ChevronRightIcon size={16} />}>
+      <ListItemTitle>Item Type</ListItemTitle>
+    </ListItem>
+    <ListItem leftNode={<ChevronRightIcon size={16} />}>
+      <ListItemTitle>Date Modified</ListItemTitle>
+    </ListItem>
+    <ListItem
+      leftNode={<ChevronDownIcon size={16} />}
+      rightNode={<CalciteA>Clear</CalciteA>}
+      open
+    >
+      <ListItemTitle>Date Created</ListItemTitle>
+    </ListItem>
+    <List minimal nested>
+      <ListItem>
+        <ListItemTitle>Today</ListItemTitle>
+      </ListItem>
+      <ListItem active>
+        <ListItemTitle>Yesterday</ListItemTitle>
+      </ListItem>
+      <ListItem>
+        <ListItemTitle>Last 7 Days</ListItemTitle>
+      </ListItem>
+      <ListItem>
+        <ListItemTitle>Last 30 Days</ListItemTitle>
+      </ListItem>
+      <ListItem>
+        <ListItemTitle>Custom Range...</ListItemTitle>
+      </ListItem>
+    </List>
+  </List>
+</Playground>
+
+## Selectable List
+
+<Playground style={{background: "#F4F4F4"}}>
+  <List selectable style={{ maxWidth: '280px' }}>
+    <ListHeader>Folders</ListHeader>
+    <ListItem filterItem>
+      <Search placeholder="Filter folders" />
+    </ListItem>
+    <ListItem active leftNode={<FolderOpenIcon size={16} />}>
+      <ListItemTitle>All My Content</ListItemTitle>
+    </ListItem>
+    <ListItem leftNode={<HomeIcon size={16} />}>
+      <ListItemTitle>james_t_kirk</ListItemTitle>
+    </ListItem>
+    <ListItem leftNode={<FolderIcon size={16} />}>
+      <ListItemTitle>M Class Planets</ListItemTitle>
+    </ListItem>
+  </List>
 </Playground>
 
 ## Lots of Content

@@ -3,26 +3,26 @@ import { unitCalc } from '../utils/helpers';
 import { CalciteTheme } from '../CalciteThemeProvider';
 
 const loaderVariables = {
-  loaderWidth: '0.85rem',
-  loaderHeight: '2rem',
-  loaderZoom: '0.5rem',
-  loaderSpacing: '1.25rem',
+  loaderWidth: '0.85em',
+  loaderHeight: '2em',
+  loaderZoom: '0.5em',
+  loaderSpacing: '1.25em',
   loaderSpeed: '0.8s',
   loaderDelay: '0.16s',
   loaderBlue: CalciteTheme.palette.blue
 };
 
-const loadKeyframes = keyframes`
+const loadKeyframes = color => keyframes`
   0%,
   80%,
   100% {
    opacity: .75;
-   box-shadow: 0 0 ${loaderVariables.loaderBlue};
+   box-shadow: 0 0 ${color || loaderVariables.loaderBlue};
    height: ${loaderVariables.loaderHeight};
   }
   40% {
    opacity: 1;
-   box-shadow: 0 -0.5rem ${loaderVariables.loaderBlue};
+   box-shadow: 0 -0.5em ${color || loaderVariables.loaderBlue};
    height: ${unitCalc(
      loaderVariables.loaderHeight,
      loaderVariables.loaderZoom,
@@ -31,19 +31,19 @@ const loadKeyframes = keyframes`
   }
 `;
 
-const loadAnimation = css`
-  ${loadKeyframes} ${loaderVariables.loaderSpeed} infinite ease-in-out;
+const loadAnimation = color => css`
+  ${loadKeyframes(color)} ${loaderVariables.loaderSpeed} infinite ease-in-out;
 `;
 
-const loaderStyles = css`
-  background: ${loaderVariables.loaderBlue};
-  animation: ${loadAnimation};
+const loaderStyles = color => css`
+  background: ${color || loaderVariables.loaderBlue};
+  animation: ${loadAnimation(color)};
   width: ${loaderVariables.loaderWidth};
   height: ${loaderVariables.loaderHeight};
 `;
 
-const loaderPseudoElements = css`
-  ${loaderStyles};
+const loaderPseudoElements = color => css`
+  ${loaderStyles(color)};
   position: absolute;
   top: 0;
   content: '';
@@ -51,28 +51,28 @@ const loaderPseudoElements = css`
 
 const StyledLoader = styled.div`
   position: relative;
-  min-height: 3rem;
+  min-height: ${props => props.sizeRatio * 3}px;
 `;
 
 const StyledLoaderBars = styled.div`
-  ${loaderStyles};
+  ${props => loaderStyles(props.color)};
 
   text-indent: -9999em;
   margin: auto;
   position: absolute;
   right: ${props =>
-    `calc(50% - ${parseFloat(loaderVariables.loaderWidth) / 2}rem)`};
-  font-size: 11px;
+    `calc(50% - ${parseFloat(loaderVariables.loaderWidth) / 2}em)`};
+  font-size: ${props => props.sizeRatio}px;
   animation-delay: ${loaderVariables.loaderDelay};
   margin: ${props => unitCalc(loaderVariables.loaderHeight, 0.25, '*')} 0 0;
 
   &:before {
-    ${loaderPseudoElements};
+    ${props => loaderPseudoElements(props.color)};
     left: -${loaderVariables.loaderSpacing};
   }
 
   &:after {
-    ${loaderPseudoElements};
+    ${props => loaderPseudoElements(props.color)};
     left: ${loaderVariables.loaderSpacing};
     animation-delay: ${unitCalc(loaderVariables.loaderDelay, 2, '*')};
   }
@@ -80,7 +80,7 @@ const StyledLoaderBars = styled.div`
 
 const StyledLoaderText = styled.div`
   text-align: center;
-  padding-top: 3.5rem;
+  padding-top: ${props => props.sizeRatio * 3.5}px;
 `;
 
 export { StyledLoader, StyledLoaderBars, StyledLoaderText };
