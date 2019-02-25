@@ -32,50 +32,83 @@ Try not to include too many optional fields, as it will make the form harder to 
 ## Basic Usage
 
 <Playground>
-  <Form>
-    <FormControl>
-      <TextField defaultValue="Map Man" label="Name:" />
-    </FormControl>
-    <FormControl error>
-      <TextField defaultValue="map_man@yahoo.com" label="Email:" />
-      <FormHelperText>Really... Yahoo?</FormHelperText>
-    </FormControl>
-    <FormControl>
-      <FormControlLabel>State</FormControlLabel>
-      <Select selectedValue="co" onChange={() => true} fullWidth>
-        <MenuItem value="ca">California</MenuItem>
-        <MenuItem value="co">Colorado</MenuItem>
-      </Select>
-    </FormControl>
-    <FormControl success>
-      <TextField fullWidth defaultValue="Denver" label="City:" />
-      <FormHelperText>City checks out</FormHelperText>
-    </FormControl>
-    <FormControl>
-      <DatePicker
-      date={this.state.date}
-      onDateChange={this.onDateChange}
-      focused={this.state.datePickerFocused}
-      onFocusChange={this.onFocusChange}
-    />
-    </FormControl>
-    <FormControl>
-      <Fieldset name="storyRadioGroup">
-        <Legend>Gender</Legend>
-        <Radio>Male</Radio>
-        <Radio>Female</Radio>
-        <Radio>Other</Radio>
-      </Fieldset>
-    </FormControl>
-    <FormControl>
-      <Fieldset name="storyCheckboxGroup">
-        <Legend>Pets</Legend>
-        <Checkbox>Dog</Checkbox>
-        <Checkbox>Cat</Checkbox>
-        <Checkbox>Other</Checkbox>
-      </Fieldset>
-    </FormControl>
-  </Form>
+  {() => {
+  class DatePickerExample extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          date: null,
+          datePickerFocused: false
+        };
+
+        this.onDateChange = this.onDateChange.bind(this);
+        this.onFocusChange = this.onFocusChange.bind(this);
+      }
+
+      onDateChange(date) {
+        this.setState({
+          date
+        });
+      };
+
+      onFocusChange({ focused }) {
+        this.setState({
+          datePickerFocused: focused
+        });
+      };
+
+      render() {
+        return (
+          <Form>
+            <FormControl>
+              <TextField defaultValue="Map Man" label="Name:" />
+            </FormControl>
+            <FormControl error>
+              <TextField defaultValue="map_man@yahoo.com" label="Email:" />
+              <FormHelperText>Really... Yahoo?</FormHelperText>
+            </FormControl>
+            <FormControl>
+              <FormControlLabel>State</FormControlLabel>
+              <Select selectedValue="co" onChange={() => true} fullWidth>
+                <MenuItem value="ca">California</MenuItem>
+                <MenuItem value="co">Colorado</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl success>
+              <TextField fullWidth defaultValue="Denver" label="City:" />
+              <FormHelperText>City checks out</FormHelperText>
+            </FormControl>
+            <FormControl>
+              <DatePicker
+              date={this.state.date}
+              onDateChange={this.onDateChange}
+              focused={this.state.datePickerFocused}
+              onFocusChange={this.onFocusChange}
+            />
+            </FormControl>
+            <FormControl>
+              <Fieldset name="storyRadioGroup">
+                <Legend>Gender</Legend>
+                <Radio>Male</Radio>
+                <Radio>Female</Radio>
+                <Radio>Other</Radio>
+              </Fieldset>
+            </FormControl>
+            <FormControl>
+              <Fieldset name="storyCheckboxGroup">
+                <Legend>Pets</Legend>
+                <Checkbox>Dog</Checkbox>
+                <Checkbox>Cat</Checkbox>
+                <Checkbox>Other</Checkbox>
+              </Fieldset>
+            </FormControl>
+          </Form>
+        );
+      }
+    }
+
+    return <DatePickerExample />;
+  }}
 </Playground>
 
 ## Horizontal Forms
