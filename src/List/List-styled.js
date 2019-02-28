@@ -35,6 +35,12 @@ const StyledList = styled(StyledSideNav)`
     props.selectable &&
     css`
       border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
+
+      ${props =>
+        props.nested &&
+        css`
+          border-bottom: none;
+        `};
     `};
 `;
 
@@ -136,7 +142,7 @@ const StyledListItem = styled.div`
       }
 
       ${props =>
-        (props.minimal || props.selectable) &&
+        props.minimal &&
         css`
           border: none;
           padding: 0 ${props => unitCalc(props.theme.baseline, 2, '/')};
