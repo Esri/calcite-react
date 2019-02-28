@@ -23,7 +23,7 @@ import DatePicker from '../../DatePicker';
 
 # Form
 
-Labels for form elements should describe what the field is. Labels should not be followed by a semicolon. Placeholder text should describe the specifics about formatting or examples for the input text. Placeholder text is optional, and should never be used to replace a label.
+Labels for form elements should describe what the field is. Labels should not be followed by a colon. Placeholder text should describe the specifics about formatting or examples for the input text. Placeholder text is optional, and should never be used to replace a label.
 
 Required form fields should have the required attribute. Optional form fields should be clearly marked with "(optional)".
 
@@ -80,7 +80,7 @@ import Form, {
               <FormHelperText>Really... Yahoo?</FormHelperText>
             </FormControl>
             <FormControl>
-              <FormControlLabel>State:</FormControlLabel>
+              <FormControlLabel>State</FormControlLabel>
               <Select selectedValue="co" onChange={() => true} fullWidth>
                 <MenuItem value="ca">California</MenuItem>
                 <MenuItem value="co">Colorado</MenuItem>
@@ -100,7 +100,7 @@ import Form, {
             </FormControl>
             <FormControl>
               <Fieldset name="storyRadioGroup">
-                <Legend>Gender:</Legend>
+                <Legend>Gender</Legend>
                 <Radio>Male</Radio>
                 <Radio>Female</Radio>
                 <Radio>Other</Radio>
@@ -108,7 +108,7 @@ import Form, {
             </FormControl>
             <FormControl>
               <Fieldset name="storyCheckboxGroup">
-                <Legend>Pets:</Legend>
+                <Legend>Pets</Legend>
                 <Checkbox>Dog</Checkbox>
                 <Checkbox>Cat</Checkbox>
                 <Checkbox>Other</Checkbox>
@@ -147,26 +147,26 @@ import Form, {
     <Form>
       <FormControl horizontal>
         <FormControlLabel style={{ minWidth: '120px' }}>
-          First Name:
+          First Name
         </FormControlLabel>
         <TextField defaultValue="James" />
       </FormControl>
       <FormControl horizontal>
         <FormControlLabel style={{ minWidth: '120px' }}>
-          Last Name:
+          Last Name
         </FormControlLabel>
         <TextField fullWidth defaultValue="Kirk" />
       </FormControl>
       <FormControl horizontal error>
         <FormControlLabel style={{ minWidth: '120px' }}>
-          Email:
+          Email
         </FormControlLabel>
         <TextField defaultValue="jKirk_1701@gmail.com" type="email" />
         <FormHelperText>Must be a .gov email</FormHelperText>
       </FormControl>
       <FormControl horizontal>
         <FormControlLabel style={{ minWidth: '120px' }}>
-          State:
+          State
         </FormControlLabel>
         <Select selectedValue="co" onChange={() => true}>
           <MenuItem value="ca">California</MenuItem>
@@ -174,7 +174,9 @@ import Form, {
         </Select>
       </FormControl>
       <FormControl horizontal>
-        <FormControlLabel style={{ minWidth: '120px' }}>City:</FormControlLabel>
+        <FormControlLabel style={{ minWidth: '120px' }}>
+          City
+        </FormControlLabel>
         <Select selectedValue="co" onChange={() => true} fullWidth>
           <MenuItem value="ca">Denver</MenuItem>
           <MenuItem value="co">Boulder</MenuItem>
