@@ -22,13 +22,13 @@ import TextFieldPropsTable from './TextField-propsTable';
 
 # TextField
 
-Labels for form elements should describe what the field is. Labels should not be
-followed by a semicolon. Placeholder text should describe the specifics about
+Labels for TextFields should describe what the field is. Labels should not be
+followed by a colon. Placeholder text should describe the specifics about
 formatting or examples for the input text. Placeholder text is optional, and
 should never be used to replace a label.
 
-Required form fields should have the required attribute. Optional form
-fields should be clearly marked with "(optional)".
+Required TextFields should have the required attribute. Optional TextFields
+should be clearly marked with "(optional)".
 
 Try not to include too many optional fields, as it will make the form harder to
 comprehend and complete for the user.
@@ -129,13 +129,13 @@ import TextField from 'calcite-react/TextField'
   <div>
     <GuideExample label="htmlFor & id">
       <FormControl>
-        <FormControlLabel htmlFor="name">Name:</FormControlLabel>
+        <FormControlLabel htmlFor="name">Name</FormControlLabel>
         <TextField id="name" defaultValue="James Kirk" />
       </FormControl>
     </GuideExample>
     <GuideExample label="auto generated id">
       <FormControl>
-        <FormControlLabel>Name:</FormControlLabel>
+        <FormControlLabel>Name</FormControlLabel>
         <TextField defaultValue="James Kirk" />
       </FormControl>
     </GuideExample>
@@ -250,7 +250,7 @@ import TextField from 'calcite-react/TextField'
                 success={touched.name && !errors.name ? true : false}
                 error={touched.name && errors.name ? true : false}
               >
-                <FormControlLabel htmlFor="name">Name:</FormControlLabel>
+                <FormControlLabel htmlFor="name">Name</FormControlLabel>
                 <Field
                   component={TextField}
                   type="text"
@@ -269,7 +269,7 @@ import TextField from 'calcite-react/TextField'
                 success={touched.email && !errors.email ? true : false}
                 error={touched.email && errors.email ? true : false}
               >
-                <FormControlLabel htmlFor="email">Email:</FormControlLabel>
+                <FormControlLabel htmlFor="email">Email</FormControlLabel>
                 <Field component={TextField} type="text" name="email" />
                 <FormHelperText>
                   {(touched.email && errors.email) || null}
@@ -283,7 +283,7 @@ import TextField from 'calcite-react/TextField'
                 error={touched.password && errors.password ? true : false}
               >
                 <FormControlLabel htmlFor="password">
-                  Password:
+                  Password
                 </FormControlLabel>
                 <Field component={TextField} type="text" name="password" />
                 <FormHelperText>

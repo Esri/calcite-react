@@ -48,6 +48,7 @@ class Tooltip extends Component {
           {({ ref }) => (
             <StyledTargetWrapper
               ref={ref}
+              targetWrapperStyle={this.props.targetWrapperStyle}
               onMouseEnter={this._handleReferenceEnter}
               onMouseLeave={this._handleReferenceLeave}
             >
@@ -121,7 +122,9 @@ Tooltip.propTypes = {
   /** Apply styles to the Tooltip element. */
   style: PropTypes.object,
   /** Apply styles to the Tooltip arrow element. */
-  arrowStyle: PropTypes.object
+  arrowStyle: PropTypes.object,
+  /** Apply styles to the Tooltip target wrapper element. */
+  targetWrapperStyle: PropTypes.object
 };
 
 Tooltip.defaultProps = {
