@@ -1,1 +1,0 @@
-The Tab component consists of clickable tabs that are aligned side by side. The `<TabNav/>` should describe the Tab navigation items and  `<TabContents/>` should describe the sections within. Any Dom-node can be passed as children to the tab section.
