@@ -1,4 +1,5 @@
 # Documentation
+
 You can find the full docs for Calcite React here: https://calcite-react.netlify.com
 
 # Calcite React
@@ -66,19 +67,24 @@ export default App;
 
 ## References
 
-- [Contributing Guide](https://github.com/ArcGIS/calcite-react/blob/develop/CONTRIBUTING.md)
+- [Contributing Guide](/CONTRIBUTING.md)
+- [Calcite React Docs](https://calcite-react.netlify.com)
 - [Calcite Web Documentation](http://esri.github.io/calcite-web/documentation/)
 
 ## Licensing
 
-COPYRIGHT © 2019 Esri
+Copyright 2019 Esri
 
-All rights reserved under the copyright laws of the United States and applicable international laws, treaties, and conventions.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-This material is licensed for use under the Esri Master License Agreement (MLA), and is bound by the terms of that agreement. You may redistribute and use this code without modification, provided you adhere to the terms of the MLA and include this copyright notice.
+http://www.apache.org/licenses/LICENSE-2.0
 
-See use restrictions at http://www.esri.com/legal/pdfs/mla_e204_e300/english
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
-For additional information, contact: Environmental Systems Research Institute, Inc. Attn: Contracts and Legal Services Department 380 New York Street Redlands, California, USA 92373 USA
-
-email: contracts@esri.com
+A copy of the license is available in the repository's [LICENSE](/LICENSE) file.
