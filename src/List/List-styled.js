@@ -166,6 +166,17 @@ const StyledListItem = styled.div`
                 ${props => unitCalc(props.theme.baseline, 1.5, '/')};
             `};
 
+          ${props =>
+            props.filterItem &&
+            css`
+              padding: 0;
+              margin-bottom: ${props => unitCalc(props.theme.baseline, 4, '/')};
+
+              &:hover {
+                background-color: unset;
+              }
+            `};
+
           &::before {
             position: absolute;
             color: #cccccc;
@@ -207,8 +218,20 @@ const StyledListItem = styled.div`
           &:hover {
             text-decoration: underline;
 
+            ${props =>
+              props.filterItem &&
+              css`
+                text-decoration: none;
+              `};
+
             &::before {
               opacity: 1;
+
+              ${props =>
+                props.filterItem &&
+                css`
+                  opacity: 0;
+                `};
             }
           }
         `};
