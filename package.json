@@ -1,16 +1,17 @@
 {
   "name": "calcite-react",
-  "version": "0.30.3",
+  "version": "0.30.6",
   "description": "Calcite components for React",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ArcGIS/calcite-react.git"
+    "url": "https://github.com/Esri/calcite-react.git"
   },
   "keywords": [
     "calcite",
     "esri",
     "arcgis",
-    "react"
+    "react",
+    "components"
   ],
   "license": "Apache-2.0",
   "author": "Esri PS",

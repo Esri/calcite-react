@@ -19,7 +19,9 @@ const ListContext = createContext({
   listContext: {
     nested: undefined,
     open: undefined,
-    minmal: undefined
+    minmal: undefined,
+    multiSelect: undefined,
+    selectable: undefined
   }
 });
 
@@ -35,6 +37,7 @@ class List extends Component {
       nested,
       open,
       minimal,
+      multiSelect,
       selectable,
       ...other
     } = this.props;
@@ -43,6 +46,7 @@ class List extends Component {
       nested,
       open,
       minimal,
+      multiSelect,
       selectable
     };
     const listNode = document.getElementById(this.listId);
@@ -86,6 +90,8 @@ List.propTypes = {
   open: PropTypes.bool,
   /** Minimal styling for the List */
   minimal: PropTypes.bool,
+  /** Display check marks for selected ListItems, used with the `minimal` and `nested` properties */
+  multiSelect: PropTypes.bool,
   /** Selectable styling for the List */
   selectable: PropTypes.bool
 };
