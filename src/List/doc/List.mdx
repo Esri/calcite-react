@@ -200,13 +200,54 @@ import List, {
   </List>
 </Playground>
 
+## Minimal MultiSelect List
+
+<Playground style={{background: "#F4F4F4"}}>
+  <List minimal style={{ maxWidth: '280px' }}>
+    <ListHeader>Filters</ListHeader>
+    <ListItem leftNode={<ChevronRightIcon size={16} />}>
+      <ListItemTitle>Item Type</ListItemTitle>
+    </ListItem>
+    <ListItem leftNode={<ChevronRightIcon size={16} />}>
+      <ListItemTitle>Date Modified</ListItemTitle>
+    </ListItem>
+    <ListItem
+      leftNode={<ChevronDownIcon size={16} />}
+      rightNode={<CalciteA>Clear</CalciteA>}
+      open
+    >
+      <ListItemTitle>Tags</ListItemTitle>
+    </ListItem>
+    <List minimal multiSelect nested>
+      <ListItem filterItem>
+        <Search fullWidth placeholder="Filter tags" />
+      </ListItem>
+      <ListItem active>
+        <ListItemTitle>basemap</ListItemTitle>
+      </ListItem>
+      <ListItem active>
+        <ListItemTitle>beta</ListItemTitle>
+      </ListItem>
+      <ListItem>
+        <ListItemTitle>esri_basemap</ListItemTitle>
+      </ListItem>
+      <ListItem active>
+        <ListItemTitle>style</ListItemTitle>
+      </ListItem>
+      <ListItem>
+        <ListItemTitle>vector</ListItemTitle>
+      </ListItem>
+    </List>
+  </List>
+</Playground>
+
 ## Selectable List
 
 <Playground style={{background: "#F4F4F4"}}>
   <List selectable style={{ maxWidth: '280px' }}>
     <ListHeader>Folders</ListHeader>
     <ListItem filterItem>
-      <Search placeholder="Filter folders" />
+      <Search fullWidth placeholder="Filter folders" />
     </ListItem>
     <ListItem active leftNode={<FolderOpenIcon size={16} />}>
       <ListItemTitle>All My Content</ListItemTitle>
