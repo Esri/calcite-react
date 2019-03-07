@@ -63,6 +63,7 @@ const ListItem = ({
       {({ listContext }) => (
         <StyledListItem
           minimal={listContext.minimal}
+          multiSelect={listContext.multiSelect}
           selectable={listContext.selectable}
           nested={listContext.nested}
           filterItem={filterItem}
