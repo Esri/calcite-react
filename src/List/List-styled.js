@@ -17,6 +17,7 @@ const StyledList = styled(StyledSideNav)`
   min-width: 200px;
   overflow: hidden;
   max-height: ${props => props.maxHeight};
+  flex-shrink: 0;
   transition: max-height 225ms cubic-bezier(0.4, 0, 0.2, 1);
 
   ${props =>
@@ -65,6 +66,7 @@ const getActiveStyles = props => {
 
 const StyledListItem = styled.div`
   display: flex;
+  flex-shrink: 0;
   justify-content: space-between;
   box-sizing: border-box;
   padding: ${props => unitCalc(props.theme.baseline, 3, '/')}
@@ -239,6 +241,7 @@ const StyledListItem = styled.div`
 `;
 
 const StyledListHeader = styled(StyledListItem)`
+  flex-shrink: 0;
   background-color: ${props => props.theme.palette.offWhite};
   cursor: auto;
 
@@ -260,17 +263,20 @@ const StyledListHeader = styled(StyledListItem)`
 
 const StyledListTitle = styled.p`
   ${fontSize(-1)};
+  flex-shrink: 0;
   margin: 0;
 `;
 
 const StyledListSubtitle = styled.span`
   ${fontSize(-3)};
+  flex-shrink: 0;
   line-height: 1.2rem;
   color: ${props => props.theme.palette.gray};
 `;
 
 const StyledListTextContainer = styled.div`
   display: flex;
+  flex-shrink: 0;
   flex: 1 0 100px;
   flex-direction: column;
   justify-content: center;
@@ -278,6 +284,7 @@ const StyledListTextContainer = styled.div`
 
 const StyledListSideContainer = styled.div`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
 
