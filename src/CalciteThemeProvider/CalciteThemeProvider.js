@@ -101,6 +101,7 @@ const CalciteReactGlobalStyles = createGlobalStyle`
   .SingleDatePicker_picker,
   .DateRangePicker_picker {
     margin-top: -20px;
+    z-index: 101 !important;
 
     .DayPickerKeyboardShortcuts_buttonReset {
       font-size: 0.875rem;
