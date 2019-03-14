@@ -48,6 +48,7 @@ class ComboButton extends Component {
       label,
       icon,
       iconPosition,
+      dropdownIcon,
       ...other
     } = this.props;
 
@@ -79,7 +80,7 @@ class ComboButton extends Component {
           targetContainerStyles={{ display: 'block' }}
           targetEl={
             <StyledComboButtonDropdown onClick={this.togglePopover} {...other}>
-              <CaretDownIcon filled size={14} />
+              {dropdownIcon}
             </StyledComboButtonDropdown>
           }
         >
@@ -124,12 +125,15 @@ ComboButton.propTypes = {
   /** The icon that will be displayed as the content of a ComboButton. */
   icon: PropTypes.node,
   /** The position of the icon in relation to other children in a ComboButton. */
-  iconPosition: PropTypes.oneOf(['after', 'before'])
+  iconPosition: PropTypes.oneOf(['after', 'before']),
+  /** The icon used inside the dropdown button */
+  dropdownIcon: PropTypes.node
 };
 
 ComboButton.defaultProps = {
   type: 'button',
   iconPosition: 'after',
+  dropdownIcon: <CaretDownIcon filled size={14} />,
   onClick: () => {}
 };
 
