@@ -10,6 +10,7 @@ import { MenuItem } from '../../Menu';
 import { ListItem, ListItemTitle, ListItemSubtitle } from '../../List';
 
 import GlobeIcon from 'calcite-ui-icons-react/GlobeIcon';
+import FileMagnifyingGlassIcon from 'calcite-ui-icons-react/FileMagnifyingGlassIcon';
 
 import statesJson from '../../../docz/_sampleJson/states.json';
 import statesJson2 from '../../../docz/_sampleJson/states_objects.json';
@@ -170,6 +171,17 @@ import Search from 'calcite-react/Search'
       return <SearchStory />;
     }}
 
+</Playground>
+
+## Replace Search Icon
+
+<Playground>
+  <GuideExample label="searchIcon={<FileMagnifyingGlassIcon size={16} />}">
+    <Search searchIcon={<FileMagnifyingGlassIcon size={16} />} />
+  </GuideExample>
+  <GuideExample label="searchIcon={false}">
+    <Search searchIcon={false} />
+  </GuideExample>
 </Playground>
 
 ## Array of Objects
