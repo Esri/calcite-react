@@ -24,7 +24,7 @@ import {
   StyledSearch,
   StyledShortcutCharacter,
   StyledCloseCircleIcon,
-  StyledMagnifyIcon,
+  StyledSearchIconContainer,
   ManagerStyle,
   PopperStyle
 } from './Search-styled';
@@ -33,6 +33,8 @@ import { StyledSelectMenu } from '../Select/Select-styled';
 import { MenuItem } from '../Menu';
 import Tooltip from '../Tooltip';
 import { ListContext } from '../List/List';
+
+import MagnifyingGlassIcon from 'calcite-ui-icons-react/MagnifyingGlassIcon';
 
 class Search extends Component {
   constructor(props) {
@@ -160,6 +162,16 @@ class Search extends Component {
     });
 
     this.props.onUserAction(inputValue, selectedItemVal);
+  };
+
+  getSearchIcon = searchIcon => {
+    if (searchIcon) {
+      return (
+        <StyledSearchIconContainer>{searchIcon}</StyledSearchIconContainer>
+      );
+    }
+
+    return null;
   };
 
   getClearSearchIcon = () => {
@@ -306,6 +318,7 @@ class Search extends Component {
       virtualized,
       virtualizedRowHeight,
       virtualizedMenuWidth,
+      searchIcon,
       ...other
     } = this.props;
 
@@ -323,7 +336,7 @@ class Search extends Component {
             fullWidth={fullWidth}
             minimal={minimal}
           >
-            <StyledMagnifyIcon filled size={16} />
+            {this.getSearchIcon(searchIcon)}
             <Manager style={ManagerStyle}>
               <Downshift
                 itemToString={this.itemToString}
@@ -353,6 +366,7 @@ class Search extends Component {
                             fullWidth,
                             ref,
                             selectableListFilter: listContext.selectable,
+                            searchIcon,
                             ...other
                           })}
                         />
@@ -471,7 +485,9 @@ Search.propTypes = {
   /** (virtualized only) Row height used to calculate how many rows to render in a virtualized menu. */
   virtualizedRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
   /** (virtualized only) Width of the menu; unloaded rows may be wider than the initial set. */
-  virtualizedMenuWidth: PropTypes.number
+  virtualizedMenuWidth: PropTypes.number,
+  /** SVG icon to be displayed inside the Search input */
+  searchIcon: PropTypes.node
 };
 
 Search.defaultProps = {
@@ -483,6 +499,7 @@ Search.defaultProps = {
   placement: 'bottom-start',
   shortcutTooltip: 'Press  /  to search',
   virtualizedRowHeight: 42,
+  searchIcon: <MagnifyingGlassIcon filled size={16} />,
   onUserAction: () => {},
   onChange: () => {},
   onRequestClear: () => {}

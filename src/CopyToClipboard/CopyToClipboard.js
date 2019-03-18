@@ -15,7 +15,6 @@ import PropTypes from 'prop-types';
 import {
   StyledCopyToClipboard,
   StyledCopyToClipboardInput,
-  ClipboardIconStyles,
   StyledCopyButton
 } from './CopyToClipboard-styled';
 
@@ -70,10 +69,10 @@ class CopyToClipboard extends Component {
 
   getClipboardIcon = () => {
     if (this.state.copySuccessful) {
-      return <CheckIcon style={ClipboardIconStyles} />;
+      return this.props.copySuccessIcon;
     }
 
-    return <CopyToClipboardIcon style={ClipboardIconStyles} />;
+    return this.props.copyIcon;
   };
 
   resetCopySuccess = () => {
@@ -124,13 +123,19 @@ CopyToClipboard.propTypes = {
   /** The tooltip will use appendToBody for positioning on the dom */
   appendToBody: PropTypes.bool,
   /** Style definition passed to the tooltip popover */
-  tooltipStyle: PropTypes.object
+  tooltipStyle: PropTypes.object,
+  /** Icon to be used in the copy to clipboard button */
+  copyIcon: PropTypes.node,
+  /** Icon to be used once the copy to clipboard button has been clicked */
+  copySuccessIcon: PropTypes.node
 };
 
 CopyToClipboard.defaultProps = {
   tooltip: 'Copy',
   successTooltip: 'Copied!',
-  appendToBody: true
+  appendToBody: true,
+  copyIcon: <CopyToClipboardIcon />,
+  copySuccessIcon: <CheckIcon />
 };
 
 CopyToClipboard.displayName = 'CopyToClipboard';

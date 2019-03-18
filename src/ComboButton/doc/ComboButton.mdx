@@ -9,6 +9,8 @@ import GuideExample from '../../../docz/GuideExample';
 import Menu, { MenuItem } from '../../Menu';
 import ComboButton from '../';
 
+import ChevronDownIcon from 'calcite-ui-icons-react/ChevronDownIcon';
+
 # ComboButton
 
 A ComboButton has a button on the left and a dropdown containing a menu of more
@@ -116,6 +118,24 @@ import ComboButton from 'calcite-react/ComboButton'
       </Menu>
     </ComboButton>
   </GuideExample>
+</Playground>
+
+## Custom Dropdown icon
+
+<Playground>
+  <ComboButton
+    onClick={() => console.log('primary clicked')}
+    label="Export All"
+    dropdownIcon={<ChevronDownIcon filled size={14} />}
+  >
+    <Menu>
+      <MenuItem onClick={() => console.log('pdf clicked')}>Export PDF</MenuItem>
+      <MenuItem onClick={() => console.log('csv clicked')}>Export CSV</MenuItem>
+      <MenuItem onClick={() => console.log('excel clicked')}>
+        Export Excel
+      </MenuItem>
+    </Menu>
+  </ComboButton>
 </Playground>
 
 ## Props
