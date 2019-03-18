@@ -43,15 +43,10 @@ const StyledCopyToClipboardInput = styled(CalciteInput)`
 const StyledCopyButton = styled(Button)`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+
+  svg {
+    margin-left: 0 !important;
+  }
 `;
 
-const ClipboardIconStyles = {
-  marginLeft: 0
-};
-
-export {
-  StyledCopyToClipboard,
-  StyledCopyToClipboardInput,
-  ClipboardIconStyles,
-  StyledCopyButton
-};
+export { StyledCopyToClipboard, StyledCopyToClipboardInput, StyledCopyButton };
