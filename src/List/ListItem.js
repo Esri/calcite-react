@@ -89,7 +89,9 @@ ListItem.propTypes = {
   /** Toggle the active style of a ListItem */
   active: PropTypes.bool,
   /** Add some styles to display a Search element properly inside a ListItem  */
-  filterItem: PropTypes.bool
+  filterItem: PropTypes.bool,
+  /** Toggle the disabled state of the ListItem, results in the item being unselectable and slightly lower opacity */
+  disabled: PropTypes.bool
 };
 
 ListItem.defaultProps = {};

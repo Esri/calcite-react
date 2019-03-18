@@ -42,6 +42,13 @@ const StyledMenuItem = styled(CalciteA)`
   cursor: pointer;
 
   ${props =>
+    props.disabled &&
+    css`
+      pointer-events: none;
+      opacity: 0.7;
+    `};
+
+  ${props =>
     props.active &&
     css`
       background-color: ${props => props.theme.palette.offWhite};

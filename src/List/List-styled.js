@@ -77,6 +77,13 @@ const StyledListItem = styled.div`
   cursor: pointer;
 
   ${props =>
+    props.disabled &&
+    css`
+      pointer-events: none;
+      opacity: 0.7;
+    `};
+
+  ${props =>
     props.active &&
     css`
       ${props => getActiveStyles(props)};
