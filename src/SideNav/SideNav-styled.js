@@ -51,6 +51,13 @@ const StyledSideNavLink = styled(CalciteA)`
   }
 
   ${props =>
+    props.disabled &&
+    css`
+      pointer-events: none;
+      opacity: 0.7;
+    `};
+
+  ${props =>
     props.active &&
     css`
       text-indent: -3px;

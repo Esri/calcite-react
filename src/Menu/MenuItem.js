@@ -32,7 +32,9 @@ MenuItem.propTypes = {
   /** Content of the MenuItem. */
   children: PropTypes.node,
   /** A container for content to be displayed right aligned in the MenuItem. */
-  subtitle: PropTypes.node
+  subtitle: PropTypes.node,
+  /** Toggle the disabled state of the MenuItem, results in the item being unselectable and slightly lower opacity */
+  disabled: PropTypes.bool
 };
 
 MenuItem.defaultProps = {};
