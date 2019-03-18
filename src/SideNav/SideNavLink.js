@@ -20,7 +20,9 @@ const SideNavLink = ({ children, ...other }) => {
 
 SideNavLink.propTypes = {
   /** The content of the component. */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** Toggle the disabled state of the SideNavLink, results in the item being unselectable and slightly lower opacity */
+  disabled: PropTypes.bool
 };
 
 SideNavLink.defaultProps = {};
