@@ -29,10 +29,14 @@ const StyledList = styled(StyledSideNav)`
       border-top-right-radius: 0;
       padding-left: ${props => props.theme.baseline};
 
-      ${props =>
-        props.open === false &&
+      ${props.open === false &&
         css`
           border-top: none;
+        `};
+
+      ${(props.minimal || props.multiSelect) &&
+        css`
+          padding-bottom: ${unitCalc(props.theme.baseline, 2, '/')};
         `};
     `};
 
@@ -46,10 +50,9 @@ const StyledList = styled(StyledSideNav)`
   ${props =>
     props.selectable &&
     css`
-      border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
+      border-bottom: 1px solid ${props.theme.palette.lighterGray};
 
-      ${props =>
-        props.nested &&
+      ${props.nested &&
         css`
           border-bottom: none;
         `};
@@ -99,7 +102,7 @@ const StyledListItem = styled.div`
       &:focus,
       &:hover {
         text-indent: -3px;
-        border-left: 3px solid ${props => props.theme.palette.blue};
+        border-left: 3px solid ${props.theme.palette.blue};
       }
     `};
 
@@ -107,17 +110,16 @@ const StyledListItem = styled.div`
     (props.minimal || props.selectable) &&
     css`
       background-color: unset;
-      padding: ${props => unitCalc(props.theme.baseline, 3, '/')}
-        ${props => unitCalc(props.theme.baseline, 4, '/')};
-      border-top-color: ${props => props.theme.palette.lighterGray};
+      padding: ${unitCalc(props.theme.baseline, 3, '/')}
+        ${unitCalc(props.theme.baseline, 4, '/')};
+      border-top-color: ${props.theme.palette.lighterGray};
 
       &:hover {
         background-color: unset;
-        color: ${props => props.theme.palette.offBlack};
+        color: ${props.theme.palette.offBlack};
       }
 
-      ${props =>
-        props.open &&
+      ${props.open &&
         css`
           font-weight: 600;
         `};
@@ -128,23 +130,19 @@ const StyledListItem = styled.div`
     css`
       border-top: none;
       box-shadow: inset 3px 0 0 transparent;
-      padding-left: calc(
-        ${props => unitCalc(props.theme.baseline, 4, '/')} + 3px
-      );
+      padding-left: calc(${unitCalc(props.theme.baseline, 4, '/')} + 3px);
 
       &:hover {
-        background-color: ${props => props.theme.palette.white};
+        background-color: ${props.theme.palette.white};
       }
 
-      ${props =>
-        props.active &&
+      ${props.active &&
         css`
-          background-color: ${props => props.theme.palette.white};
-          box-shadow: inset 3px 0 0 ${props => props.theme.palette.blue};
+          background-color: ${props.theme.palette.white};
+          box-shadow: inset 3px 0 0 ${props.theme.palette.blue};
         `};
 
-      ${props =>
-        props.filterItem &&
+      ${props.filterItem &&
         css`
           padding: 0;
 
@@ -161,25 +159,21 @@ const StyledListItem = styled.div`
         border-top: none;
       }
 
-      ${props =>
-        props.minimal &&
+      ${props.minimal &&
         css`
           border: none;
-          padding: 0 0 0 ${props => unitCalc(props.theme.baseline, 2, '/')};
+          padding: 0 0 0 ${unitCalc(props.theme.baseline, 2, '/')};
           position: relative;
 
-          ${props =>
-            props.multiSelect &&
+          ${props.multiSelect &&
             css`
-              padding: 0 0 0
-                ${props => unitCalc(props.theme.baseline, 1.5, '/')};
+              padding: 0 0 0 ${unitCalc(props.theme.baseline, 1.5, '/')};
             `};
 
-          ${props =>
-            props.filterItem &&
+          ${props.filterItem &&
             css`
               padding: 0;
-              margin-bottom: ${props => unitCalc(props.theme.baseline, 4, '/')};
+              margin-bottom: ${unitCalc(props.theme.baseline, 4, '/')};
 
               &:hover {
                 background-color: unset;
@@ -198,15 +192,13 @@ const StyledListItem = styled.div`
             font-size: 0.8em;
             left: 0;
 
-            ${props =>
-              props.multiSelect &&
+            ${props.multiSelect &&
               css`
                 content: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2213%22%20height%3D%2213%22%20viewBox%3D%220%200%2032%2032%22%20class%3D%22svg-icon%22%3E%3Cpath%20fill%3D%22%23cccccc%22%20d%3D%22M11.927%2022l-6.882-6.883-3%203L11.927%2028%2031.204%208.728l-3.001-3.001z%22%2F%3E%3C%2Fsvg%3E');
               `};
           }
 
-          ${props =>
-            props.active &&
+          ${props.active &&
             css`
               font-weight: 600;
               background-color: unset;
@@ -215,8 +207,7 @@ const StyledListItem = styled.div`
                 opacity: 1;
                 color: #005e95;
 
-                ${props =>
-                  props.multiSelect &&
+                ${props.multiSelect &&
                   css`
                     color: unset;
                     content: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2213%22%20height%3D%2213%22%20viewBox%3D%220%200%2032%2032%22%20class%3D%22svg-icon%22%3E%3Cpath%20fill%3D%22%23005e95%22%20d%3D%22M11.927%2022l-6.882-6.883-3%203L11.927%2028%2031.204%208.728l-3.001-3.001z%22%2F%3E%3C%2Fsvg%3E');
@@ -227,8 +218,7 @@ const StyledListItem = styled.div`
           &:hover {
             text-decoration: underline;
 
-            ${props =>
-              props.filterItem &&
+            ${props.filterItem &&
               css`
                 text-decoration: none;
               `};
@@ -236,8 +226,7 @@ const StyledListItem = styled.div`
             &::before {
               opacity: 1;
 
-              ${props =>
-                props.filterItem &&
+              ${props.filterItem &&
                 css`
                   opacity: 0;
                 `};
@@ -257,13 +246,13 @@ const StyledListHeader = styled(StyledListItem)`
     css`
       border: none;
       background-color: unset;
-      padding: ${props => unitCalc(props.theme.baseline, 3, '/')} 0;
+      padding: ${unitCalc(props.theme.baseline, 3, '/')} 0;
       font-weight: 600;
       ${fontSize(0)};
 
       &:hover {
         background-color: unset;
-        color: ${props => props.theme.palette.darkerGray};
+        color: ${props.theme.palette.darkerGray};
       }
     `};
 `;
@@ -311,15 +300,15 @@ const StyledListSideContainer = styled.div`
     ${props =>
       (props.minimal || props.selectable) &&
       css`
-        margin-left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+        margin-left: ${unitCalc(props.theme.baseline, 4, '/')};
         font-size: 0.9rem;
         font-weight: 400;
 
         a {
-          color: ${props => props.theme.palette.darkerGray};
+          color: ${props.theme.palette.darkerGray};
 
           &:hover {
-            color: ${props => props.theme.palette.offBlack};
+            color: ${props.theme.palette.offBlack};
           }
         }
       `};
@@ -337,7 +326,7 @@ const StyledListSideContainer = styled.div`
       props.selectable &&
       props.active &&
       css`
-        fill: ${props => props.theme.palette.blue};
+        fill: ${props.theme.palette.blue};
       `};
   }
 
