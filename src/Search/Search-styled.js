@@ -13,25 +13,25 @@ import styled, { css } from 'styled-components';
 import { CalciteInput } from '../utils/commonElements';
 import { fontSize, unitCalc, transition } from '../utils/helpers';
 
-import XCircleIcon from 'calcite-ui-icons-react/XCircleIcon';
-
-const StyledCloseCircleIcon = styled(XCircleIcon)`
+const StyledClearIconContainer = styled.div`
   display: none;
   position: absolute;
   right: ${props => unitCalc(props.theme.baseline, 4, '/')};
-  bottom: 0.55em;
-  color: ${props => props.theme.palette.lighterGray};
+  bottom: auto;
+  margin-top: 2px;
+  opacity: 0.5;
   cursor: pointer;
 
   &:hover {
-    color: ${props => props.theme.palette.gray};
+    opacity: 0.8;
   }
 `;
 
 const StyledSearchIconContainer = styled.span`
   position: absolute;
-  bottom: 0.55em;
+  bottom: auto;
   left: 0.5em;
+  margin-top: 2px;
   color: ${props => props.theme.palette.darkerGray};
   z-index: 1;
   pointer-events: none;
@@ -41,7 +41,8 @@ const StyledSearchIconContainer = styled.span`
 const StyledShortcutCharacter = styled.div`
   position: absolute;
   right: ${props => unitCalc(props.theme.baseline, 4, '/')};
-  bottom: 0.5em;
+  bottom: auto;
+  margin-top: 2px;
   border: 1px solid ${props => props.theme.palette.lighterGray};
   display: flex;
   align-items: center;
@@ -67,22 +68,24 @@ const StyledSearchContainer = styled.div`
     ${props =>
       props.minimal &&
       css`
-        bottom: 0.7em;
+        bottom: auto;
         left: 0.1rem;
+        margin-top: 0;
       `};
   }
 
-  ${StyledCloseCircleIcon} {
+  ${StyledClearIconContainer} {
     ${props =>
       props.minimal &&
       css`
         bottom: auto;
+        margin-top: 0;
       `};
   }
 
   &:hover {
-    ${StyledCloseCircleIcon} {
-      display: block;
+    ${StyledClearIconContainer} {
+      display: inherit;
     }
   }
 
@@ -151,7 +154,7 @@ export {
   StyledSearchInputWrapper,
   StyledSearch,
   StyledShortcutCharacter,
-  StyledCloseCircleIcon,
+  StyledClearIconContainer,
   StyledSearchIconContainer,
   ManagerStyle,
   PopperStyle
