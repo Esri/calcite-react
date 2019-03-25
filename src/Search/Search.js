@@ -23,7 +23,7 @@ import {
   StyledSearchInputWrapper,
   StyledSearch,
   StyledShortcutCharacter,
-  StyledCloseCircleIcon,
+  StyledClearIconContainer,
   StyledSearchIconContainer,
   ManagerStyle,
   PopperStyle
@@ -35,6 +35,8 @@ import Tooltip from '../Tooltip';
 import { ListContext } from '../List/List';
 
 import MagnifyingGlassIcon from 'calcite-ui-icons-react/MagnifyingGlassIcon';
+import XCircleIcon from 'calcite-ui-icons-react/XCircleIcon';
+import { CalciteTheme } from '../CalciteThemeProvider';
 
 class Search extends Component {
   constructor(props) {
@@ -177,11 +179,9 @@ class Search extends Component {
   getClearSearchIcon = () => {
     if (this.props.inputValue || this.props.selectedItem) {
       return (
-        <StyledCloseCircleIcon
-          filled
-          size={16}
-          onClick={this.props.onRequestClear}
-        />
+        <StyledClearIconContainer onClick={this.props.onRequestClear}>
+          {this.props.clearIcon}
+        </StyledClearIconContainer>
       );
     }
   };
@@ -487,7 +487,9 @@ Search.propTypes = {
   /** (virtualized only) Width of the menu; unloaded rows may be wider than the initial set. */
   virtualizedMenuWidth: PropTypes.number,
   /** SVG icon to be displayed inside the Search input */
-  searchIcon: PropTypes.node
+  searchIcon: PropTypes.node,
+  /** SVG icon to clear the value of the Search input */
+  clearIcon: PropTypes.node
 };
 
 Search.defaultProps = {
@@ -500,6 +502,9 @@ Search.defaultProps = {
   shortcutTooltip: 'Press  /  to search',
   virtualizedRowHeight: 42,
   searchIcon: <MagnifyingGlassIcon filled size={16} />,
+  clearIcon: (
+    <XCircleIcon filled size={16} color={CalciteTheme.palette.darkerGray} />
+  ),
   onUserAction: () => {},
   onChange: () => {},
   onRequestClear: () => {}
