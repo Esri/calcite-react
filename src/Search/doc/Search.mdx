@@ -11,10 +11,15 @@ import { ListItem, ListItemTitle, ListItemSubtitle } from '../../List';
 
 import GlobeIcon from 'calcite-ui-icons-react/GlobeIcon';
 import FileMagnifyingGlassIcon from 'calcite-ui-icons-react/FileMagnifyingGlassIcon';
+import MagnifyingGlassIcon from 'calcite-ui-icons-react/MagnifyingGlassIcon';
+import XCircleIcon from 'calcite-ui-icons-react/XCircleIcon';
 
 import statesJson from '../../../docz/_sampleJson/states.json';
 import statesJson2 from '../../../docz/_sampleJson/states_objects.json';
 import Search from '../';
+
+import {CalciteTheme} from '../../CalciteThemeProvider';
+import StyledSearch from './StyledSearch';
 
 # Search
 
@@ -584,6 +589,66 @@ import Search from 'calcite-react/Search'
               selectedItem={this.state.selectedItem}
               items={items}
               onChange={this.searchChanged}
+              onUserAction={this.onUserAction}
+              onRequestClear={this.clearSearch}
+            />
+          );
+        }
+      }
+
+      return <SearchStory />;
+    }}
+
+</Playground>
+
+## Custom Styled Input
+
+<Playground style={{ background: "#0074B9" }}>
+  {() => {
+      class SearchStory extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: ''
+          };
+
+          this.clearSearch = this.clearSearch.bind(this);
+          this.onUserAction = this.onUserAction.bind(this);
+        }
+
+        clearSearch() {
+          this.setState({
+            inputValue: ''
+          });
+        };
+
+        onUserAction(inputValue) {
+          this.setState({
+            inputValue: inputValue
+          });
+        };
+
+        render() {
+          return (
+            <StyledSearch
+              minimal
+              fullWidth
+              searchIcon={
+                <MagnifyingGlassIcon
+                  filled
+                  size={16}
+                  color={CalciteTheme.palette.lighterBlue}
+                />
+              }
+              clearIcon={
+                <XCircleIcon
+                  filled
+                  size={16}
+                  color={CalciteTheme.palette.white}
+                />
+              }
+              inputValue={this.state.inputValue}
               onUserAction={this.onUserAction}
               onRequestClear={this.clearSearch}
             />
