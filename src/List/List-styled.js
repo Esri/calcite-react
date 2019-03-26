@@ -35,6 +35,7 @@ const StyledList = styled(StyledSideNav)`
         `};
 
       ${(props.minimal || props.multiSelect) &&
+        props.open &&
         css`
           padding-bottom: ${unitCalc(props.theme.baseline, 2, '/')};
         `};
