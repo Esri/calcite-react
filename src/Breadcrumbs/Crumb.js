@@ -38,7 +38,9 @@ Crumb.propTypes = {
   /** Boolean to toggle the light style for Breadcrumbs. */
   white: PropTypes.bool,
   /** href html prop */
-  href: PropTypes.string
+  href: PropTypes.string,
+  /** The character used as a divider between Crumbs; by default it will inherit the parent Breadcrumbs dividerCharacter */
+  dividerCharacter: PropTypes.node
 };
 
 Crumb.defaultProps = {};
