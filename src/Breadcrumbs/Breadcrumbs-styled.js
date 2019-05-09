@@ -23,7 +23,7 @@ const StyledCrumb = styled(CalciteA)`
   color: ${props => props.theme.palette.darkerGray};
 
   &::before {
-    content: '/';
+    content: '${props => props.dividerCharacter}';
     color: ${props => props.theme.palette.darkerGray};
     font-weight: 400;
     display: inline-block;
@@ -54,7 +54,7 @@ const StyledSpanCrumb = styled.span`
   color: ${props => props.theme.palette.darkerGray};
 
   &::before {
-    content: '/';
+    content: '${props => props.dividerCharacter}';
     color: ${props => props.theme.palette.darkerGray};
     font-weight: 400;
     display: inline-block;

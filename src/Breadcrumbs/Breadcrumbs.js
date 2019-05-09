@@ -15,13 +15,15 @@ import { StyledBreadcrumbs } from './Breadcrumbs-styled';
 
 const BreadcrumbsContext = createContext({
   breadcrumbsContext: {
-    white: undefined
+    white: undefined,
+    dividerCharacter: undefined
   }
 });
 
-const Breadcrumbs = ({ children, white, ...other }) => {
+const Breadcrumbs = ({ children, white, dividerCharacter, ...other }) => {
   const breadcrumbsContext = {
-    white
+    white,
+    dividerCharacter
   };
 
   return (
@@ -35,10 +37,14 @@ Breadcrumbs.propTypes = {
   /** Crumb components to be rendered within Breadcrumbs. */
   children: PropTypes.node,
   /** Color modifier for the Breadcrumbs. */
-  white: PropTypes.bool
+  white: PropTypes.bool,
+  /** The character used as a divider between Crumbs */
+  dividerCharacter: PropTypes.node
 };
 
-Breadcrumbs.defaultProps = {};
+Breadcrumbs.defaultProps = {
+  dividerCharacter: '/'
+};
 
 Breadcrumbs.displayName = 'Breadcrumbs';
 
