@@ -27,7 +27,9 @@ const unitCalc = (operand1, operand2, operator) => {
     operand2Unit = operand2.replace(operand2Value, '');
   }
 
-  let value = window.eval(operand1Value + operator + operand2Value); // eslint-disable-line no-eval
+  let value =
+    typeof window !== 'undefined' &&
+    window.eval(operand1Value + operator + operand2Value); // eslint-disable-line no-eval
   value = value + (operand1Unit || operand2Unit);
 
   return value;
