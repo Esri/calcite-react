@@ -35,8 +35,11 @@ class Popover extends Component {
     this._generatedId = uniqid();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.open === false && this.props.open === true) {
+  componentDidUpdate(prevProps) {
+    if (
+      (prevProps.open === false && this.props.open === true) ||
+      (this.props.open === true && prevProps.children !== this.props.children)
+    ) {
       this._setOutsideTap();
     }
 
