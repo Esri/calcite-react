@@ -11,7 +11,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import uniqid from 'uniqid';
 import moment from 'moment';
 
 import 'react-dates/lib/css/_datepicker.css';
