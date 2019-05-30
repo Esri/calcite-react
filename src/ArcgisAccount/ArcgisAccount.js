@@ -96,6 +96,8 @@ class ArcgisAccount extends Component {
       onRequestSignOut,
       children,
       hideSwitchAccount,
+      switchAccountLabel,
+      signOutLabel,
       ...other
     } = this.props;
 
@@ -126,6 +128,8 @@ class ArcgisAccount extends Component {
           portal={portal}
           avatar={this._getAvatar(user, token, portal, 120)}
           style={{ width: '410px' }}
+          switchAccountLabel={switchAccountLabel}
+          signOutLabel={signOutLabel}
           hideSwitchAccount={hideSwitchAccount}
           onRequestSwitchAccount={onRequestSwitchAccount}
           onRequestSignOut={onRequestSignOut}
@@ -144,6 +148,10 @@ ArcgisAccount.propTypes = {
   portal: PropTypes.object.isRequired,
   /** AGOL login token. */
   token: PropTypes.string,
+  /** Text label for the Switch Account button. */
+  switchAccountLabel: PropTypes.string,
+  /** Text label for the Sign Out button. */
+  signOutLabel: PropTypes.string,
   /** Hide the button to switch accounts in the menu. */
   hideSwitchAccount: PropTypes.bool,
   /** Callback when the user selects the Switch Account button. */
@@ -153,6 +161,8 @@ ArcgisAccount.propTypes = {
 };
 
 ArcgisAccount.defaultProps = {
+  switchAccountLabel: 'Switch Account',
+  signOutLabel: 'Sign Out',
   onRequestSwitchAccount: () => {},
   onRequestSignOut: () => {}
 };
