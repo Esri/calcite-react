@@ -20,8 +20,6 @@ const CalciteReactGlobalStyles = createGlobalStyle`
   html {
     height: 100%;
     font-size: 100%;
-    font-family: 'Avenir Next W01', 'Avenir Next W00', 'Avenir Next', 'Avenir',
-      'Helvetica Neue', sans-serif;
   }
 
   body {
@@ -29,7 +27,7 @@ const CalciteReactGlobalStyles = createGlobalStyle`
     margin: 0;
 
     tracking: 0;
-    font-family: "Avenir Next W01", "Avenir Next W00", "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
+    font-family: ${props => props.theme.type.avenirFamily};
     line-height: 1.55rem;
     color: #4c4c4c;
     background-color: #ffffff;
