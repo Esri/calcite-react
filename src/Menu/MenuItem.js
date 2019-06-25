@@ -13,6 +13,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyledMenuItem, StyledMenuItemSubtitle } from './Menu-styled';
 
+import { MenuContext } from './Menu';
+
 const MenuItem = ({ children, subtitle, ...other }) => {
   const getSubtitle = subtitle => {
     if (subtitle) {
@@ -21,10 +23,20 @@ const MenuItem = ({ children, subtitle, ...other }) => {
   };
 
   return (
-    <StyledMenuItem {...other}>
-      <span>{children}</span>
-      {getSubtitle(subtitle)}
-    </StyledMenuItem>
+    <MenuContext.Consumer>
+      {({ menuContext }) => (
+        <StyledMenuItem
+          extraSmall={menuContext.extraSmall}
+          small={menuContext.small}
+          large={menuContext.large}
+          extraLarge={menuContext.extraLarge}
+          {...other}
+        >
+          <span>{children}</span>
+          {getSubtitle(subtitle)}
+        </StyledMenuItem>
+      )}
+    </MenuContext.Consumer>
   );
 };
 

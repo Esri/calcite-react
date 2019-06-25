@@ -8,7 +8,15 @@ const Menu = ({ children, ...other }) => {
 
 Menu.propTypes = {
   /** Content node for the Menu */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** Style prop used to render an extra small Menu. */
+  extraSmall: PropTypes.bool,
+  /** Style prop used to render a small Menu. */
+  small: PropTypes.bool,
+  /** Style prop used to render a large Menu. */
+  large: PropTypes.bool,
+  /** Style prop used to render an extra large Menu. */
+  extraLarge: PropTypes.bool
 };
 
 Menu.defaultProps = {};

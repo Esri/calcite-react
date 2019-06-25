@@ -16,14 +16,43 @@ import { unitCalc, fontSize } from '../utils/helpers';
 
 const StyledMenu = styled(StyledSideNav)`
   min-width: 200px;
+  display: inline-block;
   box-shadow: ${props => props.theme.boxShadow};
   z-index: 1000;
   overflow: auto;
+  ${fontSize(0)}
 
   ${props =>
     props.right &&
     css`
       right: 0;
+    `};
+  ${props =>
+    props.extraSmall &&
+    css`
+      width: 200px;
+      ${fontSize(-3)};
+    `};
+
+  ${props =>
+    props.small &&
+    css`
+      width: 220px;
+      ${fontSize(-2)};
+    `};
+
+  ${props =>
+    props.large &&
+    css`
+      width: 240px;
+      ${fontSize(1)};
+    `};
+
+  ${props =>
+    props.extraLarge &&
+    css`
+      width: 280px;
+      ${fontSize(2)};
     `};
 `;
 
@@ -33,8 +62,8 @@ const StyledMenuItem = styled(CalciteA)`
   justify-content: space-between;
   min-height: 42px;
   box-sizing: border-box;
+  font-size: 0.9em;
   padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
-  ${fontSize(-1)};
   color: ${props => props.theme.palette.darkerGray};
   background-color: ${props => props.theme.palette.white};
   border-top: 1px solid ${props => props.theme.palette.lightestGray};
@@ -72,6 +101,41 @@ const StyledMenuItem = styled(CalciteA)`
         border-left: 3px solid ${props => props.theme.palette.blue};
       }
     `};
+
+  ${props =>
+    props.extraSmall &&
+    css`
+      min-height: auto;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: ${props => unitCalc(props.theme.baseline, 6, '/')};
+      padding-right: ${props => unitCalc(props.theme.baseline, 6, '/')};
+    `};
+
+  ${props =>
+    props.small &&
+    css`
+      min-height: ${props => unitCalc(props.theme.baseline, 4, '/')};
+      padding-top: ${props => unitCalc(props.theme.baseline, 6, '/')};
+      padding-bottom: ${props => unitCalc(props.theme.baseline, 6, '/')};
+      padding-left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+      padding-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
+    `};
+
+  ${props =>
+    props.large &&
+    css`
+      min-height: ${props => unitCalc(props.theme.baseline, 2, '/')};
+      padding: ${props => unitCalc(props.theme.baseline, 2, '/')};
+    `};
+
+  ${props =>
+    props.extraLarge &&
+    css`
+      line-height: 20px;
+      padding: ${props => unitCalc(props.theme.baseline, 1.5, '/')};
+      font-weight: 300;
+    `};
 `;
 
 const StyledMenuTitle = styled(StyledMenuItem)`
@@ -80,7 +144,7 @@ const StyledMenuTitle = styled(StyledMenuItem)`
 `;
 
 const StyledMenuItemSubtitle = styled.span`
-  ${fontSize(-3)};
+  font-size: 0.85em;
   color: ${props => props.theme.palette.lighterGray};
 
   *:hover > & {
