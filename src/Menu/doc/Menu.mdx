@@ -22,10 +22,7 @@ actions.
 #### Import Syntax
 
 ```js
-import Menu, {
-  MenuTitle,
-  MenuItem
-} from 'calcite-react/Menu'
+import Menu, { MenuTitle, MenuItem } from 'calcite-react/Menu';
 ```
 
 ## Basic Usage
@@ -59,6 +56,78 @@ import Menu, {
     <MenuItem subtitle="Miles">mi</MenuItem>
     <MenuItem subtitle="Nautical Miles">NM</MenuItem>
   </Menu>
+</Playground>
+
+## Sizes
+
+<Playground>
+  <GuideExample label="extraSmall">
+    <Menu extraSmall style={{ maxWidth: '280px' }}>
+    <MenuTitle>Metric</MenuTitle>
+    <MenuItem subtitle="Meters">m</MenuItem>
+    <MenuItem subtitle="Kilometers">km</MenuItem>
+    <MenuItem subtitle="Millimeters">mm</MenuItem>
+    <MenuItem subtitle="Centimeters">cm</MenuItem>
+    <MenuItem subtitle="Decimeters">dm</MenuItem>
+    <MenuTitle>Imperial</MenuTitle>
+    <MenuItem subtitle="Feet">ft</MenuItem>
+    <MenuItem subtitle="Inches">in</MenuItem>
+    <MenuItem subtitle="Yards">yd</MenuItem>
+    <MenuItem subtitle="Miles">mi</MenuItem>
+    <MenuItem subtitle="Nautical Miles">NM</MenuItem>
+  </Menu>
+  </GuideExample>
+
+<GuideExample label="small">
+  <Menu small style={{ maxWidth: '280px' }}>
+    <MenuTitle>Metric</MenuTitle>
+    <MenuItem subtitle="Meters">m</MenuItem>
+    <MenuItem subtitle="Kilometers">km</MenuItem>
+    <MenuItem subtitle="Millimeters">mm</MenuItem>
+    <MenuItem subtitle="Centimeters">cm</MenuItem>
+    <MenuItem subtitle="Decimeters">dm</MenuItem>
+    <MenuTitle>Imperial</MenuTitle>
+    <MenuItem subtitle="Feet">ft</MenuItem>
+    <MenuItem subtitle="Inches">in</MenuItem>
+    <MenuItem subtitle="Yards">yd</MenuItem>
+    <MenuItem subtitle="Miles">mi</MenuItem>
+    <MenuItem subtitle="Nautical Miles">NM</MenuItem>
+  </Menu>
+</GuideExample>
+
+<GuideExample label="large">
+  <Menu large style={{ maxWidth: '280px' }}>
+    <MenuTitle>Metric</MenuTitle>
+    <MenuItem subtitle="Meters">m</MenuItem>
+    <MenuItem subtitle="Kilometers">km</MenuItem>
+    <MenuItem subtitle="Millimeters">mm</MenuItem>
+    <MenuItem subtitle="Centimeters">cm</MenuItem>
+    <MenuItem subtitle="Decimeters">dm</MenuItem>
+    <MenuTitle>Imperial</MenuTitle>
+    <MenuItem subtitle="Feet">ft</MenuItem>
+    <MenuItem subtitle="Inches">in</MenuItem>
+    <MenuItem subtitle="Yards">yd</MenuItem>
+    <MenuItem subtitle="Miles">mi</MenuItem>
+    <MenuItem subtitle="Nautical Miles">NM</MenuItem>
+  </Menu>
+</GuideExample>
+
+<GuideExample label="extraLarge">
+  <Menu extraLarge style={{ maxWidth: '280px' }}>
+    <MenuTitle>Metric</MenuTitle>
+    <MenuItem subtitle="Meters">m</MenuItem>
+    <MenuItem subtitle="Kilometers">km</MenuItem>
+    <MenuItem subtitle="Millimeters">mm</MenuItem>
+    <MenuItem subtitle="Centimeters">cm</MenuItem>
+    <MenuItem subtitle="Decimeters">dm</MenuItem>
+    <MenuTitle>Imperial</MenuTitle>
+    <MenuItem subtitle="Feet">ft</MenuItem>
+    <MenuItem subtitle="Inches">in</MenuItem>
+    <MenuItem subtitle="Yards">yd</MenuItem>
+    <MenuItem subtitle="Miles">mi</MenuItem>
+    <MenuItem subtitle="Nautical Miles">NM</MenuItem>
+  </Menu>
+</GuideExample>
 </Playground>
 
 ## Props
