@@ -16,7 +16,6 @@ import { unitCalc, fontSize } from '../utils/helpers';
 
 const StyledMenu = styled(StyledSideNav)`
   min-width: 200px;
-  display: inline-block;
   box-shadow: ${props => props.theme.boxShadow};
   z-index: 1000;
   overflow: auto;
@@ -106,20 +105,15 @@ const StyledMenuItem = styled(CalciteA)`
     props.extraSmall &&
     css`
       min-height: auto;
-      padding-top: 0;
-      padding-bottom: 0;
-      padding-left: ${props => unitCalc(props.theme.baseline, 6, '/')};
-      padding-right: ${props => unitCalc(props.theme.baseline, 6, '/')};
+      padding: 0 ${props => unitCalc(props.theme.baseline, 6, '/')};
     `};
 
   ${props =>
     props.small &&
     css`
       min-height: ${props => unitCalc(props.theme.baseline, 4, '/')};
-      padding-top: ${props => unitCalc(props.theme.baseline, 6, '/')};
-      padding-bottom: ${props => unitCalc(props.theme.baseline, 6, '/')};
-      padding-left: ${props => unitCalc(props.theme.baseline, 4, '/')};
-      padding-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
+      padding: ${props => unitCalc(props.theme.baseline, 6, '/')}
+        ${props => unitCalc(props.theme.baseline, 4, '/')};
     `};
 
   ${props =>
@@ -139,6 +133,7 @@ const StyledMenuItem = styled(CalciteA)`
 `;
 
 const StyledMenuTitle = styled(StyledMenuItem)`
+  font-size: 1em;
   background-color: ${props => props.theme.palette.offWhite};
   cursor: auto;
 `;
