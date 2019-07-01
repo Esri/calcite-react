@@ -24,14 +24,7 @@ const FormControlContext = createContext({
   }
 });
 
-const FormControl = ({
-  children,
-  error,
-  success,
-  horizontal,
-  noValidation,
-  ...other
-}) => {
+const FormControl = ({ children, error, success, horizontal, ...other }) => {
   const _generatedId = uniqid();
   const formControlContext = {
     horizontal,
