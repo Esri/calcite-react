@@ -29,7 +29,7 @@ Select allows users to choose one option from a prescribed list.
 #### Import Syntax
 
 ```js
-import Select from 'calcite-react/Select'
+import Select from 'calcite-react/Select';
 ```
 
 ## Basic Usage
@@ -408,3 +408,11 @@ import Select from 'calcite-react/Select'
 ## Props
 
 <PropsTable of={Select} />
+
+## Notes
+
+For keyboard interaction, Select menus can be opened and selected from using the
+`Spacebar`, but not the `Enter` key. The `Enter` key is reserved for form
+submissions. When using a filterable Select, the menu can be opened using the
+`Down Arrow` key. A Select can be closed without altering its value using the
+`Escape` key.
