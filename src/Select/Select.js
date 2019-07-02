@@ -49,6 +49,7 @@ class Select extends Component {
       isOpen,
       openMenu,
       closeMenu,
+      highlightedIndex,
       selectHighlightedItem,
       ...other
     } = params;
@@ -67,8 +68,9 @@ class Select extends Component {
           // Allow form submit by preventing Downshift default
         }
       } else if (event.key === ' ') {
+        console.log(highlightedIndex);
         event.nativeEvent.preventDownShiftDefault = true;
-        if (!isOpen) openMenu();
+        if (!highlightedIndex) openMenu();
         else {
           event.nativeEvent.preventDefault(); // Avoids an extra space after value
           selectHighlightedItem();
@@ -427,6 +429,7 @@ class Select extends Component {
                       isOpen,
                       openMenu,
                       closeMenu,
+                      highlightedIndex,
                       selectHighlightedItem,
                       ...other
                     });
