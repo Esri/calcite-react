@@ -46,8 +46,35 @@ class Select extends Component {
       field,
       form,
       renderValue,
+      isOpen,
+      openMenu,
+      closeMenu,
+      selectHighlightedItem,
       ...other
     } = params;
+
+    const onKeyDown = event => {
+      if (!event) return;
+      if (event.key === 'Enter') {
+        event.nativeEvent.preventDownshiftDefault = true;
+        if (filterable) {
+          if (!isOpen) {
+            // Allow form submit by preventing Downshift default
+          } else {
+            selectHighlightedItem();
+          }
+        } else {
+          // Allow form submit by preventing Downshift default
+        }
+      } else if (event.key === ' ') {
+        event.nativeEvent.preventDownShiftDefault = true;
+        if (!isOpen) openMenu();
+        else {
+          event.nativeEvent.preventDefault(); // Avoids an extra space after value
+          selectHighlightedItem();
+        }
+      }
+    };
 
     if (filterable) {
       return (
@@ -68,6 +95,7 @@ class Select extends Component {
                 fullWidth: fullWidth,
                 minimal: minimal,
                 style: style,
+                onKeyDown,
                 ...other
               })}
               ref={ref}
@@ -81,7 +109,9 @@ class Select extends Component {
         {({ formControlContext }) => (
           <StyledSelectButton
             {...getToggleButtonProps()}
-            {...getInputProps()}
+            {...getInputProps({
+              onKeyDown
+            })}
             as="button"
             fullWidth={fullWidth}
             minimal={minimal}
@@ -359,6 +389,9 @@ class Select extends Component {
             getInputProps,
             getItemProps,
             isOpen,
+            openMenu,
+            closeMenu,
+            selectHighlightedItem,
             selectedItem,
             highlightedIndex,
             inputValue
@@ -391,6 +424,10 @@ class Select extends Component {
                       style,
                       field,
                       form,
+                      isOpen,
+                      openMenu,
+                      closeMenu,
+                      selectHighlightedItem,
                       ...other
                     });
                   }}
