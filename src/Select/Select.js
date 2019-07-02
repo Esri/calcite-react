@@ -46,9 +46,7 @@ class Select extends Component {
       field,
       form,
       renderValue,
-      isOpen,
       openMenu,
-      closeMenu,
       highlightedIndex,
       selectHighlightedItem,
       ...other
@@ -57,20 +55,10 @@ class Select extends Component {
     const onKeyDown = event => {
       if (!event) return;
       if (event.key === 'Enter') {
+        // Allow form submit by preventing Downshift default
         event.nativeEvent.preventDownshiftDefault = true;
-        if (filterable) {
-          if (!isOpen) {
-            // Allow form submit by preventing Downshift default
-          } else {
-            selectHighlightedItem();
-          }
-        } else {
-          // Allow form submit by preventing Downshift default
-        }
       } else if (event.key === ' ') {
-        console.log(highlightedIndex);
-        event.nativeEvent.preventDownShiftDefault = true;
-        if (!highlightedIndex) openMenu();
+        if (highlightedIndex === null) openMenu();
         else {
           event.nativeEvent.preventDefault(); // Avoids an extra space after value
           selectHighlightedItem();
@@ -392,7 +380,6 @@ class Select extends Component {
             getItemProps,
             isOpen,
             openMenu,
-            closeMenu,
             selectHighlightedItem,
             selectedItem,
             highlightedIndex,
@@ -428,7 +415,6 @@ class Select extends Component {
                       form,
                       isOpen,
                       openMenu,
-                      closeMenu,
                       highlightedIndex,
                       selectHighlightedItem,
                       ...other
