@@ -50,6 +50,8 @@ class Tooltip extends Component {
   };
 
   render() {
+    const isOpen =
+      this.props.open !== undefined ? this.props.open : this.state.open;
     const usePreventOverflow =
       this.props.appendToBody || this.props.positionFixed ? false : true;
 
@@ -67,9 +69,9 @@ class Tooltip extends Component {
             </StyledTargetWrapper>
           )}
         </Reference>
-        <Transition in={this.state.open} timeout={this.props.enterDelay}>
+        <Transition in={isOpen} timeout={this.props.enterDelay}>
           {state => {
-            return this.state.open
+            return isOpen
               ? this._getPopper(
                   <Popper
                     positionFixed={this.props.positionFixed}
@@ -121,6 +123,8 @@ Tooltip.propTypes = {
   children: PropTypes.node,
   /** Nodes to be used as Tooltip content. */
   title: PropTypes.node,
+  /** Boolean to programatically control the visibility of the Tooltip */
+  open: PropTypes.bool,
   /** Placement of the popover in relation to the target. The Tooltip will override the placement if there is no room.
    If this property is not set, the Tooltip will position itself wherever there is room. */
   placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
