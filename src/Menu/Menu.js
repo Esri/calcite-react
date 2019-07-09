@@ -10,24 +10,58 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import React, { createContext, forwardRef } from 'react';
 import { StyledMenu } from './Menu-styled';
 
-const Menu = forwardRef(({ children, ...other }, ref) => {
-  return (
-    <StyledMenu ref={ref} {...other}>
-      {children}
-    </StyledMenu>
-  );
+const MenuContext = createContext({
+  menuContext: {
+    extraSmall: undefined,
+    small: undefined,
+    large: undefined,
+    extraLarge: undefined
+  }
 });
+
+const Menu = forwardRef(
+  ({ children, extraSmall, small, large, extraLarge, ...other }, ref) => {
+    const menuContext = {
+      extraSmall,
+      small,
+      large,
+      extraLarge
+    };
+    return (
+      <MenuContext.Provider value={{ menuContext }}>
+        <StyledMenu
+          ref={ref}
+          extraSmall={extraSmall}
+          small={small}
+          large={large}
+          extraLarge={extraLarge}
+          {...other}
+        >
+          {children}
+        </StyledMenu>
+      </MenuContext.Provider>
+    );
+  }
+);
 
 Menu.propTypes = {
   /** Content node for the Menu. */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** Style prop used to render an extra small Menu. */
+  extraSmall: PropTypes.bool,
+  /** Style prop used to render a small Menu. */
+  small: PropTypes.bool,
+  /** Style prop used to render a large Menu. */
+  large: PropTypes.bool,
+  /** Style prop used to render an extra large Menu. */
+  extraLarge: PropTypes.bool
 };
 
 Menu.defaultProps = {};
 
 Menu.displayName = 'Menu';
 
-export default Menu;
+export { Menu as default, MenuContext };
