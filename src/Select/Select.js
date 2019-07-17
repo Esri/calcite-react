@@ -46,8 +46,23 @@ class Select extends Component {
       field,
       form,
       renderValue,
+      openMenu,
+      highlightedIndex,
+      selectHighlightedItem,
       ...other
     } = params;
+
+    const onKeyDown = event => {
+      if (!event) return;
+      if (event.key === 'Enter') {
+      } else if (event.key === ' ') {
+        if (highlightedIndex === null) openMenu();
+        else {
+          event.nativeEvent.preventDefault(); // Avoids an extra space after value
+          selectHighlightedItem();
+        }
+      }
+    };
 
     if (filterable) {
       return (
@@ -68,6 +83,7 @@ class Select extends Component {
                 fullWidth: fullWidth,
                 minimal: minimal,
                 style: style,
+                onKeyDown,
                 ...other
               })}
               ref={ref}
@@ -81,7 +97,9 @@ class Select extends Component {
         {({ formControlContext }) => (
           <StyledSelectButton
             {...getToggleButtonProps()}
-            {...getInputProps()}
+            {...getInputProps({
+              onKeyDown
+            })}
             as="button"
             fullWidth={fullWidth}
             minimal={minimal}
@@ -359,6 +377,8 @@ class Select extends Component {
             getInputProps,
             getItemProps,
             isOpen,
+            openMenu,
+            selectHighlightedItem,
             selectedItem,
             highlightedIndex,
             inputValue
@@ -391,6 +411,10 @@ class Select extends Component {
                       style,
                       field,
                       form,
+                      isOpen,
+                      openMenu,
+                      highlightedIndex,
+                      selectHighlightedItem,
                       ...other
                     });
                   }}

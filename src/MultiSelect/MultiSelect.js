@@ -244,10 +244,24 @@ const MultiSelect = ({
           getInputProps,
           getItemProps,
           isOpen,
+          openMenu,
           selectedItem,
-          highlightedIndex
+          highlightedIndex,
+          selectHighlightedItem
         }) => {
           const selectedValues = getValues(selectedItem);
+
+          const onKeyDown = event => {
+            if (!event) return;
+            if (event.key === 'Enter') {
+            } else if (event.key === ' ') {
+              if (highlightedIndex === null) openMenu();
+              else {
+                event.nativeEvent.preventDefault(); // Avoids an extra space after value
+                selectHighlightedItem();
+              }
+            }
+          };
 
           return (
             <StyledMultiSelectWrapper
@@ -268,7 +282,8 @@ const MultiSelect = ({
                         {...getInputProps({
                           id: id || formControlContext._generatedId,
                           fullWidth: fullWidth,
-                          minimal: minimal
+                          minimal: minimal,
+                          onKeyDown
                         })}
                         {...other}
                       >
