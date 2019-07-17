@@ -55,8 +55,6 @@ class Select extends Component {
     const onKeyDown = event => {
       if (!event) return;
       if (event.key === 'Enter') {
-        // Allow form submit by preventing Downshift default
-        event.nativeEvent.preventDownshiftDefault = true;
       } else if (event.key === ' ') {
         if (highlightedIndex === null) openMenu();
         else {
