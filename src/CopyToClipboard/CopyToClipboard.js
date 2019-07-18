@@ -79,31 +79,77 @@ class CopyToClipboard extends Component {
     this.setState({ copySuccessful: false });
   };
 
+  getContent = (
+    isBasic,
+    children,
+    positionFixed,
+    appendToBody,
+    tooltipStyle,
+    tooltipTargetWrapperStyle
+  ) => {
+    if (isBasic) {
+      return (
+        <>
+          <StyledCopyToClipboardInput as="input" value={children} readOnly />
+          <Tooltip
+            positionFixed={positionFixed}
+            appendToBody={appendToBody}
+            title={this.getTooltipText()}
+            style={tooltipStyle}
+            targetWrapperStyle={tooltipTargetWrapperStyle}
+          >
+            <StyledCopyButton
+              clear
+              onClick={() => this.copyTextToClipboard(children)}
+              onBlur={this.resetCopySuccess}
+              icon={this.getClipboardIcon()}
+            />
+          </Tooltip>
+        </>
+      );
+    }
+
+    return (
+      <Tooltip
+        positionFixed={positionFixed}
+        appendToBody={appendToBody}
+        title={this.getTooltipText()}
+        style={tooltipStyle}
+        targetWrapperStyle={tooltipTargetWrapperStyle}
+      >
+        {children}
+      </Tooltip>
+    );
+  };
+
   render() {
     const {
       children,
       positionFixed,
       appendToBody,
       tooltipStyle,
+      tooltipTargetWrapperStyle,
+      copyValue,
       ...other
     } = this.props;
 
+    const isBasic = typeof children !== 'object';
+
     const copyToClipboard = (
-      <StyledCopyToClipboard {...other}>
-        <StyledCopyToClipboardInput as="input" value={children} readOnly />
-        <Tooltip
-          positionFixed={positionFixed}
-          appendToBody={appendToBody}
-          title={this.getTooltipText()}
-          style={tooltipStyle}
-        >
-          <StyledCopyButton
-            clear
-            onClick={() => this.copyTextToClipboard(children)}
-            onBlur={this.resetCopySuccess}
-            icon={this.getClipboardIcon()}
-          />
-        </Tooltip>
+      <StyledCopyToClipboard
+        onClick={
+          isBasic ? undefined : () => this.copyTextToClipboard(copyValue)
+        }
+        {...other}
+      >
+        {this.getContent(
+          isBasic,
+          children,
+          positionFixed,
+          appendToBody,
+          tooltipStyle,
+          tooltipTargetWrapperStyle
+        )}
       </StyledCopyToClipboard>
     );
 
@@ -113,7 +159,11 @@ class CopyToClipboard extends Component {
 
 CopyToClipboard.propTypes = {
   /** Text to be copied. */
-  children: PropTypes.string,
+  children: PropTypes.node,
+  /** If you're using components as children of this component you must
+   * provide a string value to be copied to the clipboard when clicked
+   */
+  copyValue: PropTypes.string,
   /** The tooltip label before the text is copied. */
   tooltip: PropTypes.string,
   /** The tooltip label after the text is copied. */
@@ -124,6 +174,8 @@ CopyToClipboard.propTypes = {
   appendToBody: PropTypes.bool,
   /** Style definition passed to the tooltip popover */
   tooltipStyle: PropTypes.object,
+  /** Style definition passed to the tooltip target wrapper */
+  tooltipTargetWrapperStyle: PropTypes.object,
   /** Icon to be used in the copy to clipboard button */
   copyIcon: PropTypes.node,
   /** Icon to be used once the copy to clipboard button has been clicked */

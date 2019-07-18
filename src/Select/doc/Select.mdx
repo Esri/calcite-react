@@ -29,13 +29,13 @@ Select allows users to choose one option from a prescribed list.
 #### Import Syntax
 
 ```js
-import Select from 'calcite-react/Select'
+import Select from 'calcite-react/Select';
 ```
 
 ## Basic Usage
 
 <Playground style={{ height: '250px' }}>
-  <Select onChange={() => console.log('onChange')}>
+  <Select onChange={value => console.log(value)}>
     <MenuItem value={10}>Ten</MenuItem>
     <MenuItem value={20}>Twenty</MenuItem>
     <MenuItem value={30}>Thirty</MenuItem>
@@ -46,7 +46,7 @@ import Select from 'calcite-react/Select'
 
 <Playground style={{ height: '550px' }}>
   <GuideExample label="fullWidth">
-    <Select fullWidth onChange={() => console.log('onChange')}>
+    <Select fullWidth onChange={value => console.log(value)}>
       <MenuItem value={10}>Ten</MenuItem>
       <MenuItem value={20}>Twenty</MenuItem>
       <MenuItem value={30}>Thirty</MenuItem>
@@ -62,7 +62,7 @@ import Select from 'calcite-react/Select'
   <GuideExample label="FormControlLabel">
     <FormControl>
       <FormControlLabel>Value:</FormControlLabel>
-      <Select onChange={() => console.log('onChange')}>
+      <Select onChange={value => console.log(value)}>
         <MenuItem value={10}>Ten</MenuItem>
         <MenuItem value={20}>Twenty</MenuItem>
         <MenuItem value={30}>Thirty</MenuItem>
@@ -77,7 +77,7 @@ import Select from 'calcite-react/Select'
     </FormControl>
   </GuideExample>
   <GuideExample label="appendToBody">
-    <Select appendToBody onChange={() => console.log('onChange')}>
+    <Select appendToBody onChange={value => console.log(value)}>
       <MenuItem value={10}>Ten</MenuItem>
       <MenuItem value={20}>Twenty</MenuItem>
       <MenuItem value={30}>Thirty</MenuItem>
@@ -93,7 +93,7 @@ import Select from 'calcite-react/Select'
   <GuideExample label="menuStyle={{maxHeight: 'none'}}">
     <Select
       menuStyle={{ maxHeight: 'none' }}
-      onChange={() => console.log('onChange')}
+      onChange={value => console.log(value)}
     >
       <MenuItem value={10}>Ten</MenuItem>
       <MenuItem value={20}>Twenty</MenuItem>
@@ -408,3 +408,11 @@ import Select from 'calcite-react/Select'
 ## Props
 
 <PropsTable of={Select} />
+
+## Notes
+
+For keyboard interaction, Select menus can be opened and selected from using the
+`Spacebar`or the `Enter` keys. The `Enter` key does not trigger form submission
+when a Select is in focus. When using a `filterable` Select, the menu can be
+opened with the `Down Arrow` key. A Select can be closed without altering its
+value with the `Escape` key.

@@ -8,6 +8,8 @@ import GuideExample from '../../../docz/GuideExample';
 
 import CopyToClipboard from '../';
 
+import Button from '../../Button';
+
 # CopyToClipboard
 
 A component that allows you to easily make snippets of text selectable and add
@@ -24,6 +26,17 @@ import CopyToClipboard from 'calcite-react/CopyToClipboard'
 <Playground>
   <CopyToClipboard>
     1D0830C9A2A0681A9EFBB001E5B9302BDF6DF02FD52C07DD6F88A3FC1B52DA84
+  </CopyToClipboard>
+</Playground>
+
+## Custom Components
+
+<Playground>
+  <CopyToClipboard copyValue="#5a9359">
+    <Button green>Click me to copy the color to clipboard!</Button>
+  </CopyToClipboard>
+  <CopyToClipboard copyValue="#0079c1">
+    <Button>Click me to copy the color to clipboard!</Button>
   </CopyToClipboard>
 </Playground>
 
