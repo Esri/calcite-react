@@ -147,8 +147,9 @@ class ArcgisShare extends Component {
         <Checkbox
           id="org"
           labelStyle={{ ...PrimaryCheckboxLabelStyles }}
-          checked={this.state.org || false}
+          checked={this.state.org || this.state.public || false}
           onChange={this.orgChange}
+          disabled={this.state.public || false}
         >
           {this.props.portal && this.props.portal.name}
         </Checkbox>
