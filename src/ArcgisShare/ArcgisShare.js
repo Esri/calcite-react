@@ -151,7 +151,6 @@ class ArcgisShare extends Component {
     return (
       <StyledArcgisShare>
         <Checkbox
-          id="public"
           labelStyle={{ ...PrimaryCheckboxLabelStyles }}
           checked={this.state.public || false}
           onChange={this.publicChange}
@@ -159,7 +158,6 @@ class ArcgisShare extends Component {
           {publicLabel}
         </Checkbox>
         <Checkbox
-          id="org"
           labelStyle={{ ...PrimaryCheckboxLabelStyles }}
           checked={this.state.org || false}
           onChange={this.orgChange}
