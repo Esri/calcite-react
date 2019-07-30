@@ -84,7 +84,9 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   onAfterOpen: () => {},
-  onRequestClose: () => {}
+  onRequestClose: () => {},
+  shouldCloseOnOverlayClick: true,
+  shouldCloseOnEsc: true
 };
 
 Modal.displayName = 'Modal';
