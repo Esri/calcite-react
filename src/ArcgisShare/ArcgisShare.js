@@ -23,7 +23,8 @@ import {
   GroupCheckboxLabelStyles,
   GroupFieldsetStyles,
   StyledStarIcon,
-  StyledLegend
+  StyledLegend,
+  StyledNoGroups
 } from './ArcgisShare-styled';
 
 // App components
@@ -70,29 +71,34 @@ class ArcgisShare extends Component {
 
   getGroupCheckboxes = groups => {
     let _groups = [...groups];
-    if (this.props.promoteFavorites) {
-      _groups.sort((a, b) => {
-        return b.isFav - a.isFav;
+
+    if (_groups.length) {
+      if (this.props.promoteFavorites) {
+        _groups.sort((a, b) => {
+          return b.isFav - a.isFav;
+        });
+      }
+
+      return _groups.map(group => {
+        let favIcon;
+        if (group.isFav && this.props.promoteFavorites) {
+          favIcon = <StyledStarIcon filled size={16} />;
+        }
+        return (
+          <Checkbox
+            key={group.id}
+            id={group.id}
+            labelStyle={{ ...GroupCheckboxLabelStyles }}
+            checked={this.state.groups[group.id] || false}
+            onChange={this.groupChange}
+          >
+            {group.title} {favIcon}
+          </Checkbox>
+        );
       });
     }
 
-    return _groups.map(group => {
-      let favIcon;
-      if (group.isFav && this.props.promoteFavorites) {
-        favIcon = <StyledStarIcon filled size={16} />;
-      }
-      return (
-        <Checkbox
-          key={group.id}
-          id={group.id}
-          labelStyle={{ ...GroupCheckboxLabelStyles }}
-          checked={this.state.groups[group.id] || false}
-          onChange={this.groupChange}
-        >
-          {group.title} {favIcon}
-        </Checkbox>
-      );
-    });
+    return <StyledNoGroups>No groups for this user</StyledNoGroups>;
   };
 
   publicChange = e => {

@@ -15,9 +15,12 @@ import { unitCalc } from '../utils/helpers';
 import StarIcon from 'calcite-ui-icons-react/StarIcon';
 import { Legend } from '../Form';
 
+import { fontSize } from '../utils/helpers';
+
 const StyledArcgisShare = styled.div``;
 
 const StyledGroupContainer = styled.div`
+  position: relative;
   border: 1px solid ${props => props.theme.palette.lightestGray};
   padding: ${props => unitCalc(props.theme.baseline, 6, '/')};
   min-width: 180px;
@@ -52,6 +55,19 @@ const StyledLegend = styled(Legend)`
   font-size: 1rem;
 `;
 
+const StyledNoGroups = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 170px;
+  padding: 0 ${props => unitCalc(props.theme.baseline, 6, '/')};
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: ${props => props.theme.palette.lightGray};
+  ${fontSize(-2)};
+`;
+
 export {
   StyledArcgisShare,
   StyledGroupContainer,
@@ -59,5 +75,6 @@ export {
   GroupCheckboxLabelStyles,
   GroupFieldsetStyles,
   StyledStarIcon,
-  StyledLegend
+  StyledLegend,
+  StyledNoGroups
 };
