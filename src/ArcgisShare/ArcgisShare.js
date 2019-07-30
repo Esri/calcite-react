@@ -69,7 +69,7 @@ class ArcgisShare extends Component {
     });
   };
 
-  getGroupCheckboxes = groups => {
+  getGroupCheckboxes = (groups, noGroupsLabel) => {
     let _groups = [...groups];
 
     if (_groups.length) {
@@ -98,7 +98,7 @@ class ArcgisShare extends Component {
       });
     }
 
-    return <StyledNoGroups>No groups for this user</StyledNoGroups>;
+    return <StyledNoGroups>{noGroupsLabel}</StyledNoGroups>;
   };
 
   publicChange = e => {
@@ -140,6 +140,14 @@ class ArcgisShare extends Component {
   };
 
   render() {
+    const {
+      publicLabel,
+      groupsLabel,
+      noGroupsLabel,
+      portal,
+      user
+    } = this.props;
+
     return (
       <StyledArcgisShare>
         <Checkbox
@@ -148,7 +156,7 @@ class ArcgisShare extends Component {
           checked={this.state.public || false}
           onChange={this.publicChange}
         >
-          {this.props.publicLabel}
+          {publicLabel}
         </Checkbox>
         <Checkbox
           id="org"
@@ -156,12 +164,12 @@ class ArcgisShare extends Component {
           checked={this.state.org || false}
           onChange={this.orgChange}
         >
-          {this.props.portal && this.props.portal.name}
+          {portal && portal.name}
         </Checkbox>
         <Fieldset name="shareGroups" style={{ ...GroupFieldsetStyles }}>
-          <StyledLegend>{this.props.groupsLabel}:</StyledLegend>
+          <StyledLegend>{groupsLabel}:</StyledLegend>
           <StyledGroupContainer>
-            {this.props.user && this.getGroupCheckboxes(this.props.user.groups)}
+            {user && this.getGroupCheckboxes(user.groups, noGroupsLabel)}
           </StyledGroupContainer>
         </Fieldset>
       </StyledArcgisShare>
@@ -181,12 +189,15 @@ ArcgisShare.propTypes = {
   /** Text label for the Groups header. */
   groupsLabel: PropTypes.string,
   /** Boolean toggle for highlighting favorited groups. */
-  promoteFavorites: PropTypes.bool
+  promoteFavorites: PropTypes.bool,
+  /** Text label used inside the groups list when the user is not assigned to any groups */
+  noGroupsLabel: PropTypes.string
 };
 
 ArcgisShare.defaultProps = {
   publicLabel: 'Everyone (public)',
-  groupsLabel: 'These groups'
+  groupsLabel: 'These groups',
+  noGroupsLabel: 'No groups for this user'
 };
 
 ArcgisShare.displayName = 'ArcgisShare';
