@@ -64,6 +64,29 @@ const App = () => {
 export default App;
 ```
 
+### `as` Polymorphic Property
+
+If you want to keep all the styling you've applied to a component but just switch
+out what's being ultimately rendered (be it a different HTML tag or a different
+custom component), you can use the
+[`as` prop](https://www.styled-components.com/docs/api#as-polymorphic-prop) to do this
+at runtime.
+
+```jsx
+const Component = styled.div`
+  color: red;
+`;
+
+render(
+  <Component
+    as="button"
+    onClick={() => alert('It works!')}
+  >
+    Hello World!
+  </Component>
+)
+```
+
 ## Customizing the Theme
 
 Limited theming is possible with Calcite React by extending the

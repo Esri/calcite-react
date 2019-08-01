@@ -79,6 +79,7 @@ const StyledTopNavLink = styled(CalciteA)`
       border-bottom-color: ${props.theme.palette.blue};
     `};
 
+  &.active,
   .active > & {
     color: ${props => props.theme.palette.offBlack};
     border-bottom-color: ${props => props.theme.palette.blue};
