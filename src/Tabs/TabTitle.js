@@ -12,27 +12,35 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { TabsContext } from './Tabs';
+
 import { StyledTabTitle } from './Tab-styled';
 
-const TabTitle = ({
-  children,
-  index,
-  activeTabIndex,
-  setActiveTabIndex,
-  ...other
-}) => {
-  const handleSetActiveTabIndex = e => {
+const index = 0;
+
+const TabTitle = ({ children, ...other }) => {
+  const handleSetActiveTabIndex = (e, setActiveTabIndex) => {
     setActiveTabIndex(e, index);
   };
 
   return (
-    <StyledTabTitle
-      onClick={handleSetActiveTabIndex}
-      active={activeTabIndex === index}
-      {...other}
-    >
-      {children}
-    </StyledTabTitle>
+    <TabsContext.Consumer>
+      {({ tabsContext }) => (
+        <StyledTabTitle
+          onClick={e =>
+            handleSetActiveTabIndex(e, tabsContext.setActiveTabIndex)
+          }
+          active={tabsContext.activeTabIndex === index}
+          gray={tabsContext.gray}
+          transparent={tabsContext.transparent}
+          translucent={tabsContext.translucent}
+          dark={tabsContext.dark}
+          {...other}
+        >
+          {children}
+        </StyledTabTitle>
+      )}
+    </TabsContext.Consumer>
   );
 };
 

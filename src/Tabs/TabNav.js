@@ -9,50 +9,46 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
-import React, { Children } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+
+import { TabsContext } from './Tabs';
 
 import { StyledTabNav } from './Tab-styled';
 
-import { getChildType } from '../utils/helpers';
+const TabNav = ({ children, ...other }) => {
+  // const childrenWithProps = Children.map(children, (child, itemIndex) => {
+  //   switch (getChildType(child)) {
+  //     case 'TabTitle':
+  //       return React.cloneElement(child, {
+  //         key: itemIndex,
+  //         index: itemIndex,
+  //         activeTabIndex,
+  //         setActiveTabIndex: (e, itemIndex) => onTabChange(itemIndex),
+  //         gray,
+  //         transparent,
+  //         translucent,
+  //         dark
+  //       });
+  //     default:
+  //       return child;
+  //   }
+  // });
 
-const TabNav = ({
-  children,
-  activeTabIndex,
-  onTabChange,
-  gray,
-  transparent,
-  translucent,
-  dark,
-  ...other
-}) => {
-  const childrenWithProps = Children.map(children, (child, itemIndex) => {
-    switch (getChildType(child)) {
-      case 'TabTitle':
-        return React.cloneElement(child, {
-          key: itemIndex,
-          index: itemIndex,
-          activeTabIndex,
-          setActiveTabIndex: (e, itemIndex) => onTabChange(itemIndex),
-          gray,
-          transparent,
-          translucent,
-          dark
-        });
-      default:
-        return child;
-    }
-  });
   return (
-    <StyledTabNav
-      gray={gray}
-      transparent={transparent}
-      translucent={translucent}
-      dark={dark}
-      {...other}
-    >
-      {childrenWithProps}
-    </StyledTabNav>
+    <TabsContext.Consumer>
+      {({ tabsContext }) => (
+        <StyledTabNav
+          gray={tabsContext.gray}
+          transparent={tabsContext.transparent}
+          translucent={tabsContext.translucent}
+          dark={tabsContext.dark}
+          {...other}
+        >
+          {children}
+        </StyledTabNav>
+      )}
+    </TabsContext.Consumer>
   );
 };
 
