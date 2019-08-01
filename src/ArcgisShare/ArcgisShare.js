@@ -23,7 +23,8 @@ import {
   GroupCheckboxLabelStyles,
   GroupFieldsetStyles,
   StyledStarIcon,
-  StyledLegend
+  StyledLegend,
+  StyledNoGroups
 } from './ArcgisShare-styled';
 
 // App components
@@ -68,31 +69,36 @@ class ArcgisShare extends Component {
     });
   };
 
-  getGroupCheckboxes = groups => {
+  getGroupCheckboxes = (groups, noGroupsLabel) => {
     let _groups = [...groups];
-    if (this.props.promoteFavorites) {
-      _groups.sort((a, b) => {
-        return b.isFav - a.isFav;
+
+    if (_groups.length) {
+      if (this.props.promoteFavorites) {
+        _groups.sort((a, b) => {
+          return b.isFav - a.isFav;
+        });
+      }
+
+      return _groups.map(group => {
+        let favIcon;
+        if (group.isFav && this.props.promoteFavorites) {
+          favIcon = <StyledStarIcon filled size={16} />;
+        }
+        return (
+          <Checkbox
+            key={group.id}
+            id={group.id}
+            labelStyle={{ ...GroupCheckboxLabelStyles }}
+            checked={this.state.groups[group.id] || false}
+            onChange={this.groupChange}
+          >
+            {group.title} {favIcon}
+          </Checkbox>
+        );
       });
     }
 
-    return _groups.map(group => {
-      let favIcon;
-      if (group.isFav && this.props.promoteFavorites) {
-        favIcon = <StyledStarIcon filled size={16} />;
-      }
-      return (
-        <Checkbox
-          key={group.id}
-          id={group.id}
-          labelStyle={{ ...GroupCheckboxLabelStyles }}
-          checked={this.state.groups[group.id] || false}
-          onChange={this.groupChange}
-        >
-          {group.title} {favIcon}
-        </Checkbox>
-      );
-    });
+    return <StyledNoGroups>{noGroupsLabel}</StyledNoGroups>;
   };
 
   publicChange = e => {
@@ -134,28 +140,34 @@ class ArcgisShare extends Component {
   };
 
   render() {
+    const {
+      publicLabel,
+      groupsLabel,
+      noGroupsLabel,
+      portal,
+      user
+    } = this.props;
+
     return (
       <StyledArcgisShare>
         <Checkbox
-          id="public"
           labelStyle={{ ...PrimaryCheckboxLabelStyles }}
           checked={this.state.public || false}
           onChange={this.publicChange}
         >
-          {this.props.publicLabel}
+          {publicLabel}
         </Checkbox>
         <Checkbox
-          id="org"
           labelStyle={{ ...PrimaryCheckboxLabelStyles }}
           checked={this.state.org || false}
           onChange={this.orgChange}
         >
-          {this.props.portal && this.props.portal.name}
+          {portal && portal.name}
         </Checkbox>
         <Fieldset name="shareGroups" style={{ ...GroupFieldsetStyles }}>
-          <StyledLegend>{this.props.groupsLabel}:</StyledLegend>
+          <StyledLegend>{groupsLabel}:</StyledLegend>
           <StyledGroupContainer>
-            {this.props.user && this.getGroupCheckboxes(this.props.user.groups)}
+            {user && this.getGroupCheckboxes(user.groups, noGroupsLabel)}
           </StyledGroupContainer>
         </Fieldset>
       </StyledArcgisShare>
@@ -175,12 +187,15 @@ ArcgisShare.propTypes = {
   /** Text label for the Groups header. */
   groupsLabel: PropTypes.string,
   /** Boolean toggle for highlighting favorited groups. */
-  promoteFavorites: PropTypes.bool
+  promoteFavorites: PropTypes.bool,
+  /** Text label used inside the groups list when the user is not assigned to any groups */
+  noGroupsLabel: PropTypes.string
 };
 
 ArcgisShare.defaultProps = {
   publicLabel: 'Everyone (public)',
-  groupsLabel: 'These groups'
+  groupsLabel: 'These groups',
+  noGroupsLabel: 'No groups for this user'
 };
 
 ArcgisShare.displayName = 'ArcgisShare';
