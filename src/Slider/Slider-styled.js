@@ -63,7 +63,6 @@ const trackStyle = error => {
   return `
     width: 100%;
     height: ${rangeProps.trackHeight};
-    border-radius: 0;
     z-index: 2;
     background-color: ${
       error ? rangeProps.trackErrorBgColor : rangeProps.trackBgColor

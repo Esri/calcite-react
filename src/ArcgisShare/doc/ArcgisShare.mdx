@@ -10,6 +10,7 @@ import ArcgisShare from '../';
 import user from './user.json';
 import portal from './portal.json';
 import item from './item.json';
+import itemNoGroups from './user-noGroups.json';
 
 # ArcgisShare
 
@@ -43,6 +44,17 @@ import ArcgisShare from 'calcite-react/ArcgisShare'
 <Playground>
   <ArcgisShare
     user={user}
+    portal={portal}
+    promoteFavorites
+    onChange={e => console.log(e)}
+  />
+</Playground>
+
+## No Groups
+
+<Playground>
+  <ArcgisShare
+    user={itemNoGroups}
     portal={portal}
     promoteFavorites
     onChange={e => console.log(e)}
