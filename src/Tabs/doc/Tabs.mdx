@@ -29,115 +29,30 @@ import Tabs, {
 ## Basic Usage
 
 <Playground>
-  <Tabs activeTabIndex={0}>
-    <TabNav>
-      <TabTitle>Tab 1</TabTitle>
-      <TabTitle>Tab 2</TabTitle>
-      <TabTitle>Tab 3</TabTitle>
-    </TabNav>
-    <TabContents>
-      <TabSection>Tab 1 content</TabSection>
-      <TabSection>Tab 2 content</TabSection>
-      <TabSection>Tab 3 content</TabSection>
-    </TabContents>
-  </Tabs>
-</Playground>
-
-## Alternate Styles
-
-<Playground>
-  <GuideExample label="gray">
-    <Tabs gray activeTabIndex={0}>
-      <TabNav>
-        <TabTitle>Tab 1</TabTitle>
-        <TabTitle>Tab 2</TabTitle>
-        <TabTitle>Tab 3</TabTitle>
-      </TabNav>
-      <TabContents>
-        <TabSection>Tab 1 content</TabSection>
-        <TabSection>Tab 2 content</TabSection>
-        <TabSection>Tab 3 content</TabSection>
-      </TabContents>
-    </Tabs>
-  </GuideExample>
-  <GuideExample label="transparent">
-    <Tabs transparent activeTabIndex={0}>
-      <TabNav>
-        <TabTitle>Tab 1</TabTitle>
-        <TabTitle>Tab 2</TabTitle>
-        <TabTitle>Tab 3</TabTitle>
-      </TabNav>
-      <TabContents>
-        <TabSection>Tab 1 content</TabSection>
-        <TabSection>Tab 2 content</TabSection>
-        <TabSection>Tab 3 content</TabSection>
-      </TabContents>
-    </Tabs>
-  </GuideExample>
-  <GuideExample label="translucent">
-    <Tabs translucent activeTabIndex={0}>
-      <TabNav>
-        <TabTitle>Tab 1</TabTitle>
-        <TabTitle>Tab 2</TabTitle>
-        <TabTitle>Tab 3</TabTitle>
-      </TabNav>
-      <TabContents>
-        <TabSection>Tab 1 content</TabSection>
-        <TabSection>Tab 2 content</TabSection>
-        <TabSection>Tab 3 content</TabSection>
-      </TabContents>
-    </Tabs>
-  </GuideExample>
-  <GuideExample label="dark">
-    <Tabs dark activeTabIndex={0}>
-      <TabNav>
-        <TabTitle>Tab 1</TabTitle>
-        <TabTitle>Tab 2</TabTitle>
-        <TabTitle>Tab 3</TabTitle>
-      </TabNav>
-      <TabContents>
-        <TabSection>Tab 1 content</TabSection>
-        <TabSection>Tab 2 content</TabSection>
-        <TabSection>Tab 3 content</TabSection>
-      </TabContents>
-    </Tabs>
-  </GuideExample>
-</Playground>
-
-## Controlled Tabs
-
-<Playground>
   {() => {    
       class TabStory extends React.Component {
         constructor(props) {
           super(props);
           this.state = {
-            activeTabIndex: 0
+            activeTabKey: 0
           };
 
           this.onTabChange = this.onTabChange.bind(this);
         }
 
-        onTabChange(index) {
-          this.setState({ activeTabIndex: index });
+        onTabChange(activeTabKey) {
+          this.setState({ activeTabKey });
         };
 
         render() {
           return (
             <Tabs
               onTabChange={this.onTabChange}
-              activeTabIndex={this.state.activeTabIndex}
+              activeTabKey={this.state.activeTabKey}
             >
-              <TabNav>
-                <TabTitle>Tab 1</TabTitle>
-                <TabTitle>Tab 2</TabTitle>
-                <TabTitle>Tab 3</TabTitle>
-              </TabNav>
-              <TabContents>
-                <TabSection>Tab 1 content</TabSection>
-                <TabSection>Tab 2 content</TabSection>
-                <TabSection>Tab 3 content</TabSection>
-              </TabContents>
+              <TabSection title="Tab 1">Tab 1 content</TabSection>
+              <TabSection title="Tab 2">Tab 2 content</TabSection>
+              <TabSection title="Tab 3">Tab 3 content</TabSection>
             </Tabs>
           );
         }
@@ -148,23 +63,54 @@ import Tabs, {
 
 </Playground>
 
+## Alternate Styles
+
+<Playground>
+  <GuideExample label="gray">
+    <Tabs gray activeTabKey={0}>
+      <TabSection title="Tab 1">Tab 1 content</TabSection>
+      <TabSection title="Tab 2">Tab 2 content</TabSection>
+      <TabSection title="Tab 3">Tab 3 content</TabSection>
+    </Tabs>
+  </GuideExample>
+  <GuideExample label="transparent">
+    <Tabs transparent activeTabKey={0}>
+      <TabSection title="Tab 1">Tab 1 content</TabSection>
+      <TabSection title="Tab 2">Tab 2 content</TabSection>
+      <TabSection title="Tab 3">Tab 3 content</TabSection>
+    </Tabs>
+  </GuideExample>
+  <GuideExample label="translucent">
+    <Tabs translucent activeTabKey={0}>
+      <TabSection title="Tab 1">Tab 1 content</TabSection>
+      <TabSection title="Tab 2">Tab 2 content</TabSection>
+      <TabSection title="Tab 3">Tab 3 content</TabSection>
+    </Tabs>
+  </GuideExample>
+  <GuideExample label="dark">
+    <Tabs dark activeTabKey={0}>
+      <TabSection title="Tab 1">Tab 1 content</TabSection>
+      <TabSection title="Tab 2">Tab 2 content</TabSection>
+      <TabSection title="Tab 3">Tab 3 content</TabSection>
+    </Tabs>
+  </GuideExample>
+</Playground>
+
+## Custom Tab Key
+
+<Playground>
+  <Tabs activeTabKey="first">
+    <TabSection title="Tab 1" tabKey="first">Tab 1 content</TabSection>
+    <TabSection title="Tab 2" tabKey="second">Tab 2 content</TabSection>
+    <TabSection title="Tab 3" tabKey="third">Tab 3 content</TabSection>
+  </Tabs>
+</Playground>
+
 ## Props
 
 ### Tabs `default`
 
 <PropsTable of={Tabs} />
-
-### TabNav
-
-<PropsTable of={TabNav} />
-
-### TabTitle
-
-<PropsTable of={TabTitle} />
-
-### TabContents
-
-<PropsTable of={TabContents} />
 
 ### TabSection
 

@@ -17,24 +17,6 @@ import { TabsContext } from './Tabs';
 import { StyledTabNav } from './Tab-styled';
 
 const TabNav = ({ children, ...other }) => {
-  // const childrenWithProps = Children.map(children, (child, itemIndex) => {
-  //   switch (getChildType(child)) {
-  //     case 'TabTitle':
-  //       return React.cloneElement(child, {
-  //         key: itemIndex,
-  //         index: itemIndex,
-  //         activeTabIndex,
-  //         setActiveTabIndex: (e, itemIndex) => onTabChange(itemIndex),
-  //         gray,
-  //         transparent,
-  //         translucent,
-  //         dark
-  //       });
-  //     default:
-  //       return child;
-  //   }
-  // });
-
   return (
     <TabsContext.Consumer>
       {({ tabsContext }) => (
@@ -57,9 +39,7 @@ TabNav.propTypes = {
   children: PropTypes.node
 };
 
-TabNav.defaultProps = {
-  onTabChange: () => {}
-};
+TabNav.defaultProps = {};
 
 TabNav.displayName = 'TabNav';
 

@@ -36,7 +36,13 @@ const TabSection = ({ children, ...other }) => {
 
 TabSection.propTypes = {
   /** The content of the component. */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** Title used for the tab nav */
+  title: PropTypes.string,
+  /** Id or index of this tab, used to toggle visibility when selected */
+  tabKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /** Style the underlying TabTitle element */
+  tabTitleStyle: PropTypes.object
 };
 
 TabSection.displayName = 'TabSection';
