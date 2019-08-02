@@ -56,6 +56,33 @@ import TopNav, {
   </TopNav>
 </Playground>
 
+### With React Router
+
+Using [React Router](https://reacttraining.com/react-router/web/guides/quick-start) with
+Calcite React components is straight-forward. Pass the router component class to the `as`
+prop on whatever component needs the functionality provided by router. Props assigned to
+the Calcite component will be inherited by the underlying router component.
+
+```jsx
+import { NavLink } from 'react-router-dom'
+...
+<TopNav>
+  <TopNavBrand href="#" src={EsriLogo} />
+  <TopNavTitle href="#">ArcGIS for Developers</TopNavTitle>
+  <TopNavList>
+    <TopNavLink as={NavLink} to="/plans">
+      Plans
+    </TopNavLink>
+    <TopNavLink as={NavLink} to="/community">Community</TopNavLink>
+    <TopNavLink as={NavLink} to="/docs">Docs</TopNavLink>
+  </TopNavList>
+  <TopNavActionsList>
+    <TopNavLink href="#">Sign In</TopNavLink>
+    <Button clear>Sign Up</Button>
+  </TopNavActionsList>
+</TopNav>
+```
+
 ## Props
 
 ### TopNav `default`
