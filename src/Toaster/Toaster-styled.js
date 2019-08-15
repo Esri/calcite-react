@@ -13,6 +13,9 @@ import styled from 'styled-components';
 
 import Button from '../Button';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledCloseButton = styled(Button)`
   color: currentColor;
 
@@ -21,5 +24,6 @@ const StyledCloseButton = styled(Button)`
     opacity: 0.7;
   }
 `;
+StyledCloseButton.defaultProps = { theme };
 
 export { StyledCloseButton };

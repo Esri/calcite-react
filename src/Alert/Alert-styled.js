@@ -14,6 +14,9 @@ import { unitCalc } from '../utils/helpers';
 import { linkColor } from '../utils/color';
 import { CalciteA } from '../Elements';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledAlert = styled.div`
   padding: ${props => unitCalc(props.theme.baseline, 2, '/')};
   color: ${props => props.theme.palette.offBlack};
@@ -55,6 +58,7 @@ const StyledAlert = styled.div`
       max-width: none;
     `};
 `;
+StyledAlert.defaultProps = { theme };
 
 const StyledAlertClose = styled(CalciteA)`
   position: absolute;
@@ -69,5 +73,6 @@ const StyledAlertClose = styled(CalciteA)`
     fill: currentColor;
   }
 `;
+StyledAlertClose.defaultProps = { theme };
 
 export { StyledAlert, StyledAlertClose };

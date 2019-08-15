@@ -13,6 +13,9 @@ import styled, { css } from 'styled-components';
 import { unitCalc, clearfix } from '../utils/helpers';
 import { CalciteH4 } from '../Elements';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledPanel = styled.div`
   ${clearfix()};
   background-color: ${props => props.theme.palette.offWhite};
@@ -87,11 +90,14 @@ const StyledPanel = styled.div`
       padding: 0;
     `};
 `;
+StyledPanel.defaultProps = { theme };
 
 const StyledPanelText = styled.div``;
+StyledPanelText.defaultProps = { theme };
 
 const StyledPanelTitle = styled(CalciteH4)`
   margin-bottom: 0.775rem;
 `;
+StyledPanelTitle.defaultProps = { theme };
 
 export { StyledPanel, StyledPanelText, StyledPanelTitle };

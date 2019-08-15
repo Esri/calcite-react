@@ -12,6 +12,9 @@
 import styled from 'styled-components';
 import Select from '../Select';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledDatePickerContainer = styled.div`
   position: relative;
   font-family: ${props => props.theme.type.avenirFamily};
@@ -102,12 +105,14 @@ const StyledDatePickerContainer = styled.div`
     align-items: center;
   }
 `;
+StyledDatePickerContainer.defaultProps = { theme };
 
 const StyledMonthElContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: -37px;
 `;
+StyledMonthElContainer.defaultProps = { theme };
 
 const StyledMonthYearSelectContainer = styled.div`
   display: flex;
@@ -116,6 +121,7 @@ const StyledMonthYearSelectContainer = styled.div`
   margin: -4px 0 5px;
   min-height: 32px;
 `;
+StyledMonthYearSelectContainer.defaultProps = { theme };
 
 const StyledMonthSelect = styled(Select).attrs({
   menuStyle: { minWidth: '100%', maxHeight: '200px' },
@@ -145,6 +151,7 @@ const StyledMonthYearHeader = styled.h6`
   caption-side: initial;
   margin: 0 3px;
 `;
+StyledMonthYearHeader.defaultProps = { theme };
 
 const StyledWeekDayList = styled.ol`
   text-decoration: none;
@@ -155,12 +162,14 @@ const StyledWeekDayList = styled.ol`
   padding: 0;
   margin: 0;
 `;
+StyledWeekDayList.defaultProps = { theme };
 
 const StyledWeekDay = styled.li`
   color: ${props => props.theme.palette.darkerGray};
   font-size: smaller;
   width: 39px;
 `;
+StyledWeekDay.defaultProps = { theme };
 
 export {
   StyledDatePickerContainer,

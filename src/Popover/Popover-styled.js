@@ -11,9 +11,13 @@
 
 import styled, { css } from 'styled-components';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledTargetWrapper = styled.div`
   display: inline-block;
 `;
+StyledTargetWrapper.defaultProps = { theme };
 
 const StyledPopover = styled.div`
   box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.05);
@@ -41,5 +45,6 @@ const StyledPopover = styled.div`
       pointer-events: auto;
     `};
 `;
+StyledPopover.defaultProps = { theme };
 
 export { StyledTargetWrapper, StyledPopover };

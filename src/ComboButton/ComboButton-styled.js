@@ -13,16 +13,21 @@ import styled, { css } from 'styled-components';
 import { StyledButton } from '../Button/Button-styled';
 import { unitCalc } from '../utils/helpers';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledComboButtonContainer = styled.div`
   display: flex;
   flex-wrap: nowrap;
 `;
+StyledComboButtonContainer.defaultProps = { theme };
 
 const StyledComboButton = styled(StyledButton)`
   border-right-width: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 `;
+StyledComboButton.defaultProps = { theme };
 
 const StyledComboButtonDropdown = styled(StyledButton)`
   height: 100%;
@@ -58,6 +63,7 @@ const StyledComboButtonDropdown = styled(StyledButton)`
       border-left-color: ${props => props.theme.palette.darkGreen};
     `};
 `;
+StyledComboButtonDropdown.defaultProps = { theme };
 
 export {
   StyledComboButtonContainer,

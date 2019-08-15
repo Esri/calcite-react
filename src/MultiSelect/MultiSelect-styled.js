@@ -12,11 +12,16 @@
 import styled, { css } from 'styled-components';
 import { CalciteSelect } from '../utils/commonElements';
 import Menu from '../Menu';
+
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 import { transition } from '../utils/helpers';
 
 const StyledMultiSelectWrapper = styled.div`
   position: relative;
 `;
+StyledMultiSelectWrapper.defaultProps = { theme };
 
 const StyledMultiSelectButton = styled(CalciteSelect)`
   cursor: pointer;
@@ -25,6 +30,7 @@ const StyledMultiSelectButton = styled(CalciteSelect)`
   text-overflow: ellipsis;
   text-align: left;
 `;
+StyledMultiSelectButton.defaultProps = { theme };
 
 const StyledMultiSelectMenu = styled(Menu)`
   max-height: 300px;
@@ -47,6 +53,7 @@ const StyledMultiSelectMenu = styled(Menu)`
       width: 100%;
     `};
 `;
+StyledMultiSelectMenu.defaultProps = { theme };
 
 export {
   StyledMultiSelectWrapper,

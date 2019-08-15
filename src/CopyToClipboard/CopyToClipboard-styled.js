@@ -14,6 +14,9 @@ import { CalciteInput } from '../utils/commonElements';
 import { transition } from '../utils/helpers';
 import Button from '../Button';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const FadeIn = keyframes`
   from {
     opacity: 0;
@@ -30,6 +33,7 @@ const StyledCopyToClipboard = styled.div`
     animation: ${FadeIn} ${transition()};
   }
 `;
+StyledCopyToClipboard.defaultProps = { theme };
 
 const StyledCopyToClipboardInput = styled(CalciteInput)`
   flex: 1 0 50px;
@@ -39,6 +43,7 @@ const StyledCopyToClipboardInput = styled(CalciteInput)`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 `;
+StyledCopyToClipboardInput.defaultProps = { theme };
 
 const StyledCopyButton = styled(Button)`
   border-top-left-radius: 0;
@@ -48,5 +53,6 @@ const StyledCopyButton = styled(Button)`
     margin-left: 0 !important;
   }
 `;
+StyledCopyButton.defaultProps = { theme };
 
 export { StyledCopyToClipboard, StyledCopyToClipboardInput, StyledCopyButton };

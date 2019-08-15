@@ -12,6 +12,9 @@
 import styled, { css } from 'styled-components';
 import { transition } from '../utils/helpers';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledDrawer = styled.div`
   position: fixed;
   top: 0;
@@ -33,6 +36,7 @@ const StyledDrawer = styled.div`
       background-color: ${props => props.theme.palette.transparentBlack};
     `};
 `;
+StyledDrawer.defaultProps = { theme };
 
 const StyledDrawerNav = styled.nav`
   position: absolute;
@@ -68,5 +72,6 @@ const StyledDrawerNav = styled.nav`
         `};
     `};
 `;
+StyledDrawerNav.defaultProps = { theme };
 
 export { StyledDrawer, StyledDrawerNav };

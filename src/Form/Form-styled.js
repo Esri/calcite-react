@@ -12,6 +12,9 @@
 import styled, { css } from 'styled-components';
 import { fontSize, unitCalc } from '../utils/helpers';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledForm = styled.form`
   margin: 0;
   padding: 0;
@@ -25,6 +28,7 @@ const StyledForm = styled.form`
       flex-direction: row;
     `};
 `;
+StyledForm.defaultProps = { theme };
 
 const StyledFormControl = styled.div`
   position: relative;
@@ -61,6 +65,7 @@ const StyledFormControl = styled.div`
       width: 100%;
     `};
 `;
+StyledFormControl.defaultProps = { theme };
 
 const StyledFormControlLabel = styled.label`
   display: flex;
@@ -73,6 +78,7 @@ const StyledFormControlLabel = styled.label`
       align-items: center;
     `};
 `;
+StyledFormControlLabel.defaultProps = { theme };
 
 const StyledFormControlLabelText = styled.span`
   ${props =>
@@ -81,6 +87,7 @@ const StyledFormControlLabelText = styled.span`
       margin-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
     `};
 `;
+StyledFormControlLabelText.defaultProps = { theme };
 
 const StyledFormHelperText = styled.span`
   ${fontSize(-3)};
@@ -100,6 +107,7 @@ const StyledFormHelperText = styled.span`
       color: ${props => props.theme.palette.darkGreen200};
     `};
 `;
+StyledFormHelperText.defaultProps = { theme };
 
 const StyledLegend = styled.legend`
   position: relative;
@@ -113,6 +121,7 @@ const StyledLegend = styled.legend`
       margin-bottom: 0;
     `};
 `;
+StyledLegend.defaultProps = { theme };
 
 const StyledFieldset = styled.div`
   margin: 0;
@@ -127,6 +136,7 @@ const StyledFieldset = styled.div`
       flex-direction: row;
     `};
 `;
+StyledFieldset.defaultProps = { theme };
 
 export {
   StyledForm,

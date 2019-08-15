@@ -13,6 +13,9 @@ import styled, { css } from 'styled-components';
 import { fontSize, unitCalc } from '../utils/helpers';
 import Button from '../Button';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledArcgisAccountControl = styled.div`
   display: flex;
   align-items: center;
@@ -47,38 +50,45 @@ const StyledArcgisAccountControl = styled.div`
       }
     `};
 `;
+StyledArcgisAccountControl.defaultProps = { theme };
 
 const StyledArcgisAccountControlAvatar = styled.div`
   margin-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
 `;
+StyledArcgisAccountControlAvatar.defaultProps = { theme };
 
 const StyledArcgisAccountControlNames = styled.div`
   flex: 1 0 50px;
   display: flex;
   flex-direction: column;
 `;
+StyledArcgisAccountControlNames.defaultProps = { theme };
 const StyledArcgisAccountControlFriendlyName = styled.span`
   font-weight: 600;
   ${fontSize(-1)};
   line-height: 20px;
 `;
+StyledArcgisAccountControlFriendlyName.defaultProps = { theme };
 const StyledArcgisAccountControlUsername = styled.span`
   font-weight: 300;
   ${fontSize(-2)};
   line-height: 16px;
 `;
+StyledArcgisAccountControlUsername.defaultProps = { theme };
 
 const StyledArcgisAccountMenu = styled.div`
   background: ${props => props.theme.palette.white};
   box-shadow: ${props => props.theme.boxShadow};
   border-radius: ${props => props.theme.borderRadius};
 `;
+StyledArcgisAccountMenu.defaultProps = { theme };
 
 const StyledArcgisAccountContent = styled.div`
   display: flex;
   min-height: 210px;
   padding-top: ${props => unitCalc(props.theme.baseline, 2, '*')};
 `;
+StyledArcgisAccountContent.defaultProps = { theme };
 const StyledArcgisAccountContentInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -86,17 +96,20 @@ const StyledArcgisAccountContentInfo = styled.div`
   align-items: center;
   flex: 1 0 50px;
 `;
+StyledArcgisAccountContentInfo.defaultProps = { theme };
 const StyledArcgisAccountContentName = styled.span`
   ${fontSize(1)};
   font-weight: 600;
   display: inline-block;
   margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
 `;
+StyledArcgisAccountContentName.defaultProps = { theme };
 const StyledArcgisAccountContentId = styled.span`
   ${fontSize(-2)};
   font-weight: 300;
   line-height: 20px;
 `;
+StyledArcgisAccountContentId.defaultProps = { theme };
 const StyledArcgisAccountContentGroup = styled.span`
   ${fontSize(-2)};
   font-weight: 300;
@@ -105,6 +118,7 @@ const StyledArcgisAccountContentGroup = styled.span`
   text-align: center;
   padding: 0 ${props => unitCalc(props.theme.baseline, 4, '/')};
 `;
+StyledArcgisAccountContentGroup.defaultProps = { theme };
 
 const StyledArcgisAccountContentMenu = styled.div`
   flex: 1 0 30px;
@@ -114,10 +128,12 @@ const StyledArcgisAccountContentMenu = styled.div`
   flex-direction: column;
   align-items: flex-start;
 `;
+StyledArcgisAccountContentMenu.defaultProps = { theme };
 
 const StyledArcgisAccountSignInMenu = styled.div`
   display: flex;
 `;
+StyledArcgisAccountSignInMenu.defaultProps = { theme };
 
 const StyledArcgisAccountMenuItem = styled.a`
   cursor: pointer;
@@ -152,17 +168,20 @@ const StyledArcgisAccountMenuItem = styled.a`
     }
   }
 `;
+StyledArcgisAccountMenuItem.defaultProps = { theme };
 
 const StyledSwitchAccountButton = styled(Button)`
   flex: 1 0 50px;
   border-radius: 0 0 0 ${props => props.theme.borderRadius};
 `;
+StyledSwitchAccountButton.defaultProps = { theme };
 
 const StyledSignOutButton = styled(Button)`
   flex: 1 0 50px;
   margin-left: 0;
   border-radius: 0 0 ${props => props.theme.borderRadius} 0;
 `;
+StyledSignOutButton.defaultProps = { theme };
 
 export {
   StyledArcgisAccountControl,

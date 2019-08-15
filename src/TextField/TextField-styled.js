@@ -11,6 +11,10 @@
 
 import styled, { css } from 'styled-components';
 import { CalciteInput, CalciteTextarea } from '../utils/commonElements';
+
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 import { unitCalc } from '../utils/helpers';
 
 const StyledTextField = styled(CalciteInput)`
@@ -30,6 +34,7 @@ const StyledTextField = styled(CalciteInput)`
       border-bottom-right-radius: 0;
     `};
 `;
+StyledTextField.defaultProps = { theme };
 
 const StyledTextArea = styled(CalciteTextarea)`
   ${props =>
@@ -48,6 +53,7 @@ const StyledTextArea = styled(CalciteTextarea)`
       border-bottom-right-radius: 0;
     `};
 `;
+StyledTextArea.defaultProps = { theme };
 
 const StyledTextFieldAdornmentWrapper = styled.div`
   display: flex;
@@ -58,6 +64,7 @@ const StyledTextFieldAdornmentWrapper = styled.div`
       width: 100%;
     `};
 `;
+StyledTextFieldAdornmentWrapper.defaultProps = { theme };
 
 const StyledAdornmentWrapper = styled.div`
   display: flex;
@@ -100,6 +107,7 @@ const StyledAdornmentWrapper = styled.div`
       border-bottom-left-radius: 0;
     `};
 `;
+StyledAdornmentWrapper.defaultProps = { theme };
 
 export {
   StyledTextField,

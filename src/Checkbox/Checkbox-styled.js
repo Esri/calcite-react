@@ -12,6 +12,9 @@
 import styled from 'styled-components';
 import { fontSize, unitCalc } from '../utils/helpers';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 import { baseRadioCheckbox } from '../utils/commonElements';
 
 const StyledCheckbox = styled(baseRadioCheckbox)`
@@ -19,6 +22,7 @@ const StyledCheckbox = styled(baseRadioCheckbox)`
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
   cursor: pointer;
 `;
+StyledCheckbox.defaultProps = { theme };
 
 const StyledCheckboxLabel = styled.span`
   ${fontSize(-1)};
@@ -27,9 +31,11 @@ const StyledCheckboxLabel = styled.span`
   margin-right: ${props => props.theme.baseline};
   cursor: pointer;
 `;
+StyledCheckboxLabel.defaultProps = { theme };
 const StyledCheckboxGroup = styled.label`
   display: flex;
   align-items: center;
 `;
+StyledCheckboxGroup.defaultProps = { theme };
 
 export { StyledCheckbox, StyledCheckboxLabel, StyledCheckboxGroup };

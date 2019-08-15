@@ -12,6 +12,10 @@
 import styled, { css } from 'styled-components';
 import { CalciteSelect } from '../utils/commonElements';
 import Menu from '../Menu';
+
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 import { transition } from '../utils/helpers';
 
 const StyledSelectWrapper = styled.div`
@@ -23,11 +27,13 @@ const StyledSelectWrapper = styled.div`
       width: 100%;
     `};
 `;
+StyledSelectWrapper.defaultProps = { theme };
 
 const StyledSelectInput = styled(CalciteSelect)`
   cursor: pointer;
   text-overflow: ellipsis;
 `;
+StyledSelectInput.defaultProps = { theme };
 
 const StyledSelectButton = styled(CalciteSelect)`
   cursor: pointer;
@@ -36,6 +42,7 @@ const StyledSelectButton = styled(CalciteSelect)`
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
+StyledSelectButton.defaultProps = { theme };
 
 const StyledSelectMenu = styled(Menu)`
   max-height: 300px;
@@ -58,6 +65,7 @@ const StyledSelectMenu = styled(Menu)`
       min-width: 100%;
     `};
 `;
+StyledSelectMenu.defaultProps = { theme };
 
 const PopperManagerStyles = {
   width: '100%'

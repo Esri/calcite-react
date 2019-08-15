@@ -10,8 +10,11 @@
 // limitations under the License.​
 
 import styled from 'styled-components';
-import { fontSize, unitCalc } from '../utils/helpers';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+import { fontSize, unitCalc } from '../utils/helpers';
 import { baseRadioCheckbox } from '../utils/commonElements';
 
 const StyledRadio = styled(baseRadioCheckbox)`
@@ -20,6 +23,7 @@ const StyledRadio = styled(baseRadioCheckbox)`
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
   cursor: pointer;
 `;
+StyledRadio.defaultProps = { theme };
 
 const StyledRadioLabel = styled.span`
   ${fontSize(-1)};
@@ -28,9 +32,11 @@ const StyledRadioLabel = styled.span`
   margin-right: ${props => props.theme.baseline};
   cursor: pointer;
 `;
+StyledRadioLabel.defaultProps = { theme };
 const StyledRadioGroup = styled.label`
   display: flex;
   align-items: center;
 `;
+StyledRadioGroup.defaultProps = { theme };
 
 export { StyledRadio, StyledRadioLabel, StyledRadioGroup };

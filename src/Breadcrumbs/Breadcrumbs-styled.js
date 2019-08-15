@@ -14,10 +14,14 @@ import { linkColor } from '../utils/color';
 import { CalciteA } from '../Elements';
 import { fontSize } from '../utils/helpers';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledBreadcrumbs = styled.nav`
   ${fontSize(-2)};
   color: ${props => props.theme.palette.darkerGray};
 `;
+StyledBreadcrumbs.defaultProps = { theme };
 
 const StyledCrumb = styled(CalciteA)`
   color: ${props => props.theme.palette.darkerGray};
@@ -49,6 +53,7 @@ const StyledCrumb = styled(CalciteA)`
       }
     `};
 `;
+StyledCrumb.defaultProps = { theme };
 
 const StyledSpanCrumb = styled.span`
   color: ${props => props.theme.palette.darkerGray};
@@ -80,5 +85,6 @@ const StyledSpanCrumb = styled.span`
       }
     `};
 `;
+StyledSpanCrumb.defaultProps = { theme };
 
 export { StyledBreadcrumbs, StyledCrumb, StyledSpanCrumb };

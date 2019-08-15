@@ -10,14 +10,17 @@
 // limitations under the License.​
 
 import styled from 'styled-components';
-import { CalciteTheme } from '../CalciteThemeProvider';
 import { unitCalc } from '../utils/helpers';
 import StarIcon from 'calcite-ui-icons-react/StarIcon';
 import { Legend } from '../Form';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 import { fontSize } from '../utils/helpers';
 
 const StyledArcgisShare = styled.div``;
+StyledArcgisShare.defaultProps = { theme };
 
 const StyledGroupContainer = styled.div`
   position: relative;
@@ -29,10 +32,11 @@ const StyledGroupContainer = styled.div`
   overflow-y: auto;
   border-radius: ${props => props.theme.borderRadius};
 `;
+StyledGroupContainer.defaultProps = { theme };
 
 const PrimaryCheckboxLabelStyles = {
   fontSize: '1rem',
-  color: CalciteTheme.palette.black
+  color: theme.palette.black
 };
 
 const GroupCheckboxLabelStyles = {
@@ -50,10 +54,12 @@ const StyledStarIcon = styled(StarIcon)`
   vertical-align: text-top;
   margin-left: 2px;
 `;
+StyledStarIcon.defaultProps = { theme };
 
 const StyledLegend = styled(Legend)`
   font-size: 1rem;
 `;
+StyledLegend.defaultProps = { theme };
 
 const StyledNoGroups = styled.span`
   position: absolute;
@@ -67,6 +73,7 @@ const StyledNoGroups = styled.span`
   color: ${props => props.theme.palette.lightGray};
   ${fontSize(-2)};
 `;
+StyledNoGroups.defaultProps = { theme };
 
 export {
   StyledArcgisShare,

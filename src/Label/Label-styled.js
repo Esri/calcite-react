@@ -10,6 +10,10 @@
 // limitations under the License.​
 
 import styled, { css } from 'styled-components';
+
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 import { fontSize } from '../utils/helpers';
 
 const StyledLabel = styled.mark`
@@ -47,5 +51,6 @@ const StyledLabel = styled.mark`
       color: ${props => props.theme.palette.white};
     `};
 `;
+StyledLabel.defaultProps = { theme };
 
 export { StyledLabel };

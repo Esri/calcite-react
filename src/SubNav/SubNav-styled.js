@@ -11,6 +11,10 @@
 
 import styled, { css } from 'styled-components';
 import { CalciteA, CalciteH1 } from '../Elements';
+
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 import {
   subNavUnderline,
   unitCalc,
@@ -42,6 +46,7 @@ const StyledSubNav = styled.header`
       )};
     `};
 `;
+StyledSubNav.defaultProps = { theme };
 
 const StyledSubNavLeftContent = styled.div`
   display: flex;
@@ -49,6 +54,7 @@ const StyledSubNavLeftContent = styled.div`
   justify-content: space-between;
   flex-direction: column;
 `;
+StyledSubNavLeftContent.defaultProps = { theme };
 
 const StyledSubNavLink = styled(CalciteA)`
   padding: 0.25em 0.75em;
@@ -92,6 +98,7 @@ const StyledSubNavLink = styled(CalciteA)`
       pointer-events: none;
     `};
 `;
+StyledSubNavLink.defaultProps = { theme };
 
 const StyledSubNavList = styled.nav`
   display: flex;
@@ -100,6 +107,7 @@ const StyledSubNavList = styled.nav`
   padding-left: 0.25em;
   box-sizing: border-box;
 `;
+StyledSubNavList.defaultProps = { theme };
 
 const StyledSubNavActions = styled.nav`
   margin: 0.5em;
@@ -107,6 +115,7 @@ const StyledSubNavActions = styled.nav`
   justify-content: flex-end;
   align-items: center;
 `;
+StyledSubNavActions.defaultProps = { theme };
 
 const StyledSubNavTitle = styled(CalciteH1)`
   ${fontSize(4)};
@@ -122,11 +131,13 @@ const StyledSubNavTitle = styled(CalciteH1)`
       color: ${props.theme.palette.white};
     `};
 `;
+StyledSubNavTitle.defaultProps = { theme };
 
 const StyledMultiRowActions = styled.div`
   display: flex;
   flex-direction: column;
 `;
+StyledMultiRowActions.defaultProps = { theme };
 
 export {
   StyledSubNav,

@@ -14,11 +14,16 @@ import { transition } from '../utils/helpers';
 import { StyledSideNav, StyledSideNavTitle } from '../SideNav/SideNav-styled';
 import ChevronRightIcon from 'calcite-ui-icons-react/ChevronRightIcon';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledAccordion = styled(StyledSideNav)`
   border-radius: ${props => props.theme.borderRadius};
 `;
+StyledAccordion.defaultProps = { theme };
 
 const StyledAccordionSection = styled.div``;
+StyledAccordionSection.defaultProps = { theme };
 
 const StyledAccordionTitle = styled(StyledSideNavTitle)`
   display: flex;
@@ -49,6 +54,7 @@ const StyledAccordionTitle = styled(StyledSideNavTitle)`
       pointer-events: none;
     `};
 `;
+StyledAccordionTitle.defaultProps = { theme };
 
 const StyledAccordionContent = styled.div`
   display: none;
@@ -59,6 +65,7 @@ const StyledAccordionContent = styled.div`
       display: block;
     `};
 `;
+StyledAccordionContent.defaultProps = { theme };
 
 const StyledChevronIcon = styled(ChevronRightIcon)`
   width: 20;
@@ -72,6 +79,7 @@ const StyledChevronIcon = styled(ChevronRightIcon)`
       transform: rotate(90deg);
     `};
 `;
+StyledChevronIcon.defaultProps = { theme };
 
 export {
   StyledAccordion,

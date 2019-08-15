@@ -11,6 +11,9 @@
 
 import styled, { css } from 'styled-components';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledAvatar = styled.div`
   width: ${props => props.aSize}px;
   height: ${props => props.aSize}px;
@@ -32,6 +35,7 @@ const StyledAvatar = styled.div`
       font-size: ${props.fontSize}px;
     `};
 `;
+StyledAvatar.defaultProps = { theme };
 
 const StyledAvatarImage = styled.img`
   width: 100%;
@@ -39,6 +43,7 @@ const StyledAvatarImage = styled.img`
   text-align: center;
   object-fit: cover;
 `;
+StyledAvatarImage.defaultProps = { theme };
 
 const StyledAvatarSvg = {
   fill: 'currentColor',
@@ -53,5 +58,6 @@ const StyledAvatarText = styled.span`
   font-weight: 300;
   font-family: ${props => props.theme.type.avenirFamily};
 `;
+StyledAvatarText.defaultProps = { theme };
 
 export { StyledAvatar, StyledAvatarImage, StyledAvatarSvg, StyledAvatarText };

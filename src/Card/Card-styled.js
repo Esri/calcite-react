@@ -13,6 +13,9 @@ import styled, { css } from 'styled-components';
 import { CalciteFigure, CalciteH4 } from '../Elements';
 import { fontSize } from '../utils/helpers';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,6 +45,7 @@ const StyledCard = styled.div`
       background: transparent;
     `};
 `;
+StyledCard.defaultProps = { theme };
 
 const StyledCardContent = styled.div`
   padding: 1rem;
@@ -66,6 +70,7 @@ const StyledCardContent = styled.div`
       border-radius: ${props => props.theme.borderRadius};
     `};
 `;
+StyledCardContent.defaultProps = { theme };
 
 const StyledCardImageWrap = styled(CalciteFigure)`
   width: 100%;
@@ -93,6 +98,7 @@ const StyledCardImageWrap = styled(CalciteFigure)`
       margin-bottom: 0;
     `};
 `;
+StyledCardImageWrap.defaultProps = { theme };
 
 const StyledCardImage = styled.img`
   width: 100%;
@@ -110,6 +116,7 @@ const StyledCardImage = styled.img`
       position: absolute;
     `};
 `;
+StyledCardImage.defaultProps = { theme };
 
 const StyledCardImageCaption = styled.figcaption`
   background: ${props => props.theme.palette.opaqueWhite};
@@ -123,10 +130,12 @@ const StyledCardImageCaption = styled.figcaption`
   ${fontSize(-2)};
   padding: 0.35rem 1.25rem 0.35rem 1.25rem;
 `;
+StyledCardImageCaption.defaultProps = { theme };
 
 const StyledCardTitle = styled(CalciteH4)`
   margin-bottom: 0.775rem;
 `;
+StyledCardTitle.defaultProps = { theme };
 
 export {
   StyledCard,

@@ -12,6 +12,9 @@
 import styled, { css } from 'styled-components';
 import { unitCalc, fontSize } from '../utils/helpers';
 
+// Calcite theme
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledButton = styled.button`
   position: relative;
   display: inline-flex;
@@ -309,10 +312,12 @@ const StyledButton = styled.button`
       border-radius: 0;
     `};
 `;
+StyledButton.defaultProps = { theme };
 
 const StyledButtonGroup = styled.nav`
   display: inline-flex;
   justify-content: space-between;
 `;
+StyledButtonGroup.defaultProps = { theme };
 
 export { StyledButton, StyledButtonGroup };
