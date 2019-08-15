@@ -9,13 +9,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
 
-// Calcite theme
+// Utils, common elements
+import { fontSize, unitCalc } from '../utils/helpers';
+
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
-import { unitCalc } from '../utils/helpers';
-import { fontSize } from '../utils/helpers';
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledTable = styled.table`
   width: 100%;

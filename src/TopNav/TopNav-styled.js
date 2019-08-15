@@ -9,13 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { CalciteA } from '../Elements';
 
-// Calcite theme
+// Utils, common elements
+import { clearfix, fontSize } from '../utils/helpers';
+
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
-import { clearfix, fontSize } from '../utils/helpers';
+// Calcite components
+import { CalciteA } from '../Elements';
+
+// Icons
+
+// Third party libraries
 
 const StyledTopNav = styled.header`
   display: flex;

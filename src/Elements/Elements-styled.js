@@ -10,11 +10,20 @@
 // limitations under the License.​
 
 import React from 'react';
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { fontSize, unitCalc } from '../utils/helpers';
 
-// Calcite theme
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const CalciteHtml = styled.html`
   height: 100%;

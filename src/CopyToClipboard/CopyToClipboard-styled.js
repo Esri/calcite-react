@@ -9,13 +9,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { keyframes } from 'styled-components';
-import { CalciteInput } from '../utils/commonElements';
+
+// Utils, common elements
 import { transition } from '../utils/helpers';
+import { CalciteInput } from '../utils/commonElements';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import Button from '../Button';
 
-// Calcite theme
-import { CalciteTheme as theme } from '../CalciteThemeProvider';
+// Icons
+
+// Third party libraries
 
 const FadeIn = keyframes`
   from {

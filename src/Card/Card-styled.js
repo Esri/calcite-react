@@ -9,12 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { CalciteFigure, CalciteH4 } from '../Elements';
+
+// Utils, common elements
 import { fontSize } from '../utils/helpers';
 
-// Calcite theme
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+import { CalciteFigure, CalciteH4 } from '../Elements';
+
+// Icons
+
+// Third party libraries
 
 const StyledCard = styled.div`
   display: flex;

@@ -9,19 +9,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled from 'styled-components';
+
+// Utils, common elements
+import { fontSize, unitCalc } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import {
   StyledCard,
   StyledCardTitle,
   StyledCardContent,
   StyledCardImageWrap
 } from '../Card/Card-styled';
-import { fontSize, unitCalc } from '../utils/helpers';
+
+// Icons
 import UserIcon from 'calcite-ui-icons-react/UserIcon';
 import CalendarIcon from 'calcite-ui-icons-react/CalendarIcon';
 
-// Calcite theme
-import { CalciteTheme as theme } from '../CalciteThemeProvider';
+// Third party libraries
 
 const StyledItemCard = styled(StyledCard)`
   border-radius: ${props => props.theme.borderRadius};

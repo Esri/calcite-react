@@ -9,11 +9,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import { CalciteA, CalciteH1 } from '../Elements';
 
-// Calcite theme
-import { CalciteTheme as theme } from '../CalciteThemeProvider';
+// Icons
+
+// Third party libraries
 
 import {
   subNavUnderline,
@@ -122,7 +131,7 @@ const StyledSubNavTitle = styled(CalciteH1)`
   padding-left: 0.25em;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
   margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  line-height: 1.25
+  line-height: 1.25;
   box-sizing: border-box;
 
   ${props =>

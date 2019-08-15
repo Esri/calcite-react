@@ -9,13 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
 
-// Calcite theme
+// Utils, common elements
+import { fontSize, unitCalc, transition } from '../utils/helpers';
+import { CalciteInput } from '../utils/commonElements';
+
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
-import { CalciteInput } from '../utils/commonElements';
-import { fontSize, unitCalc, transition } from '../utils/helpers';
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledClearIconContainer = styled.div`
   display: none;

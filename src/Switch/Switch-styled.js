@@ -9,14 +9,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { transparentize } from 'polished';
 
-// Calcite theme
+// Utils, common elements
+import { fontSize, unitCalc } from '../utils/helpers';
+import { baseRadioCheckbox } from '../utils/commonElements';
+
+// Calcite theme and Esri colors
 import { CalciteTheme as theme, EsriColors } from '../CalciteThemeProvider';
 
-import { baseRadioCheckbox } from '../utils/commonElements';
-import { fontSize, unitCalc } from '../utils/helpers';
+// Calcite components
+
+// Icons
+
+// Third party libraries
+import { transparentize } from 'polished';
 
 const switchProps = {
   switchWidth: '36px',

@@ -9,12 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { StyledButton } from '../Button/Button-styled';
+
+// Utils, common elements
 import { unitCalc } from '../utils/helpers';
 
-// Calcite theme
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+import { StyledButton } from '../Button/Button-styled';
+
+// Icons
+
+// Third party libraries
 
 const StyledComboButtonContainer = styled.div`
   display: flex;

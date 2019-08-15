@@ -9,14 +9,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
+import { unitCalc, fontSize } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import { StyledSideNav } from '../SideNav/SideNav-styled';
 import { CalciteA } from '../Elements';
 
-// Calcite theme
-import { CalciteTheme as theme } from '../CalciteThemeProvider';
+// Icons
 
-import { unitCalc, fontSize } from '../utils/helpers';
+// Third party libraries
 
 const StyledMenu = styled(StyledSideNav)`
   min-width: 200px;

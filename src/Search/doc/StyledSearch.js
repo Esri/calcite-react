@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Search from '../../Search';
 
-// Calcite theme
 import { CalciteTheme as theme } from '../../CalciteThemeProvider';
 
 const StyledSearch = styled(Search)`

@@ -9,12 +9,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
 
-// Calcite theme
+// Utils
+import { fontSize, unitCalc, transition } from './helpers';
+
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
-import { fontSize, unitCalc, transition } from './helpers';
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const formSelectInputTextarea = styled.select`
   position: relative;

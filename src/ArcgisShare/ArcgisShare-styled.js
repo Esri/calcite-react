@@ -9,15 +9,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled from 'styled-components';
-import { unitCalc } from '../utils/helpers';
-import StarIcon from 'calcite-ui-icons-react/StarIcon';
-import { Legend } from '../Form';
 
-// Calcite theme
+// Utils, common elements
+import { unitCalc, fontSize } from '../utils/helpers';
+
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
-import { fontSize } from '../utils/helpers';
+// Calcite components
+import { Legend } from '../Form';
+
+// Icons
+import StarIcon from 'calcite-ui-icons-react/StarIcon';
+
+// Third party libraries
 
 const StyledArcgisShare = styled.div``;
 StyledArcgisShare.defaultProps = { theme };

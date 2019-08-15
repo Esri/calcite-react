@@ -9,14 +9,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { CalciteSelect } from '../utils/commonElements';
-import Menu from '../Menu';
 
-// Calcite theme
+// Utils, common elements
+import { CalciteSelect } from '../utils/commonElements';
+import { transition } from '../utils/helpers';
+
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
-import { transition } from '../utils/helpers';
+// Calcite components
+import Menu from '../Menu';
+
+// Icons
+
+// Third party libraries
 
 const StyledSelectWrapper = styled.div`
   position: relative;

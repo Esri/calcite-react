@@ -9,13 +9,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { transition } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import { StyledSideNav, StyledSideNavTitle } from '../SideNav/SideNav-styled';
+
+// Icons
 import ChevronRightIcon from 'calcite-ui-icons-react/ChevronRightIcon';
 
-// Calcite theme
-import { CalciteTheme as theme } from '../CalciteThemeProvider';
+// Third party libraries
 
 const StyledAccordion = styled(StyledSideNav)`
   border-radius: ${props => props.theme.borderRadius};

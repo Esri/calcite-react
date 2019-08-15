@@ -9,13 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { CalciteH6, CalciteP } from '../Elements';
 
-// Calcite theme
+// Utils, common elements
+import { fontSize, unitCalc } from '../utils/helpers';
+
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
-import { fontSize, unitCalc } from '../utils/helpers';
+// Calcite components
+import { CalciteH6, CalciteP } from '../Elements';
+
+// Icons
+
+// Third party libraries
 
 const StyledStepper = styled.div`
   display: flex;

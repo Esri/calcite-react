@@ -9,13 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled from 'styled-components';
-import { fontSize, unitCalc } from '../utils/helpers';
 
-// Calcite theme
+// Utils, common elements
+import { fontSize, unitCalc } from '../utils/helpers';
+import { baseRadioCheckbox } from '../utils/commonElements';
+
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
-import { baseRadioCheckbox } from '../utils/commonElements';
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledCheckbox = styled(baseRadioCheckbox)`
   -webkit-appearance: checkbox;

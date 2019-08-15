@@ -9,12 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { fontSize, unitCalc } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import Button from '../Button';
 
-// Calcite theme
-import { CalciteTheme as theme } from '../CalciteThemeProvider';
+// Icons
+
+// Third party libraries
 
 const StyledArcgisAccountControl = styled.div`
   display: flex;

@@ -9,10 +9,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled from 'styled-components';
 
-// Calcite theme
+// Utils, common elements
+
+// Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledModalOverlay = {
   display: 'flex',

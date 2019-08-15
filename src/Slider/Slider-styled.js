@@ -9,13 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { transparentize } from 'polished';
 
-// Calcite theme
+// Utils, common elements
+import { CalciteInput } from '../utils/commonElements';
+
+// Calcite theme and Esri colors
 import { CalciteTheme as theme, EsriColors } from '../CalciteThemeProvider';
 
-import { CalciteInput } from '../utils/commonElements';
+// Calcite components
+
+// Icons
+
+// Third party libraries
+import { transparentize } from 'polished';
 
 const rangeProps = {
   rangeBorder: '1px solid transparent',
