@@ -25,3 +25,47 @@ To get started, go ahead and fork this repo. Once you've done that, there are a 
 ## Submitting a Pull Request
 
 Once you're ready to submit your changes, submit a pull request **into the `develop` branch**. Often it's a good idea to open an issue to discuss your proposed changes before making a PR, but you're welcome to submit a PR without an issue - just be sure to include a good description of your changes.
+
+# styled-component file snippet (VSCode)
+
+```
+"Stub out a calcite-react styled-component": {
+  "prefix": "calcite-styled-component",
+  "body": [
+    "// Copyright 2019 Esri",
+    "// Licensed under the Apache License, Version 2.0 (the \"License\");",
+    "// you may not use this file except in compliance with the License.",
+    "// You may obtain a copy of the License at",
+    "// http://www.apache.org/licenses/LICENSE-2.0",
+    "// Unless required by applicable law or agreed to in writing, software",
+    "// distributed under the License is distributed on an \"AS IS\" BASIS,",
+    "// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+    "// See the License for the specific language governing permissions and",
+    "// limitations under the License.​",
+    "",
+    "// styled-components",
+    "import styled, { css } from 'styled-components';",
+    "",
+    "// Utils, common elements",
+    "import { unitCalc, fontSize } from '../utils/helpers';",
+    "",
+    "// Calcite theme and Esri colors",
+    "import { CalciteTheme as theme } from '../CalciteThemeProvider';",
+    "",
+    "// Calcite components",
+    "",
+    "// Icons",
+    "",
+    "// Third party libraries",
+    "",
+    "const $1 = styled()`",
+    "",
+    "`;",
+    "$1.defaultProps = { theme };",
+    "",
+    "export { $1 };",
+    ""
+  ],
+  "description": "Stub out a calcite-react styled-component"
+}
+```
