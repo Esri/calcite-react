@@ -178,6 +178,71 @@ import Search from 'calcite-react/Search'
 
 </Playground>
 
+## Load Initial Results
+<Playground style={{ height: '400px'}}>
+  {() => {
+      const items = [...statesJson.states];
+        
+      class SearchStory extends React.Component {
+
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            inputValue: '',
+            selectedItem: ''
+          };
+
+          this.searchChanged = this.searchChanged.bind(this);
+          this.clearSearch = this.clearSearch.bind(this);
+          this.onUserAction = this.onUserAction.bind(this);
+        }
+
+        searchChanged(e) {
+          this.setState({
+            selectedItem: e
+          });
+        };
+
+        clearSearch() {
+          this.setState({
+            inputValue: '',
+            selectedItem: ''
+          });
+        };
+
+        onUserAction(inputValue, selectedItemVal) {
+          this.setState({
+            inputValue: inputValue,
+            selectedItem: selectedItemVal
+          });
+        };
+
+        render() {
+          return (
+            <React.Fragment>
+              <GuideExample label="loadInitialResults">
+                <Search
+                  inputValue={this.state.inputValue}
+                  selectedItem={this.state.selectedItem}
+                  items={items}
+                  minimal
+                  onChange={this.searchChanged}
+                  onUserAction={this.onUserAction}
+                  onRequestClear={this.clearSearch}
+                  loadInitialResults={true}
+                />
+              </GuideExample>
+            </React.Fragment>
+          );
+        }
+      }
+
+      return <SearchStory />;
+    }}
+
+</Playground>
+
 ## Replace Search Icon
 
 <Playground>

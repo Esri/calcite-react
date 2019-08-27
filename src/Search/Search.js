@@ -344,6 +344,7 @@ class Search extends Component {
                 selectedItem={selectedItem}
                 onChange={onChange}
                 onUserAction={this.handleOnUserAction}
+                initialIsOpen={this.props.loadInitialResults}
               >
                 {({
                   getRootProps,
@@ -489,7 +490,9 @@ Search.propTypes = {
   /** SVG icon to be displayed inside the Search input */
   searchIcon: PropTypes.node,
   /** SVG icon to clear the value of the Search input */
-  clearIcon: PropTypes.node
+  clearIcon: PropTypes.node,
+  /** Open the Search Results by Default */
+  loadInitialResults: PropTypes.bool
 };
 
 Search.defaultProps = {
@@ -507,7 +510,8 @@ Search.defaultProps = {
   ),
   onUserAction: () => {},
   onChange: () => {},
-  onRequestClear: () => {}
+  onRequestClear: () => {},
+  loadInitialResults: false
 };
 
 Search.displayName = 'Search';
