@@ -56,22 +56,6 @@ class Search extends Component {
       );
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.remote) {
-      if (this.props.items && this.props.items !== prevProps.items) {
-        this.setState({
-          itemsToShow: this.props.items
-        });
-      }
-
-      if (this.props.children && this.props.children !== prevProps.children) {
-        this.setState({
-          itemsToShow: this.props.children
-        });
-      }
-    }
-  }
-
   itemToString = item => {
     if (!item) {
       return;
@@ -153,9 +137,7 @@ class Search extends Component {
     }
 
     // object or string?
-    if (this.props.remote)
-      newItemsToShow = this.props.children || this.props.items;
-    else
+    if (!this.props.remote) {
       newItemsToShow = this.userInputtedValue
         ? matchSorter(
             this.props.children || this.props.items,
@@ -166,22 +148,23 @@ class Search extends Component {
           )
         : this.props.children || this.props.items;
 
-    if (
-      changes.hasOwnProperty('highlightedIndex') &&
-      (changes.type === Downshift.stateChangeTypes.keyDownArrowUp ||
-        changes.type === Downshift.stateChangeTypes.keyDownArrowDown)
-    ) {
-      inputValue =
-        this.itemToString(newItemsToShow[changes.highlightedIndex]) || '';
-    }
-    if (isClosingMenu) {
-      inputValue = this.itemToString(selectedItemVal) || '';
-      this.userInputtedValue = selectedItemVal;
-    }
+      if (
+        changes.hasOwnProperty('highlightedIndex') &&
+        (changes.type === Downshift.stateChangeTypes.keyDownArrowUp ||
+          changes.type === Downshift.stateChangeTypes.keyDownArrowDown)
+      ) {
+        inputValue =
+          this.itemToString(newItemsToShow[changes.highlightedIndex]) || '';
+      }
+      if (isClosingMenu) {
+        inputValue = this.itemToString(selectedItemVal) || '';
+        this.userInputtedValue = selectedItemVal;
+      }
 
-    this.setState({
-      itemsToShow: newItemsToShow
-    });
+      this.setState({
+        itemsToShow: newItemsToShow
+      });
+    }
 
     this.props.onUserAction(inputValue, selectedItemVal);
   };
@@ -348,6 +331,11 @@ class Search extends Component {
       (menuStyle && parseInt(menuStyle.maxHeight, 10)) ||
       300;
 
+    let itemsToShow;
+    if (this.props.remote)
+      itemsToShow = this.props.items || this.props.children;
+    else itemsToShow = this.state.itemsToShow;
+
     return (
       <ListContext.Consumer>
         {({ listContext }) => (
@@ -392,7 +380,7 @@ class Search extends Component {
                         />
                       )}
                     </Reference>
-                    {isOpen && this.state.itemsToShow
+                    {isOpen && itemsToShow
                       ? this._getPopper(
                           <Popper
                             positionFixed={positionFixed}
@@ -421,18 +409,14 @@ class Search extends Component {
                                 isOpen={isOpen}
                                 data-placement={placement}
                               >
-                                {this.getMenuItems(
-                                  this.state.itemsToShow,
-                                  virtualized,
-                                  {
-                                    highlightedIndex,
-                                    menuHeight,
-                                    virtualizedRowHeight,
-                                    virtualizedMenuWidth,
-                                    getItemProps,
-                                    selectedItem
-                                  }
-                                )}
+                                {this.getMenuItems(itemsToShow, virtualized, {
+                                  highlightedIndex,
+                                  menuHeight,
+                                  virtualizedRowHeight,
+                                  virtualizedMenuWidth,
+                                  getItemProps,
+                                  selectedItem
+                                })}
                               </StyledSelectMenu>
                             )}
                           </Popper>,
