@@ -178,7 +178,7 @@ import Search from 'calcite-react/Search'
 
 </Playground>
 
-## Load Initial Results
+## Use Remote API
 <Playground style={{ height: '400px'}}>
   {() => {
       const items = [...statesJson.states];
@@ -221,7 +221,7 @@ import Search from 'calcite-react/Search'
         render() {
           return (
             <React.Fragment>
-              <GuideExample label="loadInitialResults">
+              <GuideExample label="remote">
                 <Search
                   inputValue={this.state.inputValue}
                   selectedItem={this.state.selectedItem}
@@ -230,7 +230,7 @@ import Search from 'calcite-react/Search'
                   onChange={this.searchChanged}
                   onUserAction={this.onUserAction}
                   onRequestClear={this.clearSearch}
-                  loadInitialResults={true}
+                  remote={true}
                 />
               </GuideExample>
             </React.Fragment>

@@ -56,6 +56,16 @@ class Search extends Component {
       );
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.remote) {
+      if (this.props.items && this.props.items !== prevProps.items) {
+        this.setState({
+          itemsToShow: this.props.items
+        });
+      }
+    }
+  }
+
   itemToString = item => {
     if (!item) {
       return;
@@ -137,15 +147,19 @@ class Search extends Component {
     }
 
     // object or string?
-    newItemsToShow = this.userInputtedValue
-      ? matchSorter(
-          this.props.children || this.props.items,
-          this.userInputtedValue,
-          {
-            keys: [this.itemToString]
-          }
-        )
-      : this.props.children || this.props.items;
+    if (this.props.remote)
+      newItemsToShow = this.props.children || this.props.items;
+    else
+      newItemsToShow = this.userInputtedValue
+        ? matchSorter(
+            this.props.children || this.props.items,
+            this.userInputtedValue,
+            {
+              keys: [this.itemToString]
+            }
+          )
+        : this.props.children || this.props.items;
+
     if (
       changes.hasOwnProperty('highlightedIndex') &&
       (changes.type === Downshift.stateChangeTypes.keyDownArrowUp ||
@@ -344,7 +358,6 @@ class Search extends Component {
                 selectedItem={selectedItem}
                 onChange={onChange}
                 onUserAction={this.handleOnUserAction}
-                initialIsOpen={this.props.loadInitialResults}
               >
                 {({
                   getRootProps,
@@ -491,8 +504,8 @@ Search.propTypes = {
   searchIcon: PropTypes.node,
   /** SVG icon to clear the value of the Search input */
   clearIcon: PropTypes.node,
-  /** Open the Search Results by Default */
-  loadInitialResults: PropTypes.bool
+  /** Use a remote API for the data load.  This will allow the application to see the exact return from the API with no filtering applied */
+  remote: PropTypes.bool
 };
 
 Search.defaultProps = {
