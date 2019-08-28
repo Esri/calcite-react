@@ -219,7 +219,12 @@ import Search from 'calcite-react/Search';
 
           if (!inputValue) {
             this.setState({ items: [] });
+            return;
           };
+
+          if (inputValue === this.state.inputValue) {
+            return;
+          }
 
           this.fetchStates(inputValue).then(states => {
             const items = states.map(state => {
