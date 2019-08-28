@@ -524,7 +524,7 @@ Search.defaultProps = {
   onUserAction: () => {},
   onChange: () => {},
   onRequestClear: () => {},
-  loadInitialResults: false
+  remote: false
 };
 
 Search.displayName = 'Search';
