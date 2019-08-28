@@ -18,7 +18,7 @@ import statesJson from '../../../docz/_sampleJson/states.json';
 import statesJson2 from '../../../docz/_sampleJson/states_objects.json';
 import Search from '../';
 
-import {CalciteTheme} from '../../CalciteThemeProvider';
+import { CalciteTheme } from '../../CalciteThemeProvider';
 import StyledSearch from './StyledSearch';
 
 # Search
@@ -28,7 +28,7 @@ Search input with specific styles.
 #### Import Syntax
 
 ```js
-import Search from 'calcite-react/Search'
+import Search from 'calcite-react/Search';
 ```
 
 ## Basic Usage
@@ -179,16 +179,16 @@ import Search from 'calcite-react/Search'
 </Playground>
 
 ## Use Remote API
+
 <Playground style={{ height: '400px'}}>
   {() => {
-      const items = [...statesJson.states];
-        
       class SearchStory extends React.Component {
 
         constructor(props) {
           super(props);
 
           this.state = {
+            items: [],
             inputValue: '',
             selectedItem: ''
           };
@@ -216,6 +216,30 @@ import Search from 'calcite-react/Search'
             inputValue: inputValue,
             selectedItem: selectedItemVal
           });
+
+          if (!inputValue) {
+            this.setState({ items: [] });
+          };
+
+          this.fetchStates(inputValue).then(states => {
+            const items = states.map(state => {
+              return {
+                label: state.attributes.STATE_NAME,
+                value: state.attributes.STATE_NAME
+              }
+            });
+
+            this.setState({ items });
+          });
+        };
+
+        fetchStates(q) {
+          return new Promise((resolve, response) => {
+            const url = `https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_States_Generalized/FeatureServer/0/query?where=UPPER(STATE_NAME) LIKE UPPER('${q}%')&outFields=STATE_NAME,POPULATION&returnGeometry=false&orderByFields=STATE_NAME asc&f=json`;
+            fetch(window.encodeURI(url))
+              .then(response => response.json())
+              .then(json => resolve(json.features));
+          });
         };
 
         render() {
@@ -225,7 +249,7 @@ import Search from 'calcite-react/Search'
                 <Search
                   inputValue={this.state.inputValue}
                   selectedItem={this.state.selectedItem}
-                  items={items}
+                  items={this.state.items}
                   minimal
                   onChange={this.searchChanged}
                   onUserAction={this.onUserAction}
