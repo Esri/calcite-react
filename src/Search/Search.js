@@ -63,6 +63,12 @@ class Search extends Component {
           itemsToShow: this.props.items
         });
       }
+
+      if (this.props.children && this.props.children !== prevProps.children) {
+        this.setState({
+          itemsToShow: this.props.children
+        });
+      }
     }
   }
 
