@@ -178,15 +178,13 @@ import Search from 'calcite-react/Search';
 
 </Playground>
 
-## Use Remote API
+## Use Remote Data
 
 <Playground style={{ height: '400px'}}>
   {() => {
       class SearchStory extends React.Component {
 
-        constructor(props) {
-          super(props);
-
+        constructor() {
           this.state = {
             items: [],
             inputValue: '',
@@ -240,7 +238,7 @@ import Search from 'calcite-react/Search';
 
         fetchStates(q) {
           return new Promise((resolve, response) => {
-            const url = `https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_States_Generalized/FeatureServer/0/query?where=UPPER(STATE_NAME) LIKE UPPER('${q}%')&outFields=STATE_NAME,POPULATION&returnGeometry=false&orderByFields=STATE_NAME asc&f=json`;
+            const url = `https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_States_Generalized/FeatureServer/0/query?where=UPPER(STATE_NAME) LIKE UPPER('${q}%')&outFields=STATE_NAME&returnGeometry=false&orderByFields=STATE_NAME asc&f=json`;
             fetch(window.encodeURI(url))
               .then(response => response.json())
               .then(json => resolve(json.features));
@@ -249,20 +247,18 @@ import Search from 'calcite-react/Search';
 
         render() {
           return (
-            <React.Fragment>
-              <GuideExample label="remote">
-                <Search
-                  inputValue={this.state.inputValue}
-                  selectedItem={this.state.selectedItem}
-                  items={this.state.items}
-                  minimal
-                  onChange={this.searchChanged}
-                  onUserAction={this.onUserAction}
-                  onRequestClear={this.clearSearch}
-                  remote={true}
-                />
-              </GuideExample>
-            </React.Fragment>
+            <GuideExample label="remote">
+              <Search
+                inputValue={this.state.inputValue}
+                selectedItem={this.state.selectedItem}
+                items={this.state.items}
+                minimal
+                onChange={this.searchChanged}
+                onUserAction={this.onUserAction}
+                onRequestClear={this.clearSearch}
+                remote={true}
+              />
+            </GuideExample>
           );
         }
       }
