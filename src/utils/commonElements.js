@@ -35,6 +35,7 @@ const formSelectInputTextarea = styled.select`
   &:disabled {
     opacity: 0.3;
     cursor: default;
+    pointer-events: none;
   }
 
   &:focus {
