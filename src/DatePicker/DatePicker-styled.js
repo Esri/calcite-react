@@ -146,12 +146,14 @@ const StyledMonthSelect = styled(Select).attrs({
   background-size: 11px;
   background-position: right 5px center;
 `;
+StyledMonthSelect.defaultProps = { theme };
 
 const StyledYearSelect = styled(StyledMonthSelect).attrs({
   virtualized: true
 })`
   margin-left: 10px;
 `;
+StyledYearSelect.defaultProps = { theme };
 
 const StyledMonthYearHeader = styled.h6`
   color: #565a5c;

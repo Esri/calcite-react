@@ -62,6 +62,7 @@ const StyledItemCardImageWrap = styled(StyledCardImageWrap).attrs(props => ({
   justify-content: center;
   border-right: 1px solid ${props => props.theme.palette.lightestGray};
 `;
+StyledItemCardImageWrap.defaultProps = { theme };
 
 const StyledCardItemTitle = styled(StyledCardTitle)`
   ${fontSize(1)};
