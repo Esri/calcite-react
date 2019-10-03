@@ -85,7 +85,7 @@ const StyledFormControlLabelText = styled.span`
 const StyledFormHelperText = styled.span`
   ${fontSize(-3)};
   color: ${props => props.theme.palette.transparentBlack};
-  height: 1.55rem;
+  min-height: 1.55em;
   margin-bottom: -1.55rem;
 
   ${props =>
