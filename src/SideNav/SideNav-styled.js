@@ -9,10 +9,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { CalciteH4, CalciteA } from '../Elements';
+
+// Utils, common elements
 import { unitCalc, fontSize } from '../utils/helpers';
 import { avenirRegular } from '../utils/type';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+import { CalciteH4, CalciteA } from '../Elements';
+
+// Icons
+
+// Third party libraries
 
 const StyledSideNav = styled.aside`
   box-sizing: border-box;
@@ -23,6 +35,7 @@ const StyledSideNav = styled.aside`
   background-color: ${props => props.theme.palette.white};
   border-radius: ${props => props.theme.borderRadius};
 `;
+StyledSideNav.defaultProps = { theme };
 
 const StyledSideNavTitle = styled(CalciteH4)`
   margin: 0;
@@ -32,6 +45,7 @@ const StyledSideNavTitle = styled(CalciteH4)`
   background-color: ${props => props.theme.palette.offWhite};
   border-top: 1px solid ${props => props.theme.palette.lightestGray};
 `;
+StyledSideNavTitle.defaultProps = { theme };
 
 const StyledSideNavLink = styled(CalciteA)`
   position: relative;
@@ -64,5 +78,6 @@ const StyledSideNavLink = styled(CalciteA)`
       border-left: 3px solid ${props => props.theme.palette.blue};
     `};
 `;
+StyledSideNavLink.defaultProps = { theme };
 
 export { StyledSideNav, StyledSideNavTitle, StyledSideNavLink };

@@ -9,8 +9,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { transition } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledDrawer = styled.div`
   position: fixed;
@@ -33,6 +45,7 @@ const StyledDrawer = styled.div`
       background-color: ${props => props.theme.palette.transparentBlack};
     `};
 `;
+StyledDrawer.defaultProps = { theme };
 
 const StyledDrawerNav = styled.nav`
   position: absolute;
@@ -68,5 +81,6 @@ const StyledDrawerNav = styled.nav`
         `};
     `};
 `;
+StyledDrawerNav.defaultProps = { theme };
 
 export { StyledDrawer, StyledDrawerNav };

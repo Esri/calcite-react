@@ -9,20 +9,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled from 'styled-components';
+
+// Utils, common elements
+import { fontSize, unitCalc } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import {
   StyledCard,
   StyledCardTitle,
   StyledCardContent,
   StyledCardImageWrap
 } from '../Card/Card-styled';
-import { fontSize, unitCalc } from '../utils/helpers';
+
+// Icons
 import UserIcon from 'calcite-ui-icons-react/UserIcon';
 import CalendarIcon from 'calcite-ui-icons-react/CalendarIcon';
+
+// Third party libraries
 
 const StyledItemCard = styled(StyledCard)`
   border-radius: ${props => props.theme.borderRadius};
 `;
+StyledItemCard.defaultProps = { theme };
 
 const StyledItemCardContent = styled(StyledCardContent)`
   white-space: normal;
@@ -30,6 +43,7 @@ const StyledItemCardContent = styled(StyledCardContent)`
   padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
   box-sizing: border-box;
 `;
+StyledItemCardContent.defaultProps = { theme };
 
 // Set background image with attributes so that styled components doesn't
 // make a new class for every instance of this element that has a new image
@@ -48,11 +62,13 @@ const StyledItemCardImageWrap = styled(StyledCardImageWrap).attrs(props => ({
   justify-content: center;
   border-right: 1px solid ${props => props.theme.palette.lightestGray};
 `;
+StyledItemCardImageWrap.defaultProps = { theme };
 
 const StyledCardItemTitle = styled(StyledCardTitle)`
   ${fontSize(1)};
   margin-bottom: ${props => unitCalc(props.theme.baseline, 5, '/')};
 `;
+StyledCardItemTitle.defaultProps = { theme };
 
 const StyledCardItemMetrics = styled.div`
   display: flex;
@@ -63,6 +79,7 @@ const StyledCardItemMetrics = styled.div`
     border-bottom: none;
   }
 `;
+StyledCardItemMetrics.defaultProps = { theme };
 
 const StyledCardItemText = styled.p`
   font-weight: 300;
@@ -70,6 +87,7 @@ const StyledCardItemText = styled.p`
   ${fontSize(-2)};
   margin: ${props => unitCalc(props.theme.baseline, 3, '/')} 0 0;
 `;
+StyledCardItemText.defaultProps = { theme };
 
 const StyledCardItemIconLabelText = styled(StyledCardItemText)`
   display: flex;
@@ -87,14 +105,17 @@ const StyledCardItemIconLabelText = styled(StyledCardItemText)`
     height: 1.4em;
   }
 `;
+StyledCardItemIconLabelText.defaultProps = { theme };
 
 const StyledUserIcon = styled(UserIcon)`
   margin-right: ${props => unitCalc(props.theme.baseline, 6, '/')};
 `;
+StyledUserIcon.defaultProps = { theme };
 
 const StyledCalendarIcon = styled(CalendarIcon)`
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
 `;
+StyledCalendarIcon.defaultProps = { theme };
 
 export {
   StyledItemCard,

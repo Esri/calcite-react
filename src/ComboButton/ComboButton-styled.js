@@ -9,20 +9,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { StyledButton } from '../Button/Button-styled';
+
+// Utils, common elements
 import { unitCalc } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+import { StyledButton } from '../Button/Button-styled';
+
+// Icons
+
+// Third party libraries
 
 const StyledComboButtonContainer = styled.div`
   display: flex;
   flex-wrap: nowrap;
 `;
+StyledComboButtonContainer.defaultProps = { theme };
 
 const StyledComboButton = styled(StyledButton)`
   border-right-width: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 `;
+StyledComboButton.defaultProps = { theme };
 
 const StyledComboButtonDropdown = styled(StyledButton)`
   height: 100%;
@@ -58,6 +72,7 @@ const StyledComboButtonDropdown = styled(StyledButton)`
       border-left-color: ${props => props.theme.palette.darkGreen};
     `};
 `;
+StyledComboButtonDropdown.defaultProps = { theme };
 
 export {
   StyledComboButtonContainer,

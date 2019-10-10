@@ -9,10 +9,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { keyframes } from 'styled-components';
-import { CalciteInput } from '../utils/commonElements';
+
+// Utils, common elements
 import { transition } from '../utils/helpers';
+import { CalciteInput } from '../utils/commonElements';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import Button from '../Button';
+
+// Icons
+
+// Third party libraries
 
 const FadeIn = keyframes`
   from {
@@ -30,6 +42,7 @@ const StyledCopyToClipboard = styled.div`
     animation: ${FadeIn} ${transition()};
   }
 `;
+StyledCopyToClipboard.defaultProps = { theme };
 
 const StyledCopyToClipboardInput = styled(CalciteInput)`
   flex: 1 0 50px;
@@ -39,6 +52,7 @@ const StyledCopyToClipboardInput = styled(CalciteInput)`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 `;
+StyledCopyToClipboardInput.defaultProps = { theme };
 
 const StyledCopyButton = styled(Button)`
   border-top-left-radius: 0;
@@ -48,5 +62,6 @@ const StyledCopyButton = styled(Button)`
     margin-left: 0 !important;
   }
 `;
+StyledCopyButton.defaultProps = { theme };
 
 export { StyledCopyToClipboard, StyledCopyToClipboardInput, StyledCopyButton };

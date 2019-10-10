@@ -9,9 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { fontSize, unitCalc, transition } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import { CalciteA } from '../Elements';
+
+// Icons
+
+// Third party libraries
 
 const StyledTab = styled.div`
   padding: 0;
@@ -23,6 +35,7 @@ const StyledTab = styled.div`
       float: right;
     `};
 `;
+StyledTab.defaultProps = { theme };
 
 const StyledTabTitle = styled(CalciteA)`
   box-sizing: border-box;
@@ -188,6 +201,7 @@ const StyledTabTitle = styled(CalciteA)`
       pointer-events: none;
     `};
 `;
+StyledTabTitle.defaultProps = { theme };
 
 const StyledTabNav = styled.nav`
   display: flex;
@@ -198,6 +212,7 @@ const StyledTabNav = styled.nav`
     clear: both;
   }
 `;
+StyledTabNav.defaultProps = { theme };
 
 const StyledTabContents = styled.div`
   box-sizing: border-box;
@@ -226,6 +241,7 @@ const StyledTabContents = styled.div`
       border: none;
     `};
 `;
+StyledTabContents.defaultProps = { theme };
 
 const StyledTabSection = styled.article`
   box-sizing: border-box;
@@ -271,6 +287,7 @@ const StyledTabSection = styled.article`
       color: ${props => props.theme.palette.white};
     `};
 `;
+StyledTabSection.defaultProps = { theme };
 
 export {
   StyledTab,

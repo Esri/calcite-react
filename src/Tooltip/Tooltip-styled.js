@@ -9,12 +9,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { unitCalc, fontSize } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledTargetWrapper = styled.div`
   display: inline-block;
 `;
+StyledTargetWrapper.defaultProps = { theme };
 
 const StyledTooltip = styled.div`
   padding: ${props => unitCalc(props.theme.baseline, 4, '/')}
@@ -60,6 +73,7 @@ const StyledTooltip = styled.div`
       opacity: 1;
     `};
 `;
+StyledTooltip.defaultProps = { theme };
 
 const StyledTooltipArrow = styled.div`
   width: 0;
@@ -93,5 +107,6 @@ const StyledTooltipArrow = styled.div`
     right: -5px;
   }
 `;
+StyledTooltipArrow.defaultProps = { theme };
 
 export { StyledTargetWrapper, StyledTooltip, StyledTooltipArrow };

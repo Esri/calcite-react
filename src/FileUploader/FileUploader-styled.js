@@ -13,6 +13,8 @@ import styled from 'styled-components';
 import { CalciteInput } from '../utils/commonElements';
 import { unitCalc, fontSize } from '../utils/helpers';
 
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
 const StyledFileUploader = styled(CalciteInput)`
   height: auto;
 
@@ -89,5 +91,6 @@ const StyledFileUploader = styled(CalciteInput)`
     margin: 0.5em 0;
   }
 `;
+StyledFileUploader.defaultProps = { theme };
 
 export { StyledFileUploader };

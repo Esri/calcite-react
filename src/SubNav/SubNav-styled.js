@@ -9,8 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import { CalciteA, CalciteH1 } from '../Elements';
+
+// Icons
+
+// Third party libraries
+
 import {
   subNavUnderline,
   unitCalc,
@@ -42,6 +55,7 @@ const StyledSubNav = styled.header`
       )};
     `};
 `;
+StyledSubNav.defaultProps = { theme };
 
 const StyledSubNavLeftContent = styled.div`
   display: flex;
@@ -49,6 +63,7 @@ const StyledSubNavLeftContent = styled.div`
   justify-content: space-between;
   flex-direction: column;
 `;
+StyledSubNavLeftContent.defaultProps = { theme };
 
 const StyledSubNavLink = styled(CalciteA)`
   padding: 0.25em 0.75em;
@@ -92,6 +107,7 @@ const StyledSubNavLink = styled(CalciteA)`
       pointer-events: none;
     `};
 `;
+StyledSubNavLink.defaultProps = { theme };
 
 const StyledSubNavList = styled.nav`
   display: flex;
@@ -100,6 +116,7 @@ const StyledSubNavList = styled.nav`
   padding-left: 0.25em;
   box-sizing: border-box;
 `;
+StyledSubNavList.defaultProps = { theme };
 
 const StyledSubNavActions = styled.nav`
   margin: 0.5em;
@@ -107,13 +124,14 @@ const StyledSubNavActions = styled.nav`
   justify-content: flex-end;
   align-items: center;
 `;
+StyledSubNavActions.defaultProps = { theme };
 
 const StyledSubNavTitle = styled(CalciteH1)`
   ${fontSize(4)};
   padding-left: 0.25em;
   margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
   margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  line-height: 1.25
+  line-height: 1.25;
   box-sizing: border-box;
 
   ${props =>
@@ -122,11 +140,13 @@ const StyledSubNavTitle = styled(CalciteH1)`
       color: ${props.theme.palette.white};
     `};
 `;
+StyledSubNavTitle.defaultProps = { theme };
 
 const StyledMultiRowActions = styled.div`
   display: flex;
   flex-direction: column;
 `;
+StyledMultiRowActions.defaultProps = { theme };
 
 export {
   StyledSubNav,

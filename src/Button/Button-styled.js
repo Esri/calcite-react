@@ -9,8 +9,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { unitCalc, fontSize } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledButton = styled.button`
   position: relative;
@@ -309,10 +321,12 @@ const StyledButton = styled.button`
       border-radius: 0;
     `};
 `;
+StyledButton.defaultProps = { theme };
 
 const StyledButtonGroup = styled.nav`
   display: inline-flex;
   justify-content: space-between;
 `;
+StyledButtonGroup.defaultProps = { theme };
 
 export { StyledButton, StyledButtonGroup };

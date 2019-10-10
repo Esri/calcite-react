@@ -9,9 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { StyledSideNav } from '../SideNav/SideNav-styled';
+
+// Utils, common elements
 import { unitCalc, fontSize } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+import { StyledSideNav } from '../SideNav/SideNav-styled';
+
+// Icons
+
+// Third party libraries
 
 const StyledList = styled(StyledSideNav)`
   min-width: 200px;
@@ -59,6 +71,7 @@ const StyledList = styled(StyledSideNav)`
         `};
     `};
 `;
+StyledList.defaultProps = { theme };
 
 const getActiveStyles = props => {
   return `
@@ -236,6 +249,7 @@ const StyledListItem = styled.div`
         `};
     `};
 `;
+StyledListItem.defaultProps = { theme };
 
 const StyledListHeader = styled(StyledListItem)`
   flex-shrink: 0;
@@ -257,12 +271,14 @@ const StyledListHeader = styled(StyledListItem)`
       }
     `};
 `;
+StyledListHeader.defaultProps = { theme };
 
 const StyledListTitle = styled.p`
   ${fontSize(-1)};
   flex-shrink: 0;
   margin: 0;
 `;
+StyledListTitle.defaultProps = { theme };
 
 const StyledListSubtitle = styled.span`
   ${fontSize(-3)};
@@ -270,6 +286,7 @@ const StyledListSubtitle = styled.span`
   line-height: 1.2rem;
   color: ${props => props.theme.palette.gray};
 `;
+StyledListSubtitle.defaultProps = { theme };
 
 const StyledListTextContainer = styled.div`
   display: flex;
@@ -278,6 +295,7 @@ const StyledListTextContainer = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
+StyledListTextContainer.defaultProps = { theme };
 
 const StyledListSideContainer = styled.div`
   display: flex;
@@ -344,6 +362,7 @@ const StyledListSideContainer = styled.div`
       `};
   }
 `;
+StyledListSideContainer.defaultProps = { theme };
 
 export {
   StyledList,

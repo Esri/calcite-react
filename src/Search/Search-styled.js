@@ -9,9 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { CalciteInput } from '../utils/commonElements';
+
+// Utils, common elements
 import { fontSize, unitCalc, transition } from '../utils/helpers';
+import { CalciteInput } from '../utils/commonElements';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledClearIconContainer = styled.div`
   display: none;
@@ -26,6 +38,7 @@ const StyledClearIconContainer = styled.div`
     opacity: 0.8;
   }
 `;
+StyledClearIconContainer.defaultProps = { theme };
 
 const StyledSearchIconContainer = styled.span`
   position: absolute;
@@ -37,6 +50,7 @@ const StyledSearchIconContainer = styled.span`
   pointer-events: none;
   line-height: 0;
 `;
+StyledSearchIconContainer.defaultProps = { theme };
 
 const StyledShortcutCharacter = styled.div`
   position: absolute;
@@ -52,6 +66,7 @@ const StyledShortcutCharacter = styled.div`
   color: ${props => props.theme.palette.lightGray};
   border-radius: 1px;
 `;
+StyledShortcutCharacter.defaultProps = { theme };
 
 const StyledSearchContainer = styled.div`
   display: inline-flex;
@@ -97,11 +112,13 @@ const StyledSearchContainer = styled.div`
     }
   }
 `;
+StyledSearchContainer.defaultProps = { theme };
 
 const StyledSearchInputWrapper = styled.div`
   position: relative;
   flex: 1 0 50px;
 `;
+StyledSearchInputWrapper.defaultProps = { theme };
 
 const StyledSearch = styled(CalciteInput)`
   padding-right: ${props => props.theme.baseline};
@@ -139,6 +156,7 @@ const StyledSearch = styled(CalciteInput)`
       }
     `};
 `;
+StyledSearch.defaultProps = { theme };
 
 const ManagerStyle = {
   width: '100%'
