@@ -9,42 +9,51 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { transparentize } from 'polished';
 
-import { CalciteTheme, EsriColors } from '../CalciteThemeProvider';
-
+// Utils, common elements
 import { CalciteInput } from '../utils/commonElements';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme, EsriColors } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
+import { transparentize } from 'polished';
 
 const rangeProps = {
   rangeBorder: '1px solid transparent',
-  trackBgColor: CalciteTheme.palette.lighterGray,
-  trackErrorBgColor: CalciteTheme.palette.lightRed,
+  trackBgColor: theme.palette.lighterGray,
+  trackErrorBgColor: theme.palette.lightRed,
   trackHeight: '2px',
-  trackHoverBgcolor: CalciteTheme.palette.lightGray,
-  trackErrorHoverBgcolor: CalciteTheme.palette.darkRed200,
-  trackActiveBgcolor: CalciteTheme.palette.gray,
-  trackErrorActiveBgcolor: CalciteTheme.palette.darkRed,
+  trackHoverBgcolor: theme.palette.lightGray,
+  trackErrorHoverBgcolor: theme.palette.darkRed200,
+  trackActiveBgcolor: theme.palette.gray,
+  trackErrorActiveBgcolor: theme.palette.darkRed,
   thumbHeight: '18px',
   thumbWidth: '18px',
   thumbBorder: '2px solid',
-  thumbBorderColor: CalciteTheme.palette.gray,
-  thumbErrorBorderColor: CalciteTheme.palette.darkRed200,
-  thumbBorderHoverColor: CalciteTheme.palette.Brand_Blue_200,
-  thumbErrorBorderHoverColor: CalciteTheme.palette.darkRed200,
+  thumbBorderColor: theme.palette.gray,
+  thumbErrorBorderColor: theme.palette.darkRed200,
+  thumbBorderHoverColor: theme.palette.Brand_Blue_200,
+  thumbErrorBorderHoverColor: theme.palette.darkRed200,
   thumbShadowHover: `0 0 4px 1px ${transparentize(
     0.1,
-    CalciteTheme.palette.lighterGray
+    theme.palette.lighterGray
   )}`,
   thumbShadowActive: `0 0 4px 1px ${transparentize(
     0.1,
-    CalciteTheme.palette.lightestGray
+    theme.palette.lightestGray
   )}`,
-  thumbBgDefault: CalciteTheme.palette.white,
-  thumbBgHover: CalciteTheme.palette.Brand_Blue_200,
-  thumbErrorBgHover: CalciteTheme.palette.darkRed200,
+  thumbBgDefault: theme.palette.white,
+  thumbBgHover: theme.palette.Brand_Blue_200,
+  thumbErrorBgHover: theme.palette.darkRed200,
   thumbBgActive: EsriColors.Calcite_Blue_a250,
-  thumbErrorBgActive: CalciteTheme.palette.darkRed
+  thumbErrorBgActive: theme.palette.darkRed
 };
 
 const rangeStyle = () => {
@@ -353,5 +362,6 @@ const StyledSlider = styled(CalciteInput)`
     }
   }
 `;
+StyledSlider.defaultProps = { theme };
 
 export { StyledSlider };

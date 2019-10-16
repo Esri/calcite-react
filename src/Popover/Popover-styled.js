@@ -9,11 +9,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledTargetWrapper = styled.div`
   display: inline-block;
 `;
+StyledTargetWrapper.defaultProps = { theme };
 
 const StyledPopover = styled.div`
   box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.05);
@@ -41,5 +54,6 @@ const StyledPopover = styled.div`
       pointer-events: auto;
     `};
 `;
+StyledPopover.defaultProps = { theme };
 
 export { StyledTargetWrapper, StyledPopover };

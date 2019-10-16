@@ -9,7 +9,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledAvatar = styled.div`
   width: ${props => props.aSize}px;
@@ -32,6 +44,7 @@ const StyledAvatar = styled.div`
       font-size: ${props.fontSize}px;
     `};
 `;
+StyledAvatar.defaultProps = { theme };
 
 const StyledAvatarImage = styled.img`
   width: 100%;
@@ -39,6 +52,7 @@ const StyledAvatarImage = styled.img`
   text-align: center;
   object-fit: cover;
 `;
+StyledAvatarImage.defaultProps = { theme };
 
 const StyledAvatarSvg = {
   fill: 'currentColor',
@@ -53,5 +67,6 @@ const StyledAvatarText = styled.span`
   font-weight: 300;
   font-family: ${props => props.theme.type.avenirFamily};
 `;
+StyledAvatarText.defaultProps = { theme };
 
 export { StyledAvatar, StyledAvatarImage, StyledAvatarSvg, StyledAvatarText };

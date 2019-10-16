@@ -18,7 +18,7 @@ export default {
   public: '/docz/public',
 
   // Wrapper component for each mdx file, used to wrap everything in CalciteThemeProvider
-  wrapper: __dirname + '/docz/ThemeWrapper',
+  wrapper: '../../docz/ThemeWrapper',
 
   // Ordering of the side menu, used here to put "Getting Started" first
   menu: ['Getting Started', 'Customization & Theme', 'Calcite Icons'],

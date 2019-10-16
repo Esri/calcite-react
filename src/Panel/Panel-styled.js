@@ -9,9 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { unitCalc, clearfix } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import { CalciteH4 } from '../Elements';
+
+// Icons
+
+// Third party libraries
 
 const StyledPanel = styled.div`
   ${clearfix()};
@@ -87,11 +99,14 @@ const StyledPanel = styled.div`
       padding: 0;
     `};
 `;
+StyledPanel.defaultProps = { theme };
 
 const StyledPanelText = styled.div``;
+StyledPanelText.defaultProps = { theme };
 
 const StyledPanelTitle = styled(CalciteH4)`
   margin-bottom: 0.775rem;
 `;
+StyledPanelTitle.defaultProps = { theme };
 
 export { StyledPanel, StyledPanelText, StyledPanelTitle };

@@ -10,8 +10,20 @@
 // limitations under the License.​
 
 import React from 'react';
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { fontSize, unitCalc } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const CalciteHtml = styled.html`
   height: 100%;
@@ -19,6 +31,7 @@ const CalciteHtml = styled.html`
   font-family: 'Avenir Next W01', 'Avenir Next W00', 'Avenir Next', 'Avenir',
     'Helvetica Neue', sans-serif;
 `;
+CalciteHtml.defaultProps = { theme };
 CalciteHtml.displayName = 'CalciteHtml';
 
 const CalciteBody = styled.body`
@@ -40,12 +53,14 @@ const CalciteBody = styled.body`
   text-rendering: optimizeLegibility;
   font-feature-settings: 'liga' 1, 'calt' 0;
 `;
+CalciteBody.defaultProps = { theme };
 CalciteBody.displayName = 'CalciteBody';
 
 const CalciteP = styled.p`
   margin-top: 0;
   margin-bottom: 1.55rem;
 `;
+CalciteP.defaultProps = { theme };
 CalciteP.displayName = 'CalciteP';
 
 const CalciteA = styled.a`
@@ -58,6 +73,7 @@ const CalciteA = styled.a`
     text-decoration: underline;
   }
 `;
+CalciteA.defaultProps = { theme };
 CalciteA.displayName = 'CalciteA';
 
 const baseH = styled.h1`
@@ -65,6 +81,7 @@ const baseH = styled.h1`
   font-style: normal;
   margin: 0 0 ${props => props.theme.baseline} 0;
 `;
+baseH.defaultProps = { theme };
 
 const H1 = styled(baseH)`
   ${fontSize(5)};
@@ -159,6 +176,7 @@ const BaseList = styled.div`
       }
     `};
 `;
+BaseList.defaultProps = { theme };
 
 const CalciteOl = ({ children, ...props }) => {
   return (
@@ -188,11 +206,13 @@ const CalciteLi = styled.li`
     margin-bottom: 0;
   }
 `;
+CalciteLi.defaultProps = { theme };
 CalciteLi.displayName = 'CalciteLi';
 
 const CalciteFigure = styled.figure`
   margin: 0 0 1.55rem 0;
 `;
+CalciteFigure.defaultProps = { theme };
 CalciteFigure.displayName = 'CalciteFigure';
 
 export {

@@ -9,14 +9,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { CalciteSelect } from '../utils/commonElements';
-import Menu from '../Menu';
+
+// Utils, common elements
 import { transition } from '../utils/helpers';
+import { CalciteSelect } from '../utils/commonElements';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+import Menu from '../Menu';
+
+// Icons
+
+// Third party libraries
 
 const StyledMultiSelectWrapper = styled.div`
   position: relative;
 `;
+StyledMultiSelectWrapper.defaultProps = { theme };
 
 const StyledMultiSelectButton = styled(CalciteSelect)`
   cursor: pointer;
@@ -25,6 +38,7 @@ const StyledMultiSelectButton = styled(CalciteSelect)`
   text-overflow: ellipsis;
   text-align: left;
 `;
+StyledMultiSelectButton.defaultProps = { theme };
 
 const StyledMultiSelectMenu = styled(Menu)`
   max-height: 300px;
@@ -47,6 +61,7 @@ const StyledMultiSelectMenu = styled(Menu)`
       width: 100%;
     `};
 `;
+StyledMultiSelectMenu.defaultProps = { theme };
 
 export {
   StyledMultiSelectWrapper,

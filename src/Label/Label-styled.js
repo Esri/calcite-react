@@ -9,8 +9,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { fontSize } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledLabel = styled.mark`
   background-color: ${props => props.theme.palette.lightestGray};
@@ -47,5 +59,6 @@ const StyledLabel = styled.mark`
       color: ${props => props.theme.palette.white};
     `};
 `;
+StyledLabel.defaultProps = { theme };
 
 export { StyledLabel };

@@ -9,8 +9,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled from 'styled-components';
+
+// Utils, common elements
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import Select from '../Select';
+
+// Icons
+
+// Third party libraries
 
 const StyledDatePickerContainer = styled.div`
   position: relative;
@@ -102,12 +114,14 @@ const StyledDatePickerContainer = styled.div`
     align-items: center;
   }
 `;
+StyledDatePickerContainer.defaultProps = { theme };
 
 const StyledMonthElContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: -37px;
 `;
+StyledMonthElContainer.defaultProps = { theme };
 
 const StyledMonthYearSelectContainer = styled.div`
   display: flex;
@@ -116,6 +130,7 @@ const StyledMonthYearSelectContainer = styled.div`
   margin: -4px 0 5px;
   min-height: 32px;
 `;
+StyledMonthYearSelectContainer.defaultProps = { theme };
 
 const StyledMonthSelect = styled(Select).attrs({
   menuStyle: { minWidth: '100%', maxHeight: '200px' },
@@ -131,12 +146,14 @@ const StyledMonthSelect = styled(Select).attrs({
   background-size: 11px;
   background-position: right 5px center;
 `;
+StyledMonthSelect.defaultProps = { theme };
 
 const StyledYearSelect = styled(StyledMonthSelect).attrs({
   virtualized: true
 })`
   margin-left: 10px;
 `;
+StyledYearSelect.defaultProps = { theme };
 
 const StyledMonthYearHeader = styled.h6`
   color: #565a5c;
@@ -145,6 +162,7 @@ const StyledMonthYearHeader = styled.h6`
   caption-side: initial;
   margin: 0 3px;
 `;
+StyledMonthYearHeader.defaultProps = { theme };
 
 const StyledWeekDayList = styled.ol`
   text-decoration: none;
@@ -155,12 +173,14 @@ const StyledWeekDayList = styled.ol`
   padding: 0;
   margin: 0;
 `;
+StyledWeekDayList.defaultProps = { theme };
 
 const StyledWeekDay = styled.li`
   color: ${props => props.theme.palette.darkerGray};
   font-size: smaller;
   width: 39px;
 `;
+StyledWeekDay.defaultProps = { theme };
 
 export {
   StyledDatePickerContainer,

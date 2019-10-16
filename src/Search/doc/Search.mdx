@@ -18,7 +18,7 @@ import statesJson from '../../../docz/_sampleJson/states.json';
 import statesJson2 from '../../../docz/_sampleJson/states_objects.json';
 import Search from '../';
 
-import {CalciteTheme} from '../../CalciteThemeProvider';
+import { CalciteTheme } from '../../CalciteThemeProvider';
 import StyledSearch from './StyledSearch';
 
 # Search
@@ -28,7 +28,7 @@ Search input with specific styles.
 #### Import Syntax
 
 ```js
-import Search from 'calcite-react/Search'
+import Search from 'calcite-react/Search';
 ```
 
 ## Basic Usage
@@ -169,6 +169,96 @@ import Search from 'calcite-react/Search'
                 />
               </GuideExample>
             </React.Fragment>
+          );
+        }
+      }
+
+      return <SearchStory />;
+    }}
+
+</Playground>
+
+## Use Remote Data
+
+<Playground style={{ height: '400px'}}>
+  {() => {
+      class SearchStory extends React.Component {
+
+        constructor() {
+          this.state = {
+            items: [],
+            inputValue: '',
+            selectedItem: ''
+          };
+
+          this.searchChanged = this.searchChanged.bind(this);
+          this.clearSearch = this.clearSearch.bind(this);
+          this.onUserAction = this.onUserAction.bind(this);
+        }
+
+        searchChanged(e) {
+          this.setState({
+            selectedItem: e
+          });
+        };
+
+        clearSearch() {
+          this.setState({
+            inputValue: '',
+            selectedItem: ''
+          });
+        };
+
+        onUserAction(inputValue, selectedItemVal) {
+          this.setState({
+            inputValue: inputValue,
+            selectedItem: selectedItemVal
+          });
+
+          if (!inputValue) {
+            this.setState({ items: [] });
+            return;
+          };
+
+          if (inputValue === this.state.inputValue) {
+            return;
+          }
+
+          this.fetchStates(inputValue).then(states => {
+            const items = states.map(state => {
+              return {
+                label: state.attributes.STATE_NAME,
+                value: state.attributes.STATE_NAME
+              }
+            });
+
+            this.setState({ items });
+          });
+        };
+
+        fetchStates(q) {
+          return new Promise((resolve, response) => {
+            const url = `https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_States_Generalized/FeatureServer/0/query?where=UPPER(STATE_NAME) LIKE UPPER('${q}%')&outFields=STATE_NAME&returnGeometry=false&orderByFields=STATE_NAME asc&f=json`;
+            fetch(window.encodeURI(url))
+              .then(response => response.json())
+              .then(json => resolve(json.features));
+          });
+        };
+
+        render() {
+          return (
+            <GuideExample label="remote">
+              <Search
+                inputValue={this.state.inputValue}
+                selectedItem={this.state.selectedItem}
+                items={this.state.items}
+                minimal
+                onChange={this.searchChanged}
+                onUserAction={this.onUserAction}
+                onRequestClear={this.clearSearch}
+                remote={true}
+              />
+            </GuideExample>
           );
         }
       }

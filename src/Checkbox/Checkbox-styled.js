@@ -9,16 +9,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled from 'styled-components';
-import { fontSize, unitCalc } from '../utils/helpers';
 
+// Utils, common elements
+import { fontSize, unitCalc } from '../utils/helpers';
 import { baseRadioCheckbox } from '../utils/commonElements';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledCheckbox = styled(baseRadioCheckbox)`
   -webkit-appearance: checkbox;
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
   cursor: pointer;
 `;
+StyledCheckbox.defaultProps = { theme };
 
 const StyledCheckboxLabel = styled.span`
   ${fontSize(-1)};
@@ -27,9 +39,11 @@ const StyledCheckboxLabel = styled.span`
   margin-right: ${props => props.theme.baseline};
   cursor: pointer;
 `;
+StyledCheckboxLabel.defaultProps = { theme };
 const StyledCheckboxGroup = styled.label`
   display: flex;
   align-items: center;
 `;
+StyledCheckboxGroup.defaultProps = { theme };
 
 export { StyledCheckbox, StyledCheckboxLabel, StyledCheckboxGroup };
