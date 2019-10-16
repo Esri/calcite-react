@@ -10,10 +10,10 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React, { Children, createContext } from 'react';
+import React, { Children, isValidElement, createContext } from 'react';
 
 import { StyledTab } from './Tab-styled';
-import { TabNav, TabContents, TabTitle } from './';
+import { TabNav, TabContents } from './';
 
 const TabsContext = createContext({
   tabsContext: {
@@ -34,8 +34,6 @@ const Tabs = ({
   transparent,
   translucent,
   dark,
-  tabNavStyle,
-  tabContentsStyle,
   ...other
 }) => {
   const tabsContext = {
@@ -48,23 +46,26 @@ const Tabs = ({
   };
 
   const getTabTitles = children => {
-    return Children.map(children, ({ props }, i) => {
-      const { title, tabKey, tabTitleStyle } = props;
+    return Children.map(children, ({ title, tabKey, titleStyles }, i) => {
+      // If they don't provide a tabKey prop we'll just use the index
       const key = tabKey !== undefined ? tabKey : i;
 
       return (
-        <TabTitle title={title} tabKey={key} key={key} style={tabTitleStyle}>
+        <TabNav
+          activeTabKey={activeTabKey}
+          onTabChange={onTabChange}
+          gray={gray}
+          transparent={transparent}
+          translucent={translucent}
+          dark={dark}
+          title={title}
+          tabKey={key}
+          key={key}
+          titleStyles={titleStyles}
+        >
           {title}
-        </TabTitle>
+        </TabNav>
       );
-    });
-  };
-
-  const getTabSection = children => {
-    return Children.toArray(children).find(({ props }, i) => {
-      const key = props.tabKey !== undefined ? props.tabKey : i;
-
-      return key === activeTabKey;
     });
   };
 
@@ -77,9 +78,21 @@ const Tabs = ({
         dark={dark}
         {...other}
       >
-        <TabNav style={tabNavStyle}>{getTabTitles(children)}</TabNav>
-        <TabContents style={tabContentsStyle}>
-          {getTabSection(children)}
+        <TabNav
+          gray={gray}
+          transparent={transparent}
+          translucent={translucent}
+          dark={dark}
+        >
+          {getTabTitles(children)}
+        </TabNav>
+        <TabContents
+          gray={gray}
+          transparent={transparent}
+          translucent={translucent}
+          dark={dark}
+        >
+          {getTabSections(children)}
         </TabContents>
       </StyledTab>
     </TabsContext.Provider>
@@ -89,8 +102,8 @@ const Tabs = ({
 Tabs.propTypes = {
   /** The content of the component; should be TabNav and TabContents. */
   children: PropTypes.node,
-  /** The id or index of the tab that should be selected */
-  activeTabKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /** The index of the Tab that should be selected and visible. */
+  activeTabIndex: PropTypes.number,
   /** Function callback when a TabTitle is clicked. */
   onTabChange: PropTypes.func,
   /** Style prop to render a gray Tab. */
@@ -100,15 +113,11 @@ Tabs.propTypes = {
   /** Style prop to render a translucent Tab. */
   translucent: PropTypes.bool,
   /** Style prop to render a dark Tab. */
-  dark: PropTypes.bool,
-  /** Style the underlying TabNav element */
-  tabNavStyle: PropTypes.object,
-  /** Style the underlying TabContents element */
-  tabContentsStyle: PropTypes.object
+  dark: PropTypes.bool
 };
 
 Tabs.defaultProps = {
-  activeTabKey: 0,
+  activeTabIndex: 0,
   onTabChange: () => {}
 };
 

@@ -16,17 +16,21 @@ import { TabsContext } from './Tabs';
 
 import { StyledTabTitle } from './Tab-styled';
 
-const TabTitle = ({ children, tabKey, ...other }) => {
-  const handleSetActiveTabIndex = onTabChange => {
-    onTabChange(tabKey);
+const index = 0;
+
+const TabTitle = ({ children, ...other }) => {
+  const handleSetActiveTabIndex = (e, setActiveTabIndex) => {
+    setActiveTabIndex(e, index);
   };
 
   return (
     <TabsContext.Consumer>
       {({ tabsContext }) => (
         <StyledTabTitle
-          onClick={() => handleSetActiveTabIndex(tabsContext.onTabChange)}
-          active={tabsContext.activeTabKey === tabKey}
+          onClick={e =>
+            handleSetActiveTabIndex(e, tabsContext.setActiveTabIndex)
+          }
+          active={tabsContext.activeTabIndex === index}
           gray={tabsContext.gray}
           transparent={tabsContext.transparent}
           translucent={tabsContext.translucent}
