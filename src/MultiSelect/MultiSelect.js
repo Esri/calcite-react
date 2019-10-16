@@ -349,6 +349,8 @@ MultiSelect.propTypes = {
   selectedItem: PropTypes.node,
   /** Value of the selected item. */
   selectedValue: PropTypes.node,
+  /** Function to run when determining how to display selected values in a collapsed MultiSelect. */
+  renderValue: PropTypes.func,
   /** Placement of the popover in relation to the target. */
   placement: PropTypes.oneOf([
     'top',

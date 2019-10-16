@@ -488,7 +488,9 @@ Select.propTypes = {
   /** The selected item of the Select. */
   selectedItem: PropTypes.node,
   /** Value of the selected item. */
-  selectedValue: PropTypes.node,
+  selectedValue: PropTypes.any,
+  /** Function to run when determining how to display selected values in a collapsed Select. */
+  renderValue: PropTypes.func,
   /** Placeholder text for the input. */
   placeholder: PropTypes.string,
   /** Whether or not the Select will fill its container's width. */

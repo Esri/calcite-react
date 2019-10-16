@@ -50,10 +50,21 @@ class Tooltip extends Component {
   };
 
   render() {
+    const {
+      children,
+      appendToBody,
+      positionFixed,
+      targetWrapperStyle,
+      enterDelay,
+      placement,
+      transitionDuration,
+      title,
+      arrowStyle
+    } = this.props;
+
     const isOpen =
       this.props.open !== undefined ? this.props.open : this.state.open;
-    const usePreventOverflow =
-      this.props.appendToBody || this.props.positionFixed ? false : true;
+    const usePreventOverflow = appendToBody || positionFixed ? false : true;
 
     return (
       <Manager>
@@ -61,21 +72,21 @@ class Tooltip extends Component {
           {({ ref }) => (
             <StyledTargetWrapper
               ref={ref}
-              targetWrapperStyle={this.props.targetWrapperStyle}
+              style={targetWrapperStyle}
               onMouseEnter={this._handleReferenceEnter}
               onMouseLeave={this._handleReferenceLeave}
             >
-              {this.props.children}
+              {children}
             </StyledTargetWrapper>
           )}
         </Reference>
-        <Transition in={isOpen} timeout={this.props.enterDelay}>
+        <Transition in={isOpen} timeout={enterDelay}>
           {state => {
             return isOpen
               ? this._getPopper(
                   <Popper
-                    positionFixed={this.props.positionFixed}
-                    placement={this.props.placement}
+                    positionFixed={positionFixed}
+                    placement={placement}
                     modifiers={{
                       preventOverflow: {
                         enabled: usePreventOverflow
@@ -93,22 +104,22 @@ class Tooltip extends Component {
                           ...this.props.style
                         }}
                         transitionState={state}
-                        transitionDuration={this.props.transitionDuration}
+                        transitionDuration={transitionDuration}
                         data-placement={placement}
                       >
-                        {this.props.title}
+                        {title}
                         <StyledTooltipArrow
                           ref={arrowProps.ref}
                           data-placement={placement}
                           style={{
                             ...arrowProps.style,
-                            ...this.props.arrowStyle
+                            ...arrowStyle
                           }}
                         />
                       </StyledTooltip>
                     )}
                   </Popper>,
-                  this.props.appendToBody
+                  appendToBody
                 )
               : null;
           }}
