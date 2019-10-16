@@ -9,46 +9,50 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
-import React from 'react';
+import React, { Children } from 'react';
 import PropTypes from 'prop-types';
-
-import { TabsContext } from './Tabs';
 
 import { StyledTabNav } from './Tab-styled';
 
-const TabNav = ({ children, ...other }) => {
-  // const childrenWithProps = Children.map(children, (child, itemIndex) => {
-  //   switch (getChildType(child)) {
-  //     case 'TabTitle':
-  //       return React.cloneElement(child, {
-  //         key: itemIndex,
-  //         index: itemIndex,
-  //         activeTabIndex,
-  //         setActiveTabIndex: (e, itemIndex) => onTabChange(itemIndex),
-  //         gray,
-  //         transparent,
-  //         translucent,
-  //         dark
-  //       });
-  //     default:
-  //       return child;
-  //   }
-  // });
+import { getChildType } from '../utils/helpers';
 
+const TabNav = ({
+  children,
+  activeTabIndex,
+  onTabChange,
+  gray,
+  transparent,
+  translucent,
+  dark,
+  ...other
+}) => {
+  const childrenWithProps = Children.map(children, (child, itemIndex) => {
+    switch (getChildType(child)) {
+      case 'TabTitle':
+        return React.cloneElement(child, {
+          key: itemIndex,
+          index: itemIndex,
+          activeTabIndex,
+          setActiveTabIndex: (e, itemIndex) => onTabChange(itemIndex),
+          gray,
+          transparent,
+          translucent,
+          dark
+        });
+      default:
+        return child;
+    }
+  });
   return (
-    <TabsContext.Consumer>
-      {({ tabsContext }) => (
-        <StyledTabNav
-          gray={tabsContext.gray}
-          transparent={tabsContext.transparent}
-          translucent={tabsContext.translucent}
-          dark={tabsContext.dark}
-          {...other}
-        >
-          {children}
-        </StyledTabNav>
-      )}
-    </TabsContext.Consumer>
+    <StyledTabNav
+      gray={gray}
+      transparent={transparent}
+      translucent={translucent}
+      dark={dark}
+      {...other}
+    >
+      {childrenWithProps}
+    </StyledTabNav>
   );
 };
 

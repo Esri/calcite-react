@@ -10,25 +10,15 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React, { Children, isValidElement, createContext } from 'react';
+import React, { Children } from 'react';
 
 import { StyledTab } from './Tab-styled';
-import { TabNav, TabContents } from './';
 
-const TabsContext = createContext({
-  tabsContext: {
-    activeTabKey: undefined,
-    onTabChange: undefined,
-    gray: undefined,
-    transparent: undefined,
-    translucent: undefined,
-    dark: undefined
-  }
-});
+import { getChildType } from '../utils/helpers';
 
 const Tabs = ({
   children,
-  activeTabKey,
+  activeTabIndex,
   onTabChange,
   gray,
   transparent,
@@ -36,66 +26,41 @@ const Tabs = ({
   dark,
   ...other
 }) => {
-  const tabsContext = {
-    activeTabKey,
-    onTabChange,
-    gray,
-    transparent,
-    translucent,
-    dark
-  };
-
-  const getTabTitles = children => {
-    return Children.map(children, ({ title, tabKey, titleStyles }, i) => {
-      // If they don't provide a tabKey prop we'll just use the index
-      const key = tabKey !== undefined ? tabKey : i;
-
-      return (
-        <TabNav
-          activeTabKey={activeTabKey}
-          onTabChange={onTabChange}
-          gray={gray}
-          transparent={transparent}
-          translucent={translucent}
-          dark={dark}
-          title={title}
-          tabKey={key}
-          key={key}
-          titleStyles={titleStyles}
-        >
-          {title}
-        </TabNav>
-      );
-    });
-  };
+  const childArray = Children.toArray(children);
+  const childrenWithProps = childArray.map((child, i) => {
+    switch (getChildType(child)) {
+      case 'TabNav':
+        return React.cloneElement(child, {
+          activeTabIndex,
+          onTabChange,
+          gray,
+          transparent,
+          translucent,
+          dark
+        });
+      case 'TabContents':
+        return React.cloneElement(child, {
+          activeTabIndex,
+          gray,
+          transparent,
+          translucent,
+          dark
+        });
+      default:
+        return child;
+    }
+  });
 
   return (
-    <TabsContext.Provider value={{ tabsContext }}>
-      <StyledTab
-        gray={gray}
-        transparent={transparent}
-        translucent={translucent}
-        dark={dark}
-        {...other}
-      >
-        <TabNav
-          gray={gray}
-          transparent={transparent}
-          translucent={translucent}
-          dark={dark}
-        >
-          {getTabTitles(children)}
-        </TabNav>
-        <TabContents
-          gray={gray}
-          transparent={transparent}
-          translucent={translucent}
-          dark={dark}
-        >
-          {getTabSections(children)}
-        </TabContents>
-      </StyledTab>
-    </TabsContext.Provider>
+    <StyledTab
+      gray={gray}
+      transparent={transparent}
+      translucent={translucent}
+      dark={dark}
+      {...other}
+    >
+      {childrenWithProps}
+    </StyledTab>
   );
 };
 
@@ -123,4 +88,4 @@ Tabs.defaultProps = {
 
 Tabs.displayName = 'Tabs';
 
-export { Tabs as default, TabsContext };
+export default Tabs;

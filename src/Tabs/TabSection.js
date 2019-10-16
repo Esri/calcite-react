@@ -12,26 +12,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TabsContext } from './Tabs';
-
 import { StyledTabSection } from './Tab-styled';
 
 const TabSection = ({ children, ...other }) => {
-  return (
-    <TabsContext.Consumer>
-      {({ tabsContext }) => (
-        <StyledTabSection
-          gray={tabsContext.gray}
-          transparent={tabsContext.transparent}
-          translucent={tabsContext.translucent}
-          dark={tabsContext.dark}
-          {...other}
-        >
-          {children}
-        </StyledTabSection>
-      )}
-    </TabsContext.Consumer>
-  );
+  return <StyledTabSection {...other}>{children}</StyledTabSection>;
 };
 
 TabSection.propTypes = {

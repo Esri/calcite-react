@@ -9,28 +9,52 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
-import React from 'react';
+import React, { Children } from 'react';
 import PropTypes from 'prop-types';
-
-import { TabsContext } from './Tabs';
 
 import { StyledTabContents } from './Tab-styled';
 
-const TabContents = ({ children, ...other }) => {
+import { getChildType } from '../utils/helpers';
+
+const TabContents = ({
+  children,
+  activeTabIndex,
+  gray,
+  transparent,
+  translucent,
+  dark,
+  ...other
+}) => {
+  const childrenWithProps = Children.map(children, (child, itemIndex) => {
+    switch (getChildType(child)) {
+      case 'TabSection':
+        let section;
+        if (itemIndex === activeTabIndex) {
+          section = React.cloneElement(child, {
+            key: itemIndex,
+            index: itemIndex,
+            activeTabIndex,
+            gray,
+            transparent,
+            translucent,
+            dark
+          });
+        }
+        return section;
+      default:
+        return child;
+    }
+  });
   return (
-    <TabsContext.Consumer>
-      {({ tabsContext }) => (
-        <StyledTabContents
-          gray={tabsContext.gray}
-          transparent={tabsContext.transparent}
-          translucent={tabsContext.translucent}
-          dark={tabsContext.dark}
-          {...other}
-        >
-          {children}
-        </StyledTabContents>
-      )}
-    </TabsContext.Consumer>
+    <StyledTabContents
+      gray={gray}
+      transparent={transparent}
+      translucent={translucent}
+      dark={dark}
+      {...other}
+    >
+      {childrenWithProps}
+    </StyledTabContents>
   );
 };
 
