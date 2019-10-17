@@ -9,9 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { clearfix, fontSize } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import { CalciteA } from '../Elements';
+
+// Icons
+
+// Third party libraries
 
 const StyledTopNav = styled.header`
   display: flex;
@@ -22,6 +34,7 @@ const StyledTopNav = styled.header`
   z-index: 100;
   ${clearfix()};
 `;
+StyledTopNav.defaultProps = { theme };
 
 const StyledTopNavActions = styled.div`
   display: flex;
@@ -37,6 +50,7 @@ const StyledTopNavActions = styled.div`
     }
   }
 `;
+StyledTopNavActions.defaultProps = { theme };
 
 const StyledTopNavBrandLink = styled.a`
   padding: 0 ${props => props.theme.baseline};
@@ -44,10 +58,12 @@ const StyledTopNavBrandLink = styled.a`
   align-items: center;
   text-decoration: none;
 `;
+StyledTopNavBrandLink.defaultProps = { theme };
 
 const StyledTopNavBrandImg = styled.img`
   height: 30px;
 `;
+StyledTopNavBrandImg.defaultProps = { theme };
 
 const StyledTopNavLink = styled(CalciteA)`
   ${fontSize(0)};
@@ -85,6 +101,7 @@ const StyledTopNavLink = styled(CalciteA)`
     border-bottom-color: ${props => props.theme.palette.blue};
   }
 `;
+StyledTopNavLink.defaultProps = { theme };
 
 const StyledTopNavList = styled.nav`
   padding: 0;
@@ -97,6 +114,7 @@ const StyledTopNavList = styled.nav`
       float: right;
     `};
 `;
+StyledTopNavList.defaultProps = { theme };
 
 const StyledTopNavTitle = styled(CalciteA)`
   margin-right: 1.5rem;
@@ -109,6 +127,7 @@ const StyledTopNavTitle = styled(CalciteA)`
     text-decoration: none;
   }
 `;
+StyledTopNavTitle.defaultProps = { theme };
 
 export {
   StyledTopNav,

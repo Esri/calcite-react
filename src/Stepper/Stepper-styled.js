@@ -9,10 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { CalciteH6, CalciteP } from '../Elements';
+
+// Utils, common elements
 import { fontSize, unitCalc } from '../utils/helpers';
-import { CalciteTheme } from '../CalciteThemeProvider';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+import { CalciteH6, CalciteP } from '../Elements';
+
+// Icons
+
+// Third party libraries
 
 const StyledStepper = styled.div`
   display: flex;
@@ -23,6 +34,7 @@ const StyledStepper = styled.div`
       flex-direction: column;
     `};
 `;
+StyledStepper.defaultProps = { theme };
 
 const StyledStep = styled.div`
   display: flex;
@@ -60,6 +72,7 @@ const StyledStep = styled.div`
       }
     `};
 `;
+StyledStep.defaultProps = { theme };
 
 const StyledStepTextContainer = styled.div`
   display: flex;
@@ -68,6 +81,7 @@ const StyledStepTextContainer = styled.div`
   flex: 1 0 34px;
   align-items: flex-start;
 `;
+StyledStepTextContainer.defaultProps = { theme };
 
 const StyledStepTitle = styled(CalciteH6)`
   margin: 0;
@@ -137,6 +151,7 @@ const StyledStepTitle = styled(CalciteH6)`
       }
     `};
 `;
+StyledStepTitle.defaultProps = { theme };
 
 const StyledStepDescription = styled(CalciteP)`
   ${fontSize(-2)};
@@ -168,6 +183,7 @@ const StyledStepDescription = styled(CalciteP)`
       color: ${props => props.theme.palette.red};
     `};
 `;
+StyledStepDescription.defaultProps = { theme };
 
 const StyledStepIcon = styled.div`
   position: relative;
@@ -205,31 +221,32 @@ const StyledStepIcon = styled.div`
       }
     `};
 `;
+StyledStepIcon.defaultProps = { theme };
 
 const StepAvatarStyles = {
   default: {
     width: 30,
     height: 30,
-    color: CalciteTheme.palette.lightGray,
+    color: theme.palette.lightGray,
     backgroundColor: 'transparent',
     fontWeight: 300,
-    border: `1px solid ${CalciteTheme.palette.lighterGray}`
+    border: `1px solid ${theme.palette.lighterGray}`
   },
   active: {
-    backgroundColor: CalciteTheme.palette.blue,
-    color: CalciteTheme.palette.white,
+    backgroundColor: theme.palette.blue,
+    color: theme.palette.white,
     fontWeight: 400,
-    borderColor: CalciteTheme.palette.blue
+    borderColor: theme.palette.blue
   },
   complete: {
-    color: CalciteTheme.palette.blue,
+    color: theme.palette.blue,
     backgroundColor: 'transparent',
-    borderColor: CalciteTheme.palette.blue
+    borderColor: theme.palette.blue
   },
   error: {
-    color: CalciteTheme.palette.red,
+    color: theme.palette.red,
     backgroundColor: 'transparent',
-    borderColor: CalciteTheme.palette.red
+    borderColor: theme.palette.red
   },
   small: {
     width: 22,
@@ -242,16 +259,16 @@ const StepCustomIconStyles = {
   default: {
     width: 30,
     height: 30,
-    fill: CalciteTheme.palette.lightGray
+    fill: theme.palette.lightGray
   },
   active: {
-    fill: CalciteTheme.palette.blue
+    fill: theme.palette.blue
   },
   complete: {
-    fill: CalciteTheme.palette.blue
+    fill: theme.palette.blue
   },
   error: {
-    fill: CalciteTheme.palette.red
+    fill: theme.palette.red
   },
   small: {
     width: 22,
@@ -261,7 +278,7 @@ const StepCustomIconStyles = {
 };
 
 const StepCompleteIconStyles = {
-  fill: CalciteTheme.palette.blue
+  fill: theme.palette.blue
 };
 
 const StepIconStyle = {

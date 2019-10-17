@@ -9,9 +9,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css, keyframes } from 'styled-components';
+
+// Utils, common elements
 import { unitCalc } from '../utils/helpers';
-import { CalciteTheme } from '../CalciteThemeProvider';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const loaderVariables = {
   loaderWidth: '0.85em',
@@ -20,7 +31,7 @@ const loaderVariables = {
   loaderSpacing: '1.25em',
   loaderSpeed: '0.8s',
   loaderDelay: '0.16s',
-  loaderBlue: CalciteTheme.palette.blue
+  loaderBlue: theme.palette.blue
 };
 
 const loadKeyframes = color => keyframes`
@@ -64,6 +75,7 @@ const StyledLoader = styled.div`
   position: relative;
   min-height: ${props => props.sizeRatio * 3}px;
 `;
+StyledLoader.defaultProps = { theme };
 
 const StyledLoaderBars = styled.div`
   ${props => loaderStyles(props.color)};
@@ -88,10 +100,12 @@ const StyledLoaderBars = styled.div`
     animation-delay: ${unitCalc(loaderVariables.loaderDelay, 2, '*')};
   }
 `;
+StyledLoaderBars.defaultProps = { theme };
 
 const StyledLoaderText = styled.div`
   text-align: center;
   padding-top: ${props => props.sizeRatio * 3.5}px;
 `;
+StyledLoaderText.defaultProps = { theme };
 
 export { StyledLoader, StyledLoaderBars, StyledLoaderText };

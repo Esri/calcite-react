@@ -12,6 +12,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { css, ThemeProvider, createGlobalStyle } from 'styled-components';
+import { unitCalc } from '../utils/helpers';
 
 import CalciteTheme from './CalciteTheme';
 
@@ -216,14 +217,11 @@ const CalciteReactGlobalStyles = createGlobalStyle`
   /* Toastify */
 
   .Toastify__toast-container.Toastify__toast-container {
-    width: 450px;
+    width: ${props => props.theme.toasterWidth};
 
-    &--top-center {
-      margin-left: 225px;
-    }
-
+    &--top-center,
     &--bottom-center {
-      margin-left: 225px;
+      margin-left: ${props => unitCalc(props.theme.toasterWidth, -0.5, '*')};
     }
   }
 

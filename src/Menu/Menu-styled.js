@@ -9,10 +9,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
+import { unitCalc, fontSize } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import { StyledSideNav } from '../SideNav/SideNav-styled';
 import { CalciteA } from '../Elements';
-import { unitCalc, fontSize } from '../utils/helpers';
+
+// Icons
+
+// Third party libraries
 
 const StyledMenu = styled(StyledSideNav)`
   min-width: 200px;
@@ -54,6 +66,7 @@ const StyledMenu = styled(StyledSideNav)`
       ${fontSize(2)};
     `};
 `;
+StyledMenu.defaultProps = { theme };
 
 const StyledMenuItem = styled(CalciteA)`
   position: relative;
@@ -131,12 +144,14 @@ const StyledMenuItem = styled(CalciteA)`
       font-weight: 300;
     `};
 `;
+StyledMenuItem.defaultProps = { theme };
 
 const StyledMenuTitle = styled(StyledMenuItem)`
   font-size: 1em;
   background-color: ${props => props.theme.palette.offWhite};
   cursor: auto;
 `;
+StyledMenuTitle.defaultProps = { theme };
 
 const StyledMenuItemSubtitle = styled.span`
   font-size: 0.85em;
@@ -146,5 +161,6 @@ const StyledMenuItemSubtitle = styled.span`
     color: ${props => props.theme.palette.lightGray};
   }
 `;
+StyledMenuItemSubtitle.defaultProps = { theme };
 
 export { StyledMenu, StyledMenuItem, StyledMenuTitle, StyledMenuItemSubtitle };

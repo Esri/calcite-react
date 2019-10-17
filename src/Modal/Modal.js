@@ -70,9 +70,9 @@ Modal.propTypes = {
   onAfterOpen: PropTypes.func,
   /** Function that will be run when the Modal is requested to be closed (either by clicking on overlay or pressing ESC). */
   onRequestClose: PropTypes.func,
-  /** Boolean indicating if the overlay should close the Modal. */
+  /** Boolean indicating if clicking the overlay should call the onRequestClose prop. */
   shouldCloseOnOverlayClick: PropTypes.bool,
-  /** Boolean indicating if pressing the esc key should close the Modal. */
+  /** Boolean indicating if pressing the esc key should call the onRequestClose prop. */
   shouldCloseOnEsc: PropTypes.bool,
   /** Function that will be called to get the parent element to which the Modal will be attached. */
   parentSelector: PropTypes.func,
@@ -84,7 +84,9 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   onAfterOpen: () => {},
-  onRequestClose: () => {}
+  onRequestClose: () => {},
+  shouldCloseOnOverlayClick: true,
+  shouldCloseOnEsc: true
 };
 
 Modal.displayName = 'Modal';

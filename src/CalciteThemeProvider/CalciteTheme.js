@@ -137,9 +137,9 @@ const CalciteTheme = {
   linkColor: EsriColors.Calcite_Highlight_Blue_350,
   linkHover: EsriColors.Calcite_Highlight_Blue_400,
 
-  // ┌──────────────┐
-  // │ Breakpoints  │
-  // └──────────────┘
+  // ┌─────────────┐
+  // │ Breakpoints │
+  // └─────────────┘
   small: '480px',
   medium: '860px',
   large: '1450px',
@@ -148,6 +148,11 @@ const CalciteTheme = {
   // │ Grid Configuration │
   // └────────────────────┘
   prefix: '',
+
+  // ┌─────────┐
+  // │ Toaster │
+  // └─────────┘
+  toasterWidth: '450px',
 
   vwRatio: '0.95',
   containerWidth: '1450px',

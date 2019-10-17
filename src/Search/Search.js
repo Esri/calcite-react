@@ -137,31 +137,34 @@ class Search extends Component {
     }
 
     // object or string?
-    newItemsToShow = this.userInputtedValue
-      ? matchSorter(
-          this.props.children || this.props.items,
-          this.userInputtedValue,
-          {
-            keys: [this.itemToString]
-          }
-        )
-      : this.props.children || this.props.items;
-    if (
-      changes.hasOwnProperty('highlightedIndex') &&
-      (changes.type === Downshift.stateChangeTypes.keyDownArrowUp ||
-        changes.type === Downshift.stateChangeTypes.keyDownArrowDown)
-    ) {
-      inputValue =
-        this.itemToString(newItemsToShow[changes.highlightedIndex]) || '';
-    }
-    if (isClosingMenu) {
-      inputValue = this.itemToString(selectedItemVal) || '';
-      this.userInputtedValue = selectedItemVal;
-    }
+    if (!this.props.remote) {
+      newItemsToShow = this.userInputtedValue
+        ? matchSorter(
+            this.props.children || this.props.items,
+            this.userInputtedValue,
+            {
+              keys: [this.itemToString]
+            }
+          )
+        : this.props.children || this.props.items;
 
-    this.setState({
-      itemsToShow: newItemsToShow
-    });
+      if (
+        changes.hasOwnProperty('highlightedIndex') &&
+        (changes.type === Downshift.stateChangeTypes.keyDownArrowUp ||
+          changes.type === Downshift.stateChangeTypes.keyDownArrowDown)
+      ) {
+        inputValue =
+          this.itemToString(newItemsToShow[changes.highlightedIndex]) || '';
+      }
+      if (isClosingMenu) {
+        inputValue = this.itemToString(selectedItemVal) || '';
+        this.userInputtedValue = selectedItemVal;
+      }
+
+      this.setState({
+        itemsToShow: newItemsToShow
+      });
+    }
 
     this.props.onUserAction(inputValue, selectedItemVal);
   };
@@ -328,6 +331,11 @@ class Search extends Component {
       (menuStyle && parseInt(menuStyle.maxHeight, 10)) ||
       300;
 
+    let itemsToShow;
+    if (this.props.remote)
+      itemsToShow = this.props.items || this.props.children;
+    else itemsToShow = this.state.itemsToShow;
+
     return (
       <ListContext.Consumer>
         {({ listContext }) => (
@@ -372,7 +380,7 @@ class Search extends Component {
                         />
                       )}
                     </Reference>
-                    {isOpen && this.state.itemsToShow
+                    {isOpen && itemsToShow
                       ? this._getPopper(
                           <Popper
                             positionFixed={positionFixed}
@@ -401,18 +409,14 @@ class Search extends Component {
                                 isOpen={isOpen}
                                 data-placement={placement}
                               >
-                                {this.getMenuItems(
-                                  this.state.itemsToShow,
-                                  virtualized,
-                                  {
-                                    highlightedIndex,
-                                    menuHeight,
-                                    virtualizedRowHeight,
-                                    virtualizedMenuWidth,
-                                    getItemProps,
-                                    selectedItem
-                                  }
-                                )}
+                                {this.getMenuItems(itemsToShow, virtualized, {
+                                  highlightedIndex,
+                                  menuHeight,
+                                  virtualizedRowHeight,
+                                  virtualizedMenuWidth,
+                                  getItemProps,
+                                  selectedItem
+                                })}
                               </StyledSelectMenu>
                             )}
                           </Popper>,
@@ -489,7 +493,9 @@ Search.propTypes = {
   /** SVG icon to be displayed inside the Search input */
   searchIcon: PropTypes.node,
   /** SVG icon to clear the value of the Search input */
-  clearIcon: PropTypes.node
+  clearIcon: PropTypes.node,
+  /** Use a remote API for the data load.  This will allow the application to see the exact return from the API with no filtering applied */
+  remote: PropTypes.bool
 };
 
 Search.defaultProps = {
@@ -507,7 +513,8 @@ Search.defaultProps = {
   ),
   onUserAction: () => {},
   onChange: () => {},
-  onRequestClear: () => {}
+  onRequestClear: () => {},
+  remote: false
 };
 
 Search.displayName = 'Search';

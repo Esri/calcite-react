@@ -9,9 +9,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { unitCalc } from '../utils/helpers';
-import { fontSize } from '../utils/helpers';
+
+// Utils, common elements
+import { fontSize, unitCalc } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledTable = styled.table`
   width: 100%;
@@ -62,6 +73,7 @@ const StyledTable = styled.table`
       border-bottom: none;
     `};
 `;
+StyledTable.defaultProps = { theme };
 
 const StyledTableBody = styled.tbody`
   overflow: auto;
@@ -91,6 +103,7 @@ const StyledTableBody = styled.tbody`
       border-bottom: none;
     `};
 `;
+StyledTableBody.defaultProps = { theme };
 
 const StyledTableCell = styled.td`
   font-weight: 300;
@@ -162,6 +175,7 @@ const StyledTableCell = styled.td`
       }
     `};
 `;
+StyledTableCell.defaultProps = { theme };
 
 const StyledTableHeader = styled.thead`
   background-color: ${props => props.theme.palette.lightestGray};
@@ -209,6 +223,7 @@ const StyledTableHeader = styled.thead`
       border-bottom: none;
     `};
 `;
+StyledTableHeader.defaultProps = { theme };
 
 const StyledTableHeaderCell = styled.th`
   font-weight: 300;
@@ -261,6 +276,7 @@ const StyledTableHeaderCell = styled.th`
       }
     `};
 `;
+StyledTableHeaderCell.defaultProps = { theme };
 
 const StyledTableHeaderRow = styled.tr`
   ${props =>
@@ -272,6 +288,7 @@ const StyledTableHeaderRow = styled.tr`
       }
     `};
 `;
+StyledTableHeaderRow.defaultProps = { theme };
 
 const StyledTableRow = styled.tr`
   border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
@@ -333,6 +350,7 @@ const StyledTableRow = styled.tr`
       border-bottom: none;
     `};
 `;
+StyledTableRow.defaultProps = { theme };
 
 export {
   StyledTable,

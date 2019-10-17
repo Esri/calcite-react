@@ -9,10 +9,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled from 'styled-components';
-import { fontSize, unitCalc } from '../utils/helpers';
 
+// Utils, common elements
+import { fontSize, unitCalc } from '../utils/helpers';
 import { baseRadioCheckbox } from '../utils/commonElements';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
 
 const StyledRadio = styled(baseRadioCheckbox)`
   -webkit-appearance: radio;
@@ -20,6 +31,7 @@ const StyledRadio = styled(baseRadioCheckbox)`
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
   cursor: pointer;
 `;
+StyledRadio.defaultProps = { theme };
 
 const StyledRadioLabel = styled.span`
   ${fontSize(-1)};
@@ -28,9 +40,11 @@ const StyledRadioLabel = styled.span`
   margin-right: ${props => props.theme.baseline};
   cursor: pointer;
 `;
+StyledRadioLabel.defaultProps = { theme };
 const StyledRadioGroup = styled.label`
   display: flex;
   align-items: center;
 `;
+StyledRadioGroup.defaultProps = { theme };
 
 export { StyledRadio, StyledRadioLabel, StyledRadioGroup };

@@ -9,14 +9,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
-import { transparentize } from 'polished';
 
-import { CalciteTheme, EsriColors } from '../CalciteThemeProvider';
-
+// Utils, common elements
+import { fontSize, unitCalc } from '../utils/helpers';
 import { baseRadioCheckbox } from '../utils/commonElements';
 
-import { fontSize, unitCalc } from '../utils/helpers';
+// Calcite theme and Esri colors
+import { CalciteTheme as theme, EsriColors } from '../CalciteThemeProvider';
+
+// Calcite components
+
+// Icons
+
+// Third party libraries
+import { transparentize } from 'polished';
 
 const switchProps = {
   switchWidth: '36px',
@@ -25,8 +33,8 @@ const switchProps = {
   switchBorderColor: EsriColors.Calcite_Gray_350,
   switchHoverBg: EsriColors.Calcite_Gray_250,
   switchHoverBorderColor: EsriColors.Calcite_Gray_350,
-  switchCheckedBg: CalciteTheme.palette.blue,
-  switchCheckedBorderColor: CalciteTheme.palette.darkBlue,
+  switchCheckedBg: theme.palette.blue,
+  switchCheckedBorderColor: theme.palette.darkBlue,
   switchFocusShadow: `0 0 4px 2px ${transparentize(
     0.1,
     EsriColors.Calcite_Gray_350
@@ -43,18 +51,18 @@ const switchProps = {
   handleTopDistance: '-1px',
   handleEdgeDistance: '-1px',
   handleActiveEdgeDistance: '1px',
-  handleBg: CalciteTheme.palette.white,
+  handleBg: theme.palette.white,
   handleBorderColor: EsriColors.Calcite_Gray_450,
   handleShadow: `0 1px 1px 0px ${transparentize(
     0.8,
-    CalciteTheme.palette.darkestGray
+    theme.palette.darkestGray
   )}`,
   handleHoverBorderColor: EsriColors.Calcite_Blue_a200,
   handleHoverShadow: `0 1px 2px 0px ${transparentize(
     0.8,
-    CalciteTheme.palette.darkestGray
+    theme.palette.darkestGray
   )}`,
-  handleCheckedBorderColor: CalciteTheme.palette.darkBlue,
+  handleCheckedBorderColor: theme.palette.darkBlue,
   handleCheckedShadow: `0 2px 1px 0px {transparentize(.8,CalciteTheme.palette.darkestGray)}`,
   handleActiveShadow: `0 3px 1px 0px {transparentize(.8,CalciteTheme.palette.darkestGray)}`,
   switchDestructiveCheckedBg: EsriColors.Calcite_Red_a200,
@@ -71,6 +79,7 @@ const StyledSwitch = styled.label`
   tap-highlight-color: transparent;
   margin: 0 0 ${props => props.theme.baseline} 0;
 `;
+StyledSwitch.defaultProps = { theme };
 
 const StyledSwitchInput = styled(baseRadioCheckbox)`
   opacity: 0;
@@ -79,6 +88,7 @@ const StyledSwitchInput = styled(baseRadioCheckbox)`
   margin: 0;
   position: absolute;
 `;
+StyledSwitchInput.defaultProps = { theme };
 
 const StyledSwitchTrack = styled.span`
   position: relative;
@@ -233,6 +243,7 @@ const StyledSwitchTrack = styled.span`
     }
   }
 `;
+StyledSwitchTrack.defaultProps = { theme };
 
 const StyledSwitchLabel = styled.span`
   ${fontSize(-1)};
@@ -244,6 +255,7 @@ const StyledSwitchLabel = styled.span`
     margin-right: 1rem;
   }
 `;
+StyledSwitchLabel.defaultProps = { theme };
 
 export {
   StyledSwitch,

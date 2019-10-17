@@ -9,10 +9,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled, { css } from 'styled-components';
+
+// Utils, common elements
 import { CalciteSelect } from '../utils/commonElements';
-import Menu from '../Menu';
 import { transition } from '../utils/helpers';
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
+import Menu from '../Menu';
+
+// Icons
+
+// Third party libraries
 
 const StyledSelectWrapper = styled.div`
   position: relative;
@@ -23,11 +35,13 @@ const StyledSelectWrapper = styled.div`
       width: 100%;
     `};
 `;
+StyledSelectWrapper.defaultProps = { theme };
 
 const StyledSelectInput = styled(CalciteSelect)`
   cursor: pointer;
   text-overflow: ellipsis;
 `;
+StyledSelectInput.defaultProps = { theme };
 
 const StyledSelectButton = styled(CalciteSelect)`
   cursor: pointer;
@@ -36,6 +50,7 @@ const StyledSelectButton = styled(CalciteSelect)`
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
+StyledSelectButton.defaultProps = { theme };
 
 const StyledSelectMenu = styled(Menu)`
   max-height: 300px;
@@ -58,6 +73,7 @@ const StyledSelectMenu = styled(Menu)`
       min-width: 100%;
     `};
 `;
+StyledSelectMenu.defaultProps = { theme };
 
 const PopperManagerStyles = {
   width: '100%'

@@ -9,9 +9,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+// styled-components
 import styled from 'styled-components';
 
+// Utils, common elements
+
+// Calcite theme and Esri colors
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+
+// Calcite components
 import Button from '../Button';
+
+// Icons
+
+// Third party libraries
 
 const StyledCloseButton = styled(Button)`
   color: currentColor;
@@ -21,5 +32,6 @@ const StyledCloseButton = styled(Button)`
     opacity: 0.7;
   }
 `;
+StyledCloseButton.defaultProps = { theme };
 
 export { StyledCloseButton };
