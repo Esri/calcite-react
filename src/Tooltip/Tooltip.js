@@ -14,6 +14,7 @@ import ReactDOM from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import { Manager, Reference, Popper } from 'react-popper';
+import { withTheme } from 'styled-components';
 
 import {
   StyledTargetWrapper,
@@ -80,7 +81,14 @@ class Tooltip extends Component {
             </StyledTargetWrapper>
           )}
         </Reference>
-        <Transition in={isOpen} timeout={enterDelay}>
+        <Transition
+          in={isOpen}
+          timeout={
+            enterDelay !== undefined
+              ? enterDelay
+              : this.props.theme.tooltipEnterDelay
+          }
+        >
           {state => {
             return isOpen
               ? this._getPopper(
@@ -156,10 +164,9 @@ Tooltip.propTypes = {
 Tooltip.defaultProps = {
   title: '',
   placement: undefined,
-  transitionDuration: 200,
-  enterDelay: 0
+  transitionDuration: 200
 };
 
 Tooltip.displayName = 'Tooltip';
 
-export default Tooltip;
+export default withTheme(Tooltip);
