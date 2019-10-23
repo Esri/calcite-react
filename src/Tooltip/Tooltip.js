@@ -16,6 +16,8 @@ import PropTypes from 'prop-types';
 import { Manager, Reference, Popper } from 'react-popper';
 import { ThemeContext } from 'styled-components';
 
+import { CalciteTheme } from '../CalciteThemeProvider';
+
 import {
   StyledTargetWrapper,
   StyledTooltip,
@@ -69,7 +71,7 @@ class Tooltip extends Component {
 
     return (
       <ThemeContext.Consumer>
-        {theme => (
+        {(theme = CalciteTheme) => (
           <Manager>
             <Reference style={{ display: 'inline-block' }}>
               {({ ref }) => (
