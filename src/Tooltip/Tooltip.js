@@ -153,7 +153,7 @@ Tooltip.propTypes = {
   positionFixed: PropTypes.bool,
   /** Duration of animation in milliseconds. */
   transitionDuration: PropTypes.number,
-  /** Delay (in milliseconds) before the Tooltip will show. */
+  /** Delay (in milliseconds) before the Tooltip will show. Prop overrides the value specified in the theme. */
   enterDelay: PropTypes.number,
   /** Apply styles to the Tooltip element. */
   style: PropTypes.object,
