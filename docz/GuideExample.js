@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CalciteTheme as theme } from '../src/CalciteThemeProvider';
 
 const GuideExampleContainer = styled.div`
   padding: 1rem;
@@ -20,6 +21,7 @@ const GuideExampleContainer = styled.div`
     border-bottom-left-radius: 6px;
   }
 `;
+GuideExampleContainer.defaultProps = { theme };
 
 const GuideExampleLabel = styled.code`
   color: ${props => props.theme.palette.darkestGray};
@@ -39,6 +41,7 @@ const GuideExampleLabel = styled.code`
     border-radius: 0 3px 0 3px;
   }
 `;
+GuideExampleLabel.defaultProps = { theme };
 
 const GuideExample = ({ children, label, style, ...other }) => {
   function _getLabel() {
