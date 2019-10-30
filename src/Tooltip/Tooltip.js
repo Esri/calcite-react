@@ -15,11 +15,9 @@ import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import { Manager, Reference, Popper } from 'react-popper';
 
-import {
-  StyledTargetWrapper,
-  StyledTooltip,
-  StyledTooltipArrow
-} from './Tooltip-styled';
+import { StyledTargetWrapper, StyledTooltipArrow } from './Tooltip-styled';
+
+import TooltipPopper from './TooltipPopper';
 
 class Tooltip extends Component {
   constructor(props) {
@@ -96,9 +94,15 @@ class Tooltip extends Component {
                       }
                     }}
                   >
-                    {({ ref, style, placement, arrowProps }) => (
-                      <StyledTooltip
-                        ref={ref}
+                    {({
+                      ref,
+                      style,
+                      placement,
+                      arrowProps,
+                      scheduleUpdate
+                    }) => (
+                      <TooltipPopper
+                        innerRef={ref}
                         style={{
                           ...style,
                           ...this.props.style
@@ -106,6 +110,7 @@ class Tooltip extends Component {
                         transitionState={state}
                         transitionDuration={transitionDuration}
                         data-placement={placement}
+                        scheduleUpdate={scheduleUpdate}
                       >
                         {title}
                         <StyledTooltipArrow
@@ -116,7 +121,7 @@ class Tooltip extends Component {
                             ...arrowStyle
                           }}
                         />
-                      </StyledTooltip>
+                      </TooltipPopper>
                     )}
                   </Popper>,
                   appendToBody

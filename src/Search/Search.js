@@ -29,7 +29,7 @@ import {
   PopperStyle
 } from './Search-styled';
 
-import { StyledSelectMenu } from '../Select/Select-styled';
+import SearchMenu from './SearchMenu';
 import { MenuItem } from '../Menu';
 import Tooltip from '../Tooltip';
 import { ListContext } from '../List/List';
@@ -398,9 +398,9 @@ class Search extends Component {
                               }
                             }}
                           >
-                            {({ ref, style, placement, arrowProps }) => (
-                              <StyledSelectMenu
-                                ref={ref}
+                            {({ ref, style, placement, scheduleUpdate }) => (
+                              <SearchMenu
+                                innerRef={ref}
                                 fullWidth={fullWidth}
                                 style={{
                                   ...style,
@@ -408,6 +408,7 @@ class Search extends Component {
                                 }}
                                 isOpen={isOpen}
                                 data-placement={placement}
+                                scheduleUpdate={scheduleUpdate}
                               >
                                 {this.getMenuItems(itemsToShow, virtualized, {
                                   highlightedIndex,
@@ -417,7 +418,7 @@ class Search extends Component {
                                   getItemProps,
                                   selectedItem
                                 })}
-                              </StyledSelectMenu>
+                              </SearchMenu>
                             )}
                           </Popper>,
                           appendToBody

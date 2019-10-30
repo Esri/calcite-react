@@ -17,7 +17,9 @@ import outy from 'outy';
 import { Manager, Reference, Popper } from 'react-popper';
 import uniqid from 'uniqid';
 
-import { StyledTargetWrapper, StyledPopover } from './Popover-styled';
+import { StyledTargetWrapper } from './Popover-styled';
+
+import PopoverPopper from './PopoverPopper';
 
 const PopoverContext = createContext({
   popoverContext: {
@@ -122,10 +124,10 @@ class Popover extends Component {
                         }
                       }}
                     >
-                      {({ ref, style, placement }) => {
+                      {({ ref, style, placement, scheduleUpdate }) => {
                         return (
-                          <StyledPopover
-                            ref={ref}
+                          <PopoverPopper
+                            innerRef={ref}
                             id={`${this._generatedId}Popover`}
                             style={{
                               ...style,
@@ -134,9 +136,10 @@ class Popover extends Component {
                             transitionState={state}
                             transitionDuration={this.props.transitionDuration}
                             data-placement={placement}
+                            scheduleUpdate={scheduleUpdate}
                           >
                             {this.props.children}
-                          </StyledPopover>
+                          </PopoverPopper>
                         );
                       }}
                     </Popper>,
