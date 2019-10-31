@@ -53,6 +53,10 @@ const StyledPopover = styled.div`
       opacity: 1;
       pointer-events: auto;
     `};
+
+  iframe {
+    border: none;
+  }
 `;
 StyledPopover.defaultProps = { theme };
 

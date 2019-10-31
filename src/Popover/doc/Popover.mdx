@@ -278,6 +278,56 @@ import Popover from 'calcite-react/Popover'
 
 </Playground>
 
+## With Image
+
+<Playground style={{ height: '375px' }}>
+  {() => {
+      class PopoverStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            open: false
+          };
+
+          this.togglePopover = this.togglePopover.bind(this);
+          this.closePopover = this.closePopover.bind(this);
+        }
+
+        togglePopover() {
+          this.setState({
+            open: !this.state.open
+          });
+        };
+
+        closePopover() {
+          this.setState({
+            open: false
+          });
+        };
+
+        render() {
+          return (
+            <Popover
+              targetEl={
+                <Button onClick={this.togglePopover}>Click Here</Button>
+              }
+              open={this.state.open}
+              onRequestClose={this.closePopover}
+            >
+              <Panel white noBorder>
+                <p>Here comes a big photo!</p>
+                <img src="https://source.unsplash.com/collection/1270951/800x600" alt="Random photo from unsplash.com" />
+              </Panel>
+            </Popover>
+          );
+        }
+      }
+
+      return <PopoverStory />;
+    }}
+
+</Playground>
+
 ## Props
 
 <PropsTable of={Popover} />

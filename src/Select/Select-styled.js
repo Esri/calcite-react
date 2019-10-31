@@ -72,6 +72,11 @@ const StyledSelectMenu = styled(Menu)`
     css`
       min-width: 100%;
     `};
+
+  /* Handles iframe styling from react-resize-aware */
+  iframe {
+    border: none;
+  }
 `;
 StyledSelectMenu.defaultProps = { theme };
 
