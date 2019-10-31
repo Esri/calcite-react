@@ -72,6 +72,11 @@ const StyledTooltip = styled.div`
     css`
       opacity: 1;
     `};
+
+  /* Handles iframe styling from react-resize-aware */
+  iframe {
+    border: none;
+  }
 `;
 StyledTooltip.defaultProps = { theme };
 

@@ -129,9 +129,10 @@ const CalciteTheme = {
   boxShadow: '0 0 16px 0 rgba(0,0,0,.05)',
   drawerWidth: '280px',
   borderRadius: 0,
+  tooltipEnterDelay: 0,
 
   // ┌─────────────┐
-  // │ TYPE COLORS │
+  // │ Type Colors │
   // └─────────────┘
   typeColor: EsriColors.Calcite_Gray_650,
   linkColor: EsriColors.Calcite_Highlight_Blue_350,
@@ -164,7 +165,7 @@ const CalciteTheme = {
   columnGutterFallback: '20px',
   containerWidthFallback: '960px',
 
-  // Medium
+  // Large
   largeClass: 'large',
   largeColumnCount: '24',
 

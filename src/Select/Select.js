@@ -22,10 +22,10 @@ import {
   StyledSelectWrapper,
   StyledSelectButton,
   StyledSelectInput,
-  StyledSelectMenu,
   PopperManagerStyles
 } from './Select-styled';
 
+import SelectMenu from './SelectMenu';
 import { FormControlContext } from '../Form/FormControl';
 import { PopoverContext } from '../Popover/Popover';
 
@@ -435,30 +435,34 @@ class Select extends Component {
                             }
                           }}
                         >
-                          {({ ref, style: popperStyle, placement }) => {
-                            return (
-                              <StyledSelectMenu
-                                ref={ref}
-                                style={{
-                                  ...popperStyle,
-                                  ...this.getFullWidthStyle(),
-                                  ...menuStyle
-                                }}
-                                isOpen={isOpen}
-                                data-placement={placement}
-                                fullWidth={fullWidth}
-                              >
-                                {this.getMenuItems(filteredList, virtualized, {
-                                  highlightedIndex,
-                                  menuHeight,
-                                  virtualizedRowHeight,
-                                  virtualizedMenuWidth,
-                                  getItemProps,
-                                  selectedItem
-                                })}
-                              </StyledSelectMenu>
-                            );
-                          }}
+                          {({
+                            ref,
+                            style: popperStyle,
+                            placement,
+                            scheduleUpdate
+                          }) => (
+                            <SelectMenu
+                              innerRef={ref}
+                              style={{
+                                ...popperStyle,
+                                ...this.getFullWidthStyle(),
+                                ...menuStyle
+                              }}
+                              isOpen={isOpen}
+                              data-placement={placement}
+                              fullWidth={fullWidth}
+                              scheduleUpdate={scheduleUpdate}
+                            >
+                              {this.getMenuItems(filteredList, virtualized, {
+                                highlightedIndex,
+                                menuHeight,
+                                virtualizedRowHeight,
+                                virtualizedMenuWidth,
+                                getItemProps,
+                                selectedItem
+                              })}
+                            </SelectMenu>
+                          )}
                         </Popper>
                       ),
                       isOpen,

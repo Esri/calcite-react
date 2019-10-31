@@ -19,9 +19,10 @@ import { Manager, Reference, Popper } from 'react-popper';
 
 import {
   StyledMultiSelectWrapper,
-  StyledMultiSelectButton,
-  StyledMultiSelectMenu
+  StyledMultiSelectButton
 } from './MultiSelect-styled';
+
+import MultiSelectMenu from './MultiSelectMenu';
 
 import { FormControlContext } from '../Form/FormControl';
 import { PopoverContext } from '../Popover/Popover';
@@ -308,20 +309,26 @@ const MultiSelect = ({
                         }
                       }}
                     >
-                      {({ ref: popperRef, style, placement }) => (
-                        <StyledMultiSelectMenu
-                          ref={popperRef}
+                      {({
+                        ref: popperRef,
+                        style,
+                        placement,
+                        scheduleUpdate
+                      }) => (
+                        <MultiSelectMenu
+                          innerRef={popperRef}
                           style={{ ...style, ...menuStyle }}
                           fullWidth={fullWidth}
                           data-placement={placement}
                           isOpen={isOpen}
+                          scheduleUpdate={scheduleUpdate}
                         >
                           {getMenuItems(children, {
                             getItemProps,
                             highlightedIndex,
                             selectedValues
                           })}
-                        </StyledMultiSelectMenu>
+                        </MultiSelectMenu>
                       )}
                     </Popper>,
                     isOpen,

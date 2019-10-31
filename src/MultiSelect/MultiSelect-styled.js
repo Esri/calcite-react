@@ -60,6 +60,10 @@ const StyledMultiSelectMenu = styled(Menu)`
     css`
       width: 100%;
     `};
+
+  iframe {
+    border: none;
+  }
 `;
 StyledMultiSelectMenu.defaultProps = { theme };
 

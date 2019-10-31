@@ -14,12 +14,13 @@ import ReactDOM from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import { Manager, Reference, Popper } from 'react-popper';
+import { ThemeContext } from 'styled-components';
 
-import {
-  StyledTargetWrapper,
-  StyledTooltip,
-  StyledTooltipArrow
-} from './Tooltip-styled';
+import { CalciteTheme } from '../CalciteThemeProvider';
+
+import { StyledTargetWrapper, StyledTooltipArrow } from './Tooltip-styled';
+
+import TooltipPopper from './TooltipPopper';
 
 class Tooltip extends Component {
   constructor(props) {
@@ -67,64 +68,80 @@ class Tooltip extends Component {
     const usePreventOverflow = appendToBody || positionFixed ? false : true;
 
     return (
-      <Manager>
-        <Reference style={{ display: 'inline-block' }}>
-          {({ ref }) => (
-            <StyledTargetWrapper
-              ref={ref}
-              style={targetWrapperStyle}
-              onMouseEnter={this._handleReferenceEnter}
-              onMouseLeave={this._handleReferenceLeave}
+      <ThemeContext.Consumer>
+        {(theme = CalciteTheme) => (
+          <Manager>
+            <Reference style={{ display: 'inline-block' }}>
+              {({ ref }) => (
+                <StyledTargetWrapper
+                  ref={ref}
+                  style={targetWrapperStyle}
+                  onMouseEnter={this._handleReferenceEnter}
+                  onMouseLeave={this._handleReferenceLeave}
+                >
+                  {children}
+                </StyledTargetWrapper>
+              )}
+            </Reference>
+            <Transition
+              in={isOpen}
+              timeout={
+                enterDelay !== undefined ? enterDelay : theme.tooltipEnterDelay
+              }
             >
-              {children}
-            </StyledTargetWrapper>
-          )}
-        </Reference>
-        <Transition in={isOpen} timeout={enterDelay}>
-          {state => {
-            return isOpen
-              ? this._getPopper(
-                  <Popper
-                    positionFixed={positionFixed}
-                    placement={placement}
-                    modifiers={{
-                      preventOverflow: {
-                        enabled: usePreventOverflow
-                      },
-                      hide: {
-                        enabled: usePreventOverflow
-                      }
-                    }}
-                  >
-                    {({ ref, style, placement, arrowProps }) => (
-                      <StyledTooltip
-                        ref={ref}
-                        style={{
-                          ...style,
-                          ...this.props.style
+              {state => {
+                return isOpen
+                  ? this._getPopper(
+                      <Popper
+                        positionFixed={positionFixed}
+                        placement={placement}
+                        modifiers={{
+                          preventOverflow: {
+                            enabled: usePreventOverflow
+                          },
+                          hide: {
+                            enabled: usePreventOverflow
+                          }
                         }}
-                        transitionState={state}
-                        transitionDuration={transitionDuration}
-                        data-placement={placement}
                       >
-                        {title}
-                        <StyledTooltipArrow
-                          ref={arrowProps.ref}
-                          data-placement={placement}
-                          style={{
-                            ...arrowProps.style,
-                            ...arrowStyle
-                          }}
-                        />
-                      </StyledTooltip>
-                    )}
-                  </Popper>,
-                  appendToBody
-                )
-              : null;
-          }}
-        </Transition>
-      </Manager>
+                        {({
+                          ref,
+                          style,
+                          placement,
+                          arrowProps,
+                          scheduleUpdate
+                        }) => (
+                          <TooltipPopper
+                            innerRef={ref}
+                            style={{
+                              ...style,
+                              ...this.props.style
+                            }}
+                            transitionState={state}
+                            transitionDuration={transitionDuration}
+                            data-placement={placement}
+                            scheduleUpdate={scheduleUpdate}
+                          >
+                            {title}
+                            <StyledTooltipArrow
+                              ref={arrowProps.ref}
+                              data-placement={placement}
+                              style={{
+                                ...arrowProps.style,
+                                ...arrowStyle
+                              }}
+                            />
+                          </TooltipPopper>
+                        )}
+                      </Popper>,
+                      appendToBody
+                    )
+                  : null;
+              }}
+            </Transition>
+          </Manager>
+        )}
+      </ThemeContext.Consumer>
     );
   }
 }
@@ -143,7 +160,7 @@ Tooltip.propTypes = {
   positionFixed: PropTypes.bool,
   /** Duration of animation in milliseconds. */
   transitionDuration: PropTypes.number,
-  /** Delay (in milliseconds) before the Tooltip will show. */
+  /** Delay (in milliseconds) before the Tooltip will show. Prop overrides the value specified in the theme (0ms). */
   enterDelay: PropTypes.number,
   /** Apply styles to the Tooltip element. */
   style: PropTypes.object,
@@ -157,7 +174,7 @@ Tooltip.defaultProps = {
   title: '',
   placement: undefined,
   transitionDuration: 200,
-  enterDelay: 0
+  enterDelay: undefined
 };
 
 Tooltip.displayName = 'Tooltip';
