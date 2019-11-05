@@ -68,6 +68,15 @@ const ListItem = ({
           nested={listContext.nested}
           filterItem={filterItem}
           active={active}
+          tabIndex="0"
+          onKeyPress={
+            other.onClick &&
+            (event => {
+              if (event.key === 'Enter' || event.key === 'Space') {
+                other.onClick();
+              }
+            })
+          }
           {...other}
         >
           {getLeftNode(listContext, leftNode)}
