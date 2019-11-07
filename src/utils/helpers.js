@@ -231,7 +231,7 @@ const getChildType = child => {
 export const getAccessibleOnClickHandlers = onClick => {
   return onClick
     ? {
-        onClick: onClick,
+        onClick,
         onKeyPress:
           onClick &&
           (event => {
