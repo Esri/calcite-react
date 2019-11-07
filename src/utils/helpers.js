@@ -228,6 +228,21 @@ const getChildType = child => {
   );
 };
 
+export const getAccessibleOnClickHandlers = onClick => {
+  return onClick
+    ? {
+        onClick: onClick,
+        onKeyPress:
+          onClick &&
+          (event => {
+            if (event.key === 'Enter' || event.key === 'Space') {
+              onClick();
+            }
+          })
+      }
+    : undefined;
+};
+
 export {
   unitCalc,
   clearfix,
