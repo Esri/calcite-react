@@ -72,6 +72,7 @@ const ListItem = ({
           filterItem={filterItem}
           active={active}
           tabIndex="0"
+          role="listitem"
           {...getAccessibleOnClickHandlers(onClick)}
           {...other}
         >
