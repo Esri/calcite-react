@@ -12,6 +12,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { getAccessibleOnClickHandlers } from '../utils/helpers';
+
 import {
   StyledListItem,
   StyledListTextContainer,
@@ -26,6 +28,7 @@ const ListItem = ({
   rightNode,
   active,
   filterItem,
+  onClick,
   ...other
 }) => {
   const getLeftNode = (listContext, leftNode) => {
@@ -68,6 +71,9 @@ const ListItem = ({
           nested={listContext.nested}
           filterItem={filterItem}
           active={active}
+          tabIndex="0"
+          role="listitem"
+          {...getAccessibleOnClickHandlers(onClick)}
           {...other}
         >
           {getLeftNode(listContext, leftNode)}
