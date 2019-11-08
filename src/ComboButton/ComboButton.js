@@ -22,23 +22,16 @@ import Popover from '../Popover';
 import CaretDownIcon from 'calcite-ui-icons-react/CaretDownIcon';
 
 class ComboButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false
-    };
-  }
+  state = {
+    open: false
+  };
 
   togglePopover = () => {
-    this.setState({
-      open: !this.state.open
-    });
+    this.setState({ open: !this.state.open });
   };
 
   closePopover = () => {
-    this.setState({
-      open: false
-    });
+    this.setState({ open: false });
   };
 
   render() {
@@ -49,6 +42,7 @@ class ComboButton extends Component {
       icon,
       iconPosition,
       dropdownIcon,
+      half,
       ...other
     } = this.props;
 
@@ -67,7 +61,7 @@ class ComboButton extends Component {
     }
 
     const comboButton = (
-      <StyledComboButtonContainer>
+      <StyledComboButtonContainer half={half}>
         <StyledComboButton onClick={onClick} {...other}>
           {iconPosition === 'before' ? wrappedIcon : null}
           {label}
