@@ -16,6 +16,7 @@ import Downshift from 'downshift';
 import memoize from 'memoize-one';
 import { List } from 'react-virtualized';
 import { Manager, Reference, Popper } from 'react-popper';
+import { rtlModifier } from '../utils/helpers';
 
 import {
   StyledMultiSelectWrapper,
@@ -48,6 +49,7 @@ const MultiSelect = ({
   virtualized,
   virtualizedRowHeight,
   virtualizedMenuWidth,
+  rtl,
   ...other
 }) => {
   let name, touched, errors, isSubmitting, setFieldValue;
@@ -306,6 +308,11 @@ const MultiSelect = ({
                         },
                         hide: {
                           enabled: appendToBody || positionFixed ? false : true
+                        },
+                        rtl: {
+                          order: 0,
+                          enabled: true,
+                          fn: data => rtlModifier(data, rtl)
                         }
                       }}
                     >
@@ -390,7 +397,9 @@ MultiSelect.propTypes = {
   /** (virtualized only) Row height used to calculate how many rows to render in a virtualized Menu. */
   virtualizedRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
   /** (virtualized only) Width of the menu; unloaded rows may be wider than the initial set. */
-  virtualizedMenuWidth: PropTypes.number
+  virtualizedMenuWidth: PropTypes.number,
+  /** Manually set RTL behavior of the MultiSelect to flip its direction */
+  rtl: PropTypes.bool
 };
 
 MultiSelect.defaultProps = {

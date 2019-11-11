@@ -17,6 +17,7 @@ import memoize from 'memoize-one';
 import { List } from 'react-virtualized';
 import { Manager, Reference, Popper } from 'react-popper';
 import matchSorter from 'match-sorter';
+import { rtlModifier } from '../utils/helpers';
 
 import {
   StyledSelectWrapper,
@@ -341,6 +342,7 @@ class Select extends Component {
       form,
       virtualizedRowHeight,
       virtualizedMenuWidth,
+      rtl,
       ...other
     } = this.props;
 
@@ -432,6 +434,11 @@ class Select extends Component {
                             },
                             hide: {
                               enabled: popperModifiersEnabled
+                            },
+                            rtl: {
+                              order: 0,
+                              enabled: true,
+                              fn: data => rtlModifier(data, rtl)
                             }
                           }}
                         >
@@ -526,7 +533,9 @@ Select.propTypes = {
   /** (virtualized only) Row height used to calculate how many rows to render in a virtualized menu. */
   virtualizedRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
   /** (virtualized only) Width of the menu; unloaded rows may be wider than the initial set. */
-  virtualizedMenuWidth: PropTypes.number
+  virtualizedMenuWidth: PropTypes.number,
+  /** Manually set RTL behavior of the Select to flip its direction */
+  rtl: PropTypes.bool
 };
 
 Select.defaultProps = {

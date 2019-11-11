@@ -228,7 +228,7 @@ const getChildType = child => {
   );
 };
 
-export const getAccessibleOnClickHandlers = onClick => {
+const getAccessibleOnClickHandlers = onClick => {
   return onClick
     ? {
         onClick,
@@ -243,6 +243,22 @@ export const getAccessibleOnClickHandlers = onClick => {
     : undefined;
 };
 
+const rtlModifier = (data, rtl) => {
+  if (rtl || data.instance.popper.ownerDocument.children[0].dir === 'rtl') {
+    const hash = {
+      end: 'start',
+      start: 'end',
+      left: 'right',
+      right: 'left'
+    };
+    data.placement = data.placement.replace(
+      /start|end|right|left/g,
+      matched => hash[matched]
+    );
+  }
+  return data;
+};
+
 export {
   unitCalc,
   clearfix,
@@ -250,5 +266,7 @@ export {
   subNavUnderline,
   backgroundGradient,
   transition,
-  getChildType
+  getChildType,
+  getAccessibleOnClickHandlers,
+  rtlModifier
 };

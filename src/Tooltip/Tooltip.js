@@ -15,6 +15,7 @@ import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import { Manager, Reference, Popper } from 'react-popper';
 import { ThemeContext } from 'styled-components';
+import { rtlModifier } from '../utils/helpers';
 
 import { CalciteTheme } from '../CalciteThemeProvider';
 
@@ -60,7 +61,8 @@ class Tooltip extends Component {
       placement,
       transitionDuration,
       title,
-      arrowStyle
+      arrowStyle,
+      rtl
     } = this.props;
 
     const isOpen =
@@ -101,6 +103,11 @@ class Tooltip extends Component {
                           },
                           hide: {
                             enabled: usePreventOverflow
+                          },
+                          rtl: {
+                            order: 0,
+                            enabled: true,
+                            fn: data => rtlModifier(data, rtl)
                           }
                         }}
                       >
@@ -155,7 +162,20 @@ Tooltip.propTypes = {
   open: PropTypes.bool,
   /** Placement of the popover in relation to the target. The Tooltip will override the placement if there is no room.
    If this property is not set, the Tooltip will position itself wherever there is room. */
-  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  placement: PropTypes.oneOf([
+    'top',
+    'right',
+    'bottom',
+    'left',
+    'top-start',
+    'right-start',
+    'bottom-start',
+    'left-start',
+    'top-end',
+    'right-end',
+    'bottom-end',
+    'left-end'
+  ]),
   /** Uses `position: fixed` on the Tooltip, allowing it to show up outside of containers that have `overflow: hidden`. */
   positionFixed: PropTypes.bool,
   /** Duration of animation in milliseconds. */
@@ -167,7 +187,9 @@ Tooltip.propTypes = {
   /** Apply styles to the Tooltip arrow element. */
   arrowStyle: PropTypes.object,
   /** Apply styles to the Tooltip target wrapper element. */
-  targetWrapperStyle: PropTypes.object
+  targetWrapperStyle: PropTypes.object,
+  /** Manually set RTL behavior of the Tooltip to flip its direction */
+  rtl: PropTypes.bool
 };
 
 Tooltip.defaultProps = {

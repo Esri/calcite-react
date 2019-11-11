@@ -17,6 +17,7 @@ import { List } from 'react-virtualized';
 import { Manager, Reference, Popper } from 'react-popper';
 import matchSorter from 'match-sorter';
 import uniqid from 'uniqid';
+import { rtlModifier } from '../utils/helpers';
 
 import {
   StyledSearchContainer,
@@ -322,6 +323,7 @@ class Search extends Component {
       virtualizedRowHeight,
       virtualizedMenuWidth,
       searchIcon,
+      rtl,
       ...other
     } = this.props;
 
@@ -395,6 +397,11 @@ class Search extends Component {
                               },
                               hide: {
                                 enabled: usePreventOverflow
+                              },
+                              rtl: {
+                                order: 0,
+                                enabled: true,
+                                fn: data => rtlModifier(data, rtl)
                               }
                             }}
                           >
@@ -496,7 +503,9 @@ Search.propTypes = {
   /** SVG icon to clear the value of the Search input */
   clearIcon: PropTypes.node,
   /** Use a remote API for the data load.  This will allow the application to see the exact return from the API with no filtering applied */
-  remote: PropTypes.bool
+  remote: PropTypes.bool,
+  /** Manually set RTL behavior of the Search to flip its direction */
+  rtl: PropTypes.bool
 };
 
 Search.defaultProps = {

@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import outy from 'outy';
 import { Manager, Reference, Popper } from 'react-popper';
 import uniqid from 'uniqid';
+import { rtlModifier } from '../utils/helpers';
 
 import { StyledTargetWrapper } from './Popover-styled';
 
@@ -121,6 +122,11 @@ class Popover extends Component {
                         },
                         hide: {
                           enabled: usePreventOverflow
+                        },
+                        rtl: {
+                          order: 0,
+                          enabled: true,
+                          fn: data => rtlModifier(data, this.props.rtl)
                         }
                       }}
                     >
@@ -189,7 +195,9 @@ Popover.propTypes = {
   /** Styles passed onto the Popover container div. */
   popoverContainerStyles: PropTypes.object,
   /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden`. */
-  positionFixed: PropTypes.bool
+  positionFixed: PropTypes.bool,
+  /** Manually set RTL behavior of the Popover to flip its direction */
+  rtl: PropTypes.bool
 };
 
 Popover.defaultProps = {
