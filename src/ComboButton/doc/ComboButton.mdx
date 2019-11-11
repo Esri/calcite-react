@@ -19,7 +19,7 @@ options on the right.
 #### Import Syntax
 
 ```js
-import ComboButton from 'calcite-react/ComboButton'
+import ComboButton from 'calcite-react/ComboButton';
 ```
 
 ## Basic Usage
@@ -104,6 +104,125 @@ import ComboButton from 'calcite-react/ComboButton'
       onClick={() => console.log('primary clicked')}
       label="Export All"
       green
+    >
+      <Menu>
+        <MenuItem onClick={() => console.log('pdf clicked')}>
+          Export PDF
+        </MenuItem>
+        <MenuItem onClick={() => console.log('csv clicked')}>
+          Export CSV
+        </MenuItem>
+        <MenuItem onClick={() => console.log('excel clicked')}>
+          Export Excel
+        </MenuItem>
+      </Menu>
+    </ComboButton>
+  </GuideExample>
+</Playground>
+
+## Sizes
+
+<Playground>
+  <GuideExample label="extraSmall">
+    <ComboButton
+      onClick={() => console.log('primary clicked')}
+      label="Export All"
+      extraSmall
+    >
+      <Menu>
+        <MenuItem onClick={() => console.log('pdf clicked')}>
+          Export PDF
+        </MenuItem>
+        <MenuItem onClick={() => console.log('csv clicked')}>
+          Export CSV
+        </MenuItem>
+        <MenuItem onClick={() => console.log('excel clicked')}>
+          Export Excel
+        </MenuItem>
+      </Menu>
+    </ComboButton>
+  </GuideExample>
+  <GuideExample label="small">
+    <ComboButton
+      onClick={() => console.log('primary clicked')}
+      label="Export All"
+      small
+    >
+      <Menu>
+        <MenuItem onClick={() => console.log('pdf clicked')}>
+          Export PDF
+        </MenuItem>
+        <MenuItem onClick={() => console.log('csv clicked')}>
+          Export CSV
+        </MenuItem>
+        <MenuItem onClick={() => console.log('excel clicked')}>
+          Export Excel
+        </MenuItem>
+      </Menu>
+    </ComboButton>
+  </GuideExample>
+  <GuideExample label="large">
+    <ComboButton
+      onClick={() => console.log('primary clicked')}
+      label="Export All"
+      large
+    >
+      <Menu>
+        <MenuItem onClick={() => console.log('pdf clicked')}>
+          Export PDF
+        </MenuItem>
+        <MenuItem onClick={() => console.log('csv clicked')}>
+          Export CSV
+        </MenuItem>
+        <MenuItem onClick={() => console.log('excel clicked')}>
+          Export Excel
+        </MenuItem>
+      </Menu>
+    </ComboButton>
+  </GuideExample>
+  <GuideExample label="extraLarge">
+    <ComboButton
+      onClick={() => console.log('primary clicked')}
+      label="Export All"
+      extraLarge
+    >
+      <Menu>
+        <MenuItem onClick={() => console.log('pdf clicked')}>
+          Export PDF
+        </MenuItem>
+        <MenuItem onClick={() => console.log('csv clicked')}>
+          Export CSV
+        </MenuItem>
+        <MenuItem onClick={() => console.log('excel clicked')}>
+          Export Excel
+        </MenuItem>
+      </Menu>
+    </ComboButton>
+  </GuideExample>
+  <GuideExample label="fullWidth">
+    <ComboButton
+      onClick={() => console.log('primary clicked')}
+      label="Export All"
+      fullWidth
+    >
+      <Menu>
+        <MenuItem onClick={() => console.log('pdf clicked')}>
+          Export PDF
+        </MenuItem>
+        <MenuItem onClick={() => console.log('csv clicked')}>
+          Export CSV
+        </MenuItem>
+        <MenuItem onClick={() => console.log('excel clicked')}>
+          Export Excel
+        </MenuItem>
+      </Menu>
+    </ComboButton>
+  </GuideExample>
+  <GuideExample label="half">
+    <ComboButton
+      onClick={() => console.log('primary clicked')}
+      label="Export All"
+      half
     >
       <Menu>
         <MenuItem onClick={() => console.log('pdf clicked')}>

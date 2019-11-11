@@ -72,6 +72,8 @@ class List extends Component {
           open={open}
           minimal={minimal}
           selectable={selectable}
+          role="list"
+          aria-expanded={open}
           {...other}
         >
           {children}
