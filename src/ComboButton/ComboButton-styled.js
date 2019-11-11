@@ -28,6 +28,17 @@ import { StyledButton } from '../Button/Button-styled';
 const StyledComboButtonContainer = styled.div`
   display: flex;
   flex-wrap: nowrap;
+
+  ${props =>
+    props.half &&
+    css`
+      width: 50%;
+      text-align: center;
+
+      & ${StyledButton} {
+        flex: 1;
+      }
+    `};
 `;
 StyledComboButtonContainer.defaultProps = { theme };
 
