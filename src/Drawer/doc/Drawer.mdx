@@ -55,15 +55,17 @@ import Drawer from 'calcite-react/Drawer'
       render() {
         return (
           <>
-            <Button onClick={() => this.showDrawerClicked('left')}>
-              Open Left Drawer
-            </Button>
-            <Button
-              onClick={() => this.showDrawerClicked('right')}
-              style={{ float: 'right' }}
-            >
-              Open Right Drawer
-            </Button>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Button onClick={() => this.showDrawerClicked('left')}>
+                Open Left Drawer
+              </Button>
+              <Button
+                onClick={() => this.showDrawerClicked('right')}
+                style={{ float: 'right' }}
+              >
+                Open Right Drawer
+              </Button>
+            </div>
             <Drawer
               active={this.state.active}
               right={this.state.drawerDirection === 'right'}

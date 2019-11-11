@@ -67,6 +67,12 @@ const select = styled(formSelectInputTextarea)`
   -webkit-appearance: none;
   -moz-appearance: none;
 
+  html[dir='rtl'] & {
+    background-position: center left;
+    padding-right: ${props => unitCalc(props.theme.baseline, 5, '/')};
+    padding-left: ${props => props.theme.baseline};
+  }
+
   &[multiple] {
     height: auto;
     background-image: none;
@@ -119,6 +125,14 @@ const select = styled(formSelectInputTextarea)`
     css`
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+
+      html[dir='rtl'] & {
+        border-top-right-radius: ${props => props.theme.borderRadius};
+        border-bottom-right-radius: ${props => props.theme.borderRadius};
+
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     `};
 
   ${props =>
@@ -127,6 +141,14 @@ const select = styled(formSelectInputTextarea)`
     css`
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
+
+      html[dir='rtl'] & {
+        border-top-left-radius: ${props => props.theme.borderRadius};
+        border-bottom-left-radius: ${props => props.theme.borderRadius};
+
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     `};
 
   @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
@@ -180,6 +202,12 @@ const input = styled(formSelectInputTextarea)`
       background-position: right center;
       background-repeat: no-repeat;
 
+      html[dir='rtl'] & {
+        background-position: left center;
+        padding-right: ${props => unitCalc(props.theme.baseline, 5, '/')};
+        padding-left: 24px;
+      }
+
       &:focus {
         border-color: ${props => props.theme.palette.darkRed200};
         box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
@@ -194,6 +222,12 @@ const input = styled(formSelectInputTextarea)`
       background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIxNnB4IiB2aWV3Qm94PSIwIDAgMjQgMTYiPjxwb2x5Z29uIGZpbGw9IiM1QTkzNTkiIHBvaW50cz0iOC4xODgsMTEuMDgyIDQuMDU5LDYuOTUyIDIuMjU4LDguNzUyIDguMTg4LDE0LjY4MyAxOS43NTQsMy4xMTkgMTcuOTU0LDEuMzE3ICIvPjwvc3ZnPg==');
       background-position: right center;
       background-repeat: no-repeat;
+
+      html[dir='rtl'] & {
+        background-position: left center;
+        padding-right: ${props => unitCalc(props.theme.baseline, 5, '/')};
+        padding-left: 24px;
+      }
     `};
 
   ${props =>

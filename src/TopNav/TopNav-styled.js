@@ -77,6 +77,11 @@ const StyledTopNavLink = styled(CalciteA)`
   margin-left: 0.75em;
   font-weight: 300;
 
+  html[dir='rtl'] & {
+    margin-left: initial;
+    margin-right: 0.75em;
+  }
+
   &:hover,
   &:focus {
     color: ${props => props.theme.palette.blue};
@@ -108,10 +113,19 @@ const StyledTopNavList = styled.nav`
   flex: 1 0 auto;
   margin-left: -0.75em;
 
+  html[dir='rtl'] & {
+    margin-left: initial;
+    margin-right: -0.75em;
+  }
+
   ${props =>
     props.right &&
     css`
       float: right;
+
+      html[dir='rtl'] & {
+        float: left;
+      }
     `};
 `;
 StyledTopNavList.defaultProps = { theme };
@@ -122,6 +136,11 @@ const StyledTopNavTitle = styled(CalciteA)`
   padding-bottom: 1.25rem;
   ${fontSize(1)};
   color: ${props => props.theme.palette.black};
+
+  html[dir='rtl'] & {
+    margin-right: initial;
+    margin-left: 1.5rem;
+  }
 
   &:hover {
     text-decoration: none;

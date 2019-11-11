@@ -29,6 +29,7 @@ import { CalciteA } from '../Elements';
 const StyledBreadcrumbs = styled.nav`
   ${fontSize(-2)};
   color: ${props => props.theme.palette.darkerGray};
+  display: flex;
 `;
 StyledBreadcrumbs.defaultProps = { theme };
 

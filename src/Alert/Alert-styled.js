@@ -74,6 +74,11 @@ const StyledAlertClose = styled(CalciteA)`
   right: ${props => unitCalc(props.theme.baseline, 2, '/')};
   color: ${props => props.theme.palette.offBlack};
 
+  html[dir='rtl'] & {
+    right: auto;
+    left: ${props => unitCalc(props.theme.baseline, 2, '/')};
+  }
+
   &:hover {
     color: ${props => props.theme.palette.black};
   }
