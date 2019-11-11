@@ -226,6 +226,7 @@ const textarea = styled(formSelectInputTextarea)`
     props.fullWidth &&
     css`
       width: 100%;
+      resize: vertical;
     `};
 `;
 textarea.defaultProps = { theme };
