@@ -243,20 +243,20 @@ const getAccessibleOnClickHandlers = onClick => {
     : undefined;
 };
 
-const rtlModifier = (data, rtl) => {
-  if (rtl || data.instance.popper.ownerDocument.children[0].dir === 'rtl') {
+const rtlPlacement = (placement, rtl) => {
+  if (rtl || document.children[0].dir === 'rtl') {
     const hash = {
       end: 'start',
       start: 'end',
       left: 'right',
       right: 'left'
     };
-    data.placement = data.placement.replace(
+    placement = placement.replace(
       /start|end|right|left/g,
       matched => hash[matched]
     );
   }
-  return data;
+  return placement;
 };
 
 export {
@@ -268,5 +268,5 @@ export {
   transition,
   getChildType,
   getAccessibleOnClickHandlers,
-  rtlModifier
+  rtlPlacement
 };

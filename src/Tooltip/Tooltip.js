@@ -15,7 +15,7 @@ import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import { Manager, Reference, Popper } from 'react-popper';
 import { ThemeContext } from 'styled-components';
-import { rtlModifier } from '../utils/helpers';
+import { rtlPlacement } from '../utils/helpers';
 
 import { CalciteTheme } from '../CalciteThemeProvider';
 
@@ -96,18 +96,13 @@ class Tooltip extends Component {
                   ? this._getPopper(
                       <Popper
                         positionFixed={positionFixed}
-                        placement={placement}
+                        placement={rtlPlacement(placement, rtl)}
                         modifiers={{
                           preventOverflow: {
                             enabled: usePreventOverflow
                           },
                           hide: {
                             enabled: usePreventOverflow
-                          },
-                          rtl: {
-                            order: 0,
-                            enabled: true,
-                            fn: data => rtlModifier(data, rtl)
                           }
                         }}
                       >

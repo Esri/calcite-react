@@ -17,7 +17,7 @@ import memoize from 'memoize-one';
 import { List } from 'react-virtualized';
 import { Manager, Reference, Popper } from 'react-popper';
 import matchSorter from 'match-sorter';
-import { rtlModifier } from '../utils/helpers';
+import { rtlPlacement } from '../utils/helpers';
 
 import {
   StyledSelectWrapper,
@@ -427,18 +427,13 @@ class Select extends Component {
                       popper: (
                         <Popper
                           positionFixed={positionFixed}
-                          placement={other.placement}
+                          placement={rtlPlacement(other.placement, rtl)}
                           modifiers={{
                             preventOverflow: {
                               enabled: popperModifiersEnabled
                             },
                             hide: {
                               enabled: popperModifiersEnabled
-                            },
-                            rtl: {
-                              order: 0,
-                              enabled: true,
-                              fn: data => rtlModifier(data, rtl)
                             }
                           }}
                         >
