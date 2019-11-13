@@ -342,7 +342,6 @@ class Select extends Component {
       form,
       virtualizedRowHeight,
       virtualizedMenuWidth,
-      rtl,
       ...other
     } = this.props;
 
@@ -427,7 +426,7 @@ class Select extends Component {
                       popper: (
                         <Popper
                           positionFixed={positionFixed}
-                          placement={rtlPlacement(other.placement, rtl)}
+                          placement={rtlPlacement(other.placement)}
                           modifiers={{
                             preventOverflow: {
                               enabled: popperModifiersEnabled
@@ -528,9 +527,7 @@ Select.propTypes = {
   /** (virtualized only) Row height used to calculate how many rows to render in a virtualized menu. */
   virtualizedRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
   /** (virtualized only) Width of the menu; unloaded rows may be wider than the initial set. */
-  virtualizedMenuWidth: PropTypes.number,
-  /** Manually set RTL behavior of the Select to flip its direction */
-  rtl: PropTypes.bool
+  virtualizedMenuWidth: PropTypes.number
 };
 
 Select.defaultProps = {

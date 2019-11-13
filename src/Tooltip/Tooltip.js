@@ -61,8 +61,7 @@ class Tooltip extends Component {
       placement,
       transitionDuration,
       title,
-      arrowStyle,
-      rtl
+      arrowStyle
     } = this.props;
 
     const isOpen =
@@ -96,7 +95,7 @@ class Tooltip extends Component {
                   ? this._getPopper(
                       <Popper
                         positionFixed={positionFixed}
-                        placement={rtlPlacement(placement, rtl)}
+                        placement={rtlPlacement(placement)}
                         modifiers={{
                           preventOverflow: {
                             enabled: usePreventOverflow
@@ -182,9 +181,7 @@ Tooltip.propTypes = {
   /** Apply styles to the Tooltip arrow element. */
   arrowStyle: PropTypes.object,
   /** Apply styles to the Tooltip target wrapper element. */
-  targetWrapperStyle: PropTypes.object,
-  /** Manually set RTL behavior of the Tooltip to flip its direction */
-  rtl: PropTypes.bool
+  targetWrapperStyle: PropTypes.object
 };
 
 Tooltip.defaultProps = {

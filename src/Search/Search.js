@@ -323,7 +323,6 @@ class Search extends Component {
       virtualizedRowHeight,
       virtualizedMenuWidth,
       searchIcon,
-      rtl,
       ...other
     } = this.props;
 
@@ -390,7 +389,7 @@ class Search extends Component {
                               ...this.getFullWidthStyle(fullWidth),
                               ...PopperStyle
                             }}
-                            placement={rtlPlacement(this.props.placement, rtl)}
+                            placement={rtlPlacement(this.props.placement)}
                             modifiers={{
                               preventOverflow: {
                                 enabled: usePreventOverflow
@@ -498,9 +497,7 @@ Search.propTypes = {
   /** SVG icon to clear the value of the Search input */
   clearIcon: PropTypes.node,
   /** Use a remote API for the data load.  This will allow the application to see the exact return from the API with no filtering applied */
-  remote: PropTypes.bool,
-  /** Manually set RTL behavior of the Search to flip its direction */
-  rtl: PropTypes.bool
+  remote: PropTypes.bool
 };
 
 Search.defaultProps = {
