@@ -244,7 +244,7 @@ const getAccessibleOnClickHandlers = onClick => {
 };
 
 const rtlPlacement = placement => {
-  if (document.children[0].dir === 'rtl') {
+  if (placement && document.documentElement.dir === 'rtl') {
     const hash = {
       end: 'start',
       start: 'end',
