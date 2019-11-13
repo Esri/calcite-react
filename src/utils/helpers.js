@@ -228,7 +228,7 @@ const getChildType = child => {
   );
 };
 
-export const getAccessibleOnClickHandlers = onClick => {
+const getAccessibleOnClickHandlers = onClick => {
   return onClick
     ? {
         onClick,
@@ -243,6 +243,22 @@ export const getAccessibleOnClickHandlers = onClick => {
     : undefined;
 };
 
+const rtlPlacement = placement => {
+  if (placement && document.documentElement.dir === 'rtl') {
+    const hash = {
+      end: 'start',
+      start: 'end',
+      left: 'right',
+      right: 'left'
+    };
+    placement = placement.replace(
+      /start|end|right|left/g,
+      matched => hash[matched]
+    );
+  }
+  return placement;
+};
+
 export {
   unitCalc,
   clearfix,
@@ -250,5 +266,7 @@ export {
   subNavUnderline,
   backgroundGradient,
   transition,
-  getChildType
+  getChildType,
+  getAccessibleOnClickHandlers,
+  rtlPlacement
 };

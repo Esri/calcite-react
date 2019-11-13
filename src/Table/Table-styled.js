@@ -30,7 +30,7 @@ const StyledTable = styled.table`
   border-collapse: collapse;
   border-spacing: 0;
   border: 1px solid ${props => props.theme.palette.lighterGray};
-  text-align: left;
+  text-align: initial;
   overflow: auto;
   ${fontSize(-2)};
 
@@ -54,7 +54,6 @@ const StyledTable = styled.table`
       border-collapse: auto;
       border-spacing: 0;
       border: none;
-      text-align: left;
       overflow: auto;
       margin-bottom: 0;
     `};
@@ -230,6 +229,11 @@ const StyledTableHeaderCell = styled.th`
   border-left: 1px solid ${props => props.theme.palette.lighterGray};
   border-right: 1px solid ${props => props.theme.palette.lighterGray};
   padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  text-align: left;
+
+  html[dir='rtl'] & {
+    text-align: right;
+  }
 
   ${props =>
     props.blue &&
@@ -292,7 +296,6 @@ StyledTableHeaderRow.defaultProps = { theme };
 
 const StyledTableRow = styled.tr`
   border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
-  text-align: left;
 
   ${props =>
     props.blue &&
@@ -333,7 +336,6 @@ const StyledTableRow = styled.tr`
     props.noTable &&
     css`
       border: none;
-      text-align: left;
     `};
 
   ${props =>

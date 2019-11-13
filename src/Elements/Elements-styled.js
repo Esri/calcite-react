@@ -160,6 +160,11 @@ const BaseList = styled.div`
   margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
   ${fontSize(-1)};
 
+  html[dir='rtl'] & {
+    margin-left: initial;
+    margin-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
+  }
+
   ul,
   ol {
     margin-bottom: 0;
@@ -171,8 +176,18 @@ const BaseList = styled.div`
       margin-left: 0;
       list-style: none;
 
+      html[dir='rtl'] & {
+        margin-left: initial;
+        margin-right: 0;
+      }
+
       li {
         margin-left: 0;
+
+        html[dir='rtl'] & {
+          margin-left: initial;
+          margin-right: 0;
+        }
       }
     `};
 `;
@@ -200,6 +215,11 @@ const CalciteLi = styled.li`
   list-style-position: outside;
   margin: ${props => unitCalc(props.theme.baseline, 4, '/')} 0
     ${props => unitCalc(props.theme.baseline, 4, '/')} 1.5rem;
+
+  html[dir='rtl'] & {
+    margin: ${props => unitCalc(props.theme.baseline, 4, '/')} 1.5rem
+      ${props => unitCalc(props.theme.baseline, 4, '/')} 0;
+  }
 
   ul,
   ol {

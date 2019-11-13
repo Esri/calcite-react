@@ -53,7 +53,7 @@ const StyledModalDialog = {
   zIndex: '102',
   background: theme.palette.white,
   padding: theme.baseline,
-  textAlign: 'left',
+  textAlign: 'initial',
   overflowY: 'auto',
   display: 'inline-block',
   verticalAlign: 'middle',

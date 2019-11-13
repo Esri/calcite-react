@@ -15,6 +15,7 @@ import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import { Manager, Reference, Popper } from 'react-popper';
 import { ThemeContext } from 'styled-components';
+import { rtlPlacement } from '../utils/helpers';
 
 import { CalciteTheme } from '../CalciteThemeProvider';
 
@@ -94,7 +95,7 @@ class Tooltip extends Component {
                   ? this._getPopper(
                       <Popper
                         positionFixed={positionFixed}
-                        placement={placement}
+                        placement={rtlPlacement(placement)}
                         modifiers={{
                           preventOverflow: {
                             enabled: usePreventOverflow
@@ -155,7 +156,20 @@ Tooltip.propTypes = {
   open: PropTypes.bool,
   /** Placement of the popover in relation to the target. The Tooltip will override the placement if there is no room.
    If this property is not set, the Tooltip will position itself wherever there is room. */
-  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  placement: PropTypes.oneOf([
+    'top',
+    'right',
+    'bottom',
+    'left',
+    'top-start',
+    'right-start',
+    'bottom-start',
+    'left-start',
+    'top-end',
+    'right-end',
+    'bottom-end',
+    'left-end'
+  ]),
   /** Uses `position: fixed` on the Tooltip, allowing it to show up outside of containers that have `overflow: hidden`. */
   positionFixed: PropTypes.bool,
   /** Duration of animation in milliseconds. */

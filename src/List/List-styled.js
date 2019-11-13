@@ -41,6 +41,11 @@ const StyledList = styled(StyledSideNav)`
       border-top-right-radius: 0;
       padding-left: ${props => props.theme.baseline};
 
+      html[dir='rtl'] & {
+        padding-left: initial;
+        padding-right: ${props => props.theme.baseline};
+      }
+
       ${props.open === false &&
         css`
           border-top: none;
@@ -117,6 +122,11 @@ const StyledListItem = styled.div`
       &:hover {
         text-indent: -3px;
         border-left: 3px solid ${props.theme.palette.blue};
+
+        html[dir='rtl'] & {
+          border-left: none;
+          border-right: 3px solid ${props.theme.palette.blue};
+        }
       }
     `};
 
@@ -146,6 +156,11 @@ const StyledListItem = styled.div`
       box-shadow: inset 3px 0 0 transparent;
       padding-left: calc(${unitCalc(props.theme.baseline, 4, '/')} + 3px);
 
+      html[dir='rtl'] & {
+        padding-left: initial;
+        padding-right: calc(${unitCalc(props.theme.baseline, 4, '/')} + 3px);
+      }
+
       &:hover {
         background-color: ${props.theme.palette.white};
       }
@@ -158,7 +173,10 @@ const StyledListItem = styled.div`
 
       ${props.filterItem &&
         css`
-          padding: 0;
+          &,
+          html[dir='rtl'] & {
+            padding: 0;
+          }
 
           &:hover {
             background-color: unset;
@@ -179,9 +197,17 @@ const StyledListItem = styled.div`
           padding: 0 0 0 ${unitCalc(props.theme.baseline, 2, '/')};
           position: relative;
 
+          html[dir='rtl'] & {
+            padding: 0 ${unitCalc(props.theme.baseline, 2, '/')} 0 0;
+          }
+
           ${props.multiSelect &&
             css`
               padding: 0 0 0 ${unitCalc(props.theme.baseline, 1.5, '/')};
+
+              html[dir='rtl'] & {
+                padding: 0 ${unitCalc(props.theme.baseline, 1.5, '/')} 0 0;
+              }
             `};
 
           ${props.filterItem &&
@@ -205,6 +231,11 @@ const StyledListItem = styled.div`
             content: '•';
             font-size: 0.8em;
             left: 0;
+
+            html[dir='rtl'] & {
+              left: auto;
+              right: 0;
+            }
 
             ${props.multiSelect &&
               css`
@@ -306,15 +337,30 @@ const StyledListSideContainer = styled.div`
   &:first-child {
     margin-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
 
+    html[dir='rtl'] & {
+      margin-right: initial;
+      margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
+    }
+
     ${props =>
       (props.minimal || props.selectable) &&
       css`
         margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
+
+        html[dir='rtl'] & {
+          margin-right: initial;
+          margin-left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+        }
       `};
   }
 
   &:last-child {
     margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
+
+    html[dir='rtl'] & {
+      margin-left: initial;
+      margin-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
+    }
 
     ${props =>
       (props.minimal || props.selectable) &&
@@ -322,6 +368,11 @@ const StyledListSideContainer = styled.div`
         margin-left: ${unitCalc(props.theme.baseline, 4, '/')};
         font-size: 0.9rem;
         font-weight: 400;
+
+        html[dir='rtl'] & {
+          margin-left: initial;
+          margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
+        }
 
         a {
           color: ${props.theme.palette.darkerGray};

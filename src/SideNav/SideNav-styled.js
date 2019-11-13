@@ -76,6 +76,11 @@ const StyledSideNavLink = styled(CalciteA)`
     css`
       text-indent: -3px;
       border-left: 3px solid ${props => props.theme.palette.blue};
+
+      html[dir='rtl'] & {
+        border-left: none;
+        border-right: 3px solid ${props => props.theme.palette.blue};
+      }
     `};
 `;
 StyledSideNavLink.defaultProps = { theme };

@@ -33,6 +33,10 @@ const StyledTab = styled.div`
     props.right &&
     css`
       float: right;
+
+      html[dir='rtl'] & {
+        float: left;
+      }
     `};
 `;
 StyledTab.defaultProps = { theme };
@@ -51,12 +55,27 @@ const StyledTabTitle = styled(CalciteA)`
   margin-right: -1px;
   cursor: pointer;
 
+  html[dir='rtl'] & {
+    margin-right: 0;
+    margin-left: -1px;
+  }
+
   &:first-child {
     border-top-left-radius: ${props => props.theme.borderRadius};
+
+    html[dir='rtl'] & {
+      border-top-left-radius: 0;
+      border-top-right-radius: ${props => props.theme.borderRadius};
+    }
   }
 
   &:last-child {
     border-top-right-radius: ${props => props.theme.borderRadius};
+
+    html[dir='rtl'] & {
+      border-top-right-radius: 0;
+      border-top-left-radius: ${props => props.theme.borderRadius};
+    }
   }
 
   &:focus {
@@ -107,6 +126,10 @@ const StyledTabTitle = styled(CalciteA)`
         border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
         margin-right: 0;
 
+        html[dir='rtl'] & {
+          margin-left: 0;
+        }
+
         &:hover {
           border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
         }
@@ -138,6 +161,11 @@ const StyledTabTitle = styled(CalciteA)`
           margin-right: 2px;
           margin-bottom: 3px;
           transition: none;
+
+          html[dir='rtl'] & {
+            margin-right: 0;
+            margin-left: 2px;
+          }
 
           &:first-child,
           &:last-child {
@@ -174,6 +202,11 @@ const StyledTabTitle = styled(CalciteA)`
             color: ${props => props.theme.palette.white};
             border-top: 2px solid
               ${props => props.theme.palette.transparentBlack};
+
+            html[dir='rtl'] & {
+              margin-right: 0;
+              margin-left: 2px;
+            }
 
             &:hover,
             &:focus {

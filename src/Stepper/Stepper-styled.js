@@ -42,8 +42,17 @@ const StyledStep = styled.div`
   margin-right: ${props => props.theme.baseline};
   overflow: hidden;
 
+  html[dir='rtl'] & {
+    margin-right: 0;
+    margin-left: ${props => props.theme.baseline};
+  }
+
   &:last-of-type {
     margin-right: 0;
+
+    html[dir='rtl'] & {
+      margin-left: 0;
+    }
   }
 
   ${props =>
@@ -54,6 +63,10 @@ const StyledStep = styled.div`
       margin-right: 0;
       margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
       padding-bottom: ${props => props.theme.baseline};
+
+      html[dir='rtl'] & {
+        margin-left: 0;
+      }
 
       &:last-of-type {
         margin-bottom: 0;
@@ -80,6 +93,11 @@ const StyledStepTextContainer = styled.div`
   margin-left: ${props => unitCalc(props.theme.baseline, 3, '/')};
   flex: 1 0 34px;
   align-items: flex-start;
+
+  html[dir='rtl'] & {
+    margin-left: 0;
+    margin-right: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  }
 `;
 StyledStepTextContainer.defaultProps = { theme };
 
@@ -89,6 +107,11 @@ const StyledStepTitle = styled(CalciteH6)`
   position: relative;
   color: ${props => props.theme.palette.darkGray};
   padding-right: ${props => props.theme.baseline};
+
+  html[dir='rtl'] & {
+    padding-right: 0;
+    padding-left: ${props => props.theme.baseline};
+  }
 
   ${props =>
     props.small &&
@@ -125,6 +148,11 @@ const StyledStepTitle = styled(CalciteH6)`
     position: absolute;
     top: 16px;
     left: 100%;
+
+    html[dir='rtl'] & {
+      left: auto;
+      right: 100%;
+    }
 
     ${props =>
       props.small &&
@@ -203,10 +231,20 @@ const StyledStepIcon = styled.div`
         top: 100%;
         left: 16px;
 
+        html[dir='rtl'] & {
+          left: auto;
+          right: 16px;
+        }
+
         ${props =>
           props.small &&
           css`
             left: 12px;
+
+            html[dir='rtl'] & {
+              left: auto;
+              right: 12px;
+            }
           `};
 
         ${props =>

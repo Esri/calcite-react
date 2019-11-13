@@ -17,6 +17,7 @@ import { List } from 'react-virtualized';
 import { Manager, Reference, Popper } from 'react-popper';
 import matchSorter from 'match-sorter';
 import uniqid from 'uniqid';
+import { rtlPlacement } from '../utils/helpers';
 
 import {
   StyledSearchContainer,
@@ -388,7 +389,7 @@ class Search extends Component {
                               ...this.getFullWidthStyle(fullWidth),
                               ...PopperStyle
                             }}
-                            placement={this.props.placement}
+                            placement={rtlPlacement(this.props.placement)}
                             modifiers={{
                               preventOverflow: {
                                 enabled: usePreventOverflow

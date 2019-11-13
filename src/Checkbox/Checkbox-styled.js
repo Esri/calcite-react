@@ -29,6 +29,11 @@ const StyledCheckbox = styled(baseRadioCheckbox)`
   -webkit-appearance: checkbox;
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
   cursor: pointer;
+
+  html[dir='rtl'] & {
+    margin-right: initial;
+    margin-left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+  }
 `;
 StyledCheckbox.defaultProps = { theme };
 
@@ -38,6 +43,11 @@ const StyledCheckboxLabel = styled.span`
   width: auto;
   margin-right: ${props => props.theme.baseline};
   cursor: pointer;
+
+  html[dir='rtl'] & {
+    margin-right: initial;
+    margin-left: ${props => props.theme.baseline};
+  }
 `;
 StyledCheckboxLabel.defaultProps = { theme };
 const StyledCheckboxGroup = styled.label`

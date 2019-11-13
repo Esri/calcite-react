@@ -30,6 +30,11 @@ const StyledRadio = styled(baseRadioCheckbox)`
   border-radius: 50%;
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
   cursor: pointer;
+
+  html[dir='rtl'] & {
+    margin-right: 0.125rem;
+    margin-left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+  }
 `;
 StyledRadio.defaultProps = { theme };
 
@@ -39,6 +44,11 @@ const StyledRadioLabel = styled.span`
   width: auto;
   margin-right: ${props => props.theme.baseline};
   cursor: pointer;
+
+  html[dir='rtl'] & {
+    margin-right: initial;
+    margin-left: ${props => props.theme.baseline};
+  }
 `;
 StyledRadioLabel.defaultProps = { theme };
 const StyledRadioGroup = styled.label`

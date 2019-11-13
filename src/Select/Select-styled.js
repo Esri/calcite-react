@@ -45,7 +45,7 @@ StyledSelectInput.defaultProps = { theme };
 
 const StyledSelectButton = styled(CalciteSelect)`
   cursor: pointer;
-  text-align: left;
+  text-align: initial;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
