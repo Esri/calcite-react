@@ -31,31 +31,38 @@ import { FormControlContext } from '../Form/FormControl';
 import { PopoverContext } from '../Popover/Popover';
 
 class Select extends Component {
-  getAnchorElement = params => {
+  getAnchorElement = ({
+    ref,
+    getToggleButtonProps,
+    getInputProps,
+    openMenu,
+    highlightedIndex,
+    selectHighlightedItem,
+    inputValue,
+    getItemProps,
+    menuHeight,
+    ...other
+  }) => {
     const {
-      ref,
-      getToggleButtonProps,
-      getInputProps,
-      placeholder,
-      selectedItem,
+      renderValue,
       filterable,
-      id,
       fullWidth,
       minimal,
-      disabled,
       style,
+      id,
+      placeholder,
+      selectedItem,
+      disabled,
       field,
-      form,
-      renderValue,
-      openMenu,
-      highlightedIndex,
-      selectHighlightedItem,
-      ...other
-    } = params;
+      form
+    } = this.props;
 
     const onKeyDown = event => {
       if (!event) return;
       if (event.key === 'Enter') {
+        if (filterable) {
+          event.preventDefault();
+        }
       } else if (event.key === ' ') {
         if (highlightedIndex === null) openMenu();
         else {
@@ -79,12 +86,20 @@ class Select extends Component {
               error={this.isError({ formControlContext, field, form })}
               disabled={this.isDisabled({ field, form, disabled })}
               {...getInputProps({
-                placeholder: placeholder,
+                placeholder,
                 id: id || formControlContext._generatedId,
-                fullWidth: fullWidth,
-                minimal: minimal,
-                style: style,
+                fullWidth,
+                minimal,
+                style,
                 onKeyDown,
+                onBlur: e =>
+                  this.handleBlur({
+                    e,
+                    highlightedIndex,
+                    inputValue,
+                    getItemProps,
+                    menuHeight
+                  }),
                 ...other
               })}
               ref={ref}
@@ -99,7 +114,15 @@ class Select extends Component {
           <StyledSelectButton
             {...getToggleButtonProps()}
             {...getInputProps({
-              onKeyDown
+              onKeyDown,
+              onBlur: e =>
+                this.handleBlur({
+                  e,
+                  highlightedIndex,
+                  inputValue,
+                  getItemProps,
+                  menuHeight
+                })
             })}
             as="button"
             fullWidth={fullWidth}
@@ -257,9 +280,47 @@ class Select extends Component {
     return field ? field.value : selectedValue;
   };
 
-  handleBlur = (e, field, onBlur) => {
+  handleBlur = ({
+    e,
+    highlightedIndex,
+    inputValue,
+    getItemProps,
+    menuHeight
+  }) => {
+    const {
+      children,
+      selectedItem: prevSelectedItem,
+      filterable,
+      onChange,
+      onBlur,
+      field,
+      form,
+      virtualizedRowHeight,
+      virtualizedMenuWidth,
+      autoselect
+    } = this.props;
+
     if (field) {
       field.onBlur(e);
+    }
+
+    if (autoselect) {
+      const filteredItems = this.filterItems(
+        children,
+        inputValue,
+        filterable,
+        prevSelectedItem
+      );
+      const items = this.getMenuItems(filteredItems, false, {
+        getItemProps,
+        highlightedIndex,
+        menuHeight,
+        virtualizedRowHeight,
+        virtualizedMenuWidth
+      });
+      const selectedItem = items[highlightedIndex];
+      const params = { selectedItem, field, form, onChange };
+      this.downshiftOnChange(params);
     }
 
     onBlur(e);
@@ -343,6 +404,7 @@ class Select extends Component {
       virtualizedRowHeight,
       virtualizedMenuWidth,
       rtl,
+      autoselect,
       ...other
     } = this.props;
 
@@ -364,7 +426,6 @@ class Select extends Component {
               onChange
             });
           }}
-          onBlur={e => this.handleBlur(e, field, onBlur)}
           selectedItem={
             selectedItem ||
             this._getItemFromValue(
@@ -372,6 +433,8 @@ class Select extends Component {
               this.getSelectedValue(field, selectedValue)
             )
           }
+          defaultHighlightedIndex={autoselect ? 0 : undefined}
+          stateReducer={this.stateReducer}
         >
           {({
             getRootProps,
@@ -403,20 +466,12 @@ class Select extends Component {
                       ref,
                       getToggleButtonProps,
                       getInputProps,
-                      placeholder,
-                      selectedItem,
-                      filterable,
-                      id,
-                      fullWidth,
-                      minimal,
-                      disabled,
-                      style,
-                      field,
-                      form,
-                      isOpen,
                       openMenu,
                       highlightedIndex,
                       selectHighlightedItem,
+                      inputValue,
+                      getItemProps,
+                      menuHeight,
                       ...other
                     });
                   }}
@@ -487,6 +542,8 @@ Select.propTypes = {
   children: PropTypes.node,
   /** Toggle the Select to use an input and allow filtering of the items. */
   filterable: PropTypes.bool,
+  /** The highlighted item will be automatically selected on blur. */
+  autoselect: PropTypes.bool,
   /** Use react-virtualized to render rows as the user scrolls. */
   virtualized: PropTypes.bool,
   /** Callback function fired when the value of the Select changes. */
