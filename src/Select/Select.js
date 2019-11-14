@@ -434,7 +434,6 @@ class Select extends Component {
             )
           }
           defaultHighlightedIndex={autoselect ? 0 : undefined}
-          stateReducer={this.stateReducer}
         >
           {({
             getRootProps,
