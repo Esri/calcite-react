@@ -222,7 +222,7 @@ import Select from 'calcite-react/Select';
 
 </Playground>
 
-## Filterable autoselect
+## Filterable autoSelect
 
 <Playground style={{ height: '400px' }}>
   {() => {
@@ -246,7 +246,8 @@ import Select from 'calcite-react/Select';
           return (
             <Select
               filterable
-              autoselect
+              autoSelect
+              virtualized
               onChange={this.handleSelectChange}
               selectedValue={this.state.selectedValue}
             >

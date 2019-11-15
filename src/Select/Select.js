@@ -41,6 +41,7 @@ class Select extends Component {
     inputValue,
     getItemProps,
     menuHeight,
+    selectedItem,
     ...other
   }) => {
     const {
@@ -51,7 +52,6 @@ class Select extends Component {
       style,
       id,
       placeholder,
-      selectedItem,
       disabled,
       field,
       form
@@ -92,14 +92,7 @@ class Select extends Component {
                 minimal,
                 style,
                 onKeyDown,
-                onBlur: e =>
-                  this.handleBlur({
-                    e,
-                    highlightedIndex,
-                    inputValue,
-                    getItemProps,
-                    menuHeight
-                  }),
+                onBlur: this.handleBlur,
                 ...other
               })}
               ref={ref}
@@ -115,14 +108,7 @@ class Select extends Component {
             {...getToggleButtonProps()}
             {...getInputProps({
               onKeyDown,
-              onBlur: e =>
-                this.handleBlur({
-                  e,
-                  highlightedIndex,
-                  inputValue,
-                  getItemProps,
-                  menuHeight
-                })
+              onBlur: this.handleBlur
             })}
             as="button"
             fullWidth={fullWidth}
@@ -189,6 +175,16 @@ class Select extends Component {
     );
   };
 
+  handleBlur = e => {
+    const { onBlur, field } = this.props;
+
+    if (field) {
+      field.onBlur(e);
+    }
+
+    onBlur(e);
+  };
+
   getMenuItems = (filteredList, virtualized, params) => {
     const {
       getItemProps,
@@ -238,7 +234,7 @@ class Select extends Component {
 
   getMenuItem = (item, params) => {
     const {
-      getItemProps,
+      getItemProps = props => props,
       highlightedIndex,
       index,
       selectedItem,
@@ -278,52 +274,6 @@ class Select extends Component {
 
   getSelectedValue = (field, selectedValue) => {
     return field ? field.value : selectedValue;
-  };
-
-  handleBlur = ({
-    e,
-    highlightedIndex,
-    inputValue,
-    getItemProps,
-    menuHeight
-  }) => {
-    const {
-      children,
-      selectedItem: prevSelectedItem,
-      filterable,
-      onChange,
-      onBlur,
-      field,
-      form,
-      virtualizedRowHeight,
-      virtualizedMenuWidth,
-      autoselect
-    } = this.props;
-
-    if (field) {
-      field.onBlur(e);
-    }
-
-    if (autoselect) {
-      const filteredItems = this.filterItems(
-        children,
-        inputValue,
-        filterable,
-        prevSelectedItem
-      );
-      const items = this.getMenuItems(filteredItems, false, {
-        getItemProps,
-        highlightedIndex,
-        menuHeight,
-        virtualizedRowHeight,
-        virtualizedMenuWidth
-      });
-      const selectedItem = items[highlightedIndex];
-      const params = { selectedItem, field, form, onChange };
-      this.downshiftOnChange(params);
-    }
-
-    onBlur(e);
   };
 
   isSuccess = params => {
@@ -378,6 +328,54 @@ class Select extends Component {
     }
   };
 
+  stateReducer = (state, changes) => {
+    if (!this.props.autoSelect) {
+      return changes;
+    }
+
+    switch (changes.type) {
+      case Downshift.stateChangeTypes.mouseUp:
+      case Downshift.stateChangeTypes.blurInput:
+      case Downshift.stateChangeTypes.blurButton:
+        // Assumes they already collapsed the select and are now
+        // navigating away, we shouldnt change the selection here
+        if (!state.isOpen) {
+          return changes;
+        }
+
+        // Get the item list so we can find the item at the highlitedIndex
+        const {
+          children,
+          filterable,
+          virtualizedRowHeight,
+          virtualizedMenuWidth,
+          menuHeight
+        } = this.props;
+        const filteredItems = this.filterItems(
+          children,
+          state.inputValue,
+          filterable,
+          state.selectedItem
+        );
+        const items = this.getMenuItems(filteredItems, false, {
+          highlightedIndex: state.highlightedIndex,
+          menuHeight,
+          virtualizedRowHeight,
+          virtualizedMenuWidth
+        });
+        const selectedItem = items[state.highlightedIndex];
+
+        // Set the new selectedItem
+        return {
+          ...changes,
+          highlightedIndex: state.highlightedIndex,
+          selectedItem
+        };
+      default:
+        return changes;
+    }
+  };
+
   render() {
     const {
       children,
@@ -404,7 +402,7 @@ class Select extends Component {
       virtualizedRowHeight,
       virtualizedMenuWidth,
       rtl,
-      autoselect,
+      autoSelect,
       ...other
     } = this.props;
 
@@ -413,6 +411,14 @@ class Select extends Component {
       (menuStyle && parseInt(menuStyle.height, 10)) ||
       (menuStyle && parseInt(menuStyle.maxHeight, 10)) ||
       300;
+
+    // The selectedItem or the item with the same value as selectedValue
+    const selectedMenuItem =
+      selectedItem ||
+      this._getItemFromValue(
+        children,
+        this.getSelectedValue(field, selectedValue)
+      );
 
     return (
       <Manager style={{ ...PopperManagerStyles, ...wrapperStyle }}>
@@ -426,14 +432,9 @@ class Select extends Component {
               onChange
             });
           }}
-          selectedItem={
-            selectedItem ||
-            this._getItemFromValue(
-              children,
-              this.getSelectedValue(field, selectedValue)
-            )
-          }
-          defaultHighlightedIndex={autoselect ? 0 : undefined}
+          selectedItem={selectedMenuItem}
+          stateReducer={this.stateReducer}
+          defaultHighlightedIndex={autoSelect ? 0 : undefined}
         >
           {({
             getRootProps,
@@ -471,6 +472,7 @@ class Select extends Component {
                       inputValue,
                       getItemProps,
                       menuHeight,
+                      selectedItem,
                       ...other
                     });
                   }}
@@ -542,7 +544,7 @@ Select.propTypes = {
   /** Toggle the Select to use an input and allow filtering of the items. */
   filterable: PropTypes.bool,
   /** The highlighted item will be automatically selected on blur. */
-  autoselect: PropTypes.bool,
+  autoSelect: PropTypes.bool,
   /** Use react-virtualized to render rows as the user scrolls. */
   virtualized: PropTypes.bool,
   /** Callback function fired when the value of the Select changes. */
