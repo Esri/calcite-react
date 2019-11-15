@@ -371,6 +371,8 @@ class Select extends Component {
           highlightedIndex: state.highlightedIndex,
           selectedItem
         };
+      case Downshift.stateChangeTypes.changeInput:
+        return { ...changes, highlightedIndex: 0 };
       default:
         return changes;
     }
@@ -420,6 +422,17 @@ class Select extends Component {
         this.getSelectedValue(field, selectedValue)
       );
 
+    let defaultHighlightedIndex = undefined;
+    if (autoSelect) {
+      if (selectedMenuItem) {
+        defaultHighlightedIndex = children.findIndex(
+          child => child.props.value === selectedMenuItem.props.value
+        );
+      } else {
+        defaultHighlightedIndex = 0;
+      }
+    }
+
     return (
       <Manager style={{ ...PopperManagerStyles, ...wrapperStyle }}>
         <Downshift
@@ -434,7 +447,7 @@ class Select extends Component {
           }}
           selectedItem={selectedMenuItem}
           stateReducer={this.stateReducer}
-          defaultHighlightedIndex={autoSelect ? 0 : undefined}
+          defaultHighlightedIndex={defaultHighlightedIndex}
         >
           {({
             getRootProps,
