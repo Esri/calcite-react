@@ -89,7 +89,7 @@ const StyledChevronIcon = styled(ChevronRightIcon)`
     props.active === 'true' &&
     css`
       &,
-      html[dir='rtl'] {
+      html[dir='rtl'] & {
         transform: rotate(90deg);
       }
     `};
