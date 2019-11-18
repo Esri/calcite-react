@@ -49,7 +49,6 @@ const MultiSelect = ({
   virtualized,
   virtualizedRowHeight,
   virtualizedMenuWidth,
-  rtl,
   ...other
 }) => {
   let name, touched, errors, isSubmitting, setFieldValue;
@@ -301,7 +300,7 @@ const MultiSelect = ({
                   return _getPopper(
                     <Popper
                       positionFixed={positionFixed}
-                      placement={rtlPlacement(other.placement, rtl)}
+                      placement={rtlPlacement(other.placement)}
                       modifiers={{
                         preventOverflow: {
                           enabled: appendToBody || positionFixed ? false : true
@@ -392,9 +391,7 @@ MultiSelect.propTypes = {
   /** (virtualized only) Row height used to calculate how many rows to render in a virtualized Menu. */
   virtualizedRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
   /** (virtualized only) Width of the menu; unloaded rows may be wider than the initial set. */
-  virtualizedMenuWidth: PropTypes.number,
-  /** Manually set RTL behavior of the MultiSelect to flip its direction */
-  rtl: PropTypes.bool
+  virtualizedMenuWidth: PropTypes.number
 };
 
 MultiSelect.defaultProps = {

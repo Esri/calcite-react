@@ -115,10 +115,7 @@ class Popover extends Component {
                 ? this._getPopper(
                     <Popper
                       positionFixed={this.props.positionFixed}
-                      placement={rtlPlacement(
-                        this.props.placement,
-                        this.props.rtl
-                      )}
+                      placement={rtlPlacement(this.props.placement)}
                       modifiers={{
                         preventOverflow: {
                           enabled: usePreventOverflow
@@ -193,9 +190,7 @@ Popover.propTypes = {
   /** Styles passed onto the Popover container div. */
   popoverContainerStyles: PropTypes.object,
   /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden`. */
-  positionFixed: PropTypes.bool,
-  /** Manually set RTL behavior of the Popover to flip its direction */
-  rtl: PropTypes.bool
+  positionFixed: PropTypes.bool
 };
 
 Popover.defaultProps = {

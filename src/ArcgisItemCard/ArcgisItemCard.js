@@ -29,14 +29,16 @@ const ArcgisItemCard = ({
   dateFormatter,
   maxDescriptionLength,
   portal,
+  token,
   ...other
 }) => {
   let imageEl;
   let hostname = portal ? portal.portalHostname : 'arcgis.com';
   if (showThumbnail) {
+    const tokenUrlParam = token ? `?token=${token}` : '';
     const imageSource = `https://${hostname}/sharing/rest/content/items/${
       item.id
-    }/info/${item.thumbnail}`;
+    }/info/${item.thumbnail}${tokenUrlParam}`;
     imageEl = <StyledItemCardImageWrap imageSource={imageSource} />;
   }
 
@@ -108,7 +110,9 @@ ArcgisItemCard.propTypes = {
   /** Number of characters to use before truncating the description text. */
   maxDescriptionLength: PropTypes.number,
   /** AGOL portal object - if not specified will default to ArcGIS Online */
-  portal: PropTypes.object
+  portal: PropTypes.object,
+  /** AGOL login token. */
+  token: PropTypes.string
 };
 
 ArcgisItemCard.defaultProps = {

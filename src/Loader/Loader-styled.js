@@ -92,12 +92,20 @@ const StyledLoaderBars = styled.div`
   &:before {
     ${props => loaderPseudoElements(props.color)};
     left: -${loaderVariables.loaderSpacing};
+
+    html[dir='rtl'] & {
+      animation-delay: ${unitCalc(loaderVariables.loaderDelay, 2, '*')};
+    }
   }
 
   &:after {
     ${props => loaderPseudoElements(props.color)};
     left: ${loaderVariables.loaderSpacing};
     animation-delay: ${unitCalc(loaderVariables.loaderDelay, 2, '*')};
+
+    html[dir='rtl'] & {
+      animation-delay: initial;
+    }
   }
 `;
 StyledLoaderBars.defaultProps = { theme };
