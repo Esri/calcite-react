@@ -328,10 +328,18 @@ class Select extends Component {
     }
   };
 
+  getItemIndexFromChildren = value => {
+    const { children } = this.props;
+    return children.findIndex(child => child.props.value === value);
+  };
+
   stateReducer = (state, changes) => {
     if (!this.props.autoSelect) {
       return changes;
     }
+
+    const { children } = this.props;
+    let selectedItemIndex;
 
     switch (changes.type) {
       case Downshift.stateChangeTypes.mouseUp:
@@ -345,7 +353,6 @@ class Select extends Component {
 
         // Get the item list so we can find the item at the highlitedIndex
         const {
-          children,
           filterable,
           virtualizedRowHeight,
           virtualizedMenuWidth,
@@ -365,14 +372,28 @@ class Select extends Component {
         });
         const selectedItem = items[state.highlightedIndex];
 
+        selectedItemIndex =
+          changes.selectedItem &&
+          this.getItemIndexFromChildren(changes.selectedItem.props.value);
+
         // Set the new selectedItem
         return {
           ...changes,
-          highlightedIndex: state.highlightedIndex,
+          highlightedIndex: selectedItemIndex,
           selectedItem
         };
       case Downshift.stateChangeTypes.changeInput:
         return { ...changes, highlightedIndex: 0 };
+      case Downshift.stateChangeTypes.clickItem:
+      case Downshift.stateChangeTypes.keyDownEnter:
+        selectedItemIndex =
+          changes.selectedItem &&
+          this.getItemIndexFromChildren(changes.selectedItem.props.value);
+
+        return {
+          ...changes,
+          highlightedIndex: selectedItemIndex || changes.highlightedIndex
+        };
       default:
         return changes;
     }
@@ -425,8 +446,8 @@ class Select extends Component {
     let defaultHighlightedIndex = undefined;
     if (autoSelect) {
       if (selectedMenuItem) {
-        defaultHighlightedIndex = children.findIndex(
-          child => child.props.value === selectedMenuItem.props.value
+        defaultHighlightedIndex = this.getItemIndexFromChildren(
+          selectedMenuItem.props.value
         );
       } else {
         defaultHighlightedIndex = 0;
