@@ -72,8 +72,8 @@ const StyledTopNavLink = styled(CalciteA)`
   padding-bottom: calc(1.1625rem - 4px);
   border-bottom: 4px solid transparent;
   line-height: 1.5rem;
-  display: inline-block;
-  vertical-align: top;
+  display: inline-flex;
+  align-items: center;
   margin-left: 0.75em;
   font-weight: 300;
 
