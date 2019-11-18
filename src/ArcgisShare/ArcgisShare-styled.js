@@ -41,15 +41,6 @@ const StyledGroupContainer = styled.div`
 `;
 StyledGroupContainer.defaultProps = { theme };
 
-const PrimaryCheckboxLabelStyles = {
-  fontSize: '1rem',
-  color: theme.palette.black
-};
-
-const GroupCheckboxLabelStyles = {
-  fontSize: '0.85rem'
-};
-
 const StyledGroupFieldset = styled(Fieldset)`
   margin-left: 1.4rem;
   display: flex;
@@ -60,6 +51,7 @@ const StyledGroupFieldset = styled(Fieldset)`
     margin-right: 1.4rem;
   }
 `;
+StyledGroupFieldset.defaultProps = { theme };
 
 const StyledStarIcon = styled(StarIcon)`
   fill: ${props => props.theme.palette.lighterGray};
@@ -91,6 +83,15 @@ const StyledNoGroups = styled.span`
   ${fontSize(-2)};
 `;
 StyledNoGroups.defaultProps = { theme };
+
+const PrimaryCheckboxLabelStyles = {
+  fontSize: '1rem',
+  color: theme.palette.black
+};
+
+const GroupCheckboxLabelStyles = {
+  fontSize: '0.85rem'
+};
 
 export {
   StyledArcgisShare,
