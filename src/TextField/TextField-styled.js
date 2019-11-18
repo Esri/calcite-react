@@ -29,17 +29,33 @@ const StyledTextField = styled(CalciteInput)`
   ${props =>
     props.hasAdornmentLeft &&
     css`
-      border-left: none;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+      html:not([dir='rtl']) & {
+        border-left: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      html[dir='rtl'] & {
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     `};
 
   ${props =>
     props.hasAdornmentRight &&
     css`
-      border-right: none;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+      html:not([dir='rtl']) & {
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      html[dir='rtl'] & {
+        border-left: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     `};
 `;
 StyledTextField.defaultProps = { theme };
@@ -48,17 +64,33 @@ const StyledTextArea = styled(CalciteTextarea)`
   ${props =>
     props.hasAdornmentLeft &&
     css`
-      border-left: none;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+      html:not([dir='rtl']) & {
+        border-left: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      html[dir='rtl'] & {
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     `};
 
   ${props =>
     props.hasAdornmentRight &&
     css`
-      border-right: none;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+      html:not([dir='rtl']) & {
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      html[dir='rtl'] & {
+        border-left: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     `};
 `;
 StyledTextArea.defaultProps = { theme };
@@ -89,6 +121,11 @@ const StyledAdornmentWrapper = styled.div`
 
   input + & {
     border-right: 1px solid ${props => props.theme.palette.lightGray};
+
+    html[dir='rtl'] & {
+      border-right: initial;
+      border-left: 1px solid ${props => props.theme.palette.lightGray};
+    }
   }
 
   ${props =>
@@ -104,15 +141,29 @@ const StyledAdornmentWrapper = styled.div`
   ${props =>
     props.adornmentDirection === 'left' &&
     css`
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+      html:not([dir='rtl']) & {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      html[dir='rtl'] & {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     `};
 
   ${props =>
     props.adornmentDirection === 'right' &&
     css`
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+      html:not([dir='rtl']) & {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      html[dir='rtl'] & {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     `};
 `;
 StyledAdornmentWrapper.defaultProps = { theme };

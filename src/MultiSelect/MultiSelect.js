@@ -16,6 +16,7 @@ import Downshift from 'downshift';
 import memoize from 'memoize-one';
 import { List } from 'react-virtualized';
 import { Manager, Reference, Popper } from 'react-popper';
+import { rtlPlacement } from '../utils/helpers';
 
 import {
   StyledMultiSelectWrapper,
@@ -299,7 +300,7 @@ const MultiSelect = ({
                   return _getPopper(
                     <Popper
                       positionFixed={positionFixed}
-                      placement={other.placement}
+                      placement={rtlPlacement(other.placement)}
                       modifiers={{
                         preventOverflow: {
                           enabled: appendToBody || positionFixed ? false : true

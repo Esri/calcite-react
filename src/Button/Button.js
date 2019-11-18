@@ -11,7 +11,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyledButton } from './Button-styled';
+import { StyledButton, StyledIconClass } from './Button-styled';
 
 import { ButtonGroupContext } from './ButtonGroup';
 
@@ -21,30 +21,15 @@ const Button = ({
   iconButton,
   icon,
   iconPosition,
-
   ...other
 }) => {
-  function getIconMargin() {
-    if (iconButton) {
-      return;
-    } else {
-      return {
-        marginLeft: iconPosition === 'after' ? '0.75em' : '-0.25em',
-        marginRight: iconPosition === 'before' ? '0.75em' : '-0.25em'
-      };
-    }
-  }
-
   const getIcon = icon => {
     if (icon) {
       return React.cloneElement(icon, {
         ...icon.props,
-        style: {
-          fill: 'currentColor',
-          verticalAlign: 'bottom',
-          ...getIconMargin(),
-          ...icon.props.style
-        }
+        className: `${icon.props.className} ${
+          StyledIconClass.styledComponentId
+        }`
       });
     }
   };
@@ -54,6 +39,7 @@ const Button = ({
       {({ buttonGroupContext }) => (
         <StyledButton
           iconButton={iconButton}
+          iconPosition={iconPosition}
           grouped={buttonGroupContext.grouped}
           isToggle={buttonGroupContext.isToggle}
           as={href ? 'a' : 'button'}

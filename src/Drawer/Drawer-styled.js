@@ -62,11 +62,21 @@ const StyledDrawerNav = styled.nav`
   -webkit-overflow-scrolling: touch;
   transition: ${transition('all')};
 
+  html[dir='rtl'] & {
+    left: auto;
+    right: -${props => props.drawerWidth}px;
+  }
+
   ${props =>
     props.right &&
     css`
       left: auto;
       right: -${props => props.drawerWidth}px;
+
+      html[dir='rtl'] & {
+        left: -${props => props.drawerWidth}px;
+        right: auto;
+      }
     `};
 
   ${props =>
@@ -74,10 +84,20 @@ const StyledDrawerNav = styled.nav`
     css`
       left: 0;
 
+      html[dir='rtl'] & {
+        left: auto;
+        right: 0;
+      }
+
       ${props.right &&
         css`
           left: auto;
           right: 0;
+
+          html[dir='rtl'] & {
+            left: 0;
+            right: auto;
+          }
         `};
     `};
 `;

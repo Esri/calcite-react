@@ -28,6 +28,17 @@ import { StyledButton } from '../Button/Button-styled';
 const StyledComboButtonContainer = styled.div`
   display: flex;
   flex-wrap: nowrap;
+
+  ${props =>
+    props.half &&
+    css`
+      width: 50%;
+      text-align: center;
+
+      & ${StyledButton} {
+        flex: 1;
+      }
+    `};
 `;
 StyledComboButtonContainer.defaultProps = { theme };
 
@@ -35,6 +46,16 @@ const StyledComboButton = styled(StyledButton)`
   border-right-width: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+
+  html[dir='rtl'] & {
+    border-right-width: 1px;
+    border-top-right-radius: ${props => props.theme.borderRadius};
+    border-bottom-right-radius: ${props => props.theme.borderRadius};
+
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 `;
 StyledComboButton.defaultProps = { theme };
 
@@ -48,28 +69,58 @@ const StyledComboButtonDropdown = styled(StyledButton)`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 
+  html[dir='rtl'] & {
+    border-left-color: ${props => props.theme.palette.blue};
+    border-top-left-radius: ${props => props.theme.borderRadius};
+    border-bottom-left-radius: ${props => props.theme.borderRadius};
+
+    border-right: 1px solid ${props => props.theme.palette.darkBlue};
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
   ${props =>
     props.clear &&
     css`
       border-left-color: ${props => props.theme.palette.blue};
+
+      html[dir='rtl'] & {
+        border-left-color: ${props => props.theme.palette.blue};
+        border-right-color: ${props => props.theme.palette.blue};
+      }
     `};
 
   ${props =>
     props.clearGray &&
     css`
       border-left-color: ${props => props.theme.palette.gray};
+
+      html[dir='rtl'] & {
+        border-left-color: ${props => props.theme.palette.gray};
+        border-right-color: ${props => props.theme.palette.gray};
+      }
     `};
 
   ${props =>
     props.red &&
     css`
       border-left-color: ${props => props.theme.palette.red};
+
+      html[dir='rtl'] & {
+        border-left-color: ${props => props.theme.palette.red};
+        border-right-color: ${props => props.theme.palette.red};
+      }
     `};
 
   ${props =>
     props.green &&
     css`
       border-left-color: ${props => props.theme.palette.darkGreen};
+
+      html[dir='rtl'] & {
+        border-left-color: ${props => props.theme.palette.darkGreen};
+        border-right-color: ${props => props.theme.palette.darkGreen};
+      }
     `};
 `;
 StyledComboButtonDropdown.defaultProps = { theme };

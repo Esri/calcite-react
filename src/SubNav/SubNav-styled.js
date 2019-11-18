@@ -78,6 +78,10 @@ const StyledSubNavLink = styled(CalciteA)`
   transition: background-color ${transition()}, color ${transition('150ms')};
   display: inline-block;
 
+  html[dir='rtl'] & {
+    margin: 0 0.25em 0 0;
+  }
+
   &:hover,
   &:focus {
     background-color: ${props => props.theme.palette.transparentDarkerGray};
@@ -115,6 +119,11 @@ const StyledSubNavList = styled.nav`
   margin-top: 0em;
   padding-left: 0.25em;
   box-sizing: border-box;
+
+  html[dir='rtl'] & {
+    padding-left: 0;
+    padding-right: 0.25em;
+  }
 `;
 StyledSubNavList.defaultProps = { theme };
 
@@ -133,6 +142,11 @@ const StyledSubNavTitle = styled(CalciteH1)`
   margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
   line-height: 1.25;
   box-sizing: border-box;
+
+  html[dir='rtl'] & {
+    padding-left: 0;
+    padding-right: 0.25em;
+  }
 
   ${props =>
     props.blue &&

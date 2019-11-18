@@ -19,7 +19,7 @@ import { unitCalc, fontSize } from '../utils/helpers';
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
 // Calcite components
-import { Legend } from '../Form';
+import { Fieldset, Legend } from '../Form';
 
 // Icons
 import StarIcon from 'calcite-ui-icons-react/StarIcon';
@@ -41,25 +41,27 @@ const StyledGroupContainer = styled.div`
 `;
 StyledGroupContainer.defaultProps = { theme };
 
-const PrimaryCheckboxLabelStyles = {
-  fontSize: '1rem',
-  color: theme.palette.black
-};
+const StyledGroupFieldset = styled(Fieldset)`
+  margin-left: 1.4rem;
+  display: flex;
+  align-items: flex-start;
 
-const GroupCheckboxLabelStyles = {
-  fontSize: '0.85rem'
-};
-
-const GroupFieldsetStyles = {
-  marginLeft: '1.4rem',
-  display: 'flex',
-  alignItems: 'flex-start'
-};
+  html[dir='rtl'] & {
+    margin-left: initial;
+    margin-right: 1.4rem;
+  }
+`;
+StyledGroupFieldset.defaultProps = { theme };
 
 const StyledStarIcon = styled(StarIcon)`
   fill: ${props => props.theme.palette.lighterGray};
   vertical-align: text-top;
   margin-left: 2px;
+
+  html[dir='rtl'] & {
+    margin-left: initial;
+    margin-right: 2px;
+  }
 `;
 StyledStarIcon.defaultProps = { theme };
 
@@ -82,12 +84,21 @@ const StyledNoGroups = styled.span`
 `;
 StyledNoGroups.defaultProps = { theme };
 
+const PrimaryCheckboxLabelStyles = {
+  fontSize: '1rem',
+  color: theme.palette.black
+};
+
+const GroupCheckboxLabelStyles = {
+  fontSize: '0.85rem'
+};
+
 export {
   StyledArcgisShare,
   StyledGroupContainer,
   PrimaryCheckboxLabelStyles,
   GroupCheckboxLabelStyles,
-  GroupFieldsetStyles,
+  StyledGroupFieldset,
   StyledStarIcon,
   StyledLegend,
   StyledNoGroups

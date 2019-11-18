@@ -39,6 +39,15 @@ const StyledArcgisAccountControl = styled.div`
   border-left: 1px solid ${props => props.theme.palette.lighterGray};
   transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1);
 
+  html[dir='rtl'] & {
+    padding: ${props => unitCalc(props.theme.baseline, 2, '/')}
+      ${props => unitCalc(props.theme.baseline, 1.5, '/')}
+      ${props => unitCalc(props.theme.baseline, 2, '/')}
+      ${props => props.theme.baseline};
+    border-left: initial;
+    border-right: 1px solid ${props => props.theme.palette.lighterGray};
+  }
+
   &:hover {
     color: ${props => props.theme.palette.black};
     box-shadow: inset 0 -3px 0 0 ${props => props.theme.palette.lighterBlue};
@@ -63,6 +72,11 @@ StyledArcgisAccountControl.defaultProps = { theme };
 
 const StyledArcgisAccountControlAvatar = styled.div`
   margin-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
+
+  html[dir='rtl'] & {
+    margin-right: initial;
+    margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
+  }
 `;
 StyledArcgisAccountControlAvatar.defaultProps = { theme };
 
@@ -136,6 +150,11 @@ const StyledArcgisAccountContentMenu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  html[dir='rtl'] & {
+    padding-left: ${props => props.theme.baseline};
+    padding-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
+  }
 `;
 StyledArcgisAccountContentMenu.defaultProps = { theme };
 
@@ -164,7 +183,24 @@ const StyledArcgisAccountMenuItem = styled.a`
     transition: opacity 0.25s, transform 0.25s;
     background-color: ${props => props.theme.palette.white};
 
-    content: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' fill='%230079c1'%3E%3Cpath d='M8 14.3L13.3 9H0V8h13.3L8 2.7V1.3l7.2 7.2L8 15.7v-1.4z'/%3E%3C/svg%3E");
+    ${props =>
+      props &&
+      css`
+        content: ${`url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cpolygon points='8 13.3 13.3 8 0 8 0 7 13.3 7 8 1.7 8 0.3 15.2 7.5 8 14.7' fill='${props.theme.palette.darkBlue.replace(
+          '#',
+          '%23'
+        )}' %3E%3C/polygon%3E%3C/svg%3E")`};
+
+        html[dir='rtl'] & {
+          right: auto;
+          left: -8px;
+          content: ${`url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cpolygon points='8 13.3 8 14.7 0.8 7.5 8 0.3 8 1.7 2.7 7 16 7 16 8 2.7 8' fill='${props.theme.palette.darkBlue.replace(
+            '#',
+            '%23'
+          )}' %3E%3C/polygon%3E%3C/svg%3E")`};
+        }
+      `};
+
     top: calc(50% - 20px / 2);
   }
 
@@ -174,6 +210,10 @@ const StyledArcgisAccountMenuItem = styled.a`
     &::after {
       opacity: 1;
       transform: translateX(10px);
+
+      html[dir='rtl'] & {
+        transform: translateX(-10px);
+      }
     }
   }
 `;

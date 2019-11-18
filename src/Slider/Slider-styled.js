@@ -189,6 +189,10 @@ const StyledSlider = styled(CalciteInput)`
       padding-right: 0;
       background-image: none;
 
+      html[dir='rtl'] & {
+        padding-left: 0;
+      }
+
       &:focus {
         border-color: transparent;
         box-shadow: none;

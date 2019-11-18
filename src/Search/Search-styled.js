@@ -34,6 +34,11 @@ const StyledClearIconContainer = styled.div`
   opacity: 0.5;
   cursor: pointer;
 
+  html[dir='rtl'] & {
+    right: auto;
+    left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+  }
+
   &:hover {
     opacity: 0.8;
   }
@@ -49,6 +54,11 @@ const StyledSearchIconContainer = styled.span`
   z-index: 1;
   pointer-events: none;
   line-height: 0;
+
+  html[dir='rtl'] & {
+    left: auto;
+    right: 0.5em;
+  }
 `;
 StyledSearchIconContainer.defaultProps = { theme };
 
@@ -65,6 +75,11 @@ const StyledShortcutCharacter = styled.div`
   height: 18px;
   color: ${props => props.theme.palette.lightGray};
   border-radius: 1px;
+
+  html[dir='rtl'] & {
+    right: auto;
+    left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+  }
 `;
 StyledShortcutCharacter.defaultProps = { theme };
 
@@ -86,6 +101,11 @@ const StyledSearchContainer = styled.div`
         bottom: auto;
         left: 0.1rem;
         margin-top: 0;
+
+        html[dir='rtl'] & {
+          left: auto;
+          right: 0.1rem;
+        }
       `};
   }
 
@@ -124,10 +144,20 @@ const StyledSearch = styled(CalciteInput)`
   padding-right: ${props => props.theme.baseline};
   background: transparent;
 
+  html[dir='rtl'] & {
+    padding-right: ${props => unitCalc(props.theme.baseline, 5, '/')};
+    padding-left: ${props => props.theme.baseline};
+  }
+
   ${props =>
     props.searchIcon &&
     css`
       padding-left: ${props => unitCalc(props.theme.baseline, 1.2, '*')};
+
+      html[dir='rtl'] & {
+        padding-left: initial;
+        padding-right: ${props => unitCalc(props.theme.baseline, 1.2, '*')};
+      }
     `};
 
   ${props =>

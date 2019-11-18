@@ -59,6 +59,11 @@ const StyledFormControl = styled.div`
 
       ${StyledFormHelperText} {
         margin-left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+
+        html[dir='rtl'] & {
+          margin-left: initial;
+          margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
+        }
       }
     `};
 
@@ -94,6 +99,11 @@ const StyledFormControlLabelText = styled.span`
     props.horizontal &&
     css`
       margin-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
+
+      html[dir='rtl'] & {
+        margin-right: initial;
+        margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
+      }
     `};
 `;
 StyledFormControlLabelText.defaultProps = { theme };
@@ -123,6 +133,11 @@ const StyledLegend = styled.legend`
   display: block;
   margin-bottom: 0.25rem;
   margin-right: ${props => unitCalc(props.theme.baseline, 2, '/')};
+
+  html[dir='rtl'] & {
+    margin-right: initial;
+    margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
+  }
 
   ${props =>
     props.horizontal &&

@@ -65,6 +65,17 @@ class App extends Component {
 export default App;
 ```
 
+## RTL
+
+Right-to-left (RTL) is supported by Calcite React components with the `dir="rtl"`
+attribute. The attribute must be applied to the `html` element to be inherited
+properly by the library. This will mirror all components including changing the
+`placement` used by `Tooltip`, `Popover`, and `Drawer`.
+
+```jsx
+<html dir="rtl" ...>
+```
+
 ## References
 
 - [Contributing Guide](/CONTRIBUTING.md)

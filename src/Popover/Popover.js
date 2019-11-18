@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import outy from 'outy';
 import { Manager, Reference, Popper } from 'react-popper';
 import uniqid from 'uniqid';
+import { rtlPlacement } from '../utils/helpers';
 
 import { StyledTargetWrapper } from './Popover-styled';
 
@@ -114,7 +115,7 @@ class Popover extends Component {
                 ? this._getPopper(
                     <Popper
                       positionFixed={this.props.positionFixed}
-                      placement={this.props.placement}
+                      placement={rtlPlacement(this.props.placement)}
                       modifiers={{
                         preventOverflow: {
                           enabled: usePreventOverflow

@@ -36,7 +36,7 @@ const StyledMultiSelectButton = styled(CalciteSelect)`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  text-align: left;
+  text-align: initial;
 `;
 StyledMultiSelectButton.defaultProps = { theme };
 

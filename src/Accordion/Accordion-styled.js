@@ -79,13 +79,19 @@ StyledAccordionContent.defaultProps = { theme };
 const StyledChevronIcon = styled(ChevronRightIcon)`
   width: 20;
   height: 20;
-
   transition: transform ${transition()};
+
+  html[dir='rtl'] & {
+    transform: rotate(180deg);
+  }
 
   ${props =>
     props.active === 'true' &&
     css`
-      transform: rotate(90deg);
+      &,
+      html[dir='rtl'] & {
+        transform: rotate(90deg);
+      }
     `};
 `;
 StyledChevronIcon.defaultProps = { theme };

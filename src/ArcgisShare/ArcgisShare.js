@@ -21,7 +21,7 @@ import {
   StyledGroupContainer,
   PrimaryCheckboxLabelStyles,
   GroupCheckboxLabelStyles,
-  GroupFieldsetStyles,
+  StyledGroupFieldset,
   StyledStarIcon,
   StyledLegend,
   StyledNoGroups
@@ -29,7 +29,6 @@ import {
 
 // App components
 import Checkbox from '../Checkbox';
-import { Fieldset } from '../Form';
 
 // Third-party components (buttons, icons, etc.)
 
@@ -165,12 +164,12 @@ class ArcgisShare extends Component {
         >
           {portal && portal.name}
         </Checkbox>
-        <Fieldset name="shareGroups" style={{ ...GroupFieldsetStyles }}>
+        <StyledGroupFieldset name="shareGroups">
           <StyledLegend>{groupsLabel}:</StyledLegend>
           <StyledGroupContainer>
             {user && this.getGroupCheckboxes(user.groups, noGroupsLabel)}
           </StyledGroupContainer>
-        </Fieldset>
+        </StyledGroupFieldset>
       </StyledArcgisShare>
     );
   }

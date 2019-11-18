@@ -61,6 +61,11 @@ const StyledItemCardImageWrap = styled(StyledCardImageWrap).attrs(props => ({
   align-items: center;
   justify-content: center;
   border-right: 1px solid ${props => props.theme.palette.lightestGray};
+
+  html[dir='rtl'] & {
+    border-right: none;
+    border-left: 1px solid ${props => props.theme.palette.lightestGray};
+  }
 `;
 StyledItemCardImageWrap.defaultProps = { theme };
 
@@ -96,6 +101,11 @@ const StyledCardItemIconLabelText = styled(StyledCardItemText)`
   color: ${props => props.theme.palette.gray};
   &:last-child {
     margin-left: ${props => props.theme.baseline};
+
+    html[dir='rtl'] & {
+      margin-left: initial;
+      margin-right: ${props => props.theme.baseline};
+    }
   }
 
   .mdi-icon {
@@ -103,17 +113,32 @@ const StyledCardItemIconLabelText = styled(StyledCardItemText)`
     fill: currentColor;
     width: 1.4em;
     height: 1.4em;
+
+    html[dir='rtl'] & {
+      margin-right: initial;
+      margin-left: ${props => unitCalc(props.theme.baseline, 5, '/')};
+    }
   }
 `;
 StyledCardItemIconLabelText.defaultProps = { theme };
 
 const StyledUserIcon = styled(UserIcon)`
   margin-right: ${props => unitCalc(props.theme.baseline, 6, '/')};
+
+  html[dir='rtl'] & {
+    margin-right: 0;
+    margin-left: ${props => unitCalc(props.theme.baseline, 6, '/')};
+  }
 `;
 StyledUserIcon.defaultProps = { theme };
 
 const StyledCalendarIcon = styled(CalendarIcon)`
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
+
+  html[dir='rtl'] & {
+    margin-right: 0;
+    margin-left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+  }
 `;
 StyledCalendarIcon.defaultProps = { theme };
 

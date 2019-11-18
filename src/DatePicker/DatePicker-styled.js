@@ -102,6 +102,10 @@ const StyledDatePickerContainer = styled.div`
     fill: #565a5c;
     height: 19px;
     width: 19px;
+
+    html[dir='rtl'] & {
+      transform: rotate(180deg);
+    }
   }
   .DateRangePickerInput_clearDates_default:focus,
   .DateRangePickerInput_clearDates_default:hover {

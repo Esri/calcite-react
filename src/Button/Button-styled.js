@@ -24,6 +24,10 @@ import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
 // Third party libraries
 
+// Just used to generate a unique className we can use on
+// cloned instances of components
+const StyledIconClass = styled.svg``;
+
 const StyledButton = styled.button`
   position: relative;
   display: inline-flex;
@@ -47,6 +51,35 @@ const StyledButton = styled.button`
   &:hover {
     background-color: ${props => props.theme.palette.darkBlue};
     color: ${props => props.theme.palette.white};
+  }
+
+  .${StyledIconClass.styledComponentId} {
+    fill: currentColor;
+    vertical-align: bottom;
+
+    ${props =>
+      props.iconPosition === 'after' &&
+      css`
+        margin-left: 0.75em;
+        margin-right: -0.25rem;
+
+        html[dir='rtl'] & {
+          margin-left: -0.25rem;
+          margin-right: 0.75em;
+        }
+      `};
+
+    ${props =>
+      props.iconPosition === 'before' &&
+      css`
+        margin-left: -0.25rem;
+        margin-right: 0.75em;
+
+        html[dir='rtl'] & {
+          margin-left: 0.75em;
+          margin-right: -0.25rem;
+        }
+      `};
   }
 
   ${props =>
@@ -274,15 +307,36 @@ const StyledButton = styled.button`
       margin-left: -1px;
       border-radius: 0;
 
+      html[dir='rtl'] & {
+        margin-right: -1px;
+        margin-left: initial;
+      }
+
       &:first-child {
         margin-left: 0;
         border-top-left-radius: ${props => props.theme.borderRadius};
         border-bottom-left-radius: ${props => props.theme.borderRadius};
+
+        html[dir='rtl'] & {
+          margin-right: 0;
+          margin-left: initial;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          border-top-right-radius: ${props => props.theme.borderRadius};
+          border-bottom-right-radius: ${props => props.theme.borderRadius};
+        }
       }
 
       &:last-child {
         border-top-right-radius: ${props => props.theme.borderRadius};
         border-bottom-right-radius: ${props => props.theme.borderRadius};
+
+        html[dir='rtl'] & {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          border-top-left-radius: ${props => props.theme.borderRadius};
+          border-bottom-left-radius: ${props => props.theme.borderRadius};
+        }
       }
 
       ${props =>
@@ -302,8 +356,17 @@ const StyledButton = styled.button`
         css`
           margin-left: 1px;
 
+          html[dir='rtl'] & {
+            margin-right: 1px;
+            margin-left: initial;
+          }
+
           &:first-of-type {
             margin-left: 0;
+
+            html[dir='rtl'] & {
+              margin-right: 0;
+            }
           }
         `};
     `};
@@ -313,6 +376,11 @@ const StyledButton = styled.button`
     props.half &&
     css`
       margin-left: 0;
+
+      html[dir='rtl'] & {
+        margin-left: inherit;
+        margin-right: 0;
+      }
     `};
 
   ${props =>
@@ -329,4 +397,4 @@ const StyledButtonGroup = styled.nav`
 `;
 StyledButtonGroup.defaultProps = { theme };
 
-export { StyledButton, StyledButtonGroup };
+export { StyledButton, StyledButtonGroup, StyledIconClass };

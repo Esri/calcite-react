@@ -51,6 +51,16 @@ const StyledCopyToClipboardInput = styled(CalciteInput)`
   border-right: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+
+  html[dir='rtl'] & {
+    border-right: 1px solid ${props => props.theme.palette.lightGray};
+    border-top-right-radius: ${props => props.theme.borderRadius};
+    border-bottom-right-radius: ${props => props.theme.borderRadius};
+
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 `;
 StyledCopyToClipboardInput.defaultProps = { theme };
 
@@ -58,8 +68,16 @@ const StyledCopyButton = styled(Button)`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 
+  html[dir='rtl'] & {
+    border-top-left-radius: ${props => props.theme.borderRadius};
+    border-bottom-left-radius: ${props => props.theme.borderRadius};
+
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
   svg {
-    margin-left: 0 !important;
+    margin: 0 !important;
   }
 `;
 StyledCopyButton.defaultProps = { theme };

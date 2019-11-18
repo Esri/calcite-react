@@ -103,6 +103,11 @@ const StyledSwitchTrack = styled.span`
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   margin-right: 1rem;
 
+  html[dir='rtl'] & {
+    margin-right: 0;
+    margin-left: 1rem;
+  }
+
   &:after {
     position: absolute;
     display: block;
@@ -116,6 +121,11 @@ const StyledSwitchTrack = styled.span`
     border: 2px solid ${switchProps.handleBorderColor};
     box-shadow: ${switchProps.handleShadow};
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    html[dir='rtl'] & {
+      left: auto;
+      right: ${switchProps.handleEdgeDistance};
+    }
   }
 
   // hover
@@ -137,6 +147,11 @@ const StyledSwitchTrack = styled.span`
       left: ${switchProps.handleActiveEdgeDistance};
       border-color: ${switchProps.handleCheckedBorderColor};
       box-shadow: ${switchProps.handleActiveShadow};
+
+      html[dir='rtl'] & {
+        left: auto;
+        right: ${switchProps.handleActiveEdgeDistance};
+      }
     }
   }
 
@@ -150,6 +165,12 @@ const StyledSwitchTrack = styled.span`
       transform: translateX(-${unitCalc(switchProps.switchHeight, 1, '+')});
       border-color: ${switchProps.handleCheckedBorderColor};
       box-shadow: ${switchProps.handleCheckedShadow};
+
+      html[dir='rtl'] & {
+        left: auto;
+        right: 100%;
+        transform: translateX(${unitCalc(switchProps.switchHeight, 1, '+')});
+      }
     }
   }
 
@@ -162,6 +183,12 @@ const StyledSwitchTrack = styled.span`
       transform: translateX(-${unitCalc(switchProps.switchHeight, 1, '+')});
       border-color: ${switchProps.handleCheckedBorderColor};
       box-shadow: ${switchProps.handleActiveShadow};
+
+      html[dir='rtl'] & {
+        left: auto;
+        right: 100%;
+        transform: translateX(${unitCalc(switchProps.switchHeight, 1, '+')});
+      }
     }
   }
 
@@ -253,6 +280,11 @@ const StyledSwitchLabel = styled.span`
 
   &:first-child {
     margin-right: 1rem;
+
+    html[dir='rtl'] & {
+      margin-right: 0;
+      margin-left: 1rem;
+    }
   }
 `;
 StyledSwitchLabel.defaultProps = { theme };
