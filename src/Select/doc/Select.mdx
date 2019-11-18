@@ -222,6 +222,52 @@ import Select from 'calcite-react/Select';
 
 </Playground>
 
+## Filterable autoSelect
+
+<Playground style={{ height: '400px' }}>
+  {() => {
+      class SelectStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectedValue: ''
+          };
+
+          this.handleSelectChange = this.handleSelectChange.bind(this);
+        }
+
+        handleSelectChange(value, item) {
+          this.setState({
+            selectedValue: value
+          });
+        };
+
+        render() {
+          return (
+            <Select
+              filterable
+              autoSelect
+              virtualized
+              onChange={this.handleSelectChange}
+              selectedValue={this.state.selectedValue}
+            >
+              {statesJson.states.map(state => {
+                return (
+                  <MenuItem key={state} value={state}>
+                    {state}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          );
+        }
+      }
+
+      return <SelectStory />;
+    }}
+
+</Playground>
+
 ## Minimal
 
 <Playground style={{ height: '400px' }}>

@@ -31,31 +31,38 @@ import { FormControlContext } from '../Form/FormControl';
 import { PopoverContext } from '../Popover/Popover';
 
 class Select extends Component {
-  getAnchorElement = params => {
+  getAnchorElement = ({
+    ref,
+    getToggleButtonProps,
+    getInputProps,
+    openMenu,
+    highlightedIndex,
+    selectHighlightedItem,
+    inputValue,
+    getItemProps,
+    menuHeight,
+    selectedItem,
+    ...other
+  }) => {
     const {
-      ref,
-      getToggleButtonProps,
-      getInputProps,
-      placeholder,
-      selectedItem,
+      renderValue,
       filterable,
-      id,
       fullWidth,
       minimal,
-      disabled,
       style,
+      id,
+      placeholder,
+      disabled,
       field,
-      form,
-      renderValue,
-      openMenu,
-      highlightedIndex,
-      selectHighlightedItem,
-      ...other
-    } = params;
+      form
+    } = this.props;
 
     const onKeyDown = event => {
       if (!event) return;
       if (event.key === 'Enter') {
+        if (filterable) {
+          event.preventDefault();
+        }
       } else if (event.key === ' ') {
         if (highlightedIndex === null) openMenu();
         else {
@@ -79,12 +86,13 @@ class Select extends Component {
               error={this.isError({ formControlContext, field, form })}
               disabled={this.isDisabled({ field, form, disabled })}
               {...getInputProps({
-                placeholder: placeholder,
+                placeholder,
                 id: id || formControlContext._generatedId,
-                fullWidth: fullWidth,
-                minimal: minimal,
-                style: style,
+                fullWidth,
+                minimal,
+                style,
                 onKeyDown,
+                onBlur: this.handleBlur,
                 ...other
               })}
               ref={ref}
@@ -99,7 +107,8 @@ class Select extends Component {
           <StyledSelectButton
             {...getToggleButtonProps()}
             {...getInputProps({
-              onKeyDown
+              onKeyDown,
+              onBlur: this.handleBlur
             })}
             as="button"
             fullWidth={fullWidth}
@@ -166,6 +175,16 @@ class Select extends Component {
     );
   };
 
+  handleBlur = e => {
+    const { onBlur, field } = this.props;
+
+    if (field) {
+      field.onBlur(e);
+    }
+
+    onBlur(e);
+  };
+
   getMenuItems = (filteredList, virtualized, params) => {
     const {
       getItemProps,
@@ -215,7 +234,7 @@ class Select extends Component {
 
   getMenuItem = (item, params) => {
     const {
-      getItemProps,
+      getItemProps = props => props,
       highlightedIndex,
       index,
       selectedItem,
@@ -255,14 +274,6 @@ class Select extends Component {
 
   getSelectedValue = (field, selectedValue) => {
     return field ? field.value : selectedValue;
-  };
-
-  handleBlur = (e, field, onBlur) => {
-    if (field) {
-      field.onBlur(e);
-    }
-
-    onBlur(e);
   };
 
   isSuccess = params => {
@@ -317,6 +328,77 @@ class Select extends Component {
     }
   };
 
+  getItemIndexFromChildren = value => {
+    const { children } = this.props;
+    return children.findIndex(child => child.props.value === value);
+  };
+
+  stateReducer = (state, changes) => {
+    if (!this.props.autoSelect) {
+      return changes;
+    }
+
+    const { children } = this.props;
+    let selectedItemIndex;
+
+    switch (changes.type) {
+      case Downshift.stateChangeTypes.mouseUp:
+      case Downshift.stateChangeTypes.blurInput:
+      case Downshift.stateChangeTypes.blurButton:
+        // Assumes they already collapsed the select and are now
+        // navigating away, we shouldnt change the selection here
+        if (!state.isOpen) {
+          return changes;
+        }
+
+        // Get the item list so we can find the item at the highlitedIndex
+        const {
+          filterable,
+          virtualizedRowHeight,
+          virtualizedMenuWidth,
+          menuHeight
+        } = this.props;
+        const filteredItems = this.filterItems(
+          children,
+          state.inputValue,
+          filterable,
+          state.selectedItem
+        );
+        const items = this.getMenuItems(filteredItems, false, {
+          highlightedIndex: state.highlightedIndex,
+          menuHeight,
+          virtualizedRowHeight,
+          virtualizedMenuWidth
+        });
+        const selectedItem = items[state.highlightedIndex];
+
+        selectedItemIndex =
+          changes.selectedItem &&
+          this.getItemIndexFromChildren(changes.selectedItem.props.value);
+
+        // Set the new selectedItem
+        return {
+          ...changes,
+          highlightedIndex: selectedItemIndex,
+          selectedItem
+        };
+      case Downshift.stateChangeTypes.changeInput:
+        return { ...changes, highlightedIndex: 0 };
+      case Downshift.stateChangeTypes.clickItem:
+      case Downshift.stateChangeTypes.keyDownEnter:
+        selectedItemIndex =
+          changes.selectedItem &&
+          this.getItemIndexFromChildren(changes.selectedItem.props.value);
+
+        return {
+          ...changes,
+          highlightedIndex: selectedItemIndex || changes.highlightedIndex
+        };
+      default:
+        return changes;
+    }
+  };
+
   render() {
     const {
       children,
@@ -342,6 +424,7 @@ class Select extends Component {
       form,
       virtualizedRowHeight,
       virtualizedMenuWidth,
+      autoSelect,
       ...other
     } = this.props;
 
@@ -350,6 +433,25 @@ class Select extends Component {
       (menuStyle && parseInt(menuStyle.height, 10)) ||
       (menuStyle && parseInt(menuStyle.maxHeight, 10)) ||
       300;
+
+    // The selectedItem or the item with the same value as selectedValue
+    const selectedMenuItem =
+      selectedItem ||
+      this._getItemFromValue(
+        children,
+        this.getSelectedValue(field, selectedValue)
+      );
+
+    let defaultHighlightedIndex = undefined;
+    if (autoSelect) {
+      if (selectedMenuItem) {
+        defaultHighlightedIndex = this.getItemIndexFromChildren(
+          selectedMenuItem.props.value
+        );
+      } else {
+        defaultHighlightedIndex = 0;
+      }
+    }
 
     return (
       <Manager style={{ ...PopperManagerStyles, ...wrapperStyle }}>
@@ -363,14 +465,9 @@ class Select extends Component {
               onChange
             });
           }}
-          onBlur={e => this.handleBlur(e, field, onBlur)}
-          selectedItem={
-            selectedItem ||
-            this._getItemFromValue(
-              children,
-              this.getSelectedValue(field, selectedValue)
-            )
-          }
+          selectedItem={selectedMenuItem}
+          stateReducer={this.stateReducer}
+          defaultHighlightedIndex={defaultHighlightedIndex}
         >
           {({
             getRootProps,
@@ -402,20 +499,13 @@ class Select extends Component {
                       ref,
                       getToggleButtonProps,
                       getInputProps,
-                      placeholder,
-                      selectedItem,
-                      filterable,
-                      id,
-                      fullWidth,
-                      minimal,
-                      disabled,
-                      style,
-                      field,
-                      form,
-                      isOpen,
                       openMenu,
                       highlightedIndex,
                       selectHighlightedItem,
+                      inputValue,
+                      getItemProps,
+                      menuHeight,
+                      selectedItem,
                       ...other
                     });
                   }}
@@ -486,6 +576,8 @@ Select.propTypes = {
   children: PropTypes.node,
   /** Toggle the Select to use an input and allow filtering of the items. */
   filterable: PropTypes.bool,
+  /** The highlighted item will be automatically selected on blur. */
+  autoSelect: PropTypes.bool,
   /** Use react-virtualized to render rows as the user scrolls. */
   virtualized: PropTypes.bool,
   /** Callback function fired when the value of the Select changes. */
