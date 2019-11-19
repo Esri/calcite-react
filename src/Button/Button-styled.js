@@ -80,6 +80,16 @@ const StyledButton = styled.button`
           margin-right: -0.25rem;
         }
       `};
+
+    ${props =>
+      props.iconButton &&
+      css`
+        &,
+        html[dir='rtl'] & {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      `};
   }
 
   ${props =>
