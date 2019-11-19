@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "calcite-ui-icons-react": "^0.10.0",
-    "downshift": "^3.1.9",
+    "downshift": "^3.4.1",
     "match-sorter": "^2.3.0",
     "memoize-one": "^4.0.2",
     "outy": "^0.1.2",

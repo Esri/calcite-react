@@ -110,7 +110,8 @@ const StyledListItem = styled.div`
     css`
       ${props => getActiveStyles(props)};
     `};
-  &:hover {
+  &:hover,
+  &:focus {
     ${props => getActiveStyles(props)};
   }
 
@@ -138,7 +139,8 @@ const StyledListItem = styled.div`
         ${unitCalc(props.theme.baseline, 4, '/')};
       border-top-color: ${props.theme.palette.lighterGray};
 
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: unset;
         color: ${props.theme.palette.offBlack};
       }
@@ -161,7 +163,8 @@ const StyledListItem = styled.div`
         padding-right: calc(${unitCalc(props.theme.baseline, 4, '/')} + 3px);
       }
 
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: ${props.theme.palette.white};
       }
 
@@ -178,7 +181,8 @@ const StyledListItem = styled.div`
             padding: 0;
           }
 
-          &:hover {
+          &:hover,
+          &:focus {
             background-color: unset;
           }
         `};
@@ -215,7 +219,8 @@ const StyledListItem = styled.div`
               padding: 0;
               margin-bottom: ${unitCalc(props.theme.baseline, 4, '/')};
 
-              &:hover {
+              &:hover,
+              &:focus {
                 background-color: unset;
               }
             `};
@@ -260,7 +265,8 @@ const StyledListItem = styled.div`
               }
             `};
 
-          &:hover {
+          &:hover,
+          &:focus {
             text-decoration: underline;
 
             ${props.filterItem &&
@@ -296,7 +302,8 @@ const StyledListHeader = styled(StyledListItem)`
       font-weight: 600;
       ${fontSize(0)};
 
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: unset;
         color: ${props.theme.palette.darkerGray};
       }

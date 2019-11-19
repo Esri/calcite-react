@@ -56,10 +56,9 @@ class List extends Component {
       listMaxHeight = '0px';
     } else if (listNode && nested) {
       listMaxHeight = 0;
-      for (let i = 0; i < listNode.childNodes.length; i++) {
-        const child = listNode.childNodes[i];
-        listMaxHeight = listMaxHeight + child.clientHeight;
-      }
+      listNode.childNodes.forEach(child => {
+        listMaxHeight = listMaxHeight + child.getBoundingClientRect().height;
+      });
       listMaxHeight = listMaxHeight + 'px';
     }
 

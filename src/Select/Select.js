@@ -47,6 +47,7 @@ class Select extends Component {
     const {
       renderValue,
       filterable,
+      autoSelect,
       fullWidth,
       minimal,
       style,
@@ -64,8 +65,11 @@ class Select extends Component {
           event.preventDefault();
         }
       } else if (event.key === ' ') {
-        if (highlightedIndex === null) openMenu();
-        else {
+        if (filterable && autoSelect) return;
+
+        if (highlightedIndex === null) {
+          openMenu();
+        } else {
           event.nativeEvent.preventDefault(); // Avoids an extra space after value
           selectHighlightedItem();
         }
