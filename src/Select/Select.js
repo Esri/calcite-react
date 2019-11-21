@@ -180,9 +180,11 @@ class Select extends Component {
   };
 
   handleBlur = e => {
-    const { onBlur, field } = this.props;
+    const { onBlur, field, autoSelect } = this.props;
 
-    if (field) {
+    // Ignore field blur if autoSelect
+    // Blur behavior is handled by downshift stateReducer
+    if (!autoSelect && field) {
       field.onBlur(e);
     }
 
@@ -377,8 +379,8 @@ class Select extends Component {
         const selectedItem = items[state.highlightedIndex];
 
         selectedItemIndex =
-          changes.selectedItem &&
-          this.getItemIndexFromChildren(changes.selectedItem.props.value);
+          selectedItem &&
+          this.getItemIndexFromChildren(selectedItem.props.value);
 
         // Set the new selectedItem
         return {
