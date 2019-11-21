@@ -369,7 +369,7 @@ import Select from 'calcite-react/Select';
           const errors = {};
           if (!values.state) {
             errors.state = 'Required 🤨';
-          } else if (values.state !== 'CO') {
+          } else if (values.state !== 'Colorado') {
             errors.state = 'You have to live in Colorado to use this form 😉';
           }
 
@@ -395,9 +395,13 @@ import Select from 'calcite-react/Select';
                       State:
                     </FormControlLabel>
                     <Field component={Select} name="state">
-                      <MenuItem value="CA">California</MenuItem>
-                      <MenuItem value="CO">Colorado</MenuItem>
-                      <MenuItem value="MD">Maryland</MenuItem>
+                      {statesJson.states.map(state => {
+                        return (
+                          <MenuItem key={state} value={state}>
+                            {state}
+                          </MenuItem>
+                        );
+                      })}
                     </Field>
                     <FormHelperText>
                       {(touched.state && errors.state) || null}
