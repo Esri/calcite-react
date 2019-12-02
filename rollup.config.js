@@ -4,10 +4,11 @@ import multiInput from 'rollup-plugin-multi-input';
 import embedCSS from 'rollup-plugin-embed-css';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import progress from 'rollup-plugin-progress';
 
 export default {
   // use glob in the input
-  input: ['src/**/index.js'],
+  input: ['src/**/index.js', 'src/**/*-styled.js', 'src/**/utils/*.js'],
   output: {
     format: 'esm',
     dir: 'dist'
@@ -17,7 +18,7 @@ export default {
       preferBuiltins: true, // use local modules over matching builtin ones
       mainFields: ['main', 'module']
     }),
-    multiInput({ exports: false }),
+    multiInput(),
     commonjs({
       include: 'node_modules/**',
       namedExports: {
@@ -52,6 +53,7 @@ export default {
     babel({
       exclude: ['node_modules/**']
     }),
-    terser()
+    terser(),
+    progress()
   ]
 };
