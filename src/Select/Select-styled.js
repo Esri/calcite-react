@@ -58,7 +58,7 @@ const StyledSelectMenu = styled(Menu)`
   border-bottom: none;
   box-shadow: ${props => props.theme.boxShadow},
     0 1px 0 ${props => props.theme.palette.lightestGray};
-  transition: opacity ${transition()};
+  transition: opacity ${props => transition(props.theme)};
   z-index: 2000;
 
   ${props =>

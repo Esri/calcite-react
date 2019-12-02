@@ -10,7 +10,6 @@
 // limitations under the License.​
 
 import { transparentize } from 'polished';
-import { CalciteTheme } from '../CalciteThemeProvider';
 
 const unitCalc = (operand1, operand2, operator) => {
   let operand1Value = operand1;
@@ -210,14 +209,15 @@ const backgroundGradient = (img, fromColor, toColor, addOverlayGradient) => {
   }
 };
 
-const transition = delayTime => {
+const transition = (theme, delayTime) => {
   if (delayTime) {
     return `
-      ${CalciteTheme.transitionDuration} ${delayTime} ${CalciteTheme.easingFunc}
+      ${theme.transitionDuration} ${delayTime} ${props =>
+      props.theme.easingFunc}
     `;
   }
   return `
-    ${CalciteTheme.transitionDuration} ${CalciteTheme.easingFunc}
+    ${theme.transitionDuration} ${theme.easingFunc}
   `;
 };
 

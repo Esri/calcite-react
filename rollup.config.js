@@ -55,5 +55,26 @@ export default {
     }),
     terser(),
     progress()
+  ],
+  external: [
+    'calcite-ui-icons-react',
+    'downshift',
+    'match-sorter',
+    'memoize-one',
+    'outy',
+    'polished',
+    'react-dates',
+    'react-is',
+    'react-modal',
+    'react-popper',
+    'react-resize-aware',
+    'react-toastify',
+    'react-transition-group',
+    'react-virtualized',
+    'styled-components',
+    'uniqid',
+    'react',
+    'prop-types',
+    'react-dom'
   ]
 };

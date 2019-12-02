@@ -34,7 +34,7 @@ const StyledDrawer = styled.div`
   overflow: hidden;
   opacity: 0;
   background: ${props => props.theme.palette.transparentBlack};
-  transition: ${transition('opacity')};
+  transition: opacity ${props => transition(props.theme)};
   z-index: 1001;
 
   ${props =>
@@ -60,7 +60,7 @@ const StyledDrawerNav = styled.nav`
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  transition: ${transition('all')};
+  transition: all ${props => transition(props.theme)};
 
   html[dir='rtl'] & {
     left: auto;

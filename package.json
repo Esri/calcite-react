@@ -107,7 +107,6 @@
     "husky": "^0.14.3",
     "jest": "^22.0.4",
     "lint-staged": "^6.0.0",
-    "material-ui": "^0.20.2",
     "mdi-react": "^2.1.19",
     "prettier": "^1.13.4",
     "prop-types": "^15.6.2",
@@ -125,8 +124,7 @@
     "rollup-plugin-progress": "^1.1.1",
     "rollup-plugin-size-snapshot": "^0.10.0",
     "rollup-plugin-terser": "^5.1.2",
-    "rxjs-compat": "^6.3.3",
-    "yup": "^0.26.5"
+    "rxjs-compat": "^6.3.3"
   },
   "peerDependencies": {
     "react": "^16.8.6"

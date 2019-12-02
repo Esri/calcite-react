@@ -39,7 +39,7 @@ const StyledCopyToClipboard = styled.div`
   display: flex;
 
   svg {
-    animation: ${FadeIn} ${transition()};
+    animation: ${FadeIn} ${props => transition(props.theme)};
   }
 `;
 StyledCopyToClipboard.defaultProps = { theme };

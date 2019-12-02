@@ -193,7 +193,7 @@ const ManagerStyle = {
 };
 
 const PopperStyle = {
-  transition: `opacity ${transition()}`,
+  transition: `opacity ${props => transition(props.theme)}`,
   zIndex: 2000
 };
 

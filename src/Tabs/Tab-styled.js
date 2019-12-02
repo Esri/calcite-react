@@ -44,7 +44,7 @@ StyledTab.defaultProps = { theme };
 const StyledTabTitle = styled(CalciteA)`
   box-sizing: border-box;
   ${fontSize(-2)};
-  transition: background ${transition()};
+  transition: background ${props => transition(props.theme)};
   padding: ${props => unitCalc(props.theme.baseline, 4, '/')}
     ${props => unitCalc(props.theme.baseline, 2, '/')};
   white-space: nowrap;
@@ -137,7 +137,7 @@ const StyledTabTitle = styled(CalciteA)`
         ${props =>
           props.active &&
           css`
-            transition: background ${transition()};
+            transition: background ${props => transition(props.theme)};
             background-color: transparent;
             border: 1px solid ${props => props.theme.palette.lighterGray};
             border-bottom: 1px solid ${props => props.theme.palette.white};

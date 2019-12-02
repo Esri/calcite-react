@@ -51,7 +51,7 @@ const StyledAccordionTitle = styled(StyledSideNavTitle)`
 
   &:hover,
   &:focus {
-    transition: all, ${transition()};
+    transition: all, ${props => transition(props.theme)};
     background-color: ${props => props.theme.palette.lightestGray};
     outline: none;
   }
@@ -79,7 +79,7 @@ StyledAccordionContent.defaultProps = { theme };
 const StyledChevronIcon = styled(ChevronRightIcon)`
   width: 20;
   height: 20;
-  transition: transform ${transition()};
+  transition: transform ${props => transition(props.theme)};
 
   html[dir='rtl'] & {
     transform: rotate(180deg);
