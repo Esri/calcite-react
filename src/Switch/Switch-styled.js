@@ -20,6 +20,7 @@ import { baseRadioCheckbox } from '../utils/commonElements';
 import { CalciteTheme as theme, EsriColors } from '../CalciteThemeProvider';
 
 // Calcite components
+import { StyledFormControlLabel } from '../Form/Form-styled';
 
 // Icons
 
@@ -72,12 +73,18 @@ const switchProps = {
 };
 
 const StyledSwitch = styled.label`
-  display: block;
+  display: flex;
   position: relative;
   cursor: pointer;
   user-select: none;
   tap-highlight-color: transparent;
   margin: 0 0 ${props => props.theme.baseline} 0;
+
+  ${props =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+    `};
 `;
 StyledSwitch.defaultProps = { theme };
 
@@ -102,6 +109,7 @@ const StyledSwitchTrack = styled.span`
   border: 1px solid ${switchProps.switchBorderColor};
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   margin-right: 1rem;
+  flex-shrink: 0;
 
   html[dir='rtl'] & {
     margin-right: 0;
@@ -272,20 +280,25 @@ const StyledSwitchTrack = styled.span`
 `;
 StyledSwitchTrack.defaultProps = { theme };
 
-const StyledSwitchLabel = styled.span`
-  ${fontSize(-1)};
-  width: calc((100% - 3em) - 0.5em);
-  padding: 0 0.1em;
+const StyledSwitchLabel = styled(StyledFormControlLabel)`
   vertical-align: top;
+  text-align: end;
 
   &:first-child {
     margin-right: 1rem;
+    text-align: start;
 
     html[dir='rtl'] & {
       margin-right: 0;
       margin-left: 1rem;
     }
   }
+
+  ${props =>
+    props.fullWidth &&
+    css`
+      flex: 1 0 auto;
+    `};
 `;
 StyledSwitchLabel.defaultProps = { theme };
 

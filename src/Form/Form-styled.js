@@ -82,6 +82,7 @@ const StyledFormControl = styled.div`
 StyledFormControl.defaultProps = { theme };
 
 const StyledFormControlLabel = styled.label`
+  ${fontSize(0)}
   display: flex;
   flex-direction: column;
 
