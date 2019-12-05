@@ -130,6 +130,7 @@ const StyledFormHelperText = styled.span`
 StyledFormHelperText.defaultProps = { theme };
 
 const StyledLegend = styled.legend`
+  ${fontSize(0)}
   position: relative;
   display: block;
   margin-bottom: 0.25rem;
