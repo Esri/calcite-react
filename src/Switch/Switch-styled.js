@@ -282,11 +282,11 @@ StyledSwitchTrack.defaultProps = { theme };
 
 const StyledSwitchLabel = styled(StyledFormControlLabel)`
   vertical-align: top;
-  text-align: end;
+  text-align: right;
 
   &:first-child {
     margin-right: 1rem;
-    text-align: start;
+    text-align: initial;
 
     html[dir='rtl'] & {
       margin-right: 0;
