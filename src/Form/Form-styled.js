@@ -82,6 +82,7 @@ const StyledFormControl = styled.div`
 StyledFormControl.defaultProps = { theme };
 
 const StyledFormControlLabel = styled.label`
+  ${fontSize(0)}
   display: flex;
   flex-direction: column;
 
@@ -129,6 +130,7 @@ const StyledFormHelperText = styled.span`
 StyledFormHelperText.defaultProps = { theme };
 
 const StyledLegend = styled.legend`
+  ${fontSize(0)}
   position: relative;
   display: block;
   margin-bottom: 0.25rem;

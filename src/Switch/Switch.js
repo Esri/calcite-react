@@ -22,6 +22,7 @@ import {
 const Switch = ({
   children,
   labelPosition,
+  fullWidth,
   destructive,
   checked,
   field,
@@ -45,7 +46,9 @@ const Switch = ({
 
   const getSwitchLabel = children => {
     if (children) {
-      return <StyledSwitchLabel>{children}</StyledSwitchLabel>;
+      return (
+        <StyledSwitchLabel fullWidth={fullWidth}>{children}</StyledSwitchLabel>
+      );
     }
   };
 
@@ -84,7 +87,7 @@ const Switch = ({
   };
 
   return (
-    <StyledSwitch>
+    <StyledSwitch fullWidth={fullWidth}>
       {labelPosition === 'before' ? getSwitchLabel(children) : null}
       <StyledSwitchInput
         onChange={handleChange}
@@ -113,7 +116,9 @@ Switch.propTypes = {
   /** Should use a red highlight color. */
   destructive: PropTypes.bool,
   /** Position of the label text in relation to the input. */
-  labelPosition: PropTypes.oneOf(['before', 'after'])
+  labelPosition: PropTypes.oneOf(['before', 'after']),
+  /** Switch and label will take up the full width of the container */
+  fullWidth: PropTypes.bool
 };
 
 Switch.defaultProps = {
