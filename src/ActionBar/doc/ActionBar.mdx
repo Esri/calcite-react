@@ -1,0 +1,163 @@
+---
+name: ActionBar
+route: /action-bar
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import ActionBar, {
+  Action,
+  ActionGroup,
+  BottomActionGroup
+} from '../'
+
+import PlusIcon from 'calcite-ui-icons-react/PlusIcon';
+import SaveIcon from 'calcite-ui-icons-react/SaveIcon';
+import LayersIcon from 'calcite-ui-icons-react/LayersIcon';
+import SignOutIcon from 'calcite-ui-icons-react/SignOutIcon';
+import BookmarkIcon from 'calcite-ui-icons-react/BookmarkIcon';
+import BasemapIcon from 'calcite-ui-icons-react/BasemapIcon';
+
+# Action Bar
+
+The `ActionBar` component is made up of multiple `Actions` in the form of clickable icons. The action bar can be expanded to view actions with descriptive text or made smaller to view with just icons.
+
+#### Import Syntax
+
+```js
+import ActionBar, {
+  Action,
+  ActionGroup,
+  BottomActionGroup
+} from 'calcite-react/ActionBar'
+```
+
+## Basic Usage
+
+<Playground style={{height: '400px', background: "#f3f3f3"}}>
+  <ActionBar>
+    <Action active icon={<PlusIcon />}>Add Item</Action>
+    <Action icon={<SaveIcon />}>Save</Action>
+    <Action icon={<LayersIcon filled />}>Layer List</Action>
+  </ActionBar>
+</Playground>
+
+## Controlled ActionBar
+
+<Playground style={{height: '400px', background: "#f3f3f3"}}>
+  {() => {    
+      class ActionBarStory extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            collapsed: false,
+            activeAction: 'ADD_ITEM'
+          };
+
+          this.onToggleCollapse = this.onToggleCollapse.bind(this);
+          this.actionSelected = this.actionSelected.bind(this);
+        }
+
+        onToggleCollapse() {
+          this.setState({collapsed: !this.state.collapsed})
+        }
+
+        actionSelected(activeAction) {
+          this.setState({ activeAction });
+        };
+
+        render() {
+          return (
+            <ActionBar
+              collapsed={this.state.collapsed}
+              onToggleCollapse={this.onToggleCollapse}
+            >
+              <Action
+                onClick={() => this.actionSelected('ADD_ITEM')}
+                active={this.state.activeAction === 'ADD_ITEM'}
+                icon={<PlusIcon />}
+              >
+                Add Item
+              </Action>
+              <Action
+                onClick={() => this.actionSelected('SAVE')}
+                active={this.state.activeAction === 'SAVE'}
+                icon={<SaveIcon />}
+              >
+                Save
+              </Action>
+              <Action
+                onClick={() => this.actionSelected('LAYER_LIST')}
+                active={this.state.activeAction === 'LAYER_LIST'}
+                icon={<LayersIcon />}
+              >
+                Layer List
+              </Action>
+            </ActionBar>
+          );
+        }
+      }
+
+      return <ActionBarStory />;
+    }}
+</Playground>
+
+## Dark
+
+<Playground style={{height: '400px'}}>
+  <ActionBar dark>
+    <Action active icon={<PlusIcon />}>Add Item</Action>
+    <Action icon={<SaveIcon />}>Save</Action>
+    <Action icon={<LayersIcon filled />}>Layer List</Action>
+  </ActionBar>
+</Playground>
+
+## Grouped Actions
+
+<Playground style={{display: 'flex', height: '400px', background: "#f3f3f3"}}>
+  <ActionBar>
+    <ActionGroup>
+      <Action active icon={<PlusIcon />}>Add Item</Action>
+      <Action icon={<SaveIcon />}>Save</Action>
+      <Action icon={<LayersIcon filled />}>Layer List</Action>
+    </ActionGroup>
+    <ActionGroup>
+      <Action icon={<BookmarkIcon />}>Bookmarks</Action>
+      <Action icon={<BasemapIcon />}>Basemaps</Action>
+    </ActionGroup>
+  </ActionBar>
+</Playground>
+
+## Bottom Actions
+
+<Playground style={{height: '400px', background: "#f3f3f3"}}>
+  <ActionBar>
+    <ActionGroup>
+      <Action active icon={<PlusIcon />}>Add Item</Action>
+      <Action icon={<SaveIcon />}>Save</Action>
+      <Action icon={<LayersIcon filled />}>Layer List</Action>
+    </ActionGroup>
+    <BottomActionGroup>
+      <Action icon={<SignOutIcon />}>Sign Out</Action>
+    </BottomActionGroup>
+  </ActionBar>
+</Playground>
+
+## Props
+
+### ActionBar `default`
+
+<PropsTable of={ActionBar} />
+
+### Action
+
+<PropsTable of={Action} />
+
+### ActionGroup
+
+<PropsTable of={ActionGroup} />
+
+### BottomActionGroup
+
+<PropsTable of={BottomActionGroup} />
