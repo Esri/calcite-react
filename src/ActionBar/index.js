@@ -10,7 +10,6 @@
 // limitations under the License.​
 
 export { default } from './ActionBar';
+export { default as Action } from './Action';
 export { default as ActionGroup } from './ActionGroup';
 export { default as BottomActionGroup } from './BottomActionGroup';
-export { default as Action } from './Action';
-export { ActionDivider } from './ActionBar-styled.js';

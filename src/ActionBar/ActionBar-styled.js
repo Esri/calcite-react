@@ -13,319 +13,189 @@
 import styled, { css } from 'styled-components';
 
 // Utils, common elements
-import { fontSize, unitCalc, transition } from '../utils/helpers';
+import { unitCalc } from '../utils/helpers';
 
 // Calcite theme and Esri colors
-import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
 // Calcite components
-import { CalciteA } from '../Elements';
+import Button from '../Button';
 
 // Icons
 
-// Third party libraries
-
-const StyledTab = styled.div`
-  padding: 0;
-  flex: 1 0 auto;
-
-  ${props =>
-    props.right &&
-    css`
-      float: right;
-
-      html[dir='rtl'] & {
-        float: left;
-      }
-    `};
+// Third party librarie
+const StyledActionGroup = styled.div`
+  width: 100%;
+  flex: 0 0 auto;
+  border-bottom: 1px solid ${props => props.theme.palette.lightestGray};
 `;
-StyledTab.defaultProps = { theme };
 
-const StyledTabTitle = styled(CalciteA)`
-  box-sizing: border-box;
-  ${fontSize(-2)};
-  transition: background ${transition()};
-  padding: ${props => unitCalc(props.theme.baseline, 4, '/')}
-    ${props => unitCalc(props.theme.baseline, 2, '/')};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  background-color: ${props => props.theme.palette.offWhite};
-  border: 1px solid ${props => props.theme.palette.lighterGray};
-  margin-right: -1px;
-  cursor: pointer;
+const StyledBottomActionGroup = styled.div`
+  width: 100%;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`;
+
+const StyledActionBar = styled.div`
+  height: 100%;
+  width: 180px;
+  flex: 0 0 180px;
+  display: flex;
+  flex-direction: column;
+  background-color: ${props => props.theme.palette.white};
+  border-right: 1px solid ${props => props.theme.palette.lightestGray};
+  align-items: flex-start;
 
   html[dir='rtl'] & {
-    margin-right: 0;
-    margin-left: -1px;
+    border-right: none;
+    border-left: 1px solid ${props => props.theme.palette.lightestGray};
   }
 
-  &:first-child {
-    border-top-left-radius: ${props => props.theme.borderRadius};
+  ${props =>
+    props.dark &&
+    css`
+      background-color: ${props => props.theme.palette.offBlack};
+
+      ${StyledActionGroup} {
+        border-bottom-color: ${props => props.theme.palette.black};
+      }
+    `};
+
+  ${props =>
+    props.collapsed &&
+    css`
+      width: 49px;
+      flex: 0 0 49px;
+    `};
+`;
+
+const StyledActionBarCollapseContainer = styled.div`
+  width: 100%;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  ${StyledBottomActionGroup} + & {
+    flex: 0 0 auto;
+  }
+`;
+
+const StyledCollapseAction = styled(Button).attrs(({ collapsed }) => {
+  return {
+    white: true,
+    iconButton: collapsed,
+    iconPosition: 'before',
+    fullWidth: true,
+    extraSmall: true
+  };
+})`
+  height: 48px;
+  color: ${props => props.theme.palette.black};
+  padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  border: none;
+  white-space: normal;
+  text-align: start;
+  line-height: 1rem;
+  background: transparent;
+
+  ${props =>
+    props.dark &&
+    css`
+      color: ${props => props.theme.palette.white};
+    `};
+
+  &:hover {
+    color: ${props => props.theme.palette.black};
+    background: ${props => props.theme.palette.lightestGray};
+
+    ${props =>
+      props.dark &&
+      css`
+        color: ${props => props.theme.palette.white};
+        background: ${props => props.theme.palette.black};
+      `};
+  }
+
+  ${props =>
+    !props.collapsed &&
+    css`
+      display: flex;
+      justify-content: flex-start;
+      padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
+      padding-left: ${props => unitCalc(props.theme.baseline, 1.5, '/')};
+
+      html[dir='rtl'] & {
+        padding-left: ${props => unitCalc(props.theme.baseline, 3, '/')};
+        padding-right: ${props => unitCalc(props.theme.baseline, 1.5, '/')};
+      }
+    `};
+
+  svg {
+    flex-shrink: 0;
+    margin-left: 0 !important;
 
     html[dir='rtl'] & {
-      border-top-left-radius: 0;
-      border-top-right-radius: ${props => props.theme.borderRadius};
+      margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
+      margin-right: 0 !important;
     }
   }
+`;
 
-  &:last-child {
-    border-top-right-radius: ${props => props.theme.borderRadius};
-
-    html[dir='rtl'] & {
-      border-top-right-radius: 0;
-      border-top-left-radius: ${props => props.theme.borderRadius};
-    }
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:hover,
-  &:focus {
-    background-color: ${props => props.theme.palette.white};
-    text-decoration: none;
-    background-image: linear-gradient(
-      to top,
-      transparent 94%,
-      ${props => props.theme.palette.blue} 96%,
-      ${props => props.theme.palette.blue} 100%
-    );
-  }
-
+const StyledAction = styled(StyledCollapseAction)`
   ${props =>
     props.active &&
     css`
-      border-bottom: 1px solid ${props => props.theme.palette.white};
-      background-color: ${props => props.theme.palette.white};
-
+      &,
       &:hover {
-        background-color: ${props.theme.palette.white};
+        color: ${props.theme.palette.darkBlue};
+        background: ${props.theme.palette.lightestBlue};
+
+        ${props.dark &&
+          css`
+            color: ${props.theme.palette.blue};
+            background: #151515;
+          `};
       }
     `};
 
-    ${props =>
-      props.gray &&
-      css`
-        background-color: ${props => props.theme.palette.white};
-
-        ${props =>
-          props.active &&
-          css`
-            background-color: ${props => props.theme.palette.offWhite};
-            border-bottom: 1px solid ${props => props.theme.palette.offWhite};
-          `};
-      `};
+  & {
+    position: relative;
 
     ${props =>
-      props.transparent &&
+      props.hasNotification &&
       css`
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
-        margin-right: 0;
-
-        html[dir='rtl'] & {
-          margin-left: 0;
-        }
-
-        &:hover {
-          border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
-        }
-
-        ${props =>
-          props.active &&
-          css`
-            transition: background ${transition()};
-            background-color: transparent;
-            border: 1px solid ${props => props.theme.palette.lighterGray};
-            border-bottom: 1px solid ${props => props.theme.palette.white};
-            border-radius: ${props => props.theme.borderRadius}
-              ${props => props.theme.borderRadius} 0 0;
-
-            &:hover {
-              border-bottom: 1px solid ${props => props.theme.palette.white};
-            }
-          `};
-      `};
-
-      ${props =>
-        props.translucent &&
-        css`
-          background-color: ${props => props.theme.palette.transparentWhite};
-          background-image: none;
-          border: none;
-          border-top: 2px solid ${props => props.theme.palette.transparentWhite};
-          color: ${props => props.theme.palette.offBlack};
-          margin-right: 2px;
-          margin-bottom: 3px;
-          transition: none;
+        &::after {
+          content: '';
+          border: 3px solid ${props => props.theme.palette.blue};
+          position: absolute;
+          bottom: 6px;
+          right: 6px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: ${props => props.theme.palette.white};
 
           html[dir='rtl'] & {
-            margin-right: 0;
-            margin-left: 2px;
+            right: auto;
+            left: 6px;
           }
-
-          &:first-child,
-          &:last-child {
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-          }
-
-          &:hover,
-          &:focus {
-            background-color: ${props => props.theme.palette.opaqueWhite};
-            border-top-color: ${props => props.theme.palette.blue};
-            background-image: none;
-          }
-
-          ${props =>
-            props.active &&
-            css`
-              background-image: none;
-              background-color: ${props => props.theme.palette.opaqueWhite};
-              border-top-color: ${props => props.theme.palette.blue};
-              border-bottom: 2px solid
-                ${props => props.theme.palette.opaqueWhite};
-              margin-bottom: 0;
-            `};
-        `};
-
-        ${props =>
-          props.dark &&
-          css`
-            margin-right: 2px;
-            margin-bottom: 3px;
-            border: none;
-            background-color: ${props => props.theme.palette.transparentBlack};
-            color: ${props => props.theme.palette.white};
-            border-top: 2px solid
-              ${props => props.theme.palette.transparentBlack};
-
-            html[dir='rtl'] & {
-              margin-right: 0;
-              margin-left: 2px;
-            }
-
-            &:hover,
-            &:focus {
-              color: ${props => props.theme.palette.white};
-              background-color: ${props => props.theme.palette.opaqueBlack};
-              border-top-color: ${props => props.theme.palette.white};
-              background-image: none;
-            }
-
-            ${props =>
-              props.active &&
-              css`
-                margin-bottom: 1px;
-                background-color: ${props => props.theme.palette.opaqueBlack};
-                border-top-color: ${props => props.theme.palette.white};
-                border-bottom: 2px solid transparent;
-              `};
-          `};
-  }
-
-  ${props =>
-    props.disabled &&
-    css`
-      opacity: 0.5;
-      pointer-events: none;
-    `};
-`;
-StyledTabTitle.defaultProps = { theme };
-
-const StyledTabNav = styled.nav`
-  display: flex;
-
-  &::after {
-    display: table;
-    content: '';
-    clear: both;
+        }
+      `};
   }
 `;
-StyledTabNav.defaultProps = { theme };
 
-const StyledTabContents = styled.div`
-  box-sizing: border-box;
-  border: 1px solid ${props => props.theme.palette.lighterGray};
-  border-radius: 0 0 ${props => props.theme.borderRadius}
-    ${props => props.theme.borderRadius};
-  margin-top: -1px;
-
-  ${props =>
-    props.transparent &&
-    css`
-      border-bottom: none;
-      border-left: none;
-      border-right: none;
-    `};
-
-  ${props =>
-    props.translucent &&
-    css`
-      border: none;
-    `};
-
-  ${props =>
-    props.dark &&
-    css`
-      border: none;
-    `};
-`;
-StyledTabContents.defaultProps = { theme };
-
-const StyledTabSection = styled.article`
-  box-sizing: border-box;
-  background-color: ${props => props.theme.palette.white};
-  padding: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  border-radius: 0 0 ${props => props.theme.borderRadius}
-    ${props => props.theme.borderRadius};
-
-  pre {
-    margin: 0;
-  }
-
-  ${props =>
-    props.gray &&
-    css`
-      background-color: ${props => props.theme.palette.offWhite};
-
-      pre code {
-        padding: 0;
-        border: none;
-        background-color: transparent;
-      }
-    `};
-
-  ${props =>
-    props.transparent &&
-    css`
-      background-color: transparent;
-      padding-left: 0;
-      padding-right: 0;
-    `};
-
-  ${props =>
-    props.translucent &&
-    css`
-      background-color: ${props => props.theme.palette.opaqueWhite};
-    `};
-
-  ${props =>
-    props.dark &&
-    css`
-      background-color: ${props => props.theme.palette.opaqueBlack};
-      color: ${props => props.theme.palette.white};
-    `};
-`;
-StyledTabSection.defaultProps = { theme };
+const TooltipWrapperStyles = {
+  width: '100%'
+};
 
 export {
-  StyledTab,
-  StyledTabTitle,
-  StyledTabNav,
-  StyledTabContents,
-  StyledTabSection
+  StyledActionBar,
+  StyledActionGroup,
+  StyledBottomActionGroup,
+  StyledActionBarCollapseContainer,
+  StyledCollapseAction,
+  StyledAction,
+  TooltipWrapperStyles
 };

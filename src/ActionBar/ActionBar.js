@@ -10,15 +10,54 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { createContext } from 'react';
 
-import { StyledTab } from './Tab-styled';
+import {
+  StyledActionBar,
+  StyledActionBarCollapseContainer
+} from './ActionBar-styled';
 
-const ActionBar = ({ children, dark, ...other }) => {
+import CollapseAction from './CollapseAction';
+
+const ActionBarContext = createContext({
+  actionBarContext: {
+    dark: undefined,
+    collapsed: undefined
+  }
+});
+
+const ActionBar = ({
+  children,
+  dark,
+  showCollapser,
+  collapsed,
+  collapseLabel,
+  expandLabel,
+  onToggleCollapse,
+  ...other
+}) => {
+  const actionBarContext = {
+    dark,
+    collapsed
+  };
+
   return (
-    <StyledTab dark={dark} {...other}>
-      {children}
-    </StyledTab>
+    <ActionBarContext.Provider value={{ actionBarContext }}>
+      <StyledActionBar dark={dark} collapsed={collapsed} {...other}>
+        {children}
+        {showCollapser && (
+          <StyledActionBarCollapseContainer>
+            <CollapseAction
+              dark={dark}
+              collapsed={collapsed}
+              collapseLabel={collapseLabel}
+              expandLabel={expandLabel}
+              onClick={onToggleCollapse}
+            />
+          </StyledActionBarCollapseContainer>
+        )}
+      </StyledActionBar>
+    </ActionBarContext.Provider>
   );
 };
 
@@ -27,14 +66,25 @@ ActionBar.propTypes = {
   children: PropTypes.node,
   /** Style prop to render a dark ActionBar. */
   dark: PropTypes.bool,
+  /** Toggle visibility of the collapser control at the bottom of the ActionBar */
   showCollapser: PropTypes.bool,
+  /** Programatically control collapsed state of the ActionBar */
   collapsed: PropTypes.bool,
+  /** Label used in the collapser */
   collapseLabel: PropTypes.node,
-  expandLabel: PropTypes.node
+  /** Label used in the collapser tooltip when collapsed */
+  expandLabel: PropTypes.node,
+  /** Event callback when the collapser is clicked */
+  onToggleCollapse: PropTypes.func
 };
 
-ActionBar.defaultProps = {};
+ActionBar.defaultProps = {
+  showCollapser: true,
+  collapseLabel: 'Collapse',
+  expandLabel: 'Expand',
+  onToggleCollapse: () => {}
+};
 
 ActionBar.displayName = 'ActionBar';
 
-export default ActionBar;
+export { ActionBar as default, ActionBarContext };
