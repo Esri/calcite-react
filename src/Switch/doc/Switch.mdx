@@ -30,20 +30,25 @@ import Switch from 'calcite-react/Switch'
 ## Alternate Styles
 
 <Playground>
-  <Form>
-    <GuideExample label="destructive">
-      <FormControl>
-        <Switch destructive>
-          Confirm account deletion. You cannot recover deleted accounts.
-        </Switch>
-      </FormControl>
-    </GuideExample>
-    <GuideExample label="labelPosition='before'">
-      <FormControl>
-        <Switch labelPosition="before">Enable Two-Factor Authentication</Switch>
-      </FormControl>
-    </GuideExample>
-  </Form>
+  <GuideExample label="destructive">
+    <Switch destructive>
+      Confirm account deletion. You cannot recover deleted accounts.
+    </Switch>
+  </GuideExample>
+  <GuideExample label="labelPosition='before'">
+    <Switch labelPosition="before">Enable Two-Factor Authentication</Switch>
+  </GuideExample>
+</Playground>
+
+## fullWidth
+
+<Playground>
+  <GuideExample>
+    <Switch fullWidth>Enable Two-Factor Authentication</Switch>
+  </GuideExample>
+  <GuideExample>
+    <Switch fullWidth labelPosition="before">Enable Two-Factor Authentication</Switch>
+  </GuideExample>
 </Playground>
 
 ## with Formik
