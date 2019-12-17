@@ -390,14 +390,7 @@ class Search extends Component {
                               ...PopperStyle
                             }}
                             placement={rtlPlacement(this.props.placement)}
-                            modifiers={{
-                              preventOverflow: {
-                                enabled: usePreventOverflow
-                              },
-                              hide: {
-                                enabled: usePreventOverflow
-                              }
-                            }}
+                            modifiers={this.props.popperModifiers}
                           >
                             {({ ref, style, placement, scheduleUpdate }) => (
                               <SearchMenu
@@ -497,7 +490,9 @@ Search.propTypes = {
   /** SVG icon to clear the value of the Search input */
   clearIcon: PropTypes.node,
   /** Use a remote API for the data load.  This will allow the application to see the exact return from the API with no filtering applied */
-  remote: PropTypes.bool
+  remote: PropTypes.bool,
+  /** Modifiers to be passed to the Popper element */
+  popperModifiers: PropTypes.object
 };
 
 Search.defaultProps = {
