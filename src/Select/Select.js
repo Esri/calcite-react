@@ -431,10 +431,10 @@ class Select extends Component {
       virtualizedRowHeight,
       virtualizedMenuWidth,
       autoSelect,
+      popperModifiers,
       ...other
     } = this.props;
 
-    const popperModifiersEnabled = appendToBody || positionFixed ? false : true;
     const menuHeight =
       (menuStyle && parseInt(menuStyle.height, 10)) ||
       (menuStyle && parseInt(menuStyle.maxHeight, 10)) ||
@@ -523,14 +523,7 @@ class Select extends Component {
                         <Popper
                           positionFixed={positionFixed}
                           placement={rtlPlacement(other.placement)}
-                          modifiers={{
-                            preventOverflow: {
-                              enabled: popperModifiersEnabled
-                            },
-                            hide: {
-                              enabled: popperModifiersEnabled
-                            }
-                          }}
+                          modifiers={popperModifiers}
                         >
                           {({
                             ref,
@@ -625,7 +618,9 @@ Select.propTypes = {
   /** (virtualized only) Row height used to calculate how many rows to render in a virtualized menu. */
   virtualizedRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
   /** (virtualized only) Width of the menu; unloaded rows may be wider than the initial set. */
-  virtualizedMenuWidth: PropTypes.number
+  virtualizedMenuWidth: PropTypes.number,
+  /** Modifiers to be passed to the Popper element */
+  popperModifiers: PropTypes.object
 };
 
 Select.defaultProps = {
