@@ -92,9 +92,6 @@ class Popover extends Component {
   };
 
   render() {
-    const usePreventOverflow =
-      this.props.appendToBody || this.props.positionFixed ? false : true;
-
     return (
       <PopoverContext.Provider value={{ popoverContext: this.popoverContext }}>
         <Manager>
@@ -116,14 +113,7 @@ class Popover extends Component {
                     <Popper
                       positionFixed={this.props.positionFixed}
                       placement={rtlPlacement(this.props.placement)}
-                      modifiers={{
-                        preventOverflow: {
-                          enabled: usePreventOverflow
-                        },
-                        hide: {
-                          enabled: usePreventOverflow
-                        }
-                      }}
+                      modifiers={this.props.popperModifiers}
                     >
                       {({ ref, style, placement, scheduleUpdate }) => {
                         return (
@@ -190,7 +180,9 @@ Popover.propTypes = {
   /** Styles passed onto the Popover container div. */
   popoverContainerStyles: PropTypes.object,
   /** Uses `position: fixed` on the tooltip allowing it to show up outside of containers that have `overflow: hidden`. */
-  positionFixed: PropTypes.bool
+  positionFixed: PropTypes.bool,
+  /** Modifiers to be passed to the Popper element */
+  popperModifiers: PropTypes.object
 };
 
 Popover.defaultProps = {

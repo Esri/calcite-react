@@ -61,12 +61,12 @@ class Tooltip extends Component {
       placement,
       transitionDuration,
       title,
-      arrowStyle
+      arrowStyle,
+      popperModifiers
     } = this.props;
 
     const isOpen =
       this.props.open !== undefined ? this.props.open : this.state.open;
-    const usePreventOverflow = appendToBody || positionFixed ? false : true;
 
     return (
       <ThemeContext.Consumer>
@@ -96,14 +96,7 @@ class Tooltip extends Component {
                       <Popper
                         positionFixed={positionFixed}
                         placement={rtlPlacement(placement)}
-                        modifiers={{
-                          preventOverflow: {
-                            enabled: usePreventOverflow
-                          },
-                          hide: {
-                            enabled: usePreventOverflow
-                          }
-                        }}
+                        modifiers={popperModifiers}
                       >
                         {({
                           ref,
@@ -181,7 +174,9 @@ Tooltip.propTypes = {
   /** Apply styles to the Tooltip arrow element. */
   arrowStyle: PropTypes.object,
   /** Apply styles to the Tooltip target wrapper element. */
-  targetWrapperStyle: PropTypes.object
+  targetWrapperStyle: PropTypes.object,
+  /** Modifiers to be passed to the Popper element */
+  popperModifiers: PropTypes.object
 };
 
 Tooltip.defaultProps = {
