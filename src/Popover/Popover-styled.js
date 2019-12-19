@@ -18,6 +18,7 @@ import styled, { css } from 'styled-components';
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
 // Calcite components
+import { StyledMenu } from '../Menu/Menu-styled';
 
 // Icons
 
@@ -53,6 +54,10 @@ const StyledPopover = styled.div`
       opacity: 1;
       pointer-events: auto;
     `};
+
+  ${StyledMenu} {
+    box-shadow: none;
+  }
 
   iframe {
     border: none;
