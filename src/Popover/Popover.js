@@ -113,7 +113,15 @@ class Popover extends Component {
                     <Popper
                       positionFixed={this.props.positionFixed}
                       placement={rtlPlacement(this.props.placement)}
-                      modifiers={this.props.popperModifiers}
+                      modifiers={{
+                        preventOverflow: {
+                          boundariesElement:
+                            this.props.positionFixed || this.props.appendToBody
+                              ? 'window'
+                              : 'scrollParent'
+                        },
+                        ...this.props.popperModifiers
+                      }}
                     >
                       {({ ref, style, placement, scheduleUpdate }) => {
                         return (

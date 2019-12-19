@@ -523,7 +523,15 @@ class Select extends Component {
                         <Popper
                           positionFixed={positionFixed}
                           placement={rtlPlacement(other.placement)}
-                          modifiers={popperModifiers}
+                          modifiers={{
+                            preventOverflow: {
+                              boundariesElement:
+                                positionFixed || appendToBody
+                                  ? 'window'
+                                  : 'scrollParent'
+                            },
+                            ...popperModifiers
+                          }}
                         >
                           {({
                             ref,
