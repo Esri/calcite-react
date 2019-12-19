@@ -96,7 +96,15 @@ class Tooltip extends Component {
                       <Popper
                         positionFixed={positionFixed}
                         placement={rtlPlacement(placement)}
-                        modifiers={popperModifiers}
+                        modifiers={{
+                          preventOverflow: {
+                            boundariesElement:
+                              positionFixed || appendToBody
+                                ? 'window'
+                                : 'scrollParent'
+                          },
+                          ...popperModifiers
+                        }}
                       >
                         {({
                           ref,

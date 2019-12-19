@@ -326,7 +326,6 @@ class Search extends Component {
       ...other
     } = this.props;
 
-    const usePreventOverflow = appendToBody || positionFixed ? false : true;
     const menuHeight =
       (menuStyle && parseInt(menuStyle.height, 10)) ||
       (menuStyle && parseInt(menuStyle.maxHeight, 10)) ||
@@ -390,7 +389,15 @@ class Search extends Component {
                               ...PopperStyle
                             }}
                             placement={rtlPlacement(this.props.placement)}
-                            modifiers={this.props.popperModifiers}
+                            modifiers={{
+                              preventOverflow: {
+                                boundariesElement:
+                                  positionFixed || appendToBody
+                                    ? 'window'
+                                    : 'scrollParent'
+                              },
+                              ...this.props.popperModifiers
+                            }}
                           >
                             {({ ref, style, placement, scheduleUpdate }) => (
                               <SearchMenu
