@@ -60,6 +60,8 @@ Button.propTypes = {
   children: PropTypes.node,
   /** The HTML type property of the Button. */
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
+  /** Style prop used to render an inline Button. */
+  inline: PropTypes.bool,
   /** Style prop used to render a transparent Button. */
   transparent: PropTypes.bool,
   /** Style prop used to render a clear Button. */
