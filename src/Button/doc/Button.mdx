@@ -21,7 +21,7 @@ Buttons communicate the action that will occur when the user touches them.
 #### Import Syntax
 
 ```js
-import Button, { ButtonGroup } from 'calcite-react/Button'
+import Button, { ButtonGroup } from 'calcite-react/Button';
 ```
 
 ## Basic Usage
@@ -33,11 +33,17 @@ import Button, { ButtonGroup } from 'calcite-react/Button'
 ## Colors
 
 <Playground>
-  <GuideExample label="transparent">
-    <Button transparent onClick={() => console.log('clicked')}>
-      transparent
+  <GuideExample label="inline">
+    <Button icon={<SaveIcon size={16}/>} iconPosition="before" inline onClick={() => console.log('clicked')}>
+      inline
     </Button>
   </GuideExample>
+
+<GuideExample label="transparent">
+  <Button transparent onClick={() => console.log('clicked')}>
+    transparent
+  </Button>
+</GuideExample>
 
 <GuideExample label="clear">
   <Button clear onClick={() => console.log('clicked')}>
