@@ -9,11 +9,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { StyledToaster } from './Toaster-styled';
+
+import { StyledAlertContent, StyledAlertIcon } from '../Alert/Alert-styled';
+
+import LightbulbIcon from 'calcite-ui-icons-react/LightbulbIcon';
+import CheckCircleIcon from 'calcite-ui-icons-react/CheckCircleIcon';
+import ExclamationMarkTriangleIcon from 'calcite-ui-icons-react/ExclamationMarkTriangleIcon';
 
 class Toaster extends Component {
   toastId = null;
@@ -30,8 +38,22 @@ class Toaster extends Component {
     }
   }
 
+  getAlertIcon = () => {
+    const { type } = this.props;
+    let defaultIcon;
+    if (type === 'success') {
+      defaultIcon = <CheckCircleIcon filled size={16} />;
+    } else if (type === 'warning' || type === 'error') {
+      defaultIcon = <ExclamationMarkTriangleIcon filled size={16} />;
+    } else {
+      defaultIcon = <LightbulbIcon filled size={16} />;
+    }
+
+    return <StyledAlertIcon>{defaultIcon}</StyledAlertIcon>;
+  };
+
   notify = () => {
-    const { children, showProgress, ...other } = this.props;
+    const { children, type, showProgress, showIcon, ...other } = this.props;
     let progressClassName = '';
     if (showProgress) {
       progressClassName = 'progress-visible';
@@ -40,10 +62,19 @@ class Toaster extends Component {
     }
 
     if (!toast.isActive(this.toastId)) {
-      this.toastId = toast(<Fragment>{children}</Fragment> || '', {
-        progressClassName,
-        ...other
-      });
+      this.toastId = toast(
+        (
+          <StyledToaster type={type}>
+            {showIcon && this.getAlertIcon()}
+            <StyledAlertContent>{children}</StyledAlertContent>
+          </StyledToaster>
+        ) || '',
+        {
+          progressClassName,
+          type,
+          ...other
+        }
+      );
     }
   };
 
@@ -69,7 +100,9 @@ Toaster.propTypes = {
   /** How long the Toaster should be open for; false if it shouldn't auto close, or a duration in millisecnds for how long it should take to close. */
   autoClose: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
   /** Toggle default visibility of the progress bar in a Toaster. */
-  showProgress: PropTypes.bool
+  showProgress: PropTypes.bool,
+  /** Toggles visibility of the icon */
+  showIcon: PropTypes.bool
 };
 
 Toaster.defaultProps = {

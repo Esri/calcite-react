@@ -12,7 +12,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { css, ThemeProvider, createGlobalStyle } from 'styled-components';
-import { unitCalc } from '../utils/helpers';
+import { unitCalc, fontSize } from '../utils/helpers';
 
 import CalciteTheme from './CalciteTheme';
 
@@ -228,30 +228,32 @@ const CalciteReactGlobalStyles = createGlobalStyle`
   .Toastify__toast.Toastify__toast {
     padding: 0.775rem;
     box-shadow: ${CalciteTheme.boxShadow};
-    border: 1px solid ${CalciteTheme.palette.lightestGray};
-    border-radius: ${CalciteTheme.borderRadius};
+    border-top: 3px solid ${CalciteTheme.palette.blue};
+    border-radius: 3px;
     font-family: ${CalciteTheme.type.avenirFamily};
+    color: ${CalciteTheme.palette.offBlack};
+    background: ${CalciteTheme.palette.white};
 
-    &--default {
-      background: ${CalciteTheme.palette.white};
-      color: ${CalciteTheme.palette.offBlack};
-    }
     &--info {
-      background: ${CalciteTheme.palette.blue};
-      border-color: transparent;
+      border-top-color: ${CalciteTheme.palette.blue};
+      background: ${CalciteTheme.palette.white};
     }
     &--success {
-      background: ${CalciteTheme.palette.darkGreen};
-      border-color: transparent;
+      border-top-color: ${CalciteTheme.palette.darkGreen};
+      background: ${CalciteTheme.palette.white};
     }
     &--warning {
-      background: ${CalciteTheme.palette.darkYellow};
-      border-color: transparent;
+      border-top-color: ${CalciteTheme.palette.darkYellow};
+      background: ${CalciteTheme.palette.white};
     }
     &--error {
-      background: ${CalciteTheme.palette.red};
-      border-color: transparent;
+      border-top-color: ${CalciteTheme.palette.red};
+      background: ${CalciteTheme.palette.white};
     }
+  }
+
+  .Toastify__toast .Toastify__toast-body {
+    ${fontSize(-1)};
   }
 
   .Toastify__progress-bar.Toastify__progress-bar {

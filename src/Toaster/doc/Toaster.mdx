@@ -8,7 +8,7 @@ import GuideExample from '../../../docz/GuideExample';
 import { Slide, Zoom, Flip } from 'react-toastify';
 
 import Button from '../../Button';
-import Toaster, {ToastContainer} from '../';
+import Toaster, { ToastContainer, ToastTitle, ToastMessage } from '../';
 
 import ToasterExampleComponent from './ToasterExampleComponent';
 
@@ -122,7 +122,8 @@ ReactDOM.render(
                     open={this.state.toasterOpen}
                     onClose={this.hideToaster}
                   >
-                    Something Happened!
+                    <ToastTitle>Here's a general bit of information</ToastTitle>
+                    <ToastMessage>This toaster will stay open for 10 seconds!</ToastMessage>
                   </Toaster>
                 </GuideExample>
                 <GuideExample label='autoClose={false}'>
@@ -132,7 +133,7 @@ ReactDOM.render(
                     onClose={this.hideToaster2}
                     autoClose={false}
                   >
-                    This toaster won't close automatically!
+                    <ToastMessage>This toaster won't close automatically!</ToastMessage>
                   </Toaster>
                 </GuideExample>
                 <GuideExample label="autoClose={10000}">
@@ -141,8 +142,10 @@ ReactDOM.render(
                     open={this.state.toaster3Open}
                     onClose={this.hideToaster3}
                     autoClose={10000}
+                    showIcon
                   >
-                    This toaster will stay open for 10 seconds!
+                    <ToastTitle>Here's a general bit of information</ToastTitle>
+                    <ToastMessage>This toaster will stay open for 10 seconds!</ToastMessage>
                   </Toaster>
                 </GuideExample>
                 <GuideExample label="showProgress">
@@ -152,7 +155,7 @@ ReactDOM.render(
                     onClose={this.hideToaster4}
                     showProgress
                   >
-                    This toaster has a progress bar!
+                    <ToastMessage>This toaster has a progress bar!</ToastMessage>
                   </Toaster>
                 </GuideExample>
               </div>
@@ -200,42 +203,50 @@ ReactDOM.render(
                 <Button onClick={this.showToaster}>Show Toaster</Button>
                 <Toaster
                   open={this.state.toasterOpen}
+                  showIcon
                   onClose={this.hideToaster}
                   autoClose={false}
                 >
-                  default
+                  <ToastTitle>Here's a general bit of information</ToastTitle>
+                  <ToastMessage>Some kind of contextually relevant content</ToastMessage>
                 </Toaster>
                 <Toaster
                   type="success"
+                  showIcon
                   open={this.state.toasterOpen}
                   onClose={this.hideToaster}
                   autoClose={false}
                 >
-                  success
+                  <ToastMessage>Successfully duplicated <strong>2019 Sales Demographics by County</strong> layer</ToastMessage>
                 </Toaster>
                 <Toaster
                   type="info"
+                  showIcon
                   open={this.state.toasterOpen}
                   onClose={this.hideToaster}
                   autoClose={false}
                 >
-                  info
+                  <ToastTitle>Here's a general bit of information</ToastTitle>
+                  <ToastMessage>Some kind of contextually relevant content</ToastMessage>
                 </Toaster>
                 <Toaster
                   type="warning"
+                  showIcon
                   open={this.state.toasterOpen}
                   onClose={this.hideToaster}
                   autoClose={false}
                 >
-                  warning
+                  <ToastMessage>Network connection interruption detected</ToastMessage>
                 </Toaster>
                 <Toaster
                   type="error"
+                  showIcon
                   open={this.state.toasterOpen}
                   onClose={this.hideToaster}
                   autoClose={false}
                 >
-                  error
+                  <ToastTitle>Something failed</ToastTitle>
+                  <ToastMessage>That thing you wanted to do didn't work as expected</ToastMessage>
                 </Toaster>
               </div>
             </React.Fragment>
