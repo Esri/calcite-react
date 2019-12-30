@@ -10,3 +10,5 @@
 // limitations under the License.​
 
 export { default } from './Alert';
+export { StyledAlertTitle as AlertTitle } from './Alert-styled';
+export { StyledAlertMessage as AlertMessage } from './Alert-styled';
