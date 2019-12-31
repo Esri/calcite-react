@@ -47,9 +47,14 @@ const StyledAlert = styled.div`
   position: relative;
   z-index: 100;
   max-width: 40em;
-  border-top: 3px solid ${props => props.theme.palette.blue};
+  border-left: 3px solid ${props => props.theme.palette.blue};
   box-shadow: ${props => props.theme.boxShadow};
-  border-radius: 3px;
+  border-radius: ${props => props.theme.borderRadius};
+
+  html[dir='rtl'] & {
+    border-left: none;
+    border-right: 3px solid ${props => props.theme.palette.blue};
+  }
 
   ${StyledAlertIcon} svg {
     fill: ${props => props.theme.palette.blue};
@@ -61,7 +66,7 @@ const StyledAlert = styled.div`
   ${props =>
     props.red &&
     css`
-      border-top-color: ${props => props.theme.palette.red};
+      border-color: ${props => props.theme.palette.red};
 
       ${StyledAlertIcon} svg {
         fill: ${props => props.theme.palette.red};
@@ -71,7 +76,7 @@ const StyledAlert = styled.div`
   ${props =>
     props.yellow &&
     css`
-      border-top-color: ${props => props.theme.palette.yellow};
+      border-color: ${props => props.theme.palette.yellow};
 
       ${StyledAlertIcon} svg {
         fill: ${props => props.theme.palette.yellow};
@@ -81,7 +86,7 @@ const StyledAlert = styled.div`
   ${props =>
     props.green &&
     css`
-      border-top-color: ${props => props.theme.palette.green};
+      border-color: ${props => props.theme.palette.green};
 
       ${StyledAlertIcon} svg {
         fill: ${props => props.theme.palette.green};
@@ -103,6 +108,12 @@ const StyledAlertContent = styled.div`
   padding: ${props => unitCalc(props.theme.baseline, 1.5, '/')}
     ${props => props.theme.baseline};
   padding-right: 0;
+
+  html[dir='rtl'] & {
+    padding: ${props => unitCalc(props.theme.baseline, 1.5, '/')}
+      ${props => props.theme.baseline};
+    padding-left: 0;
+  }
 `;
 StyledAlertContent.defaultProps = { theme };
 
