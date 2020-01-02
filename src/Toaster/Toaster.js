@@ -17,66 +17,95 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { StyledToaster } from './Toaster-styled';
 
-import { StyledAlertContent, StyledAlertIcon } from '../Alert/Alert-styled';
+import {
+  StyledAlertContent,
+  StyledAlertIcon,
+  StyledAlertMessage
+} from '../Alert/Alert-styled';
 
 import LightbulbIcon from 'calcite-ui-icons-react/LightbulbIcon';
 import CheckCircleIcon from 'calcite-ui-icons-react/CheckCircleIcon';
 import ExclamationMarkTriangleIcon from 'calcite-ui-icons-react/ExclamationMarkTriangleIcon';
 
+const getAlertIcon = type => {
+  let defaultIcon;
+  if (type === 'success') {
+    defaultIcon = <CheckCircleIcon filled size={16} />;
+  } else if (type === 'warning' || type === 'error') {
+    defaultIcon = <ExclamationMarkTriangleIcon filled size={16} />;
+  } else {
+    defaultIcon = <LightbulbIcon filled size={16} />;
+  }
+
+  return <StyledAlertIcon>{defaultIcon}</StyledAlertIcon>;
+};
+
+// Wraps the content in a <ToastMessage /> component for styling
+// if they only passed a string of content
+const wrapContentMessage = content => {
+  if (content && typeof content === 'string') {
+    return <StyledAlertMessage>{content}</StyledAlertMessage>;
+  }
+
+  return content;
+};
+
+const notify = (
+  content,
+  { type, showProgress, showIcon, toastId, ...other } = {}
+) => {
+  let progressClassName = '';
+  if (showProgress) {
+    progressClassName = 'progress-visible';
+  } else if (showProgress === false) {
+    progressClassName = 'progress-hidden';
+  }
+
+  if (!toastId || !toast.isActive(toastId)) {
+    toastId = toast(
+      (
+        <StyledToaster type={type}>
+          {showIcon && getAlertIcon(type)}
+          <StyledAlertContent>{wrapContentMessage(content)}</StyledAlertContent>
+        </StyledToaster>
+      ) || '',
+      {
+        progressClassName,
+        type,
+        ...other
+      }
+    );
+  }
+};
+
 class Toaster extends Component {
   toastId = null;
 
   componentDidMount() {
-    if (this.props.open) {
-      this.notify();
+    console.warn(
+      'Depracation warning: Using <Toaster /> as a rendered component is deprecated. Please use notify(content, options). See https://calcite-react.netlify.com/toaster for more info.'
+    );
+
+    const { children, open, ...other } = this.props;
+
+    if (open) {
+      notify(children, {
+        toastId: this.toastId,
+        ...other
+      });
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.open) {
-      this.notify();
+    const { children, open, ...other } = this.props;
+
+    if (open) {
+      notify(children, {
+        toastId: this.toastId,
+        ...other
+      });
     }
   }
-
-  getAlertIcon = () => {
-    const { type } = this.props;
-    let defaultIcon;
-    if (type === 'success') {
-      defaultIcon = <CheckCircleIcon filled size={16} />;
-    } else if (type === 'warning' || type === 'error') {
-      defaultIcon = <ExclamationMarkTriangleIcon filled size={16} />;
-    } else {
-      defaultIcon = <LightbulbIcon filled size={16} />;
-    }
-
-    return <StyledAlertIcon>{defaultIcon}</StyledAlertIcon>;
-  };
-
-  notify = () => {
-    const { children, type, showProgress, showIcon, ...other } = this.props;
-    let progressClassName = '';
-    if (showProgress) {
-      progressClassName = 'progress-visible';
-    } else if (showProgress === false) {
-      progressClassName = 'progress-hidden';
-    }
-
-    if (!toast.isActive(this.toastId)) {
-      this.toastId = toast(
-        (
-          <StyledToaster type={type}>
-            {showIcon && this.getAlertIcon()}
-            <StyledAlertContent>{children}</StyledAlertContent>
-          </StyledToaster>
-        ) || '',
-        {
-          progressClassName,
-          type,
-          ...other
-        }
-      );
-    }
-  };
 
   render() {
     return null;
@@ -113,4 +142,4 @@ Toaster.defaultProps = {
 
 Toaster.displayName = 'Toaster';
 
-export default Toaster;
+export { Toaster as default, notify };

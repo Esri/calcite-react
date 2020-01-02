@@ -83,10 +83,18 @@ StyledToaster.defaultProps = { theme };
 
 const StyledCloseButton = styled(Button)`
   color: currentColor;
+  margin: -${props => unitCalc(props.theme.baseline, 2, '/')};
+  margin-left: 0;
+  padding: ${props => props.theme.baseline};
+
+  html[dir='rtl'] & {
+    margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
+    margin-right: 0;
+  }
 
   &:hover {
     color: currentColor;
-    opacity: 0.7;
+    background: ${props => props.theme.palette.offWhite};
   }
 `;
 StyledCloseButton.defaultProps = { theme };
