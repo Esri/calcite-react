@@ -14,6 +14,7 @@ import styled, { css } from 'styled-components';
 
 // Utils, common elements
 import { unitCalc, fontSize } from '../utils/helpers';
+import { transparentize } from 'polished';
 
 // Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
@@ -146,6 +147,74 @@ const StyledButton = styled.button`
         color: ${props => props.theme.linkHover};
         background: none;
         text-decoration: underline;
+      }
+    `};
+
+  ${props =>
+    props.inline &&
+    css`
+      display: inline;
+      padding: 0;
+      outline: none;
+      border: none;
+      font-weight: 500;
+      white-space: initial;
+      user-select: text;
+      color: ${props => props.theme.linkColor};
+      background-color: transparent;
+      position: relative;
+      background-image: linear-gradient(currentColor, currentColor),
+        linear-gradient(
+          ${transparentize(0.8, props.theme.linkColor)},
+          ${transparentize(0.8, props.theme.linkColor)}
+        );
+      background-position: 0% 100%, 100% 100%;
+      background-repeat: no-repeat, no-repeat;
+      background-size: 0% 1px, 100% 1px;
+      transition: all 0.15s ease-in-out, background-size 0.3s ease-in-out;
+
+      &:hover,
+      &:focus {
+        color: ${props.theme.linkHover};
+        background-color: transparent;
+        background-size: 100% 1px, 100% 1px;
+
+        .${StyledIconClass.styledComponentId} {
+          fill: ${props.theme.linkHover};
+        }
+      }
+      &:active {
+        color: ${props.theme.linkColor};
+        background-size: 100% 1px, 100% 1px;
+      }
+
+      .${StyledIconClass.styledComponentId} {
+        fill: currentColor;
+        vertical-align: middle;
+
+        ${props =>
+          props.iconPosition === 'after' &&
+          css`
+            margin-left: 0.33em;
+            margin-right: 0;
+
+            html[dir='rtl'] & {
+              margin-left: 0;
+              margin-right: 0.33em;
+            }
+          `};
+
+        ${props =>
+          props.iconPosition === 'before' &&
+          css`
+            margin-left: 0;
+            margin-right: 0.33em;
+
+            html[dir='rtl'] & {
+              margin-left: 0.33em;
+              margin-right: 0;
+            }
+          `};
       }
     `};
 
