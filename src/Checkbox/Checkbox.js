@@ -12,10 +12,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  StyledCheckbox,
+  StyledDisplayCheckbox,
+  StyledCheckboxInput,
   StyledCheckboxLabel,
   StyledCheckboxGroup
 } from './Checkbox-styled';
+
+import CheckIcon from 'calcite-ui-icons-react/CheckIcon';
+import MinusIcon from 'calcite-ui-icons-react/MinusIcon';
 
 const Checkbox = ({
   children,
@@ -29,6 +33,7 @@ const Checkbox = ({
   error = false,
   disabled = false,
   onChange,
+  inputProps,
   ...other
 }) => {
   let name, touched, errors, values, isSubmitting, setFieldValue;
@@ -96,7 +101,7 @@ const Checkbox = ({
 
   return (
     <StyledCheckboxGroup>
-      <StyledCheckbox
+      <StyledCheckboxInput
         onChange={handleChange}
         checked={isChecked()}
         success={isSuccess()}
@@ -105,6 +110,9 @@ const Checkbox = ({
         {...other}
         type="checkbox"
       />
+      <StyledDisplayCheckbox>
+        <CheckIcon filled size={10.5} />
+      </StyledDisplayCheckbox>
       {checkboxLabel}
     </StyledCheckboxGroup>
   );
@@ -119,6 +127,8 @@ Checkbox.propTypes = {
   name: PropTypes.string,
   /** Whether the Checkbox is currently checked. */
   checked: PropTypes.bool,
+  /** Whether the Checkbox is currently disabled. */
+  disabled: PropTypes.bool,
   /** Style object passed down to the label. */
   labelStyle: PropTypes.object,
   /** Event called when the Checkbox value should be toggled. */

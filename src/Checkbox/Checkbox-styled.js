@@ -25,9 +25,64 @@ import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
 // Third party libraries
 
-const StyledCheckbox = styled(baseRadioCheckbox)`
-  -webkit-appearance: checkbox;
+const StyledDisplayCheckbox = styled.div`
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: ${props => props.theme.palette.white};
+  border: 1px solid ${props => props.theme.palette.gray};
+  color: ${props => props.theme.palette.white};
+  border-radius: 2px;
+  box-sizing: border-box;
+  margin-top: 0.135rem;
+  margin-bottom: 3px;
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
+  margin-left: 0.125rem;
+  cursor: pointer;
+
+  html[dir='rtl'] & {
+    margin-right: 0.125rem;
+    margin-left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+  }
+
+  > * {
+    display: none;
+  }
+
+  input:hover ~ &,
+  input:focus ~ & {
+    box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 2px inset,
+      rgba(81, 167, 232, 0.5) 0px 0px 5px, rgba(81, 167, 232, 0.5) 0px 0px 5px;
+  }
+
+  input:checked ~ & {
+    background: ${props => props.theme.palette.blue};
+    border-color: ${props => props.theme.palette.blue};
+
+    > * {
+      display: inline-block;
+    }
+  }
+
+  input:disabled ~ & {
+    opacity: 0.3;
+    background: ${props => props.theme.palette.lightestGray};
+  }
+
+  input:disabled:checked ~ & {
+    background: ${props => props.theme.palette.blue};
+  }
+`;
+
+const StyledCheckboxInput = styled(baseRadioCheckbox)`
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  -webkit-appearance: checkbox;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 
   html[dir='rtl'] & {
@@ -35,7 +90,7 @@ const StyledCheckbox = styled(baseRadioCheckbox)`
     margin-left: ${props => unitCalc(props.theme.baseline, 4, '/')};
   }
 `;
-StyledCheckbox.defaultProps = { theme };
+StyledCheckboxInput.defaultProps = { theme };
 
 const StyledCheckboxLabel = styled.span`
   ${fontSize(-1)};
@@ -50,10 +105,17 @@ const StyledCheckboxLabel = styled.span`
   }
 `;
 StyledCheckboxLabel.defaultProps = { theme };
+
 const StyledCheckboxGroup = styled.label`
   display: flex;
   align-items: center;
+  position: relative;
 `;
 StyledCheckboxGroup.defaultProps = { theme };
 
-export { StyledCheckbox, StyledCheckboxLabel, StyledCheckboxGroup };
+export {
+  StyledDisplayCheckbox,
+  StyledCheckboxInput,
+  StyledCheckboxLabel,
+  StyledCheckboxGroup
+};
