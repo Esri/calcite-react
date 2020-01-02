@@ -52,14 +52,18 @@ const Alert = ({
   };
 
   const getAlertClose = () => {
-    return <StyledAlertClose onClick={onClose}>{closeLabel}</StyledAlertClose>;
+    return (
+      <StyledAlertClose onClick={onClose}>
+        {closeLabel || <XIcon size={16} />}
+      </StyledAlertClose>
+    );
   };
 
   return (
     <StyledAlert blue={blue} green={green} yellow={yellow} red={red} {...other}>
-      {showIcon && getAlertIcon()}
+      {(showIcon || icon) && getAlertIcon()}
       <StyledAlertContent>{children}</StyledAlertContent>
-      {showCloseLabel && getAlertClose()}
+      {(showCloseLabel || closeLabel) && getAlertClose()}
     </StyledAlert>
   );
 };
@@ -90,7 +94,6 @@ Alert.propTypes = {
 };
 
 Alert.defaultProps = {
-  closeLabel: <XIcon size={16} />,
   onClose: () => {}
 };
 

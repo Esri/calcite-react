@@ -8,6 +8,7 @@ import GuideExample from '../../../docz/GuideExample';
 
 import Alert, { AlertTitle, AlertMessage } from '../';
 import XIcon from 'calcite-ui-icons-react/XIcon';
+import BananaIcon from 'calcite-ui-icons-react/BananaIcon';
 
 # Alert
 
@@ -62,7 +63,7 @@ import Alert from 'calcite-react/Alert'
     </Alert>
   </GuideExample>
   <GuideExample label='closeLabel="Close"'>
-    <Alert showCloseLabel closeLabel="Close" onClose={() => console.log('clicked')}>
+    <Alert closeLabel="Close" onClose={() => console.log('clicked')}>
       <AlertTitle>Here's a general bit of information</AlertTitle>
       <AlertMessage>Has close link!</AlertMessage>
     </Alert>
@@ -73,25 +74,31 @@ import Alert from 'calcite-react/Alert'
 
 <Playground>
   <GuideExample>
-      <Alert showIcon>
-        <AlertTitle>Here's a general bit of information</AlertTitle>
-        <AlertMessage>Some kind of contextually relevant content</AlertMessage>
-      </Alert>
-    </GuideExample>
+    <Alert showIcon>
+      <AlertTitle>Here's a general bit of information</AlertTitle>
+      <AlertMessage>Some kind of contextually relevant content</AlertMessage>
+    </Alert>
+  </GuideExample>
   <GuideExample>
-      <Alert red showIcon>
-        <AlertTitle>Something failed</AlertTitle>
-        <AlertMessage>That thing you wanted to do didn't work as expected</AlertMessage>
-      </Alert>
-    </GuideExample>
+    <Alert red showIcon>
+      <AlertTitle>Something failed</AlertTitle>
+      <AlertMessage>That thing you wanted to do didn't work as expected</AlertMessage>
+    </Alert>
+  </GuideExample>
   <GuideExample>
-      <Alert yellow showIcon>
-        <AlertMessage>Network connection interruption detected</AlertMessage>
-      </Alert>
-    </GuideExample>
+    <Alert yellow showIcon>
+      <AlertMessage>Network connection interruption detected</AlertMessage>
+    </Alert>
+  </GuideExample>
   <GuideExample>
     <Alert green showIcon>
       <AlertMessage>Successfully duplicated <strong>2019 Sales Demographics by County</strong> layer</AlertMessage>
+    </Alert>
+  </GuideExample>
+  <GuideExample label="icon={<BananaIcon size={16} />}">
+    <Alert icon={<BananaIcon size={16} />}>
+      <AlertTitle>Here's a general bit of information</AlertTitle>
+      <AlertMessage>Some kind of contextually relevant content</AlertMessage>
     </Alert>
   </GuideExample>
 </Playground>
