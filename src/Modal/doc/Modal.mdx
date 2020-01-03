@@ -9,7 +9,7 @@ import GuideExample from '../../../docz/GuideExample';
 import Modal, { ModalActions } from '../';
 
 import Button from '../../Button';
-import { CalciteH1, CalciteP } from '../../Elements';
+import { CalciteH3, CalciteP } from '../../Elements';
 
 import ChevronLeftIcon from 'calcite-ui-icons-react/ChevronLeftIcon';
 
@@ -80,20 +80,20 @@ export class ModalExample extends React.Component {
       overlayStyle={{ position: 'absolute' }}
       dialogStyle={{ width: '90%' }}
       appElement={document.body}
-      title="Modal!"
+      title="A New Hope"
       actions={[
-          <Button key="save">Save</Button>,
-          <Button key="cancel" halo>Cancel</Button>
-        ]}
-      >
+        <Button key="save">Save</Button>,
+        <Button key="cancel" halo>Cancel</Button>
+      ]}
+    >
       <CalciteP>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.
+      </CalciteP>
+      <CalciteP>
+        During the battle, Rebel spies managed to steal secret plans to the Empire’s ultimate weapon, the DEATH STAR, an armored space station with enough power to destroy an entire planet.
+      </CalciteP>
+      <CalciteP>
+        Pursued by the Empire’s sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy...
       </CalciteP>
     </Modal>
   </GuideExample>
@@ -139,7 +139,7 @@ export class ModalExample extends React.Component {
                 onRequestClose={this.closeModal}
                 appElement={document.body}
                 overlayStyle={docsModalZIndex}
-                title="Modal!"
+                title="The Empire Strikes Back"
                 actions={[
                   <Button key="ok" onClick={this.closeModal}>
                     Okay
@@ -161,14 +161,12 @@ export class ModalExample extends React.Component {
                 }
               >
                 <CalciteP>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                  It is a dark time for the Rebellion. Although the Death Star has been destroyed, Imperial troops have driven the Rebel forces from their hidden base and pursued them across the galaxy.      </CalciteP>
+                <CalciteP>
+                  Evading the dreaded Imperial Starfleet, a group of freedom fighters led by Luke Skywalker has established a new secret base on the remote ice world of Hoth.
+                </CalciteP>
+                <CalciteP>
+                  The evil lord Darth Vader, obsessed with finding young Skywalker, has dispatched thousands of remote probes into the far reaches of space...
                 </CalciteP>
               </Modal>
             </div>
@@ -195,14 +193,15 @@ export class ModalExample extends React.Component {
       dialogStyle={{ width: '90%' }}
       appElement={document.body}
       >
+      <CalciteH3>Return of the Jedi</CalciteH3>
       <CalciteP>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Luke Skywalker has returned to his home planet of Tatooine in an attempt to rescue his friend Han Solo from the clutches of the vile gangster Jabba the Hutt.
+      </CalciteP>
+      <CalciteP>
+        Little does Luke know that the GALACTIC EMPIRE has secretly begun construction on a new armored space station even more powerful than the first dreaded Death Star.
+      </CalciteP>
+      <CalciteP>
+        When completed, this ultimate weapon will spell certain doom for the small band of rebels struggling to restore freedom to the galaxy...
       </CalciteP>
     </Modal>
   </GuideExample>

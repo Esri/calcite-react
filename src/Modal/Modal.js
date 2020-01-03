@@ -45,6 +45,7 @@ const Modal = ({
   contentStyles,
   actionStyles,
   secondaryActionStyles,
+  onRequestClose,
   ...other
 }) => {
   return (
@@ -67,12 +68,13 @@ const Modal = ({
           }}
           contentLabel={title}
           role="dialog"
+          onRequestClose={onRequestClose}
           {...other}
         >
           {title && (
             <StyledModalHeader styles={headerStyles}>
               <StyledModalTitle styles={titleStyles}>{title}</StyledModalTitle>
-              {showClose && <StyledModalCloseButton onClick={onCloseClicked} />}
+              {showClose && <StyledModalCloseButton onClick={onRequestClose} />}
             </StyledModalHeader>
           )}
           <StyledModalContent styles={contentStyles} noPadding={noPadding}>
@@ -133,8 +135,6 @@ Modal.propTypes = {
   actionStyles: PropTypes.object,
   /** Styles applied to the footer secondary actions div. */
   secondaryActionStyles: PropTypes.object,
-  /** Event callback when the close button is clicked. */
-  onCloseClicked: PropTypes.func,
   /** Toggles visiblity of the close icon button. */
   showClose: PropTypes.bool
 };
