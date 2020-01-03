@@ -13,7 +13,7 @@
 import styled, { css, keyframes } from 'styled-components';
 
 // Utils, common elements
-import { unitCalc } from '../utils/helpers';
+import { unitCalc, fontSize } from '../utils/helpers';
 
 // Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
@@ -50,6 +50,15 @@ const loadKeyframes = color => keyframes`
      loaderVariables.loaderZoom,
      '+'
    )};
+  }
+`;
+
+const squareLoaderKeyframes = () => keyframes`
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -400%;
   }
 `;
 
@@ -110,10 +119,59 @@ const StyledLoaderBars = styled.div`
 `;
 StyledLoaderBars.defaultProps = { theme };
 
+const StyledLoaderSquare = styled.svg`
+  position: absolute;
+  stroke-dashoffset: 0;
+  fill: none;
+
+  stroke-dasharray: 50%, 350%;
+
+  animation: linear 0s infinite normal none running ${squareLoaderKeyframes};
+  animation-duration: 2s;
+
+  &:nth-child(0n + 2) {
+    stroke-dasharray: 100%, 225%, 50%, 25%;
+
+    animation-duration: 1s;
+  }
+
+  &:nth-child(0n + 3) {
+    stroke-dasharray: 50%, 50%, 75%, 225%;
+
+    animation-duration: 1.85s;
+  }
+`;
+StyledLoaderSquare.defaultProps = { theme };
+
+const StyledLoaderSquareContainer = styled.div`
+  position: absolute;
+  left: ${props => `calc(50% - ${parseFloat(props.sizePx) / 2}px)`};
+
+  ${StyledLoaderSquare} {
+    height: ${props => props.sizePx}px;
+    width: ${props => props.sizePx}px;
+    stroke: ${props => props.color || loaderVariables.loaderBlue};
+    stroke-width: ${props => Math.round(props.sizePx / 8)}px;
+  }
+
+  rect {
+    width: ${props => props.sizePx}px;
+    height: ${props => props.sizePx}px;
+  }
+`;
+StyledLoaderSquareContainer.defaultProps = { theme };
+
 const StyledLoaderText = styled.div`
   text-align: center;
   padding-top: ${props => props.sizeRatio * 3.5}px;
+  ${fontSize(-1)};
 `;
 StyledLoaderText.defaultProps = { theme };
 
-export { StyledLoader, StyledLoaderBars, StyledLoaderText };
+export {
+  StyledLoader,
+  StyledLoaderBars,
+  StyledLoaderSquareContainer,
+  StyledLoaderSquare,
+  StyledLoaderText
+};

@@ -15,10 +15,12 @@ import React from 'react';
 import {
   StyledLoaderText,
   StyledLoader,
-  StyledLoaderBars
+  StyledLoaderBars,
+  StyledLoaderSquareContainer,
+  StyledLoaderSquare
 } from './Loader-styled';
 
-const Loader = ({ text, sizeRatio, color, ...other }) => {
+const Loader = ({ text, sizeRatio, color, square, ...other }) => {
   const sizePx = sizeRatio * 17;
 
   const getLoaderText = text => {
@@ -27,9 +29,30 @@ const Loader = ({ text, sizeRatio, color, ...other }) => {
     }
   };
 
+  const getLoaderAnimation = () => {
+    if (square) {
+      const squareSizePx = sizePx * 3;
+      return (
+        <StyledLoaderSquareContainer sizePx={squareSizePx} color={color}>
+          <StyledLoaderSquare>
+            <rect />
+          </StyledLoaderSquare>
+          <StyledLoaderSquare>
+            <rect />
+          </StyledLoaderSquare>
+          <StyledLoaderSquare>
+            <rect />
+          </StyledLoaderSquare>
+        </StyledLoaderSquareContainer>
+      );
+    }
+
+    return <StyledLoaderBars sizeRatio={sizePx} color={color} />;
+  };
+
   return (
     <StyledLoader sizeRatio={sizePx} {...other}>
-      <StyledLoaderBars sizeRatio={sizePx} color={color} />
+      {getLoaderAnimation()}
       {getLoaderText(text)}
     </StyledLoader>
   );
@@ -41,7 +64,9 @@ Loader.propTypes = {
   /** Relative size of the Loader component. Value must be greater than 0. A value of 1 results in a 50px height Loader */
   sizeRatio: PropTypes.number,
   /** Color of the Loader bars */
-  color: PropTypes.string
+  color: PropTypes.string,
+  /** Display the loader as an animating square */
+  square: PropTypes.bool
 };
 
 Loader.defaultProps = {
