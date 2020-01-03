@@ -18,8 +18,14 @@ import ReactModal from 'react-modal';
 import {
   StyledModalOverlay,
   StyledModalDialog,
+  StyledModalHeader,
+  StyledModalTitle,
+  StyledModalCloseButton,
+  StyledModalContent,
   OverlayTransition,
-  DialogTransition
+  DialogTransition,
+  StyledModalActions,
+  StyledSecondaryActions
 } from './Modal-styled';
 
 const Modal = ({
@@ -28,6 +34,17 @@ const Modal = ({
   title,
   overlayStyle,
   dialogStyle,
+  showClose,
+  onCloseClicked,
+  actions,
+  secondaryActions,
+  color,
+  noPadding,
+  headerStyles,
+  titleStyles,
+  contentStyles,
+  actionStyles,
+  secondaryActionStyles,
   ...other
 }) => {
   return (
@@ -43,7 +60,7 @@ const Modal = ({
               ...OverlayTransition[state]
             },
             content: {
-              ...StyledModalDialog,
+              ...StyledModalDialog(color),
               ...dialogStyle,
               ...DialogTransition[state]
             }
@@ -52,7 +69,25 @@ const Modal = ({
           role="dialog"
           {...other}
         >
-          {children}
+          {title && (
+            <StyledModalHeader styles={headerStyles}>
+              <StyledModalTitle styles={titleStyles}>{title}</StyledModalTitle>
+              {showClose && <StyledModalCloseButton onClick={onCloseClicked} />}
+            </StyledModalHeader>
+          )}
+          <StyledModalContent styles={contentStyles} noPadding={noPadding}>
+            {children}
+          </StyledModalContent>
+          {(actions || secondaryActions) && (
+            <StyledModalActions styles={actionStyles}>
+              {actions}
+              {secondaryActions && (
+                <StyledSecondaryActions styles={secondaryActionStyles}>
+                  {secondaryActions}
+                </StyledSecondaryActions>
+              )}
+            </StyledModalActions>
+          )}
         </ReactModal>
       )}
     </Transition>
@@ -66,6 +101,14 @@ Modal.propTypes = {
   open: PropTypes.bool,
   /** String indicating how the content container should be announced to screenreaders. */
   title: PropTypes.string,
+  /** Buttons or links to be placed in the Modal actions footer. */
+  actions: PropTypes.node,
+  /** Buttons or links to be placed in the footer, opposite your primary actions. */
+  secondaryActions: PropTypes.node,
+  /** Adds a colored bar to the top of the Modal */
+  color: PropTypes.oneOf(['blue', 'red']),
+  /** Remove pading from content wrapper. */
+  noPadding: PropTypes.bool,
   /** Function that will be run after the Modal has opened. */
   onAfterOpen: PropTypes.func,
   /** Function that will be run when the Modal is requested to be closed (either by clicking on overlay or pressing ESC). */
@@ -79,14 +122,29 @@ Modal.propTypes = {
   /** Styles applied to the overlay div. */
   overlayStyle: PropTypes.object,
   /** Styles applied to the container dialog div. */
-  dialogStyle: PropTypes.object
+  dialogStyle: PropTypes.object,
+  /** Styles applied to the header div. */
+  headerStyles: PropTypes.object,
+  /** Styles applied to the title div. */
+  titleStyles: PropTypes.object,
+  /** Styles applied to the content div. */
+  contentStyles: PropTypes.object,
+  /** Styles applied to the footer actions div. */
+  actionStyles: PropTypes.object,
+  /** Styles applied to the footer secondary actions div. */
+  secondaryActionStyles: PropTypes.object,
+  /** Event callback when the close button is clicked. */
+  onCloseClicked: PropTypes.func,
+  /** Toggles visiblity of the close icon button. */
+  showClose: PropTypes.bool
 };
 
 Modal.defaultProps = {
   onAfterOpen: () => {},
   onRequestClose: () => {},
   shouldCloseOnOverlayClick: true,
-  shouldCloseOnEsc: true
+  shouldCloseOnEsc: true,
+  showClose: true
 };
 
 Modal.displayName = 'Modal';

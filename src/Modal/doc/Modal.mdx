@@ -11,6 +11,8 @@ import Modal, { ModalActions } from '../';
 import Button from '../../Button';
 import { CalciteH1, CalciteP } from '../../Elements';
 
+import ChevronLeftIcon from 'calcite-ui-icons-react/ChevronLeftIcon';
+
 # Modal
 
 Modals are meant to "take over" the screen and focus users attention on a dialog which presents the user with an opportunity to add, modify or create content. A Modal should always be centered both vertically and horizontally within the browser window. When a Modal is opened, the interface darkens and disables all other user interface elements in order to force a user to take an action required by their workflow. Two Modals can't be open at once.
@@ -78,8 +80,12 @@ export class ModalExample extends React.Component {
       overlayStyle={{ position: 'absolute' }}
       dialogStyle={{ width: '90%' }}
       appElement={document.body}
-    >
-      <CalciteH1>Modal!</CalciteH1>
+      title="Modal!"
+      actions={[
+          <Button key="save">Save</Button>,
+          <Button key="cancel" halo>Cancel</Button>
+        ]}
+      >
       <CalciteP>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -89,10 +95,6 @@ export class ModalExample extends React.Component {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </CalciteP>
-      <ModalActions>
-        <Button style={{ marginRight: '10px' }}>Okay</Button>
-        <Button clear>Cancel</Button>
-      </ModalActions>
     </Modal>
   </GuideExample>
 </Playground>
@@ -137,8 +139,27 @@ export class ModalExample extends React.Component {
                 onRequestClose={this.closeModal}
                 appElement={document.body}
                 overlayStyle={docsModalZIndex}
+                title="Modal!"
+                actions={[
+                  <Button key="ok" onClick={this.closeModal}>
+                    Okay
+                  </Button>,
+                  <Button key="cancel" onClick={this.closeModal} halo>
+                    Cancel
+                  </Button>
+                ]}
+                secondaryActions={
+                  <Button
+                    key="back"
+                    onClick={this.closeModal}
+                    clearGray
+                    icon={<ChevronLeftIcon />}
+                    iconPosition="before"
+                  >
+                    Back
+                  </Button>
+                }
               >
-                <CalciteH1>Modal!</CalciteH1>
                 <CalciteP>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -149,17 +170,6 @@ export class ModalExample extends React.Component {
                   cupidatat non proident, sunt in culpa qui officia deserunt
                   mollit anim id est laborum.
                 </CalciteP>
-                <ModalActions>
-                  <Button
-                    onClick={this.closeModal}
-                    style={{ marginRight: '10px' }}
-                  >
-                    Okay
-                  </Button>
-                  <Button onClick={this.closeModal} clear>
-                    Cancel
-                  </Button>
-                </ModalActions>
               </Modal>
             </div>
           );
@@ -169,6 +179,33 @@ export class ModalExample extends React.Component {
       return <ModalStory />;
     }}
 
+</Playground>
+
+## No Header or Footer
+
+<Playground>
+  <GuideExample
+    id="contentModalGuideExample"
+    style={{ position: 'relative', height: '400px' }}
+  >
+    <Modal
+      open={true}
+      parentSelector={() => document.getElementById('contentModalGuideExample')}
+      overlayStyle={{ position: 'absolute' }}
+      dialogStyle={{ width: '90%' }}
+      appElement={document.body}
+      >
+      <CalciteP>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </CalciteP>
+    </Modal>
+  </GuideExample>
 </Playground>
 
 ## Props
