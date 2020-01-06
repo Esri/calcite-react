@@ -19,39 +19,10 @@ Calcite React `Toaster` extends the react-toastify library with the `notify` met
 Use `notify(content, options)` to display a toaster notification. View their
 [documentation](https://github.com/fkhadra/react-toastify) to see available options.
 
-#### ⚠️ Important Usage Note ⚠️ 
-
-The `Toaster` requires a supporting component called `ToastContainer` to render properly. 
-Only one `ToastContainer` is allowed per project and should be rendered near the top of
-your component tree.
-```jsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import App from 'path/to/App';
-
-import CalciteThemeProvider from 'calcite-react/CalciteThemeProvider';
-import { ToastContainer, notify } from 'calcite-react/Toaster';
-
-ReactDOM.render(
-  <CalciteThemeProvider>
-    // Create your single ToastContainer for your whole app
-    <ToastContainer />
-    <App>
-      // notify() can be used from any component now
-      <Button onClick={() => notify("Here's a basic toaster!", { showIcon: true })}>
-        Click Me
-      </Button>
-    </App>
-  </CalciteThemeProvider>,
-  document.getElementById('root')
-);
-```
-
-### ⛔️ `Toaster` Component Deprecated ⛔️
+### ⛔️ Use `notify` method ⛔️
 
 We have deprecated using `<Toaster />` as a rendered component and will be removing it
-at our `v1.0.0` release. Please use the newer `notify(content, options);` method to trigger
+at our `v1.0.0` release. Please use the newer `notify(content, options)` method to trigger
 toaster messages.
 
 ## Basic Usage
@@ -386,3 +357,7 @@ export default ToasterExampleComponent;
 ### ToastContainer
 
 <PropsTable of={ToastContainer} />
+
+ℹ️ `ToastContainer` is no longer required unless you are attempting to set
+custom properties for all toast messages in your app. A container will be
+automatically mounted the first time a toast is triggered.

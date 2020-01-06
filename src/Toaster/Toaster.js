@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { StyledToaster } from './Toaster-styled';
+import { StyledToaster, StyledCloseButton } from './Toaster-styled';
 
 import {
   StyledAlertContent,
@@ -23,6 +23,8 @@ import {
   StyledAlertMessage
 } from '../Alert/Alert-styled';
 
+// App components
+import XIcon from 'calcite-ui-icons-react/XIcon';
 import LightbulbIcon from 'calcite-ui-icons-react/LightbulbIcon';
 import CheckCircleIcon from 'calcite-ui-icons-react/CheckCircleIcon';
 import ExclamationMarkTriangleIcon from 'calcite-ui-icons-react/ExclamationMarkTriangleIcon';
@@ -50,6 +52,15 @@ const wrapContentMessage = content => {
   return content;
 };
 
+const CloseButton = ({ closeToast }) => (
+  <StyledCloseButton
+    type="button"
+    iconButton
+    icon={<XIcon size={16} />}
+    onClick={closeToast}
+  />
+);
+
 const notify = (
   content,
   { type, showProgress, showIcon, toastId, ...other } = {}
@@ -62,6 +73,11 @@ const notify = (
   }
 
   if (!toastId || !toast.isActive(toastId)) {
+    // If no ToastContainer has been mounted yet we can do that here
+    toast.configure({
+      closeButton: <CloseButton />
+    });
+
     toastId = toast(
       (
         <StyledToaster type={type}>
