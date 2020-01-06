@@ -15,11 +15,9 @@ import {
   StyledDisplayCheckbox,
   StyledCheckboxInput,
   StyledCheckboxLabel,
-  StyledCheckboxGroup
+  StyledCheckboxGroup,
+  StyledCheckboxCheckIcon
 } from './Checkbox-styled';
-
-import CheckIcon from 'calcite-ui-icons-react/CheckIcon';
-import MinusIcon from 'calcite-ui-icons-react/MinusIcon';
 
 const Checkbox = ({
   children,
@@ -111,7 +109,13 @@ const Checkbox = ({
         type="checkbox"
       />
       <StyledDisplayCheckbox>
-        <CheckIcon filled size={10.5} />
+        {/* Manually include separate check icon pulled from calcite-components docs */}
+        <StyledCheckboxCheckIcon>
+          <path
+            d="M12.753 3l-7.319 7.497L3.252 8.31 2 9.373l3.434 3.434L14 4.24z"
+            fill="white"
+          />
+        </StyledCheckboxCheckIcon>
       </StyledDisplayCheckbox>
       {checkboxLabel}
     </StyledCheckboxGroup>

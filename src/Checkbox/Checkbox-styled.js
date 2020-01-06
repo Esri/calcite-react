@@ -40,6 +40,7 @@ const StyledDisplayCheckbox = styled.div`
   margin-bottom: 3px;
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
   margin-left: 0.125rem;
+  transition: all 150ms linear;
   cursor: pointer;
 
   html[dir='rtl'] & {
@@ -113,9 +114,17 @@ const StyledCheckboxGroup = styled.label`
 `;
 StyledCheckboxGroup.defaultProps = { theme };
 
+const StyledCheckboxCheckIcon = styled.svg.attrs({
+  viewBox: '0 0 16 16'
+})`
+  height: 16px;
+  width: 16px;
+`;
+
 export {
   StyledDisplayCheckbox,
   StyledCheckboxInput,
   StyledCheckboxLabel,
-  StyledCheckboxGroup
+  StyledCheckboxGroup,
+  StyledCheckboxCheckIcon
 };
