@@ -16,14 +16,14 @@ import Transition from 'react-transition-group/Transition';
 import ReactModal from 'react-modal';
 
 import {
-  ReactModalOverlayStyles,
-  ReactModalContentStyles,
+  reactModalOverlayStyles,
+  reactModalContentStyles,
   StyledModalHeader,
   StyledModalTitle,
   StyledModalCloseButton,
   StyledModalContent,
-  OverlayTransition,
-  DialogTransition,
+  overlayTransition,
+  dialogTransition,
   StyledModalActions,
   StyledSecondaryActions
 } from './Modal-styled';
@@ -56,14 +56,14 @@ const Modal = ({
           closeTimeoutMS={300}
           style={{
             overlay: {
-              ...ReactModalOverlayStyles,
+              ...reactModalOverlayStyles,
               ...overlayStyle,
-              ...OverlayTransition[state]
+              ...overlayTransition[state]
             },
             content: {
-              ...ReactModalContentStyles(color),
+              ...reactModalContentStyles(color),
               ...dialogStyle,
-              ...DialogTransition[state]
+              ...dialogTransition[state]
             }
           }}
           contentLabel={title}
