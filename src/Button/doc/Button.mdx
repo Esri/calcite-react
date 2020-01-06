@@ -21,7 +21,7 @@ Buttons communicate the action that will occur when the user touches them.
 #### Import Syntax
 
 ```js
-import Button, { ButtonGroup } from 'calcite-react/Button'
+import Button, { ButtonGroup } from 'calcite-react/Button';
 ```
 
 ## Basic Usage
@@ -30,14 +30,20 @@ import Button, { ButtonGroup } from 'calcite-react/Button'
   <Button onClick={() => console.log('clicked')}>default</Button>
 </Playground>
 
-## Colors
+## Appearances
 
 <Playground>
-  <GuideExample label="transparent">
-    <Button transparent onClick={() => console.log('clicked')}>
-      transparent
+  <GuideExample label="inline">
+    <Button inline onClick={() => console.log('clicked')}>
+      inline
     </Button>
   </GuideExample>
+
+<GuideExample label="transparent">
+  <Button transparent onClick={() => console.log('clicked')}>
+    transparent
+  </Button>
+</GuideExample>
 
 <GuideExample label="clear">
   <Button clear onClick={() => console.log('clicked')}>
@@ -136,7 +142,7 @@ import Button, { ButtonGroup } from 'calcite-react/Button'
     target="_blank"
     onClick={() => console.log('clicked')}
   >
-    link button
+    Link button
   </Button>
 </Playground>
 
