@@ -30,7 +30,8 @@ import XIcon from 'calcite-ui-icons-react/XIcon';
 
 // Third party libraries
 
-const StyledModalOverlay = {
+// Overlay styles passed to the ReactModal library
+const ReactModalOverlayStyles = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -46,7 +47,8 @@ const StyledModalOverlay = {
   opacity: 0
 };
 
-const StyledModalDialog = color => {
+// Modal wrapper styles passed to the ReactModal library
+const ReactModalContentStyles = color => {
   let borderTop;
   if (color === 'blue') {
     borderTop = `4px solid ${theme.palette.blue}`;
@@ -185,8 +187,8 @@ const DialogTransition = {
 };
 
 export {
-  StyledModalOverlay,
-  StyledModalDialog,
+  ReactModalOverlayStyles,
+  ReactModalContentStyles,
   StyledModalHeader,
   StyledModalTitle,
   StyledModalCloseButton,

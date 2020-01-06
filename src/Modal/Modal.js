@@ -16,8 +16,8 @@ import Transition from 'react-transition-group/Transition';
 import ReactModal from 'react-modal';
 
 import {
-  StyledModalOverlay,
-  StyledModalDialog,
+  ReactModalOverlayStyles,
+  ReactModalContentStyles,
   StyledModalHeader,
   StyledModalTitle,
   StyledModalCloseButton,
@@ -56,12 +56,12 @@ const Modal = ({
           closeTimeoutMS={300}
           style={{
             overlay: {
-              ...StyledModalOverlay,
+              ...ReactModalOverlayStyles,
               ...overlayStyle,
               ...OverlayTransition[state]
             },
             content: {
-              ...StyledModalDialog(color),
+              ...ReactModalContentStyles(color),
               ...dialogStyle,
               ...DialogTransition[state]
             }
