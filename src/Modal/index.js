@@ -10,4 +10,4 @@
 // limitations under the License.​
 
 export { default } from './Modal';
-export { default as ModalActions } from './ModalActions';
+export { StyledModalActions as ModalActions } from './Modal-styled';
