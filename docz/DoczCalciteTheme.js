@@ -1,4 +1,4 @@
-import esriColors from './esriColors.json';
+import colors from '@esri/calcite-colors/colors';
 
 export default {
   // Removing logo for now as it overwrites the package name, removing any
@@ -9,34 +9,34 @@ export default {
   // },
   radii: '2px',
   colors: {
-    white: esriColors['blk-000'],
-    grayExtraLight: esriColors['blk-010'],
-    grayLight: esriColors['blk-040'],
-    gray: esriColors['blk-150'],
-    grayDark: esriColors['blk-190'],
-    grayExtraDark: esriColors['blk-210'],
-    dark: esriColors['blk-220'],
-    blue: esriColors['v-bb-160'],
-    skyBlue: esriColors['v-bb-150'],
+    white: colors['blk-000'],
+    grayExtraLight: colors['blk-010'],
+    grayLight: colors['blk-040'],
+    gray: colors['blk-150'],
+    grayDark: colors['blk-190'],
+    grayExtraDark: colors['blk-210'],
+    dark: colors['blk-220'],
+    blue: colors['v-bb-160'],
+    skyBlue: colors['v-bb-150'],
     /** properties below depend on mode select */
-    primary: esriColors['v-bb-160'],
-    text: esriColors['blk-170'],
-    link: esriColors['v-bb-160'],
-    footerText: esriColors['blk-190'],
-    sidebarBg: esriColors['blk-010'],
-    sidebarText: esriColors['blk-170'],
+    primary: colors['v-bb-160'],
+    text: colors['blk-170'],
+    link: colors['v-bb-160'],
+    footerText: colors['blk-190'],
+    sidebarBg: colors['blk-010'],
+    sidebarText: colors['blk-170'],
     sidebarHighlight: null,
-    sidebarBorder: esriColors['blk-060'],
-    background: esriColors['blk-000'],
-    border: esriColors['blk-040'],
-    theadColor: esriColors['blk-150'],
-    theadBg: esriColors['blk-010'],
-    tableColor: esriColors['blk-220'],
-    codeColor: esriColors['blk-150'],
-    preBg: esriColors['blk-010'],
-    blockquoteBg: esriColors['blk-010'],
-    blockquoteBorder: esriColors['blk-040'],
-    blockquoteColor: esriColors['blk-120']
+    sidebarBorder: colors['blk-060'],
+    background: colors['blk-000'],
+    border: colors['blk-040'],
+    theadColor: colors['blk-150'],
+    theadBg: colors['blk-010'],
+    tableColor: colors['blk-220'],
+    codeColor: colors['blk-150'],
+    preBg: colors['blk-010'],
+    blockquoteBg: colors['blk-010'],
+    blockquoteBorder: colors['blk-040'],
+    blockquoteColor: colors['blk-120']
   },
   styles: {
     body: {

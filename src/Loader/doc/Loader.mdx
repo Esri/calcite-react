@@ -5,7 +5,7 @@ route: /loader
 
 import { Playground, PropsTable } from 'docz';
 import GuideExample from '../../../docz/GuideExample';
-import EsriColors from '../../CalciteThemeProvider/EsriColors';
+import colors from '@esri/calcite-colors/colors';
 
 import Loader from '../';
 
@@ -44,7 +44,7 @@ import Loader from 'calcite-react/Loader'
 <Playground>
   <Loader color="tomato" />
   <Loader color="#1E90FF" />
-  <Loader color={EsriColors.Calcite_Gray_300} />
+  <Loader color={colors['blk-070']} />
 </Playground>
 
 ## Props

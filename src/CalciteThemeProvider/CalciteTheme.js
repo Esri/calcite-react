@@ -9,24 +9,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
-import EsriColors from './EsriColors';
+import colors from '@esri/calcite-colors/colors';
 
 const CalciteTheme = {
   palette: {
     // ┌───────────┐
     // │ Grayscale │
     // └───────────┘
-    white: '#ffffff',
-    offWhite: EsriColors.Calcite_Gray_100,
-    lightestGray: EsriColors.Calcite_Gray_200,
-    lighterGray: EsriColors.Calcite_Gray_350,
-    lightGray: EsriColors.Calcite_Gray_400,
-    gray: EsriColors.Calcite_Gray_450,
-    darkGray: EsriColors.Calcite_Gray_500,
-    darkerGray: EsriColors.Calcite_Gray_550,
-    darkestGray: EsriColors.Calcite_Gray_600,
-    offBlack: EsriColors.Calcite_Gray_650,
-    black: EsriColors.Calcite_Gray_700,
+    white: colors['blk-000'],
+    offWhite: colors['blk-005'],
+    lightestGray: colors['blk-020'],
+    lighterGray: colors['blk-050'],
+    lightGray: colors['blk-080'],
+    gray: colors['blk-100'],
+    darkGray: colors['blk-120'],
+    darkerGray: colors['blk-140'],
+    darkestGray: colors['blk-160'],
+    offBlack: colors['blk-180'],
+    black: colors['blk-200'],
 
     transparentWhite: 'rgba(255, 255, 255, 0.7)',
     opaqueWhite: 'rgba(255, 255, 255, 0.8)',
@@ -40,52 +40,62 @@ const CalciteTheme = {
     // ┌────────────┐
     // │ Brand Blue │
     // └────────────┘
-    Brand_Blue_100: EsriColors.Brand_Blue_100, //  previously blue 14
-    Brand_Blue_150: EsriColors.Brand_Blue_150, // previously blue 13
-    Brand_Blue_200: EsriColors.Brand_Blue_200, // "Esri Blue", previously blue 12
-    Brand_Blue_250: EsriColors.Brand_Blue_250, // previously blue 11
+    Brand_Blue_100: colors['h-bb-020'], //  previously blue 14
+    Brand_Blue_150: colors['h-bb-040'], // previously blue 13
+    Brand_Blue_200: colors['h-bb-060'], // "Esri Blue", previously blue 12
+    Brand_Blue_250: colors['h-bb-080'], // previously blue 11
 
     // ┌───────────┐
     // │ UI Colors │
     // └───────────┘
-    lightestBlue: EsriColors.Calcite_Blue_100,
-    lighterBlue: EsriColors.Calcite_Blue_150,
-    lightBlue: EsriColors.Calcite_Blue_250,
-    blue: EsriColors.Calcite_Highlight_Blue_350,
-    darkBlue: EsriColors.Calcite_Highlight_Blue_400,
-    darkerBlue: '#052942',
+    lightestBlue: colors['h-bb-010'],
+    lighterBlue: colors['h-bb-030'],
+    lightBlue: colors['h-bb-050'],
+    blue: colors['h-bb-060'],
+    darkBlue: colors['h-bb-080'],
+    darkerBlue: colors['h-bb-100'],
 
-    lightestGreen: EsriColors.Calcite_Green_100,
-    lightGreen: EsriColors.Calcite_Green_150,
-    green: EsriColors.Calcite_Green_250,
-    darkGreen: EsriColors.Calcite_Green_a200,
-    darkGreen200: EsriColors.Calcite_Green_200,
+    lightestGreen: colors['h-gg-010'],
+    lighterGreen: colors['h-gg-020'],
+    lightGreen: colors['h-gg-040'],
+    green: colors['h-gg-060'],
+    darkGreen: colors['h-gg-080'],
+    darkerGreen: colors['h-gg-100'],
 
-    lightestRed: EsriColors.Calcite_Red_100,
-    lightRed: EsriColors.Calcite_Red_150,
-    red: EsriColors.Brand_Red_100,
-    darkRed: EsriColors.Calcite_Red_a200,
-    darkRed200: EsriColors.Calcite_Red_200,
+    lightestRed: colors['h-rr-010'],
+    lighterRed: colors['h-rr-020'],
+    lightRed: colors['h-rr-040'],
+    red: colors['h-rr-060'],
+    darkRed: colors['h-rr-080'],
+    darkerRed: colors['h-rr-100'],
 
-    lightestOrange: EsriColors.Calcite_Orange_a100,
-    lightOrange: EsriColors.Calcite_Orange_a150,
-    orange: EsriColors.Calcite_Orange_a200,
-    darkOrange: EsriColors.Calcite_Orange_a250,
+    lightestOrange: colors['h-oo-010'],
+    lighterOrange: colors['h-oo-020'],
+    lightOrange: colors['h-oo-040'],
+    orange: colors['h-oo-060'],
+    darkOrange: colors['h-oo-080'],
+    darkerOrange: colors['h-oo-100'],
 
-    lightestYellow: EsriColors.Calcite_Yellow_100,
-    lightYellow: EsriColors.Calcite_Yellow_150,
-    yellow: EsriColors.Calcite_Yellow_200,
-    darkYellow: EsriColors.Calcite_Yellow_a150,
+    lightestYellow: colors['h-yy-010'],
+    lighterYellow: colors['h-yy-020'],
+    lightYellow: colors['h-yy-040'],
+    yellow: colors['h-yy-060'],
+    darkYellow: colors['h-yy-080'],
+    darkerYellow: colors['h-yy-100'],
 
-    lightestPurple: EsriColors.Calcite_Purple_100,
-    lightPurple: EsriColors.Calcite_Purple_150,
-    purple: EsriColors.Calcite_Purple_200,
-    darkPurple: EsriColors.Calcite_Purple_a150,
+    lightestPurple: colors['h-vv-010'],
+    lighterPurple: colors['h-vv-020'],
+    lightPurple: colors['h-vv-040'],
+    purple: colors['h-vv-060'],
+    darkPurple: colors['h-vv-080'],
+    darkerPurple: colors['h-vv-100'],
 
-    lightestBrown: EsriColors.Calcite_Brown_100,
-    lightBrown: EsriColors.Calcite_Brown_150,
-    brown: EsriColors.Calcite_Brown_250,
-    darkBrown: EsriColors.Calcite_Brown_a200
+    lightestBrown: colors['h-br-010'],
+    lighterBrown: colors['h-br-020'],
+    lightBrown: colors['h-br-040'],
+    brown: colors['h-br-060'],
+    darkBrown: colors['h-br-080'],
+    darkerBrown: colors['h-br-100']
   },
   type: {
     // Header Family
@@ -133,9 +143,9 @@ const CalciteTheme = {
   // ┌─────────────┐
   // │ Type Colors │
   // └─────────────┘
-  typeColor: EsriColors.Calcite_Gray_650,
-  linkColor: EsriColors.Calcite_Highlight_Blue_350,
-  linkHover: EsriColors.Calcite_Highlight_Blue_400,
+  typeColor: colors['ui-text-1'],
+  linkColor: colors['ui-blue'],
+  linkHover: colors['ui-blue-hover'],
 
   // ┌─────────────┐
   // │ Breakpoints │
@@ -152,7 +162,7 @@ const CalciteTheme = {
   // ┌───────────────────┐
   // │ Tooltip Variables │
   // └───────────────────┘
-  tooltipBackgroundColor: EsriColors.Calcite_Gray_800,
+  tooltipBackgroundColor: colors['blk-200'],
   tooltipBorderRadius: 0,
   tooltipEnterDelay: 0,
 

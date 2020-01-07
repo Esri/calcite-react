@@ -50,7 +50,8 @@ const StyledButton = styled.button`
   text-decoration: none;
 
   &:hover {
-    background-color: ${props => props.theme.palette.darkBlue};
+    background-color: ${props => props.theme.palette.lightBlue};
+    border-color: ${props => props.theme.palette.lightBlue};
     color: ${props => props.theme.palette.white};
   }
 
@@ -96,18 +97,18 @@ const StyledButton = styled.button`
   ${props =>
     props.isAdornment &&
     css`
-      margin: ${props => unitCalc(props.theme.baseline, 6, '/')} 0 0 0;
+      margin: ${unitCalc(props.theme.baseline, 6, '/')} 0 0 0;
 
       ${props =>
         props.minimal &&
         css`
           background: none;
-          color: ${props => props.theme.linkColor};
+          color: ${props.theme.linkColor};
           border: none;
-          border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
+          border-bottom: 1px solid ${props.theme.palette.lighterGray};
 
           &:hover {
-            color: ${props => props.theme.linkHover};
+            color: ${props.theme.linkHover};
             background: none;
             text-decoration: underline;
           }
@@ -140,11 +141,11 @@ const StyledButton = styled.button`
     props.transparent &&
     css`
       background: none;
-      color: ${props => props.theme.linkColor};
+      color: ${props.theme.linkColor};
       border: none;
 
       &:hover {
-        color: ${props => props.theme.linkHover};
+        color: ${props.theme.linkHover};
         background: none;
         text-decoration: underline;
       }
@@ -160,7 +161,7 @@ const StyledButton = styled.button`
       font-weight: 500;
       white-space: initial;
       user-select: text;
-      color: ${props => props.theme.linkColor};
+      color: ${props.theme.linkColor};
       background-color: transparent;
       position: relative;
       background-image: linear-gradient(currentColor, currentColor),
@@ -221,14 +222,14 @@ const StyledButton = styled.button`
   ${props =>
     props.clear &&
     css`
-      color: ${props => props.theme.palette.blue};
-      background: ${props => props.theme.palette.white};
-      border-color: ${props => props.theme.palette.blue};
+      color: ${props.theme.palette.blue};
+      background: ${props.theme.palette.white};
+      border-color: ${props.theme.palette.blue};
 
       &:hover {
-        color: ${props => props.theme.palette.white};
-        background: ${props => props.theme.palette.darkBlue};
-        border-color: ${props => props.theme.palette.darkBlue};
+        color: ${props.theme.palette.white};
+        background: ${props.theme.palette.darkBlue};
+        border-color: ${props.theme.palette.darkBlue};
       }
     `};
 
@@ -236,11 +237,12 @@ const StyledButton = styled.button`
     props.clearGray &&
     css`
       background: none;
-      color: ${props => props.theme.palette.gray};
-      border-color: ${props => props.theme.palette.gray};
+      color: ${props.theme.palette.gray};
+      border-color: ${props.theme.palette.gray};
       &:hover {
-        color: ${props => props.theme.palette.white};
-        background: ${props => props.theme.palette.darkGray};
+        color: ${props.theme.palette.white};
+        background: ${props.theme.palette.darkGray};
+        border-color: ${props.theme.palette.darkGray};
       }
     `};
 
@@ -248,39 +250,41 @@ const StyledButton = styled.button`
     props.clearWhite &&
     css`
       background: none;
-      color: ${props => props.theme.palette.white};
-      border: 1px solid ${props => props.theme.palette.white};
+      color: ${props.theme.palette.white};
+      border: 1px solid ${props.theme.palette.white};
       &:hover {
-        color: ${props => props.theme.palette.gray};
-        background: ${props => props.theme.palette.white};
+        color: ${props.theme.palette.gray};
+        background: ${props.theme.palette.white};
+        border-color: ${props.theme.palette.white};
       }
     `};
 
   ${props =>
     props.white &&
     css`
-      background: ${props => props.theme.palette.white};
-      color: ${props => props.theme.palette.offBlack};
-      border: 1px solid ${props => props.theme.palette.white};
+      background: ${props.theme.palette.white};
+      color: ${props.theme.palette.offBlack};
+      border: 1px solid ${props.theme.palette.white};
       &:hover {
-        color: ${props => props.theme.palette.offBlack};
-        background: ${props => props.theme.palette.lightestGray};
+        color: ${props.theme.palette.offBlack};
+        background: ${props.theme.palette.lightestGray};
+        border-color: ${props.theme.palette.lightestGray};
       }
     `};
 
   ${props =>
     props.halo &&
     css`
-      color: ${props => props.theme.palette.blue};
+      color: ${props.theme.palette.blue};
       background: transparent;
-      border-color: ${props => props.theme.palette.blue};
-      box-shadow: inset 0 0 0 0 ${props => props.theme.palette.blue};
+      border-color: ${props.theme.palette.blue};
+      box-shadow: inset 0 0 0 0 ${props.theme.palette.blue};
 
       &:hover {
-        color: ${props => props.theme.palette.blue};
+        color: ${props.theme.palette.blue};
         background: transparent;
-        border-color: ${props => props.theme.palette.blue};
-        box-shadow: inset 0 0 0 2px ${props => props.theme.palette.blue};
+        border-color: ${props.theme.palette.blue};
+        box-shadow: inset 0 0 0 2px ${props.theme.palette.blue};
       }
     `};
 
@@ -331,28 +335,28 @@ const StyledButton = styled.button`
   ${props =>
     props.red &&
     css`
-      color: ${props => props.theme.palette.red};
+      color: ${props.theme.palette.red};
       background: transparent;
-      border-color: ${props => props.theme.palette.red};
+      border-color: ${props.theme.palette.red};
 
       &:hover {
-        color: ${props => props.theme.palette.white};
-        background: ${props => props.theme.palette.darkRed};
-        border-color: ${props => props.theme.palette.darkRed};
+        color: ${props.theme.palette.white};
+        background: ${props.theme.palette.darkRed};
+        border-color: ${props.theme.palette.darkRed};
       }
     `};
 
   ${props =>
     props.green &&
     css`
-      color: ${props => props.theme.palette.white};
-      background: ${props => props.theme.palette.green};
-      border-color: ${props => props.theme.palette.green};
+      color: ${props.theme.palette.white};
+      background: ${props.theme.palette.green};
+      border-color: ${props.theme.palette.green};
 
       &:hover {
-        color: ${props => props.theme.palette.white};
-        background: ${props => props.theme.palette.darkGreen};
-        border-color: ${props => props.theme.palette.darkGreen};
+        color: ${props.theme.palette.white};
+        background: ${props.theme.palette.darkGreen};
+        border-color: ${props.theme.palette.darkGreen};
       }
     `};
 
@@ -360,22 +364,22 @@ const StyledButton = styled.button`
     props.iconButton &&
     css`
       background: transparent;
-      color: ${props => props.theme.palette.darkGray};
+      color: ${props.theme.palette.darkGray};
       border: none;
-      padding: ${props => unitCalc(props.theme.baseline, 5, '/')};
+      padding: ${unitCalc(props.theme.baseline, 5, '/')};
       ${props =>
         props.white &&
         css`
-          color: ${props => props.theme.palette.white};
+          color: ${props.theme.palette.white};
         `};
 
       &:hover {
-        color: ${props => props.theme.palette.offBlack};
+        color: ${props.theme.palette.offBlack};
         background: transparent;
         ${props =>
           props.white &&
           css`
-            color: ${props => props.theme.palette.lightestGray};
+            color: ${props.theme.palette.lightestGray};
           `};
       }
     `};
@@ -393,28 +397,28 @@ const StyledButton = styled.button`
 
       &:first-child {
         margin-left: 0;
-        border-top-left-radius: ${props => props.theme.borderRadius};
-        border-bottom-left-radius: ${props => props.theme.borderRadius};
+        border-top-left-radius: ${props.theme.borderRadius};
+        border-bottom-left-radius: ${props.theme.borderRadius};
 
         html[dir='rtl'] & {
           margin-right: 0;
           margin-left: initial;
           border-top-left-radius: 0;
           border-bottom-left-radius: 0;
-          border-top-right-radius: ${props => props.theme.borderRadius};
-          border-bottom-right-radius: ${props => props.theme.borderRadius};
+          border-top-right-radius: ${props.theme.borderRadius};
+          border-bottom-right-radius: ${props.theme.borderRadius};
         }
       }
 
       &:last-child {
-        border-top-right-radius: ${props => props.theme.borderRadius};
-        border-bottom-right-radius: ${props => props.theme.borderRadius};
+        border-top-right-radius: ${props.theme.borderRadius};
+        border-bottom-right-radius: ${props.theme.borderRadius};
 
         html[dir='rtl'] & {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
-          border-top-left-radius: ${props => props.theme.borderRadius};
-          border-bottom-left-radius: ${props => props.theme.borderRadius};
+          border-top-left-radius: ${props.theme.borderRadius};
+          border-bottom-left-radius: ${props.theme.borderRadius};
         }
       }
 
@@ -425,7 +429,7 @@ const StyledButton = styled.button`
           cursor: default;
 
           &:hover {
-            background-color: ${props => props.theme.palette.blue};
+            background-color: ${props.theme.palette.blue};
           }
         `};
 

@@ -239,11 +239,11 @@ const CalciteReactGlobalStyles = createGlobalStyle`
       background: ${CalciteTheme.palette.white};
     }
     &--success {
-      border-top-color: ${CalciteTheme.palette.darkGreen};
+      border-top-color: ${CalciteTheme.palette.green};
       background: ${CalciteTheme.palette.white};
     }
     &--warning {
-      border-top-color: ${CalciteTheme.palette.darkYellow};
+      border-top-color: ${CalciteTheme.palette.yellow};
       background: ${CalciteTheme.palette.white};
     }
     &--error {

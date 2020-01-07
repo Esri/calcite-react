@@ -13,11 +13,12 @@
 import styled, { css } from 'styled-components';
 
 // Utils, common elements
-import { fontSize, unitCalc } from '../utils/helpers';
+import { unitCalc } from '../utils/helpers';
 import { baseRadioCheckbox } from '../utils/commonElements';
 
 // Calcite theme and Esri colors
-import { CalciteTheme as theme, EsriColors } from '../CalciteThemeProvider';
+import { CalciteTheme as theme } from '../CalciteThemeProvider';
+import colors from '@esri/calcite-colors/colors';
 
 // Calcite components
 import { StyledFormControlLabel } from '../Form/Form-styled';
@@ -30,35 +31,32 @@ import { transparentize } from 'polished';
 const switchProps = {
   switchWidth: '36px',
   switchHeight: '20px',
-  switchBg: EsriColors.Calcite_Gray_150,
-  switchBorderColor: EsriColors.Calcite_Gray_350,
-  switchHoverBg: EsriColors.Calcite_Gray_250,
-  switchHoverBorderColor: EsriColors.Calcite_Gray_350,
+  switchBg: colors['blk-010'],
+  switchBorderColor: colors['blk-040'],
+  switchHoverBg: colors['blk-020'],
+  switchHoverBorderColor: colors['blk-060'],
   switchCheckedBg: theme.palette.blue,
   switchCheckedBorderColor: theme.palette.darkBlue,
-  switchFocusShadow: `0 0 4px 2px ${transparentize(
-    0.1,
-    EsriColors.Calcite_Gray_350
-  )}`,
+  switchFocusShadow: `0 0 4px 2px ${transparentize(0.1, colors['blk-050'])}`,
   switchFocusCheckedShadow: `0 0 4px 2px ${transparentize(
     0.1,
-    EsriColors.Calcite_Blue_200
+    colors['h-bb-030']
   )}`,
   switchFocusDestructiveCheckedShadow: `0 0 4px 2px ${transparentize(
     0.1,
-    EsriColors.Calcite_Red_200
+    colors['h-rr-030']
   )}`,
   handleSize: '18px',
   handleTopDistance: '-1px',
   handleEdgeDistance: '-1px',
   handleActiveEdgeDistance: '1px',
   handleBg: theme.palette.white,
-  handleBorderColor: EsriColors.Calcite_Gray_450,
+  handleBorderColor: colors['blk-100'],
   handleShadow: `0 1px 1px 0px ${transparentize(
     0.8,
     theme.palette.darkestGray
   )}`,
-  handleHoverBorderColor: EsriColors.Calcite_Blue_a200,
+  handleHoverBorderColor: colors['h-bb-050'],
   handleHoverShadow: `0 1px 2px 0px ${transparentize(
     0.8,
     theme.palette.darkestGray
@@ -66,10 +64,10 @@ const switchProps = {
   handleCheckedBorderColor: theme.palette.darkBlue,
   handleCheckedShadow: `0 2px 1px 0px {transparentize(.8,CalciteTheme.palette.darkestGray)}`,
   handleActiveShadow: `0 3px 1px 0px {transparentize(.8,CalciteTheme.palette.darkestGray)}`,
-  switchDestructiveCheckedBg: EsriColors.Calcite_Red_a200,
-  switchDestructiveCheckedBorderColor: EsriColors.Calcite_Red_a250,
-  handleDestructiveHoverBorderColor: EsriColors.Calcite_Red_a200,
-  handleDestructiveCheckedBorderColor: EsriColors.Calcite_Red_a250
+  switchDestructiveCheckedBg: colors['h-ro-060'],
+  switchDestructiveCheckedBorderColor: colors['h-ro-070'],
+  handleDestructiveHoverBorderColor: colors['h-ro-060'],
+  handleDestructiveCheckedBorderColor: colors['h-ro-070']
 };
 
 const StyledSwitch = styled.label`
