@@ -9,43 +9,119 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { StyledToaster, StyledCloseButton } from './Toaster-styled';
+
+import {
+  StyledAlertContent,
+  StyledAlertIcon,
+  StyledAlertMessage
+} from '../Alert/Alert-styled';
+
+// App components
+import XIcon from 'calcite-ui-icons-react/XIcon';
+import LightbulbIcon from 'calcite-ui-icons-react/LightbulbIcon';
+import CheckCircleIcon from 'calcite-ui-icons-react/CheckCircleIcon';
+import ExclamationMarkTriangleIcon from 'calcite-ui-icons-react/ExclamationMarkTriangleIcon';
+
+const getAlertIcon = type => {
+  let defaultIcon;
+  if (type === 'success') {
+    defaultIcon = <CheckCircleIcon filled size={16} />;
+  } else if (type === 'warning' || type === 'error') {
+    defaultIcon = <ExclamationMarkTriangleIcon filled size={16} />;
+  } else {
+    defaultIcon = <LightbulbIcon filled size={16} />;
+  }
+
+  return <StyledAlertIcon>{defaultIcon}</StyledAlertIcon>;
+};
+
+// Wraps the content in a <ToastMessage /> component for styling
+// if they only passed a string of content
+const wrapContentMessage = content => {
+  if (content && typeof content === 'string') {
+    return <StyledAlertMessage>{content}</StyledAlertMessage>;
+  }
+
+  return content;
+};
+
+const CloseButton = ({ closeToast }) => (
+  <StyledCloseButton
+    type="button"
+    iconButton
+    icon={<XIcon size={16} />}
+    onClick={closeToast}
+  />
+);
+
+const notify = (
+  content,
+  { type, showProgress, showIcon, toastId, ...other } = {}
+) => {
+  let progressClassName = '';
+  if (showProgress) {
+    progressClassName = 'progress-visible';
+  } else if (showProgress === false) {
+    progressClassName = 'progress-hidden';
+  }
+
+  if (!toastId || !toast.isActive(toastId)) {
+    // If no ToastContainer has been mounted yet we can do that here
+    toast.configure({
+      closeButton: <CloseButton />
+    });
+
+    toastId = toast(
+      (
+        <StyledToaster type={type}>
+          {showIcon && getAlertIcon(type)}
+          <StyledAlertContent>{wrapContentMessage(content)}</StyledAlertContent>
+        </StyledToaster>
+      ) || '',
+      {
+        progressClassName,
+        type,
+        ...other
+      }
+    );
+  }
+};
+
 class Toaster extends Component {
   toastId = null;
 
   componentDidMount() {
-    if (this.props.open) {
-      this.notify();
+    console.warn(
+      'Depracation warning: Using <Toaster /> as a rendered component is deprecated. Please use notify(content, options). See https://calcite-react.netlify.com/toaster for more info.'
+    );
+
+    const { children, open, ...other } = this.props;
+
+    if (open) {
+      notify(children, {
+        toastId: this.toastId,
+        ...other
+      });
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.open) {
-      this.notify();
-    }
-  }
+    const { children, open, ...other } = this.props;
 
-  notify = () => {
-    const { children, showProgress, ...other } = this.props;
-    let progressClassName = '';
-    if (showProgress) {
-      progressClassName = 'progress-visible';
-    } else if (showProgress === false) {
-      progressClassName = 'progress-hidden';
-    }
-
-    if (!toast.isActive(this.toastId)) {
-      this.toastId = toast(<Fragment>{children}</Fragment> || '', {
-        progressClassName,
+    if (open) {
+      notify(children, {
+        toastId: this.toastId,
         ...other
       });
     }
-  };
+  }
 
   render() {
     return null;
@@ -69,7 +145,9 @@ Toaster.propTypes = {
   /** How long the Toaster should be open for; false if it shouldn't auto close, or a duration in millisecnds for how long it should take to close. */
   autoClose: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
   /** Toggle default visibility of the progress bar in a Toaster. */
-  showProgress: PropTypes.bool
+  showProgress: PropTypes.bool,
+  /** Toggles visibility of the icon */
+  showIcon: PropTypes.bool
 };
 
 Toaster.defaultProps = {
@@ -80,4 +158,4 @@ Toaster.defaultProps = {
 
 Toaster.displayName = 'Toaster';
 
-export default Toaster;
+export { Toaster as default, notify };

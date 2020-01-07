@@ -11,21 +11,59 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyledAlert, StyledAlertClose } from './Alert-styled';
+import {
+  StyledAlert,
+  StyledAlertIcon,
+  StyledAlertContent,
+  StyledAlertClose
+} from './Alert-styled';
 
-const Alert = ({ children, closeLabel, onClose, ...other }) => {
-  const getAlertClose = closeLabel => {
-    if (closeLabel) {
-      return (
-        <StyledAlertClose onClick={onClose}>{closeLabel}</StyledAlertClose>
-      );
+import XIcon from 'calcite-ui-icons-react/XIcon';
+import LightbulbIcon from 'calcite-ui-icons-react/LightbulbIcon';
+import CheckCircleIcon from 'calcite-ui-icons-react/CheckCircleIcon';
+import ExclamationMarkTriangleIcon from 'calcite-ui-icons-react/ExclamationMarkTriangleIcon';
+
+const Alert = ({
+  children,
+  showIcon,
+  icon,
+  showCloseLabel,
+  closeLabel,
+  onClose,
+  blue,
+  green,
+  yellow,
+  red,
+  ...other
+}) => {
+  const getAlertIcon = () => {
+    let defaultIcon;
+    if (green) {
+      defaultIcon = <CheckCircleIcon filled size={16} />;
+    } else if (yellow) {
+      defaultIcon = <ExclamationMarkTriangleIcon filled size={16} />;
+    } else if (red) {
+      defaultIcon = <ExclamationMarkTriangleIcon filled size={16} />;
+    } else {
+      defaultIcon = <LightbulbIcon filled size={16} />;
     }
+
+    return <StyledAlertIcon>{icon || defaultIcon}</StyledAlertIcon>;
+  };
+
+  const getAlertClose = () => {
+    return (
+      <StyledAlertClose onClick={onClose}>
+        {closeLabel || <XIcon size={16} />}
+      </StyledAlertClose>
+    );
   };
 
   return (
-    <StyledAlert {...other}>
-      {children}
-      {getAlertClose(closeLabel)}
+    <StyledAlert blue={blue} green={green} yellow={yellow} red={red} {...other}>
+      {(showIcon || icon) && getAlertIcon()}
+      <StyledAlertContent>{children}</StyledAlertContent>
+      {(showCloseLabel || closeLabel) && getAlertClose()}
     </StyledAlert>
   );
 };
@@ -33,6 +71,10 @@ const Alert = ({ children, closeLabel, onClose, ...other }) => {
 Alert.propTypes = {
   /** Components to be rendered within the Alert. */
   children: PropTypes.node,
+  /** Toggles visibility of the icon */
+  showIcon: PropTypes.bool,
+  /** Manually set an icon rather than use the default */
+  icon: PropTypes.node,
   /** Color modifier for the Alert. */
   blue: PropTypes.bool,
   /** Color modifier for the Alert. */
@@ -43,6 +85,8 @@ Alert.propTypes = {
   red: PropTypes.bool,
   /** Full-width modifier for the Alert. */
   full: PropTypes.bool,
+  /**  */
+  showCloseLabel: PropTypes.bool,
   /** Display label used to close the Alert. */
   closeLabel: PropTypes.node,
   /** Callback function fired when the close link is clicked. */

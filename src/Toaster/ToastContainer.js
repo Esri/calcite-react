@@ -33,7 +33,7 @@ const ToastContainer = ({ ...other }) => {
     <StyledCloseButton
       type="button"
       iconButton
-      icon={<XIcon size={20} />}
+      icon={<XIcon size={16} />}
       onClick={closeToast}
     />
   );
