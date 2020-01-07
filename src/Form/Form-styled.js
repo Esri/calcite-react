@@ -124,7 +124,7 @@ const StyledFormHelperText = styled.span`
   ${props =>
     props.success &&
     css`
-      color: ${props => props.theme.palette.darkGreen200};
+      color: ${props => props.theme.palette.darkerGreen};
     `};
 `;
 StyledFormHelperText.defaultProps = { theme };

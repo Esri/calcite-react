@@ -6,12 +6,15 @@ route: /toaster
 import { Playground, PropsTable } from 'docz';
 import { Component, Fragment } from 'react';
 import GuideExample from '../../../docz/GuideExample';
-import { Slide, Zoom, Flip } from 'react-toastify';
+import { toast, Slide, Zoom, Flip } from 'react-toastify';
 
 import Button from '../../Button';
 import Toaster, { notify, ToastContainer, ToastTitle, ToastMessage } from '../';
 
 import ToasterExampleComponent from './ToasterExampleComponent';
+
+import { StyledCloseButton } from '../Toaster-styled';
+import XIcon from 'calcite-ui-icons-react/XIcon';
 
 # Toaster
 
@@ -32,6 +35,18 @@ toaster messages.
       class ToasterStory extends Component {
         constructor(props) {
           super(props);
+          const CloseButton = ({ closeToast }) => (
+            <StyledCloseButton
+              type="button"
+              iconButton
+              icon={<XIcon size={16} />}
+              onClick={closeToast}
+            />
+          );
+
+          toast.configure({
+            closeButton: <CloseButton />
+          });
 
           this.showToaster = this.showToaster.bind(this);
         }

@@ -74,9 +74,12 @@ const notify = (
 
   if (!toastId || !toast.isActive(toastId)) {
     // If no ToastContainer has been mounted yet we can do that here
-    toast.configure({
-      closeButton: <CloseButton />
-    });
+    if (!document.getElementsByClassName('Toastify')) {
+      toast.configure({
+        className: 'calcite-react-toastify',
+        closeButton: <CloseButton />
+      });
+    }
 
     toastId = toast(
       (
