@@ -30,13 +30,13 @@ const StyledTargetWrapper = styled.div`
 StyledTargetWrapper.defaultProps = { theme };
 
 const StyledTooltip = styled.div`
-  padding: ${props => unitCalc(props.theme.baseline, 4, '/')}
+  padding: ${props => unitCalc(props.theme.baseline, 3, '/')}
     ${props => unitCalc(props.theme.baseline, 2, '/')};
   ${fontSize(-2)};
   color: ${props => props.theme.palette.white};
   text-align: center;
-  background: ${props => props.theme.palette.transparentBlack};
-  border-radius: ${props => props.theme.borderRadius || '3px'};
+  background: ${props => props.theme.tooltipBackgroundColor};
+  border-radius: ${props => props.theme.tooltipBorderRadius};
   max-width: 400px;
   opacity: 0;
   transition: opacity ${props => props.transitionDuration}ms
@@ -89,26 +89,26 @@ const StyledTooltipArrow = styled.div`
 
   &[data-placement^='top'] {
     border-width: 5px 5px 0 5px;
-    border-color: ${props => props.theme.palette.transparentBlack} transparent
+    border-color: ${props => props.theme.tooltipBackgroundColor} transparent
       transparent transparent;
     bottom: -5px;
   }
   &[data-placement^='bottom'] {
     border-width: 0 5px 5px 5px;
     border-color: transparent transparent
-      ${props => props.theme.palette.transparentBlack} transparent;
+      ${props => props.theme.tooltipBackgroundColor} transparent;
     top: -5px;
   }
   &[data-placement^='right'] {
     border-width: 5px 5px 5px 0;
-    border-color: transparent ${props => props.theme.palette.transparentBlack}
+    border-color: transparent ${props => props.theme.tooltipBackgroundColor}
       transparent transparent;
     left: -5px;
   }
   &[data-placement^='left'] {
     border-width: 5px 0 5px 5px;
     border-color: transparent transparent transparent
-      ${props => props.theme.palette.transparentBlack};
+      ${props => props.theme.tooltipBackgroundColor};
     right: -5px;
   }
 `;

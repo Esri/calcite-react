@@ -126,10 +126,9 @@ const CalciteTheme = {
   transition: '150ms linear',
   transitionDuration: '150ms',
   easingFunc: 'linear',
-  boxShadow: '0 0 16px 0 rgba(0,0,0,.05)',
+  boxShadow: 'rgba(0, 0, 0, 0.15) 0px 0px 16px 0px;',
   drawerWidth: '280px',
   borderRadius: 0,
-  tooltipEnterDelay: 0,
 
   // ┌─────────────┐
   // │ Type Colors │
@@ -149,6 +148,13 @@ const CalciteTheme = {
   // │ Grid Configuration │
   // └────────────────────┘
   prefix: '',
+
+  // ┌───────────────────┐
+  // │ Tooltip Variables │
+  // └───────────────────┘
+  tooltipBackgroundColor: EsriColors.Calcite_Gray_800,
+  tooltipBorderRadius: 0,
+  tooltipEnterDelay: 0,
 
   // ┌─────────┐
   // │ Toaster │
