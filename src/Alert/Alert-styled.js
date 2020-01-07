@@ -119,10 +119,9 @@ StyledAlert.defaultProps = { theme };
 const StyledAlertContent = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1 0 auto;
+  flex: 1 0 0px;
   padding: ${props => unitCalc(props.theme.baseline, 1.5, '/')}
     ${props => props.theme.baseline};
-  padding-right: 0;
 
   html[dir='rtl'] & {
     padding-right: ${props => props.theme.baseline};
@@ -149,6 +148,7 @@ const StyledAlertClose = styled(CalciteA)`
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
+  margin-left: -${props => props.theme.baseline};
   padding: ${props => props.theme.baseline};
   ${fontSize(-1)};
   line-height: 0;
