@@ -18,6 +18,7 @@ const AccordionTitle = ({
   active,
   sectionIndex,
   onAccordionChange,
+  iconPosition,
   ...other
 }) => {
   const setActiveAccordionIndex = e => {
@@ -28,10 +29,24 @@ const AccordionTitle = ({
     <StyledAccordionTitle
       onClick={setActiveAccordionIndex}
       active={active}
+      iconPosition={iconPosition}
       {...other}
     >
-      <StyledChevronIcon active={`${active}`} />
+      {iconPosition === 'start' ? (
+        <StyledChevronIcon
+          size={16}
+          iconPosition={iconPosition}
+          active={`${active}`}
+        />
+      ) : null}
       {children}
+      {iconPosition === 'end' ? (
+        <StyledChevronIcon
+          size={16}
+          iconPosition={iconPosition}
+          active={`${active}`}
+        />
+      ) : null}
     </StyledAccordionTitle>
   );
 };

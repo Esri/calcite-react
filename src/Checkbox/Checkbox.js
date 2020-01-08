@@ -12,9 +12,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  StyledCheckbox,
+  StyledDisplayCheckbox,
+  StyledCheckboxInput,
   StyledCheckboxLabel,
-  StyledCheckboxGroup
+  StyledCheckboxGroup,
+  StyledCheckboxCheckIcon
 } from './Checkbox-styled';
 
 const Checkbox = ({
@@ -29,6 +31,7 @@ const Checkbox = ({
   error = false,
   disabled = false,
   onChange,
+  inputProps,
   ...other
 }) => {
   let name, touched, errors, values, isSubmitting, setFieldValue;
@@ -96,7 +99,7 @@ const Checkbox = ({
 
   return (
     <StyledCheckboxGroup>
-      <StyledCheckbox
+      <StyledCheckboxInput
         onChange={handleChange}
         checked={isChecked()}
         success={isSuccess()}
@@ -105,6 +108,15 @@ const Checkbox = ({
         {...other}
         type="checkbox"
       />
+      <StyledDisplayCheckbox>
+        {/* Manually include separate check icon pulled from calcite-components docs */}
+        <StyledCheckboxCheckIcon>
+          <path
+            d="M12.753 3l-7.319 7.497L3.252 8.31 2 9.373l3.434 3.434L14 4.24z"
+            fill="white"
+          />
+        </StyledCheckboxCheckIcon>
+      </StyledDisplayCheckbox>
       {checkboxLabel}
     </StyledCheckboxGroup>
   );
@@ -119,6 +131,8 @@ Checkbox.propTypes = {
   name: PropTypes.string,
   /** Whether the Checkbox is currently checked. */
   checked: PropTypes.bool,
+  /** Whether the Checkbox is currently disabled. */
+  disabled: PropTypes.bool,
   /** Style object passed down to the label. */
   labelStyle: PropTypes.object,
   /** Event called when the Checkbox value should be toggled. */

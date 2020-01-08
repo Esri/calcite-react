@@ -8,7 +8,7 @@ import GuideExample from '../../../docz/GuideExample';
 
 import Avatar from '../';
 
-import { EsriColors } from '../../CalciteThemeProvider';
+import colors from '@esri/calcite-colors/colors';
 import CodyProfilePic from './codyProfile.jpeg';
 
 import DownloadToIcon from 'calcite-ui-icons-react/DownloadToIcon';
@@ -34,7 +34,7 @@ import Avatar from 'calcite-react/Avatar'
   <Avatar
     style={{
       margin: '10px',
-      backgroundColor: EsriColors.Calcite_Vibrant_Red_200
+      backgroundColor: colors['v-rr-140']
     }}
   >
     CL
@@ -42,7 +42,7 @@ import Avatar from 'calcite-react/Avatar'
   <Avatar
     style={{
       margin: '10px',
-      backgroundColor: EsriColors.Calcite_Gray_250,
+      backgroundColor: colors['v-bb-140'],
       color: '#4c4c4c'
     }}
   >
@@ -69,7 +69,7 @@ import Avatar from 'calcite-react/Avatar'
   <Avatar
     style={{
       margin: '10px',
-      backgroundColor: EsriColors.Calcite_Green_a100
+      backgroundColor: colors['v-gg-160']
     }}
   >
     <SaveIcon size={16} />
@@ -77,8 +77,8 @@ import Avatar from 'calcite-react/Avatar'
   <Avatar
     style={{
       margin: '10px',
-      backgroundColor: EsriColors.Calcite_Red_150,
-      color: EsriColors.Calcite_Red_a250
+      backgroundColor: colors['v-rr-120'],
+      color: colors['v-rr-160']
     }}
   >
     <UserIcon />
@@ -86,10 +86,10 @@ import Avatar from 'calcite-react/Avatar'
   <Avatar
     style={{
       margin: '10px',
-      backgroundColor: EsriColors.Calcite_Purple_a200
+      backgroundColor: colors['v-vv-160']
     }}
   >
-    <SearchIcon style={{ fill: EsriColors.Calcite_Purple_150 }} />
+    <SearchIcon style={{ fill: colors['v-vv-120'] }} />
   </Avatar>
 </Playground>
 

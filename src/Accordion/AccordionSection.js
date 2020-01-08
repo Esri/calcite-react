@@ -20,6 +20,7 @@ const AccordionSection = ({
   active,
   sectionIndex,
   onAccordionChange,
+  iconPosition,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
@@ -29,17 +30,18 @@ const AccordionSection = ({
         let title;
         title = React.cloneElement(child, {
           key: i,
-          active: active,
-          sectionIndex: sectionIndex,
-          onAccordionChange: onAccordionChange
+          active,
+          sectionIndex,
+          onAccordionChange,
+          iconPosition
         });
         return title;
       case 'AccordionContent':
         let content;
         content = React.cloneElement(child, {
           key: i,
-          active: active,
-          sectionIndex: sectionIndex
+          active,
+          sectionIndex
         });
         return content;
       default:

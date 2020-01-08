@@ -19,6 +19,7 @@ const Accordion = ({
   children,
   activeSectionIndexes,
   onAccordionChange,
+  iconPosition,
   ...other
 }) => {
   const childArray = React.Children.toArray(children);
@@ -30,7 +31,8 @@ const Accordion = ({
           key: i,
           active: activeSectionIndexes.includes(i),
           sectionIndex: i,
-          onAccordionChange: onAccordionChange
+          onAccordionChange,
+          iconPosition
         });
         return section;
       default:
@@ -45,12 +47,15 @@ Accordion.propTypes = {
   /** Used to render AccordionSections inside the Accordion. */
   children: PropTypes.node,
   /** Indexes of the sections that are supposed to be active. */
-  activeSectionIndexes: PropTypes.array
+  activeSectionIndexes: PropTypes.array,
+  /** Where the chevron is positioned in relation to the title */
+  iconPosition: PropTypes.oneOf(['start', 'end'])
 };
 
 Accordion.defaultProps = {
   activeSectionIndexes: [],
-  onAccordionChange: () => {}
+  onAccordionChange: () => {},
+  iconPosition: 'end'
 };
 
 Accordion.displayName = 'Accordion';

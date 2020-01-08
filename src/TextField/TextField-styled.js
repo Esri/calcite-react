@@ -20,6 +20,8 @@ import { CalciteInput, CalciteTextarea } from '../utils/commonElements';
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
 // Calcite components
+import { StyledButton } from '../Button/Button-styled';
+import { StyledSelectInput, StyledSelectButton } from '../Select/Select-styled';
 
 // Icons
 
@@ -95,17 +97,6 @@ const StyledTextArea = styled(CalciteTextarea)`
 `;
 StyledTextArea.defaultProps = { theme };
 
-const StyledTextFieldAdornmentWrapper = styled.div`
-  display: flex;
-
-  ${props =>
-    props.fullWidth &&
-    css`
-      width: 100%;
-    `};
-`;
-StyledTextFieldAdornmentWrapper.defaultProps = { theme };
-
 const StyledAdornmentWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -167,6 +158,27 @@ const StyledAdornmentWrapper = styled.div`
     `};
 `;
 StyledAdornmentWrapper.defaultProps = { theme };
+
+const StyledTextFieldAdornmentWrapper = styled.div`
+  display: flex;
+
+  /* Ensure all adornments and inputs have the same margin with no rounding errors */
+  ${StyledTextField},
+  ${StyledTextArea},
+  ${StyledButton},
+  ${StyledAdornmentWrapper},
+  ${StyledSelectInput},
+  ${StyledSelectButton} {
+    margin: ${props => unitCalc(props.theme.baseline, 6, '/')} 0 0 0;
+  }
+
+  ${props =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+    `};
+`;
+StyledTextFieldAdornmentWrapper.defaultProps = { theme };
 
 export {
   StyledTextField,

@@ -116,6 +116,7 @@ const EsriColors = {
   Calcite_Gray_600: '#595959', // 65%, previously Esri_Gray150
   Calcite_Gray_650: '#4c4c4c', // 70%, previously Esri_Gray155. body text
   Calcite_Gray_700: '#323232', // 80%, previously Esri_Gray160
+  Calcite_Gray_800: '#2b2b2b',
 
   Calcite_Highlight_Blue_100: '#e2f1fb', // hovered, previously Esri_Blue1. NOTE--Esri_Blue2 was removed in Calcite Colors v8.00 due to it being so similar to Calcite_Highlight_Blue_100 and 150
   Calcite_Highlight_Blue_150: '#c5e5f9', // hovered & selected, previously Esri_Blue5

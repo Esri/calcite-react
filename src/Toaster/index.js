@@ -10,4 +10,9 @@
 // limitations under the License.​
 
 export { default } from './Toaster';
+export { notify } from './Toaster';
 export { default as ToastContainer } from './ToastContainer';
+export {
+  StyledAlertTitle as ToastTitle,
+  StyledAlertMessage as ToastMessage
+} from '../Alert/Alert-styled';

@@ -117,6 +117,71 @@ import Accordion, {
 
 </Playground>
 
+
+## Icon Position
+
+<Playground>
+  {() => {
+      class AccordionExample extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            activeSectionIndexes: [0]
+          };
+
+          this.onAccordionChange = this.onAccordionChange.bind(this);
+        }
+
+        onAccordionChange(evt, index) {
+          this.state.activeSectionIndexes.includes(index)
+            ? this.setState({
+                activeSectionIndexes: this.state.activeSectionIndexes.filter(
+                  item => index !== item
+                )
+              })
+            : this.setState({
+                activeSectionIndexes: [
+                  ...this.state.activeSectionIndexes,
+                  index
+                ]
+              });
+        };
+
+        render() {
+          return (
+            <Accordion
+              iconPosition="start"
+              onAccordionChange={this.onAccordionChange}
+              activeSectionIndexes={this.state.activeSectionIndexes}
+            >
+              <AccordionSection>
+                <AccordionTitle>Accordion Title 1</AccordionTitle>
+                <AccordionContent>
+                  <CalciteP>Accordion Content 1</CalciteP>
+                </AccordionContent>
+              </AccordionSection>
+              <AccordionSection>
+                <AccordionTitle>Accordion Title 2</AccordionTitle>
+                <AccordionContent>
+                  <CalciteP>Accordion Content 2</CalciteP>
+                </AccordionContent>
+              </AccordionSection>
+              <AccordionSection>
+                <AccordionTitle>Accordion Title 3</AccordionTitle>
+                <AccordionContent>
+                  <CalciteP>Accordion Content 3</CalciteP>
+                </AccordionContent>
+              </AccordionSection>
+            </Accordion>
+          );
+        }
+      }
+
+      return <AccordionExample />;
+    }}
+
+</Playground>
+
 ## Props
 
 ### Accordion `default`
