@@ -10,7 +10,7 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { StyledAction, TooltipWrapperStyles } from './ActionBar-styled';
 
@@ -19,6 +19,8 @@ import Tooltip from '../Tooltip';
 import { ActionBarContext } from './ActionBar';
 
 const Action = ({ children, icon, ...other }) => {
+  const actionBarContext = useContext(ActionBarContext);
+
   const getAction = ({ action, collapsed }) => {
     if (!collapsed) {
       return action;
@@ -41,25 +43,19 @@ const Action = ({ children, icon, ...other }) => {
     });
   };
 
-  return (
-    <ActionBarContext.Consumer>
-      {({ actionBarContext }) => {
-        return getAction({
-          action: (
-            <StyledAction
-              dark={actionBarContext.dark}
-              collapsed={actionBarContext.collapsed}
-              icon={getIcon(icon)}
-              {...other}
-            >
-              {!actionBarContext.collapsed && children}
-            </StyledAction>
-          ),
-          collapsed: actionBarContext.collapsed
-        });
-      }}
-    </ActionBarContext.Consumer>
-  );
+  return getAction({
+    action: (
+      <StyledAction
+        dark={actionBarContext.dark}
+        collapsed={actionBarContext.collapsed}
+        icon={getIcon(icon)}
+        {...other}
+      >
+        {!actionBarContext.collapsed && children}
+      </StyledAction>
+    ),
+    collapsed: actionBarContext.collapsed
+  });
 };
 
 Action.propTypes = {

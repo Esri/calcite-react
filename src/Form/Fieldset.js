@@ -10,32 +10,32 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React, { createContext } from 'react';
+import React, { useContext, createContext } from 'react';
+import { useContextState } from '../utils/helpers';
 
 import { StyledFieldset } from './Form-styled';
 
 import { FormControlContext } from './FormControl';
+
 const FieldsetContext = createContext({
   fieldsetContext: {
     name: undefined
   }
 });
+FieldsetContext.displayName = 'FieldsetContext';
 
 const Fieldset = ({ children, name, ...other }) => {
-  const fieldsetContext = {
+  const fieldsetContext = useContextState({
     name
-  };
+  });
+  const formControlContext = useContext(FormControlContext);
 
   return (
-    <FormControlContext.Consumer>
-      {({ formControlContext }) => (
-        <FieldsetContext.Provider value={{ fieldsetContext }}>
-          <StyledFieldset horizontal={formControlContext.horizontal} {...other}>
-            {children}
-          </StyledFieldset>
-        </FieldsetContext.Provider>
-      )}
-    </FormControlContext.Consumer>
+    <FieldsetContext.Provider value={fieldsetContext}>
+      <StyledFieldset horizontal={formControlContext.horizontal} {...other}>
+        {children}
+      </StyledFieldset>
+    </FieldsetContext.Provider>
   );
 };
 

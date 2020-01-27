@@ -274,7 +274,7 @@ const MultiSelect = ({
               <Reference style={{ display: 'inline-block' }}>
                 {({ ref }) => (
                   <FormControlContext.Consumer>
-                    {({ formControlContext }) => (
+                    {formControlContext => (
                       <StyledMultiSelectButton
                         ref={ref}
                         success={isSuccess(formControlContext)}
@@ -297,7 +297,7 @@ const MultiSelect = ({
                 )}
               </Reference>
               <PopoverContext.Consumer>
-                {({ popoverContext }) => {
+                {popoverContext => {
                   return _getPopper(
                     <Popper
                       positionFixed={positionFixed}

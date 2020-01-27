@@ -10,45 +10,44 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React, { createContext } from 'react';
+import React, { useContext, createContext } from 'react';
+import { useContextState } from '../utils/helpers';
+
 import uniqid from 'uniqid';
 import { StyledFormControl } from './Form-styled';
 
 import { FormContext } from './Form';
+
 const FormControlContext = createContext({
-  formControlContext: {
-    horizontal: undefined,
-    error: undefined,
-    success: undefined,
-    _generatedId: undefined
-  }
+  horizontal: undefined,
+  error: undefined,
+  success: undefined,
+  _generatedId: undefined
 });
+FormControlContext.displayName = 'FormControlContext';
 
 const FormControl = ({ children, error, success, horizontal, ...other }) => {
   const _generatedId = uniqid();
-  const formControlContext = {
+  const formControlContext = useContextState({
     horizontal,
     error,
     success,
     _generatedId
-  };
+  });
+  const formContext = useContext(FormContext);
 
   return (
-    <FormContext.Consumer>
-      {({ formContext }) => (
-        <FormControlContext.Provider value={{ formControlContext }}>
-          <StyledFormControl
-            error={error}
-            success={success}
-            horizontal={horizontal}
-            noValidation={formContext.noValidation}
-            {...other}
-          >
-            {children}
-          </StyledFormControl>
-        </FormControlContext.Provider>
-      )}
-    </FormContext.Consumer>
+    <FormControlContext.Provider value={formControlContext}>
+      <StyledFormControl
+        error={error}
+        success={success}
+        horizontal={horizontal}
+        noValidation={formContext.noValidation}
+        {...other}
+      >
+        {children}
+      </StyledFormControl>
+    </FormControlContext.Provider>
   );
 };
 

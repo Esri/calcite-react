@@ -10,7 +10,7 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { getAccessibleOnClickHandlers } from '../utils/helpers';
 
@@ -31,7 +31,9 @@ const ListItem = ({
   onClick,
   ...other
 }) => {
-  const getLeftNode = (listContext, leftNode) => {
+  const listContext = useContext(ListContext);
+
+  const getLeftNode = leftNode => {
     if (leftNode) {
       return (
         <StyledListSideContainer
@@ -46,7 +48,7 @@ const ListItem = ({
     }
   };
 
-  const getRightNode = (listContext, rightNode) => {
+  const getRightNode = rightNode => {
     if (rightNode) {
       return (
         <StyledListSideContainer
@@ -62,26 +64,22 @@ const ListItem = ({
   };
 
   return (
-    <ListContext.Consumer>
-      {({ listContext }) => (
-        <StyledListItem
-          minimal={listContext.minimal}
-          multiSelect={listContext.multiSelect}
-          selectable={listContext.selectable}
-          nested={listContext.nested}
-          filterItem={filterItem}
-          active={active}
-          tabIndex="0"
-          role="listitem"
-          {...getAccessibleOnClickHandlers(onClick)}
-          {...other}
-        >
-          {getLeftNode(listContext, leftNode)}
-          <StyledListTextContainer>{children}</StyledListTextContainer>
-          {getRightNode(listContext, rightNode)}
-        </StyledListItem>
-      )}
-    </ListContext.Consumer>
+    <StyledListItem
+      minimal={listContext.minimal}
+      multiSelect={listContext.multiSelect}
+      selectable={listContext.selectable}
+      nested={listContext.nested}
+      filterItem={filterItem}
+      active={active}
+      tabIndex="0"
+      role="listitem"
+      {...getAccessibleOnClickHandlers(onClick)}
+      {...other}
+    >
+      {getLeftNode(leftNode)}
+      <StyledListTextContainer>{children}</StyledListTextContainer>
+      {getRightNode(rightNode)}
+    </StyledListItem>
   );
 };
 

@@ -79,7 +79,7 @@ class Select extends Component {
     if (filterable) {
       return (
         <FormControlContext.Consumer>
-          {({ formControlContext }) => (
+          {formControlContext => (
             <StyledSelectInput
               as="input"
               onClick={e => {
@@ -107,7 +107,7 @@ class Select extends Component {
     }
     return (
       <FormControlContext.Consumer>
-        {({ formControlContext }) => (
+        {formControlContext => (
           <StyledSelectButton
             {...getToggleButtonProps()}
             {...getInputProps({
@@ -517,7 +517,7 @@ class Select extends Component {
                   }}
                 </Reference>
                 <PopoverContext.Consumer>
-                  {({ popoverContext }) => {
+                  {popoverContext => {
                     return this._getPopper({
                       popper: (
                         <Popper

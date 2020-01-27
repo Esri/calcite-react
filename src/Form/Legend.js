@@ -10,20 +10,19 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
+
 import { StyledLegend } from './Form-styled';
 
 import { FormControlContext } from './FormControl';
 
 const Legend = ({ children, ...other }) => {
+  const formControlContext = useContext(FormControlContext);
+
   return (
-    <FormControlContext.Consumer>
-      {({ formControlContext }) => (
-        <StyledLegend horizontal={formControlContext.horizontal} {...other}>
-          {children}
-        </StyledLegend>
-      )}
-    </FormControlContext.Consumer>
+    <StyledLegend horizontal={formControlContext.horizontal} {...other}>
+      {children}
+    </StyledLegend>
   );
 };
 

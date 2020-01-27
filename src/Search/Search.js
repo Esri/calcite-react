@@ -338,7 +338,7 @@ class Search extends Component {
 
     return (
       <ListContext.Consumer>
-        {({ listContext }) => (
+        {listContext => (
           <StyledSearchContainer
             style={containerStyle}
             fullWidth={fullWidth}

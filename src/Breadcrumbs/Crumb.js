@@ -10,25 +10,24 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
+
 import { StyledCrumb, StyledSpanCrumb } from './Breadcrumbs-styled';
 import { BreadcrumbsContext } from './Breadcrumbs';
 
 const Crumb = ({ children, href, hasLink, ...other }) => {
-  let Crumb = StyledSpanCrumb;
+  const breadcrumbsContext = useContext(BreadcrumbsContext);
 
+  // Render a span if there's no href or link prop
+  let Crumb = StyledSpanCrumb;
   if (href || hasLink) {
     Crumb = StyledCrumb;
   }
 
   return (
-    <BreadcrumbsContext.Consumer>
-      {({ breadcrumbsContext }) => (
-        <Crumb {...breadcrumbsContext} {...other} href={href}>
-          {children}
-        </Crumb>
-      )}
-    </BreadcrumbsContext.Consumer>
+    <Crumb {...breadcrumbsContext} {...other} href={href}>
+      {children}
+    </Crumb>
   );
 };
 

@@ -10,21 +10,19 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { StyledListSubtitle } from './List-styled';
 
 import { ListContext } from './List';
 
 const ListSubtitle = ({ children, ...other }) => {
+  const listContext = useContext(ListContext);
+
   return (
-    <ListContext.Consumer>
-      {({ listContext }) => (
-        <StyledListSubtitle nested={listContext.nested} {...other}>
-          {children}
-        </StyledListSubtitle>
-      )}
-    </ListContext.Consumer>
+    <StyledListSubtitle nested={listContext.nested} {...other}>
+      {children}
+    </StyledListSubtitle>
   );
 };
 

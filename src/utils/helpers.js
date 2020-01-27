@@ -9,6 +9,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+import { useEffect, useState } from 'react';
 import { transparentize } from 'polished';
 import { CalciteTheme } from '../CalciteThemeProvider';
 
@@ -259,6 +260,16 @@ const rtlPlacement = placement => {
   return placement;
 };
 
+const useContextState = contextProps => {
+  const [contextState, setContextState] = useState(contextProps);
+
+  useEffect(() => {
+    setContextState(contextProps);
+  }, Object.values(contextProps));
+
+  return contextState;
+};
+
 export {
   unitCalc,
   clearfix,
@@ -268,5 +279,6 @@ export {
   transition,
   getChildType,
   getAccessibleOnClickHandlers,
-  rtlPlacement
+  rtlPlacement,
+  useContextState
 };

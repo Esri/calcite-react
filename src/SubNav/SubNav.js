@@ -11,21 +11,21 @@
 
 import PropTypes from 'prop-types';
 import React, { Children, createContext } from 'react';
+import { useContextState } from '../utils/helpers';
 
 import { StyledSubNav, StyledSubNavLeftContent } from './SubNav-styled';
 
 import { getChildType } from '../utils/helpers';
 
 const SubNavContext = createContext({
-  subNavContext: {
-    blue: undefined
-  }
+  blue: undefined
 });
+SubNavContext.displayName = 'SubNavContext';
 
 const SubNav = ({ children, blue, ...other }) => {
-  const subNavContext = {
+  const subNavContext = useContextState({
     blue
-  };
+  });
 
   const getLeftContent = function() {
     return Children.toArray(children).filter(child => {
@@ -43,7 +43,7 @@ const SubNav = ({ children, blue, ...other }) => {
   };
 
   return (
-    <SubNavContext.Provider value={{ subNavContext }}>
+    <SubNavContext.Provider value={subNavContext}>
       <StyledSubNav blue={blue} {...other}>
         <StyledSubNavLeftContent>{getLeftContent()}</StyledSubNavLeftContent>
         {getSubNavActions()}

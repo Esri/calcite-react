@@ -10,21 +10,18 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { StyledTableBody } from './Table-styled';
 
 import { TableContext } from './Table';
 
 const TableBody = ({ children, ...other }) => {
+  const tableContext = useContext(TableContext);
   return (
-    <TableContext.Consumer>
-      {({ tableContext }) => (
-        <StyledTableBody noTable={tableContext.noTable} {...other}>
-          {children}
-        </StyledTableBody>
-      )}
-    </TableContext.Consumer>
+    <StyledTableBody noTable={tableContext.noTable} {...other}>
+      {children}
+    </StyledTableBody>
   );
 };
 
