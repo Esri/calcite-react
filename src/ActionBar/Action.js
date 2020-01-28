@@ -21,41 +21,34 @@ import { ActionBarContext } from './ActionBar';
 const Action = ({ children, icon, ...other }) => {
   const actionBarContext = useContext(ActionBarContext);
 
-  const getAction = ({ action, collapsed }) => {
-    if (!collapsed) {
-      return action;
-    }
-
-    return (
-      <Tooltip
-        title={children}
-        placement="right"
-        targetWrapperStyle={TooltipWrapperStyles}
-      >
-        {action}
-      </Tooltip>
-    );
-  };
-
   const getIcon = icon => {
     return React.cloneElement(icon, {
       size: 16
     });
   };
 
-  return getAction({
-    action: (
-      <StyledAction
-        dark={actionBarContext.dark}
-        collapsed={actionBarContext.collapsed}
-        icon={getIcon(icon)}
-        {...other}
-      >
-        {!actionBarContext.collapsed && children}
-      </StyledAction>
-    ),
-    collapsed: actionBarContext.collapsed
-  });
+  const actionButton = (
+    <StyledAction
+      dark={actionBarContext.dark}
+      collapsed={actionBarContext.collapsed}
+      icon={getIcon(icon)}
+      {...other}
+    >
+      {!actionBarContext.collapsed && children}
+    </StyledAction>
+  );
+
+  return actionBarContext.collapsed ? (
+    <Tooltip
+      title={children}
+      placement="right"
+      targetWrapperStyle={TooltipWrapperStyles}
+    >
+      {actionButton}
+    </Tooltip>
+  ) : (
+    actionButton
+  );
 };
 
 Action.propTypes = {
