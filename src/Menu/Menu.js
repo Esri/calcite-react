@@ -11,27 +11,29 @@
 
 import PropTypes from 'prop-types';
 import React, { createContext, forwardRef } from 'react';
+import { useContextState } from '../utils/helpers';
+
 import { StyledMenu } from './Menu-styled';
 
 const MenuContext = createContext({
-  menuContext: {
-    extraSmall: undefined,
-    small: undefined,
-    large: undefined,
-    extraLarge: undefined
-  }
+  extraSmall: undefined,
+  small: undefined,
+  large: undefined,
+  extraLarge: undefined
 });
+MenuContext.displayName = 'MenuContext';
 
 const Menu = forwardRef(
   ({ children, extraSmall, small, large, extraLarge, ...other }, ref) => {
-    const menuContext = {
+    const menuContext = useContextState({
       extraSmall,
       small,
       large,
       extraLarge
-    };
+    });
+
     return (
-      <MenuContext.Provider value={{ menuContext }}>
+      <MenuContext.Provider value={menuContext}>
         <StyledMenu
           ref={ref}
           extraSmall={extraSmall}

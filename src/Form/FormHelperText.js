@@ -10,24 +10,22 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyledFormHelperText } from './Form-styled';
 
 import { FormControlContext } from './FormControl';
 
 const FormHelperText = ({ children, ...other }) => {
+  const formControlContext = useContext(FormControlContext);
+
   return (
-    <FormControlContext.Consumer>
-      {({ formControlContext }) => (
-        <StyledFormHelperText
-          error={formControlContext.error}
-          success={formControlContext.success}
-          {...other}
-        >
-          {children}
-        </StyledFormHelperText>
-      )}
-    </FormControlContext.Consumer>
+    <StyledFormHelperText
+      error={formControlContext.error}
+      success={formControlContext.success}
+      {...other}
+    >
+      {children}
+    </StyledFormHelperText>
   );
 };
 

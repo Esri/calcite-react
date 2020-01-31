@@ -11,20 +11,20 @@
 
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
+import { useContextState } from '../utils/helpers';
 
 import { StyledTable } from './Table-styled';
 
 const TableContext = createContext({
-  tableContext: {
-    blue: undefined,
-    striped: undefined,
-    plain: undefined,
-    noTable: undefined,
-    justified: undefined,
-    noCol: undefined,
-    noRow: undefined
-  }
+  blue: undefined,
+  striped: undefined,
+  plain: undefined,
+  noTable: undefined,
+  justified: undefined,
+  noCol: undefined,
+  noRow: undefined
 });
+TableContext.displayName = 'TableContext';
 
 const Table = ({
   children,
@@ -37,7 +37,7 @@ const Table = ({
   noRow,
   ...other
 }) => {
-  const tableContext = {
+  const tableContext = useContextState({
     blue,
     striped,
     plain,
@@ -45,10 +45,10 @@ const Table = ({
     justified,
     noCol,
     noRow
-  };
+  });
 
   return (
-    <TableContext.Provider value={{ tableContext }}>
+    <TableContext.Provider value={tableContext}>
       <StyledTable
         blue={blue}
         plain={plain}

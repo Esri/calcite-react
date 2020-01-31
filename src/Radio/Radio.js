@@ -10,7 +10,7 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
   StyledRadio,
@@ -32,6 +32,8 @@ const Radio = ({
   onChange,
   ...other
 }) => {
+  const fieldsetContext = useContext(FieldsetContext);
+
   let name, touched, errors, values, isSubmitting, setFieldValue;
   if (field && form) {
     name = field.name;
@@ -83,23 +85,19 @@ const Radio = ({
   };
 
   return (
-    <FieldsetContext.Consumer>
-      {({ fieldsetContext }) => (
-        <StyledRadioGroup>
-          <StyledRadio
-            name={fieldsetContext.name}
-            onChange={handleChange}
-            checked={isChecked()}
-            success={isSuccess()}
-            error={isError()}
-            disabled={isDisabled()}
-            {...other}
-            type="radio"
-          />
-          {getRadioLabel(children)}
-        </StyledRadioGroup>
-      )}
-    </FieldsetContext.Consumer>
+    <StyledRadioGroup>
+      <StyledRadio
+        name={fieldsetContext.name}
+        onChange={handleChange}
+        checked={isChecked()}
+        success={isSuccess()}
+        error={isError()}
+        disabled={isDisabled()}
+        {...other}
+        type="radio"
+      />
+      {getRadioLabel(children)}
+    </StyledRadioGroup>
   );
 };
 

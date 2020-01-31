@@ -10,26 +10,23 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { StyledTableHeaderRow } from './Table-styled';
 
 import { TableContext } from './Table';
 
 const TableHeaderRow = ({ children, ...other }) => {
+  const tableContext = useContext(TableContext);
   return (
-    <TableContext.Consumer>
-      {({ tableContext }) => (
-        <StyledTableHeaderRow
-          blue={tableContext.blue}
-          noCol={tableContext.noCol}
-          noRow={tableContext.noRow}
-          {...other}
-        >
-          {children}
-        </StyledTableHeaderRow>
-      )}
-    </TableContext.Consumer>
+    <StyledTableHeaderRow
+      blue={tableContext.blue}
+      noCol={tableContext.noCol}
+      noRow={tableContext.noRow}
+      {...other}
+    >
+      {children}
+    </StyledTableHeaderRow>
   );
 };
 

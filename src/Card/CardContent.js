@@ -10,20 +10,18 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyledCardContent } from './Card-styled';
 
 import { CardContext } from './Card';
 
 const CardContent = ({ children, ...other }) => {
+  const cardContext = useContext(CardContext);
+
   return (
-    <CardContext.Consumer>
-      {({ cardContext }) => (
-        <StyledCardContent {...cardContext} {...other}>
-          {children}
-        </StyledCardContent>
-      )}
-    </CardContext.Consumer>
+    <StyledCardContent {...cardContext} {...other}>
+      {children}
+    </StyledCardContent>
   );
 };
 

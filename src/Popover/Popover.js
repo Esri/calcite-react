@@ -23,16 +23,16 @@ import { StyledTargetWrapper } from './Popover-styled';
 import PopoverPopper from './PopoverPopper';
 
 const PopoverContext = createContext({
-  popoverContext: {
-    isInPopover: undefined
-  }
+  isInPopover: undefined
 });
+PopoverContext.displayName = 'PopoverContext';
 
 class Popover extends Component {
   constructor(props) {
     super(props);
 
-    this.popoverContext = {
+    // State just for PopoverContext
+    this.state = {
       isInPopover: true
     };
     this._generatedId = uniqid();
@@ -93,7 +93,7 @@ class Popover extends Component {
 
   render() {
     return (
-      <PopoverContext.Provider value={{ popoverContext: this.popoverContext }}>
+      <PopoverContext.Provider value={this.state}>
         <Manager>
           <Reference style={{ display: 'inline-block' }}>
             {({ ref }) => (

@@ -10,26 +10,25 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
+
 import { StyledFormControlLabel } from './Form-styled';
 
 import { FormControlContext } from './FormControl';
 
 const FormControlLabel = ({ children, htmlFor, ...other }) => {
+  const formControlContext = useContext(FormControlContext);
+
   return (
-    <FormControlContext.Consumer>
-      {({ formControlContext }) => (
-        <StyledFormControlLabel
-          htmlFor={formControlContext._generatedId}
-          error={formControlContext.error}
-          success={formControlContext.success}
-          horizontal={formControlContext.horizontal}
-          {...other}
-        >
-          {children}
-        </StyledFormControlLabel>
-      )}
-    </FormControlContext.Consumer>
+    <StyledFormControlLabel
+      htmlFor={formControlContext._generatedId}
+      error={formControlContext.error}
+      success={formControlContext.success}
+      horizontal={formControlContext.horizontal}
+      {...other}
+    >
+      {children}
+    </StyledFormControlLabel>
   );
 };
 

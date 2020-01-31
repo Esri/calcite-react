@@ -10,7 +10,7 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyledButton, StyledIconClass } from './Button-styled';
 
 import { ButtonGroupContext } from './ButtonGroup';
@@ -23,6 +23,8 @@ const Button = ({
   iconPosition,
   ...other
 }) => {
+  const buttonGroupContext = useContext(ButtonGroupContext);
+
   const getIcon = icon => {
     if (icon) {
       return React.cloneElement(icon, {
@@ -35,23 +37,19 @@ const Button = ({
   };
 
   return (
-    <ButtonGroupContext.Consumer>
-      {({ buttonGroupContext }) => (
-        <StyledButton
-          iconButton={iconButton}
-          iconPosition={iconPosition}
-          grouped={buttonGroupContext.grouped}
-          isToggle={buttonGroupContext.isToggle}
-          as={href ? 'a' : 'button'}
-          href={href}
-          {...other}
-        >
-          {iconPosition === 'before' ? getIcon(icon) : null}
-          {children}
-          {iconPosition === 'after' ? getIcon(icon) : null}
-        </StyledButton>
-      )}
-    </ButtonGroupContext.Consumer>
+    <StyledButton
+      iconButton={iconButton}
+      iconPosition={iconPosition}
+      grouped={buttonGroupContext.grouped}
+      isToggle={buttonGroupContext.isToggle}
+      as={href ? 'a' : 'button'}
+      href={href}
+      {...other}
+    >
+      {iconPosition === 'before' ? getIcon(icon) : null}
+      {children}
+      {iconPosition === 'after' ? getIcon(icon) : null}
+    </StyledButton>
   );
 };
 

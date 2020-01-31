@@ -11,6 +11,7 @@
 
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
+import { useContextState } from '../utils/helpers';
 
 import {
   StyledActionBar,
@@ -20,11 +21,10 @@ import {
 import CollapseAction from './CollapseAction';
 
 const ActionBarContext = createContext({
-  actionBarContext: {
-    dark: undefined,
-    collapsed: undefined
-  }
+  dark: undefined,
+  collapsed: undefined
 });
+ActionBarContext.displayName = 'ActionBarContext';
 
 const ActionBar = ({
   children,
@@ -36,13 +36,10 @@ const ActionBar = ({
   onToggleCollapse,
   ...other
 }) => {
-  const actionBarContext = {
-    dark,
-    collapsed
-  };
+  const contextState = useContextState({ dark, collapsed });
 
   return (
-    <ActionBarContext.Provider value={{ actionBarContext }}>
+    <ActionBarContext.Provider value={contextState}>
       <StyledActionBar dark={dark} collapsed={collapsed} {...other}>
         {children}
         {showCollapser && (

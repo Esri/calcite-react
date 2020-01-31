@@ -10,26 +10,24 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { StyledListHeader } from './List-styled';
 
 import { ListContext } from './List';
 
 const ListHeader = ({ children, ...other }) => {
+  const listContext = useContext(ListContext);
+
   return (
-    <ListContext.Consumer>
-      {({ listContext }) => (
-        <StyledListHeader
-          as="span"
-          minimal={listContext.minimal}
-          selectable={listContext.selectable}
-          {...other}
-        >
-          {children}
-        </StyledListHeader>
-      )}
-    </ListContext.Consumer>
+    <StyledListHeader
+      as="span"
+      minimal={listContext.minimal}
+      selectable={listContext.selectable}
+      {...other}
+    >
+      {children}
+    </StyledListHeader>
   );
 };
 

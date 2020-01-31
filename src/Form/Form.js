@@ -11,17 +11,20 @@
 
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
+import { useContextState } from '../utils/helpers';
+
 import { StyledForm } from './Form-styled';
 
-const FormContext = createContext({ formContext: { noValidation: false } });
+const FormContext = createContext({ noValidation: false });
+FormContext.displayName = 'FormContext';
 
 const Form = ({ children, noValidation, ...other }) => {
-  const formContext = {
+  const formContext = useContextState({
     noValidation
-  };
+  });
 
   return (
-    <FormContext.Provider value={{ formContext }}>
+    <FormContext.Provider value={formContext}>
       <StyledForm {...other}>{children}</StyledForm>
     </FormContext.Provider>
   );
