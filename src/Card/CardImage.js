@@ -10,7 +10,7 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   StyledCardImageWrap,
   StyledCardImage,
@@ -20,6 +20,8 @@ import {
 import { CardContext } from './Card';
 
 const CardImage = ({ children, src, caption, alt, ...other }) => {
+  const cardContext = useContext(CardContext);
+
   function getFigcaption(shaped) {
     if (!shaped && caption) {
       return <StyledCardImageCaption>{caption}</StyledCardImageCaption>;
@@ -27,14 +29,10 @@ const CardImage = ({ children, src, caption, alt, ...other }) => {
   }
 
   return (
-    <CardContext.Consumer>
-      {({ cardContext }) => (
-        <StyledCardImageWrap {...cardContext} {...other}>
-          <StyledCardImage {...cardContext} src={src} alt={alt} />
-          {getFigcaption(cardContext.shaped)}
-        </StyledCardImageWrap>
-      )}
-    </CardContext.Consumer>
+    <StyledCardImageWrap {...cardContext} {...other}>
+      <StyledCardImage {...cardContext} src={src} alt={alt} />
+      {getFigcaption(cardContext.shaped)}
+    </StyledCardImageWrap>
   );
 };
 

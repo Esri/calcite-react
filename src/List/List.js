@@ -11,24 +11,55 @@
 
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
+
 import uniqid from 'uniqid';
 
 import { StyledList } from './List-styled';
 
 const ListContext = createContext({
-  listContext: {
-    nested: undefined,
-    open: undefined,
-    minmal: undefined,
-    multiSelect: undefined,
-    selectable: undefined
-  }
+  nested: undefined,
+  open: undefined,
+  minmal: undefined,
+  multiSelect: undefined,
+  selectable: undefined
 });
+ListContext.displayName = 'ListContext';
 
 class List extends Component {
   constructor(props) {
     super(props);
+
+    const { nested, open, minimal, multiSelect, selectable } = this.props;
+
+    this.state = {
+      nested,
+      open,
+      minimal,
+      multiSelect,
+      selectable
+    };
+
     this.listId = this.props.id || uniqid();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { nested, open, minimal, multiSelect, selectable } = this.props;
+
+    if (
+      prevProps.nested !== nested ||
+      prevProps.open !== open ||
+      prevProps.minimal !== minimal ||
+      prevProps.multiSelect !== multiSelect ||
+      prevProps.selectable !== selectable
+    ) {
+      this.setState({
+        nested,
+        open,
+        minimal,
+        multiSelect,
+        selectable
+      });
+    }
   }
 
   render() {
@@ -42,13 +73,6 @@ class List extends Component {
       ...other
     } = this.props;
 
-    const listContext = {
-      nested,
-      open,
-      minimal,
-      multiSelect,
-      selectable
-    };
     const listNode = document.getElementById(this.listId);
 
     let listMaxHeight = 'none';
@@ -63,7 +87,7 @@ class List extends Component {
     }
 
     return (
-      <ListContext.Provider value={{ listContext }}>
+      <ListContext.Provider value={this.state}>
         <StyledList
           id={this.listId}
           maxHeight={listMaxHeight}

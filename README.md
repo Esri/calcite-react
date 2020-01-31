@@ -29,9 +29,9 @@ level.
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from 'path/to/App';
-
 import CalciteThemeProvider from 'calcite-react/CalciteThemeProvider';
+
+import App from 'path/to/App';
 
 ReactDOM.render(
   <CalciteThemeProvider>

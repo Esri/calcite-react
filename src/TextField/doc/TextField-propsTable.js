@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
   StyledTextField,
@@ -29,6 +29,8 @@ const TextField = ({
   form,
   ...other
 }) => {
+  const formControlContext = useContext(FormControlContext);
+
   let touched, errors, isSubmitting;
   if (field) {
     name = field.name;
@@ -115,57 +117,46 @@ const TextField = ({
 
   if (!leftAdornment && !rightAdornment) {
     return (
-      <FormControlContext.Consumer>
-        {({ formControlContext }) => (
-          <TextFieldArea
-            name={name}
-            as={type === 'textarea' ? 'textarea' : 'input'}
-            type={type}
-            value={getValue()}
-            minimal={minimal}
-            fullWidth={fullWidth}
-            id={id || formControlContext._generatedId}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            success={isSuccess(formControlContext)}
-            error={isError(formControlContext)}
-            disabled={isDisabled()}
-            {...other}
-          />
-        )}
-      </FormControlContext.Consumer>
+      <TextFieldArea
+        name={name}
+        as={type === 'textarea' ? 'textarea' : 'input'}
+        type={type}
+        value={getValue()}
+        minimal={minimal}
+        fullWidth={fullWidth}
+        id={id || formControlContext._generatedId}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        success={isSuccess(formControlContext)}
+        error={isError(formControlContext)}
+        disabled={isDisabled()}
+        {...other}
+      />
     );
   }
 
   return (
-    <FormControlContext.Consumer>
-      {({ formControlContext }) => (
-        <StyledTextFieldAdornmentWrapper
-          fullWidth={fullWidth}
-          minimal={minimal}
-        >
-          {getAdornment(leftAdornment, leftAdornmentNoWrap, 'left')}
-          <TextFieldArea
-            name={name}
-            as={type === 'textarea' ? 'textarea' : 'input'}
-            type={type}
-            value={getValue()}
-            minimal={minimal}
-            fullWidth={fullWidth}
-            hasAdornmentLeft={leftAdornment !== undefined}
-            hasAdornmentRight={rightAdornment !== undefined}
-            id={id || formControlContext._generatedId}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            success={isSuccess(formControlContext)}
-            error={isError(formControlContext)}
-            disabled={isDisabled()}
-            {...other}
-          />
-          {getAdornment(rightAdornment, rightAdornmentNoWrap, 'right')}
-        </StyledTextFieldAdornmentWrapper>
-      )}
-    </FormControlContext.Consumer>
+    <StyledTextFieldAdornmentWrapper fullWidth={fullWidth} minimal={minimal}>
+      {getAdornment(leftAdornment, leftAdornmentNoWrap, 'left')}
+      <TextFieldArea
+        name={name}
+        as={type === 'textarea' ? 'textarea' : 'input'}
+        type={type}
+        value={getValue()}
+        minimal={minimal}
+        fullWidth={fullWidth}
+        hasAdornmentLeft={leftAdornment !== undefined}
+        hasAdornmentRight={rightAdornment !== undefined}
+        id={id || formControlContext._generatedId}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        success={isSuccess(formControlContext)}
+        error={isError(formControlContext)}
+        disabled={isDisabled()}
+        {...other}
+      />
+      {getAdornment(rightAdornment, rightAdornmentNoWrap, 'right')}
+    </StyledTextFieldAdornmentWrapper>
   );
 };
 

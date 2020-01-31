@@ -11,6 +11,8 @@
 
 import PropTypes from 'prop-types';
 import React, { createContext, forwardRef } from 'react';
+import { useContextState } from '../utils/helpers';
+
 import { StyledCard } from './Card-styled';
 
 const CardContext = createContext({
@@ -19,15 +21,16 @@ const CardContext = createContext({
     wide: undefined
   }
 });
+CardContext.displayName = 'CardContext';
 
 const Card = forwardRef(({ children, shaped, wide, ...other }, ref) => {
-  const cardContext = {
+  const cardContext = useContextState({
     shaped,
     wide
-  };
+  });
 
   return (
-    <CardContext.Provider value={{ cardContext }}>
+    <CardContext.Provider value={cardContext}>
       <StyledCard shaped={shaped} wide={wide} ref={ref} {...other}>
         {children}
       </StyledCard>

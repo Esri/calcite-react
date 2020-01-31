@@ -11,6 +11,8 @@
 
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
+import { useContextState } from '../utils/helpers';
+
 import { StyledBreadcrumbs } from './Breadcrumbs-styled';
 
 const BreadcrumbsContext = createContext({
@@ -19,15 +21,16 @@ const BreadcrumbsContext = createContext({
     dividerCharacter: undefined
   }
 });
+BreadcrumbsContext.displayName = 'BreadcrumbsContext';
 
 const Breadcrumbs = ({ children, white, dividerCharacter, ...other }) => {
-  const breadcrumbsContext = {
+  const breadcrumbsContext = useContextState({
     white,
     dividerCharacter
-  };
+  });
 
   return (
-    <BreadcrumbsContext.Provider value={{ breadcrumbsContext }}>
+    <BreadcrumbsContext.Provider value={breadcrumbsContext}>
       <StyledBreadcrumbs {...other}>{children}</StyledBreadcrumbs>
     </BreadcrumbsContext.Provider>
   );

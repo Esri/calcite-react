@@ -11,6 +11,8 @@
 
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
+import { useContextState } from '../utils/helpers';
+
 import { StyledButtonGroup } from './Button-styled';
 
 const ButtonGroupContext = createContext({
@@ -19,15 +21,16 @@ const ButtonGroupContext = createContext({
     isToggle: undefined
   }
 });
+ButtonGroupContext.displayName = 'ButtonGroupContext';
 
 const ButtonGroup = ({ children, isToggle, ...other }) => {
-  const buttonGroupContext = {
+  const buttonGroupContext = useContextState({
     grouped: true,
-    isToggle: isToggle
-  };
+    isToggle
+  });
 
   return (
-    <ButtonGroupContext.Provider value={{ buttonGroupContext }}>
+    <ButtonGroupContext.Provider value={buttonGroupContext}>
       <StyledButtonGroup isToggle={isToggle} {...other}>
         {children}
       </StyledButtonGroup>

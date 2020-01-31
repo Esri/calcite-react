@@ -10,7 +10,7 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { StyledAction, TooltipWrapperStyles } from './ActionBar-styled';
 
@@ -19,21 +19,7 @@ import Tooltip from '../Tooltip';
 import { ActionBarContext } from './ActionBar';
 
 const Action = ({ children, icon, ...other }) => {
-  const getAction = ({ action, collapsed }) => {
-    if (!collapsed) {
-      return action;
-    }
-
-    return (
-      <Tooltip
-        title={children}
-        placement="right"
-        targetWrapperStyle={TooltipWrapperStyles}
-      >
-        {action}
-      </Tooltip>
-    );
-  };
+  const actionBarContext = useContext(ActionBarContext);
 
   const getIcon = icon => {
     return React.cloneElement(icon, {
@@ -41,24 +27,27 @@ const Action = ({ children, icon, ...other }) => {
     });
   };
 
-  return (
-    <ActionBarContext.Consumer>
-      {({ actionBarContext }) => {
-        return getAction({
-          action: (
-            <StyledAction
-              dark={actionBarContext.dark}
-              collapsed={actionBarContext.collapsed}
-              icon={getIcon(icon)}
-              {...other}
-            >
-              {!actionBarContext.collapsed && children}
-            </StyledAction>
-          ),
-          collapsed: actionBarContext.collapsed
-        });
-      }}
-    </ActionBarContext.Consumer>
+  const actionButton = (
+    <StyledAction
+      dark={actionBarContext.dark}
+      collapsed={actionBarContext.collapsed}
+      icon={getIcon(icon)}
+      {...other}
+    >
+      {!actionBarContext.collapsed && children}
+    </StyledAction>
+  );
+
+  return actionBarContext.collapsed ? (
+    <Tooltip
+      title={children}
+      placement="right"
+      targetWrapperStyle={TooltipWrapperStyles}
+    >
+      {actionButton}
+    </Tooltip>
+  ) : (
+    actionButton
   );
 };
 

@@ -10,27 +10,25 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { StyledMenuTitle } from './Menu-styled';
 import { MenuContext } from './Menu';
 
 const MenuTitle = ({ children, ...other }) => {
+  const menuContext = useContext(MenuContext);
+
   return (
-    <MenuContext.Consumer>
-      {({ menuContext }) => (
-        <StyledMenuTitle
-          as="span"
-          extraSmall={menuContext.extraSmall}
-          small={menuContext.small}
-          large={menuContext.large}
-          extraLarge={menuContext.extraLarge}
-          {...other}
-        >
-          {children}
-        </StyledMenuTitle>
-      )}
-    </MenuContext.Consumer>
+    <StyledMenuTitle
+      as="span"
+      extraSmall={menuContext.extraSmall}
+      small={menuContext.small}
+      large={menuContext.large}
+      extraLarge={menuContext.extraLarge}
+      {...other}
+    >
+      {children}
+    </StyledMenuTitle>
   );
 };
 
