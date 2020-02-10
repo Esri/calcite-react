@@ -31,6 +31,7 @@ import {
 const Modal = ({
   children,
   open,
+  contentLabel,
   title,
   overlayStyle,
   dialogStyle,
@@ -66,7 +67,7 @@ const Modal = ({
               ...dialogTransition[state]
             }
           }}
-          contentLabel={title}
+          contentLabel={contentLabel}
           role="dialog"
           onRequestClose={onRequestClose}
           {...other}
@@ -101,8 +102,10 @@ Modal.propTypes = {
   children: PropTypes.node,
   /** Boolean describing if the Modal should be shown or not. */
   open: PropTypes.bool,
+  /** Node to be rendered as the modal title in the header */
+  title: PropTypes.node,
   /** String indicating how the content container should be announced to screenreaders. */
-  title: PropTypes.string,
+  contentLabel: PropTypes.string,
   /** Buttons or links to be placed in the Modal actions footer. */
   actions: PropTypes.node,
   /** Buttons or links to be placed in the footer, opposite your primary actions. */
