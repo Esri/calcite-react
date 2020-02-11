@@ -99,6 +99,7 @@ const StyledModalHeader = styled.div`
 StyledModalHeader.defaultProps = { theme };
 
 const StyledModalTitle = styled(CalciteH3)`
+  width: 100%;
   margin: 0;
   padding: ${props => unitCalc(props.theme.baseline, 2, '/')}
     ${props => props.theme.baseline};
