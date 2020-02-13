@@ -9,10 +9,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
-import React, { Component, createContext } from 'react';
+import React, { useRef, createContext } from 'react';
 import PropTypes from 'prop-types';
 
-import uniqid from 'uniqid';
+import { useContextState } from '../utils/helpers';
 
 import { StyledList } from './List-styled';
 
@@ -25,86 +25,53 @@ const ListContext = createContext({
 });
 ListContext.displayName = 'ListContext';
 
-class List extends Component {
-  constructor(props) {
-    super(props);
+const List = ({
+  children,
+  nested,
+  open,
+  minimal,
+  multiSelect,
+  selectable,
+  ...other
+}) => {
+  const listContext = useContextState({
+    nested,
+    open,
+    minimal,
+    multiSelect,
+    selectable
+  });
+  const listEl = useRef(null);
 
-    const { nested, open, minimal, multiSelect, selectable } = this.props;
-
-    this.state = {
-      nested,
-      open,
-      minimal,
-      multiSelect,
-      selectable
-    };
-
-    this.listId = this.props.id || uniqid();
+  let listMaxHeight = 'none';
+  if (open === false) {
+    listMaxHeight = '0px';
+  } else if (listEl.current && nested) {
+    listMaxHeight = 0;
+    listEl.current.childNodes.forEach(child => {
+      listMaxHeight = listMaxHeight + child.getBoundingClientRect().height;
+    });
+    listMaxHeight = Math.ceil(listMaxHeight) + 'px';
   }
 
-  componentDidUpdate(prevProps) {
-    const { nested, open, minimal, multiSelect, selectable } = this.props;
-
-    if (
-      prevProps.nested !== nested ||
-      prevProps.open !== open ||
-      prevProps.minimal !== minimal ||
-      prevProps.multiSelect !== multiSelect ||
-      prevProps.selectable !== selectable
-    ) {
-      this.setState({
-        nested,
-        open,
-        minimal,
-        multiSelect,
-        selectable
-      });
-    }
-  }
-
-  render() {
-    const {
-      children,
-      nested,
-      open,
-      minimal,
-      multiSelect,
-      selectable,
-      ...other
-    } = this.props;
-
-    const listNode = document.getElementById(this.listId);
-
-    let listMaxHeight = 'none';
-    if (open === false) {
-      listMaxHeight = '0px';
-    } else if (listNode && nested) {
-      listMaxHeight = 0;
-      listNode.childNodes.forEach(child => {
-        listMaxHeight = listMaxHeight + child.getBoundingClientRect().height;
-      });
-      listMaxHeight = listMaxHeight + 'px';
-    }
-
-    return (
-      <ListContext.Provider value={this.state}>
-        <StyledList
-          id={this.listId}
-          maxHeight={listMaxHeight}
-          nested={nested}
-          open={open}
-          minimal={minimal}
-          selectable={selectable}
-          role="list"
-          aria-expanded={open}
-          {...other}
-        >
-          {children}
-        </StyledList>
-      </ListContext.Provider>
-    );
-  }
-}
+  return (
+    <ListContext.Provider value={listContext}>
+      <StyledList
+        ref={listEl}
+        maxHeight={listMaxHeight}
+        nested={nested}
+        open={open}
+        minimal={minimal}
+        selectable={selectable}
+        role="list"
+        aria-expanded={open}
+        {...other}
+      >
+        {children}
+      </StyledList>
+    </ListContext.Provider>
+  );
+};
 
 List.propTypes = {
   /** The content of the component; can contain ListHeader, ListItem, and even another List. */
