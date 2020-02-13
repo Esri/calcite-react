@@ -10,7 +10,7 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React, { useContext, createContext } from 'react';
+import React, { useContext, useMemo, createContext } from 'react';
 import { useContextState } from '../utils/helpers';
 
 import uniqid from 'uniqid';
@@ -27,7 +27,7 @@ const FormControlContext = createContext({
 FormControlContext.displayName = 'FormControlContext';
 
 const FormControl = ({ children, error, success, horizontal, ...other }) => {
-  const _generatedId = uniqid();
+  const _generatedId = useMemo(uniqid, []);
   const formControlContext = useContextState({
     horizontal,
     error,

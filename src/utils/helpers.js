@@ -260,14 +260,11 @@ const rtlPlacement = placement => {
   return placement;
 };
 
-const useContextState = ({ _generatedId, ...contextProps }) => {
+const useContextState = contextProps => {
   const [contextState, setContextState] = useState(contextProps);
 
   useEffect(() => {
-    setContextState({
-      ...contextProps,
-      _generatedId: contextState._generatedId || _generatedId
-    });
+    setContextState(contextProps);
   }, Object.values(contextProps));
 
   return contextState;
