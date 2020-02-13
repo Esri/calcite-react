@@ -36,10 +36,10 @@ const ActionBar = ({
   onToggleCollapse,
   ...other
 }) => {
-  const contextState = useContextState({ dark, collapsed });
+  const actionBarContext = useContextState({ dark, collapsed });
 
   return (
-    <ActionBarContext.Provider value={contextState}>
+    <ActionBarContext.Provider value={actionBarContext}>
       <StyledActionBar dark={dark} collapsed={collapsed} {...other}>
         {children}
         {showCollapser && (
