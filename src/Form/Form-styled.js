@@ -155,6 +155,7 @@ const StyledFieldset = styled.div`
   border: none;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 
   ${props =>
     props.horizontal &&
