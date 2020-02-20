@@ -196,7 +196,7 @@ const input = styled(formSelectInputTextarea)`
   ${props =>
     props.error &&
     css`
-      border-color: ${props => props.theme.palette.darkRed200};
+      border-color: ${props => props.theme.palette.red};
       padding-right: 24px;
       background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjE2cHgiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeD0iMiIgeT0iMCI+PHBhdGggZmlsbD0iI2M4NmE0YSIgZD0iTTExLjIyNSwwSDQuNjQ4TDAsNC42NXY2LjU3Nmw0LjY0OCw0LjY0OWg2LjU3Nmw0LjY1LTQuNjQ5VjQuNjVMMTEuMjI1LDB6IE05LjA3MSwxMy42MDdINi44MDR2LTIuMjY5aDIuMjY4VjEzLjYwN3ogTTkuMDcxLDkuMDcxSDYuODA0VjMuNDAyaDIuMjY4VjkuMDcxeiIvPjwvc3ZnPg==');
       background-position: right center;
@@ -209,7 +209,7 @@ const input = styled(formSelectInputTextarea)`
       }
 
       &:focus {
-        border-color: ${props => props.theme.palette.darkRed200};
+        border-color: ${props => props.theme.palette.red};
         box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
           0 0 5px rgba(200, 106, 75, 0.5);
       }
