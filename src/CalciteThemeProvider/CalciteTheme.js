@@ -41,7 +41,10 @@ const CalciteTheme = {
     // │ Brand Blue │
     // └────────────┘
     Brand_Blue_100: colors['h-bb-020'], //  previously blue 14
+    Brand_Blue_120: colors['v-bb-120'],
+    Brand_Blue_140: colors['v-bb-140'],
     Brand_Blue_150: colors['h-bb-040'], // previously blue 13
+    Brand_Blue_160: colors['v-bb-160'],
     Brand_Blue_200: colors['h-bb-060'], // "Esri Blue", previously blue 12
     Brand_Blue_250: colors['h-bb-080'], // previously blue 11
 

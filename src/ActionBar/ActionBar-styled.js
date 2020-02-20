@@ -154,7 +154,7 @@ const StyledAction = styled(StyledCollapseAction)`
 
         ${props.dark &&
           css`
-            color: ${props.theme.palette.blue};
+            color: ${props.theme.palette.Brand_Blue_120};
             background: #151515;
           `};
       }
