@@ -32,16 +32,16 @@ const rangeProps = {
   trackErrorBgColor: theme.palette.lightRed,
   trackHeight: '2px',
   trackHoverBgcolor: theme.palette.lightGray,
-  trackErrorHoverBgcolor: theme.palette.darkRed200,
+  trackErrorHoverBgcolor: theme.palette.darkRed,
   trackActiveBgcolor: theme.palette.gray,
-  trackErrorActiveBgcolor: theme.palette.darkRed,
+  trackErrorActiveBgcolor: theme.palette.red,
   thumbHeight: '18px',
   thumbWidth: '18px',
   thumbBorder: '2px solid',
   thumbBorderColor: theme.palette.gray,
-  thumbErrorBorderColor: theme.palette.darkRed200,
+  thumbErrorBorderColor: theme.palette.darkRed,
   thumbBorderHoverColor: theme.palette.Brand_Blue_200,
-  thumbErrorBorderHoverColor: theme.palette.darkRed200,
+  thumbErrorBorderHoverColor: theme.palette.darkRed,
   thumbShadowHover: `0 0 4px 1px ${transparentize(
     0.1,
     theme.palette.lighterGray
@@ -52,9 +52,9 @@ const rangeProps = {
   )}`,
   thumbBgDefault: theme.palette.white,
   thumbBgHover: theme.palette.Brand_Blue_200,
-  thumbErrorBgHover: theme.palette.darkRed200,
+  thumbErrorBgHover: theme.palette.darkRed,
   thumbBgActive: colors['ui-blue-press'],
-  thumbErrorBgActive: theme.palette.darkRed
+  thumbErrorBgActive: theme.palette.red
 };
 
 const rangeStyle = () => {
