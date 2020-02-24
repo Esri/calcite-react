@@ -1,4 +1,4 @@
-import colors from '@esri/calcite-colors/colors';
+import colors from '@esri/calcite-colors/colors.json';
 
 export default {
   // Removing logo for now as it overwrites the package name, removing any

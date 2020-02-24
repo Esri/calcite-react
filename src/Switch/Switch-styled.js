@@ -18,7 +18,7 @@ import { baseRadioCheckbox } from '../utils/commonElements';
 
 // Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
-import colors from '@esri/calcite-colors/colors';
+import colors from '@esri/calcite-colors/colors.json';
 
 // Calcite components
 import { StyledFormControlLabel } from '../Form/Form-styled';
