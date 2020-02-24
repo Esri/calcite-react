@@ -17,7 +17,7 @@ import { CalciteInput } from '../utils/commonElements';
 
 // Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
-import colors from '@esri/calcite-colors/colors';
+import colors from '@esri/calcite-colors/colors.json';
 
 // Calcite components
 
