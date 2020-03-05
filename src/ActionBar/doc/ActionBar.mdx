@@ -45,7 +45,7 @@ import ActionBar, {
 
 ## Controlled ActionBar
 
-<Playground style={{height: '400px', background: "#f3f3f3"}}>
+<Playground style={{height: '400px', background: "#f3f3f3", display: 'flex'}}>
   {() => {    
       class ActionBarStory extends React.Component {
         constructor(props) {
@@ -141,6 +141,16 @@ import ActionBar, {
     <BottomActionGroup>
       <Action icon={<SignOutIcon />}>Sign Out</Action>
     </BottomActionGroup>
+  </ActionBar>
+</Playground>
+
+## Position "end"
+
+<Playground style={{height: '400px', background: "#f3f3f3", display: 'flex', justifyContent: 'flex-end'}}>
+  <ActionBar position="end">
+    <Action active icon={<PlusIcon />}>Add Item</Action>
+    <Action icon={<SaveIcon />}>Save</Action>
+    <Action icon={<LayersIcon filled />}>Layer List</Action>
   </ActionBar>
 </Playground>
 

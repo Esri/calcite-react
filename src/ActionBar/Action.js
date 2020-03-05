@@ -31,6 +31,7 @@ const Action = ({ children, icon, ...other }) => {
     <StyledAction
       dark={actionBarContext.dark}
       collapsed={actionBarContext.collapsed}
+      position={actionBarContext.position}
       icon={getIcon(icon)}
       {...other}
     >
@@ -41,7 +42,7 @@ const Action = ({ children, icon, ...other }) => {
   return actionBarContext.collapsed ? (
     <Tooltip
       title={children}
-      placement="right"
+      placement={actionBarContext.position === 'start' ? 'right' : 'left'}
       targetWrapperStyle={TooltipWrapperStyles}
     >
       {actionButton}

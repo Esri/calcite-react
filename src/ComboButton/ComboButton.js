@@ -43,6 +43,7 @@ class ComboButton extends Component {
       iconPosition,
       dropdownIcon,
       half,
+      closeOnSelect,
       ...other
     } = this.props;
 
@@ -70,6 +71,7 @@ class ComboButton extends Component {
         <Popover
           open={this.state.open}
           onRequestClose={this.closePopover}
+          closeOnSelect={closeOnSelect}
           placement="bottom-end"
           targetContainerStyles={{ display: 'block' }}
           targetEl={
@@ -121,12 +123,15 @@ ComboButton.propTypes = {
   /** The position of the icon in relation to other children in a ComboButton. */
   iconPosition: PropTypes.oneOf(['after', 'before']),
   /** The icon used inside the dropdown button */
-  dropdownIcon: PropTypes.node
+  dropdownIcon: PropTypes.node,
+  /** Whether or not the Popover should trigger onRequestClose when an element is selected. */
+  closeOnSelect: PropTypes.bool
 };
 
 ComboButton.defaultProps = {
   type: 'button',
   iconPosition: 'after',
+  closeOnSelect: true,
   dropdownIcon: <CaretDownIcon filled size={14} />,
   onClick: () => {}
 };

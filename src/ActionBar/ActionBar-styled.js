@@ -136,9 +136,29 @@ const StyledCollapseAction = styled(Button).attrs(({ collapsed }) => {
     flex-shrink: 0;
     margin-left: 0 !important;
 
+    ${props =>
+      props.position === 'end' &&
+      css`
+        transform: rotate(180deg);
+      `};
+
     html[dir='rtl'] & {
-      margin-left: ${props => unitCalc(props.theme.baseline, 2, '/')};
+      margin-left: ${props =>
+        unitCalc(props.theme.baseline, 2, '/')} !important;
       margin-right: 0 !important;
+      transform: rotate(180deg);
+
+      ${props =>
+        props.position === 'end' &&
+        css`
+          transform: rotate(0deg);
+        `};
+
+      ${props =>
+        props.collapsed &&
+        css`
+          margin-left: 0 !important;
+        `};
     }
   }
 `;
@@ -183,6 +203,10 @@ const StyledAction = styled(StyledCollapseAction)`
           }
         }
       `};
+  }
+
+  svg {
+    transform: rotate(0deg) !important;
   }
 `;
 
