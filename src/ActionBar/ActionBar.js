@@ -22,6 +22,7 @@ import CollapseAction from './CollapseAction';
 
 const ActionBarContext = createContext({
   dark: undefined,
+  position: undefined,
   collapsed: undefined
 });
 ActionBarContext.displayName = 'ActionBarContext';
@@ -29,6 +30,7 @@ ActionBarContext.displayName = 'ActionBarContext';
 const ActionBar = ({
   children,
   dark,
+  position,
   showCollapser,
   collapsed,
   collapseLabel,
@@ -36,16 +38,22 @@ const ActionBar = ({
   onToggleCollapse,
   ...other
 }) => {
-  const actionBarContext = useContextState({ dark, collapsed });
+  const actionBarContext = useContextState({ dark, position, collapsed });
 
   return (
     <ActionBarContext.Provider value={actionBarContext}>
-      <StyledActionBar dark={dark} collapsed={collapsed} {...other}>
+      <StyledActionBar
+        dark={dark}
+        position={position}
+        collapsed={collapsed}
+        {...other}
+      >
         {children}
         {showCollapser && (
           <StyledActionBarCollapseContainer>
             <CollapseAction
               dark={dark}
+              position={position}
               collapsed={collapsed}
               collapseLabel={collapseLabel}
               expandLabel={expandLabel}
@@ -63,6 +71,8 @@ ActionBar.propTypes = {
   children: PropTypes.node,
   /** Style prop to render a dark ActionBar. */
   dark: PropTypes.bool,
+  /** Adjust alignment so ActionBar can be placed on the right side of the screen. */
+  position: PropTypes.oneOf(['start', 'end']),
   /** Toggle visibility of the collapser control at the bottom of the ActionBar */
   showCollapser: PropTypes.bool,
   /** Programatically control collapsed state of the ActionBar */
@@ -76,6 +86,7 @@ ActionBar.propTypes = {
 };
 
 ActionBar.defaultProps = {
+  position: 'start',
   showCollapser: true,
   collapseLabel: 'Collapse',
   expandLabel: 'Expand',

@@ -143,33 +143,42 @@ class ArcgisShare extends Component {
       publicLabel,
       groupsLabel,
       noGroupsLabel,
+      hidePublicSharing,
+      hideOrganizationSharing,
+      hideGroupsSharing,
       portal,
       user
     } = this.props;
 
     return (
       <StyledArcgisShare>
-        <Checkbox
-          labelStyle={{ ...PrimaryCheckboxLabelStyles }}
-          checked={this.state.public || false}
-          onChange={this.publicChange}
-        >
-          {publicLabel}
-        </Checkbox>
-        <Checkbox
-          labelStyle={{ ...PrimaryCheckboxLabelStyles }}
-          checked={this.state.org || this.state.public || false}
-          onChange={this.orgChange}
-          disabled={this.state.public || false}
-        >
-          {portal && portal.name}
-        </Checkbox>
-        <StyledGroupFieldset name="shareGroups">
-          <StyledLegend>{groupsLabel}:</StyledLegend>
-          <StyledGroupContainer>
-            {user && this.getGroupCheckboxes(user.groups, noGroupsLabel)}
-          </StyledGroupContainer>
-        </StyledGroupFieldset>
+        {!hidePublicSharing ? (
+          <Checkbox
+            labelStyle={{ ...PrimaryCheckboxLabelStyles }}
+            checked={this.state.public || false}
+            onChange={this.publicChange}
+          >
+            {publicLabel}
+          </Checkbox>
+        ) : null}
+        {!hideOrganizationSharing ? (
+          <Checkbox
+            labelStyle={{ ...PrimaryCheckboxLabelStyles }}
+            checked={this.state.org || this.state.public || false}
+            onChange={this.orgChange}
+            disabled={this.state.public || false}
+          >
+            {portal && portal.name}
+          </Checkbox>
+        ) : null}
+        {!hideGroupsSharing ? (
+          <StyledGroupFieldset name="shareGroups">
+            <StyledLegend>{groupsLabel}:</StyledLegend>
+            <StyledGroupContainer>
+              {user && this.getGroupCheckboxes(user.groups, noGroupsLabel)}
+            </StyledGroupContainer>
+          </StyledGroupFieldset>
+        ) : null}
       </StyledArcgisShare>
     );
   }
@@ -182,6 +191,12 @@ ArcgisShare.propTypes = {
   portal: PropTypes.object.isRequired,
   /** AGOL sharing object. */
   sharing: PropTypes.object,
+  /** Hide the option to share publically. */
+  hidePublicSharing: PropTypes.bool,
+  /** Hide the option to share to your organization. */
+  hideOrganizationSharing: PropTypes.bool,
+  /** Hide the option to share with your groups. */
+  hideGroupsSharing: PropTypes.bool,
   /** Text label for the Public group. */
   publicLabel: PropTypes.string,
   /** Text label for the Groups header. */
@@ -195,7 +210,10 @@ ArcgisShare.propTypes = {
 ArcgisShare.defaultProps = {
   publicLabel: 'Everyone (public)',
   groupsLabel: 'These groups',
-  noGroupsLabel: 'No groups for this user'
+  noGroupsLabel: 'No groups for this user',
+  hidePublicSharing: false,
+  hideOrganizationSharing: false,
+  hideGroupsSharing: false
 };
 
 ArcgisShare.displayName = 'ArcgisShare';

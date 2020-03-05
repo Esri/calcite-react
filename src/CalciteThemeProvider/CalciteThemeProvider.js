@@ -253,7 +253,7 @@ const CalciteReactGlobalStyles = createGlobalStyle`
   }
 
   .Toastify__toast .Toastify__toast-body {
-    ${fontSize(-1)};
+    ${() => fontSize(-1)};
   }
 
   .Toastify__progress-bar.Toastify__progress-bar {
