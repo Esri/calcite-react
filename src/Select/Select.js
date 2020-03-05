@@ -151,6 +151,8 @@ class Select extends Component {
 
   downshiftOnChange = params => {
     const { selectedItem, field, form, onChange } = params;
+    // Ignore onChange if not item was selected (e.g. escape key)
+    if (!selectedItem) return;
     let name, touched, setTouched, setFieldValue;
     if (field) {
       name = field.name;
