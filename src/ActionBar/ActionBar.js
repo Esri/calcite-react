@@ -72,7 +72,7 @@ ActionBar.propTypes = {
   /** Style prop to render a dark ActionBar. */
   dark: PropTypes.bool,
   /** Adjust alignment so ActionBar can be placed on the right side of the screen. */
-  right: PropTypes.oneOf(['start', 'end']),
+  position: PropTypes.oneOf(['start', 'end']),
   /** Toggle visibility of the collapser control at the bottom of the ActionBar */
   showCollapser: PropTypes.bool,
   /** Programatically control collapsed state of the ActionBar */
