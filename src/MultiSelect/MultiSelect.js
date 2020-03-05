@@ -83,6 +83,8 @@ const MultiSelect = ({
 
   function downshiftOnChange(selectedItem, downshiftProps) {
     const { selectedItem: selectedItems } = downshiftProps;
+    // Ignore onChange if not item was selected (e.g. escape key)
+    if (!selectedItem) return;
     const existingValues = selectedItems.map(item => item.props.value);
     let values;
 

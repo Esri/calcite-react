@@ -25,6 +25,7 @@ const CollapseAction = ({
   expandLabel,
   collapseLabel,
   dark,
+  position,
   ...other
 }) => {
   const getAction = action => {
@@ -35,7 +36,7 @@ const CollapseAction = ({
     return (
       <Tooltip
         title={expandLabel}
-        placement="right"
+        placement={position === 'start' ? 'right' : 'left'}
         targetWrapperStyle={TooltipWrapperStyles}
       >
         {action}
@@ -49,6 +50,7 @@ const CollapseAction = ({
         collapsed ? <ChevronsRight size={16} /> : <ChevronsLeft size={16} />
       }
       dark={dark}
+      position={position}
       {...other}
     >
       {!collapsed && collapseLabel}
