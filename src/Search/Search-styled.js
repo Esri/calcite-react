@@ -155,7 +155,7 @@ const StyledSearch = styled(CalciteInput)`
       padding-left: ${props => unitCalc(props.theme.baseline, 1.2, '*')};
 
       html[dir='rtl'] & {
-        padding-left: initial;
+        padding-left: ${props => props.theme.baseline};
         padding-right: ${props => unitCalc(props.theme.baseline, 1.2, '*')};
       }
     `};
