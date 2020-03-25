@@ -114,6 +114,7 @@ StyledStepTextContainer.defaultProps = { theme };
 
 const StyledStepTitle = styled(CalciteH6)`
   margin: 0;
+  margin-bottom: ${props => unitCalc(props.theme.baseline, 5, '/')};
   line-height: 32px;
   position: relative;
   color: ${props => props.theme.palette.darkGray};
@@ -129,6 +130,7 @@ const StyledStepTitle = styled(CalciteH6)`
     css`
       ${fontSize(-2)};
       line-height: 28px;
+      margin-bottom: 0;
     `};
 
   ${props =>
