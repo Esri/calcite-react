@@ -31,6 +31,7 @@ const StyledDisplayCheckbox = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   background: ${props => props.theme.palette.white};
   border: 1px solid ${props => props.theme.palette.gray};
   color: ${props => props.theme.palette.white};

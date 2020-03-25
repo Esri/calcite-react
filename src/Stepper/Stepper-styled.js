@@ -61,8 +61,19 @@ const StyledStep = styled.div`
       flex: unset;
       align-items: flex-start;
       margin-right: 0;
-      margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
-      padding-bottom: ${props => props.theme.baseline};
+      margin-bottom: ${unitCalc(props.theme.baseline, 2, '/')};
+      padding-bottom: ${props.theme.baseline};
+
+      ${props =>
+        props.small &&
+        css`
+          margin-bottom: ${unitCalc(props.theme.baseline, 4, '/')};
+          padding-bottom: ${unitCalc(props.theme.baseline, 3, '/')};
+
+          ${StyledStepDescription} {
+            line-height: 1.25rem;
+          }
+        `};
 
       html[dir='rtl'] & {
         margin-left: 0;
@@ -174,6 +185,14 @@ const StyledStepTitle = styled(CalciteH6)`
   ${props =>
     props.vertical &&
     css`
+      margin-bottom: ${props => unitCalc(props.theme.baseline, 5, '/')};
+
+      ${props =>
+        props.small &&
+        css`
+          margin-bottom: 0;
+        `};
+
       &::after {
         content: none;
       }
@@ -215,6 +234,9 @@ StyledStepDescription.defaultProps = { theme };
 
 const StyledStepIcon = styled.div`
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 32px;
 
   ${props =>
     props.vertical &&
@@ -254,9 +276,21 @@ const StyledStepIcon = styled.div`
           `};
       }
 
+      ${props =>
+        props.small &&
+        css`
+          padding-bottom: ${props => unitCalc(props.theme.baseline, 4, '/')};
+        `};
+
       *:last-of-type > &::after {
         content: none;
       }
+    `};
+
+  ${props =>
+    props.small &&
+    css`
+      height: 28px;
     `};
 `;
 StyledStepIcon.defaultProps = { theme };

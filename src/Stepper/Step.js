@@ -53,7 +53,7 @@ const Step = ({
   });
 
   return (
-    <StyledStep vertical={vertical} {...other}>
+    <StyledStep vertical={vertical} small={small} {...other}>
       <StepIcon
         icon={icon}
         active={active}
