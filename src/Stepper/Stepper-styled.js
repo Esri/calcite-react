@@ -114,7 +114,6 @@ StyledStepTextContainer.defaultProps = { theme };
 
 const StyledStepTitle = styled(CalciteH6)`
   margin: 0;
-  margin-bottom: ${props => unitCalc(props.theme.baseline, 5, '/')};
   line-height: 32px;
   position: relative;
   color: ${props => props.theme.palette.darkGray};
@@ -130,7 +129,6 @@ const StyledStepTitle = styled(CalciteH6)`
     css`
       ${fontSize(-2)};
       line-height: 28px;
-      margin-bottom: 0;
     `};
 
   ${props =>
@@ -187,6 +185,14 @@ const StyledStepTitle = styled(CalciteH6)`
   ${props =>
     props.vertical &&
     css`
+      margin-bottom: ${props => unitCalc(props.theme.baseline, 5, '/')};
+
+      ${props =>
+        props.small &&
+        css`
+          margin-bottom: 0;
+        `};
+
       &::after {
         content: none;
       }
@@ -228,6 +234,9 @@ StyledStepDescription.defaultProps = { theme };
 
 const StyledStepIcon = styled.div`
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 32px;
 
   ${props =>
     props.vertical &&
@@ -276,6 +285,12 @@ const StyledStepIcon = styled.div`
       *:last-of-type > &::after {
         content: none;
       }
+    `};
+
+  ${props =>
+    props.small &&
+    css`
+      height: 28px;
     `};
 `;
 StyledStepIcon.defaultProps = { theme };
