@@ -59,6 +59,7 @@ const TextField = forwardRef(
         adornment &&
         adornment.type &&
         (adornment.type.displayName === 'Button' ||
+          adornment.type.displayName === 'ButtonGroup' ||
           adornment.type.displayName === 'Select' ||
           adornmentNoWrap)
       ) {
