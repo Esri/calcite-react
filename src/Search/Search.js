@@ -375,6 +375,7 @@ class Search extends Component {
                             ref,
                             selectableListFilter: listContext.selectable,
                             searchIcon,
+                            type: 'text',
                             ...other
                           })}
                         />
