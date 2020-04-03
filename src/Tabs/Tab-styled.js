@@ -159,7 +159,7 @@ const StyledTabTitle = styled(CalciteA)`
           border-bottom: 3px solid transparent;
           color: ${props.theme.palette.darkerGray};
           margin-right: ${unitCalc(props.theme.baseline, 2, '/')};
-          transition: none;
+          transition: transition: all 0.15s ease-in-out 0s;
           padding: ${props => unitCalc(props.theme.baseline, 2, '/')} 0;
 
           html[dir='rtl'] & {
