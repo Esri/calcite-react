@@ -153,18 +153,18 @@ const StyledTabTitle = styled(CalciteA)`
       ${props =>
         props.translucent &&
         css`
-          background-color: ${props => props.theme.palette.transparentWhite};
+          background-color: transparent;
           background-image: none;
           border: none;
-          border-top: 2px solid ${props => props.theme.palette.transparentWhite};
-          color: ${props => props.theme.palette.offBlack};
-          margin-right: 2px;
-          margin-bottom: 3px;
+          border-bottom: 3px solid transparent;
+          color: ${props.theme.palette.darkerGray};
+          margin-right: ${unitCalc(props.theme.baseline, 2, '/')};
           transition: none;
+          padding: ${props => unitCalc(props.theme.baseline, 2, '/')} 0;
 
           html[dir='rtl'] & {
             margin-right: 0;
-            margin-left: 2px;
+            margin-left: ${unitCalc(props.theme.baseline, 2, '/')};
           }
 
           &:first-child,
@@ -175,20 +175,24 @@ const StyledTabTitle = styled(CalciteA)`
 
           &:hover,
           &:focus {
-            background-color: ${props => props.theme.palette.opaqueWhite};
-            border-top-color: ${props => props.theme.palette.blue};
+            background-color: transparent;
+            border-bottom-color: ${props.theme.palette.lighterGray};
             background-image: none;
+            color: ${props.theme.palette.offBlack};
           }
 
           ${props =>
             props.active &&
             css`
-              background-image: none;
-              background-color: ${props => props.theme.palette.opaqueWhite};
-              border-top-color: ${props => props.theme.palette.blue};
-              border-bottom: 2px solid
-                ${props => props.theme.palette.opaqueWhite};
-              margin-bottom: 0;
+              &,
+              &:hover,
+              &:focus {
+                background-image: none;
+                background-color: transparent;
+                border-bottom-color: ${props.theme.palette.blue};
+                color: ${props.theme.palette.offBlack};
+                font-weight: bold;
+              }
             `};
         `};
 
@@ -263,15 +267,16 @@ const StyledTabContents = styled.div`
     `};
 
   ${props =>
-    props.translucent &&
+    props.dark &&
     css`
       border: none;
     `};
 
   ${props =>
-    props.dark &&
+    props.translucent &&
     css`
       border: none;
+      border-top: 1px solid ${props.theme.palette.lighterGray};
     `};
 `;
 StyledTabContents.defaultProps = { theme };
