@@ -316,6 +316,8 @@ const StyledTabSection = styled.article`
     props.translucent &&
     css`
       background-color: ${props => props.theme.palette.opaqueWhite};
+      padding-left: 0;
+      padding-right: 0;
     `};
 
   ${props =>
