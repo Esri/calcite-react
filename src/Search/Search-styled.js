@@ -144,6 +144,10 @@ const StyledSearch = styled(CalciteInput)`
   padding-right: ${props => props.theme.baseline};
   background: transparent;
 
+  &::-ms-clear {
+    display: none;
+  }
+
   html[dir='rtl'] & {
     padding-right: ${props => unitCalc(props.theme.baseline, 5, '/')};
     padding-left: ${props => props.theme.baseline};
