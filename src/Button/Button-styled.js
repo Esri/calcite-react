@@ -36,6 +36,7 @@ const StyledButton = styled.button`
   justify-content: center;
   padding: ${props => unitCalc(props.theme.baseline, 5, '/')} 0.9rem;
   width: auto;
+  margin: 0;
   color: ${props => props.theme.palette.white};
   border: 1px solid ${props => props.theme.palette.blue};
   border-radius: ${props => props.theme.borderRadius};
