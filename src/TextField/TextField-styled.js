@@ -203,7 +203,7 @@ const SearchClearIcon = styled(({ isSuccess, isError, ...rest }) => (
   ${props =>
     (props.isSuccess || props.isError) &&
     css`
-      right: ${props => unitCalc(props.theme.baseline, 1.5, '/')};
+      right: ${props.theme.baseline};
     `};
 
   html[dir='rtl'] & {
@@ -213,7 +213,7 @@ const SearchClearIcon = styled(({ isSuccess, isError, ...rest }) => (
     ${props =>
       (props.isSuccess || props.isError) &&
       css`
-        left: ${props => unitCalc(props.theme.baseline, 1.5, '/')};
+        left: ${props.theme.baseline};
       `};
   }
 
