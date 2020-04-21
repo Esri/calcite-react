@@ -189,8 +189,10 @@ ArcgisShare.propTypes = {
   user: PropTypes.object.isRequired,
   /** AGOL portal object. */
   portal: PropTypes.object.isRequired,
-  /** AGOL sharing object. */
+  /** AGOL sharing object used to populate the item's sharing permissions. https://developers.arcgis.com/rest/users-groups-and-items/user-item-link-.htm */
   sharing: PropTypes.object,
+  /** Event callback when a sharing permission changes. */
+  onChange: PropTypes.func.isRequired,
   /** Hide the option to share publically. */
   hidePublicSharing: PropTypes.bool,
   /** Hide the option to share to your organization. */
@@ -208,6 +210,7 @@ ArcgisShare.propTypes = {
 };
 
 ArcgisShare.defaultProps = {
+  onChange: () => {},
   publicLabel: 'Everyone (public)',
   groupsLabel: 'These groups',
   noGroupsLabel: 'No groups for this user',
