@@ -46,6 +46,7 @@ class Search extends Component {
     this.state = {
       itemsToShow: this.props.children || this.props.items
     };
+    this.isComposing = false;
     this.userInputtedValue = '';
     this._generatedId = uniqid();
   }
@@ -129,11 +130,14 @@ class Search extends Component {
 
     // If the component is just being used as an input filter
     if (!this.props.children && !this.props.items) {
-      this.props.onUserAction(
-        changes.inputValue === undefined
-          ? downshiftProps.inputValue
-          : changes.inputValue
-      );
+      // This will be handled in onInputValueChange if IME is being used
+      if (!this.isComposing) {
+        this.props.onUserAction(
+          changes.inputValue === undefined
+            ? downshiftProps.inputValue
+            : changes.inputValue
+        );
+      }
       return;
     }
 
@@ -168,6 +172,22 @@ class Search extends Component {
     }
 
     this.props.onUserAction(inputValue, selectedItemVal);
+  };
+
+  handleOnInputValueChange = (inputValue, downshiftProps) => {
+    // If IME keyboard is being used, then we need to update the value
+    // before onUserAction gets called. Otherwise, the IME will close.
+    if (!this.isComposing) {
+      return;
+    }
+
+    const value =
+      inputValue !== undefined ? inputValue : this.props.inputValue || '';
+
+    this.props.onUserAction(
+      value,
+      downshiftProps.selectedItem || this.props.selectedItem
+    );
   };
 
   getSearchIcon = searchIcon => {
@@ -352,6 +372,7 @@ class Search extends Component {
                 selectedItem={selectedItem}
                 onChange={onChange}
                 onUserAction={this.handleOnUserAction}
+                onInputValueChange={this.handleOnInputValueChange}
               >
                 {({
                   getRootProps,
@@ -376,6 +397,19 @@ class Search extends Component {
                             selectableListFilter: listContext.selectable,
                             searchIcon,
                             type: 'text',
+                            onKeyDown: evt => {
+                              // Prevent downshift key events while IME is open
+                              // IME uses key events for selecting IME options
+                              if (evt.nativeEvent.isComposing) {
+                                evt.nativeEvent.preventDownshiftDefault = true;
+                              }
+                            },
+                            onCompositionStart: evt => {
+                              this.isComposing = true;
+                            },
+                            onCompositionEnd: evt => {
+                              this.isComposing = false;
+                            },
                             ...other
                           })}
                         />
