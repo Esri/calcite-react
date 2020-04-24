@@ -36,7 +36,7 @@ comprehend and complete for the user.
 #### Import Syntax
 
 ```js
-import TextField from 'calcite-react/TextField'
+import TextField from 'calcite-react/TextField';
 ```
 
 ## Basic Usage
@@ -69,6 +69,11 @@ import TextField from 'calcite-react/TextField'
       <FormControl success>
         <TextField defaultValue={1} type="number" />
         <FormHelperText>That's a number!</FormHelperText>
+      </FormControl>
+    </GuideExample>
+    <GuideExample label="search">
+      <FormControl>
+        <TextField search placeholder="Search..." />
       </FormControl>
     </GuideExample>
     <GuideExample label="fullWidth">
@@ -110,7 +115,11 @@ import TextField from 'calcite-react/TextField'
           <TextField
             defaultValue="500.00"
             rightAdornment={
-              <Select id="currencyUnitSelect" placement="bottom-end" selectedValue="usd">
+              <Select
+                id="currencyUnitSelect"
+                placement="bottom-end"
+                selectedValue="usd"
+              >
                 <MenuItem value="usd">USD</MenuItem>
                 <MenuItem value="eur">EUR</MenuItem>
                 <MenuItem value="jpy">JPY</MenuItem>
@@ -270,7 +279,7 @@ import TextField from 'calcite-react/TextField'
                 error={touched.email && errors.email ? true : false}
               >
                 <FormControlLabel htmlFor="email">Email</FormControlLabel>
-                <Field component={TextField} search type="text" name="email" />
+                <Field component={TextField} type="text" name="email" />
                 <FormHelperText>
                   {(touched.email && errors.email) || null}
                 </FormHelperText>
