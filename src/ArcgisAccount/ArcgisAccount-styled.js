@@ -31,6 +31,7 @@ const StyledArcgisAccountControl = styled.div`
   color: ${props => props.theme.palette.darkestGray};
   cursor: pointer;
   height: 62px;
+  max-width: 260px;
   padding: ${props => unitCalc(props.theme.baseline, 2, '/')}
     ${props => props.theme.baseline}
     ${props => unitCalc(props.theme.baseline, 2, '/')}
@@ -90,6 +91,10 @@ const StyledArcgisAccountControlFriendlyName = styled.span`
   font-weight: 600;
   ${fontSize(-1)};
   line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 170px;
 `;
 StyledArcgisAccountControlFriendlyName.defaultProps = { theme };
 const StyledArcgisAccountControlUsername = styled.span`
@@ -123,6 +128,8 @@ StyledArcgisAccountContentInfo.defaultProps = { theme };
 const StyledArcgisAccountContentName = styled.span`
   ${fontSize(1)};
   font-weight: 600;
+  word-break: break-word;
+  text-align: center;
   display: inline-block;
   margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
 `;
