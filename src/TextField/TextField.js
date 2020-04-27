@@ -10,13 +10,14 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React, { useContext, forwardRef } from 'react';
+import React, { useContext, useMemo, forwardRef } from 'react';
 
 import {
   StyledTextField,
   StyledTextArea,
   StyledTextFieldAdornmentWrapper,
-  StyledAdornmentWrapper
+  StyledAdornmentWrapper,
+  SearchClearIcon
 } from './TextField-styled';
 
 import { FormControlContext } from '../Form/FormControl';
@@ -29,6 +30,7 @@ const TextField = forwardRef(
       value,
       minimal,
       fullWidth,
+      search,
       id,
       onChange,
       onBlur,
@@ -40,6 +42,8 @@ const TextField = forwardRef(
       disabled,
       field,
       form,
+      onRequestClear,
+      searchClearProps,
       ...other
     },
     ref
@@ -107,14 +111,14 @@ const TextField = forwardRef(
       }
     };
 
-    const isSuccess = formControlContext => {
+    const isSuccess = () => {
       if (touched) {
         return touched[name] && !errors[name] ? true : false;
       }
       return formControlContext.success;
     };
 
-    const isError = formControlContext => {
+    const isError = () => {
       if (touched) {
         return touched[name] && errors[name] ? true : false;
       }
@@ -125,13 +129,32 @@ const TextField = forwardRef(
       return isSubmitting || disabled;
     };
 
+    const searchClear = useMemo(
+      () => {
+        if (search && !isDisabled() && (getValue() || getValue() === 0)) {
+          return (
+            <SearchClearIcon
+              size={16}
+              filled
+              isSuccess={isSuccess()}
+              isError={isError()}
+              {...searchClearProps}
+              onClick={onRequestClear}
+            />
+          );
+        }
+        return null;
+      },
+      [search, getValue(), isDisabled()]
+    );
+
     let TextFieldArea = StyledTextField;
 
     if (type === 'textarea') {
       TextFieldArea = StyledTextArea;
     }
 
-    if (!leftAdornment && !rightAdornment) {
+    if (!leftAdornment && !rightAdornment && !search) {
       return (
         <TextFieldArea
           ref={ref}
@@ -144,8 +167,8 @@ const TextField = forwardRef(
           id={id || formControlContext._generatedId}
           onChange={handleChange}
           onBlur={handleBlur}
-          success={isSuccess(formControlContext)}
-          error={isError(formControlContext)}
+          success={isSuccess()}
+          error={isError()}
           disabled={isDisabled()}
           {...other}
         />
@@ -162,17 +185,19 @@ const TextField = forwardRef(
           type={type}
           value={getValue()}
           minimal={minimal}
+          search={search}
           fullWidth={fullWidth}
           hasAdornmentLeft={leftAdornment !== undefined}
           hasAdornmentRight={rightAdornment !== undefined}
           id={id || formControlContext._generatedId}
           onChange={handleChange}
           onBlur={handleBlur}
-          success={isSuccess(formControlContext)}
-          error={isError(formControlContext)}
+          success={isSuccess()}
+          error={isError()}
           disabled={isDisabled()}
           {...other}
         />
+        {searchClear}
         {getAdornment(rightAdornment, rightAdornmentNoWrap, 'right')}
       </StyledTextFieldAdornmentWrapper>
     );
@@ -199,12 +224,16 @@ TextField.propTypes = {
   error: PropTypes.bool,
   /** The form control should show success. */
   success: PropTypes.bool,
-  /** Option to display a magnifying glass icon and clear button to the input. */
-  search: PropTypes.bool,
   /** Make the TextField 100% width. */
   fullWidth: PropTypes.bool,
   /** Display prop to style the TextField with a simplified UI. */
   minimal: PropTypes.bool,
+  /** Option to display a magnifying glass icon and clear button to the input. */
+  search: PropTypes.bool,
+  /** Callback when Search clear button is clicked */
+  onRequestClear: PropTypes.func,
+  /** Props to be passed to the Search clear button */
+  searchClearProps: PropTypes.object,
   /** TextField and label should appear side by side instead of stacked. */
   horizontal: PropTypes.bool,
   /** HTML prop for the TextField; works together with a label's `for` prop. */
