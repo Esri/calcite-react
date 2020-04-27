@@ -180,8 +180,10 @@ TextField.propTypes = {
   error: PropTypes.bool,
   /** The form control should show success */
   success: PropTypes.bool,
-  /** Option to display a magnifying glass icon and clear button to the input */
+  /** Option to display a magnifying glass icon and clear button to the input. */
   search: PropTypes.bool,
+  /** Callback when Search clear button is clicked */
+  onRequestClear: PropTypes.func,
   /** Make the TextField 100% width */
   fullWidth: PropTypes.bool,
   /** Display prop to style the TextField with a simplified UI */

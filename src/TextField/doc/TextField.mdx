@@ -36,7 +36,7 @@ comprehend and complete for the user.
 #### Import Syntax
 
 ```js
-import TextField from 'calcite-react/TextField'
+import TextField from 'calcite-react/TextField';
 ```
 
 ## Basic Usage
@@ -48,79 +48,119 @@ import TextField from 'calcite-react/TextField'
 ## Advanced Usage
 
 <Playground>
-  <div>
-    <GuideExample label="placeholder">
-      <FormControl>
-        <TextField placeholder="A placeholder!" />
-      </FormControl>
-    </GuideExample>
-    <GuideExample label="value">
-      <FormControl>
-        <TextField defaultValue="James T Kirk" />
-      </FormControl>
-    </GuideExample>
-    <GuideExample label="error">
-      <FormControl error>
-        <TextField defaultValue="jkirk@gmail.com" type="email" />
-        <FormHelperText>Needs to be .gov</FormHelperText>
-      </FormControl>
-    </GuideExample>
-    <GuideExample label="success">
-      <FormControl success>
-        <TextField defaultValue={1} type="number" />
-        <FormHelperText>That's a number!</FormHelperText>
-      </FormControl>
-    </GuideExample>
-    <GuideExample label="fullWidth">
-      <FormControl fullWidth>
-        <TextField fullWidth defaultValue="Full Width TextField" />
-      </FormControl>
-    </GuideExample>
-    <GuideExample label='type="textarea"'>
-      <FormControl>
-        <TextField
-          defaultValue="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-          type="textarea"
-        />
-      </FormControl>
-    </GuideExample>
-    <GuideExample label="with adornments">
-      <Form>
-        <FormControl>
-          <TextField
-            placeholder="Username"
-            rightAdornment={<Button>Yay</Button>}
-          />
-        </FormControl>
-        <FormControl>
-          <TextField
-            defaultValue="Dr. Leonard McCoy"
-            leftAdornment={<UserIcon size={16} />}
-          />
-        </FormControl>
-        <FormControl fullWidth success>
-          <TextField
-            fullWidth
-            defaultValue="500.00"
-            leftAdornment="$"
-            rightAdornment={<Button>Submit</Button>}
-          />
-        </FormControl>
-        <FormControl>
-          <TextField
-            defaultValue="500.00"
-            rightAdornment={
-              <Select id="currencyUnitSelect" placement="bottom-end" selectedValue="usd">
-                <MenuItem value="usd">USD</MenuItem>
-                <MenuItem value="eur">EUR</MenuItem>
-                <MenuItem value="jpy">JPY</MenuItem>
-              </Select>
-            }
-          />
-        </FormControl>
-      </Form>
-    </GuideExample>
-  </div>
+  {() => {
+    class TextFieldExample extends React.Component {
+      constructor(props) {
+        super();
+        this.state = {
+          inputValue: ''
+        }
+      }
+
+      render() {
+        return (
+          <div>
+            <GuideExample label="placeholder">
+              <FormControl>
+                <TextField
+                  placeholder="A placeholder!" />
+              </FormControl>
+            </GuideExample>
+            <GuideExample label="value">
+              <FormControl>
+                <TextField
+                  defaultValue="James T Kirk" />
+              </FormControl>
+            </GuideExample>
+            <GuideExample label="error">
+              <FormControl error>
+                <TextField
+                  defaultValue="jkirk@gmail.com" type="email" />
+                <FormHelperText>Needs to be .gov</FormHelperText>
+              </FormControl>
+            </GuideExample>
+            <GuideExample label="success">
+              <FormControl success>
+                <TextField
+                  defaultValue={1}
+                  type="number" />
+                <FormHelperText>That's a number!</FormHelperText>
+              </FormControl>
+            </GuideExample>
+            <GuideExample label="search">
+              <FormControl>
+                <TextField
+                  value={this.state.inputValue}
+                  onChange={e => this.setState({inputValue: e.target.value})}
+                  onRequestClear={() => this.setState({inputValue: ''})}
+                  search
+                  placeholder="Search..." />
+              </FormControl>
+            </GuideExample>
+            <GuideExample label="fullWidth">
+              <FormControl fullWidth>
+                <TextField
+                  fullWidth
+                  defaultValue="Full Width TextField" />
+              </FormControl>
+            </GuideExample>
+            <GuideExample label='type="textarea"'>
+              <FormControl>
+                <TextField
+                  defaultValue="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                  type="textarea"
+                />
+              </FormControl>
+            </GuideExample>
+            <GuideExample label="with adornments">
+              <Form>
+                <FormControl>
+                  <TextField
+                    placeholder="Username"
+                    rightAdornment={<Button>Yay</Button>}
+                  />
+                </FormControl>
+                <FormControl>
+                  <TextField
+                    defaultValue="Dr. Leonard McCoy"
+                    leftAdornment={<UserIcon size={16} />}
+                  />
+                </FormControl>
+                <FormControl fullWidth success>
+                  <TextField
+                    fullWidth
+                    defaultValue="500.00"
+                    leftAdornment="$"
+                    rightAdornment={<Button>Submit</Button>}
+                  />
+                </FormControl>
+                <FormControl>
+                  <TextField
+                    defaultValue="500.00"
+                    rightAdornment={
+                      <Select
+                        id="currencyUnitSelect"
+                        placement="bottom-end"
+                        selectedValue="usd"
+                      >
+                        <MenuItem value="usd">USD</MenuItem>
+                        <MenuItem value="eur">EUR</MenuItem>
+                        <MenuItem value="jpy">JPY</MenuItem>
+                      </Select>
+                    }
+                  />
+                </FormControl>
+              </Form>
+            </GuideExample>
+          </div>
+        );
+      }
+    }
+
+    return <TextFieldExample />;
+
+}}
+
 </Playground>
 
 ## With Label

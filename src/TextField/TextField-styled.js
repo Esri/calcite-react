@@ -9,6 +9,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
+import React from 'react';
+
 // styled-components
 import styled, { css } from 'styled-components';
 
@@ -24,6 +26,7 @@ import { StyledButton } from '../Button/Button-styled';
 import { StyledSelectInput, StyledSelectButton } from '../Select/Select-styled';
 
 // Icons
+import XCircleIcon from 'calcite-ui-icons-react/XCircleIcon';
 
 // Third party libraries
 
@@ -160,6 +163,7 @@ const StyledAdornmentWrapper = styled.div`
 StyledAdornmentWrapper.defaultProps = { theme };
 
 const StyledTextFieldAdornmentWrapper = styled.div`
+  position: relative;
   display: flex;
 
   /* Ensure all adornments and inputs have the same margin with no rounding errors */
@@ -180,9 +184,48 @@ const StyledTextFieldAdornmentWrapper = styled.div`
 `;
 StyledTextFieldAdornmentWrapper.defaultProps = { theme };
 
+const SearchClearIcon = styled(({ isSuccess, isError, ...rest }) => (
+  <XCircleIcon {...rest} />
+))`
+  display: none;
+  position: absolute;
+  right: ${props => unitCalc(props.theme.baseline, 4, '/')};
+  bottom: ${unitCalc('2.25rem', 2, '/')};
+  transform: translateY(50%);
+  color: ${props => props.theme.palette.darkerGray};
+  opacity: 0.5;
+  cursor: pointer;
+
+  ${StyledTextFieldAdornmentWrapper}:hover & {
+    display: block;
+  }
+
+  ${props =>
+    (props.isSuccess || props.isError) &&
+    css`
+      right: ${props.theme.baseline};
+    `};
+
+  html[dir='rtl'] & {
+    right: auto;
+    left: ${props => unitCalc(props.theme.baseline, 4, '/')};
+
+    ${props =>
+      (props.isSuccess || props.isError) &&
+      css`
+        left: ${props.theme.baseline};
+      `};
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 export {
   StyledTextField,
   StyledTextArea,
   StyledTextFieldAdornmentWrapper,
-  StyledAdornmentWrapper
+  StyledAdornmentWrapper,
+  SearchClearIcon
 };
