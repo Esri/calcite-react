@@ -21,6 +21,7 @@ import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
 // Calcite components
 import Menu from '../Menu';
+import { StyledMenuItem } from '../Menu/Menu-styled';
 
 // Icons
 
@@ -72,6 +73,11 @@ const StyledSelectMenu = styled(Menu)`
     css`
       min-width: 100%;
     `};
+
+  ${StyledMenuItem} {
+    -moz-padding-inline-end: ${props => props.theme.baseline};
+    -moz-padding-end: ${props => props.theme.baseline};
+  }
 
   /* Handles iframe styling from react-resize-aware */
   iframe {
