@@ -1,0 +1,47 @@
+---
+name: Progress
+route: /progress
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import Progress from '../Progress';
+
+# Progress
+
+Progress is used to show progress on some async task to the user.
+
+#### Import Syntax
+
+```js
+import Progress from 'calcite-react/Progress';
+```
+
+## Determinate
+
+<Playground>
+  <Progress type="determinate" value={0.4} />
+</Playground>
+
+## Indeterminate
+
+<Playground>
+  <Progress type="indeterminate" />
+</Playground>
+
+## Reversed
+
+<Playground>
+  <Progress reversed type="determinate" value={0.4} />
+</Playground>
+
+## With Text
+
+<Playground>
+  <Progress type="determinate" value={0.57} text="Reticulating Splines" />
+</Playground>
+
+## Props
+
+<PropsTable of={Progress} />
