@@ -18,10 +18,11 @@ const Progress = ({
   reversed = false,
   text = null,
   type = 'determinate',
-  value = 0
+  value = 0,
+  ...other
 }) => {
   return (
-    <StyledProgress>
+    <StyledProgress {...other}>
       <Track>
         <Bar reversed={reversed} type={type} value={value} />
       </Track>
