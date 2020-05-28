@@ -67,6 +67,20 @@ export const Bar = styled.div`
           transform: translate3d(600%, 0, 0);
         }
       }
+
+      [dir='rtl'] & {
+        @keyframes looping-progress-bar-ani {
+          0% {
+            transform: translate3d(100%, 0, 0);
+          }
+          50% {
+            width: 40%;
+          }
+          100% {
+            transform: translate3d(-600%, 0, 0);
+          }
+        }
+      }
     `}
 
   ${({ type, value }) =>
@@ -75,11 +89,11 @@ export const Bar = styled.div`
       width: ${value * 100}%;
     `}
 
-    ${({ reversed }) =>
-      reversed &&
-      css`
-        right: 0;
-      `}
+  ${({ reversed }) =>
+    reversed &&
+    css`
+      animation-direction: reverse;
+    `}
 `;
 Bar.defaultProps = { theme };
 
