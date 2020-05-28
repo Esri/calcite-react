@@ -13,6 +13,7 @@
 import styled, { css } from 'styled-components';
 
 // Utils, common elements
+import { fontSize } from '../utils/helpers';
 
 // Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
@@ -101,5 +102,6 @@ Bar.defaultProps = { theme };
 
 export const Text = styled.div`
   padding: ${({ theme }) => theme.baseline} 0 0 0;
+  ${fontSize(0)};
 `;
 Text.defaultProps = { theme };

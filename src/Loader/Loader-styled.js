@@ -13,7 +13,7 @@
 import styled, { css, keyframes } from 'styled-components';
 
 // Utils, common elements
-import { unitCalc } from '../utils/helpers';
+import { fontSize, unitCalc } from '../utils/helpers';
 
 // Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
@@ -113,6 +113,7 @@ StyledLoaderBars.defaultProps = { theme };
 const StyledLoaderText = styled.div`
   text-align: center;
   padding-top: ${props => props.sizeRatio * 3.5}px;
+  ${fontSize(0)};
 `;
 StyledLoaderText.defaultProps = { theme };
 
