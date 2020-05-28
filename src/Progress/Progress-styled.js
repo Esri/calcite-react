@@ -56,6 +56,10 @@ export const Bar = styled.div`
       width: 20%;
       animation: looping-progress-bar-ani 2200ms linear infinite;
 
+      [dir='rtl'] & {
+        animation: looping-progress-bar-ani-rtl 2200ms linear infinite;
+      }
+
       @keyframes looping-progress-bar-ani {
         0% {
           transform: translate3d(-100%, 0, 0);
@@ -68,17 +72,15 @@ export const Bar = styled.div`
         }
       }
 
-      [dir='rtl'] & {
-        @keyframes looping-progress-bar-ani {
-          0% {
-            transform: translate3d(100%, 0, 0);
-          }
-          50% {
-            width: 40%;
-          }
-          100% {
-            transform: translate3d(-600%, 0, 0);
-          }
+      @keyframes looping-progress-bar-ani-rtl {
+        0% {
+          transform: translate3d(100%, 0, 0);
+        }
+        50% {
+          width: 40%;
+        }
+        100% {
+          transform: translate3d(-600%, 0, 0);
         }
       }
     `}
@@ -92,7 +94,7 @@ export const Bar = styled.div`
   ${({ reversed }) =>
     reversed &&
     css`
-      animation-direction: reverse;
+      animation-direction: reverse !important;
     `}
 `;
 Bar.defaultProps = { theme };
