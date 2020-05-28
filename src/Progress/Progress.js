@@ -32,13 +32,13 @@ const Progress = ({
 };
 
 Progress.propTypes = {
-  /** Fill bar in the opposite direction */
+  /** For indeterminate progress bars, reverse the animation direction */
   reversed: PropTypes.bool,
   /** Text label for the progress indicator	 */
   text: PropTypes.string,
   /** Use indeterminate if finding actual progress value is impossible */
   type: PropTypes.oneOf(['determinate', 'indeterminate']),
-  /** Percent complete of 100 */
+  /** Fraction completed, in the range of 0 - 1.0 */
   value: PropTypes.number
 };
 
