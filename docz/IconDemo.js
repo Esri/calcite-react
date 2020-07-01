@@ -14,8 +14,7 @@ import ThreeDGlassesIcon from 'calcite-ui-icons-react/ThreeDGlassesIcon';
 export default class IconDemo extends Component {
   state = {
     size: 200,
-    color: 'tomato',
-    filled: false
+    color: 'tomato'
   };
 
   render() {
@@ -51,40 +50,27 @@ export default class IconDemo extends Component {
               }
             />
           </FormControl>
-
-          <FormControl>
-            <FormControlLabel>Filled:</FormControlLabel>
-            <Switch
-              checked={this.state.filled}
-              onChange={e => this.setState({ filled: e.target.checked })}
-            />
-          </FormControl>
         </Form>
         <div style={{ textAlign: 'center', height: '220px', overflow: 'auto' }}>
           <BananaIcon
             size={this.state.size}
             color={this.state.color}
-            filled={this.state.filled}
           />
           <BasemapIcon
             size={this.state.size}
             color={this.state.color}
-            filled={this.state.filled}
           />
           <RunningIcon
             size={this.state.size}
             color={this.state.color}
-            filled={this.state.filled}
           />
           <ThreeDGlassesIcon
             size={this.state.size}
             color={this.state.color}
-            filled={this.state.filled}
           />
           <BatteryChargingIcon
             size={this.state.size}
             color={this.state.color}
-            filled={this.state.filled}
           />
         </div>
       </Fragment>
