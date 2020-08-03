@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 
 import {
   StyledAccountTile,
+  StyledContentWrapper,
   StyledAvatarContainer,
   StyledIconWrapper,
   StyledTextWrapper,
@@ -137,26 +138,31 @@ const AccountTile = ({
           open={isOpen}
           tabIndex="0"
         >
-          <StyledAvatarContainer>
-            <Avatar src={user.userThumbnail} style={{ width: 60, height: 60 }}>
-              {!user.userThumbnail && avatarLetters_user}
-            </Avatar>
-            <Avatar
-              src={user.portalThumbnail}
-              style={{ width: 30, height: 30 }}
-            >
-              {!user.portalThumbnail && avatarLetters_org}
-            </Avatar>
-          </StyledAvatarContainer>
-          <StyledTextWrapper>
-            <StyledP title={orgName} demi>
-              {orgName}
-            </StyledP>
-            <StyledP title={user.fullName}>{user.fullName}</StyledP>
-            <StyledP title={user.username} small>
-              {user.username}
-            </StyledP>
-          </StyledTextWrapper>
+          <StyledContentWrapper>
+            <StyledAvatarContainer>
+              <Avatar
+                src={user.userThumbnail}
+                style={{ width: 60, height: 60 }}
+              >
+                {!user.userThumbnail && avatarLetters_user}
+              </Avatar>
+              <Avatar
+                src={user.portalThumbnail}
+                style={{ width: 30, height: 30 }}
+              >
+                {!user.portalThumbnail && avatarLetters_org}
+              </Avatar>
+            </StyledAvatarContainer>
+            <StyledTextWrapper>
+              <StyledP title={orgName} demi>
+                {orgName}
+              </StyledP>
+              <StyledP title={user.fullName}>{user.fullName}</StyledP>
+              <StyledP title={user.username} small>
+                {user.username}
+              </StyledP>
+            </StyledTextWrapper>
+          </StyledContentWrapper>
           <StyledIconWrapper>
             {authStatusIndicator}
             {actions.length !== 0 && <HandleVerticalIcon scale={16} />}
