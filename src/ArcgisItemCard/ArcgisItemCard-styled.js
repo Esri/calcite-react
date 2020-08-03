@@ -10,7 +10,7 @@
 // limitations under the License.​
 
 // styled-components
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // Utils, common elements
 import { fontSize, unitCalc } from '../utils/helpers';
@@ -34,14 +34,23 @@ import CalendarIcon from 'calcite-ui-icons-react/CalendarIcon';
 
 const StyledItemCard = styled(StyledCard)`
   border-radius: ${props => props.theme.borderRadius};
+
+  ${props =>
+    props.vertical &&
+    css`
+      max-width: calc(33.3% - 1.5rem);
+    `};
 `;
 StyledItemCard.defaultProps = { theme };
 
 const StyledItemCardContent = styled(StyledCardContent)`
   white-space: normal;
   flex: 3 1 75px;
-  padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  padding: 0;
   box-sizing: border-box;
+  .div {
+    padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  }
 `;
 StyledItemCardContent.defaultProps = { theme };
 
@@ -62,6 +71,13 @@ const StyledItemCardImageWrap = styled(StyledCardImageWrap).attrs(props => ({
   justify-content: center;
   border-right: 1px solid ${props => props.theme.palette.lightestGray};
 
+  ${props =>
+    props.vertical &&
+    css`
+      min-height: 160px;
+      height: 160px;
+    `};
+
   html[dir='rtl'] & {
     border-right: none;
     border-left: 1px solid ${props => props.theme.palette.lightestGray};
@@ -71,14 +87,20 @@ StyledItemCardImageWrap.defaultProps = { theme };
 
 const StyledCardItemTitle = styled(StyledCardTitle)`
   ${fontSize(1)};
-  margin-bottom: ${props => unitCalc(props.theme.baseline, 5, '/')};
+  margin-top: ${props => unitCalc(props.theme.baseline, 5, '/')};
+  margin-left: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  margin-right: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  margin-bottom: ${props => unitCalc(props.theme.baseline, 3, '/')};
 `;
 StyledCardItemTitle.defaultProps = { theme };
 
 const StyledCardItemMetrics = styled.div`
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid ${props => props.theme.palette.lighterGray};
+  border-bottom: 1px solid ${props => props.theme.palette.lightestGray};
+  padding-top: ${props => unitCalc(props.theme.baseline, 5, '/')};
+  padding-left: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  padding-right: ${props => unitCalc(props.theme.baseline, 3, '/')};
 
   &:last-child {
     border-bottom: none;
@@ -90,7 +112,10 @@ const StyledCardItemText = styled.p`
   font-weight: 300;
   font-style: normal;
   ${fontSize(-2)};
-  margin: ${props => unitCalc(props.theme.baseline, 3, '/')} 0 0;
+  margin-top: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  margin-left: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  margin-right: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  margin-bottom: ${props => unitCalc(props.theme.baseline, 3, '/')};
 `;
 StyledCardItemText.defaultProps = { theme };
 
@@ -142,6 +167,14 @@ const StyledCalendarIcon = styled(CalendarIcon)`
 `;
 StyledCalendarIcon.defaultProps = { theme };
 
+const StyledActionsContainer = styled.div`
+  border-top: 1px solid ${props => props.theme.palette.lightestGray};
+  padding: 7px;
+  justify-content: flex-end;
+  display: flex;
+`;
+StyledActionsContainer.defaultProps = { theme };
+
 export {
   StyledItemCard,
   StyledItemCardContent,
@@ -151,5 +184,6 @@ export {
   StyledCardItemText,
   StyledCardItemIconLabelText,
   StyledUserIcon,
-  StyledCalendarIcon
+  StyledCalendarIcon,
+  StyledActionsContainer
 };
