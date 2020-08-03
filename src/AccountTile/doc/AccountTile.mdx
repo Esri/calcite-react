@@ -1,0 +1,143 @@
+---
+name: AccountTile
+route: /account-tile
+---
+
+import { Playground, PropsTable } from 'docz';
+import GuideExample from '../../../docz/GuideExample';
+
+import AccountTile from '../';
+import Panel from '../../Panel';
+
+# Account Tile
+
+The `AccountTile` component can be used when the user needs to frequently switch between or manage different accounts.
+
+#### Import Syntax
+
+```js
+import AccountTile from 'calcite-react/AccountTile';
+```
+
+## Basic Usage
+
+<Playground style={{height: '200px', background: "#f3f3f3"}}>
+  {() => {
+    const AccountTileExample = () => {
+      
+      const placeholders = {
+        actions: [
+          {
+            label: 'Sign out',
+            onClick: () => console.log('sign out')
+          },
+          {
+            label: 'Remove Account',
+            onClick: () => console.log('remove account')
+          }
+        ],
+        user: {
+          userThumbnail: null,
+          portalThumbnail: null,
+          arcgisAccountUrl: '',
+          username: 'jharig',
+          fullName: 'Joey Harig',
+          firstName: 'Joey',
+          lastName: 'Harig'
+        },
+        isAuthenticated: true,
+        orgName: 'Esri'
+      }
+
+      return (
+        <AccountTile
+          actions={placeholders.actions}
+          user={placeholders.user}
+          isAuthenticated={placeholders.isAuthenticated}
+          orgName={placeholders.orgName}
+        />
+      );
+    }
+
+    return <AccountTileExample />;
+
+}}
+
+</Playground>
+
+
+## Multiple Accounts
+
+<Playground style={{ background: "#f3f3f3" }}>
+  {() => {
+    const AccountTilesExample = () => {
+      
+      const accounts = [
+        { 
+          user: {
+            userThumbnail: null,
+            portalThumbnail: null,
+            arcgisAccountUrl: '',
+            username: 'jharig',
+            fullName: 'Joey Harig',
+            firstName: 'Joey',
+            lastName: 'Harig'
+          },
+          isAuthenticated: true,
+          orgName: 'Esri Proffesional Services'
+        },
+        { 
+          user: {
+            userThumbnail: null,
+            portalThumbnail: null,
+            arcgisAccountUrl: '',
+            username: 'selse',
+            fullName: 'Someone Else',
+            firstName: 'Someone',
+            lastName: 'Else'
+          },
+          isAuthenticated: false,
+          orgName: 'Esri'
+        }
+      ];
+
+      const createActions = (user, isAuthenticated) => {
+        let actions = [{
+            label: 'Remove account', onClick: () => console.log('remove')
+        }];
+        if (isAuthenticated) {
+          actions.unshift({
+            label: 'Sign out', onClick: () => console.log('sign out')
+          });
+        } else {
+          actions.unshift({
+            label: 'Sign in', onClick: () => console.log('sign in')
+          });
+        }
+        return actions;
+      };
+
+      const accountTiles = accounts.map(account => {
+        return <AccountTile 
+          key={account.user.fullName}
+          actions={createActions(account.user, account.isAuthenticated)}
+          user={account.user}
+          isAuthenticated={account.isAuthenticated}
+          orgName={account.orgName}
+        />
+      });
+
+      return <Panel>{accountTiles}</Panel>;
+    }
+
+    return (
+      <AccountTilesExample />
+    );
+
+}}
+
+</Playground>
+
+## Props
+
+<PropsTable of={AccountTile} />

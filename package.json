@@ -1,6 +1,6 @@
 {
   "name": "calcite-react",
-  "version": "0.52.0",
+  "version": "0.52.1",
   "description": "Calcite components for React",
   "repository": {
     "type": "git",
@@ -68,7 +68,7 @@
     "memoize-one": "^4.0.2",
     "outy": "^0.1.2",
     "polished": "^2.3.0",
-    "react-dates": "^18.3.1",
+    "react-dates": "^21.8.0",
     "react-is": "^16.8.6",
     "react-modal": "^3.11.1",
     "react-popper": "^1.3.6",
