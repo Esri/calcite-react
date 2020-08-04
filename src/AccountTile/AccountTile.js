@@ -34,14 +34,16 @@ import ExclamationMarkTriangleIcon from 'calcite-ui-icons-react/ExclamationMarkT
 const AccountTile = ({
   actions,
   user,
-  isAuthenticated,
-  orgName,
+  isAuthenticated, // accountmanagerstate object does account have token
+  orgName, // from same object
+  userThumbnail, // object {url: null, fallBack: 'JH'}
+  orgThumbnail,
   width,
   expiredText,
   authenticatedText
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const fullName = `${user.firstName} ${user.lastName}`;
   const close = () => {
     isOpen && setIsOpen(false);
   };
@@ -64,16 +66,6 @@ const AccountTile = ({
     }
     setIsOpen(!isOpen);
   };
-
-  let avatarLetters_user;
-  if (user.firstName && user.lastName) {
-    avatarLetters_user = `${user.firstName[0] +
-      user.lastName[0]}`.toUpperCase();
-  } else {
-    avatarLetters_user = user.fullName[0].toUpperCase();
-  }
-
-  const avatarLetters_org = orgName ? orgName[0].toUpperCase() : '';
 
   const menuItems = actions.map(item => (
     <MenuItem
@@ -140,24 +132,20 @@ const AccountTile = ({
         >
           <StyledContentWrapper>
             <StyledAvatarContainer>
-              <Avatar
-                src={user.userThumbnail}
-                style={{ width: 60, height: 60 }}
-              >
-                {!user.userThumbnail && avatarLetters_user}
+              <Avatar src={userThumbnail.url} style={{ width: 60, height: 60 }}>
+                {!userThumbnail.url && userThumbnail.fallBackText}
               </Avatar>
-              <Avatar
-                src={user.portalThumbnail}
-                style={{ width: 30, height: 30 }}
-              >
-                {!user.portalThumbnail && avatarLetters_org}
+              <Avatar src={orgThumbnail.url} style={{ width: 30, height: 30 }}>
+                {!orgThumbnail.url && orgThumbnail.fallBackText}
               </Avatar>
             </StyledAvatarContainer>
             <StyledTextWrapper>
               <StyledP title={orgName} demi>
                 {orgName}
               </StyledP>
-              <StyledP title={user.fullName}>{user.fullName}</StyledP>
+              <StyledP title={user.fullName || fullName}>
+                {user.fullName || fullName}
+              </StyledP>
               <StyledP title={user.username} small>
                 {user.username}
               </StyledP>
@@ -180,7 +168,7 @@ AccountTile.propTypes = {
   /** Actions to be included in the dropdown. Each action should be structured: { label: 'Action Label', action: someMethod } */
   actions: PropTypes.array,
   /** The ArcGIS user object.*/
-  user: PropTypes.object,
+  user: PropTypes.object.isRequired,
   /** Is the user currently logged in or has their authentication expired? */
   isAuthenticated: PropTypes.bool,
   /** Name of the user's organization */
@@ -190,13 +178,17 @@ AccountTile.propTypes = {
   /** Text to show when the account is authenticated.*/
   authenticatedText: PropTypes.string,
   /** Text to show when the account has expired (is not authenticated).*/
-  expiredText: PropTypes.string
+  expiredText: PropTypes.string,
+  /** Object containing thumbnail url and fallback text: { url: 'thumbnail.com', fallBackText: 'JH' }.*/
+  userThumbnail: PropTypes.object.isRequired,
+  /** Object containing thumbnail url and fallback text: { url: 'thumbnail.com', fallBackText: 'E' }.*/
+  orgThumbnail: PropTypes.object.isRequired
 };
 
 AccountTile.defaultProps = {
   actions: [],
   isAuthenticated: false,
-  orgName: null,
+  orgName: '',
   width: '100%',
   authenticatedText: 'Account authenticated',
   expiredText: 'Authentication expired'

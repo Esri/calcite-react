@@ -7,7 +7,11 @@ import { Playground, PropsTable } from 'docz';
 import GuideExample from '../../../docz/GuideExample';
 
 import AccountTile from '../';
+import { useAccountManager } from '../../ArcgisAccount';
 import Panel from '../../Panel';
+
+import user from './user.json';
+import portal from './portal.json';
 
 # Account Tile
 
@@ -37,8 +41,6 @@ import AccountTile from 'calcite-react/AccountTile';
           }
         ],
         user: {
-          userThumbnail: null,
-          portalThumbnail: null,
           arcgisAccountUrl: '',
           username: 'jharig',
           fullName: 'Joey Harig',
@@ -46,7 +48,15 @@ import AccountTile from 'calcite-react/AccountTile';
           lastName: 'Harig'
         },
         isAuthenticated: true,
-        orgName: 'Esri'
+        orgName: 'Esri',
+        userThumbnail: {
+          url: null,
+          fallBackText: 'JH'
+        },
+        orgThumbnail: {
+          url: null,
+          fallBackText: 'E'
+        }
       }
 
       return (
@@ -55,6 +65,8 @@ import AccountTile from 'calcite-react/AccountTile';
           user={placeholders.user}
           isAuthenticated={placeholders.isAuthenticated}
           orgName={placeholders.orgName}
+          userThumbnail={placeholders.userThumbnail}
+          orgThumbnail={placeholders.orgThumbnail}
         />
       );
     }
@@ -65,7 +77,6 @@ import AccountTile from 'calcite-react/AccountTile';
 
 </Playground>
 
-
 ## Multiple Accounts
 
 <Playground style={{ background: "#f3f3f3" }}>
@@ -75,29 +86,40 @@ import AccountTile from 'calcite-react/AccountTile';
       const accounts = [
         { 
           user: {
-            userThumbnail: null,
-            portalThumbnail: null,
-            arcgisAccountUrl: '',
             username: 'jharig',
             fullName: 'Joey Harig',
             firstName: 'Joey',
             lastName: 'Harig'
           },
           isAuthenticated: true,
-          orgName: 'Esri Proffesional Services'
+          orgName: 'Esri Proffesional Services',
+          userThumbnail: null,
+          userThumbnail: {
+            url: null,
+            fallBackText: 'JH'
+          },
+          orgThumbnail: {
+            url: null,
+            fallBackText: 'E'
+          }
         },
         { 
           user: {
-            userThumbnail: null,
-            portalThumbnail: null,
-            arcgisAccountUrl: '',
             username: 'selse',
             fullName: 'Someone Else',
             firstName: 'Someone',
             lastName: 'Else'
           },
           isAuthenticated: false,
-          orgName: 'Esri'
+          orgName: 'Esri',
+          userThumbnail: {
+            url: null,
+            fallBackText: 'SE'
+          },
+          orgThumbnail: {
+            url: null,
+            fallBackText: 'E'
+          }
         }
       ];
 
@@ -118,12 +140,14 @@ import AccountTile from 'calcite-react/AccountTile';
       };
 
       const accountTiles = accounts.map(account => {
-        return <AccountTile 
+        return <AccountTile
           key={account.user.fullName}
           actions={createActions(account.user, account.isAuthenticated)}
           user={account.user}
           isAuthenticated={account.isAuthenticated}
           orgName={account.orgName}
+          userThumbnail={account.userThumbnail}
+          orgThumbnail={account.orgThumbnail}
         />
       });
 
@@ -132,6 +156,22 @@ import AccountTile from 'calcite-react/AccountTile';
 
     return (
       <AccountTilesExample />
+    );
+
+}}
+
+</Playground>
+
+## With the `useAccountManager` hook
+
+<Playground style={{ background: "#f3f3f3" }}>
+  {() => {
+    const UseAccountManagerExample = () => {
+      return <Panel/>;
+    }
+
+    return (
+      <UseAccountManagerExample />
     );
 
 }}
