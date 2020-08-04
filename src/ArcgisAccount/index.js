@@ -11,3 +11,4 @@
 
 export { default } from './ArcgisAccount';
 export { default as ArcgisAccountMenuItem } from './ArcgisAccountMenuItem';
+export { default as useAccountManager } from './useAccountManager';
