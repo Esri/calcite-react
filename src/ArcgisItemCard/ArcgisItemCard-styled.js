@@ -92,7 +92,7 @@ const StyledCardItemMetrics = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid ${props => props.theme.palette.lightestGray};
-  padding: 0 0.516667rem;
+  padding: 0 ${props => unitCalc(props.theme.baseline, 3, '/')};
 
   &:last-child {
     border-bottom: none;
