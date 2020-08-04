@@ -48,9 +48,6 @@ const StyledItemCardContent = styled(StyledCardContent)`
   flex: 3 1 75px;
   padding: 0;
   box-sizing: border-box;
-  .div {
-    padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
-  }
 `;
 StyledItemCardContent.defaultProps = { theme };
 
@@ -87,10 +84,7 @@ StyledItemCardImageWrap.defaultProps = { theme };
 
 const StyledCardItemTitle = styled(StyledCardTitle)`
   ${fontSize(1)};
-  margin-top: ${props => unitCalc(props.theme.baseline, 3, '/')};
-  margin-left: ${props => unitCalc(props.theme.baseline, 3, '/')};
-  margin-right: ${props => unitCalc(props.theme.baseline, 3, '/')};
-  margin-bottom: ${props => unitCalc(props.theme.baseline, 20, '/')};
+  margin: ${props => unitCalc(props.theme.baseline, 3, '/')};
 `;
 StyledCardItemTitle.defaultProps = { theme };
 
@@ -98,9 +92,7 @@ const StyledCardItemMetrics = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid ${props => props.theme.palette.lightestGray};
-  padding-top: ${props => unitCalc(props.theme.baseline, 5, '/')};
-  padding-left: ${props => unitCalc(props.theme.baseline, 3, '/')};
-  padding-right: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  padding: 0 0.516667rem;
 
   &:last-child {
     border-bottom: none;
@@ -166,7 +158,7 @@ StyledCalendarIcon.defaultProps = { theme };
 
 const StyledActionsContainer = styled.div`
   border-top: 1px solid ${props => props.theme.palette.lightestGray};
-  padding: 7px;
+  padding: ${props => unitCalc(props.theme.baseline, 3, '/')};
   justify-content: flex-end;
   display: flex;
 `;
