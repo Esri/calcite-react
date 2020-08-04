@@ -87,10 +87,10 @@ StyledItemCardImageWrap.defaultProps = { theme };
 
 const StyledCardItemTitle = styled(StyledCardTitle)`
   ${fontSize(1)};
-  margin-top: ${props => unitCalc(props.theme.baseline, 5, '/')};
+  margin-top: ${props => unitCalc(props.theme.baseline, 3, '/')};
   margin-left: ${props => unitCalc(props.theme.baseline, 3, '/')};
   margin-right: ${props => unitCalc(props.theme.baseline, 3, '/')};
-  margin-bottom: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  margin-bottom: ${props => unitCalc(props.theme.baseline, 20, '/')};
 `;
 StyledCardItemTitle.defaultProps = { theme };
 
@@ -112,10 +112,7 @@ const StyledCardItemText = styled.p`
   font-weight: 300;
   font-style: normal;
   ${fontSize(-2)};
-  margin-top: ${props => unitCalc(props.theme.baseline, 3, '/')};
-  margin-left: ${props => unitCalc(props.theme.baseline, 3, '/')};
-  margin-right: ${props => unitCalc(props.theme.baseline, 3, '/')};
-  margin-bottom: ${props => unitCalc(props.theme.baseline, 3, '/')};
+  margin: ${props => unitCalc(props.theme.baseline, 3, '/')};
 `;
 StyledCardItemText.defaultProps = { theme };
 

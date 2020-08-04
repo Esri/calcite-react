@@ -112,26 +112,20 @@ StyledCardImageWrap.defaultProps = { theme };
 const StyledCardImage = styled.img`
   width: 100%;
   display: block;
+  margin: 0;
+  position: absolute;
+  min-width: 100%;
+  max-width: none;
 
   ${props =>
     props.wide
       ? css`
           width: auto;
-          min-width: 100%;
-          max-width: none;
           height: 100%;
-          margin: 0;
-          display: block;
-          position: absolute;
         `
       : css`
           width: 100%;
-          min-width: 100%;
-          max-width: none;
           height: 300px;
-          margin: 0;
-          display: block;
-          position: absolute;
         `};
 `;
 StyledCardImage.defaultProps = { theme };

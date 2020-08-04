@@ -121,7 +121,9 @@ ArcgisItemCard.propTypes = {
   /** AGOL login token. */
   token: PropTypes.string,
   /** Style prop to position Card content vertically */
-  vertical: PropTypes.bool
+  vertical: PropTypes.bool,
+  /** Whether the ArcgisItemCard shows an actions tab at the bottom or not */
+  actions: PropTypes.object
 };
 
 ArcgisItemCard.defaultProps = {
