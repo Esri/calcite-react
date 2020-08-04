@@ -13,7 +13,7 @@ import TopNav, {
   TopNavActionsList
 } from '../../TopNav';
 import EsriLogo from '../../../docz/images/ESRI_Logo_Black.svg';
-import ArcgisAccount, { ArcgisAccountMenuItem } from '../';
+import ArcgisAccount, { ArcgisAccountMenuItem, useAccountManager } from '../';
 
 import user from './user.json';
 import portal from './portal.json';
@@ -26,7 +26,7 @@ popover to show actions related to account management.
 #### Import Syntax
 
 ```js
-import ArcgisAccount, { ArcgisAccountMenuItem } from 'calcite-react/ArcgisAccount'
+import ArcgisAccount, { ArcgisAccountMenuItem, useAccountManager } from 'calcite-react/ArcgisAccount'
 ```
 
 ## Basic Usage
@@ -84,3 +84,7 @@ import ArcgisAccount, { ArcgisAccountMenuItem } from 'calcite-react/ArcgisAccoun
 ### ArcgisAccountMenuItem
 
 <PropsTable of={ArcgisAccountMenuItem} />
+
+### useAccountManager
+
+<PropsTable of={useAccountManager} />
