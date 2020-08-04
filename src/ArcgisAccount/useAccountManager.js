@@ -5,8 +5,8 @@ import {
   completeAuth,
   loginOAuth2,
   logoutOAuth2,
-  userThumbnail,
-  orgThumbnail
+  getUserThumbnail,
+  getOrgThumbnail
 } from './accountManagerUtils';
 
 import {
@@ -161,8 +161,8 @@ const useAccountManager = props => {
     restoreAccount,
     refreshAccount,
     switchActiveAccount,
-    userThumbnail,
-    orgThumbnail
+    getUserThumbnail,
+    getOrgThumbnail
   };
 };
 

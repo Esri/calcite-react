@@ -129,7 +129,7 @@ export const logoutOAuth2 = ({ url, clientId, token }) => {
 };
 
 //** Get Org Thumbnail */
-export const orgThumbnail = props => {
+export const getOrgThumbnail = props => {
   const { session, portal, token } = props || {};
   //org thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/portal-self.htm)
   const thumbnail =
@@ -144,7 +144,7 @@ export const orgThumbnail = props => {
 };
 
 //** Get User Thumbnail */
-export const userThumbnail = props => {
+export const getUserThumbnail = props => {
   const { session, user, token } = props || {};
 
   //user thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/user.htm)
