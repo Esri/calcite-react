@@ -85,7 +85,7 @@ const StyledCardImageWrap = styled(CalciteFigure)`
   width: 100%;
   position: relative;
   margin-bottom: 0;
-  flex: 0 0 auto;
+  flex: ${props => (props.wide ? '0 0 auto' : '6 0 auto')};
 
   ${props =>
     props.shaped &&
@@ -112,18 +112,21 @@ StyledCardImageWrap.defaultProps = { theme };
 const StyledCardImage = styled.img`
   width: 100%;
   display: block;
+  margin: 0;
+  position: absolute;
+  min-width: 100%;
+  max-width: none;
 
   ${props =>
-    props.wide &&
-    css`
-      width: auto;
-      min-width: 100%;
-      max-width: none;
-      height: 100%;
-      margin: 0;
-      display: block;
-      position: absolute;
-    `};
+    props.wide
+      ? css`
+          width: auto;
+          height: 100%;
+        `
+      : css`
+          width: 100%;
+          height: 300px;
+        `};
 `;
 StyledCardImage.defaultProps = { theme };
 
