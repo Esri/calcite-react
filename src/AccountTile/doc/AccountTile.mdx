@@ -7,6 +7,7 @@ import { Playground, PropsTable } from 'docz';
 import GuideExample from '../../../docz/GuideExample';
 
 import AccountTile from '../';
+import Button from '../../Button';
 import { useAccountManager } from '../../ArcgisAccount';
 import Panel from '../../Panel';
 
@@ -167,7 +168,47 @@ import AccountTile from 'calcite-react/AccountTile';
 <Playground style={{ background: "#f3f3f3" }}>
   {() => {
     const UseAccountManagerExample = () => {
-      return <Panel/>;
+      const accountManager = useAccountManager();
+      let accounts =[];
+      const options = {
+        clientId: "I2YAIyLxcjzok07Y",
+        redirectUri: `${window.location.origin}/auth`,
+        popup: true,
+      };
+      
+      async function login() {
+        try {
+          const account = await accountManager.addAccount(options);
+          console.log(account);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      const accountTiles = accounts.map(account => {
+        return <AccountTile
+          key={account.user.fullName}
+          actions={[
+            account.logoutAccount,
+            account.removeAccount
+          ]}
+          user={account.user}
+          isAuthenticated={account.isAuthenticated}
+          orgName={account.orgName}
+          userThumbnail={account.userThumbnail}
+          orgThumbnail={account.orgThumbnail}
+        />;
+      });
+
+      return (
+        <Panel>
+          <Button 
+            onClick={login}
+            >Login
+          </Button>
+          {accountTiles}
+        </Panel>
+      );
     }
 
     return (
