@@ -52,11 +52,11 @@ import AccountTile from 'calcite-react/AccountTile';
         orgName: 'Esri',
         userThumbnail: {
           url: null,
-          fallBackText: 'JH'
+          letters: 'JH'
         },
         orgThumbnail: {
           url: null,
-          fallBackText: 'E'
+          letters: 'E'
         }
       }
 
@@ -97,11 +97,11 @@ import AccountTile from 'calcite-react/AccountTile';
           userThumbnail: null,
           userThumbnail: {
             url: null,
-            fallBackText: 'JH'
+            letters: 'JH'
           },
           orgThumbnail: {
             url: null,
-            fallBackText: 'E'
+            letters: 'E'
           }
         },
         { 
@@ -115,11 +115,11 @@ import AccountTile from 'calcite-react/AccountTile';
           orgName: 'Esri',
           userThumbnail: {
             url: null,
-            fallBackText: 'SE'
+            letters: 'SE'
           },
           orgThumbnail: {
             url: null,
-            fallBackText: 'E'
+            letters: 'E'
           }
         }
       ];
@@ -168,46 +168,72 @@ import AccountTile from 'calcite-react/AccountTile';
 <Playground style={{ background: "#f3f3f3" }}>
   {() => {
     const UseAccountManagerExample = () => {
-      const accountManager = useAccountManager();
-      let accounts =[];
+      
       const options = {
         clientId: "I2YAIyLxcjzok07Y",
-        redirectUri: `${window.location.origin}/auth`,
-        popup: true,
-      };
-      
-      async function login() {
-        try {
-          const account = await accountManager.addAccount(options);
-          console.log(account);
-        } catch (err) {
-          console.log(err);
-        }
+        redirectUri: `${window.location.origin}/account-tile`,
+        popup: false,
       };
 
-      const accountTiles = accounts.map(account => {
+      const {
+        accountManagerState,
+        addAccount,
+        logoutAccount,
+        removeAccount,
+        restoreAccount,
+        refreshAccount,
+        switchActiveAccount,
+        getUserThumbnail,
+        getOrgThumbnail
+      } = useAccountManager(options);
+
+      const accounts = accountManagerState.accounts;
+
+      const createActions = (key, isAuthenticated) => {
+        let actions = [{
+            label: 'Remove account', onClick: () => removeAccount(key)
+        }];
+        if (isAuthenticated) {
+          actions.unshift({
+            label: 'Sign out', onClick: () => logoutAccount(key)
+          });
+        } else {
+          actions.unshift({
+            label: 'Sign in', onClick: () => restoreAccount(options)
+          });
+        }
+        return actions;
+      };
+
+      const accountTiles = Object.keys(accounts).map(key => {
+        const account = accounts[key];
+        const isAuthenticated = !!account.token;
         return <AccountTile
-          key={account.user.fullName}
-          actions={[
-            account.logoutAccount,
-            account.removeAccount
-          ]}
+          key={key}
+          actions={createActions(key, isAuthenticated)}
           user={account.user}
-          isAuthenticated={account.isAuthenticated}
-          orgName={account.orgName}
-          userThumbnail={account.userThumbnail}
-          orgThumbnail={account.orgThumbnail}
-        />;
+          isAuthenticated={isAuthenticated}
+          orgName={account.portal.name}
+          userThumbnail={getUserThumbnail(account)}
+          orgThumbnail={getOrgThumbnail(account)}
+        />
       });
 
       return (
-        <Panel>
+        <div>
+          <Panel
+            style={{
+              marginBottom: '16px',
+              width: '400px'
+            }}
+          >
+            {accountTiles.length ? accountTiles : 'No accounts added yet'}
+          </Panel>
           <Button 
-            onClick={login}
-            >Login
+            onClick={() => addAccount(options)}
+            >Add account
           </Button>
-          {accountTiles}
-        </Panel>
+        </div>
       );
     }
 

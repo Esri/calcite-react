@@ -82,7 +82,7 @@ const StyledTextWrapper = styled.span`
   width: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
