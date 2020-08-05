@@ -20,7 +20,9 @@ import {
   StyledCardItemText,
   StyledCardItemIconLabelText,
   StyledUserIcon,
-  StyledCalendarIcon
+  StyledCalendarIcon,
+  StyledActionsContainer,
+  StyledDivider
 } from './ArcgisItemCard-styled';
 
 const ArcgisItemCard = ({
@@ -30,6 +32,8 @@ const ArcgisItemCard = ({
   maxDescriptionLength,
   portal,
   token,
+  vertical,
+  actions,
   ...other
 }) => {
   let imageEl;
@@ -39,7 +43,9 @@ const ArcgisItemCard = ({
     const imageSource = `https://${hostname}/sharing/rest/content/items/${
       item.id
     }/info/${item.thumbnail}${tokenUrlParam}`;
-    imageEl = <StyledItemCardImageWrap imageSource={imageSource} />;
+    imageEl = (
+      <StyledItemCardImageWrap vertical={vertical} imageSource={imageSource} />
+    );
   }
 
   function _dateFormatter(date) {
@@ -78,7 +84,7 @@ const ArcgisItemCard = ({
   }
 
   return (
-    <StyledItemCard wide {...other}>
+    <StyledItemCard wide={!vertical} vertical={vertical} {...other}>
       {imageEl}
       <StyledItemCardContent>
         <StyledCardItemTitle title={item.title}>
@@ -95,6 +101,7 @@ const ArcgisItemCard = ({
           </StyledCardItemIconLabelText>
         </StyledCardItemMetrics>
         {_getDescription()}
+        {actions && <StyledActionsContainer>{actions}</StyledActionsContainer>}
       </StyledItemCardContent>
     </StyledItemCard>
   );
@@ -112,12 +119,17 @@ ArcgisItemCard.propTypes = {
   /** AGOL portal object - if not specified will default to ArcGIS Online */
   portal: PropTypes.object,
   /** AGOL login token. */
-  token: PropTypes.string
+  token: PropTypes.string,
+  /** Style prop to position Card content vertically */
+  vertical: PropTypes.bool,
+  /** Whether the ArcgisItemCard shows an actions tab at the bottom or not */
+  actions: PropTypes.object
 };
 
 ArcgisItemCard.defaultProps = {
   showThumbnail: true,
-  maxDescriptionLength: 90
+  maxDescriptionLength: 90,
+  vertical: false
 };
 
 ArcgisItemCard.displayName = 'ArcgisItemCard';
