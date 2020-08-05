@@ -87,4 +87,25 @@ import ArcgisAccount, { ArcgisAccountMenuItem, useAccountManager } from 'calcite
 
 ### useAccountManager
 
-<PropsTable of={useAccountManager} />
+| Property           | Type      | Required  | Default     | Description                                                                                                        |
+| :----------------- | :-------- | :-------- | :---------- | :------------------------------------------------------------------------------------------------------------------ |
+| accountManagerName | String | false    | arcgis-account-manager       | Text name for accountManager object in local storage.                                   |
+| options            | Object | false    | -       | Options used when calling addAccount to include { clientId, redirectUri, portalUrl, popup }. Can also be fed directly to addAccount function. Note: portalUrl will default to ArcGIS Online, popup will default to true.                               |
+
+## Return
+
+### useAccountManager
+
+This hook returns an object containing the state and various callback functions. 
+
+| Property           | Type      | Inputs  | Input Description     | Description                                                                                                        |
+| :----------------- | :-------- | :-------- | :---------- | :---------- |
+| accountManagerState | Object | - | - | State object in the format {active: key, accounts: { key: {portal:{},user:{},session:{}, token: String} }} |
+| addAccount | Func | options: Object | options: Object in the form { clientId: String, redirectUri: String, portalUrl: String, popup: Bool }. Function will default to use accountManager options prop. This input is required: If options prop not set in hook or if attempting to authenticate with a different portal than set in options prop for hook. | Begins user OAuth process and adds account to accountManagerState accounts list after user is authenticated. |
+| logoutAccount | Func | key: String `Required` | key: Specific account object key in accountManagerState.accounts | Performs logout operation on select account and updates account in accountManagerState. |
+| removeAccount | Func | key: String `Required` | key: Specific account object key in accountManagerState.accounts | Performs remove operation on select account and removes account from accountManagerState. |
+| restoreAccount | Func | options: Object  | options: Object in the form { clientId: String, redirectUri: String, portalUrl: String, popup: Bool }. Function will default to use accountManager options prop. This input is required: If options prop not set in hook or if attempting to authenticate with a different portal than set in options prop for hook. | Begins user OAuth process and updates select account in  accountManagerState accounts list after user is authenticated. |
+| refreshAccount | Func | key: String `Required` | key: Specific account object key in accountManagerState.accounts | Performs logout operation on select account and updates accountManagerState. |
+| switchActiveAccount | Func | key: String `Required` | key: Specific account object key in accountManagerState.accounts | Sets select account as active account in accountManagerState. |
+| getUserThumbnail | Func | account: Object `Required` | account: Object obtained from accounts list {portal:{},user:{},session:{}, token: String} | Returns object with thumbnail url and user avatar string: {url: String \| undefined, letters: String \| undefined} |
+| getOrgThumbnail | Func | account: Object `Required` | account: Object obtained from accounts list {portal:{},user:{},session:{}, token: String} | Returns object with thumbnail url and org avatar string: {url: String \| undefined, letters: String \| undefined} |
