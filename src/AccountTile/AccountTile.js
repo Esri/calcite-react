@@ -133,16 +133,23 @@ const AccountTile = ({
           <StyledContentWrapper>
             <StyledAvatarContainer>
               <Avatar src={userThumbnail.url} style={{ width: 60, height: 60 }}>
-                {!userThumbnail.url && userThumbnail.fallBackText}
+                {!userThumbnail.url && userThumbnail.letters}
               </Avatar>
-              <Avatar src={orgThumbnail.url} style={{ width: 30, height: 30 }}>
-                {!orgThumbnail.url && orgThumbnail.fallBackText}
-              </Avatar>
+              {orgName && (
+                <Avatar
+                  src={orgThumbnail.url}
+                  style={{ width: 30, height: 30 }}
+                >
+                  {!orgThumbnail.url && orgThumbnail.letters}
+                </Avatar>
+              )}
             </StyledAvatarContainer>
             <StyledTextWrapper>
-              <StyledP title={orgName} demi>
-                {orgName}
-              </StyledP>
+              {orgName && (
+                <StyledP title={orgName} demi>
+                  {orgName}
+                </StyledP>
+              )}
               <StyledP title={user.fullName || fullName}>
                 {user.fullName || fullName}
               </StyledP>
@@ -165,7 +172,7 @@ const AccountTile = ({
 };
 
 AccountTile.propTypes = {
-  /** Actions to be included in the dropdown. Each action should be structured: { label: 'Action Label', action: someMethod } */
+  /** Actions to be included in the dropdown. Each action should be structured: { label: 'Action Label', onClick: someMethod } */
   actions: PropTypes.array,
   /** The ArcGIS user object.*/
   user: PropTypes.object.isRequired,
@@ -179,9 +186,9 @@ AccountTile.propTypes = {
   authenticatedText: PropTypes.string,
   /** Text to show when the account has expired (is not authenticated).*/
   expiredText: PropTypes.string,
-  /** Object containing thumbnail url and fallback text: { url: 'thumbnail.com', fallBackText: 'JH' }.*/
+  /** Object containing thumbnail url and fallback text: { url: 'thumbnail.com', letters: 'JH' }.*/
   userThumbnail: PropTypes.object.isRequired,
-  /** Object containing thumbnail url and fallback text: { url: 'thumbnail.com', fallBackText: 'E' }.*/
+  /** Object containing thumbnail url and fallback text: { url: 'thumbnail.com', letters: 'E' }.*/
   orgThumbnail: PropTypes.object.isRequired
 };
 
