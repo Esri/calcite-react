@@ -45,7 +45,7 @@ export const removeAccountStorage = (name, key) => {
   setLocal({
     state: {
       ...previous,
-      active: active
+      active: active === key ? undefined : active
     },
     name: name
   });

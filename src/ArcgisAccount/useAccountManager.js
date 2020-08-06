@@ -62,7 +62,6 @@ const useAccountManager = props => {
     options => {
       const selectOptions = options ? options : authOptions;
       const { clientId, redirectUri, portalUrl, popup } = selectOptions || {};
-
       //set localstorage status
       beginStatusStorage(name, options);
       //begin login
@@ -104,7 +103,6 @@ const useAccountManager = props => {
           const { session, token } = accounts[key];
           const portalUrl = session ? session.portal : null;
           const clientId = session ? session.clientId : null;
-
           //Remove token and session
           logoutOAuth2({
             url: portalUrl,

@@ -11,12 +11,17 @@ export const beginOAuthSignIn = async ({
   popup
 }) => {
   try {
+    const portal = portalUrl
+      ? portalUrl
+      : 'https://www.arcgis.com/sharing/rest';
     UserSession.beginOAuth2({
       // register an app of your own to create a unique clientId
       clientId: clientId,
       redirectUri: redirectUri,
-      portalUrl: portalUrl,
+      portal: portal,
       popup: popup
+    }).then(session => {
+      console.log('begin: ', session);
     });
   } catch (err) {
     console.error('Error getting User Session (beginOAuth).', err);
@@ -27,18 +32,27 @@ export const beginOAuthSignIn = async ({
 /** Complete OAuth  */
 export const completeOAuthSignIn = async ({ clientId, portalUrl, popup }) => {
   try {
-    const session = UserSession.completeOAuth2({ clientId, portalUrl, popup });
-    const token = session.token;
-    const user = await session.getUser();
-    const portal = await getPortal({ portalUrl, session });
+    const portal = portalUrl
+      ? portalUrl
+      : 'https://www.arcgis.com/sharing/rest';
+    const dSession = UserSession.completeOAuth2({
+      clientId: clientId,
+      portal: portal,
+      popup: true
+    });
+    dSession.clientId = dSession.clientId ? dSession.clientId : clientId;
+    const token = dSession.token;
+    const user = await dSession.getUser();
+    const dPortal = await getPortal({ portalUrl: portal, session: dSession });
 
     // Clear query string token from URL
     window.history.replaceState({}, document.title, window.location.pathname);
-
+    console.log(dSession);
+    console.log(dSession.serialize);
     return {
-      session: session.serialize(),
+      session: dSession.serialize(),
       user: user,
-      portal: JSON.stringify(portal),
+      portal: JSON.stringify(dPortal),
       token: token
     };
   } catch (err) {
@@ -93,10 +107,6 @@ export const loginOAuth2 = ({ clientId, redirectUri, portalUrl, popup }) => {
     redirectUri,
     portalUrl,
     popup
-  }).then(results => {
-    console.log('Completed: ', results);
-    // Clear query string token from URL
-    window.history.replaceState({}, document.title, window.location.pathname);
   });
 };
 
@@ -110,6 +120,9 @@ export const logoutOAuth2 = ({ url, clientId, token }) => {
 
   //** Revoke Token (OAuth2): https://developers.arcgis.com/rest/users-groups-and-items/revoke-token.htm */
   //Build logout request
+  if (!clientId || !token) {
+    return { success: false, error: 'Empty client_id / token' };
+  }
   const revokeTokenEndpoint = `${url}/oauth2/revokeToken`;
   const data = {
     client_id: clientId,
