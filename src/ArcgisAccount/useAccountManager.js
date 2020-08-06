@@ -36,12 +36,13 @@ const useAccountManager = props => {
   /** Complete Login: If applicable */
   useEffect(
     () => {
-      if (!status || status.loading !== true) {
+      const { loading, authProps } = status || {};
+      if (loading !== true) {
         return;
       }
       //complete login
       completeAuth({
-        status
+        authProps
       }).then(account => {
         const { key, user } = account || {};
         if (key) {
@@ -59,13 +60,21 @@ const useAccountManager = props => {
 
   /** Add Account */
   const addAccount = useCallback(
-    options => {
+    async options => {
       const selectOptions = options ? options : authOptions;
       const { clientId, redirectUri, portalUrl, popup } = selectOptions || {};
+
       //set localstorage status
-      beginStatusStorage(name, options);
+      beginStatusStorage(name, selectOptions);
       //begin login
-      loginOAuth2({ clientId, redirectUri, portalUrl, popup });
+      loginOAuth2({
+        clientId,
+        redirectUri,
+        portalUrl,
+        popup,
+        name,
+        setAccountManagerState
+      });
     },
     [authOptions, name]
   );
