@@ -169,15 +169,19 @@ export const logoutOAuth2 = ({ url, clientId, token }) => {
 export const getOrgThumbnail = props => {
   const { session, portal, token } = props || {};
   //org thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/portal-self.htm)
-  const thumbnail =
+  let orgThumbnail = {
+    url: undefined,
+    letters: undefined
+  };
+  orgThumbnail.url =
     portal && portal.thumbnail && session && session.portal && token
       ? `${session.portal}/portals/self/resources/${
           portal.thumbnail
         }?token=${token}`
       : undefined;
-  const letters = portal && portal.name ? portal.name[0] : undefined;
-
-  return thumbnail ? thumbnail : letters ? letters.toUpperCase() : '';
+  orgThumbnail.letters =
+    portal && portal.name ? portal.name[0].toUpperCase() : 'A';
+  return orgThumbnail;
 };
 
 //** Get User Thumbnail */
@@ -185,27 +189,24 @@ export const getUserThumbnail = props => {
   const { session, user, token } = props || {};
 
   //user thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/user.htm)
-  const thumbnail =
+  let userThumbnail = {
+    url: undefined,
+    letters: undefined
+  };
+  userThumbnail.url =
     user && user.thumbnail && session && session.portal
       ? `${session.portal}/community/users/${session.username}/info/${
           user.thumbnail
         }?token=${token}`
       : undefined;
 
-  const letters =
+  userThumbnail.letters =
     user && user.firstName && user.lastName
-      ? `${user.firstName[0] + user.lastName[0]}`
+      ? `${user.firstName[0] + user.lastName[0]}`.toUpperCase()
+      : user && user.fullName
+      ? user.fullName[0].toUpperCase()
       : undefined;
-
-  const letter = user && user.fullName ? user.fullName[0] : undefined;
-
-  return thumbnail
-    ? thumbnail
-    : letters
-    ? letters.toUpperCase()
-    : letter
-    ? letter.toUpperCase()
-    : '';
+  return userThumbnail;
 };
 
 const createAccountObject = async ({ dSession, portal, clientId }) => {

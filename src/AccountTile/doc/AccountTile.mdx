@@ -7,6 +7,8 @@ import { Playground, PropsTable } from 'docz';
 import GuideExample from '../../../docz/GuideExample';
 
 import AccountTile from '../';
+import Button from '../../Button';
+import { useAccountManager } from '../../ArcgisAccount';
 import Panel from '../../Panel';
 
 # Account Tile
@@ -37,8 +39,6 @@ import AccountTile from 'calcite-react/AccountTile';
           }
         ],
         user: {
-          userThumbnail: null,
-          portalThumbnail: null,
           arcgisAccountUrl: '',
           username: 'jharig',
           fullName: 'Joey Harig',
@@ -46,7 +46,15 @@ import AccountTile from 'calcite-react/AccountTile';
           lastName: 'Harig'
         },
         isAuthenticated: true,
-        orgName: 'Esri'
+        orgName: 'Esri',
+        userThumbnail: {
+          url: null,
+          letters: 'JH'
+        },
+        orgThumbnail: {
+          url: null,
+          letters: 'E'
+        }
       }
 
       return (
@@ -55,6 +63,8 @@ import AccountTile from 'calcite-react/AccountTile';
           user={placeholders.user}
           isAuthenticated={placeholders.isAuthenticated}
           orgName={placeholders.orgName}
+          userThumbnail={placeholders.userThumbnail}
+          orgThumbnail={placeholders.orgThumbnail}
         />
       );
     }
@@ -65,7 +75,6 @@ import AccountTile from 'calcite-react/AccountTile';
 
 </Playground>
 
-
 ## Multiple Accounts
 
 <Playground style={{ background: "#f3f3f3" }}>
@@ -75,29 +84,40 @@ import AccountTile from 'calcite-react/AccountTile';
       const accounts = [
         { 
           user: {
-            userThumbnail: null,
-            portalThumbnail: null,
-            arcgisAccountUrl: '',
             username: 'jharig',
             fullName: 'Joey Harig',
             firstName: 'Joey',
             lastName: 'Harig'
           },
           isAuthenticated: true,
-          orgName: 'Esri Proffesional Services'
+          orgName: 'Esri Proffesional Services',
+          userThumbnail: null,
+          userThumbnail: {
+            url: null,
+            letters: 'JH'
+          },
+          orgThumbnail: {
+            url: null,
+            letters: 'E'
+          }
         },
         { 
           user: {
-            userThumbnail: null,
-            portalThumbnail: null,
-            arcgisAccountUrl: '',
             username: 'selse',
             fullName: 'Someone Else',
             firstName: 'Someone',
             lastName: 'Else'
           },
           isAuthenticated: false,
-          orgName: 'Esri'
+          orgName: 'Esri',
+          userThumbnail: {
+            url: null,
+            letters: 'SE'
+          },
+          orgThumbnail: {
+            url: null,
+            letters: 'E'
+          }
         }
       ];
 
@@ -118,12 +138,14 @@ import AccountTile from 'calcite-react/AccountTile';
       };
 
       const accountTiles = accounts.map(account => {
-        return <AccountTile 
+        return <AccountTile
           key={account.user.fullName}
           actions={createActions(account.user, account.isAuthenticated)}
           user={account.user}
           isAuthenticated={account.isAuthenticated}
           orgName={account.orgName}
+          userThumbnail={account.userThumbnail}
+          orgThumbnail={account.orgThumbnail}
         />
       });
 
@@ -132,6 +154,88 @@ import AccountTile from 'calcite-react/AccountTile';
 
     return (
       <AccountTilesExample />
+    );
+
+}}
+
+</Playground>
+
+## With the `useAccountManager` hook
+
+<Playground style={{ background: "#f3f3f3" }}>
+  {() => {
+    const UseAccountManagerExample = () => {
+      
+      const options = {
+        clientId: "I2YAIyLxcjzok07Y",
+        redirectUri: `${window.location.origin}/account-tile`,
+        popup: false,
+      };
+
+      const {
+        accountManagerState,
+        addAccount,
+        logoutAccount,
+        removeAccount,
+        restoreAccount,
+        refreshAccount,
+        switchActiveAccount,
+        getUserThumbnail,
+        getOrgThumbnail
+      } = useAccountManager(options);
+
+      const accounts = accountManagerState.accounts;
+
+      const createActions = (key, isAuthenticated) => {
+        let actions = [{
+            label: 'Remove account', onClick: () => removeAccount(key)
+        }];
+        if (isAuthenticated) {
+          actions.unshift({
+            label: 'Sign out', onClick: () => logoutAccount(key)
+          });
+        } else {
+          actions.unshift({
+            label: 'Sign in', onClick: () => restoreAccount(options)
+          });
+        }
+        return actions;
+      };
+
+      const accountTiles = Object.keys(accounts).map(key => {
+        const account = accounts[key];
+        const isAuthenticated = !!account.token;
+        return <AccountTile
+          key={key}
+          actions={createActions(key, isAuthenticated)}
+          user={account.user}
+          isAuthenticated={isAuthenticated}
+          orgName={account.portal.name}
+          userThumbnail={getUserThumbnail(account)}
+          orgThumbnail={getOrgThumbnail(account)}
+        />
+      });
+
+      return (
+        <div>
+          <Panel
+            style={{
+              marginBottom: '16px',
+              width: '400px'
+            }}
+          >
+            {accountTiles.length ? accountTiles : 'No accounts added yet'}
+          </Panel>
+          <Button 
+            onClick={() => addAccount(options)}
+            >Add account
+          </Button>
+        </div>
+      );
+    }
+
+    return (
+      <UseAccountManagerExample />
     );
 
 }}

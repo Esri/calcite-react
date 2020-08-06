@@ -60,7 +60,7 @@ const useAccountManager = props => {
 
   /** Add Account */
   const addAccount = useCallback(
-    async options => {
+    options => {
       const selectOptions = options ? options : authOptions;
       const { clientId, redirectUri, portalUrl, popup } = selectOptions || {};
 
