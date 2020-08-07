@@ -135,7 +135,7 @@ const AccountTile = ({
               <Avatar src={userThumbnail.url} style={{ width: 60, height: 60 }}>
                 {!userThumbnail.url && userThumbnail.letters}
               </Avatar>
-              {orgName && (
+              {orgName && orgThumbnail && (
                 <Avatar
                   src={orgThumbnail.url}
                   style={{ width: 30, height: 30 }}
@@ -172,13 +172,18 @@ const AccountTile = ({
 };
 
 AccountTile.propTypes = {
-  /** Actions to be included in the dropdown. Each action should be structured: { label: 'Action Label', onClick: someMethod } */
-  actions: PropTypes.array,
+  /** Actions to be included in the dropdown. Each action should describe a label and an onClick method. */
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      onClick: PropTypes.func
+    })
+  ),
   /** The ArcGIS user object.*/
   user: PropTypes.object.isRequired,
   /** Is the user currently logged in or has their authentication expired? */
   isAuthenticated: PropTypes.bool,
-  /** Name of the user's organization */
+  /** Name of the user's organization. */
   orgName: PropTypes.string,
   /** Style prop to define the width of the tile.*/
   width: PropTypes.string,
@@ -186,19 +191,24 @@ AccountTile.propTypes = {
   authenticatedText: PropTypes.string,
   /** Text to show when the account has expired (is not authenticated).*/
   expiredText: PropTypes.string,
-  /** Object containing thumbnail url and fallback text: { url: 'thumbnail.com', letters: 'JH' }.*/
-  userThumbnail: PropTypes.object.isRequired,
-  /** Object containing thumbnail url and fallback text: { url: 'thumbnail.com', letters: 'E' }.*/
-  orgThumbnail: PropTypes.object.isRequired
+  /** Object containing thumbnail url and fallback letters for the avatar. If url is falsy, the avatar will show letters instead.*/
+  userThumbnail: PropTypes.shape({
+    url: PropTypes.string,
+    letters: PropTypes.string
+  }).isRequired,
+  /** Object containing thumbnail url and fallback letters for the avatar. If url is falsy, the avatar will show letters instead. If orgThumbnail or orgName are not given, no org avatar will be shown.*/
+  orgThumbnail: PropTypes.shape({
+    url: PropTypes.string,
+    letters: PropTypes.string
+  })
 };
 
 AccountTile.defaultProps = {
   actions: [],
   isAuthenticated: false,
-  orgName: '',
   width: '100%',
-  authenticatedText: 'Account authenticated',
-  expiredText: 'Authentication expired'
+  authenticatedText: 'Signed in',
+  expiredText: 'Session expired'
 };
 
 AccountTile.displayName = 'AccountTile';
