@@ -172,8 +172,13 @@ const AccountTile = ({
 };
 
 AccountTile.propTypes = {
-  /** Actions to be included in the dropdown. Each action should be structured: { label: 'Action Label', onClick: someMethod } */
-  actions: PropTypes.array,
+  /** Actions to be included in the dropdown. Each action should describe a label and an onClick method. */
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      onClick: PropTypes.func
+    })
+  ),
   /** The ArcGIS user object.*/
   user: PropTypes.object.isRequired,
   /** Is the user currently logged in or has their authentication expired? */
