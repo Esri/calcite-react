@@ -25,9 +25,9 @@ const useAccountManager = ({ accountManagerName, options }) => {
     : 'arcgis-account-manager';
   const { accounts, status, active } = getAccountManagerStorage({ name });
   const [accountManagerState, setAccountManagerState] = useState({
-    active: active,
-    accounts: accounts,
-    status: status
+    active,
+    accounts,
+    status
   });
   const authOptions = options;
 
