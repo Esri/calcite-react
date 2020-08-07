@@ -183,7 +183,7 @@ AccountTile.propTypes = {
   user: PropTypes.object.isRequired,
   /** Is the user currently logged in or has their authentication expired? */
   isAuthenticated: PropTypes.bool,
-  /** Name of the user's organization */
+  /** Name of the user's organization. */
   orgName: PropTypes.string,
   /** Style prop to define the width of the tile.*/
   width: PropTypes.string,
