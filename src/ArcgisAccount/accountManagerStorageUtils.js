@@ -23,7 +23,7 @@ export const addAccountStorage = ({ name, key, account }) => {
       accounts: { ...accounts, [key]: account },
       active: updateActive
     },
-    name: name
+    name
   });
 };
 
@@ -47,7 +47,7 @@ export const removeAccountStorage = ({ name, key }) => {
       ...previous,
       active: active === key ? undefined : active
     },
-    name: name
+    name
   });
 };
 
