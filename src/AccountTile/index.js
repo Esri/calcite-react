@@ -9,6 +9,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
-export { default } from './ArcgisAccount';
-export { default as ArcgisAccountMenuItem } from './ArcgisAccountMenuItem';
-export { default as useAccountManager } from './useAccountManager';
+export { default } from './AccountTile';

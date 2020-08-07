@@ -61,6 +61,9 @@
     ]
   },
   "dependencies": {
+    "@esri/arcgis-rest-auth": "^2.14.1",
+    "@esri/arcgis-rest-portal": "^2.14.1",
+    "@esri/arcgis-rest-request": "^2.14.1",
     "@esri/calcite-colors": "^1.7.1",
     "calcite-ui-icons-react": "^0.11.0",
     "downshift": "^3.4.1",
