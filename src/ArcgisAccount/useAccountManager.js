@@ -86,8 +86,8 @@ const useAccountManager = ({ accountManagerName, options }) => {
         const clientId = session ? session.clientId : null;
         logoutOAuth2({
           url: portalUrl,
-          clientId: clientId,
-          token: token
+          clientId,
+          token
         });
 
         //Update localStorage/ state
@@ -112,8 +112,8 @@ const useAccountManager = ({ accountManagerName, options }) => {
           //Remove token and session
           logoutOAuth2({
             url: portalUrl,
-            clientId: clientId,
-            token: token
+            clientId,
+            token
           });
         }
 

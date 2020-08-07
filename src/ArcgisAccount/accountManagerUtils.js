@@ -24,10 +24,10 @@ export const beginOAuthSignIn = async ({
         : 'https://www.arcgis.com/sharing/rest';
       UserSession.beginOAuth2({
         // register an app of your own to create a unique clientId
-        clientId: clientId,
-        redirectUri: redirectUri,
-        portal: portal,
-        popup: popup
+        clientId,
+        redirectUri,
+        portal,
+        popup
       }).then(dSession => {
         createAccountObject({ dSession, portal, clientId }).then(account => {
           const key = createAccountKey({ account });
@@ -46,10 +46,10 @@ export const beginOAuthSignIn = async ({
         : 'https://www.arcgis.com/sharing/rest';
       UserSession.beginOAuth2({
         // register an app of your own to create a unique clientId
-        clientId: clientId,
-        redirectUri: redirectUri,
-        portal: portal,
-        popup: popup
+        clientId,
+        redirectUri,
+        portal,
+        popup
       });
     } catch (err) {
       console.error('Error getting User Session (beginOAuth).', err);
@@ -214,7 +214,7 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
 
   return {
     session: dSession.serialize(),
-    user: user,
+    user,
     portal: JSON.stringify(dPortal),
     token: token
   };
