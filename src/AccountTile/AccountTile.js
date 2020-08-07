@@ -42,7 +42,8 @@ const AccountTile = ({
   orgThumbnail,
   width,
   expiredText,
-  authenticatedText
+  authenticatedText,
+  ...other
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -104,17 +105,15 @@ const AccountTile = ({
           onKeyPress={toggleIsOpen}
           open={isOpen}
           tabIndex="0"
+          {...other}
         >
           <StyledContentWrapper>
             <StyledAvatarContainer>
-              <Avatar src={userThumbnail.url} style={{ width: 60, height: 60 }}>
+              <Avatar src={userThumbnail.url} size={60}>
                 {!userThumbnail.url && userThumbnail.letters}
               </Avatar>
               {orgName && orgThumbnail && (
-                <StyledOrgAvatar
-                  src={orgThumbnail.url}
-                  style={{ width: 30, height: 30 }}
-                >
+                <StyledOrgAvatar src={orgThumbnail.url} size={30}>
                   {!orgThumbnail.url && orgThumbnail.letters}
                 </StyledOrgAvatar>
               )}
