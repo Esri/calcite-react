@@ -12,19 +12,23 @@
 // styled-components
 import styled from 'styled-components';
 
+// Utils, common elements
+import { unitCalc, fontSize } from '../utils/helpers';
+
 // Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
 // Calcite components
 import { CalciteP } from '../Elements';
+import Avatar from '../Avatar';
 
 const StyledAccountTile = styled.div`
   max-width: 100%;
   height: 60px;
   display: flex;
   justify-content: space-between;
-  padding: 1rem 1rem;
-  transition: 0.2s;
+  padding: ${props => unitCalc(props.theme.baseline, 1.5, '/')};
+  transition: ${props => props.theme.transition};
   background-color: ${props =>
     props.open ? props.theme.palette.offWhite : props.theme.palette.white};
   &:hover {
@@ -36,62 +40,53 @@ StyledAccountTile.defaultProps = { theme };
 
 const StyledContentWrapper = styled.div`
   max-width: 100%;
-  width: auto;
   display: flex;
-  margin-right: 1.5rem;
+  margin-right: ${props => props.theme.baseline};
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 `;
 
 const StyledAvatarContainer = styled.div`
-  margin-right: 1.5rem;
-  & > :nth-child(2) {
-    position: absolute;
-    transform: translate(120%, -60px);
-    border: 2px solid;
-    border-color: ${props => props.theme.palette.white};
-  }
+  margin-right: ${props => props.theme.baseline};
 `;
 StyledAvatarContainer.defaultProps = { theme };
+
+const StyledOrgAvatar = styled(Avatar)`
+  position: absolute;
+  transform: translate(120%, -60px);
+  border: 2px solid;
+  border-color: ${props => props.theme.palette.white};
+`;
+StyledOrgAvatar.defaultProps = { theme };
 
 const StyledP = styled(CalciteP)`
   font-weight: ${props => (props.demi ? '500' : '300')};
   font-size: ${props => (props.small ? '0.75rem' : '1rem')};
   margin-bottom: -4px;
   max-width: 100%;
-  width: auto;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
 const StyledIconWrapper = styled.span`
   width: 48px;
-  right: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  & > :nth-child(1) {
-    margin-right: 0.5rem;
-  }
+  justify-content: space-between;
 `;
 
 const StyledTextWrapper = styled.span`
   max-width: 100%;
-  width: auto;
   display: flex;
   flex-direction: column;
-
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 `;
 
 export {
   StyledAccountTile,
   StyledContentWrapper,
   StyledAvatarContainer,
+  StyledOrgAvatar,
   StyledIconWrapper,
   StyledTextWrapper,
   StyledP

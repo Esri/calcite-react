@@ -9,13 +9,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { ThemeContext } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import {
   StyledAccountTile,
   StyledContentWrapper,
   StyledAvatarContainer,
+  StyledOrgAvatar,
   StyledIconWrapper,
   StyledTextWrapper,
   StyledP
@@ -34,16 +36,20 @@ import ExclamationMarkTriangleIcon from 'calcite-ui-icons-react/ExclamationMarkT
 const AccountTile = ({
   actions,
   user,
-  isAuthenticated, // accountmanagerstate object does account have token
-  orgName, // from same object
-  userThumbnail, // object {url: null, fallBack: 'JH'}
+  isAuthenticated,
+  orgName,
+  userThumbnail,
   orgThumbnail,
   width,
   expiredText,
   authenticatedText
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const fullName = `${user.firstName} ${user.lastName}`;
+
+  const themeContext = useContext(ThemeContext);
+
+  user.fullName = user.fullName || `${user.firstName} ${user.lastName}`;
+
   const close = () => {
     isOpen && setIsOpen(false);
   };
@@ -82,37 +88,6 @@ const AccountTile = ({
     </MenuItem>
   ));
 
-  let authStatusIndicator;
-  switch (isAuthenticated) {
-    case true:
-      authStatusIndicator = (
-        <Tooltip
-          title={authenticatedText}
-          placement="top"
-          targetWrapperStyle={{
-            alignItems: 'center',
-            display: 'flex'
-          }}
-        >
-          <CheckCircleIcon color="green" size={16} alt={authenticatedText} />
-        </Tooltip>
-      );
-      break;
-    default:
-      authStatusIndicator = (
-        <Tooltip
-          title={expiredText}
-          placement="top"
-          targetWrapperStyle={{
-            alignItems: 'center',
-            display: 'flex'
-          }}
-        >
-          <ExclamationMarkTriangleIcon size={16} alt={expiredText} />
-        </Tooltip>
-      );
-  }
-
   return (
     <Popover
       open={isOpen}
@@ -136,12 +111,12 @@ const AccountTile = ({
                 {!userThumbnail.url && userThumbnail.letters}
               </Avatar>
               {orgName && orgThumbnail && (
-                <Avatar
+                <StyledOrgAvatar
                   src={orgThumbnail.url}
                   style={{ width: 30, height: 30 }}
                 >
                   {!orgThumbnail.url && orgThumbnail.letters}
-                </Avatar>
+                </StyledOrgAvatar>
               )}
             </StyledAvatarContainer>
             <StyledTextWrapper>
@@ -150,22 +125,40 @@ const AccountTile = ({
                   {orgName}
                 </StyledP>
               )}
-              <StyledP title={user.fullName || fullName}>
-                {user.fullName || fullName}
-              </StyledP>
+              <StyledP title={user.fullName}>{user.fullName}</StyledP>
               <StyledP title={user.username} small>
                 {user.username}
               </StyledP>
             </StyledTextWrapper>
           </StyledContentWrapper>
           <StyledIconWrapper>
-            {authStatusIndicator}
+            <Tooltip
+              title={isAuthenticated ? authenticatedText : expiredText}
+              placement="top"
+              targetWrapperStyle={{
+                alignItems: 'center',
+                display: 'flex'
+              }}
+            >
+              {isAuthenticated ? (
+                <CheckCircleIcon
+                  color={themeContext.palette.green}
+                  size={16}
+                  alt={authenticatedText}
+                />
+              ) : (
+                <ExclamationMarkTriangleIcon
+                  color={themeContext.palette.darkGray}
+                  size={16}
+                  alt={expiredText}
+                />
+              )}
+            </Tooltip>
             {actions.length !== 0 && <HandleVerticalIcon scale={16} />}
           </StyledIconWrapper>
         </StyledAccountTile>
       }
     >
-      {/* Account item dropdown menu */}
       <Menu>{actions.length !== 0 && menuItems}</Menu>
     </Popover>
   );

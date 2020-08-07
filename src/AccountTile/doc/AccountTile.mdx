@@ -7,6 +7,7 @@ import { Playground, PropsTable } from 'docz';
 import GuideExample from '../../../docz/GuideExample';
 
 import AccountTile from '../';
+
 import Button from '../../Button';
 import { useAccountManager } from '../../ArcgisAccount';
 import Panel from '../../Panel';
@@ -46,13 +47,13 @@ import AccountTile from 'calcite-react/AccountTile';
           lastName: 'Harig'
         },
         isAuthenticated: true,
-        orgName: 'Esri',
+        orgName: 'Esri Professional Services',
         userThumbnail: {
-          url: null,
+          url: 'https://avatars1.githubusercontent.com/u/55154968?s=460&u=4034cb088cb3c99e051c2c89663e2c070b28666f&v=4',
           letters: 'JH'
         },
         orgThumbnail: {
-          url: null,
+          url: 'https://www.esri.com/content/dam/esrisites/en-us/common/icons/product-logos/ArcGIS-Pro.png',
           letters: 'E'
         }
       }
@@ -90,14 +91,14 @@ import AccountTile from 'calcite-react/AccountTile';
             lastName: 'Harig'
           },
           isAuthenticated: true,
-          orgName: 'Esri Profesional Services',
+          orgName: 'Esri Professional Services',
           userThumbnail: null,
           userThumbnail: {
-            url: null,
+            url: 'https://avatars1.githubusercontent.com/u/55154968?s=460&u=4034cb088cb3c99e051c2c89663e2c070b28666f&v=4',
             letters: 'JH'
           },
           orgThumbnail: {
-            url: null,
+            url: 'https://www.esri.com/content/dam/esrisites/en-us/common/icons/product-logos/ArcGIS-Pro.png',
             letters: 'E'
           }
         },
@@ -109,14 +110,14 @@ import AccountTile from 'calcite-react/AccountTile';
             lastName: 'Else'
           },
           isAuthenticated: false,
-          orgName: 'Esri',
+          orgName: 'Another Organization',
           userThumbnail: {
             url: null,
             letters: 'SE'
           },
           orgThumbnail: {
             url: null,
-            letters: 'E'
+            letters: 'A'
           }
         }
       ];
@@ -149,7 +150,10 @@ import AccountTile from 'calcite-react/AccountTile';
         />
       });
 
-      return <Panel>{accountTiles}</Panel>;
+      return <Panel 
+        white
+        style={{ width: '400px' }}
+      >{accountTiles}</Panel>;
     }
 
     return (
@@ -219,6 +223,7 @@ import AccountTile from 'calcite-react/AccountTile';
       return (
         <div>
           <Panel
+            white
             style={{
               marginBottom: '16px',
               width: '400px'
