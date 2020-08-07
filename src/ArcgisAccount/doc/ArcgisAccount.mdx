@@ -86,10 +86,18 @@ import ArcgisAccount, { ArcgisAccountMenuItem, useAccountManager } from 'calcite
 
       const options = {
         // register an app of your own to create a unique clientId
-        clientId: "I2YAIyLxcjzok07Y",
+        clientId: "dwecSqF6H1LcJ1n3",
         redirectUri: `${window.location.origin}/arcgis-account`,
         popup: true,
       };
+
+      const options2 = {
+        // register an app of your own to create a unique clientId
+        clientId: "dwecSqF6H1LcJ1n3",
+        redirectUri: `${window.location.origin}/arcgis-account`,
+        popup: false,
+      };
+
 
       const {
         accountManagerState,
@@ -116,7 +124,10 @@ import ArcgisAccount, { ArcgisAccountMenuItem, useAccountManager } from 'calcite
 
       return (
       <>
-        {!active && <Button onClick={() => addAccount()}> Add Account </Button>}
+        <div style={{display:"flex"}}>
+          {!active && <Button onClick={() => addAccount()} style={{flex:1, margin: "1em"}}> Add Account Popup </Button>}
+          {!active && <Button onClick={() => addAccount(options2)} style={{flex:1, margin: "1em"}}> Add Account </Button>}
+        </div>
 
         {active && (
           <TopNav>
