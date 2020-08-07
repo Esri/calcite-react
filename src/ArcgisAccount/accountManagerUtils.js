@@ -2,45 +2,78 @@ import { UserSession } from '@esri/arcgis-rest-auth';
 import { getSelf } from '@esri/arcgis-rest-portal';
 import { request } from '@esri/arcgis-rest-request';
 
+import {
+  addAccountStorage,
+  getAccountManagerStorage
+} from './accountManagerStorageUtils';
+
 //** RestJS */
 /** Begin OAuth  */
 export const beginOAuthSignIn = async ({
   clientId,
   redirectUri,
   portalUrl,
-  popup
+  popup,
+  name,
+  setAccountManagerState
 }) => {
-  try {
-    UserSession.beginOAuth2({
-      // register an app of your own to create a unique clientId
-      clientId: clientId,
-      redirectUri: redirectUri,
-      portalUrl: portalUrl,
-      popup: popup
-    });
-  } catch (err) {
-    console.error('Error getting User Session (beginOAuth).', err);
-    return null;
+  if (popup) {
+    try {
+      const portal = portalUrl
+        ? portalUrl
+        : 'https://www.arcgis.com/sharing/rest';
+      UserSession.beginOAuth2({
+        // register an app of your own to create a unique clientId
+        clientId: clientId,
+        redirectUri: redirectUri,
+        portal: portal,
+        popup: popup
+      }).then(dSession => {
+        createAccountObject({ dSession, portal, clientId }).then(account => {
+          const key = createAccountKey({ account });
+          addAccountStorage(name, key, account);
+          const accountManager = getAccountManagerStorage(name);
+          setAccountManagerState(accountManager);
+        });
+      });
+    } catch (err) {
+      console.error('Error getting User Session (beginOAuth).', err);
+    }
+  } else {
+    try {
+      const portal = portalUrl
+        ? portalUrl
+        : 'https://www.arcgis.com/sharing/rest';
+      UserSession.beginOAuth2({
+        // register an app of your own to create a unique clientId
+        clientId: clientId,
+        redirectUri: redirectUri,
+        portal: portal,
+        popup: popup
+      });
+    } catch (err) {
+      console.error('Error getting User Session (beginOAuth).', err);
+    }
   }
 };
 
 /** Complete OAuth  */
 export const completeOAuthSignIn = async ({ clientId, portalUrl, popup }) => {
   try {
-    const session = UserSession.completeOAuth2({ clientId, portalUrl, popup });
-    const token = session.token;
-    const user = await session.getUser();
-    const portal = await getPortal({ portalUrl, session });
+    const portal = portalUrl
+      ? portalUrl
+      : 'https://www.arcgis.com/sharing/rest';
+    const dSession = UserSession.completeOAuth2({
+      clientId: clientId,
+      portal: portal,
+      popup: popup
+    });
+
+    const account = await createAccountObject({ dSession, portal, clientId });
 
     // Clear query string token from URL
     window.history.replaceState({}, document.title, window.location.pathname);
-
-    return {
-      session: session.serialize(),
-      user: user,
-      portal: JSON.stringify(portal),
-      token: token
-    };
+    return account;
   } catch (err) {
     console.error('Error getting User Session (completeOAuth).');
     return null;
@@ -48,25 +81,21 @@ export const completeOAuthSignIn = async ({ clientId, portalUrl, popup }) => {
 };
 
 /** Complete auth and return account with serialized portal and session  */
-export const completeAuth = async ({ status }) => {
-  const { clientId, portalUrl, popup } = status.authProps || {};
+export const completeAuth = async ({ authProps }) => {
+  const { clientId, portalUrl, popup } = authProps || {};
 
-  const userAuthObject = await completeOAuthSignIn({
+  const account = await completeOAuthSignIn({
     clientId,
     portalUrl,
     popup
   });
 
-  if (userAuthObject) {
+  if (account) {
     //Create key
-    const { user, portal } = userAuthObject || {};
-    const deserializedPortal = portal ? JSON.parse(portal) : {};
-    const { username } = user || {};
-    const { name } = deserializedPortal || {};
-    const orgName = name ? name.replace(/\s+/g, '') : 'org';
-    const key = username + '-' + orgName;
+    const key = createAccountKey({ account });
     //Set state
-    return { key: key, user: userAuthObject };
+
+    return { key: key, user: account };
   } else {
     return { key: undefined, user: undefined };
   }
@@ -87,16 +116,21 @@ export const getPortal = async ({ portalUrl, session }) => {
 };
 
 //** Login */
-export const loginOAuth2 = ({ clientId, redirectUri, portalUrl, popup }) => {
+export const loginOAuth2 = async ({
+  clientId,
+  redirectUri,
+  portalUrl,
+  popup,
+  name,
+  setAccountManagerState
+}) => {
   beginOAuthSignIn({
     clientId,
     redirectUri,
     portalUrl,
-    popup
-  }).then(results => {
-    console.log('Completed: ', results);
-    // Clear query string token from URL
-    window.history.replaceState({}, document.title, window.location.pathname);
+    popup,
+    name,
+    setAccountManagerState
   });
 };
 
@@ -110,6 +144,9 @@ export const logoutOAuth2 = ({ url, clientId, token }) => {
 
   //** Revoke Token (OAuth2): https://developers.arcgis.com/rest/users-groups-and-items/revoke-token.htm */
   //Build logout request
+  if (!clientId || !token) {
+    return { success: false, error: 'Empty client_id / token' };
+  }
   const revokeTokenEndpoint = `${url}/oauth2/revokeToken`;
   const data = {
     client_id: clientId,
@@ -170,4 +207,33 @@ export const getUserThumbnail = props => {
       ? user.fullName[0].toUpperCase()
       : undefined;
   return userThumbnail;
+};
+
+const createAccountObject = async ({ dSession, portal, clientId }) => {
+  dSession.clientId = dSession.clientId ? dSession.clientId : clientId;
+  const token = dSession.token;
+  const user = await dSession.getUser();
+  const dPortal = await getPortal({ portalUrl: portal, session: dSession });
+
+  return {
+    session: dSession.serialize(),
+    user: user,
+    portal: JSON.stringify(dPortal),
+    token: token
+  };
+};
+
+const createAccountKey = ({ account }) => {
+  try {
+    const { user, portal } = account || {};
+    const deserializedPortal = portal ? JSON.parse(portal) : {};
+    const { username } = user || {};
+    const { name } = deserializedPortal || {};
+    const orgName = name ? name.replace(/\s+/g, '') : 'org';
+    const key = username + '-' + orgName;
+    return key;
+  } catch (err) {
+    console.error(err);
+    return undefined;
+  }
 };

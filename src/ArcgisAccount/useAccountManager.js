@@ -36,12 +36,13 @@ const useAccountManager = props => {
   /** Complete Login: If applicable */
   useEffect(
     () => {
-      if (!status || status.loading !== true) {
+      const { loading, authProps } = status || {};
+      if (loading !== true) {
         return;
       }
       //complete login
       completeAuth({
-        status
+        authProps
       }).then(account => {
         const { key, user } = account || {};
         if (key) {
@@ -64,9 +65,16 @@ const useAccountManager = props => {
       const { clientId, redirectUri, portalUrl, popup } = selectOptions || {};
 
       //set localstorage status
-      beginStatusStorage(name, options);
+      beginStatusStorage(name, selectOptions);
       //begin login
-      loginOAuth2({ clientId, redirectUri, portalUrl, popup });
+      loginOAuth2({
+        clientId,
+        redirectUri,
+        portalUrl,
+        popup,
+        name,
+        setAccountManagerState
+      });
     },
     [authOptions, name]
   );
@@ -104,7 +112,6 @@ const useAccountManager = props => {
           const { session, token } = accounts[key];
           const portalUrl = session ? session.portal : null;
           const clientId = session ? session.clientId : null;
-
           //Remove token and session
           logoutOAuth2({
             url: portalUrl,
