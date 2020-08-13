@@ -13,27 +13,34 @@ import { useEffect, useState } from 'react';
 import { transparentize } from 'polished';
 import { CalciteTheme } from '../CalciteThemeProvider';
 
-const unitCalc = (operand1, operand2, operator) => {
-  let operand1Value = operand1;
-  let operand1Unit;
-  if (typeof operand1 === 'string') {
-    operand1Value = parseFloat(operand1);
-    operand1Unit = operand1.replace(operand1Value, '');
+const unitCalc = (left, right, operator) => {
+  let leftUnit, rightUnit;
+  if (typeof left === 'string') {
+    leftUnit = left.replace(parseFloat(left), '');
+    left = parseFloat(left);
+  }
+  if (typeof right === 'string') {
+    rightUnit = right.replace(parseFloat(right), '');
+    right = parseFloat(right);
   }
 
-  let operand2Value = operand2;
-  let operand2Unit;
-  if (typeof operand2 === 'string') {
-    operand2Value = parseFloat(operand2);
-    operand2Unit = operand2.replace(operand2Value, '');
+  const unit = leftUnit || rightUnit;
+
+  switch (operator) {
+    case '+':
+      return left + right + unit;
+    case '-':
+      return left - right + unit;
+    case '*':
+      return left * right + unit;
+    case '/':
+      return left / right + unit;
+    case '%':
+      return (left % right) + unit;
+    default:
+      console.warn('unitCalc only supports the following operators: +, -, *, /, %');
+      return left;
   }
-
-  let value =
-    typeof window !== 'undefined' &&
-    window.eval(operand1Value + operator + operand2Value); // eslint-disable-line no-eval
-  value = value + (operand1Unit || operand2Unit);
-
-  return value;
 };
 
 // const unitCompare = (compare1, compare2, operator) => {
