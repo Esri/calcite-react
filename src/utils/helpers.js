@@ -38,7 +38,8 @@ const unitCalc = (left, right, operator) => {
     case '%':
       return (left % right) + unit;
     default:
-      return undefined;
+      console.warn('unitCalc only supports the following operators: +, -, *, /, %');
+      return left;
   }
 };
 
