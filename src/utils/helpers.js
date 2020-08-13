@@ -37,6 +37,8 @@ const unitCalc = (left, right, operator) => {
       return left / right + unit;
     case '%':
       return (left % right) + unit;
+    default:
+      return undefined;
   }
 };
 
