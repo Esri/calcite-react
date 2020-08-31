@@ -5,7 +5,7 @@ route: /sub-nav
 
 import { Playground, PropsTable } from 'docz';
 import GuideExample from '../../../docz/GuideExample';
-
+import Breadcrumbs, { Crumb } from '../../Breadcrumbs';
 import Button from '../../Button';
 import SubNav, {
   SubNavTitle,
@@ -21,8 +21,13 @@ import grayCityBg from '../../../docz/images/city_map.png';
 
 SubNav provides a second level of hierarchy to a site. While TopNav includes the
 top-most level of navigation, SubNav includes navigation for sections nested
-inside that. SubNav has a tabbed navigation pattern, a title, and room for a
-call to action.
+inside that. SubNav has a tabbed navigation pattern and a title. 
+
+### ⛔️ Use of `legacy` prop ⛔️
+
+The `legacy` prop must be included to keep legacy styles from before `v0.55.0` releae. 
+SubNavActions may only be used with legacy. Please take a look at the SubNav props 
+table for a full list of props that are only accepted with legacy.
 
 #### Import Syntax
 
@@ -32,14 +37,14 @@ import SubNav, {
   SubNavList,
   SubNavLink,
   SubNavActions
-} from 'calcite-react/SubNav'
+} from 'calcite-react/SubNav';
 ```
 
 ## Basic Usage
 
 <Playground>
   <SubNav>
-    <SubNavTitle href="#">Fields</SubNavTitle>
+    <SubNavTitle>Fields</SubNavTitle>
     <SubNavList>
       <SubNavLink active href="#">
         Glens
@@ -50,60 +55,125 @@ import SubNav, {
   </SubNav>
 </Playground>
 
-## Advanced Usage
+## With Breadcrumbs
 
 <Playground>
-  <GuideExample label="blue">
-    <SubNav blue>
-      <SubNavTitle href="#">Fields</SubNavTitle>
-      <SubNavList>
-        <SubNavLink active href="#">
-          Glens
-        </SubNavLink>
-        <SubNavLink href="#">Dales</SubNavLink>
-        <SubNavLink href="#">Meadows</SubNavLink>
-      </SubNavList>
-    </SubNav>
-  </GuideExample>
-  <GuideExample label="with actions">
-    <SubNav blue>
-      <SubNavTitle href="#">Fields</SubNavTitle>
-      <SubNavList>
-        <SubNavLink active href="#">
-          Glens
-        </SubNavLink>
-        <SubNavLink href="#">Dales</SubNavLink>
-        <SubNavLink href="#">Meadows</SubNavLink>
-      </SubNavList>
-      <SubNavActions>
-        <Button white small>
-          New Field
-        </Button>
-      </SubNavActions>
-    </SubNav>
-  </GuideExample>
-  <GuideExample label="no nav - with actions">
-    <SubNav blue>
-      <SubNavTitle href="#">Fields</SubNavTitle>
-      <SubNavActions>
-        <Button white small>
-          New Field
-        </Button>
-      </SubNavActions>
-    </SubNav>
-  </GuideExample>
+  <SubNav>
+    <SubNavTitle>
+      <Breadcrumbs>
+        <Crumb href="#">Thing</Crumb>
+        <Crumb>Thing</Crumb>
+        <Crumb href="#">Thing</Crumb>
+        <Crumb href="#">Current</Crumb>
+      </Breadcrumbs>
+    </SubNavTitle>
+    <SubNavList>
+      <SubNavLink active href="#">
+        Glens
+      </SubNavLink>
+      <SubNavLink href="#">Dales</SubNavLink>
+      <SubNavLink href="#">Meadows</SubNavLink>
+    </SubNavList>
+  </SubNav>
 </Playground>
 
-## Background Image
+## Different Background Colors
+Using either a calcite-color (ex. 'purple') or a custom color.
+<Playground>
+  <GuideExample label="backgroundColor='purple'">
+    <SubNav backgroundColor="purple">
+      <SubNavTitle>Fields</SubNavTitle>
+      <SubNavList>
+        <SubNavLink active href="#">
+          Glens
+        </SubNavLink>
+        <SubNavLink href="#">Dales</SubNavLink>
+        <SubNavLink href="#">Meadows</SubNavLink>
+      </SubNavList>
+    </SubNav>
+  </GuideExample>
+
+  <GuideExample label="backgroundColor='#52993c'">
+    <SubNav backgroundColor="#52993c">
+      <SubNavTitle>Fields</SubNavTitle>
+      <SubNavList>
+        <SubNavLink active href="#">
+          Glens
+        </SubNavLink>
+        <SubNavLink href="#">Dales</SubNavLink>
+        <SubNavLink href="#">Meadows</SubNavLink>
+      </SubNavList>
+    </SubNav>
+    </GuideExample>
+</Playground>
+
+
+## Legacy Usage
 
 <Playground>
-  <div>
+
+  <GuideExample label="basic usage">
+    <SubNav legacy={true}>
+      <SubNavTitle href="#">Fields</SubNavTitle>
+      <SubNavList>
+        <SubNavLink active href="#">
+          Glens
+        </SubNavLink>
+        <SubNavLink href="#">Dales</SubNavLink>
+        <SubNavLink href="#">Meadows</SubNavLink>
+      </SubNavList>
+    </SubNav>
+    </GuideExample>
+
+    <GuideExample label="blue">
+      <SubNav legacy={true} blue={true}>
+        <SubNavTitle href="#">Fields</SubNavTitle>
+        <SubNavList>
+          <SubNavLink active href="#">
+            Glens
+          </SubNavLink>
+          <SubNavLink href="#">Dales</SubNavLink>
+          <SubNavLink href="#">Meadows</SubNavLink>
+        </SubNavList>
+      </SubNav>
+    </GuideExample>
+
+    <GuideExample label="with actions">
+      <SubNav legacy={true}>
+        <SubNavTitle href="#">Fields</SubNavTitle>
+        <SubNavList>
+          <SubNavLink active href="#">
+            Glens
+          </SubNavLink>
+          <SubNavLink href="#">Dales</SubNavLink>
+          <SubNavLink href="#">Meadows</SubNavLink>
+        </SubNavList>
+        <SubNavActions>
+          <Button white small>
+            New Field
+          </Button>
+        </SubNavActions>
+      </SubNav>
+    </GuideExample>
+
+    <GuideExample label="no nav - with actions">
+      <SubNav legacy={true}>
+        <SubNavTitle href="#">Fields</SubNavTitle>
+        <SubNavActions>
+          <Button white small>
+            New Field
+          </Button>
+        </SubNavActions>
+      </SubNav>
+    </GuideExample>
+
     <GuideExample label="backgroundImage">
       <SubNav
         backgroundImage={greenBlueBg}
         gradientFromColor="#70be49"
         gradientToColor="#1688aa"
         overlayGradient={false}
+        legacy={true}
       >
         <SubNavTitle href="#" style={{ color: '#fff' }}>
           Fields
@@ -123,6 +193,7 @@ import SubNav, {
         backgroundImage={grayCityBg}
         gradientFromColor="#70BB51"
         gradientToColor="#2088A7"
+        legacy={true}
       >
         <SubNavTitle href="#" style={{ color: '#fff' }}>
           Fields
@@ -137,7 +208,6 @@ import SubNav, {
       </SubNav>
     </GuideExample>
 
-  </div>
 </Playground>
 
 ## Props
@@ -159,5 +229,7 @@ import SubNav, {
 <PropsTable of={SubNavLink} />
 
 ### SubNavActions
+
+WARNING - Actions are only supported with legacy SubNav.
 
 <PropsTable of={SubNavActions} />
