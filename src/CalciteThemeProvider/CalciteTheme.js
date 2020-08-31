@@ -157,6 +157,12 @@ const CalciteTheme = {
   medium: '860px',
   large: '1450px',
 
+  // ┌──────────────────────┐
+  // │ SCREEN CONTENT WIDTH │
+  // └──────────────────────┘
+  contentWidth: '1440px',
+  contentMaxWidth: '96vw',
+
   // ┌────────────────────┐
   // │ Grid Configuration │
   // └────────────────────┘
