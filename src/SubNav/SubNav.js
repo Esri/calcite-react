@@ -13,21 +13,25 @@ import PropTypes from 'prop-types';
 import React, { Children, createContext } from 'react';
 import { useContextState } from '../utils/helpers';
 
-import { StyledSubNav, StyledSubNavLeftContent } from './SubNav-styled';
+import { StyledSubNav, StyledSubNavContent } from './SubNav-styled';
 
 import { getChildType } from '../utils/helpers';
 
 const SubNavContext = createContext({
-  blue: undefined
+  legacy: undefined,
+  blue: undefined,
+  backgroundColor: 'blue'
 });
 SubNavContext.displayName = 'SubNavContext';
 
-const SubNav = ({ children, blue, ...other }) => {
+const SubNav = ({ children, blue, backgroundColor, legacy, ...other }) => {
   const subNavContext = useContextState({
-    blue
+    legacy,
+    blue,
+    backgroundColor
   });
 
-  const getLeftContent = function() {
+  const getContent = function() {
     return Children.toArray(children).filter(child => {
       return (
         getChildType(child) === 'SubNavTitle' ||
@@ -44,9 +48,16 @@ const SubNav = ({ children, blue, ...other }) => {
 
   return (
     <SubNavContext.Provider value={subNavContext}>
-      <StyledSubNav blue={blue} {...other}>
-        <StyledSubNavLeftContent>{getLeftContent()}</StyledSubNavLeftContent>
-        {getSubNavActions()}
+      <StyledSubNav
+        backgroundColor={subNavContext.backgroundColor}
+        legacy={subNavContext.legacy}
+        blue={subNavContext.blue}
+        {...other}
+      >
+        <StyledSubNavContent legacy={subNavContext.legacy}>
+          {getContent()}
+        </StyledSubNavContent>
+        {legacy && getSubNavActions()}
       </StyledSubNav>
     </SubNavContext.Provider>
   );
@@ -55,19 +66,28 @@ const SubNav = ({ children, blue, ...other }) => {
 SubNav.propTypes = {
   /** The content of the component. */
   children: PropTypes.node,
-  /** A style prop to render the SubNav with a blue background. */
-  blue: PropTypes.bool,
-  /** The background image src. */
+  /** Background color of SubNav. Accepts colors from CalciteTheme (ex. blue) or color values (ex. #b9e0f7 or rgb(0,0,0)).*/
+  backgroundColor: PropTypes.string,
+  /** The background image src. WARNING - only supported with legacy SubNav. */
   backgroundImage: PropTypes.node,
-  /** If true, the gradient is applied on top of the image. */
+  /** If true, the gradient is applied on top of the image. WARNING - only supported with legacy SubNav. */
   overlayGradient: PropTypes.bool,
-  /** The gradient overlay color to start from the left of the SubNav. */
+  /** The gradient overlay color to start from the left of the SubNav. WARNING - only supported with legacy SubNav. */
   gradientFromColor: PropTypes.string,
-  /** The gradient overlay color to end on the right of the SubNav. */
-  gradientToColor: PropTypes.string
+  /** The gradient overlay color to end on the right of the SubNav. WARNING - only supported with legacy SubNav. */
+  gradientToColor: PropTypes.string,
+  /** Should the SubNav use legacy styles. */
+  legacy: PropTypes.bool,
+  /** A style prop to render the SubNav with a blue background. WARNING - only supported with legacy SubNav.*/
+  blue: PropTypes.bool,
+  /** Override for contentWidth from theme provider (ex. '1300px').*/
+  contentWidth: PropTypes.string,
+  /** Override for contentMaxWidth from theme provider (ex. '95vw').*/
+  contentMaxWidth: PropTypes.string
 };
 
 SubNav.defaultProps = {
+  backgroundColor: 'blue',
   overlayGradient: true
 };
 

@@ -10,12 +10,20 @@
 // limitations under the License.​
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { SubNavContext } from './SubNav';
 
 import { StyledSubNavList } from './SubNav-styled';
 
 const SubNavList = ({ children, ...other }) => {
-  return <StyledSubNavList {...other}>{children}</StyledSubNavList>;
+  const { legacy } = useContext(SubNavContext);
+
+  return (
+    <StyledSubNavList {...other} legacy={legacy}>
+      {children}
+    </StyledSubNavList>
+  );
 };
 
 SubNavList.propTypes = {
