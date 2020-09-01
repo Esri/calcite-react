@@ -1,20 +1,20 @@
 import { UserSession } from '@esri/arcgis-rest-auth';
 
-export const getAccountManagerStorage = name => {
-  const sAccountManager = getLocalSerialized(name);
+export const getAccountManagerStorage = ({ name }) => {
+  const sAccountManager = getLocalSerialized({ name });
   const { accounts, active, status } = sAccountManager || {};
 
-  const dAccounts = deserializeUserAuthObjects(accounts);
+  const dAccounts = deserializeUserAuthObjects({ accounts });
   const authObject = {
     accounts: dAccounts,
-    active: active,
-    status: status
+    active,
+    status
   };
   return authObject;
 };
 
-export const addAccountStorage = (name, key, account) => {
-  const previous = getLocalSerialized(name);
+export const addAccountStorage = ({ name, key, account }) => {
+  const previous = getLocalSerialized({ name });
   const { accounts, active } = previous || {};
   const updateActive = active ? active : key;
   setLocal({
@@ -23,12 +23,12 @@ export const addAccountStorage = (name, key, account) => {
       accounts: { ...accounts, [key]: account },
       active: updateActive
     },
-    name: name
+    name
   });
 };
 
-export const removeAccountStorage = (name, key) => {
-  const previous = getLocalSerialized(name);
+export const removeAccountStorage = ({ name, key }) => {
+  const previous = getLocalSerialized({ name });
 
   let active = previous.active;
   if (active === key) {
@@ -47,36 +47,39 @@ export const removeAccountStorage = (name, key) => {
       ...previous,
       active: active === key ? undefined : active
     },
-    name: name
+    name
   });
 };
 
-export const switchActiveStorage = (name, key) => {
-  const previous = getLocalSerialized(name);
+export const switchActiveStorage = ({ name, key }) => {
+  const previous = getLocalSerialized({ name });
   setLocal({
     state: {
       ...previous,
       active: key
     },
-    name: name
+    name
   });
 };
 
-export const completeStatusStorage = name => {
-  const previous = getLocalSerialized(name);
+export const completeStatusStorage = ({ name }) => {
+  const previous = getLocalSerialized({ name });
   const { status } = previous || {};
   setLocal({
     state: {
       ...previous,
       status: { ...status, loading: false }
     },
-    name: name
+    name
   });
 };
 
-export const beginStatusStorage = (name, options) => {
-  const previous = getLocalSerialized(name);
-  const { clientId, redirectUri, portalUrl, popup } = options || {};
+export const beginStatusStorage = ({
+  name,
+  options: { clientId, redirectUri, portalUrl, popup }
+}) => {
+  const previous = getLocalSerialized({ name });
+
   setLocal({
     state: {
       ...previous,
@@ -85,12 +88,12 @@ export const beginStatusStorage = (name, options) => {
         authProps: { clientId, redirectUri, portalUrl, popup }
       }
     },
-    name: name
+    name
   });
 };
 
-export const logoutAccountStorage = (name, key) => {
-  const previous = getLocalSerialized(name);
+export const logoutAccountStorage = ({ name, key }) => {
+  const previous = getLocalSerialized({ name });
   const { accounts } = previous || {};
   const user = {
     ...accounts[key],
@@ -103,19 +106,19 @@ export const logoutAccountStorage = (name, key) => {
       ...previous,
       accounts: { ...accounts, [key]: user }
     },
-    name: name
+    name
   });
 };
 
-export const refreshAccountStorage = (name, key, session) => {
-  const previous = getLocalSerialized(name);
+export const refreshAccountStorage = ({ name, key, session }) => {
+  const previous = getLocalSerialized({ name });
   const { accounts } = previous || {};
   setLocal({
     state: {
       ...previous,
-      accounts: { ...accounts, [key]: { ...accounts[key], session: session } }
+      accounts: { ...accounts, [key]: { ...accounts[key], session } }
     },
-    name: name
+    name
   });
 };
 
@@ -125,18 +128,18 @@ const setLocal = ({ state, name }) => {
   window.localStorage.setItem(name, JSON.stringify(state));
 };
 
-const getLocalSerialized = name => {
+const getLocalSerialized = ({ name }) => {
   const accountManager = JSON.parse(window.localStorage.getItem(name));
   const { accounts, active, status } = accountManager || {};
   const authObject = {
-    accounts: accounts,
-    active: active,
-    status: status
+    accounts,
+    active,
+    status
   };
   return authObject;
 };
 
-const deserializeUserAuthObjects = accounts => {
+const deserializeUserAuthObjects = ({ accounts }) => {
   const dUsers = {};
 
   if (accounts) {

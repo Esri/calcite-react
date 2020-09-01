@@ -24,15 +24,15 @@ export const beginOAuthSignIn = async ({
         : 'https://www.arcgis.com/sharing/rest';
       UserSession.beginOAuth2({
         // register an app of your own to create a unique clientId
-        clientId: clientId,
-        redirectUri: redirectUri,
-        portal: portal,
-        popup: popup
+        clientId,
+        redirectUri,
+        portal,
+        popup
       }).then(dSession => {
         createAccountObject({ dSession, portal, clientId }).then(account => {
           const key = createAccountKey({ account });
-          addAccountStorage(name, key, account);
-          const accountManager = getAccountManagerStorage(name);
+          addAccountStorage({ name, key, account });
+          const accountManager = getAccountManagerStorage({ name });
           setAccountManagerState(accountManager);
         });
       });
@@ -46,10 +46,10 @@ export const beginOAuthSignIn = async ({
         : 'https://www.arcgis.com/sharing/rest';
       UserSession.beginOAuth2({
         // register an app of your own to create a unique clientId
-        clientId: clientId,
-        redirectUri: redirectUri,
-        portal: portal,
-        popup: popup
+        clientId,
+        redirectUri,
+        portal,
+        popup
       });
     } catch (err) {
       console.error('Error getting User Session (beginOAuth).', err);
@@ -64,9 +64,9 @@ export const completeOAuthSignIn = async ({ clientId, portalUrl, popup }) => {
       ? portalUrl
       : 'https://www.arcgis.com/sharing/rest';
     const dSession = UserSession.completeOAuth2({
-      clientId: clientId,
-      portal: portal,
-      popup: popup
+      clientId,
+      portal,
+      popup
     });
 
     const account = await createAccountObject({ dSession, portal, clientId });
@@ -81,9 +81,7 @@ export const completeOAuthSignIn = async ({ clientId, portalUrl, popup }) => {
 };
 
 /** Complete auth and return account with serialized portal and session  */
-export const completeAuth = async ({ authProps }) => {
-  const { clientId, portalUrl, popup } = authProps || {};
-
+export const completeAuth = async ({ clientId, portalUrl, popup }) => {
   const account = await completeOAuthSignIn({
     clientId,
     portalUrl,
@@ -94,8 +92,7 @@ export const completeAuth = async ({ authProps }) => {
     //Create key
     const key = createAccountKey({ account });
     //Set state
-
-    return { key: key, user: account };
+    return { key, user: account };
   } else {
     return { key: undefined, user: undefined };
   }
@@ -166,45 +163,45 @@ export const logoutOAuth2 = ({ url, clientId, token }) => {
 };
 
 //** Get Org Thumbnail */
-export const getOrgThumbnail = props => {
-  const { session, portal, token } = props || {};
+export const getOrgThumbnail = ({
+  session: { portal },
+  portal: { thumbnail, name },
+  token
+}) => {
   //org thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/portal-self.htm)
   let orgThumbnail = {
     url: undefined,
     letters: undefined
   };
   orgThumbnail.url =
-    portal && portal.thumbnail && session && session.portal && token
-      ? `${session.portal}/portals/self/resources/${
-          portal.thumbnail
-        }?token=${token}`
+    thumbnail && portal && token
+      ? `${portal}/portals/self/resources/${thumbnail}?token=${token}`
       : undefined;
-  orgThumbnail.letters =
-    portal && portal.name ? portal.name[0].toUpperCase() : 'A';
+  orgThumbnail.letters = name ? name[0].toUpperCase() : 'A';
   return orgThumbnail;
 };
 
 //** Get User Thumbnail */
-export const getUserThumbnail = props => {
-  const { session, user, token } = props || {};
-
+export const getUserThumbnail = ({
+  session: { portal, username },
+  user: { thumbnail, firstName, lastName, fullName },
+  token
+}) => {
   //user thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/user.htm)
   let userThumbnail = {
     url: undefined,
     letters: undefined
   };
   userThumbnail.url =
-    user && user.thumbnail && session && session.portal
-      ? `${session.portal}/community/users/${session.username}/info/${
-          user.thumbnail
-        }?token=${token}`
+    thumbnail && portal
+      ? `${portal}/community/users/${username}/info/${thumbnail}?token=${token}`
       : undefined;
 
   userThumbnail.letters =
-    user && user.firstName && user.lastName
-      ? `${user.firstName[0] + user.lastName[0]}`.toUpperCase()
-      : user && user.fullName
-      ? user.fullName[0].toUpperCase()
+    firstName && lastName
+      ? `${firstName[0] + lastName[0]}`.toUpperCase()
+      : fullName
+      ? fullName[0].toUpperCase()
       : undefined;
   return userThumbnail;
 };
@@ -217,7 +214,7 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
 
   return {
     session: dSession.serialize(),
-    user: user,
+    user,
     portal: JSON.stringify(dPortal),
     token: token
   };

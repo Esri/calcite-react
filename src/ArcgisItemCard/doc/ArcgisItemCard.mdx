@@ -6,6 +6,7 @@ route: /arcgis-item-card
 import { Playground, PropsTable } from 'docz';
 
 import ArcgisItemCard from '../';
+import { StyledUserIcon, StyledCalendarIcon } from '../ArcgisItemCard-styled';
 
 import item from './item.json';
 
@@ -22,7 +23,25 @@ import ArcgisItemCard from 'calcite-react/ArcgisItemCard'
 ## Basic Usage
 
 <Playground>
-  <ArcgisItemCard item={item} />
+  <ArcgisItemCard item={item}/>
+</Playground>
+
+## Vertical Usage
+
+<Playground>
+  <ArcgisItemCard item={item} vertical />
+</Playground>
+
+## Basic Usage With Actions
+
+<Playground>
+  <ArcgisItemCard item={item} actions={[<StyledUserIcon/>, <StyledCalendarIcon/>]}/>
+</Playground>
+
+## Vertical Usage With Actions
+
+<Playground>
+  <ArcgisItemCard item={item} vertical actions={[<StyledUserIcon/>, <StyledCalendarIcon/>]}/>
 </Playground>
 
 ## Props
