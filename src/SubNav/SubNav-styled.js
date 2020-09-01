@@ -16,7 +16,11 @@ import styled, { css } from 'styled-components';
 
 // Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
-
+import {
+  StyledBreadcrumbs,
+  StyledCrumb,
+  StyledSpanCrumb
+} from '../Breadcrumbs/Breadcrumbs-styled';
 // Calcite components
 import { CalciteA, CalciteH1 } from '../Elements';
 
@@ -26,96 +30,141 @@ import { CalciteA, CalciteH1 } from '../Elements';
 
 import {
   subNavUnderline,
+  subNavLinkActive,
   unitCalc,
   fontSize,
   backgroundGradient,
   transition
 } from '../utils/helpers';
+import { linkColor } from '../utils/color';
 
 const StyledSubNav = styled.header`
   position: relative;
-  background-color: ${props => props.theme.palette.lightestGray};
   display: flex;
-  flex-wrap: wrap;
-
+  width: 100%;
   ${props =>
-    props.blue &&
-    css`
-      background-color: ${props.theme.palette.darkerBlue};
-    `};
-
-  ${props =>
-    props.backgroundImage &&
-    css`
-      ${backgroundGradient(
-        props.backgroundImage,
-        props.gradientFromColor,
-        props.gradientToColor,
-        props.overlayGradient
-      )};
-    `};
+    props.legacy
+      ? // ----- LEGACY STYLES -----
+        css`
+          flex-wrap: wrap;
+          background-color: ${props.blue
+            ? props.theme.palette.darkerBlue
+            : props.theme.palette.lightestGray};
+          ${props.backgroundImage &&
+            backgroundGradient(
+              props.backgroundImage,
+              props.gradientFromColor,
+              props.gradientToColor,
+              props.overlayGradient
+            )}
+        `
+      : // ----- MODERN STYLES -----
+        css`
+          background-color: ${props.theme.palette[props.backgroundColor] ||
+            props.backgroundColor};
+        `}
 `;
 StyledSubNav.defaultProps = { theme };
 
-const StyledSubNavLeftContent = styled.div`
+const StyledSubNavContent = styled.div`
   display: flex;
-  flex: 1 0 200px;
   justify-content: space-between;
-  flex-direction: column;
+  ${props =>
+    props.legacy
+      ? // ----- LEGACY STYLES -----
+        css`
+          flex-direction: column;
+          flex: 1 0 200px;
+        `
+      : // ----- MODERN STYLES -----
+        css`
+          width: ${props.contentWidth || props.theme.contentWidth};
+          max-width: ${props.contentMaxWidth || props.theme.contentMaxWidth};
+          margin: 0 auto;
+        `}
 `;
-StyledSubNavLeftContent.defaultProps = { theme };
+StyledSubNavContent.defaultProps = { theme };
 
 const StyledSubNavLink = styled(CalciteA)`
-  padding: 0.25em 0.75em;
-  margin: 0 0 0 0.25em;
   font-family: ${props => props.theme.avenirFamily};
-  color: ${props => props.theme.palette.offWhite};
-  ${fontSize(-1)};
-  background-color: ${props => props.theme.palette.transparentOffBlack};
-  box-sizing: border-box;
-  border-radius: ${props => props.theme.borderRadius}
-    ${props => props.theme.borderRadius} 0 0;
   transition: background-color ${transition()}, color ${transition('150ms')};
+  box-sizing: border-box;
   display: inline-block;
-
-  html[dir='rtl'] & {
-    margin: 0 0.25em 0 0;
-  }
-
-  &:hover,
-  &:focus {
-    background-color: ${props => props.theme.palette.transparentDarkerGray};
-    color: ${props => props.theme.palette.white};
-    text-decoration: none;
-    ${props => subNavUnderline(props)};
-  }
-
-  ${props =>
-    props.active &&
-    css`
-      &,
-      &:hover,
-      &:focus {
-        background-color: ${props.theme.palette.white};
-        color: ${props.theme.palette.offBlack};
-      }
-    `} .active > &, .active > &:hover, .active > &:focus {
-    background-color: ${props => props.theme.palette.white};
-    color: ${props => props.theme.palette.offBlack};
-  }
+  ${fontSize(-1)};
 
   ${props =>
     props.disabled &&
     css`
       opacity: 0.5;
       pointer-events: none;
-    `};
+    `}
+
+  ${props =>
+    props.legacy
+      ? // ----- LEGACY STYLES -----
+        css`
+          padding: 0.25em 0.75em;
+          margin: 0 0 0 0.25em;
+          color: ${props.theme.palette.offWhite};
+          background-color: ${props.theme.palette.transparentOffBlack};
+          border-radius: ${props.theme.borderRadius} ${props.theme.borderRadius}
+            0 0;
+
+          html[dir='rtl'] & {
+            margin: 0 0.25em 0 0;
+          }
+
+          &:hover,
+          &:focus {
+            background-color: ${props.theme.palette.transparentDarkerGray};
+            color: ${props.theme.palette.white};
+            text-decoration: none;
+            ${subNavUnderline(props)};
+          }
+          ${props.active &&
+            css`
+              &,
+              &:hover,
+              &:focus {
+                background-color: ${props.theme.palette.white};
+                color: ${props.theme.palette.offBlack};
+              }
+            `} .active > &, .active > &:hover, .active > &:focus {
+            background-color: ${props.theme.palette.white};
+            color: ${props.theme.palette.offBlack};
+          }
+        `
+      : // ----- MODERN STYLES -----
+        css`
+          color: ${props.theme.palette.white};
+          box-shadow: inset 0px 0px 0px 4px transparent;
+          border-bottom: 4px solid transparent;
+          padding-top: ${unitCalc(props.theme.baseline, 1.5, '/')};
+          padding-bottom: ${unitCalc(props.theme.baseline, 1.7, '/')};
+          padding-right: ${props.theme.baseline};
+          padding-left: ${props.theme.baseline};
+
+          ${props.active &&
+            css`
+              &,
+              &:hover,
+              &:focus {
+                ${subNavLinkActive(props)}
+              }
+            `}
+          &:hover,
+          &:focus, 
+          .active > &, 
+          .active > &:hover, 
+          .active > &:focus {
+            ${subNavLinkActive(props)}
+          }
+        `}
 `;
 StyledSubNavLink.defaultProps = { theme };
 
 const StyledSubNavList = styled.nav`
   display: flex;
-  height: 32px;
   margin-top: 0em;
   padding-left: 0.25em;
   box-sizing: border-box;
@@ -127,6 +176,61 @@ const StyledSubNavList = styled.nav`
 `;
 StyledSubNavList.defaultProps = { theme };
 
+const StyledSubNavTitle = styled(CalciteH1)`
+  box-sizing: border-box;
+
+  ${props =>
+    props.legacy
+      ? // ----- LEGACY STYLES -----
+        css`
+          ${fontSize(4)};
+          line-height: 1.25;
+          padding-left: 0.25em;
+          margin-top: ${unitCalc(props.theme.baseline, 2, '/')};
+          margin-bottom: ${unitCalc(props.theme.baseline, 2, '/')};
+          ${props.blue &&
+            css`
+              color: ${props.theme.palette.white};
+            `};
+
+          html[dir='rtl'] & {
+            padding-left: 0;
+            padding-right: 0.25em;
+          }
+        `
+      : // ----- MODERN STYLES -----
+        css`
+          ${fontSize(2)};
+          display: flex;
+          align-items: center;
+          color: ${props.theme.palette.white};
+          padding-left: ${unitCalc(props.theme.baseline, 3, '/')};
+          margin-bottom: 0;
+
+          ${StyledSpanCrumb}, ${StyledCrumb} {
+            color: ${props.theme.palette.white};
+            ${linkColor(
+              props.theme.palette.white,
+              props.theme.palette.lightestGray
+            )};
+
+            &::before {
+              color: ${props.theme.palette.white};
+            }
+          }
+
+          ${StyledBreadcrumbs} {
+            ${fontSize(1)};
+          }
+
+          html[dir='rtl'] & {
+            padding-left: 0;
+            padding-right: ${unitCalc(props.theme.baseline, 3, '/')};
+          }
+        `}
+`;
+StyledSubNavTitle.defaultProps = { theme };
+
 const StyledSubNavActions = styled.nav`
   margin: 0.5em;
   display: flex;
@@ -134,27 +238,6 @@ const StyledSubNavActions = styled.nav`
   align-items: center;
 `;
 StyledSubNavActions.defaultProps = { theme };
-
-const StyledSubNavTitle = styled(CalciteH1)`
-  ${fontSize(4)};
-  padding-left: 0.25em;
-  margin-top: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  margin-bottom: ${props => unitCalc(props.theme.baseline, 2, '/')};
-  line-height: 1.25;
-  box-sizing: border-box;
-
-  html[dir='rtl'] & {
-    padding-left: 0;
-    padding-right: 0.25em;
-  }
-
-  ${props =>
-    props.blue &&
-    css`
-      color: ${props.theme.palette.white};
-    `};
-`;
-StyledSubNavTitle.defaultProps = { theme };
 
 const StyledMultiRowActions = styled.div`
   display: flex;
@@ -164,7 +247,7 @@ StyledMultiRowActions.defaultProps = { theme };
 
 export {
   StyledSubNav,
-  StyledSubNavLeftContent,
+  StyledSubNavContent,
   StyledSubNavLink,
   StyledSubNavList,
   StyledSubNavTitle,

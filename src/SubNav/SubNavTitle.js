@@ -17,10 +17,10 @@ import { StyledSubNavTitle } from './SubNav-styled';
 import { SubNavContext } from './SubNav';
 
 const SubNavTitle = ({ children, ...other }) => {
-  const subNavContext = useContext(SubNavContext);
+  const { legacy, blue } = useContext(SubNavContext);
 
   return (
-    <StyledSubNavTitle blue={subNavContext.blue} {...other}>
+    <StyledSubNavTitle blue={blue} legacy={legacy} {...other}>
       {children}
     </StyledSubNavTitle>
   );

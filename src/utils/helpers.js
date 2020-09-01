@@ -38,7 +38,9 @@ const unitCalc = (left, right, operator) => {
     case '%':
       return (left % right) + unit;
     default:
-      console.warn('unitCalc only supports the following operators: +, -, *, /, %');
+      console.warn(
+        'unitCalc only supports the following operators: +, -, *, /, %'
+      );
       return left;
   }
 };
@@ -267,6 +269,15 @@ const rtlPlacement = placement => {
   return placement;
 };
 
+const subNavLinkActive = props => {
+  return `
+    background-color: rgba(0,0,0,.25);
+    color: ${props.theme.palette.white};
+    text-decoration: none;
+    border-bottom-color: rgba(0, 0, 0, 0.4);
+  `;
+};
+
 const useContextState = contextProps => {
   const [contextState, setContextState] = useState(contextProps);
 
@@ -282,6 +293,7 @@ export {
   clearfix,
   fontSize,
   subNavUnderline,
+  subNavLinkActive,
   backgroundGradient,
   transition,
   getChildType,
