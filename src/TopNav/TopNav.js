@@ -31,7 +31,7 @@ const TopNav = ({ children, contentWidth, contentMaxWidth, ...other }) => {
 TopNav.propTypes = {
   /** The content of the component. */
   children: PropTypes.node,
-  /** Override for contentWidth from theme provider (ex. '1300px').*/
+  /** Override for contentWidth from CalciteThemeProvider (ex. '1300px'). Use "100%" for full width TopNav. */
   contentWidth: PropTypes.string,
   /** Override for contentMaxWidth from theme provider (ex. '95vw').*/
   contentMaxWidth: PropTypes.string
