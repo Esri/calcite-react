@@ -80,7 +80,7 @@ SubNav.propTypes = {
   legacy: PropTypes.bool,
   /** A style prop to render the SubNav with a blue background. WARNING - only supported with legacy SubNav.*/
   blue: PropTypes.bool,
-  /** Override for contentWidth from theme provider (ex. '1300px').*/
+  /** Override for contentWidth from CalciteThemeProvider (ex. '1300px'). Use "100%" for full width SubNav. */
   contentWidth: PropTypes.string,
   /** Override for contentMaxWidth from theme provider (ex. '95vw').*/
   contentMaxWidth: PropTypes.string
