@@ -199,6 +199,9 @@ const MultiSelect = ({
               rowRenderStyle
             });
           }}
+          style={{
+            direction: document.documentElement.dir || 'ltr'
+          }}
         />
       );
     }
