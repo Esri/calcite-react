@@ -260,7 +260,7 @@ class Search extends Component {
             });
           }}
           style={{
-            direction: document.documentElement.dir || 'ltr'
+            direction: (document && document.documentElement.dir) || 'ltr'
           }}
         />
       );
