@@ -228,12 +228,14 @@ StyledArcgisAccountMenuItem.defaultProps = { theme };
 
 const StyledSwitchAccountButton = styled(Button)`
   flex: 1 0 50px;
+  white-space: normal;
   border-radius: 0 0 0 ${props => props.theme.borderRadius};
 `;
 StyledSwitchAccountButton.defaultProps = { theme };
 
 const StyledSignOutButton = styled(Button)`
   flex: 1 0 50px;
+  white-space: normal;
   margin-left: 0;
   border-radius: 0 0 ${props => props.theme.borderRadius} 0;
 `;
