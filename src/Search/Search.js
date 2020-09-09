@@ -259,6 +259,9 @@ class Search extends Component {
               rowRenderStyle
             });
           }}
+          style={{
+            direction: (document && document.documentElement.dir) || 'ltr'
+          }}
         />
       );
     }

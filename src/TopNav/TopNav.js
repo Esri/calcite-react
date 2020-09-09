@@ -12,15 +12,29 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { StyledTopNav } from './TopNav-styled';
+import { StyledTopNav, StyledTopNavContainer } from './TopNav-styled';
 
-const TopNav = ({ children, ...other }) => {
-  return <StyledTopNav {...other}>{children}</StyledTopNav>;
+const TopNav = ({ children, contentWidth, contentMaxWidth, ...other }) => {
+  return (
+    <StyledTopNavContainer>
+      <StyledTopNav
+        contentWidth={contentWidth}
+        contentMaxWidth={contentMaxWidth}
+        {...other}
+      >
+        {children}{' '}
+      </StyledTopNav>
+    </StyledTopNavContainer>
+  );
 };
 
 TopNav.propTypes = {
   /** The content of the component. */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** Override for contentWidth from CalciteThemeProvider (ex. '1300px'). Use "100%" for full width TopNav. */
+  contentWidth: PropTypes.string,
+  /** Override for contentMaxWidth from theme provider (ex. '95vw').*/
+  contentMaxWidth: PropTypes.string
 };
 
 TopNav.defaultProps = {};

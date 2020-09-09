@@ -25,12 +25,22 @@ import { CalciteA } from '../Elements';
 
 // Third party libraries
 
+const StyledTopNavContainer = styled.header`
+  background-color: ${props => props.theme.palette.white};
+  border-bottom: 1px solid ${props => props.theme.palette.lightestGray};
+  position: relative;
+  display: flex;
+  width: 100%;
+`;
+StyledTopNavContainer.defaultProps = { theme };
+
 const StyledTopNav = styled.header`
   display: flex;
   align-items: center;
-  position: relative;
-  border-bottom: 1px solid ${props => props.theme.palette.lightestGray};
   background-color: ${props => props.theme.palette.white};
+  width: ${props => props.contentWidth || props.theme.contentWidth};
+  max-width: ${props => props.contentMaxWidth || props.theme.contentMaxWidth};
+  margin: 0 auto;
   z-index: 100;
   ${clearfix()};
 `;
@@ -149,6 +159,7 @@ const StyledTopNavTitle = styled(CalciteA)`
 StyledTopNavTitle.defaultProps = { theme };
 
 export {
+  StyledTopNavContainer,
   StyledTopNav,
   StyledTopNavActions,
   StyledTopNavBrandLink,
