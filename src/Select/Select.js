@@ -226,6 +226,9 @@ class Select extends Component {
               rowRenderStyle
             });
           }}
+          style={{
+            direction: (document && document.documentElement.dir) || 'ltr'
+          }}
         />
       );
     }
