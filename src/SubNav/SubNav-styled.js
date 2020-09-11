@@ -166,13 +166,23 @@ StyledSubNavLink.defaultProps = { theme };
 const StyledSubNavList = styled.nav`
   display: flex;
   margin-top: 0em;
-  padding-left: 0.25em;
   box-sizing: border-box;
+  padding-left: 0.25em;
 
   html[dir='rtl'] & {
     padding-left: 0;
     padding-right: 0.25em;
   }
+
+  ${props =>
+    props.legacy &&
+    css`
+      margin-left: auto;
+      html[dir='rtl'] & {
+        margin-left: 0;
+        margin-right: auto;
+      }
+    `}
 `;
 StyledSubNavList.defaultProps = { theme };
 
@@ -204,7 +214,6 @@ const StyledSubNavTitle = styled(CalciteH1)`
           display: flex;
           align-items: center;
           color: ${props.theme.palette.white};
-          padding-left: ${unitCalc(props.theme.baseline, 3, '/')};
           margin-bottom: 0;
 
           ${StyledSpanCrumb}, ${StyledCrumb} {
