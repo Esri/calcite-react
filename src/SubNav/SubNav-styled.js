@@ -175,7 +175,7 @@ const StyledSubNavList = styled.nav`
   }
 
   ${props =>
-    props.legacy &&
+    !props.legacy &&
     css`
       margin-left: auto;
       html[dir='rtl'] & {
