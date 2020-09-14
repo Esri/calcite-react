@@ -34,12 +34,13 @@ const StyledTopNavContainer = styled.header`
 `;
 StyledTopNavContainer.defaultProps = { theme };
 
-const StyledTopNav = styled.header`
+const StyledTopNav = styled.div`
   display: flex;
   align-items: center;
   background-color: ${props => props.theme.palette.white};
   width: ${props => props.contentWidth || props.theme.contentWidth};
   max-width: ${props => props.contentMaxWidth || props.theme.contentMaxWidth};
+  padding: 0 1rem;
   margin: 0 auto;
   z-index: 100;
   ${clearfix()};
@@ -49,7 +50,15 @@ StyledTopNav.defaultProps = { theme };
 const StyledTopNavActions = styled.div`
   display: flex;
   align-items: center;
-  padding: 0 ${props => props.theme.baseline};
+  margin-left: auto;
+  padding-left: ${props => props.theme.baseline};
+
+  html[dir='rtl'] & {
+    margin-left: initial;
+    margin-right: auto;
+    padding-left: initial;
+    padding-right: ${props => props.theme.baseline};
+  }
 
   > a,
   > button {
@@ -63,10 +72,15 @@ const StyledTopNavActions = styled.div`
 StyledTopNavActions.defaultProps = { theme };
 
 const StyledTopNavBrandLink = styled.a`
-  padding: 0 ${props => props.theme.baseline};
+  padding-right: ${props => props.theme.baseline};
   display: inline-flex;
   align-items: center;
   text-decoration: none;
+
+  html[dir='rtl'] & {
+    padding-right: initial;
+    padding-left: ${props => props.theme.baseline};
+  }
 `;
 StyledTopNavBrandLink.defaultProps = { theme };
 

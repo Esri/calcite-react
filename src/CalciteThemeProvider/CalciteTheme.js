@@ -160,7 +160,7 @@ const CalciteTheme = {
   // ┌──────────────────────┐
   // │ SCREEN CONTENT WIDTH │
   // └──────────────────────┘
-  contentWidth: '1440px',
+  contentWidth: '1450px',
   contentMaxWidth: '96vw',
 
   // ┌────────────────────┐
