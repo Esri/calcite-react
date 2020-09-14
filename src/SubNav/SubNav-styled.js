@@ -80,7 +80,9 @@ const StyledSubNavContent = styled.div`
         css`
           width: ${props.contentWidth || props.theme.contentWidth};
           max-width: ${props.contentMaxWidth || props.theme.contentMaxWidth};
+          height: 56px;
           margin: 0 auto;
+          padding: 0 1rem;
         `}
 `;
 StyledSubNavContent.defaultProps = { theme };
@@ -136,11 +138,11 @@ const StyledSubNavLink = styled(CalciteA)`
         `
       : // ----- MODERN STYLES -----
         css`
+          display: flex;
+          align-items: center;
+          box-sizing: border-box;
           color: ${props.theme.palette.white};
-          box-shadow: inset 0px 0px 0px 4px transparent;
           border-bottom: 4px solid transparent;
-          padding-top: ${unitCalc(props.theme.baseline, 1.5, '/')};
-          padding-bottom: ${unitCalc(props.theme.baseline, 1.7, '/')};
           padding-right: ${props.theme.baseline};
           padding-left: ${props.theme.baseline};
 
@@ -166,13 +168,23 @@ StyledSubNavLink.defaultProps = { theme };
 const StyledSubNavList = styled.nav`
   display: flex;
   margin-top: 0em;
-  padding-left: 0.25em;
   box-sizing: border-box;
+  padding-left: 0.25em;
 
   html[dir='rtl'] & {
     padding-left: 0;
     padding-right: 0.25em;
   }
+
+  ${props =>
+    !props.legacy &&
+    css`
+      margin-left: auto;
+      html[dir='rtl'] & {
+        margin-left: 0;
+        margin-right: auto;
+      }
+    `}
 `;
 StyledSubNavList.defaultProps = { theme };
 
@@ -204,7 +216,6 @@ const StyledSubNavTitle = styled(CalciteH1)`
           display: flex;
           align-items: center;
           color: ${props.theme.palette.white};
-          padding-left: ${unitCalc(props.theme.baseline, 3, '/')};
           margin-bottom: 0;
 
           ${StyledSpanCrumb}, ${StyledCrumb} {
