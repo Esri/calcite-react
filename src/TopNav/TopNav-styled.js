@@ -34,7 +34,7 @@ const StyledTopNavContainer = styled.header`
 `;
 StyledTopNavContainer.defaultProps = { theme };
 
-const StyledTopNav = styled.header`
+const StyledTopNav = styled.div`
   display: flex;
   align-items: center;
   background-color: ${props => props.theme.palette.white};
