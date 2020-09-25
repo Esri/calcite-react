@@ -88,7 +88,6 @@ const StyledSpanCrumb = styled.span`
     props.white &&
     css`
       color: ${props.theme.palette.white};
-      ${linkColor(props.theme.palette.white, props.theme.palette.lightestGray)};
 
       &::before {
         color: ${props.theme.palette.white};
