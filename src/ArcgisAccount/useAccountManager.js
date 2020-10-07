@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   completeAuth,
@@ -6,7 +7,7 @@ import {
   logoutOAuth2,
   getUserThumbnail,
   getOrgThumbnail
-} from './accountManagerUtils';
+} from './utils/arcgisAuthUtils';
 
 import {
   getAccountManagerStorage,
@@ -17,19 +18,18 @@ import {
   switchActiveStorage,
   completeStatusStorage,
   refreshAccountStorage
-} from './accountManagerStorageUtils';
+} from './utils/localStorageUtils';
 
-const useAccountManager = ({ accountManagerName, options }) => {
-  const name = accountManagerName
-    ? accountManagerName
-    : 'arcgis-account-manager';
-  const { accounts, status, active } = getAccountManagerStorage({ name });
+const useAccountManager = (options, name = 'arcgis-account-manager') => {
+  const [manager] = useState(name);
+  const [credentials] = useState(options);
+
+  const { accounts, status, active } = getAccountManagerStorage(manager);
   const [accountManagerState, setAccountManagerState] = useState({
     active,
     accounts,
     status
   });
-  const authOptions = options;
 
   /** Complete Login: If applicable */
   useEffect(
@@ -39,41 +39,42 @@ const useAccountManager = ({ accountManagerName, options }) => {
         return;
       }
       //complete login
-      const { clientId, portalUrl, popup } = authProps;
-      completeAuth({ clientId, portalUrl, popup }).then(account => {
+      completeAuth({
+        authProps
+      }).then(account => {
         const { key, user } = account || {};
         if (key) {
-          addAccountStorage({ name, key, account: user });
+          addAccountStorage(manager, key, user);
         }
 
         //Update localStorage/ state
-        completeStatusStorage({ name });
-        const accountManager = getAccountManagerStorage({ name });
+        completeStatusStorage(manager);
+        const accountManager = getAccountManagerStorage(manager);
         setAccountManagerState(accountManager);
       });
     },
-    [accountManagerState]
+    [manager, status]
   );
 
   /** Add Account */
   const addAccount = useCallback(
-    options => {
-      const selectOptions = options ? options : authOptions;
-      const { clientId, redirectUri, portalUrl, popup } = selectOptions || {};
+    props => {
+      const select = props ? props : credentials;
+      const { clientId, redirectUri, portalUrl, popup } = select || {};
 
       //set localstorage status
-      beginStatusStorage({ name, options: selectOptions });
+      beginStatusStorage(manager, select);
       //begin login
       loginOAuth2({
         clientId,
         redirectUri,
         portalUrl,
         popup,
-        name,
+        manager,
         setAccountManagerState
       });
     },
-    [accountManagerState]
+    [credentials, manager]
   );
 
   /** Logout Account: Remove token and session from user auth object and attempt revoke token*/
@@ -86,17 +87,17 @@ const useAccountManager = ({ accountManagerName, options }) => {
         const clientId = session ? session.clientId : null;
         logoutOAuth2({
           url: portalUrl,
-          clientId,
-          token
+          clientId: clientId,
+          token: token
         });
 
         //Update localStorage/ state
-        logoutAccountStorage({ name, key });
-        const accountManager = getAccountManagerStorage({ name });
+        logoutAccountStorage(manager, key);
+        const accountManager = getAccountManagerStorage(manager);
         setAccountManagerState(accountManager);
       }
     },
-    [accountManagerState]
+    [accountManagerState, manager]
   );
 
   /** Remove Account: Remove account from local storage and attempt revoke token*/
@@ -112,27 +113,27 @@ const useAccountManager = ({ accountManagerName, options }) => {
           //Remove token and session
           logoutOAuth2({
             url: portalUrl,
-            clientId,
-            token
+            clientId: clientId,
+            token: token
           });
         }
 
         //Update localStorage/ state
-        removeAccountStorage({ name, key });
-        const accountManager = getAccountManagerStorage({ name });
+        removeAccountStorage(manager, key);
+        const accountManager = getAccountManagerStorage(manager);
         setAccountManagerState(accountManager);
       }
     },
-    [accountManagerState]
+    [accountManagerState, manager]
   );
 
   /** Restore Account: Log in to an existing account that is logged out */
-  const restoreAccount = options => {
-    const selectOptions = options ? options : authOptions;
-    const { clientId, redirectUri, portalUrl, popup } = selectOptions || {};
+  const restoreAccount = props => {
+    const select = props ? props : credentials;
+    const { clientId, redirectUri, portalUrl, popup } = select || {};
 
     //set localstorage status
-    beginStatusStorage({ name, options });
+    beginStatusStorage(manager, select);
     //begin login
     loginOAuth2({ clientId, redirectUri, portalUrl, popup });
   };
@@ -143,18 +144,18 @@ const useAccountManager = ({ accountManagerName, options }) => {
     const { session } = accounts[key];
     session.refreshSession().then(session => {
       const sSession = session.serialize();
-      refreshAccountStorage({ name, key, session: sSession });
+      refreshAccountStorage(manager, key, sSession);
     });
   };
 
   //** Set the active account */
   const switchActiveAccount = useCallback(
     key => {
-      switchActiveStorage({ name, key });
-      const accountManager = getAccountManagerStorage({ name });
+      switchActiveStorage(manager, key);
+      const accountManager = getAccountManagerStorage(manager);
       setAccountManagerState(accountManager);
     },
-    [accountManagerState]
+    [manager]
   );
 
   return {
@@ -168,6 +169,13 @@ const useAccountManager = ({ accountManagerName, options }) => {
     getUserThumbnail,
     getOrgThumbnail
   };
+};
+
+useAccountManager.propTypes = {
+  /** Text object name for accountManager in local storage. */
+  accountManagerName: PropTypes.string,
+  /** Options for starting OAuth to include { clientId, redirectUri, portalUrl, popup }. Can also be set in addAccount function.  */
+  options: PropTypes.object
 };
 
 useAccountManager.defaultProps = {
