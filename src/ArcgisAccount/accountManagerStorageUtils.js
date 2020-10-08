@@ -76,7 +76,8 @@ export const completeStatusStorage = ({ name }) => {
 
 export const beginStatusStorage = ({
   name,
-  options: { clientId, redirectUri, portalUrl, popup }
+  options: { clientId, redirectUri, portalUrl, popup },
+  originRoute
 }) => {
   const previous = getLocalSerialized({ name });
 
@@ -85,7 +86,8 @@ export const beginStatusStorage = ({
       ...previous,
       status: {
         loading: true,
-        authProps: { clientId, redirectUri, portalUrl, popup }
+        authProps: { clientId, redirectUri, portalUrl, popup },
+        originRoute
       }
     },
     name

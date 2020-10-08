@@ -177,7 +177,7 @@ export const getOrgThumbnail = ({
     thumbnail && portal && token
       ? `${portal}/portals/self/resources/${thumbnail}?token=${token}`
       : undefined;
-  orgThumbnail.letters = name ? name[0].toUpperCase() : 'A';
+  orgThumbnail.letters = name ? name[0].toUpperCase() : '!';
   return orgThumbnail;
 };
 
@@ -193,7 +193,7 @@ export const getUserThumbnail = ({
     letters: undefined
   };
   userThumbnail.url =
-    thumbnail && portal
+    thumbnail && portal && username && token
       ? `${portal}/community/users/${username}/info/${thumbnail}?token=${token}`
       : undefined;
 
@@ -202,7 +202,7 @@ export const getUserThumbnail = ({
       ? `${firstName[0] + lastName[0]}`.toUpperCase()
       : fullName
       ? fullName[0].toUpperCase()
-      : undefined;
+      : '!';
   return userThumbnail;
 };
 
