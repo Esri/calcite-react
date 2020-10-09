@@ -90,14 +90,14 @@ import ArcgisAccount, {
         // register an app of your own to create a unique clientId
         clientId: "dwecSqF6H1LcJ1n3",
         redirectUri: `${window.location.origin}/arcgis-account`,
-        popup: true,
+        popup: true
       };
 
       const options2 = {
         // register an app of your own to create a unique clientId
         clientId: "dwecSqF6H1LcJ1n3",
         redirectUri: `${window.location.origin}/arcgis-account`,
-        popup: false,
+        popup: false
       };
 
 
@@ -105,9 +105,11 @@ import ArcgisAccount, {
         accountManagerState,
         addAccount,
         removeAccount,
+        removeAllAccounts
       } = useAccountManager(options);
 
       const {active, accounts} = accountManagerState
+      console.log(accounts)
 
       const accountManagerJson = {
         active: active,
@@ -140,10 +142,9 @@ import ArcgisAccount, {
               <ArcgisAccount
                 user={accounts[active].user}
                 portal={accounts[active].portal}
-                onRequestSwitchAccount={() =>
-                  console.log('switch account clicked')
+                onRequestSwitchAccount={() => removeAllAccounts()
                 }
-                onRequestSignOut={() => removeAccount(active)}
+                onRequestSignOut={() => removeAccount(accounts[active])}
               >
                 <ArcgisAccountMenuItem
                   onClick={() => console.log('Profile & Settings clicked')}

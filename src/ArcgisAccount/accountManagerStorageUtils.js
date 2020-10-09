@@ -1,10 +1,9 @@
 import { UserSession } from '@esri/arcgis-rest-auth';
 
-export const getAccountManagerStorage = ({ name }) => {
-  const sAccountManager = getLocalSerialized({ name });
-  const { accounts, active, status } = sAccountManager || {};
+export const getAccountManagerStorage = manager => {
+  const { accounts, active, status } = getLocalSerialized(manager) || {};
 
-  const dAccounts = deserializeUserAuthObjects({ accounts });
+  const dAccounts = deserializeUserAuthObjects(accounts);
   const authObject = {
     accounts: dAccounts,
     active,
@@ -13,22 +12,22 @@ export const getAccountManagerStorage = ({ name }) => {
   return authObject;
 };
 
-export const addAccountStorage = ({ name, key, account }) => {
-  const previous = getLocalSerialized({ name });
+export const addAccountStorage = (manager, account) => {
+  const previous = getLocalSerialized(manager);
   const { accounts, active } = previous || {};
-  const updateActive = active ? active : key;
+  const updateActive = active ? active : account.key;
   setLocal({
     state: {
       ...previous,
-      accounts: { ...accounts, [key]: account },
+      accounts: { ...accounts, [account.key]: account },
       active: updateActive
     },
-    name
+    manager
   });
 };
 
-export const removeAccountStorage = ({ name, key }) => {
-  const previous = getLocalSerialized({ name });
+export const removeAccountStorage = (manager, { key }) => {
+  const previous = getLocalSerialized(manager);
 
   let active = previous.active;
   if (active === key) {
@@ -47,39 +46,39 @@ export const removeAccountStorage = ({ name, key }) => {
       ...previous,
       active: active === key ? undefined : active
     },
-    name
+    manager
   });
 };
 
-export const switchActiveStorage = ({ name, key }) => {
-  const previous = getLocalSerialized({ name });
+export const switchActiveStorage = (manager, { key }) => {
+  const previous = getLocalSerialized(manager);
   setLocal({
     state: {
       ...previous,
       active: key
     },
-    name
+    manager
   });
 };
 
-export const completeStatusStorage = ({ name }) => {
-  const previous = getLocalSerialized({ name });
+export const completeStatusStorage = manager => {
+  const previous = getLocalSerialized(manager);
   const { status } = previous || {};
   setLocal({
     state: {
       ...previous,
       status: { ...status, loading: false }
     },
-    name
+    manager
   });
 };
 
-export const beginStatusStorage = ({
-  name,
-  options: { clientId, redirectUri, portalUrl, popup },
+export const beginStatusStorage = (
+  manager,
+  { clientId, redirectUri, portalUrl, popup },
   originRoute
-}) => {
-  const previous = getLocalSerialized({ name });
+) => {
+  const previous = getLocalSerialized(manager);
 
   setLocal({
     state: {
@@ -90,17 +89,18 @@ export const beginStatusStorage = ({
         originRoute
       }
     },
-    name
+    manager
   });
 };
 
-export const logoutAccountStorage = ({ name, key }) => {
-  const previous = getLocalSerialized({ name });
+export const logoutAccountStorage = (manager, { key }) => {
+  const previous = getLocalSerialized(manager);
   const { accounts } = previous || {};
+
   const user = {
     ...accounts[key],
-    session: undefined,
-    token: undefined
+    token: null,
+    session: null
   };
 
   setLocal({
@@ -108,30 +108,30 @@ export const logoutAccountStorage = ({ name, key }) => {
       ...previous,
       accounts: { ...accounts, [key]: user }
     },
-    name
+    manager
   });
 };
 
-export const refreshAccountStorage = ({ name, key, session }) => {
-  const previous = getLocalSerialized({ name });
+export const refreshAccountStorage = (manager, { key, session }) => {
+  const previous = getLocalSerialized(manager);
   const { accounts } = previous || {};
   setLocal({
     state: {
       ...previous,
       accounts: { ...accounts, [key]: { ...accounts[key], session } }
     },
-    name
+    manager
   });
 };
 
 //** State Management */
 
-const setLocal = ({ state, name }) => {
-  window.localStorage.setItem(name, JSON.stringify(state));
+const setLocal = ({ state, manager }) => {
+  window.localStorage.setItem(manager, JSON.stringify(state));
 };
 
-const getLocalSerialized = ({ name }) => {
-  const accountManager = JSON.parse(window.localStorage.getItem(name));
+const getLocalSerialized = manager => {
+  const accountManager = JSON.parse(window.localStorage.getItem(manager));
   const { accounts, active, status } = accountManager || {};
   const authObject = {
     accounts,
@@ -141,7 +141,7 @@ const getLocalSerialized = ({ name }) => {
   return authObject;
 };
 
-const deserializeUserAuthObjects = ({ accounts }) => {
+const deserializeUserAuthObjects = accounts => {
   const dUsers = {};
 
   if (accounts) {
@@ -153,11 +153,11 @@ const deserializeUserAuthObjects = ({ accounts }) => {
         ? JSON.parse(accounts[key].portal)
         : undefined;
 
-      dUsers[key] = {};
-      dUsers[key].user = accounts[key].user;
-      dUsers[key].session = deserializedSession;
-      dUsers[key].portal = deserializedPortal;
-      dUsers[key].token = accounts[key].token;
+      dUsers[key] = {
+        ...accounts[key],
+        portal: deserializedPortal,
+        session: deserializedSession
+      };
     }
   }
 

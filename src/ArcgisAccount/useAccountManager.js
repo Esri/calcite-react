@@ -7,7 +7,7 @@ import {
   logoutOAuth2,
   getUserThumbnail,
   getOrgThumbnail
-} from './utils/arcgisAuthUtils';
+} from './accountManagerUtils';
 
 import {
   getAccountManagerStorage,
@@ -18,7 +18,7 @@ import {
   switchActiveStorage,
   completeStatusStorage,
   refreshAccountStorage
-} from './utils/localStorageUtils';
+} from './accountManagerStorageUtils';
 
 const useAccountManager = (options, name = 'arcgis-account-manager') => {
   const [manager] = useState(name);
@@ -39,12 +39,9 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
         return;
       }
       //complete login
-      completeAuth({
-        authProps
-      }).then(account => {
-        const { key, user } = account || {};
-        if (key) {
-          addAccountStorage(manager, key, user);
+      completeAuth(authProps).then(account => {
+        if (account && account.key) {
+          addAccountStorage(manager, account);
         }
 
         //Update localStorage/ state
@@ -66,50 +63,46 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
         ? options || {}
         : credentials || {};
 
-      const portal = buildPortalUrl(portalUrl);
-
       //set localstorage status
       beginStatusStorage(
         manager,
         {
           clientId,
           redirectUri,
-          portalUrl: portal,
+          portalUrl,
           popup
         },
         originRoute
       );
       //begin login
-      loginOAuth2({
-        clientId,
-        redirectUri,
-        portalUrl: portal,
-        popup,
+      loginOAuth2(
         manager,
+        {
+          clientId,
+          redirectUri,
+          portalUrl,
+          popup
+        },
         setAccountManagerState
-      });
+      );
     },
     [credentials, manager]
   );
 
   /** Logout Account: Remove token and session from user auth object and attempt revoke token*/
   const logoutAccount = useCallback(
-    (account = null) => {
-      // const { accounts } = accountManagerState || {};
+    async (account = null) => {
       const { session, token, key } = account || {};
+      const valid = validAccount(account);
 
-      if (session && token && key) {
-        const portalUrl = session ? session.portal : null;
-        const clientId = session ? session.clientId : null;
-        const message = logoutOAuth2({
-          url: portalUrl,
-          clientId: clientId,
-          token: token
+      if (session && token && valid) {
+        logoutOAuth2(account).then(message => {
+          const status = JSON.stringify(message);
+          console.log(`Revoke token status: ${status}`);
         });
-        console.log(`Revoke token status: ${message}`);
 
         //Update localStorage/ state
-        logoutAccountStorage(manager, key);
+        logoutAccountStorage(manager, account);
         const accountManager = getAccountManagerStorage(manager);
         setAccountManagerState(accountManager);
       } else {
@@ -124,22 +117,20 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
   /** Remove Account: Remove account from local storage and attempt revoke token*/
   const removeAccount = useCallback(
     (account = null) => {
-      const { session, token, key } = account;
-      if (session && key) {
+      const valid = validAccount(account);
+      const { session, token, key } = account || {};
+      if (valid) {
         //Revoke token
         if (token) {
-          const portalUrl = session?.portal;
-          const clientId = session?.clientId;
           //Remove token and session
-          logoutOAuth2({
-            url: portalUrl,
-            clientId: clientId,
-            token: token
+          logoutOAuth2(account).then(message => {
+            const status = JSON.stringify(message);
+            console.log(`Revoke token status: ${status}`);
           });
         }
 
         //Update localStorage/ state
-        removeAccountStorage(manager, key);
+        removeAccountStorage(manager, account);
         const accountManager = getAccountManagerStorage(manager);
         setAccountManagerState(accountManager);
       } else {
@@ -162,28 +153,29 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
   };
 
   /** Refresh Account: UserSession.refreshSession [https://esri.github.io/arcgis-rest-js/api/auth/UserSession/#refreshSession] */
-  const refreshAccount = account => {
-    const { session, key } = account || {};
+  const refreshAccount = ({ session, key }) => {
     try {
       if (!session) throw Error('Missing account session.');
       if (!key) throw Error('Missing account key.');
-      session.refreshSession().then(session => {
-        const sSession = session.serialize();
-        refreshAccountStorage(manager, key, sSession);
-      });
+      session
+        .refreshSession()
+        .then(session => {
+          const sSession = session.serialize();
+          refreshAccountStorage(manager, { key, session: sSession });
+        })
+        .catch(e =>
+          console.error(`Cannot refresh session for account: ${key}. ${e}`)
+        );
     } catch (e) {
-      console.error(
-        `Cannot refresh session for account: ${account}. Error: ${e}.`
-      );
+      console.error(`Cannot refresh session for account: ${key}. ${e}`);
     }
   };
 
-  //** Set the active account */
+  /** Set the active account */
   const switchActiveAccount = useCallback(
     (account = null) => {
       if (validAccount(account)) {
-        const { key } = account;
-        switchActiveStorage(manager, key);
+        switchActiveStorage(manager, account);
         const accountManager = getAccountManagerStorage(manager);
         setAccountManagerState(accountManager);
       }
@@ -191,29 +183,104 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
     [manager]
   );
 
-  const verifyToken = useCallback((account = null) => {}, []);
-
-  const logoutAllAccounts = useCallback(() => {}, []);
-
-  const removeAllAccounts = useCallback(() => {}, []);
-
-  const validAccount = (account = null) => {
-    const { key } = account || {};
-    if (key) {
-      const valid = accountManagerState?.accounts[key] ? true : false;
-      return valid;
+  /** Check token status */
+  const verifyToken = useCallback(({ session, token, key }) => {
+    if (session && token) {
+      try {
+        const { portal } = session || {};
+        session
+          .getToken(portal)
+          .then(() => {
+            return true;
+          })
+          .catch(e => {
+            console.log(`Account ${key} token invalid. ${e}`);
+            return false;
+          });
+      } catch (e) {
+        console.error(`Token status verification failed with error.  ${e}`);
+        return false;
+      }
+    } else {
+      return false;
     }
-    return false;
-  };
+  }, []);
+
+  /** Logout all accounts */
+  const logoutAllAccounts = useCallback(
+    () => {
+      Object.entries(accountManagerState.accounts).map(([key, account]) => {
+        const { session, token } = account || {};
+
+        if (session && token) {
+          logoutOAuth2(account).then(message => {
+            const status = JSON.stringify(message);
+            console.log(`Revoke token status for account ${key}: ${status}`);
+          });
+
+          //Update localStorage/ state
+          logoutAccountStorage(manager, account);
+        }
+        return account;
+      });
+      const accountManager = getAccountManagerStorage(manager);
+      setAccountManagerState(accountManager);
+    },
+    [accountManagerState]
+  );
+
+  /** Remove all accounts */
+  const removeAllAccounts = useCallback(
+    () => {
+      Object.entries(accountManagerState.accounts).map(([key, account]) => {
+        const { session, token } = account || {};
+
+        //Revoke token
+        if (session && token) {
+          logoutOAuth2(account).then(message => {
+            const status = JSON.stringify(message);
+            console.log(`Revoke token status for account ${key}: ${status}`);
+          });
+        }
+        //Update localStorage/ state
+        removeAccountStorage(manager, account);
+
+        return {};
+      });
+      const accountManager = getAccountManagerStorage(manager);
+      setAccountManagerState(accountManager);
+    },
+    [accountManagerState]
+  );
+
+  // Helper Functions
+  const validAccount = useCallback(
+    (account = null) => {
+      const { key } = account || {};
+      if (key) {
+        const valid = accountManagerState
+          ? accountManagerState.accounts[key]
+            ? true
+            : false
+          : false;
+        return valid;
+      }
+      return false;
+    },
+    [accountManagerState]
+  );
 
   return {
     accountManagerState,
     addAccount,
     logoutAccount,
+    logoutAllAccounts,
     removeAccount,
+    removeAllAccounts,
     restoreAccount,
     refreshAccount,
     switchActiveAccount,
+    verifyToken,
     getUserThumbnail,
     getOrgThumbnail
   };
@@ -223,52 +290,52 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
  * Helper Functions
  */
 
-const buildPortalUrl = url => {
-  //https://developers.arcgis.com/rest/users-groups-and-items/root.htm
-  //Enterprise ex:http://aero.esri.com/portal/sharing/rest
-  //Arcgis Online ex: https://dbsne.maps.arcgis.com/sharing/rest
-  if (!url) return null;
-  const format =
-    'https://<webadaptorhost>.<domain>.com/<webadaptorname>/sharing/rest';
-  try {
-    let portal = new URL(url);
-    const protocol = portal.protocol;
-    const host = portal.host;
-    let pathname = portal.pathname; // Format '/<webadaptorname>/sharing/rest'
-    const defaultPathname = '/portal/sharing/rest';
+// const buildPortalUrl = url => {
+//   //https://developers.arcgis.com/rest/users-groups-and-items/root.htm
+//   //Enterprise ex:http://aero.esri.com/portal/sharing/rest
+//   //Arcgis Online ex: https://dbsne.maps.arcgis.com/sharing/rest
+//   if (!url) return null;
+//   const format =
+//     'https://<webadaptorhost>.<domain>.com/<webadaptorname>/sharing/rest';
+//   try {
+//     let portal = new URL(url);
+//     const protocol = portal.protocol;
+//     const host = portal.host;
+//     let pathname = portal.pathname; // Format '/<webadaptorname>/sharing/rest'
+//     const defaultPathname = '/portal/sharing/rest';
 
-    const pathArray = pathname?.split('/');
-    if (!pathArray) {
-      console.warn(
-        `No URL path given. Expected format: '/<webadaptorname>/sharing/rest'. Setting path to default: ${defaultPathname}`
-      );
-      pathname = defaultPathname;
-    } else if (pathArray.length < 2) {
-      console.warn(
-        `No URL path given. Expected format: '/<webadaptorname>/sharing/rest'. Setting path to default: ${defaultPathname}`
-      );
-      pathname = defaultPathname;
-    } else if (pathArray.length < 4) {
-      console.warn(
-        `URL path ${pathname} may be invalid format. Verify format. Arcgis Online format: '/sharing/rest'. Enterprise format: '/<webadaptorname>/sharing/rest'. Setting path to: ${pathname}`
-      );
-    } else if (pathArray.length !== 4) {
-      console.warn(
-        `URL path ${pathname} is invalid format. Expected format: '/<webadaptorname>/sharing/rest'. Setting path to: /${
-          pathArray[1]
-        }/sharing/rest`
-      );
-      pathname = `/${pathArray[1]}/sharing/rest`;
-    }
+//     const pathArray = pathname ? pathname.split('/') : null;
+//     if (!pathArray) {
+//       console.warn(
+//         `No URL path given. Expected format: '/<webadaptorname>/sharing/rest'. Setting path to default: ${defaultPathname}`
+//       );
+//       pathname = defaultPathname;
+//     } else if (pathArray.length < 2) {
+//       console.warn(
+//         `No URL path given. Expected format: '/<webadaptorname>/sharing/rest'. Setting path to default: ${defaultPathname}`
+//       );
+//       pathname = defaultPathname;
+//     } else if (pathArray.length < 4) {
+//       console.warn(
+//         `URL path ${pathname} may be invalid format. Verify format. Arcgis Online format: '/sharing/rest'. Enterprise format: '/<webadaptorname>/sharing/rest'. Setting path to: ${pathname}`
+//       );
+//     } else if (pathArray.length !== 4) {
+//       console.warn(
+//         `URL path ${pathname} is invalid format. Expected format: '/<webadaptorname>/sharing/rest'. Setting path to: /${
+//           pathArray[1]
+//         }/sharing/rest`
+//       );
+//       pathname = `/${pathArray[1]}/sharing/rest`;
+//     }
 
-    return `${protocol}//${host}${pathname}`;
-  } catch (e) {
-    console.error(
-      `This may be an invalid URL: ${url}. For ArcGIS Online set url to null. For Enterprise use format: ${format}. Full error: ${e}`
-    );
-    return url;
-  }
-};
+//     return `${protocol}//${host}${pathname}`;
+//   } catch (e) {
+//     console.error(
+//       `This may be an invalid URL: ${url}. For ArcGIS Online set url to null. For Enterprise use format: ${format}. Full error: ${e}`
+//     );
+//     return url;
+//   }
+// };
 
 /**
  * Docs
