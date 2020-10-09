@@ -104,12 +104,10 @@ import ArcgisAccount, {
       const {
         accountManagerState,
         addAccount,
-        removeAccount,
-        removeAllAccounts
+        removeAccount
       } = useAccountManager(options);
 
       const {active, accounts} = accountManagerState
-      console.log(accounts)
 
       const accountManagerJson = {
         active: active,
@@ -142,8 +140,7 @@ import ArcgisAccount, {
               <ArcgisAccount
                 user={accounts[active].user}
                 portal={accounts[active].portal}
-                onRequestSwitchAccount={() => removeAllAccounts()
-                }
+                onRequestSwitchAccount={() => console.log('Switch Account')}
                 onRequestSignOut={() => removeAccount(accounts[active])}
               >
                 <ArcgisAccountMenuItem
@@ -202,10 +199,10 @@ import ArcgisAccount, {
 
 ### useAccountManager
 
-| Property           | Type   | Required | Default                | Description                                                                                                                                                                                                                                                                                                                                                                                                |
-| :----------------- | :----- | :------- | :--------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| options            | Object | false    | -                      | Options used when calling addAccount to include { clientId, redirectUri, portalUrl, popup }. Can also be fed directly to addAccount function. Note: portalUrl will default to ArcGIS Online, popup will default to false. [Portal Url Format Doc](https://developers.arcgis.com/rest/users-groups-and-items/root.htm). Example _https_://[`webadaptorhost`].[`domain`].com/[`webadaptorname`]/sharing/rest |
-| accountManagerName | String | false    | arcgis-account-manager | Text name for accountManager object in local storage.                                                                                                                                                                                                                                                                                                                                                      |
+| Property           | Type   | Required | Default                | Description                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :----------------- | :----- | :------- | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| options            | Object | false    | -                      | Options used when calling addAccount to include { clientId, redirectUri, portalUrl, popup }. Can also be fed directly to addAccount function. Note: portalUrl will default to ArcGIS Online, popup will default to false. [Formatting portalUrl docs](https://developers.arcgis.com/rest/users-groups-and-items/root.htm). Example _https_://[`webadaptorhost`].[`domain`].com/[`webadaptorname`]/sharing/rest |
+| accountManagerName | String | false    | arcgis-account-manager | Text name for accountManager object in local storage.                                                                                                                                                                                                                                                                                                                                                          |
 
 ## Return
 

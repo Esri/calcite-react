@@ -217,7 +217,7 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
     const key = createAccountKey({
       session: dSession,
       user,
-      dPortal: portal,
+      portal: dPortal,
       token
     });
     return {
@@ -234,12 +234,10 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
   }
 };
 
-const createAccountKey = account => {
+const createAccountKey = ({ user, portal }) => {
   try {
-    const { user, portal } = account || {};
-    const deserializedPortal = portal ? JSON.parse(portal) : {};
     const { username } = user || {};
-    const { name } = deserializedPortal || {};
+    const { name } = portal || {};
     const orgName = name ? name.replace(/\s+/g, '') : 'org';
     const key = username + '-' + orgName;
     return key;

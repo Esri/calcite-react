@@ -143,13 +143,45 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
   );
 
   /** Restore Account: Log in to an existing account that is logged out */
-  const restoreAccount = (account = null) => {
-    // const select = props ? props : credentials;
-    // const { clientId, redirectUri, portalUrl, popup } = select || {};
-    //set localstorage status
-    // beginStatusStorage(manager, select);
-    //begin login
-    // loginOAuth2({ clientId, redirectUri, portalUrl, popup });
+  const restoreAccount = ({ portal }) => {
+    const { appInfo, portalHostname } = portal || {};
+    const { appId } = appInfo || {};
+    const portalUrl =
+      portalHostname === 'www.arcgis.com'
+        ? null
+        : `https://${portalHostname}/sharing/rest`;
+    if (appId && portalHostname) {
+      const clientId = appId;
+      const {
+        authProps: { redirectUri, popup }
+      } = accountManagerState.status || {};
+      const originRoute = window.location.href;
+
+      if (redirectUri && popup !== undefined) {
+        //set localstorage status
+        beginStatusStorage(
+          manager,
+          { clientId, redirectUri, portalUrl, popup },
+          originRoute
+        );
+        //begin login
+        loginOAuth2(
+          manager,
+          { clientId, redirectUri, portalUrl, popup },
+          setAccountManagerState
+        );
+      } else {
+        console.error(
+          `Cannot restore account. Missing redirectUri and popup in accountManagerState.status: ${
+            accountManagerState.status
+          }`
+        );
+      }
+    } else {
+      console.error(
+        `Cannot restore account. Missing clientId and portalUrl in account portal: ${portal}`
+      );
+    }
   };
 
   /** Refresh Account: UserSession.refreshSession [https://esri.github.io/arcgis-rest-js/api/auth/UserSession/#refreshSession] */
