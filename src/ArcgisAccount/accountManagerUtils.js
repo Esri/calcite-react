@@ -168,7 +168,8 @@ export const logoutOAuth2 = async ({ session, token }) => {
 export const getOrgThumbnail = ({
   session: { portal },
   portal: { thumbnail, name },
-  token
+  token,
+  orgImage
 }) => {
   //org thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/portal-self.htm)
   let orgThumbnail = {
@@ -180,6 +181,19 @@ export const getOrgThumbnail = ({
       ? `${portal}/portals/self/resources/${thumbnail}?token=${token}`
       : undefined;
   orgThumbnail.letters = name ? name[0].toUpperCase() : '!';
+
+  if (orgImage) {
+    orgThumbnail.image = orgImage;
+  } else if (orgThumbnail.url) {
+    try {
+      const image = new Image();
+      image.src = orgThumbnail.url;
+      orgThumbnail.image = image;
+    } catch (e) {
+      console.error(`Error creating js Image(). ${e}`);
+    }
+  }
+
   return orgThumbnail;
 };
 
@@ -187,7 +201,8 @@ export const getOrgThumbnail = ({
 export const getUserThumbnail = ({
   session: { portal, username },
   user: { thumbnail, firstName, lastName, fullName },
-  token
+  token,
+  userImage
 }) => {
   //user thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/user.htm)
   let userThumbnail = {
@@ -205,6 +220,19 @@ export const getUserThumbnail = ({
       : fullName
       ? fullName[0].toUpperCase()
       : '!';
+
+  if (userImage) {
+    userThumbnail.image = userImage;
+  } else if (userThumbnail.url) {
+    try {
+      const image = new Image();
+      image.src = userThumbnail.url;
+      userThumbnail.image = image;
+    } catch (e) {
+      console.error(`Error creating js Image(). ${e}`);
+    }
+  }
+
   return userThumbnail;
 };
 
@@ -220,10 +248,13 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
       portal: dPortal,
       token
     });
+
+    //store images to user?
+
     return {
-      session: dSession.serialize(),
       user,
       portal: JSON.stringify(dPortal),
+      session: dSession.serialize(),
       token: token,
       key
     };
