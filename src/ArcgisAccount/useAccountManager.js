@@ -39,16 +39,18 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
         return;
       }
       //complete login
-      completeAuth(authProps).then(account => {
+      const completeLogin = async () => {
+        const account = await completeAuth(authProps);
         if (account && account.key) {
           addAccountStorage(manager, account);
         }
-
         //Update localStorage/ state
         completeStatusStorage(manager);
         const accountManager = getAccountManagerStorage(manager);
         setAccountManagerState(accountManager);
-      });
+      };
+
+      completeLogin();
     },
     [manager, status]
   );
@@ -96,10 +98,9 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
       const valid = validAccount(account);
 
       if (session && token && valid) {
-        logoutOAuth2(account).then(message => {
-          const status = JSON.stringify(message);
-          console.log(`Revoke token status: ${status}`);
-        });
+        const message = await logoutOAuth2(account);
+        const status = JSON.stringify(message);
+        console.log(`Revoke token status: ${status}`);
 
         //Update localStorage/ state
         logoutAccountStorage(manager, account);
@@ -116,17 +117,16 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
 
   /** Remove Account: Remove account from local storage and attempt revoke token*/
   const removeAccount = useCallback(
-    (account = null) => {
+    async (account = null) => {
       const valid = validAccount(account);
       const { session, token, key } = account || {};
       if (valid) {
         //Revoke token
         if (token) {
           //Remove token and session
-          logoutOAuth2(account).then(message => {
-            const status = JSON.stringify(message);
-            console.log(`Revoke token status: ${status}`);
-          });
+          const message = await logoutOAuth2(account);
+          const status = JSON.stringify(message);
+          console.log(`Revoke token status: ${status}`);
         }
 
         //Update localStorage/ state
@@ -185,19 +185,14 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
   };
 
   /** Refresh Account: UserSession.refreshSession [https://esri.github.io/arcgis-rest-js/api/auth/UserSession/#refreshSession] */
-  const refreshAccount = ({ session, key }) => {
+  const refreshAccount = async ({ session, key }) => {
     try {
       if (!session) throw Error('Missing account session.');
       if (!key) throw Error('Missing account key.');
-      session
-        .refreshSession()
-        .then(session => {
-          const sSession = session.serialize();
-          refreshAccountStorage(manager, { key, session: sSession });
-        })
-        .catch(e =>
-          console.error(`Cannot refresh session for account: ${key}. ${e}`)
-        );
+
+      const refresh = await session.refreshSession();
+      const sSession = refresh ? refresh.serialize() : undefined;
+      refreshAccountStorage(manager, { key, session: sSession });
     } catch (e) {
       console.error(`Cannot refresh session for account: ${key}. ${e}`);
     }
@@ -216,19 +211,13 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
   );
 
   /** Check token status */
-  const verifyToken = useCallback(({ session, token, key }) => {
+  const verifyToken = useCallback(async ({ session, token, key }) => {
     if (session && token) {
       try {
         const { portal } = session || {};
-        session
-          .getToken(portal)
-          .then(() => {
-            return true;
-          })
-          .catch(e => {
-            console.log(`Account ${key} token invalid. ${e}`);
-            return false;
-          });
+        const result = session.getToken(portal);
+        if (result) return true;
+        return false;
       } catch (e) {
         console.error(`Token status verification failed with error.  ${e}`);
         return false;
@@ -240,21 +229,22 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
 
   /** Logout all accounts */
   const logoutAllAccounts = useCallback(
-    () => {
-      Object.entries(accountManagerState.accounts).map(([key, account]) => {
-        const { session, token } = account || {};
+    async () => {
+      Object.entries(accountManagerState.accounts).map(
+        async ([key, account]) => {
+          const { session, token } = account || {};
 
-        if (session && token) {
-          logoutOAuth2(account).then(message => {
+          if (session && token) {
+            const message = await logoutOAuth2(account);
             const status = JSON.stringify(message);
             console.log(`Revoke token status for account ${key}: ${status}`);
-          });
 
-          //Update localStorage/ state
-          logoutAccountStorage(manager, account);
+            //Update localStorage/ state
+            logoutAccountStorage(manager, account);
+          }
+          return account;
         }
-        return account;
-      });
+      );
       const accountManager = getAccountManagerStorage(manager);
       setAccountManagerState(accountManager);
     },
@@ -263,22 +253,23 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
 
   /** Remove all accounts */
   const removeAllAccounts = useCallback(
-    () => {
-      Object.entries(accountManagerState.accounts).map(([key, account]) => {
-        const { session, token } = account || {};
+    async () => {
+      Object.entries(accountManagerState.accounts).map(
+        async ([key, account]) => {
+          const { session, token } = account || {};
 
-        //Revoke token
-        if (session && token) {
-          logoutOAuth2(account).then(message => {
+          //Revoke token
+          if (session && token) {
+            const message = await logoutOAuth2(account);
             const status = JSON.stringify(message);
             console.log(`Revoke token status for account ${key}: ${status}`);
-          });
-        }
-        //Update localStorage/ state
-        removeAccountStorage(manager, account);
+          }
+          //Update localStorage/ state
+          removeAccountStorage(manager, account);
 
-        return {};
-      });
+          return {};
+        }
+      );
       const accountManager = getAccountManagerStorage(manager);
       setAccountManagerState(accountManager);
     },
@@ -317,57 +308,6 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
     getOrgThumbnail
   };
 };
-
-/**
- * Helper Functions
- */
-
-// const buildPortalUrl = url => {
-//   //https://developers.arcgis.com/rest/users-groups-and-items/root.htm
-//   //Enterprise ex:http://aero.esri.com/portal/sharing/rest
-//   //Arcgis Online ex: https://dbsne.maps.arcgis.com/sharing/rest
-//   if (!url) return null;
-//   const format =
-//     'https://<webadaptorhost>.<domain>.com/<webadaptorname>/sharing/rest';
-//   try {
-//     let portal = new URL(url);
-//     const protocol = portal.protocol;
-//     const host = portal.host;
-//     let pathname = portal.pathname; // Format '/<webadaptorname>/sharing/rest'
-//     const defaultPathname = '/portal/sharing/rest';
-
-//     const pathArray = pathname ? pathname.split('/') : null;
-//     if (!pathArray) {
-//       console.warn(
-//         `No URL path given. Expected format: '/<webadaptorname>/sharing/rest'. Setting path to default: ${defaultPathname}`
-//       );
-//       pathname = defaultPathname;
-//     } else if (pathArray.length < 2) {
-//       console.warn(
-//         `No URL path given. Expected format: '/<webadaptorname>/sharing/rest'. Setting path to default: ${defaultPathname}`
-//       );
-//       pathname = defaultPathname;
-//     } else if (pathArray.length < 4) {
-//       console.warn(
-//         `URL path ${pathname} may be invalid format. Verify format. Arcgis Online format: '/sharing/rest'. Enterprise format: '/<webadaptorname>/sharing/rest'. Setting path to: ${pathname}`
-//       );
-//     } else if (pathArray.length !== 4) {
-//       console.warn(
-//         `URL path ${pathname} is invalid format. Expected format: '/<webadaptorname>/sharing/rest'. Setting path to: /${
-//           pathArray[1]
-//         }/sharing/rest`
-//       );
-//       pathname = `/${pathArray[1]}/sharing/rest`;
-//     }
-
-//     return `${protocol}//${host}${pathname}`;
-//   } catch (e) {
-//     console.error(
-//       `This may be an invalid URL: ${url}. For ArcGIS Online set url to null. For Enterprise use format: ${format}. Full error: ${e}`
-//     );
-//     return url;
-//   }
-// };
 
 /**
  * Docs
