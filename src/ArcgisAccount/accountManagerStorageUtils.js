@@ -1,26 +1,32 @@
 import { UserSession } from '@esri/arcgis-rest-auth';
 
 export const getAccountManagerStorage = manager => {
-  const { accounts, active, status } = getLocalSerialized(manager) || {};
-
+  const { accounts, active, status, order } = getLocalSerialized(manager) || {};
   const dAccounts = deserializeUserAuthObjects(accounts);
+
   const authObject = {
     accounts: dAccounts,
     active,
-    status
+    status,
+    order
   };
   return authObject;
 };
 
 export const addAccountStorage = (manager, account) => {
   const previous = getLocalSerialized(manager);
-  const { accounts, active } = previous || {};
-  const updateActive = active ? active : account.key;
+  const { accounts, active, status: setActive } = previous || {};
+  const updateActive = setActive || !active ? account.key : active;
+  const order =
+    previous.order && !accounts[account.key]
+      ? [account.key, ...previous.order]
+      : [];
   setLocal({
     state: {
       ...previous,
       accounts: { ...accounts, [account.key]: account },
-      active: updateActive
+      active: updateActive,
+      order
     },
     manager
   });
@@ -28,23 +34,21 @@ export const addAccountStorage = (manager, account) => {
 
 export const removeAccountStorage = (manager, { key }) => {
   const previous = getLocalSerialized(manager);
-
-  let active = previous.active;
-  if (active === key) {
-    //update active
-    for (const aKey in previous.accounts) {
-      if (aKey !== key) {
-        active = aKey;
-        break;
-      }
-    }
-  }
-
+  const order = previous.order.filter(item => item !== key);
   delete previous.accounts[key];
+
+  const active =
+    previous.active === key
+      ? order.length > 0
+        ? order[0]
+        : undefined
+      : previous.active;
+
   setLocal({
     state: {
       ...previous,
-      active: active === key ? undefined : active
+      active,
+      order
     },
     manager
   });
@@ -52,10 +56,12 @@ export const removeAccountStorage = (manager, { key }) => {
 
 export const switchActiveStorage = (manager, { key }) => {
   const previous = getLocalSerialized(manager);
+  const order = [key, ...previous.order.filter(item => item !== key)];
   setLocal({
     state: {
       ...previous,
-      active: key
+      active: key,
+      order
     },
     manager
   });
@@ -76,7 +82,8 @@ export const completeStatusStorage = manager => {
 export const beginStatusStorage = (
   manager,
   { clientId, redirectUri, portalUrl, popup },
-  originRoute
+  originRoute,
+  setActive
 ) => {
   const previous = getLocalSerialized(manager);
 
@@ -86,7 +93,8 @@ export const beginStatusStorage = (
       status: {
         loading: true,
         authProps: { clientId, redirectUri, portalUrl, popup },
-        originRoute
+        originRoute,
+        setActive
       }
     },
     manager
@@ -132,11 +140,12 @@ const setLocal = ({ state, manager }) => {
 
 const getLocalSerialized = manager => {
   const accountManager = JSON.parse(window.localStorage.getItem(manager));
-  const { accounts, active, status } = accountManager || {};
+  const { accounts, active, status, order } = accountManager || {};
   const authObject = {
     accounts,
     active,
-    status
+    status,
+    order
   };
   return authObject;
 };

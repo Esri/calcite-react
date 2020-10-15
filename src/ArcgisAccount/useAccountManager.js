@@ -24,11 +24,12 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
   const [manager] = useState(name);
   const [credentials] = useState(options);
 
-  const { accounts, status, active } = getAccountManagerStorage(manager);
+  const { accounts, status, active, order } = getAccountManagerStorage(manager);
   const [accountManagerState, setAccountManagerState] = useState({
     active,
     accounts,
-    status
+    status,
+    order
   });
 
   /** Complete Login */
@@ -57,7 +58,7 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
 
   /** Add Account */
   const addAccount = useCallback(
-    (options = null) => {
+    (options = null, setActive = true) => {
       // saving window.location.href (query params, etc) as originRoute
       const originRoute = window.location.href;
 
@@ -74,7 +75,8 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
           portalUrl,
           popup
         },
-        originRoute
+        originRoute,
+        setActive
       );
       //begin login
       loginOAuth2(
