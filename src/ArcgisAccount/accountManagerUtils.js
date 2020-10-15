@@ -30,23 +30,18 @@ export const beginOAuthSignIn = async (
 
   if (popup) {
     try {
-      UserSession.beginOAuth2({
+      const dSession = await UserSession.beginOAuth2({
         // register an app of your own to create a unique clientId
         clientId,
         redirectUri,
         portal,
         popup
-      })
-        .then(dSession => {
-          createAccountObject({ dSession, portal, clientId })
-            .then(account => {
-              addAccountStorage(manager, account);
-              const accountManager = getAccountManagerStorage(manager);
-              setAccountManagerState(accountManager);
-            })
-            .catch(e => console.error(`Error creating account object. ${e}`));
-        })
-        .catch(e => console.error(`Error beginning OAuth (beginOAuth2). ${e}`));
+      });
+      const account = await createAccountObject({ dSession, portal, clientId });
+
+      addAccountStorage(manager, account);
+      const accountManager = getAccountManagerStorage(manager);
+      setAccountManagerState(accountManager);
     } catch (e) {
       console.error(`Error getting User Session (beginOAuth). ${e}`);
     }
