@@ -9,41 +9,44 @@ import {
 
 //** RestJS */
 /** Begin OAuth  */
-export const beginOAuthSignIn = async ({
-  clientId,
-  redirectUri,
-  portalUrl,
-  popup,
-  name,
+export const beginOAuthSignIn = async (
+  manager,
+  { clientId, redirectUri, portalUrl, popup },
   setAccountManagerState
-}) => {
+) => {
+  const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing/rest';
+  const url = new URL(portal);
+
+  if (!url.pathname) {
+    const resource = new URL(
+      'https://developers.arcgis.com/rest/users-groups-and-items/root.htm'
+    );
+    const format =
+      'https://<webadaptorhost>.<domain>.com/<webadaptorname>/sharing/rest';
+    console.warn(
+      `No URL path given may cause 400 error. If using Enterprise portal verify url format: ${format}. View resource for formatting url: ${resource}`
+    );
+  }
+
   if (popup) {
     try {
-      const portal = portalUrl
-        ? portalUrl
-        : 'https://www.arcgis.com/sharing/rest';
-      UserSession.beginOAuth2({
+      const dSession = await UserSession.beginOAuth2({
         // register an app of your own to create a unique clientId
         clientId,
         redirectUri,
         portal,
         popup
-      }).then(dSession => {
-        createAccountObject({ dSession, portal, clientId }).then(account => {
-          const key = createAccountKey({ account });
-          addAccountStorage({ name, key, account });
-          const accountManager = getAccountManagerStorage({ name });
-          setAccountManagerState(accountManager);
-        });
       });
-    } catch (err) {
-      console.error('Error getting User Session (beginOAuth).', err);
+      const account = await createAccountObject({ dSession, portal, clientId });
+
+      addAccountStorage(manager, account);
+      const accountManager = getAccountManagerStorage(manager);
+      setAccountManagerState(accountManager);
+    } catch (e) {
+      console.error(`Error getting User Session (beginOAuth). ${e}`);
     }
   } else {
     try {
-      const portal = portalUrl
-        ? portalUrl
-        : 'https://www.arcgis.com/sharing/rest';
       UserSession.beginOAuth2({
         // register an app of your own to create a unique clientId
         clientId,
@@ -51,14 +54,19 @@ export const beginOAuthSignIn = async ({
         portal,
         popup
       });
-    } catch (err) {
-      console.error('Error getting User Session (beginOAuth).', err);
+    } catch (e) {
+      console.error(`Error getting User Session (beginOAuth). ${e}`);
     }
   }
 };
 
 /** Complete OAuth  */
-export const completeOAuthSignIn = async ({ clientId, portalUrl, popup }) => {
+export const completeOAuthSignIn = async ({
+  clientId,
+  portalUrl,
+  redirectUri,
+  popup
+}) => {
   try {
     const portal = portalUrl
       ? portalUrl
@@ -66,35 +74,36 @@ export const completeOAuthSignIn = async ({ clientId, portalUrl, popup }) => {
     const dSession = UserSession.completeOAuth2({
       clientId,
       portal,
+      redirectUri,
       popup
     });
 
     const account = await createAccountObject({ dSession, portal, clientId });
 
-    // Clear query string token from URL
-    window.history.replaceState({}, document.title, window.location.pathname);
+    // Clear hash token from URL
+    if (window.history.pushState) {
+      window.history.pushState('', '/', window.location.pathname);
+    } else {
+      window.location.hash = '';
+    }
     return account;
-  } catch (err) {
-    console.error('Error getting User Session (completeOAuth).');
+  } catch (e) {
+    console.error(
+      `Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url. ${e}`
+    );
     return null;
   }
 };
 
 /** Complete auth and return account with serialized portal and session  */
-export const completeAuth = async ({ clientId, portalUrl, popup }) => {
-  const account = await completeOAuthSignIn({
-    clientId,
-    portalUrl,
-    popup
-  });
+export const completeAuth = async options => {
+  const account = await completeOAuthSignIn(options);
 
   if (account) {
-    //Create key
-    const key = createAccountKey({ account });
     //Set state
-    return { key, user: account };
+    return account;
   } else {
-    return { key: undefined, user: undefined };
+    return null;
   }
 };
 
@@ -106,33 +115,21 @@ export const getPortal = async ({ portalUrl, session }) => {
       authentication: session
     });
     return portalObject;
-  } catch (err) {
-    console.error('Error getting portal item.', err);
+  } catch (e) {
+    console.error(`Error retrieving portal item. ${e}`);
     return null;
   }
 };
 
 //** Login */
-export const loginOAuth2 = async ({
-  clientId,
-  redirectUri,
-  portalUrl,
-  popup,
-  name,
-  setAccountManagerState
-}) => {
-  beginOAuthSignIn({
-    clientId,
-    redirectUri,
-    portalUrl,
-    popup,
-    name,
-    setAccountManagerState
-  });
+export const loginOAuth2 = async (manager, options, setAccountManagerState) => {
+  beginOAuthSignIn(manager, options, setAccountManagerState);
 };
 
 //** Logout */
-export const logoutOAuth2 = ({ url, clientId, token }) => {
+export const logoutOAuth2 = async ({ session, token }) => {
+  const url = session ? session.portal : null;
+  const clientId = session ? session.clientId : null;
   //** Formal Logout requires esri_auth cookie */
   //AGO
   //return `${portalUrl.origin}/home/pages/Account/manage_accounts.html#redirect_uri=${encodedRedirectUrl}&client_id=${params.clientId}&signout=true`
@@ -151,14 +148,14 @@ export const logoutOAuth2 = ({ url, clientId, token }) => {
   };
 
   try {
-    request(revokeTokenEndpoint, {
+    const res = await request(revokeTokenEndpoint, {
       params: data,
       httpMethod: 'POST'
-    }).then(res => {
-      return { success: res.success };
     });
-  } catch (err) {
-    return { success: false, error: err };
+    const success = res ? res.success : undefined;
+    return { success };
+  } catch (e) {
+    return { success: false, error: e };
   }
 };
 
@@ -166,7 +163,8 @@ export const logoutOAuth2 = ({ url, clientId, token }) => {
 export const getOrgThumbnail = ({
   session: { portal },
   portal: { thumbnail, name },
-  token
+  token,
+  orgImage
 }) => {
   //org thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/portal-self.htm)
   let orgThumbnail = {
@@ -177,7 +175,20 @@ export const getOrgThumbnail = ({
     thumbnail && portal && token
       ? `${portal}/portals/self/resources/${thumbnail}?token=${token}`
       : undefined;
-  orgThumbnail.letters = name ? name[0].toUpperCase() : 'A';
+  orgThumbnail.letters = name ? name[0].toUpperCase() : '!';
+
+  if (orgImage) {
+    orgThumbnail.image = orgImage;
+  } else if (orgThumbnail.url) {
+    try {
+      const image = new Image();
+      image.src = orgThumbnail.url;
+      orgThumbnail.image = image;
+    } catch (e) {
+      console.error(`Error creating js Image(). ${e}`);
+    }
+  }
+
   return orgThumbnail;
 };
 
@@ -185,7 +196,8 @@ export const getOrgThumbnail = ({
 export const getUserThumbnail = ({
   session: { portal, username },
   user: { thumbnail, firstName, lastName, fullName },
-  token
+  token,
+  userImage
 }) => {
   //user thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/user.htm)
   let userThumbnail = {
@@ -193,7 +205,7 @@ export const getUserThumbnail = ({
     letters: undefined
   };
   userThumbnail.url =
-    thumbnail && portal
+    thumbnail && portal && username && token
       ? `${portal}/community/users/${username}/info/${thumbnail}?token=${token}`
       : undefined;
 
@@ -202,35 +214,60 @@ export const getUserThumbnail = ({
       ? `${firstName[0] + lastName[0]}`.toUpperCase()
       : fullName
       ? fullName[0].toUpperCase()
-      : undefined;
+      : '!';
+
+  if (userImage) {
+    userThumbnail.image = userImage;
+  } else if (userThumbnail.url) {
+    try {
+      const image = new Image();
+      image.src = userThumbnail.url;
+      userThumbnail.image = image;
+    } catch (e) {
+      console.error(`Error creating js Image(). ${e}`);
+    }
+  }
+
   return userThumbnail;
 };
 
 const createAccountObject = async ({ dSession, portal, clientId }) => {
-  dSession.clientId = dSession.clientId ? dSession.clientId : clientId;
-  const token = dSession.token;
-  const user = await dSession.getUser();
-  const dPortal = await getPortal({ portalUrl: portal, session: dSession });
+  try {
+    dSession.clientId = dSession.clientId ? dSession.clientId : clientId;
+    const token = dSession.token;
+    const user = await dSession.getUser();
+    const dPortal = await getPortal({ portalUrl: portal, session: dSession });
+    const key = createAccountKey({
+      session: dSession,
+      user,
+      portal: dPortal,
+      token
+    });
 
-  return {
-    session: dSession.serialize(),
-    user,
-    portal: JSON.stringify(dPortal),
-    token: token
-  };
+    //store images to user?
+
+    return {
+      user,
+      portal: JSON.stringify(dPortal),
+      session: dSession.serialize(),
+      token: token,
+      key
+    };
+  } catch (e) {
+    throw new Error(
+      `Could not create account object. This could be due to UserSession.getUser(). ${e}`
+    );
+  }
 };
 
-const createAccountKey = ({ account }) => {
+const createAccountKey = ({ user, portal }) => {
   try {
-    const { user, portal } = account || {};
-    const deserializedPortal = portal ? JSON.parse(portal) : {};
     const { username } = user || {};
-    const { name } = deserializedPortal || {};
+    const { name } = portal || {};
     const orgName = name ? name.replace(/\s+/g, '') : 'org';
     const key = username + '-' + orgName;
     return key;
-  } catch (err) {
-    console.error(err);
-    return undefined;
+  } catch (e) {
+    throw new Error(`Error creating account key. ${e}`);
   }
 };

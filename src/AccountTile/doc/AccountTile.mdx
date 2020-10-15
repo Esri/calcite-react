@@ -150,7 +150,7 @@ import AccountTile from 'calcite-react/AccountTile';
         />
       });
 
-      return <Panel 
+      return <Panel
         white
         style={{ width: '400px' }}
       >{accountTiles}</Panel>;
@@ -192,15 +192,15 @@ import AccountTile from 'calcite-react/AccountTile';
 
       const createActions = (key, isAuthenticated) => {
         let actions = [{
-            label: 'Remove account', onClick: () => removeAccount(key)
+            label: 'Remove account', onClick: () => removeAccount(accounts[key])
         }];
         if (isAuthenticated) {
           actions.unshift({
-            label: 'Sign out', onClick: () => logoutAccount(key)
+            label: 'Sign out', onClick: () => logoutAccount(accounts[key])
           });
         } else {
           actions.unshift({
-            label: 'Sign in', onClick: () => restoreAccount(options)
+            label: 'Sign in', onClick: () => restoreAccount(accounts[key])
           });
         }
         return actions;
@@ -231,7 +231,7 @@ import AccountTile from 'calcite-react/AccountTile';
           >
             {accountTiles.length ? accountTiles : 'No accounts added yet'}
           </Panel>
-          <Button 
+          <Button
             onClick={() => addAccount(options)}
             >Add account
           </Button>

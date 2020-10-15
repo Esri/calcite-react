@@ -1,104 +1,114 @@
 import { UserSession } from '@esri/arcgis-rest-auth';
 
-export const getAccountManagerStorage = ({ name }) => {
-  const sAccountManager = getLocalSerialized({ name });
-  const { accounts, active, status } = sAccountManager || {};
+export const getAccountManagerStorage = manager => {
+  const { accounts, active, status, order } = getLocalSerialized(manager) || {};
+  const dAccounts = deserializeUserAuthObjects(accounts);
 
-  const dAccounts = deserializeUserAuthObjects({ accounts });
   const authObject = {
     accounts: dAccounts,
     active,
-    status
+    status,
+    order
   };
   return authObject;
 };
 
-export const addAccountStorage = ({ name, key, account }) => {
-  const previous = getLocalSerialized({ name });
-  const { accounts, active } = previous || {};
-  const updateActive = active ? active : key;
+export const addAccountStorage = (manager, account) => {
+  const previous = getLocalSerialized(manager);
+  const { accounts, active, status: setActive } = previous || {};
+  const updateActive = setActive || !active ? account.key : active;
+  const order =
+    previous.order && !accounts[account.key]
+      ? [account.key, ...previous.order]
+      : [];
   setLocal({
     state: {
       ...previous,
-      accounts: { ...accounts, [key]: account },
-      active: updateActive
+      accounts: { ...accounts, [account.key]: account },
+      active: updateActive,
+      order
     },
-    name
+    manager
   });
 };
 
-export const removeAccountStorage = ({ name, key }) => {
-  const previous = getLocalSerialized({ name });
-
-  let active = previous.active;
-  if (active === key) {
-    //update active
-    for (const aKey in previous.accounts) {
-      if (aKey !== key) {
-        active = aKey;
-        break;
-      }
-    }
-  }
-
+export const removeAccountStorage = (manager, { key }) => {
+  const previous = getLocalSerialized(manager);
+  const order = previous.order.filter(item => item !== key);
   delete previous.accounts[key];
+
+  const active =
+    previous.active === key
+      ? order.length > 0
+        ? order[0]
+        : undefined
+      : previous.active;
+
   setLocal({
     state: {
       ...previous,
-      active: active === key ? undefined : active
+      active,
+      order
     },
-    name
+    manager
   });
 };
 
-export const switchActiveStorage = ({ name, key }) => {
-  const previous = getLocalSerialized({ name });
+export const switchActiveStorage = (manager, { key }) => {
+  const previous = getLocalSerialized(manager);
+  const order = [key, ...previous.order.filter(item => item !== key)];
   setLocal({
     state: {
       ...previous,
-      active: key
+      active: key,
+      order
     },
-    name
+    manager
   });
 };
 
-export const completeStatusStorage = ({ name }) => {
-  const previous = getLocalSerialized({ name });
+export const completeStatusStorage = manager => {
+  const previous = getLocalSerialized(manager);
   const { status } = previous || {};
   setLocal({
     state: {
       ...previous,
       status: { ...status, loading: false }
     },
-    name
+    manager
   });
 };
 
-export const beginStatusStorage = ({
-  name,
-  options: { clientId, redirectUri, portalUrl, popup }
-}) => {
-  const previous = getLocalSerialized({ name });
+export const beginStatusStorage = (
+  manager,
+  { clientId, redirectUri, portalUrl, popup },
+  originRoute,
+  setActive
+) => {
+  const previous = getLocalSerialized(manager);
 
   setLocal({
     state: {
       ...previous,
       status: {
         loading: true,
-        authProps: { clientId, redirectUri, portalUrl, popup }
+        authProps: { clientId, redirectUri, portalUrl, popup },
+        originRoute,
+        setActive
       }
     },
-    name
+    manager
   });
 };
 
-export const logoutAccountStorage = ({ name, key }) => {
-  const previous = getLocalSerialized({ name });
+export const logoutAccountStorage = (manager, { key }) => {
+  const previous = getLocalSerialized(manager);
   const { accounts } = previous || {};
+
   const user = {
     ...accounts[key],
-    session: undefined,
-    token: undefined
+    token: null,
+    session: null
   };
 
   setLocal({
@@ -106,40 +116,41 @@ export const logoutAccountStorage = ({ name, key }) => {
       ...previous,
       accounts: { ...accounts, [key]: user }
     },
-    name
+    manager
   });
 };
 
-export const refreshAccountStorage = ({ name, key, session }) => {
-  const previous = getLocalSerialized({ name });
+export const refreshAccountStorage = (manager, { key, session }) => {
+  const previous = getLocalSerialized(manager);
   const { accounts } = previous || {};
   setLocal({
     state: {
       ...previous,
       accounts: { ...accounts, [key]: { ...accounts[key], session } }
     },
-    name
+    manager
   });
 };
 
 //** State Management */
 
-const setLocal = ({ state, name }) => {
-  window.localStorage.setItem(name, JSON.stringify(state));
+const setLocal = ({ state, manager }) => {
+  window.localStorage.setItem(manager, JSON.stringify(state));
 };
 
-const getLocalSerialized = ({ name }) => {
-  const accountManager = JSON.parse(window.localStorage.getItem(name));
-  const { accounts, active, status } = accountManager || {};
+const getLocalSerialized = manager => {
+  const accountManager = JSON.parse(window.localStorage.getItem(manager));
+  const { accounts, active, status, order } = accountManager || {};
   const authObject = {
     accounts,
     active,
-    status
+    status,
+    order
   };
   return authObject;
 };
 
-const deserializeUserAuthObjects = ({ accounts }) => {
+const deserializeUserAuthObjects = accounts => {
   const dUsers = {};
 
   if (accounts) {
@@ -151,11 +162,11 @@ const deserializeUserAuthObjects = ({ accounts }) => {
         ? JSON.parse(accounts[key].portal)
         : undefined;
 
-      dUsers[key] = {};
-      dUsers[key].user = accounts[key].user;
-      dUsers[key].session = deserializedSession;
-      dUsers[key].portal = deserializedPortal;
-      dUsers[key].token = accounts[key].token;
+      dUsers[key] = {
+        ...accounts[key],
+        portal: deserializedPortal,
+        session: deserializedSession
+      };
     }
   }
 
