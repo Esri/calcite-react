@@ -93,7 +93,7 @@ const StyledModalHeader = styled.div`
   max-width: 100%;
   min-width: 0;
   z-index: 2;
-  flex: 0 1 0%;
+  flex: 0 0 auto;
   border-bottom: 1px solid ${props => props.theme.palette.lightestGray};
 `;
 StyledModalHeader.defaultProps = { theme };
