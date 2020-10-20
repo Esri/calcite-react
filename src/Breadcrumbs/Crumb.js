@@ -39,7 +39,9 @@ Crumb.propTypes = {
   /** href html prop */
   href: PropTypes.string,
   /** The character used as a divider between Crumbs; by default it will inherit the parent Breadcrumbs dividerCharacter */
-  dividerCharacter: PropTypes.node
+  dividerCharacter: PropTypes.node,
+  /** Use hasLink as a way to maintain the calcite link styles when no href is given (useful when using a Crumb with an outside routing library). */
+  hasLink: PropTypes.bool
 };
 
 Crumb.defaultProps = {};
