@@ -17,7 +17,7 @@ Alerts are used to inform users of state changes, errors, or successful actions.
 #### Import Syntax
 
 ```js
-import Alert from 'calcite-react/Alert'
+import Alert, { AlertTitle, AlertMessage } from 'calcite-react/Alert';
 ```
 
 ## Basic Usage
@@ -32,7 +32,9 @@ import Alert from 'calcite-react/Alert'
   <GuideExample label="red">
     <Alert red>
       <AlertTitle>Something failed</AlertTitle>
-      <AlertMessage>That thing you wanted to do didn't work as expected</AlertMessage>
+      <AlertMessage>
+        That thing you wanted to do didn't work as expected
+      </AlertMessage>
     </Alert>
   </GuideExample>
   <GuideExample label="yellow">
@@ -42,7 +44,10 @@ import Alert from 'calcite-react/Alert'
   </GuideExample>
   <GuideExample label="green">
     <Alert green>
-      <AlertMessage>Successfully duplicated <strong>2019 Sales Demographics by County</strong> layer</AlertMessage>
+      <AlertMessage>
+        Successfully duplicated{' '}
+        <strong>2019 Sales Demographics by County</strong> layer
+      </AlertMessage>
     </Alert>
   </GuideExample>
   <GuideExample label="full">
@@ -82,7 +87,9 @@ import Alert from 'calcite-react/Alert'
   <GuideExample>
     <Alert red showIcon>
       <AlertTitle>Something failed</AlertTitle>
-      <AlertMessage>That thing you wanted to do didn't work as expected</AlertMessage>
+      <AlertMessage>
+        That thing you wanted to do didn't work as expected
+      </AlertMessage>
     </Alert>
   </GuideExample>
   <GuideExample>
@@ -92,7 +99,10 @@ import Alert from 'calcite-react/Alert'
   </GuideExample>
   <GuideExample>
     <Alert green showIcon>
-      <AlertMessage>Successfully duplicated <strong>2019 Sales Demographics by County</strong> layer</AlertMessage>
+      <AlertMessage>
+        Successfully duplicated{' '}
+        <strong>2019 Sales Demographics by County</strong> layer
+      </AlertMessage>
     </Alert>
   </GuideExample>
   <GuideExample label="icon={<BananaIcon size={16} />}">
