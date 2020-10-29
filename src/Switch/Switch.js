@@ -116,7 +116,7 @@ Switch.propTypes = {
   onChange: PropTypes.func,
   /** Should use a red highlight color. */
   destructive: PropTypes.bool,
-  /** Color  */
+  /** The color of the Switch. 'green' | 'rgb(0, 255, 255)' | '#fefefe'  */
   color: PropTypes.string,
   /** Position of the label text in relation to the input. */
   labelPosition: PropTypes.oneOf(['before', 'after']),
