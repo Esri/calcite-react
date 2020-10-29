@@ -18,7 +18,7 @@ A skin on a checkbox.
 #### Import Syntax
 
 ```js
-import Switch from 'calcite-react/Switch'
+import Switch from 'calcite-react/Switch';
 ```
 
 ## Basic Usage
@@ -40,6 +40,31 @@ import Switch from 'calcite-react/Switch'
   </GuideExample>
 </Playground>
 
+## Alternate Colors
+
+<Playground>
+  <GuideExample label="color">
+    <Switch checked color="green">
+      green
+    </Switch>
+    <Switch checked color="#64DAA1">
+      #64DAA1
+    </Switch>
+    <Switch checked color="#060080">
+      #060080
+    </Switch>
+    <Switch checked color="rgb(127,255,0)">
+      rgb(127,255,0)
+    </Switch>
+    <Switch checked color="rgb(32,178,170)">
+      rgb(32,178,170)
+    </Switch>
+    <Switch checked color="rgb(165,42,42)">
+      rgb(165,42,42)
+    </Switch>
+  </GuideExample>
+</Playground>
+
 ## fullWidth
 
 <Playground>
@@ -47,7 +72,9 @@ import Switch from 'calcite-react/Switch'
     <Switch fullWidth>Enable Two-Factor Authentication</Switch>
   </GuideExample>
   <GuideExample>
-    <Switch fullWidth labelPosition="before">Enable Two-Factor Authentication</Switch>
+    <Switch fullWidth labelPosition="before">
+      Enable Two-Factor Authentication
+    </Switch>
   </GuideExample>
 </Playground>
 

@@ -26,7 +26,7 @@ import { StyledFormControlLabel } from '../Form/Form-styled';
 // Icons
 
 // Third party libraries
-import { transparentize } from 'polished';
+import { transparentize, lighten, darken } from 'polished';
 
 const switchProps = {
   switchWidth: '36px',
@@ -253,6 +253,49 @@ const StyledSwitchTrack = styled.span`
 
         &:after {
           border-color: ${switchProps.handleDestructiveCheckedBorderColor};
+        }
+      }
+    `};
+
+  ${props =>
+    props.color &&
+    css`
+      input:hover + &:after {
+        border-color: ${lighten(0.2, props.color)};
+      }
+
+      input:active + &:after {
+        border-color: ${lighten(0.2, props.color)};
+      }
+
+      input:checked:active + & {
+        box-shadow: 0 0 4px 2px
+          ${transparentize(0.6, lighten(0.2, props.color))};
+
+        &:after {
+          border-color: ${lighten(0.2, props.color)};
+        }
+      }
+
+      input:checked + & {
+        background-color: ${lighten(0.2, props.color)};
+        border-color: ${props.color};
+
+        &:after {
+          border-color: ${lighten(0.2, props.color)};
+        }
+      }
+
+      input:focus + &:after {
+        border-color: ${lighten(0.2, props.color)};
+      }
+
+      input:checked:focus + & {
+        box-shadow: 0 0 4px 2px
+          ${transparentize(0.6, lighten(0.2, props.color))};
+
+        &:after {
+          border-color: ${lighten(0.2, props.color)};
         }
       }
     `};
