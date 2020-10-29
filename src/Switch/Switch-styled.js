@@ -278,11 +278,11 @@ const StyledSwitchTrack = styled.span`
       }
 
       input:checked + & {
-        background-color: ${lighten(0.2, props.color)};
-        border-color: ${props.color};
+        background-color: ${props.color};
+        border-color: ${darken(0.2, props.color)};
 
         &:after {
-          border-color: ${lighten(0.2, props.color)};
+          border-color: ${darken(0.2, props.color)};
         }
       }
 
