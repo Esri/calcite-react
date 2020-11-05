@@ -209,7 +209,7 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
         setAccountManagerState(accountManager);
       }
     },
-    [manager]
+    [accountManagerState, manager]
   );
 
   /** Check token status */
@@ -290,9 +290,15 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
           : false;
         return valid;
       }
+      const invalid = {
+        warning: 'Invalid account',
+        account: account,
+        accountManagerState: accountManagerState
+      };
+      console.warn(invalid);
       return false;
     },
-    [accountManagerState]
+    [accountManagerState, accountManagerState.accounts]
   );
 
   return {

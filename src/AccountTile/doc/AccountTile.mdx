@@ -193,6 +193,8 @@ import AccountTile from 'calcite-react/AccountTile';
       const createActions = (key, isAuthenticated) => {
         let actions = [{
             label: 'Remove account', onClick: () => removeAccount(accounts[key])
+        }, {
+            label: 'Set active', onClick: () => switchActiveAccount(accounts[key])
         }];
         if (isAuthenticated) {
           actions.unshift({
