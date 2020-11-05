@@ -298,7 +298,7 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
       console.warn(invalid);
       return false;
     },
-    [accountManagerState, accountManagerState.accounts]
+    [accountManagerState]
   );
 
   return {
