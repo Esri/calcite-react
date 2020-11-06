@@ -17,10 +17,11 @@ export const addAccountStorage = (manager, account) => {
   const previous = getLocalSerialized(manager);
   const { accounts, active, status: setActive } = previous || {};
   const updateActive = setActive || !active ? account.key : active;
-  const order =
-    previous.order && !accounts[account.key]
-      ? [account.key, ...previous.order]
-      : [];
+  const order = previous.order
+    ? previous.order.find(id => id === account.key)
+      ? [...previous.order]
+      : [account.key, ...previous.order]
+    : [account.key];
   setLocal({
     state: {
       ...previous,
@@ -56,7 +57,8 @@ export const removeAccountStorage = (manager, { key }) => {
 
 export const switchActiveStorage = (manager, { key }) => {
   const previous = getLocalSerialized(manager);
-  const order = [key, ...previous.order.filter(item => item !== key)];
+  const orders = previous.order ? previous.order : [];
+  const order = [key, ...orders.filter(item => item !== key)];
   setLocal({
     state: {
       ...previous,
