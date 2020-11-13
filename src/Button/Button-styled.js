@@ -63,12 +63,12 @@ const StyledButton = styled.button`
     ${props =>
       props.iconPosition === 'after' &&
       css`
-        margin-left: 0.75em;
+        margin-left: ${props.transparent ? '0.5em' : '0.75em'};
         margin-right: -0.25rem;
 
         html[dir='rtl'] & {
           margin-left: -0.25rem;
-          margin-right: 0.75em;
+          margin-right: ${props.transparent ? '0.5em' : '0.75em'};
         }
       `};
 
@@ -76,10 +76,10 @@ const StyledButton = styled.button`
       props.iconPosition === 'before' &&
       css`
         margin-left: -0.25rem;
-        margin-right: 0.75em;
+        margin-right: ${props.transparent ? '0.5em' : '0.75em'};
 
         html[dir='rtl'] & {
-          margin-left: 0.75em;
+          margin-left: ${props.transparent ? '0.5em' : '0.75em'};
           margin-right: -0.25rem;
         }
       `};
