@@ -73,19 +73,19 @@ const Modal = ({
           {...other}
         >
           {title && (
-            <StyledModalHeader styles={headerStyles}>
-              <StyledModalTitle styles={titleStyles}>{title}</StyledModalTitle>
+            <StyledModalHeader style={headerStyles}>
+              <StyledModalTitle style={titleStyles}>{title}</StyledModalTitle>
               {showClose && <StyledModalCloseButton onClick={onRequestClose} />}
             </StyledModalHeader>
           )}
-          <StyledModalContent styles={contentStyles} noPadding={noPadding}>
+          <StyledModalContent style={contentStyles} noPadding={noPadding}>
             {children}
           </StyledModalContent>
           {(actions || secondaryActions) && (
-            <StyledModalActions styles={actionStyles}>
+            <StyledModalActions style={actionStyles}>
               {actions}
               {secondaryActions && (
-                <StyledSecondaryActions styles={secondaryActionStyles}>
+                <StyledSecondaryActions style={secondaryActionStyles}>
                   {secondaryActions}
                 </StyledSecondaryActions>
               )}
