@@ -81,8 +81,9 @@ export const completeOAuthSignIn = async ({
     const account = await createAccountObject({ dSession, portal, clientId });
 
     // Clear hash token from URL
-    if (window.history.pushState) {
-      window.history.pushState('', '/', window.location.pathname);
+    // Refactored by Alex Ela to use window.history.replaceState() instead of window.history.pushState()
+    if (window.history.replaceState) {
+      window.history.replaceState({}, '', window.location.pathname);
     } else {
       window.location.hash = '';
     }
