@@ -64,7 +64,7 @@
     "@esri/arcgis-rest-auth": "^2.14.1",
     "@esri/arcgis-rest-portal": "^2.14.1",
     "@esri/arcgis-rest-request": "^2.14.1",
-    "@esri/calcite-colors": "^1.7.1",
+    "@esri/calcite-colors": "6.0.0",
     "calcite-ui-icons-react": "^0.11.0",
     "downshift": "^3.4.1",
     "match-sorter": "^2.3.0",
