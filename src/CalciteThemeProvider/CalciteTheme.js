@@ -9,7 +9,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
-import colors from '@esri/calcite-colors/colors.json';
+import { colors } from '@esri/calcite-colors';
 
 const CalciteTheme = {
   palette: {
