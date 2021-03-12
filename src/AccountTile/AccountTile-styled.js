@@ -31,10 +31,14 @@ const StyledAccountTile = styled.div`
   transition: ${props => props.theme.transition};
   background-color: ${props =>
     props.open ? props.theme.palette.offWhite : props.theme.palette.white};
-  &:hover {
-    background-color: ${props => props.theme.palette.offWhite};
-    cursor: pointer;
-  }
+
+  ${props.clickable &&
+    css`
+      &:hover {
+        background-color: ${props.theme.palette.offWhite};
+        cursor: pointer;
+      }
+    `};
 `;
 StyledAccountTile.defaultProps = { theme };
 

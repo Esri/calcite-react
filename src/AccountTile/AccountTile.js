@@ -43,6 +43,8 @@ const AccountTile = ({
   width,
   expiredText,
   authenticatedText,
+  clickable,
+  hideIcons,
   ...other
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -104,7 +106,8 @@ const AccountTile = ({
           onClick={toggleIsOpen}
           onKeyPress={toggleIsOpen}
           open={isOpen}
-          tabIndex="0"
+          tabIndex={clickable ? 0 : -1}
+          clickable={clickable}
           {...other}
         >
           <StyledContentWrapper>
@@ -130,31 +133,33 @@ const AccountTile = ({
               </StyledP>
             </StyledTextWrapper>
           </StyledContentWrapper>
-          <StyledIconWrapper>
-            <Tooltip
-              title={isAuthenticated ? authenticatedText : expiredText}
-              placement="top"
-              targetWrapperStyle={{
-                alignItems: 'center',
-                display: 'flex'
-              }}
-            >
-              {isAuthenticated ? (
-                <CheckCircleIcon
-                  color={themeContext.palette.green}
-                  size={16}
-                  alt={authenticatedText}
-                />
-              ) : (
-                <ExclamationMarkTriangleIcon
-                  color={themeContext.palette.darkGray}
-                  size={16}
-                  alt={expiredText}
-                />
-              )}
-            </Tooltip>
-            {actions.length !== 0 && <HandleVerticalIcon scale={16} />}
-          </StyledIconWrapper>
+          {!hideIcons && (
+            <StyledIconWrapper>
+              <Tooltip
+                title={isAuthenticated ? authenticatedText : expiredText}
+                placement="top"
+                targetWrapperStyle={{
+                  alignItems: 'center',
+                  display: 'flex'
+                }}
+              >
+                {isAuthenticated ? (
+                  <CheckCircleIcon
+                    color={themeContext.palette.green}
+                    size={16}
+                    alt={authenticatedText}
+                  />
+                ) : (
+                  <ExclamationMarkTriangleIcon
+                    color={themeContext.palette.darkGray}
+                    size={16}
+                    alt={expiredText}
+                  />
+                )}
+              </Tooltip>
+              {actions.length !== 0 && <HandleVerticalIcon scale={16} />}
+            </StyledIconWrapper>
+          )}
         </StyledAccountTile>
       }
     >
@@ -192,7 +197,11 @@ AccountTile.propTypes = {
   orgThumbnail: PropTypes.shape({
     url: PropTypes.string,
     letters: PropTypes.string
-  })
+  }),
+  /** Can the time be clicked (false will disable hover effects and pointer events) */
+  clickable: PropTypes.bool,
+  /** Should the account tiles be hidden */
+  hideIcons: PropTypes.bool
 };
 
 AccountTile.defaultProps = {
@@ -200,7 +209,9 @@ AccountTile.defaultProps = {
   isAuthenticated: false,
   width: '100%',
   authenticatedText: 'Signed in',
-  expiredText: 'Session expired'
+  expiredText: 'Session expired',
+  clickable: true,
+  hideIcons: false
 };
 
 AccountTile.displayName = 'AccountTile';
