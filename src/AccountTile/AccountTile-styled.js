@@ -32,7 +32,7 @@ const StyledAccountTile = styled.div`
   background-color: ${props =>
     props.open ? props.theme.palette.offWhite : props.theme.palette.white};
 
-  ${props.clickable &&
+  ${props => props.clickable &&
     css`
       &:hover {
         background-color: ${props.theme.palette.offWhite};
