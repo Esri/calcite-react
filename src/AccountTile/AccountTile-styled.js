@@ -10,7 +10,7 @@
 // limitations under the License.​
 
 // styled-components
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // Utils, common elements
 import { unitCalc, fontSize } from '../utils/helpers';
