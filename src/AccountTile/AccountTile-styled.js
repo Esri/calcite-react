@@ -10,7 +10,7 @@
 // limitations under the License.​
 
 // styled-components
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // Utils, common elements
 import { unitCalc, fontSize } from '../utils/helpers';
@@ -31,10 +31,14 @@ const StyledAccountTile = styled.div`
   transition: ${props => props.theme.transition};
   background-color: ${props =>
     props.open ? props.theme.palette.offWhite : props.theme.palette.white};
-  &:hover {
-    background-color: ${props => props.theme.palette.offWhite};
-    cursor: pointer;
-  }
+
+  ${props => props.clickable &&
+    css`
+      &:hover {
+        background-color: ${props.theme.palette.offWhite};
+        cursor: pointer;
+      }
+    `};
 `;
 StyledAccountTile.defaultProps = { theme };
 

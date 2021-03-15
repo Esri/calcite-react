@@ -76,6 +76,53 @@ import AccountTile from 'calcite-react/AccountTile';
 
 </Playground>
 
+## Not Clickable
+
+<Playground style={{height: '200px', background: "#f3f3f3"}}>
+  {() => {
+    const AccountTileExample = () => {
+      
+      const placeholders = {
+        user: {
+          arcgisAccountUrl: '',
+          username: 'jharig',
+          fullName: 'Joey Harig',
+          firstName: 'Joey',
+          lastName: 'Harig'
+        },
+        isAuthenticated: true,
+        orgName: 'Esri Professional Services',
+        userThumbnail: {
+          url: 'https://avatars1.githubusercontent.com/u/55154968?s=460&u=4034cb088cb3c99e051c2c89663e2c070b28666f&v=4',
+          letters: 'JH'
+        },
+        orgThumbnail: {
+          url: 'https://www.esri.com/content/dam/esrisites/en-us/common/icons/product-logos/ArcGIS-Pro.png',
+          letters: 'E'
+        }
+      }
+
+      return (
+        <AccountTile
+          actions={placeholders.actions}
+          user={placeholders.user}
+          isAuthenticated={placeholders.isAuthenticated}
+          orgName={placeholders.orgName}
+          userThumbnail={placeholders.userThumbnail}
+          orgThumbnail={placeholders.orgThumbnail}
+          clickable={false}
+          hideIcons={true}
+        />
+      );
+    }
+
+    return <AccountTileExample />;
+
+}}
+
+</Playground>
+
+
 ## Multiple Accounts
 
 <Playground style={{ background: "#f3f3f3" }}>
