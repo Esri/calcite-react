@@ -103,11 +103,11 @@ const AccountTile = ({
       targetEl={
         // ---------- Account Tile ----------
         <StyledAccountTile
-          onClick={toggleIsOpen}
           onKeyPress={toggleIsOpen}
           open={isOpen}
-          tabIndex={clickable ? -1 : 0}
+          tabIndex={clickable ? 0 : -1}
           clickable={clickable}
+          {...clickable && (onClick = { toggleIsOpen })}
           {...other}
         >
           <StyledContentWrapper>
