@@ -103,8 +103,7 @@ const AccountTile = ({
       targetEl={
         // ---------- Account Tile ----------
         <StyledAccountTile
-          onClick={toggleIsOpen}
-          onKeyPress={toggleIsOpen}
+          {...clickable && { onClick: toggleIsOpen, onKeyPress: toggleIsOpen }}
           open={isOpen}
           tabIndex={clickable ? 0 : -1}
           clickable={clickable}
