@@ -98,6 +98,7 @@ class ArcgisAccount extends Component {
       hideSwitchAccount,
       switchAccountLabel,
       signOutLabel,
+      appendToBody,
       ...other
     } = this.props;
 
@@ -122,6 +123,7 @@ class ArcgisAccount extends Component {
         onRequestClose={this.closeAccountControl}
         placement="bottom-end"
         positionFixed
+        appendToBody={appendToBody === undefined ? true : appendToBody}
       >
         <ArcgisAccountMenu
           user={user}
