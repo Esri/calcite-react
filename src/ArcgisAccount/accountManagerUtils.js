@@ -37,6 +37,7 @@ export const beginOAuthSignIn = async (
         portal,
         popup
       });
+      console.log(dSession);
       const account = await createAccountObject({ dSession, portal, clientId });
 
       addAccountStorage(manager, account);
@@ -233,6 +234,7 @@ export const getUserThumbnail = ({
 };
 
 const createAccountObject = async ({ dSession, portal, clientId }) => {
+  console.log(dSession);
   try {
     dSession.clientId = dSession.clientId ? dSession.clientId : clientId;
     const token = dSession.token;
