@@ -1,3 +1,5 @@
+# This project is deprecated and is not recommended for future development.
+
 # Documentation
 
 You can find the full docs for Calcite React here: https://calcite-react.netlify.com

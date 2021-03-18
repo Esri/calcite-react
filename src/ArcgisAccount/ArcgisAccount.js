@@ -98,6 +98,7 @@ class ArcgisAccount extends Component {
       hideSwitchAccount,
       switchAccountLabel,
       signOutLabel,
+      appendToBody,
       ...other
     } = this.props;
 
@@ -122,6 +123,7 @@ class ArcgisAccount extends Component {
         onRequestClose={this.closeAccountControl}
         placement="bottom-end"
         positionFixed
+        appendToBody={appendToBody}
       >
         <ArcgisAccountMenu
           user={user}
@@ -157,14 +159,17 @@ ArcgisAccount.propTypes = {
   /** Callback when the user selects the Switch Account button. */
   onRequestSwitchAccount: PropTypes.func,
   /** Callback when the user selects the Sign Out button. */
-  onRequestSignOut: PropTypes.func
+  onRequestSignOut: PropTypes.func,
+  /** Append Popover to body. */
+  appendToBody: PropTypes.bool
 };
 
 ArcgisAccount.defaultProps = {
   switchAccountLabel: 'Switch Account',
   signOutLabel: 'Sign Out',
   onRequestSwitchAccount: () => {},
-  onRequestSignOut: () => {}
+  onRequestSignOut: () => {},
+  appendToBody: true
 };
 
 ArcgisAccount.displayName = 'ArcgisAccount';

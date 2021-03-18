@@ -240,7 +240,7 @@ DateRangePicker.defaultProps = {
   endDatePlaceholderText: 'End Date',
   monthYearSelectionMode: 'NONE',
   yearSelectDates: {
-    startYear: new moment().subtract('year', 50).year(),
+    startYear: new moment().subtract(50, 'year').year(),
     endYear: new moment().year()
   },
   hideKeyboardShortcutsPanel: true
