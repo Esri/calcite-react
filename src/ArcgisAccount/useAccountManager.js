@@ -194,6 +194,7 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
       if (!key) throw Error('Missing account key.');
 
       const refresh = await session.refreshSession();
+      console.log(refresh);
       const sSession = refresh ? refresh.serialize() : undefined;
       refreshAccountStorage(manager, { key, session: sSession });
     } catch (e) {
