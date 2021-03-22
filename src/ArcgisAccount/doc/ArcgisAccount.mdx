@@ -131,7 +131,7 @@ import ArcgisAccount, {
       <>
         <div style={{display:"flex"}}>
           {!active && <Button onClick={() => addAccount()} style={{flex:1, margin: "1em"}}> Add Account Popup </Button>}
-          {active && <Button onClick={() => refreshAccount(options2)} style={{flex:1, margin: "1em"}}> Refresh Account </Button>}
+          {active && <Button onClick={() => refreshAccount(accounts[active])} style={{flex:1, margin: "1em"}}> Refresh Account </Button>}
         </div>
 
         {active && (
