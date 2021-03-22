@@ -11,7 +11,7 @@ import {
 /** Begin OAuth  */
 export const beginOAuthSignIn = async (
   manager,
-  { clientId, redirectUri, portalUrl, popup, refreshTokenTTL },
+  { clientId, redirectUri, portalUrl, popup, refreshTokenTTL, duration },
   setAccountManagerState
 ) => {
   const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing/rest';
@@ -36,7 +36,8 @@ export const beginOAuthSignIn = async (
         redirectUri,
         portal,
         popup,
-        refreshTokenTTL
+        refreshTokenTTL,
+        duration
       });
       const account = await createAccountObject({ dSession, portal, clientId });
 
@@ -69,7 +70,6 @@ export const completeOAuthSignIn = async ({
   redirectUri,
   popup
 }) => {
-  const refreshTokenTTL = 43200;
   try {
     const portal = portalUrl
       ? portalUrl
@@ -78,8 +78,7 @@ export const completeOAuthSignIn = async ({
       clientId,
       portal,
       redirectUri,
-      popup,
-      refreshTokenTTL
+      popup
     });
 
     const account = await createAccountObject({ dSession, portal, clientId });
@@ -129,6 +128,8 @@ export const getPortal = async ({ portalUrl, session }) => {
 //** Login */
 export const loginOAuth2 = async (manager, options, setAccountManagerState) => {
   options.refreshTokenTTL = 43200;
+  options.duration = 5;
+
   beginOAuthSignIn(manager, options, setAccountManagerState);
 };
 

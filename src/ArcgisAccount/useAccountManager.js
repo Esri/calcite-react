@@ -188,7 +188,8 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
 
   /** Refresh Account: UserSession.refreshSession [https://esri.github.io/arcgis-rest-js/api/auth/UserSession/#refreshSession] */
   const refreshAccount = async ({ session, key, ...sessionState }) => {
-    console.log(sessionState);
+    console.log(sessionState, session);
+    const params = session;
     try {
       if (!session) throw Error('Missing account session.');
       if (!key) throw Error('Missing account key.');
