@@ -38,7 +38,6 @@ export const beginOAuthSignIn = async (
         popup,
         refreshTokenTTL
       });
-      console.log(dSession); //popup
       const account = await createAccountObject({ dSession, portal, clientId });
 
       addAccountStorage(manager, account);
