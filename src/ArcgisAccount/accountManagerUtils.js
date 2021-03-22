@@ -69,6 +69,7 @@ export const completeOAuthSignIn = async ({
   redirectUri,
   popup
 }) => {
+  const refreshTokenTTL = 43200;
   try {
     const portal = portalUrl
       ? portalUrl
@@ -77,7 +78,8 @@ export const completeOAuthSignIn = async ({
       clientId,
       portal,
       redirectUri,
-      popup
+      popup,
+      refreshTokenTTL
     });
 
     const account = await createAccountObject({ dSession, portal, clientId });
