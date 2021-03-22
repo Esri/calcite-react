@@ -127,7 +127,7 @@ export const getPortal = async ({ portalUrl, session }) => {
 
 //** Login */
 export const loginOAuth2 = async (manager, options, setAccountManagerState) => {
-  options.refreshTokenTTL = 43200;
+  options.refreshTokenTTL = 21600;
   options.duration = 5;
 
   beginOAuthSignIn(manager, options, setAccountManagerState);
