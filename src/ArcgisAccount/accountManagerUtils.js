@@ -11,7 +11,7 @@ import {
 /** Begin OAuth  */
 export const beginOAuthSignIn = async (
   manager,
-  { clientId, redirectUri, portalUrl, popup },
+  { clientId, redirectUri, portalUrl, popup, refreshTokenTTL },
   setAccountManagerState
 ) => {
   const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing/rest';
@@ -35,9 +35,10 @@ export const beginOAuthSignIn = async (
         clientId,
         redirectUri,
         portal,
-        popup
+        popup,
+        refreshTokenTTL
       });
-      console.log(dSession);
+      console.log(dSession); //popup
       const account = await createAccountObject({ dSession, portal, clientId });
 
       addAccountStorage(manager, account);
@@ -53,7 +54,8 @@ export const beginOAuthSignIn = async (
         clientId,
         redirectUri,
         portal,
-        popup
+        popup,
+        refreshTokenTTL
       });
     } catch (e) {
       console.error(`Error getting User Session (beginOAuth). ${e}`);
@@ -125,6 +127,7 @@ export const getPortal = async ({ portalUrl, session }) => {
 
 //** Login */
 export const loginOAuth2 = async (manager, options, setAccountManagerState) => {
+  options.refreshTokenTTL = 43200;
   beginOAuthSignIn(manager, options, setAccountManagerState);
 };
 
@@ -234,7 +237,7 @@ export const getUserThumbnail = ({
 };
 
 const createAccountObject = async ({ dSession, portal, clientId }) => {
-  console.log(dSession);
+  console.log(dSession); //popup
   try {
     dSession.clientId = dSession.clientId ? dSession.clientId : clientId;
     const token = dSession.token;
