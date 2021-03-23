@@ -247,7 +247,6 @@ export const getUserThumbnail = ({
 };
 
 const createAccountObject = async ({ dSession, portal, clientId }) => {
-  console.log(dSession); //popup
   try {
     dSession.clientId = dSession.clientId ? dSession.clientId : clientId;
     const token = dSession.token;
