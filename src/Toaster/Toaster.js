@@ -100,15 +100,6 @@ const notify = (
   return toastId;
 };
 
-// If user passes specific toastId to closeDisplayedToast(), only close that toaster.  Otherwise, close all displayed toasts.
-const closeDisplayedToast = toasterId => {
-  if (toasterId) {
-    toast.dismiss(toasterId);
-  } else {
-    toast.dismiss();
-  }
-};
-
 class Toaster extends Component {
   toastId = null;
 
@@ -173,4 +164,4 @@ Toaster.defaultProps = {
 
 Toaster.displayName = 'Toaster';
 
-export { Toaster as default, notify, closeDisplayedToast };
+export { Toaster as default, notify, toast };
