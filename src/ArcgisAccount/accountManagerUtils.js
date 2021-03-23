@@ -247,6 +247,14 @@ export const getUserThumbnail = ({
 };
 
 const createAccountObject = async ({ dSession, portal, clientId }) => {
+  console.log(dSession);
+  const url = null;
+  const requestOptions = {
+    params: { client_id: dSession.clientId, grant_type: 'authorization_code' }
+  };
+  const fetchTokenResponse = await fetchToken(url, requestOptions);
+  console.log(fetchTokenResponse);
+
   try {
     dSession.clientId = dSession.clientId ? dSession.clientId : clientId;
     const token = dSession.token;
