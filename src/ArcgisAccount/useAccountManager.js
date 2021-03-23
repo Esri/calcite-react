@@ -191,23 +191,23 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
     // refresh workflow for server oauth sessions (view authorize and exchangeAuthorizationCode)
     console.log(session);
 
-    if (!session?.refreshToken) {
+    if (session?.refreshToken) {
+      try {
+        if (!session) throw Error('Missing account session.');
+        if (!key) throw Error('Missing account key.');
+
+        const refresh = await session.refreshSession();
+        console.log(refresh);
+        const sSession = refresh ? refresh.serialize() : undefined;
+        refreshAccountStorage(manager, { key, session: sSession });
+      } catch (e) {
+        console.error(`Cannot refresh session for account: ${key}. ${e}`);
+      }
+    } else {
       console.warn(
         `Cannot refresh session for account: ${key}. No refreshToken exists.`
       );
       session.beginOAuth2();
-    }
-
-    try {
-      if (!session) throw Error('Missing account session.');
-      if (!key) throw Error('Missing account key.');
-
-      const refresh = await session.refreshSession();
-      console.log(refresh);
-      const sSession = refresh ? refresh.serialize() : undefined;
-      refreshAccountStorage(manager, { key, session: sSession });
-    } catch (e) {
-      console.error(`Cannot refresh session for account: ${key}. ${e}`);
     }
   };
 
