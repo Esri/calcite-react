@@ -208,8 +208,8 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
       console.warn(
         `Cannot refresh session for account: ${key}. No refreshToken exists.`
       );
-      const token = session.getToken();
-      console.log(token);
+      // const token = session.getToken();
+      // console.log(token);
     }
   };
 
