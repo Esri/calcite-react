@@ -191,7 +191,7 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
     // refresh workflow for server oauth sessions (view authorize and exchangeAuthorizationCode)
     console.warn(session);
 
-    if (session?.refreshToken) {
+    if (session.refreshToken) {
       try {
         if (!session) throw Error('Missing account session.');
         if (!key) throw Error('Missing account key.');
