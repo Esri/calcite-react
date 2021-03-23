@@ -11,7 +11,7 @@ import {
 /** Begin OAuth  */
 export const beginOAuthSignIn = async (
   manager,
-  { clientId, redirectUri, portalUrl, popup, refreshTokenTTL, duration },
+  { clientId, redirectUri, portalUrl, popup, duration },
   setAccountManagerState
 ) => {
   const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing/rest';
@@ -36,7 +36,6 @@ export const beginOAuthSignIn = async (
         redirectUri,
         portal,
         popup,
-        refreshTokenTTL,
         duration
       });
       const account = await createAccountObject({ dSession, portal, clientId });
@@ -54,8 +53,7 @@ export const beginOAuthSignIn = async (
         clientId,
         redirectUri,
         portal,
-        popup,
-        refreshTokenTTL
+        popup
       });
     } catch (e) {
       console.error(`Error getting User Session (beginOAuth). ${e}`);
@@ -80,14 +78,6 @@ export const completeOAuthSignIn = async ({
       redirectUri,
       popup
     });
-
-    console.log(dSession);
-    const url = null;
-    const requestOptions = {
-      params: { client_id: dSession.clientId, grant_type: 'authorization_code' }
-    };
-    const fetchTokenResponse = await fetchToken(url, requestOptions);
-    console.log(fetchTokenResponse);
 
     const account = await createAccountObject({ dSession, portal, clientId });
 
@@ -135,7 +125,6 @@ export const getPortal = async ({ portalUrl, session }) => {
 
 //** Login */
 export const loginOAuth2 = async (manager, options, setAccountManagerState) => {
-  options.refreshTokenTTL = 21600;
   options.duration = 5;
 
   beginOAuthSignIn(manager, options, setAccountManagerState);
@@ -248,13 +237,6 @@ export const getUserThumbnail = ({
 
 const createAccountObject = async ({ dSession, portal, clientId }) => {
   console.log(dSession);
-  const url = null;
-  const requestOptions = {
-    params: { client_id: dSession.clientId, grant_type: 'authorization_code' }
-  };
-  const fetchTokenResponse = await fetchToken(url, requestOptions);
-  console.log(fetchTokenResponse);
-
   try {
     dSession.clientId = dSession.clientId ? dSession.clientId : clientId;
     const token = dSession.token;
