@@ -1,4 +1,4 @@
-import { UserSession } from '@esri/arcgis-rest-auth';
+import { UserSession, fetchToken } from '@esri/arcgis-rest-auth';
 import { getSelf } from '@esri/arcgis-rest-portal';
 import { request } from '@esri/arcgis-rest-request';
 
@@ -80,6 +80,14 @@ export const completeOAuthSignIn = async ({
       redirectUri,
       popup
     });
+
+    console.log(dSession);
+    const url = null;
+    const requestOptions = {
+      params: { client_id: dSession.clientId, grant_type: 'authorization_code' }
+    };
+    const fetchTokenResponse = await fetchToken(url, requestOptions);
+    console.log(fetchTokenResponse);
 
     const account = await createAccountObject({ dSession, portal, clientId });
 
