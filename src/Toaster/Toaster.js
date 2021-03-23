@@ -95,6 +95,18 @@ const notify = (
       }
     );
   }
+
+  // Returning toastId will allow users to access id of specific toaster, which will let them manipulate that specific toaster only, if desired.
+  return toastId;
+};
+
+// If user passes specific toastId to closeDisplayedToast(), only close that toaster.  Otherwise, close all displayed toasts.
+const closeDisplayedToast = toasterId => {
+  if (toasterId) {
+    toast.dismiss(toasterId);
+  } else {
+    toast.dismiss();
+  }
 };
 
 class Toaster extends Component {
@@ -161,4 +173,4 @@ Toaster.defaultProps = {
 
 Toaster.displayName = 'Toaster';
 
-export { Toaster as default, notify };
+export { Toaster as default, notify, closeDisplayedToast };

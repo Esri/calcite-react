@@ -11,6 +11,7 @@
 
 export { default } from './Toaster';
 export { notify } from './Toaster';
+export { closeDisplayedToast } from './Toaster';
 export { default as ToastContainer } from './ToastContainer';
 export {
   StyledAlertTitle as ToastTitle,
