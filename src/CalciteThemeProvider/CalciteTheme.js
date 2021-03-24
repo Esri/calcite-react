@@ -9,7 +9,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.​
 
-import { colors } from '@esri/calcite-colors';
+import { colors, themes } from '@esri/calcite-colors';
+
+const lightThemeVariables = themes[0].variables;
 
 const CalciteTheme = {
   palette: {
@@ -37,9 +39,9 @@ const CalciteTheme = {
     transparentBlack: 'rgba(0, 0, 0, 0.75)',
     opaqueBlack: 'rgba(0, 0, 0, 0.85)',
 
-    // ┌────────────┐
-    // │ Brand Blue │
-    // └────────────┘
+    // ┌─────────────────────┐
+    // │ Brand Blue (legacy) │
+    // └─────────────────────┘
     Brand_Blue_100: colors['h-bb-020'], //  previously blue 14
     Brand_Blue_120: colors['v-bb-120'],
     Brand_Blue_140: colors['v-bb-140'],
@@ -47,6 +49,21 @@ const CalciteTheme = {
     Brand_Blue_160: colors['v-bb-160'],
     Brand_Blue_200: colors['h-bb-060'], // "Esri Blue", previously blue 12
     Brand_Blue_250: colors['h-bb-080'], // previously blue 11
+
+    // ┌───────┐
+    // │ Brand │
+    // └───────┘
+    brand: lightThemeVariables['brand'],
+    brandHover: lightThemeVariables['brand-hover'],
+    brandPress: lightThemeVariables['brand-press'],
+
+    // ┌───────────────────────┐
+    // │ Background/Foreground │
+    // └───────────────────────┘
+    background: lightThemeVariables['background'],
+    foreground1: lightThemeVariables['foreground-1'],
+    foreground2: lightThemeVariables['foreground-2'],
+    foreground3: lightThemeVariables['foreground-3'],
 
     // ┌───────────┐
     // │ UI Colors │
@@ -146,9 +163,9 @@ const CalciteTheme = {
   // ┌─────────────┐
   // │ Type Colors │
   // └─────────────┘
-  typeColor: colors['ui-text-1'],
-  linkColor: colors['ui-blue'],
-  linkHover: colors['ui-blue-hover'],
+  typeColor: lightThemeVariables['text-1'],
+  linkColor: lightThemeVariables['text-link'],
+  linkHover: lightThemeVariables['brand-press'],
 
   // ┌─────────────┐
   // │ Breakpoints │
