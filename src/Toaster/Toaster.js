@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 import { StyledToaster, StyledCloseButton } from './Toaster-styled';
@@ -95,6 +96,9 @@ const notify = (
       }
     );
   }
+
+  // Returning toastId will allow users to access id of specific toaster, which will let them manipulate that specific toaster only, if desired.
+  return toastId;
 };
 
 class Toaster extends Component {
@@ -161,4 +165,4 @@ Toaster.defaultProps = {
 
 Toaster.displayName = 'Toaster';
 
-export { Toaster as default, notify };
+export { Toaster as default, notify, toast };
