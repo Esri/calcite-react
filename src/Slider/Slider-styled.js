@@ -17,7 +17,6 @@ import { CalciteInput } from '../utils/commonElements';
 
 // Calcite theme and Esri colors
 import { CalciteTheme as theme } from '../CalciteThemeProvider';
-import { colors } from '@esri/calcite-colors';
 
 // Calcite components
 
@@ -53,7 +52,7 @@ const rangeProps = {
   thumbBgDefault: theme.palette.white,
   thumbBgHover: theme.palette.Brand_Blue_200,
   thumbErrorBgHover: theme.palette.darkRed,
-  thumbBgActive: colors['ui-blue-press'],
+  thumbBgActive: theme.palette.brandPress,
   thumbErrorBgActive: theme.palette.red
 };
 
