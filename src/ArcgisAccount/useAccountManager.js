@@ -189,8 +189,7 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
   /** Refresh Account: UserSession.refreshSession [https://esri.github.io/arcgis-rest-js/api/auth/UserSession/#refreshSession] */
   const refreshAccount = async ({ session, key, ...sessionState }) => {
     // refresh workflow for server oauth sessions (view authorize and exchangeAuthorizationCode)
-    console.log(session);
-    console.log(sessionState);
+    // No refresh for client side: https://github.com/Esri/arcgis-rest-js/issues/627#issuecomment-535644535
 
     if (session.refreshToken) {
       try {

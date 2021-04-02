@@ -11,11 +11,18 @@ import {
 /** Begin OAuth  */
 export const beginOAuthSignIn = async (
   manager,
-  { clientId, redirectUri, portalUrl, popup, duration },
+  { clientId, redirectUri, portalUrl, popup },
   setAccountManagerState
 ) => {
   const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing/rest';
   const url = new URL(portal);
+
+  /**
+   * 
+   Get access Code (Query)
+   `${portal}/oauth2/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&popup=${popup}`
+    const session = await UserSession.exchangeAuthorizationCode({clientId, redirectUri: oauth_redirect_uri }, oauth_access_code)
+   */
 
   if (!url.pathname) {
     const resource = new URL(
@@ -35,8 +42,7 @@ export const beginOAuthSignIn = async (
         clientId,
         redirectUri,
         portal,
-        popup,
-        duration
+        popup
       });
       const account = await createAccountObject({ dSession, portal, clientId });
 
@@ -69,9 +75,7 @@ export const completeOAuthSignIn = async ({
   popup
 }) => {
   try {
-    const portal = portalUrl
-      ? portalUrl
-      : 'https://www.arcgis.com/sharing/rest';
+    const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
     const dSession = UserSession.completeOAuth2({
       clientId,
       portal,
@@ -125,8 +129,6 @@ export const getPortal = async ({ portalUrl, session }) => {
 
 //** Login */
 export const loginOAuth2 = async (manager, options, setAccountManagerState) => {
-  options.duration = 5;
-
   beginOAuthSignIn(manager, options, setAccountManagerState);
 };
 
@@ -248,8 +250,6 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
       portal: dPortal,
       token
     });
-
-    //store images to user?
 
     return {
       user,
