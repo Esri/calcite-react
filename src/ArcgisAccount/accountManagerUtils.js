@@ -14,8 +14,9 @@ export const beginOAuthSignIn = async (
   { clientId, redirectUri, portalUrl, popup },
   setAccountManagerState
 ) => {
-  const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing/rest';
+  const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
   const url = new URL(portal);
+  console.log(portal);
 
   /**
    * 
