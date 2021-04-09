@@ -88,7 +88,7 @@ import ArcgisAccount, {
 
       const options = {
         // register an app of your own to create a unique clientId
-        clientId: "TibvtSLjTqHPo4s2",
+        clientId: "BprsHhCKRCOXoE86",
         redirectUri: `${window.location.origin}/arcgis-account`,
         popup: false,
         portalUrl: "https://jctest2.esri.com/portal"
@@ -123,7 +123,7 @@ import ArcgisAccount, {
       return (
       <>
         <div style={{display:"flex"}}>
-          {<Button onClick={() => addAccount()} style={{flex:1, margin: "1em"}}> Add Account Popup </Button>}
+          {<Button onClick={() => addAccount()} style={{flex:1, margin: "1em"}}> Add Account </Button>}
           {<Button onClick={() => refreshAccount(accounts[active])} style={{flex:1, margin: "1em"}}> Refresh Account </Button>}
         </div>
 
