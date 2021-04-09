@@ -93,6 +93,13 @@ import ArcgisAccount, {
         redirectUri: `${window.location.origin}/arcgis-account`,
         portalUrl: "https://jctest2.esri.com/portal/sharing/rest"
       };
+      const options2 = {
+        // register an app of your own to create a unique clientId
+        clientId: "TibvtSLjTqHPo4s2",
+        redirectUri: `${window.location.origin}/arcgis-account`,
+        portalUrl: "https://jctest2.esri.com/portal/sharing/rest"
+      };
+
 
       const {
         accountManagerState,
@@ -124,7 +131,7 @@ import ArcgisAccount, {
       <>
         <div style={{display:"flex"}}>
           {<Button onClick={() => addAccount()} style={{flex:1, margin: "1em"}}> Add Account </Button>}
-          {<Button onClick={() => refreshAccount(accounts[active])} style={{flex:1, margin: "1em"}}> Refresh Account </Button>}
+          {<Button onClick={() => addAccount(options2)} style={{flex:1, margin: "1em"}}> Add Account Auto-Redirects </Button>}
         </div>
 
         {active && (
