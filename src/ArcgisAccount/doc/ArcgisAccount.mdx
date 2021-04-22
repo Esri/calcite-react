@@ -125,7 +125,7 @@ import ArcgisAccount, {
         restoreAccount
       } = useAccountManager(options);
 
-      const {active, accounts} = accountManagerState
+      const {active, accounts, status, order} = accountManagerState
 
       const accountManagerJson = {
         active: active,
@@ -139,8 +139,8 @@ import ArcgisAccount, {
               }
             }
           : undefined,
-        status: { originRoute: '...' },
-        order: '[...]'
+        status,
+        order
       };
       const accountManagerStateString = JSON.stringify(accountManagerJson, null, 4);
 
