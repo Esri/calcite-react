@@ -89,6 +89,12 @@ const useAccountManager = (
         originRoute,
         setActive
       );
+
+      setAccountManagerState({
+        status: { popupOpen: popup, ...status },
+        ...accountManagerState
+      });
+
       //begin login
       beginLogin(
         managerName,
