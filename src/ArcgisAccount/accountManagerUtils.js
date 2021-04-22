@@ -1,4 +1,4 @@
-import { UserSession, fetchToken } from '@esri/arcgis-rest-auth';
+import { UserSession } from '@esri/arcgis-rest-auth';
 import { getSelf } from '@esri/arcgis-rest-portal';
 import { request } from '@esri/arcgis-rest-request';
 
@@ -60,7 +60,8 @@ export const beginOAuthSignIn = async (
         clientId,
         redirectUri,
         portal,
-        popup
+        popup,
+        force_login: true
       });
     } catch (e) {
       console.error(`Error getting User Session (beginOAuth). ${e}`);
