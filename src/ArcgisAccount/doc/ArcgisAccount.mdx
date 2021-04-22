@@ -102,18 +102,10 @@ import ArcgisAccount, {
         popup: true
       };
 
-      const optionsPopupParams = {
+      const optionsParams = {
         clientId,
         redirectUri,
-        popup: true,
-        params: { force_login: true }
-      };
-
-      const optionsEnterprise = {
-        clientId: "BprsHhCKRCOXoE86",
-        redirectUri: `${window.location.origin}/arcgis-account`,
-        portalUrl: "https://jctest2.esri.com/portal/sharing/rest",
-        popup: true,
+        popup: false,
         params: { force_login: true }
       };
 
@@ -150,7 +142,7 @@ import ArcgisAccount, {
         <div style={{display:"flex"}}>
           {<Button onClick={() => addAccount()} style={{flex:1, margin: "1em"}}> Add AGO Account </Button>}
           {<Button onClick={() => addAccount(optionsPopup)} style={{flex:1, margin: "1em"}}>  Add AGO Account (Popup) </Button>}
-          {<Button onClick={() => addAccount(optionsEnterprise)} style={{flex:1, margin: "1em"}}> Add Enterprise Account </Button>}
+          {<Button onClick={() => addAccount(optionsParams)} style={{flex:1, margin: "1em"}}> Add AGO Account (Params) </Button>}
         </div>
 
         {active &&
