@@ -155,7 +155,7 @@ import ArcgisAccount, {
         {active &&
           (
             <div style={{display:"flex"}}>
-              {<Button onClick={() => logoutAccount(accounts[active]))} style={{flex:1, margin: "1em"}}> Logout Active </Button>}
+              {<Button onClick={() => logoutAccount(accounts[active])} style={{flex:1, margin: "1em"}}> Logout Active </Button>}
               {<Button onClick={() => removeAccount(accounts[active])} style={{flex:1, margin: "1em"}}>  Remove Active </Button>}
               {<Button onClick={() => refreshAccount(accounts[active])} style={{flex:1, margin: "1em"}}> Refresh Active </Button>}
               {<Button onClick={() => restoreAccount(accounts[active])} style={{flex:1, margin: "1em"}}> Restore Active </Button>}
