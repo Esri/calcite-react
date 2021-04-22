@@ -2,9 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  completeAuth,
-  loginOAuth2,
-  logoutOAuth2,
+  beginLogin,
+  completeLogin,
+  logout,
+  refresh,
   getUserThumbnail,
   getOrgThumbnail
 } from './accountManagerUtils';
@@ -20,11 +21,22 @@ import {
   refreshAccountStorage
 } from './accountManagerStorageUtils';
 
-const useAccountManager = (options, name = 'arcgis-account-manager') => {
-  const [manager] = useState(name);
-  const [credentials] = useState(options);
+const useAccountManager = (
+  options = {
+    clientId: null,
+    redirectUri: null,
+    portalUrl: 'https://www.arcgis.com/sharing',
+    popup: false,
+    params: { force_login: false }
+  },
+  name = 'arcgis-account-manager'
+) => {
+  const [managerName] = useState(name);
+  const [managerOptions] = useState(options);
 
-  const { accounts, status, active, order } = getAccountManagerStorage(manager);
+  const { accounts, status, active, order } = getAccountManagerStorage(
+    managerName
+  );
   const [accountManagerState, setAccountManagerState] = useState({
     active,
     accounts,
@@ -36,39 +48,38 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
   useEffect(
     () => {
       const { loading, authProps } = status || {};
-      if (loading !== true) {
-        return;
-      }
-      //complete login
-      const completeLogin = async () => {
-        const account = await completeAuth(authProps);
-        if (account && account.key) {
-          addAccountStorage(manager, account);
-        }
-        //Update localStorage/ state
-        completeStatusStorage(manager);
-        const accountManager = getAccountManagerStorage(manager);
-        setAccountManagerState(accountManager);
-      };
+      if (loading) {
+        //complete login
+        const completeAddAccount = async () => {
+          const account = await completeLogin(authProps);
+          if (account && account.key) {
+            addAccountStorage(managerName, account);
+          }
+          //Update localStorage/ state
+          completeStatusStorage(managerName);
+          const accountManager = getAccountManagerStorage(managerName);
+          setAccountManagerState(accountManager);
+        };
 
-      completeLogin();
+        completeAddAccount();
+      }
     },
-    [manager, status]
+    [managerName, status]
   );
 
   /** Add Account */
   const addAccount = useCallback(
-    (options = null, setActive = true) => {
+    (options = null, setActive = true, type = 'OAuth2') => {
       // saving window.location.href (query params, etc) as originRoute
       const originRoute = window.location.href;
 
       const { clientId, redirectUri, portalUrl, popup } = options
         ? options || {}
-        : credentials || {};
+        : managerOptions || {};
 
       //set localstorage status
       beginStatusStorage(
-        manager,
+        managerName,
         {
           clientId,
           redirectUri,
@@ -79,18 +90,19 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
         setActive
       );
       //begin login
-      loginOAuth2(
-        manager,
+      beginLogin(
+        managerName,
         {
           clientId,
           redirectUri,
           portalUrl,
           popup
         },
-        setAccountManagerState
+        setAccountManagerState,
+        type
       );
     },
-    [credentials, manager]
+    [managerOptions, managerName]
   );
 
   /** Logout Account: Remove token and session from user auth object and attempt revoke token*/
@@ -100,13 +112,13 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
       const valid = validAccount(account);
 
       if (session && token && valid) {
-        const message = await logoutOAuth2(account);
-        const status = JSON.stringify(message);
+        const response = await logout(account);
+        const status = JSON.stringify(response);
         console.log(`Revoke token status: ${status}`);
 
         //Update localStorage/ state
-        logoutAccountStorage(manager, account);
-        const accountManager = getAccountManagerStorage(manager);
+        logoutAccountStorage(managerName, account);
+        const accountManager = getAccountManagerStorage(managerName);
         setAccountManagerState(accountManager);
       } else {
         console.error(
@@ -114,7 +126,7 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
         );
       }
     },
-    [accountManagerState, manager]
+    [accountManagerState, managerName]
   );
 
   /** Remove Account: Remove account from local storage and attempt revoke token*/
@@ -126,14 +138,14 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
         //Revoke token
         if (token) {
           //Remove token and session
-          const message = await logoutOAuth2(account);
-          const status = JSON.stringify(message);
+          const response = await logout(account);
+          const status = JSON.stringify(response);
           console.log(`Revoke token status: ${status}`);
         }
 
         //Update localStorage/ state
-        removeAccountStorage(manager, account);
-        const accountManager = getAccountManagerStorage(manager);
+        removeAccountStorage(managerName, account);
+        const accountManager = getAccountManagerStorage(managerName);
         setAccountManagerState(accountManager);
       } else {
         console.error(
@@ -141,35 +153,41 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
         );
       }
     },
-    [accountManagerState, manager]
+    [accountManagerState, managerName]
   );
 
   /** Restore Account: Log in to an existing account that is logged out */
-  const restoreAccount = ({ portal }) => {
-    const { appInfo, portalHostname } = portal || {};
+  const restoreAccount = async (account = null) => {
+    // Get type from account
+    const { portal } = account || {};
+    const { appInfo, portalHostname, user } = portal || {};
     const { appId } = appInfo || {};
-    const portalUrl =
-      portalHostname === 'www.arcgis.com'
-        ? null
-        : `https://${portalHostname}/sharing/rest`;
+    const { username } = user || {};
+
     if (appId && portalHostname) {
+      const portalUrl = `https://${portalHostname}/sharing`;
       const clientId = appId;
-      const {
-        authProps: { redirectUri, popup }
-      } = accountManagerState.status || {};
+      const { authProps } = accountManagerState.status || {};
+      const { redirectUri, popup } = authProps || { popup: false };
       const originRoute = window.location.href;
 
       if (redirectUri && popup !== undefined) {
         //set localstorage status
         beginStatusStorage(
-          manager,
+          managerName,
           { clientId, redirectUri, portalUrl, popup },
           originRoute
         );
         //begin login
-        loginOAuth2(
-          manager,
-          { clientId, redirectUri, portalUrl, popup },
+        beginLogin(
+          managerName,
+          {
+            clientId,
+            redirectUri,
+            portalUrl,
+            popup,
+            params: { force_login: true, username }
+          },
           setAccountManagerState
         );
       } else {
@@ -186,29 +204,56 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
     }
   };
 
-  /** Refresh Account: UserSession.refreshSession [https://esri.github.io/arcgis-rest-js/api/auth/UserSession/#refreshSession] */
-  const refreshAccount = async ({ session, key, ...sessionState }) => {
-    // refresh workflow for server oauth sessions (view authorize and exchangeAuthorizationCode)
-    // No refresh for client side: https://github.com/Esri/arcgis-rest-js/issues/627#issuecomment-535644535
+  /** Refresh Account */
+  const refreshAccount = async (account = null) => {
+    const { portal } = account || {};
+    const response = refresh(account);
 
-    if (session.refreshToken) {
-      try {
-        if (!session) throw Error('Missing account session.');
-        if (!key) throw Error('Missing account key.');
-
-        const refresh = await session.refreshSession();
-        console.log(refresh);
-        const sSession = refresh ? refresh.serialize() : undefined;
-        refreshAccountStorage(manager, { key, session: sSession });
-      } catch (e) {
-        console.error(`Cannot refresh session for account: ${key}. ${e}`);
-      }
+    if (response.success && response.session) {
+      refreshAccountStorage(managerName, {
+        key: account.key,
+        session: response.session
+      });
     } else {
-      console.warn(
-        `Cannot refresh session for account: ${key}. No refreshToken exists.`
+      if (portal) {
+        const { appInfo, portalHostname, user } = portal || {};
+        const { appId } = appInfo || {};
+        const { username } = user || {};
+
+        if (appId && portalHostname) {
+          const portalUrl = `https://${portalHostname}/sharing`;
+          const clientId = appId;
+          const { authProps } = accountManagerState.status || {};
+          const { redirectUri, popup } = authProps || { popup: false };
+          const originRoute = window.location.href;
+
+          if (redirectUri) {
+            //set localstorage status
+            beginStatusStorage(
+              managerName,
+              { clientId, redirectUri, portalUrl, popup },
+              originRoute
+            );
+            //begin login
+            beginLogin(
+              managerName,
+              {
+                clientId,
+                redirectUri,
+                portalUrl,
+                popup,
+                params: { force_login: true, username }
+              },
+              setAccountManagerState
+            );
+          }
+        }
+      }
+      console.error(
+        `Cannot refresh session for account. Refresh operation failed: ${
+          response.error
+        }. Attempt to re-authenticate failed due to missing properties in account portal item.`
       );
-      // const token = session.getToken();
-      // console.log(token);
     }
   };
 
@@ -216,16 +261,16 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
   const switchActiveAccount = useCallback(
     (account = null) => {
       if (validAccount(account)) {
-        switchActiveStorage(manager, account);
-        const accountManager = getAccountManagerStorage(manager);
+        switchActiveStorage(managerName, account);
+        const accountManager = getAccountManagerStorage(managerName);
         setAccountManagerState(accountManager);
       }
     },
-    [accountManagerState, manager]
+    [accountManagerState, managerName]
   );
 
   /** Check token status */
-  const verifyToken = useCallback(async ({ session, token, key }) => {
+  const verifyToken = useCallback(async ({ session, token }) => {
     if (session && token) {
       try {
         const { portal } = session || {};
@@ -249,17 +294,17 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
           const { session, token } = account || {};
 
           if (session && token) {
-            const message = await logoutOAuth2(account);
+            const message = await logout(account);
             const status = JSON.stringify(message);
             console.log(`Revoke token status for account ${key}: ${status}`);
 
             //Update localStorage/ state
-            logoutAccountStorage(manager, account);
+            logoutAccountStorage(managerName, account);
           }
           return account;
         }
       );
-      const accountManager = getAccountManagerStorage(manager);
+      const accountManager = getAccountManagerStorage(managerName);
       setAccountManagerState(accountManager);
     },
     [accountManagerState]
@@ -274,17 +319,17 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
 
           //Revoke token
           if (session && token) {
-            const message = await logoutOAuth2(account);
+            const message = await logout(account);
             const status = JSON.stringify(message);
             console.log(`Revoke token status for account ${key}: ${status}`);
           }
           //Update localStorage/ state
-          removeAccountStorage(manager, account);
+          removeAccountStorage(managerName, account);
 
           return {};
         }
       );
-      const accountManager = getAccountManagerStorage(manager);
+      const accountManager = getAccountManagerStorage(managerName);
       setAccountManagerState(accountManager);
     },
     [accountManagerState]
@@ -336,12 +381,19 @@ const useAccountManager = (options, name = 'arcgis-account-manager') => {
 useAccountManager.propTypes = {
   /** Text object name for accountManager in local storage. */
   accountManagerName: PropTypes.string,
-  /** Options for starting OAuth to include { clientId, redirectUri, portalUrl, popup }. Can also be set in addAccount function.  */
+  /** Options for starting OAuth to include { clientId, redirectUri, portalUrl, popup, params }. Can also be set in addAccount function.  */
   options: PropTypes.object
 };
 
 useAccountManager.defaultProps = {
-  accountManagerName: 'arcgis-account-manager'
+  accountManagerName: 'arcgis-account-manager',
+  options: {
+    clientId: null,
+    redirectUri: null,
+    portalUrl: 'https://www.arcgis.com/sharing',
+    popup: false,
+    params: { force_login: false }
+  }
 };
 
 useAccountManager.displayName = 'useAccountManager';
