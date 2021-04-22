@@ -89,7 +89,6 @@ const useAccountManager = (
         originRoute,
         setActive
       );
-
       //begin login
       beginLogin(
         managerName,
