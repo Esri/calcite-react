@@ -28,6 +28,10 @@ export const loginOAuth2 = async (
   { clientId, redirectUri, portalUrl, popup, params },
   setAccountManagerState
 ) => {
+  // params is an undocumented IOAuth2Option:
+  // https://github.com/Esri/arcgis-rest-js/blob/master/packages/arcgis-rest-auth/src/UserSession.ts#L303
+  // https://github.com/Esri/arcgis-rest-js/blob/master/packages/arcgis-rest-request/src/utils/encode-query-string.ts#L28
+
   const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
   const url = new URL(portal);
 

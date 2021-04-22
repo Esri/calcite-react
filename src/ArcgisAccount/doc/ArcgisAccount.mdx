@@ -85,21 +85,29 @@ import ArcgisAccount, {
     {() => {
 
     const Example = () => {
-      //BprsHhCKRCOXoE86
-      //TibvtSLjTqHPo4s2
+
+      // register an app of your own to create a unique clientId
+      const clientId =  "dwecSqF6H1LcJ1n3"
+      const redirectUri = `${window.location.origin}/arcgis-account`
+
       const options = {
-        // register an app of your own to create a unique clientId
-        clientId: "BprsHhCKRCOXoE86",
-        redirectUri: `${window.location.origin}/arcgis-account`,
-        portalUrl: "https://jctest2.esri.com/portal/sharing/rest"
-      };
-      const options2 = {
-        // register an app of your own to create a unique clientId
-        clientId: "TibvtSLjTqHPo4s2",
-        redirectUri: `${window.location.origin}/arcgis-account`,
-        portalUrl: "https://jctest2.esri.com/portal/sharing/rest"
+        clientId,
+        redirectUri,
+        popup: false,
       };
 
+      const optionsPopup = {
+        clientId,
+        redirectUri,
+        popup: true
+      };
+
+      const optionsEnterprise = {
+        clientId: "BprsHhCKRCOXoE86",
+        redirectUri: `${window.location.origin}/arcgis-account`,
+        portalUrl: "https://jctest2.esri.com/portal/sharing/rest",
+        params: { force_login: true, username }
+      };
 
       const {
         accountManagerState,
@@ -130,8 +138,9 @@ import ArcgisAccount, {
       return (
       <>
         <div style={{display:"flex"}}>
-          {<Button onClick={() => addAccount()} style={{flex:1, margin: "1em"}}> Add Account </Button>}
-          {<Button onClick={() => addAccount(options2)} style={{flex:1, margin: "1em"}}> Add Account Auto-Redirects </Button>}
+          {<Button onClick={() => addAccount()} style={{flex:1, margin: "1em"}}> Add AGO Account </Button>}
+          {<Button onClick={() => addAccount(optionsPopup)} style={{flex:1, margin: "1em"}}>  Add AGO Account (Popup) </Button>}
+          {<Button onClick={() => addAccount(optionsEnterprise)} style={{flex:1, margin: "1em"}}> Add Enterprise Account </Button>}
         </div>
 
         {active && (

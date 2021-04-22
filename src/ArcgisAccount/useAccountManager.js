@@ -73,7 +73,7 @@ const useAccountManager = (
       // saving window.location.href (query params, etc) as originRoute
       const originRoute = window.location.href;
 
-      const { clientId, redirectUri, portalUrl, popup } = options
+      const { clientId, redirectUri, portalUrl, popup, params } = options
         ? options || {}
         : managerOptions || {};
 
@@ -96,7 +96,8 @@ const useAccountManager = (
           clientId,
           redirectUri,
           portalUrl,
-          popup
+          popup,
+          params
         },
         setAccountManagerState,
         type
