@@ -112,8 +112,10 @@ import ArcgisAccount, {
       const {
         accountManagerState,
         addAccount,
+        logoutAccount,
         removeAccount,
-        refreshAccount
+        refreshAccount,
+        restoreAccount
       } = useAccountManager(options);
 
       const {active, accounts} = accountManagerState
