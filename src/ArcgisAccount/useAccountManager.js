@@ -172,7 +172,7 @@ const useAccountManager = (
       const { redirectUri, popup } = authProps || { popup: false };
       const originRoute = window.location.href;
 
-      if (redirectUri && popup !== undefined) {
+      if (redirectUri) {
         //set localstorage status
         beginStatusStorage(
           managerName,
