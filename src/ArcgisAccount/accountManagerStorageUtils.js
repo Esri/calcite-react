@@ -96,7 +96,8 @@ export const beginStatusStorage = (
         loading: true,
         authProps: { clientId, redirectUri, portalUrl, popup },
         originRoute,
-        setActive
+        setActive,
+        popupOpen: popup
       }
     },
     manager

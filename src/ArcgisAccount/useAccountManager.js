@@ -90,11 +90,6 @@ const useAccountManager = (
         setActive
       );
 
-      setAccountManagerState({
-        status: { popupOpen: popup, ...status },
-        ...accountManagerState
-      });
-
       //begin login
       beginLogin(
         managerName,

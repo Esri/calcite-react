@@ -61,10 +61,7 @@ export const loginOAuth2 = async (
       addAccountStorage(managerName, account);
 
       const accountManager = getAccountManagerStorage(managerName);
-      setAccountManagerState({
-        status: { popupOpen: false, ...accountManager.status },
-        ...accountManager
-      });
+      setAccountManagerState(accountManager);
     } catch (e) {
       console.error(`Error getting User Session (loginOAuth2). ${e}`);
     }
