@@ -61,7 +61,7 @@ export const beginOAuthSignIn = async (
         redirectUri,
         portal,
         popup,
-        force_login: true
+        params: 'force_login=true'
       });
     } catch (e) {
       console.error(`Error getting User Session (beginOAuth). ${e}`);
