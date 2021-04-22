@@ -102,6 +102,13 @@ import ArcgisAccount, {
         popup: true
       };
 
+      const optionsPopupParams = {
+        clientId,
+        redirectUri,
+        popup: true,
+        params: { force_login: true }
+      };
+
       const optionsEnterprise = {
         clientId: "BprsHhCKRCOXoE86",
         redirectUri: `${window.location.origin}/arcgis-account`,
@@ -143,6 +150,13 @@ import ArcgisAccount, {
           {<Button onClick={() => addAccount()} style={{flex:1, margin: "1em"}}> Add AGO Account </Button>}
           {<Button onClick={() => addAccount(optionsPopup)} style={{flex:1, margin: "1em"}}>  Add AGO Account (Popup) </Button>}
           {<Button onClick={() => addAccount(optionsEnterprise)} style={{flex:1, margin: "1em"}}> Add Enterprise Account </Button>}
+        </div>
+
+        <div style={{display:"flex"}}>
+          {<Button onClick={() => logoutAccount(accounts(active))} style={{flex:1, margin: "1em"}}> Logout Active </Button>}
+          {<Button onClick={() => removeAccount(accounts(active))} style={{flex:1, margin: "1em"}}>  Remove Active </Button>}
+          {<Button onClick={() => refreshAccount(accounts(active))} style={{flex:1, margin: "1em"}}> Refresh Active </Button>}
+          {<Button onClick={() => restoreAccount(accounts(active))} style={{flex:1, margin: "1em"}}> Restore Active </Button>}
         </div>
 
         {active && (
@@ -213,10 +227,10 @@ import ArcgisAccount, {
 
 ### useAccountManager
 
-| Property           | Type   | Required | Default                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| :----------------- | :----- | :------- | :--------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| options            | Object | false    | -                      | Options used when calling addAccount to include { clientId, redirectUri, portalUrl, popup, params }. Can also be fed directly to addAccount function. Note: portalUrl will default to ArcGIS Online, popup will default to false. Params is an object that allows the addition of url params {key: value} to the auth request (Ex: avoid redirects when adding an account with params = {force_login: true} ).[Formatting portalUrl docs](https://developers.arcgis.com/rest/users-groups-and-items/root.htm). Example \_https\*://[`webadaptorhost`].[`domain`].com/[`webadaptorname`]/sharing |
-| accountManagerName | String | false    | arcgis-account-manager | Text name for accountManager object in local storage.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Property           | Type   | Required | Default                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| :----------------- | :----- | :------- | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| options            | Object | false    | -                      | Options used when calling addAccount to include { clientId, redirectUri, portalUrl, popup, params }. Can also be fed directly to addAccount function. Note: portalUrl will default to ArcGIS Online, popup will default to false. Params is an object that allows the addition of url params {param: value} to the auth request (Ex: avoid redirects when adding an account with params = {force_login: true} ).[Formatting portalUrl docs](https://developers.arcgis.com/rest/users-groups-and-items/root.htm). Example \_https\*://[`webadaptorhost`].[`domain`].com/[`webadaptorname`]/sharing |
+| accountManagerName | String | false    | arcgis-account-manager | Text name for accountManager object in local storage.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ## Return
 
