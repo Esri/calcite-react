@@ -6,10 +6,10 @@ route: /toaster
 import { Playground, PropsTable } from 'docz';
 import { Component, Fragment } from 'react';
 import GuideExample from '../../../docz/GuideExample';
-import { toast, Slide, Zoom, Flip } from 'react-toastify';
+import { Slide, Zoom, Flip } from 'react-toastify';
 
 import Button from '../../Button';
-import Toaster, { notify, ToastContainer, ToastTitle, ToastMessage } from '../';
+import Toaster, { toast, notify, ToastContainer, ToastTitle, ToastMessage } from '../';
 
 import ToasterExampleComponent from './ToasterExampleComponent';
 
@@ -19,7 +19,9 @@ import XIcon from 'calcite-ui-icons-react/XIcon';
 # Toaster
 
 Calcite React `Toaster` extends the react-toastify library with the `notify` method.
-Use `notify(content, options)` to display a toaster notification. View their
+Use `notify(content, options)` to display a toaster notification. 
+Use `toast` to access react-toastify object by same name.
+View their
 [documentation](https://github.com/fkhadra/react-toastify) to see available options.
 
 ### ⛔️ Use `notify` method ⛔️
@@ -354,6 +356,77 @@ export default ToasterExampleComponent;
         render() {
           return (
             <Button onClick={this.showToaster}>Show Toaster</Button>
+          );
+        }
+      }
+
+      return <ToasterStory />;
+    }}
+
+</Playground>
+
+## Dismiss toast (react-toastify `toast.dismiss()`)
+
+<Playground>
+  {() => {
+      class ToasterStory extends Component {
+        constructor(props) {
+          super(props);
+          this.displayedToasterIds = []
+          this.showCustomToaster = this.showCustomToaster.bind(this);
+        }
+
+        showCustomToaster({
+          content,
+          showIcon,
+          autoClose,
+          showProgress
+        }) {
+          const toastId = notify(content, {
+            showIcon,
+            autoClose,
+            showProgress
+          })
+
+          const displayedToasterIds = [...this.state.displayedToasterIds, toastId]
+
+          this.setState({ displayedToasterIds })
+        };
+
+        closeToaster(toasterId) {
+          if(!toasterId) {
+            toast.dismiss()
+            this.setState({ displayedToasterIds: [] })
+          } else {
+            toast.dismiss(toasterId)
+
+            const displayedToasterIds = this.state.displayedToasterIds.filter(id => id !== toasterId)
+            this.setState({ displayedToasterIds })
+          }
+        }
+
+        render() {
+          return (
+            <Fragment>
+              <GuideExample label='toaster open'>
+                <Button onClick={() => this.showCustomToaster({
+                  content: "This toaster is open!",
+                  autoClose: false
+                })}>Show Toaster</Button>
+              </GuideExample>
+              <GuideExample label='closeToaster() (All toasters)'>
+                <Button onClick={() => this.closeToaster()
+                }>Close All Toasters</Button>
+              </GuideExample>
+              <GuideExample label='closeToaster(toastId) (Only most recent toaster)'>
+                <Button onClick={() => {
+                  const { displayedToasterIds } = this.state
+                  const mostRecentToaster = displayedToasterIds[displayedToasterIds.length - 1]
+                    this.closeToaster(mostRecentToaster)
+                  }
+                }>Close Only Most Recent Toaster</Button>
+              </GuideExample>
+            </Fragment>
           );
         }
       }
