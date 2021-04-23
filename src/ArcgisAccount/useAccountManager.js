@@ -49,7 +49,6 @@ const useAccountManager = (
     () => {
       const { loading, authProps } = status || {};
       if (loading) {
-        //complete login
         const completeAddAccount = async () => {
           const account = await completeLogin(authProps);
           if (account && account.key) {
