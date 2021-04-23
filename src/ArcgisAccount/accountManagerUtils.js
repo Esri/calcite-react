@@ -7,14 +7,32 @@ import {
   getAccountManagerStorage
 } from './accountManagerStorageUtils';
 
-//** RestJS */
-/** Begin OAuth  */
-export const beginOAuthSignIn = async (
-  manager,
-  { clientId, redirectUri, portalUrl, popup },
+//** Login Workflow*/
+//** ============= */
+
+//** Login */
+export const beginLogin = async (
+  managerName,
+  options,
+  setAccountManagerState,
+  type = 'OAuth2'
+) => {
+  if (type === 'OAuth2') {
+    loginOAuth2(managerName, options, setAccountManagerState);
+  }
+};
+
+//** Login: Begin OAuth */
+export const loginOAuth2 = async (
+  managerName,
+  { clientId, redirectUri, portalUrl, popup, params },
   setAccountManagerState
 ) => {
-  const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing/rest';
+  // params is an undocumented IOAuth2Option:
+  // https://github.com/Esri/arcgis-rest-js/blob/master/packages/arcgis-rest-auth/src/UserSession.ts#L303
+  // https://github.com/Esri/arcgis-rest-js/blob/master/packages/arcgis-rest-request/src/utils/encode-query-string.ts#L28
+
+  const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
   const url = new URL(portal);
 
   if (!url.pathname) {
@@ -35,15 +53,17 @@ export const beginOAuthSignIn = async (
         clientId,
         redirectUri,
         portal,
-        popup
+        popup,
+        params
       });
-      const account = await createAccountObject({ dSession, portal, clientId });
 
-      addAccountStorage(manager, account);
-      const accountManager = getAccountManagerStorage(manager);
+      const account = await createAccountObject({ dSession, portal, clientId });
+      addAccountStorage(managerName, account);
+
+      const accountManager = getAccountManagerStorage(managerName);
       setAccountManagerState(accountManager);
     } catch (e) {
-      console.error(`Error getting User Session (beginOAuth). ${e}`);
+      console.error(`Error getting User Session (loginOAuth2). ${e}`);
     }
   } else {
     try {
@@ -52,25 +72,32 @@ export const beginOAuthSignIn = async (
         clientId,
         redirectUri,
         portal,
-        popup
+        popup,
+        params
       });
     } catch (e) {
-      console.error(`Error getting User Session (beginOAuth). ${e}`);
+      console.error(`Error getting User Session (loginOAuth2). ${e}`);
     }
   }
 };
 
-/** Complete OAuth  */
-export const completeOAuthSignIn = async ({
+/** Complete auth and return account with serialized portal and session  */
+export const completeLogin = async (options, type = 'OAuth2') => {
+  if (type === 'OAuth2') {
+    const account = await completeOAuth2(options);
+    return account;
+  }
+};
+
+/** Login: Complete OAuth2  */
+export const completeOAuth2 = async ({
   clientId,
   portalUrl,
   redirectUri,
   popup
 }) => {
   try {
-    const portal = portalUrl
-      ? portalUrl
-      : 'https://www.arcgis.com/sharing/rest';
+    const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
     const dSession = UserSession.completeOAuth2({
       clientId,
       portal,
@@ -96,38 +123,19 @@ export const completeOAuthSignIn = async ({
   }
 };
 
-/** Complete auth and return account with serialized portal and session  */
-export const completeAuth = async options => {
-  const account = await completeOAuthSignIn(options);
-
-  if (account) {
-    //Set state
-    return account;
-  } else {
-    return null;
-  }
-};
-
-//** Get portal object */
-export const getPortal = async ({ portalUrl, session }) => {
-  try {
-    const portalObject = await getSelf({
-      portal: portalUrl,
-      authentication: session
-    });
-    return portalObject;
-  } catch (e) {
-    console.error(`Error retrieving portal item. ${e}`);
-    return null;
-  }
-};
-
-//** Login */
-export const loginOAuth2 = async (manager, options, setAccountManagerState) => {
-  beginOAuthSignIn(manager, options, setAccountManagerState);
-};
+//** Logout Workflow*/
+//** ============= */
 
 //** Logout */
+export const logout = async (account, type = 'OAuth2') => {
+  // Get type from account
+  if (type === 'OAuth2') {
+    const response = await logoutOAuth2(account);
+    return response;
+  }
+};
+
+//** Logout: OAuth2 */
 export const logoutOAuth2 = async ({ session, token }) => {
   const url = session ? session.portal : null;
   const clientId = session ? session.clientId : null;
@@ -157,6 +165,59 @@ export const logoutOAuth2 = async ({ session, token }) => {
     return { success };
   } catch (e) {
     return { success: false, error: e };
+  }
+};
+
+//** Refresh Workflow*/
+export const refresh = async (account, type = 'OAuth2') => {
+  if (type === 'OAuth2') {
+    const response = await refreshOAuth2(account);
+    return response;
+  }
+};
+
+export const refreshOAuth2 = async ({ session, key } = {}) => {
+  //UserSession.refreshSession [https://esri.github.io/arcgis-rest-js/api/auth/UserSession/#refreshSession]
+  // refresh workflow for server oauth sessions (view authorize and exchangeAuthorizationCode)
+  // No refresh for client side: https://github.com/Esri/arcgis-rest-js/issues/627#issuecomment-535644535
+
+  if (!key) {
+    return { success: false, error: 'Empty account key.' };
+  }
+
+  if (session && session.refreshToken) {
+    try {
+      const refresh = await session.refreshSession();
+      const sSession = refresh ? refresh.serialize() : undefined;
+      return { success: true, session: sSession };
+    } catch (e) {
+      return {
+        success: false,
+        error: `Session.refreshSession failed for account ${key}. ${e}`
+      };
+    }
+  }
+
+  return {
+    success: false,
+    error: `Cannot refresh account session for account ${key}. Missing session/sessionToken.`
+  };
+};
+
+//** Helpers */
+//** ======= */
+
+//** Get portal object */
+export const getPortal = async ({ portalUrl, session }) => {
+  try {
+    const portalObject = await getSelf({
+      portal: portalUrl,
+      authentication: session
+    });
+    return portalObject;
+  } catch (e) {
+    console.error(`Error retrieving portal item. ${e}`);
+    return null;
   }
 };
 
@@ -244,8 +305,6 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
       portal: dPortal,
       token
     });
-
-    //store images to user?
 
     return {
       user,

@@ -86,28 +86,39 @@ import ArcgisAccount, {
 
     const Example = () => {
 
+      // register an app of your own to create a unique clientId
+      const clientId =  "dwecSqF6H1LcJ1n3"
+      const redirectUri = `${window.location.origin}/arcgis-account`
+
       const options = {
-        // register an app of your own to create a unique clientId
-        clientId: "dwecSqF6H1LcJ1n3",
-        redirectUri: `${window.location.origin}/arcgis-account`,
+        clientId,
+        redirectUri,
+        popup: false,
+      };
+
+      const optionsPopup = {
+        clientId,
+        redirectUri,
         popup: true
       };
 
-      const options2 = {
-        // register an app of your own to create a unique clientId
-        clientId: "dwecSqF6H1LcJ1n3",
-        redirectUri: `${window.location.origin}/arcgis-account`,
-        popup: false
+      const optionsParams = {
+        clientId,
+        redirectUri,
+        popup: false,
+        params: { force_login: true }
       };
-
 
       const {
         accountManagerState,
         addAccount,
+        logoutAccount,
         removeAccount,
+        refreshAccount,
+        restoreAccount
       } = useAccountManager(options);
 
-      const {active, accounts} = accountManagerState
+      const {active, accounts, status, order} = accountManagerState
 
       const accountManagerJson = {
         active: active,
@@ -121,17 +132,30 @@ import ArcgisAccount, {
               }
             }
           : undefined,
-        status: { originRoute: '...' },
-        order: '[...]'
+        status,
+        order
       };
       const accountManagerStateString = JSON.stringify(accountManagerJson, null, 4);
 
       return (
       <>
         <div style={{display:"flex"}}>
-          {!active && <Button onClick={() => addAccount()} style={{flex:1, margin: "1em"}}> Add Account Popup </Button>}
-          {!active && <Button onClick={() => addAccount(options2)} style={{flex:1, margin: "1em"}}> Add Account </Button>}
+          {<Button onClick={() => addAccount()} style={{flex:1, margin: "1em"}}> Add AGO Account </Button>}
+          {<Button onClick={() => addAccount(optionsPopup)} style={{flex:1, margin: "1em"}}>  Add AGO Account (Popup) </Button>}
+          {<Button onClick={() => addAccount(optionsParams)} style={{flex:1, margin: "1em"}}> Add AGO Account (Params) </Button>}
         </div>
+
+        {active &&
+          (
+            <div style={{display:"flex"}}>
+              {<Button onClick={() => logoutAccount(accounts[active])} style={{flex:1, margin: "1em"}}> Logout Active </Button>}
+              {<Button onClick={() => removeAccount(accounts[active])} style={{flex:1, margin: "1em"}}>  Remove Active </Button>}
+              {<Button onClick={() => refreshAccount(accounts[active])} style={{flex:1, margin: "1em"}}> Refresh Active </Button>}
+              {<Button onClick={() => restoreAccount(accounts[active])} style={{flex:1, margin: "1em"}}> Restore Active </Button>}
+            </div>
+          )
+        }
+
 
         {active && (
           <TopNav>
@@ -201,10 +225,10 @@ import ArcgisAccount, {
 
 ### useAccountManager
 
-| Property           | Type   | Required | Default                | Description                                                                                                                                                                                                                                                                                                                                                                                                    |
-| :----------------- | :----- | :------- | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| options            | Object | false    | -                      | Options used when calling addAccount to include { clientId, redirectUri, portalUrl, popup }. Can also be fed directly to addAccount function. Note: portalUrl will default to ArcGIS Online, popup will default to false. [Formatting portalUrl docs](https://developers.arcgis.com/rest/users-groups-and-items/root.htm). Example _https_://[`webadaptorhost`].[`domain`].com/[`webadaptorname`]/sharing/rest |
-| accountManagerName | String | false    | arcgis-account-manager | Text name for accountManager object in local storage.                                                                                                                                                                                                                                                                                                                                                          |
+| Property           | Type   | Required | Default                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| :----------------- | :----- | :------- | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| options            | Object | false    | -                      | Options used when calling addAccount to include { clientId, redirectUri, portalUrl, popup, params }. Can also be fed directly to addAccount function. Note: portalUrl will default to ArcGIS Online, popup will default to false. Params is an object that allows the addition of url params {param: value} to the auth request (Ex: avoid redirects when adding an account with params = {force_login: true} ).[Formatting portalUrl docs](https://developers.arcgis.com/rest/users-groups-and-items/root.htm). Example \_https\*://[`webadaptorhost`].[`domain`].com/[`webadaptorname`]/sharing |
+| accountManagerName | String | false    | arcgis-account-manager | Text name for accountManager object in local storage.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ## Return
 
