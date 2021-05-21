@@ -94,6 +94,7 @@ class ArcgisAccount extends Component {
       token,
       onRequestSwitchAccount,
       onRequestSignOut,
+      onRequestClose,
       children,
       hideSwitchAccount,
       switchAccountLabel,
@@ -120,7 +121,9 @@ class ArcgisAccount extends Component {
           />
         }
         open={this.state.open}
-        onRequestClose={this.closeAccountControl}
+        onRequestClose={() => {
+          onRequestClose ? onRequestClose(this.closeAccountControl) : this.closeAccountControl()
+        }}
         placement="bottom-end"
         positionFixed
         appendToBody={appendToBody}

@@ -1,4 +1,9 @@
-# This project is deprecated and is not recommended for future development.
+### This project is deprecated and is not recommended for future development.
+
+We recommend you check out Esri's [Calcite Design System](https://www.esri.com/arcgis-blog/products/developers/announcements/make-beautiful-consistent-web-apps-faster/)!
+
+
+---
 
 # Documentation
 
