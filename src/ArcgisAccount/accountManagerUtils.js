@@ -108,6 +108,7 @@ export const completeOAuth2 = async ({
       redirectUri,
       popup
     });
+    console.log(dSession);
 
     const account = await createAccountObject({ dSession, portal, clientId });
 
