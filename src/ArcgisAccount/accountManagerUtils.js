@@ -32,7 +32,7 @@ export const loginOAuth2 = async (
   // https://github.com/Esri/arcgis-rest-js/blob/master/packages/arcgis-rest-auth/src/UserSession.ts#L303
   // https://github.com/Esri/arcgis-rest-js/blob/master/packages/arcgis-rest-request/src/utils/encode-query-string.ts#L28
 
-  const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
+  const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing/rest';
   const url = new URL(portal);
 
   if (!url.pathname) {
@@ -97,7 +97,9 @@ export const completeOAuth2 = async ({
   popup
 }) => {
   try {
-    const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
+    const portal = portalUrl
+      ? portalUrl
+      : 'https://www.arcgis.com/sharing/rest';
     const dSession = UserSession.completeOAuth2({
       clientId,
       portal,

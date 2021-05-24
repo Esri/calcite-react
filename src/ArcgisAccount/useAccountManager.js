@@ -25,14 +25,27 @@ const useAccountManager = (
   options = {
     clientId: null,
     redirectUri: null,
-    portalUrl: 'https://www.arcgis.com/sharing',
+    portalUrl: 'https://www.arcgis.com/sharing/rest',
     popup: false,
     params: { force_login: false }
   },
-  name = 'arcgis-account-manager'
+  name = 'arcgis-account-manager',
+  onAccountAdded = () => {
+    console.log('onAccountAdded');
+  },
+  onAccountRemoved = () => {
+    console.log('onAccountRemoved');
+  },
+  onAccountsUpdated = () => {
+    console.log('onAccountsUpdated');
+  },
+  onAuthCancelled = () => {
+    console.log('onAuthCancelled');
+  }
 ) => {
   const [managerName] = useState(name);
   const [managerOptions] = useState(options);
+  const [popupOpen, setPopupOpen] = useState(false);
 
   const { accounts, status, active, order } = getAccountManagerStorage(
     managerName
@@ -41,7 +54,8 @@ const useAccountManager = (
     active,
     accounts,
     status,
-    order
+    order,
+    popupOpen
   });
 
   /** Complete Login */
@@ -61,6 +75,7 @@ const useAccountManager = (
         };
 
         completeAddAccount();
+        onAccountAdded();
       }
     },
     [managerName, status]
@@ -75,6 +90,8 @@ const useAccountManager = (
       const { clientId, redirectUri, portalUrl, popup, params } = options
         ? options || {}
         : managerOptions || {};
+
+      setPopupOpen(popup);
 
       //set localstorage status
       beginStatusStorage(
@@ -101,6 +118,8 @@ const useAccountManager = (
         setAccountManagerState,
         type
       );
+      onAccountAdded();
+      setPopupOpen(false);
     },
     [managerOptions, managerName]
   );
@@ -120,6 +139,7 @@ const useAccountManager = (
         logoutAccountStorage(managerName, account);
         const accountManager = getAccountManagerStorage(managerName);
         setAccountManagerState(accountManager);
+        onAccountsUpdated();
       } else {
         console.error(
           `Invalid account object given to logoutAccount. Required fields: session/token/key. Fields received: {session: ${session}, token: ${token}, key: ${key}}`
@@ -147,6 +167,8 @@ const useAccountManager = (
         removeAccountStorage(managerName, account);
         const accountManager = getAccountManagerStorage(managerName);
         setAccountManagerState(accountManager);
+
+        onAccountRemoved();
       } else {
         console.error(
           `Invalid account object given to removeAccount. Required fields: session/key. Fields received: {session: ${session}, key: ${key}}`
@@ -172,6 +194,7 @@ const useAccountManager = (
       const originRoute = window.location.href;
 
       if (redirectUri) {
+        setPopupOpen(popup);
         //set localstorage status
         beginStatusStorage(
           managerName,
@@ -190,6 +213,8 @@ const useAccountManager = (
           },
           setAccountManagerState
         );
+
+        setPopupOpen(false);
       } else {
         console.error(
           `Cannot restore account. Missing redirectUri and popup in accountManagerState.status: ${
@@ -228,6 +253,7 @@ const useAccountManager = (
           const originRoute = window.location.href;
 
           if (redirectUri) {
+            setPopupOpen(popup);
             //set localstorage status
             beginStatusStorage(
               managerName,
@@ -246,6 +272,7 @@ const useAccountManager = (
               },
               setAccountManagerState
             );
+            setPopupOpen(false);
           }
         }
       }
@@ -390,7 +417,7 @@ useAccountManager.defaultProps = {
   options: {
     clientId: null,
     redirectUri: null,
-    portalUrl: 'https://www.arcgis.com/sharing',
+    portalUrl: 'https://www.arcgis.com/sharing/rest',
     popup: false,
     params: { force_login: false }
   }
