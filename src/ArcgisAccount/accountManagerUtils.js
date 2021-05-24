@@ -109,6 +109,7 @@ export const completeOAuth2 = async ({
       popup
     });
     console.log(dSession);
+    //#error=access_denied
 
     const account = await createAccountObject({ dSession, portal, clientId });
 
@@ -124,6 +125,8 @@ export const completeOAuth2 = async ({
     console.error(
       `Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url. ${e}`
     );
+    console.log(e);
+    //ArcGISAuthError: access_denied
     return null;
   }
 };
