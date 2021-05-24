@@ -58,6 +58,7 @@ export const loginOAuth2 = async (
       });
 
       const account = await createAccountObject({ dSession, portal, clientId });
+      console.log(account);
       addAccountStorage(managerName, account);
 
       const accountManager = getAccountManagerStorage(managerName);
@@ -85,6 +86,7 @@ export const loginOAuth2 = async (
 export const completeLogin = async (options, type = 'OAuth2') => {
   if (type === 'OAuth2') {
     const account = await completeOAuth2(options);
+    console.log(account);
     return account;
   }
 };

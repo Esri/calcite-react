@@ -75,10 +75,16 @@ const useAccountManager = (
         };
 
         completeAddAccount();
-        onAccountAdded();
       }
     },
     [managerName, status]
+  );
+
+  useEffect(
+    () => {
+      console.log(popupOpen);
+    },
+    [popupOpen]
   );
 
   /** Add Account */
@@ -118,7 +124,6 @@ const useAccountManager = (
         setAccountManagerState,
         type
       );
-      onAccountAdded();
       setPopupOpen(false);
     },
     [managerOptions, managerName]
