@@ -133,7 +133,7 @@ export const completeOAuth2 = async ({
     return { account: account };
   } catch (e) {
     console.warn(`Error getting User Session (completeOAuth). ${e.message}`);
-    window.location.hash = '';
+    // window.location.hash = '';
     return { error: e };
   }
 };
