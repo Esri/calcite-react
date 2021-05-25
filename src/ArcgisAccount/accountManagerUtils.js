@@ -18,12 +18,7 @@ export const beginLogin = async (
   type = 'OAuth2'
 ) => {
   if (type === 'OAuth2') {
-    const response = await loginOAuth2(
-      managerName,
-      options,
-      setAccountManagerState
-    );
-    return response;
+    loginOAuth2(managerName, options, setAccountManagerState);
   }
 };
 
@@ -69,12 +64,9 @@ export const loginOAuth2 = async (
 
       const accountManager = getAccountManagerStorage(managerName);
       setAccountManagerState(accountManager);
-
-      return { account: account };
     } catch (e) {
       console.warn(`Error getting User Session (loginOAuth2). ${e.message}`);
       window.location.hash = '';
-      return { error: e };
     }
   } else {
     try {
@@ -86,11 +78,9 @@ export const loginOAuth2 = async (
         popup,
         params
       });
-      return {};
     } catch (e) {
       console.warn(`Error getting User Session (loginOAuth2). ${e.message}`);
       window.location.hash = '';
-      return { error: e };
     }
   }
 };
