@@ -87,6 +87,7 @@ const useAccountManager = (
         };
 
         completeAddAccount();
+        console.log('COMPLETE');
       }
     },
     [managerName, status]
@@ -124,7 +125,7 @@ const useAccountManager = (
         setActive
       );
       //begin login
-      const response = await beginLogin(
+      beginLogin(
         managerName,
         {
           clientId,
@@ -136,22 +137,6 @@ const useAccountManager = (
         setAccountManagerState,
         type
       );
-      console.log(response);
-      //update
-      setPopupOpen(false);
-      if (
-        response &&
-        response.error &&
-        response.error.code === 'access_denied'
-      ) {
-        //error.code === 'access_denied'
-        //error.name === 'ArcGISAuthError'
-        //error.message === 'access_denied: The user denied your request.&state=[client_id]'
-        onAuthCancelled();
-      }
-      if (response && response.account) {
-        onAccountAdded();
-      }
     },
     [managerOptions, managerName]
   );
