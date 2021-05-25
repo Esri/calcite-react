@@ -59,46 +59,62 @@ const useAccountManager = (
   });
 
   /** Complete Login */
+  // useEffect(
+  //   () => {
+  //     const { loading, authProps } = status || {};
+  //     if (loading) {
+  //       const completeAddAccount = async () => {
+  //         const response = await completeLogin(authProps);
+  //         if (response && response.account && response.account.key) {
+  //           addAccountStorage(managerName, response.account);
+  //           onAccountAdded();
+  //         }
+  //         //Update localStorage/ state
+  //         completeStatusStorage(managerName);
+  //         const accountManager = getAccountManagerStorage(managerName);
+  //         setAccountManagerState(accountManager);
+
+  //         // if (
+  //         //   response &&
+  //         //   response.error &&
+  //         //   response.error.code === 'access_denied'
+  //         // ) {
+  //         //   //error.code === 'access_denied'
+  //         //   //error.name === 'ArcGISAuthError'
+  //         //   //error.message === 'access_denied: The user denied your request.&state=[client_id]'
+  //         //   onAuthCancelled();
+  //         // }
+  //       };
+
+  //       completeAddAccount();
+  //       console.log('COMPLETE');
+  //     }
+  //   },
+  //   [managerName, status]
+  // );
+
   useEffect(
     () => {
       const { loading, authProps } = status || {};
       if (loading) {
         const completeAddAccount = async () => {
-          const response = await completeLogin(authProps);
-          if (response && response.account && response.account.key) {
-            addAccountStorage(managerName, response.account);
-            onAccountAdded();
+          const { account } = (await completeLogin(authProps)) || {};
+          if (account && account.key) {
+            addAccountStorage(managerName, account);
           }
           //Update localStorage/ state
           completeStatusStorage(managerName);
           const accountManager = getAccountManagerStorage(managerName);
           setAccountManagerState(accountManager);
-
-          if (
-            response &&
-            response.error &&
-            response.error.code === 'access_denied'
-          ) {
-            //error.code === 'access_denied'
-            //error.name === 'ArcGISAuthError'
-            //error.message === 'access_denied: The user denied your request.&state=[client_id]'
-            onAuthCancelled();
-          }
         };
 
         completeAddAccount();
-        console.log('COMPLETE');
       }
     },
     [managerName, status]
   );
 
-  useEffect(
-    () => {
-      console.log(popupOpen);
-    },
-    [popupOpen]
-  );
+  console.log(popupOpen);
 
   /** Add Account */
   const addAccount = useCallback(
