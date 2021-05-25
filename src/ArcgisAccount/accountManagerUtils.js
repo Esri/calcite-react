@@ -48,7 +48,6 @@ export const loginOAuth2 = async (
 
   if (popup) {
     try {
-      console.log({ clientId, redirectUri, portalUrl, popup, params });
       const dSession = await UserSession.beginOAuth2({
         // register an app of your own to create a unique clientId
         clientId,
@@ -57,7 +56,6 @@ export const loginOAuth2 = async (
         popup,
         params
       });
-      console.log(dSession);
 
       const account = await createAccountObject({ dSession, portal, clientId });
       addAccountStorage(managerName, account);
@@ -67,6 +65,7 @@ export const loginOAuth2 = async (
     } catch (e) {
       console.warn(`Error getting User Session (loginOAuth2). ${e.message}`);
       window.location.hash = '';
+      console.log('popup');
     }
   } else {
     try {
