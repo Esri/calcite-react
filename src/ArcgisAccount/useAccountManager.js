@@ -62,7 +62,7 @@ const useAccountManager = (
   useEffect(
     () => {
       const { loading, authProps } = status || {};
-      if (loading) {
+      if (loading && !authProps.popup) {
         const completeAddAccount = async () => {
           const response = await completeLogin(authProps);
           if (response && response.account && response.account.key) {

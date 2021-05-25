@@ -73,6 +73,7 @@ export const loginOAuth2 = async (
       return { account: account };
     } catch (e) {
       console.warn(`Error getting User Session (loginOAuth2). ${e.message}`);
+      window.location.hash = '';
       return { error: e };
     }
   } else {
@@ -88,6 +89,7 @@ export const loginOAuth2 = async (
       return {};
     } catch (e) {
       console.warn(`Error getting User Session (loginOAuth2). ${e.message}`);
+      window.location.hash = '';
       return { error: e };
     }
   }
@@ -131,8 +133,7 @@ export const completeOAuth2 = async ({
     return { account: account };
   } catch (e) {
     console.warn(`Error getting User Session (completeOAuth). ${e.message}`);
-
-    //ArcGISAuthError: access_denied
+    window.location.hash = '';
     return { error: e };
   }
 };
