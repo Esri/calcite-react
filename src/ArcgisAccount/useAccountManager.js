@@ -98,7 +98,7 @@ const useAccountManager = (
       const { loading, authProps } = status || {};
       if (loading) {
         const completeAddAccount = async () => {
-          const { account } = (await completeLogin(authProps)) || {};
+          const account = await completeLogin(authProps);
           if (account && account.key) {
             addAccountStorage(managerName, account);
           }
@@ -113,8 +113,6 @@ const useAccountManager = (
     },
     [managerName, status]
   );
-
-  console.log(popupOpen);
 
   /** Add Account */
   const addAccount = useCallback(

@@ -64,7 +64,7 @@ export const loginOAuth2 = async (
       setAccountManagerState(accountManager);
     } catch (e) {
       console.warn(`Error getting User Session (loginOAuth2). ${e.message}`);
-      window.location.hash = '';
+      // window.location.hash = '';
       console.log('popup');
     }
   } else {
@@ -79,7 +79,7 @@ export const loginOAuth2 = async (
       });
     } catch (e) {
       console.warn(`Error getting User Session (loginOAuth2). ${e.message}`);
-      window.location.hash = '';
+      // window.location.hash = '';
     }
   }
 };
@@ -119,11 +119,13 @@ export const completeOAuth2 = async ({
     } else {
       window.location.hash = '';
     }
-    return { account: account };
+    // return { account: account };
+    return account;
   } catch (e) {
     console.warn(`Error getting User Session (completeOAuth). ${e.message}`);
     window.location.hash = '';
-    return { error: e };
+    // return { error: e };
+    return null;
   }
 };
 
