@@ -136,6 +136,7 @@ const useAccountManager = (
         setAccountManagerState,
         type
       );
+      console.log(response);
       //update
       setPopupOpen(false);
       if (
