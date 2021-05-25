@@ -63,9 +63,7 @@ export const loginOAuth2 = async (
       const accountManager = getAccountManagerStorage(managerName);
       setAccountManagerState(accountManager);
     } catch (e) {
-      console.warn(`Error getting User Session (loginOAuth2). ${e.message}`);
-      // window.location.hash = '';
-      console.log('popup');
+      console.error(`Error getting User Session (loginOAuth2). ${e}`);
     }
   } else {
     try {
@@ -78,8 +76,7 @@ export const loginOAuth2 = async (
         params
       });
     } catch (e) {
-      console.warn(`Error getting User Session (loginOAuth2). ${e.message}`);
-      // window.location.hash = '';
+      console.error(`Error getting User Session (loginOAuth2). ${e}`);
     }
   }
 };
@@ -87,8 +84,8 @@ export const loginOAuth2 = async (
 /** Complete auth and return account with serialized portal and session  */
 export const completeLogin = async (options, type = 'OAuth2') => {
   if (type === 'OAuth2') {
-    const response = await completeOAuth2(options);
-    return response;
+    const account = await completeOAuth2(options);
+    return account;
   }
 };
 
@@ -100,9 +97,7 @@ export const completeOAuth2 = async ({
   popup
 }) => {
   try {
-    const portal = portalUrl
-      ? portalUrl
-      : 'https://www.arcgis.com/sharing/rest';
+    const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/rest';
     const dSession = UserSession.completeOAuth2({
       clientId,
       portal,
@@ -119,12 +114,11 @@ export const completeOAuth2 = async ({
     } else {
       window.location.hash = '';
     }
-    // return { account: account };
     return account;
   } catch (e) {
-    console.warn(`Error getting User Session (completeOAuth). ${e.message}`);
-    window.location.hash = '';
-    // return { error: e };
+    console.error(
+      `Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url. ${e}`
+    );
     return null;
   }
 };

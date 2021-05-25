@@ -29,23 +29,10 @@ const useAccountManager = (
     popup: false,
     params: { force_login: false }
   },
-  name = 'arcgis-account-manager',
-  onAccountAdded = () => {
-    console.log('onAccountAdded');
-  },
-  onAccountRemoved = () => {
-    console.log('onAccountRemoved');
-  },
-  onAccountsUpdated = () => {
-    console.log('onAccountsUpdated');
-  },
-  onAuthCancelled = () => {
-    console.log('onAuthCancelled');
-  }
+  name = 'arcgis-account-manager'
 ) => {
   const [managerName] = useState(name);
   const [managerOptions] = useState(options);
-  const [popupOpen, setPopupOpen] = useState(false);
 
   const { accounts, status, active, order } = getAccountManagerStorage(
     managerName
@@ -54,45 +41,10 @@ const useAccountManager = (
     active,
     accounts,
     status,
-    order,
-    popupOpen
+    order
   });
 
   /** Complete Login */
-  // useEffect(
-  //   () => {
-  //     const { loading, authProps } = status || {};
-  //     if (loading) {
-  //       const completeAddAccount = async () => {
-  //         const response = await completeLogin(authProps);
-  //         if (response && response.account && response.account.key) {
-  //           addAccountStorage(managerName, response.account);
-  //           onAccountAdded();
-  //         }
-  //         //Update localStorage/ state
-  //         completeStatusStorage(managerName);
-  //         const accountManager = getAccountManagerStorage(managerName);
-  //         setAccountManagerState(accountManager);
-
-  //         // if (
-  //         //   response &&
-  //         //   response.error &&
-  //         //   response.error.code === 'access_denied'
-  //         // ) {
-  //         //   //error.code === 'access_denied'
-  //         //   //error.name === 'ArcGISAuthError'
-  //         //   //error.message === 'access_denied: The user denied your request.&state=[client_id]'
-  //         //   onAuthCancelled();
-  //         // }
-  //       };
-
-  //       completeAddAccount();
-  //       console.log('COMPLETE');
-  //     }
-  //   },
-  //   [managerName, status]
-  // );
-
   useEffect(
     () => {
       const { loading, authProps } = status || {};
@@ -116,15 +68,13 @@ const useAccountManager = (
 
   /** Add Account */
   const addAccount = useCallback(
-    async (options = null, setActive = true, type = 'OAuth2') => {
+    (options = null, setActive = true, type = 'OAuth2') => {
       // saving window.location.href (query params, etc) as originRoute
       const originRoute = window.location.href;
 
       const { clientId, redirectUri, portalUrl, popup, params } = options
         ? options || {}
         : managerOptions || {};
-
-      setPopupOpen(popup);
 
       //set localstorage status
       beginStatusStorage(
@@ -170,7 +120,6 @@ const useAccountManager = (
         logoutAccountStorage(managerName, account);
         const accountManager = getAccountManagerStorage(managerName);
         setAccountManagerState(accountManager);
-        onAccountsUpdated();
       } else {
         console.error(
           `Invalid account object given to logoutAccount. Required fields: session/token/key. Fields received: {session: ${session}, token: ${token}, key: ${key}}`
@@ -198,8 +147,6 @@ const useAccountManager = (
         removeAccountStorage(managerName, account);
         const accountManager = getAccountManagerStorage(managerName);
         setAccountManagerState(accountManager);
-
-        onAccountRemoved();
       } else {
         console.error(
           `Invalid account object given to removeAccount. Required fields: session/key. Fields received: {session: ${session}, key: ${key}}`
@@ -218,14 +165,13 @@ const useAccountManager = (
     const { username } = user || {};
 
     if (appId && portalHostname) {
-      const portalUrl = `https://${portalHostname}/sharing`;
+      const portalUrl = `https://${portalHostname}/sharing/rest`;
       const clientId = appId;
       const { authProps } = accountManagerState.status || {};
       const { redirectUri, popup } = authProps || { popup: false };
       const originRoute = window.location.href;
 
       if (redirectUri) {
-        setPopupOpen(popup);
         //set localstorage status
         beginStatusStorage(
           managerName,
@@ -244,8 +190,6 @@ const useAccountManager = (
           },
           setAccountManagerState
         );
-
-        setPopupOpen(false);
       } else {
         console.error(
           `Cannot restore account. Missing redirectUri and popup in accountManagerState.status: ${
@@ -277,14 +221,13 @@ const useAccountManager = (
         const { username } = user || {};
 
         if (appId && portalHostname) {
-          const portalUrl = `https://${portalHostname}/sharing`;
+          const portalUrl = `https://${portalHostname}/sharing/rest`;
           const clientId = appId;
           const { authProps } = accountManagerState.status || {};
           const { redirectUri, popup } = authProps || { popup: false };
           const originRoute = window.location.href;
 
           if (redirectUri) {
-            setPopupOpen(popup);
             //set localstorage status
             beginStatusStorage(
               managerName,
@@ -303,7 +246,6 @@ const useAccountManager = (
               },
               setAccountManagerState
             );
-            setPopupOpen(false);
           }
         }
       }
@@ -457,3 +399,13 @@ useAccountManager.defaultProps = {
 useAccountManager.displayName = 'useAccountManager';
 
 export default useAccountManager;
+//         // if (
+//         //   response &&
+//         //   response.error &&
+//         //   response.error.code === 'access_denied'
+//         // ) {
+//         //   //error.code === 'access_denied'
+//         //   //error.name === 'ArcGISAuthError'
+//         //   //error.message === 'access_denied: The user denied your request.&state=[client_id]'
+//         //   onAuthCancelled();
+//         // }
