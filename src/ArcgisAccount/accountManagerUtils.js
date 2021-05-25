@@ -18,7 +18,12 @@ export const beginLogin = async (
   type = 'OAuth2'
 ) => {
   if (type === 'OAuth2') {
-    loginOAuth2(managerName, options, setAccountManagerState);
+    const response = await loginOAuth2(
+      managerName,
+      options,
+      setAccountManagerState
+    );
+    return response;
   }
 };
 
@@ -58,13 +63,15 @@ export const loginOAuth2 = async (
       });
 
       const account = await createAccountObject({ dSession, portal, clientId });
-      console.log(account);
       addAccountStorage(managerName, account);
 
       const accountManager = getAccountManagerStorage(managerName);
       setAccountManagerState(accountManager);
+
+      return { account: account };
     } catch (e) {
       console.error(`Error getting User Session (loginOAuth2). ${e}`);
+      return { error: e };
     }
   } else {
     try {
@@ -76,8 +83,10 @@ export const loginOAuth2 = async (
         popup,
         params
       });
+      return {};
     } catch (e) {
       console.error(`Error getting User Session (loginOAuth2). ${e}`);
+      return { error: e };
     }
   }
 };
@@ -85,9 +94,8 @@ export const loginOAuth2 = async (
 /** Complete auth and return account with serialized portal and session  */
 export const completeLogin = async (options, type = 'OAuth2') => {
   if (type === 'OAuth2') {
-    const account = await completeOAuth2(options);
-    console.log(account);
-    return account;
+    const response = await completeOAuth2(options);
+    return response;
   }
 };
 
@@ -108,8 +116,6 @@ export const completeOAuth2 = async ({
       redirectUri,
       popup
     });
-    console.log(dSession);
-    //#error=access_denied
 
     const account = await createAccountObject({ dSession, portal, clientId });
 
@@ -120,14 +126,14 @@ export const completeOAuth2 = async ({
     } else {
       window.location.hash = '';
     }
-    return account;
+    return { account: account };
   } catch (e) {
     console.error(
       `Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url. ${e}`
     );
-    console.log(e);
+
     //ArcGISAuthError: access_denied
-    return null;
+    return { error: e };
   }
 };
 

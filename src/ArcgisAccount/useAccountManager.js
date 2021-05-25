@@ -64,14 +64,26 @@ const useAccountManager = (
       const { loading, authProps } = status || {};
       if (loading) {
         const completeAddAccount = async () => {
-          const account = await completeLogin(authProps);
-          if (account && account.key) {
-            addAccountStorage(managerName, account);
+          const response = await completeLogin(authProps);
+          if (response && response.account && response.account.key) {
+            addAccountStorage(managerName, response.account);
+            onAccountAdded();
           }
           //Update localStorage/ state
           completeStatusStorage(managerName);
           const accountManager = getAccountManagerStorage(managerName);
           setAccountManagerState(accountManager);
+
+          if (
+            response &&
+            response.error &&
+            response.error.code === 'access_denied'
+          ) {
+            //error.code === 'access_denied'
+            //error.name === 'ArcGISAuthError'
+            //error.message === 'access_denied: The user denied your request.&state=[client_id]'
+            onAuthCancelled();
+          }
         };
 
         completeAddAccount();
@@ -89,7 +101,7 @@ const useAccountManager = (
 
   /** Add Account */
   const addAccount = useCallback(
-    (options = null, setActive = true, type = 'OAuth2') => {
+    async (options = null, setActive = true, type = 'OAuth2') => {
       // saving window.location.href (query params, etc) as originRoute
       const originRoute = window.location.href;
 
@@ -112,7 +124,7 @@ const useAccountManager = (
         setActive
       );
       //begin login
-      beginLogin(
+      const response = await beginLogin(
         managerName,
         {
           clientId,
@@ -124,7 +136,21 @@ const useAccountManager = (
         setAccountManagerState,
         type
       );
+      //update
       setPopupOpen(false);
+      if (
+        response &&
+        response.error &&
+        response.error.code === 'access_denied'
+      ) {
+        //error.code === 'access_denied'
+        //error.name === 'ArcGISAuthError'
+        //error.message === 'access_denied: The user denied your request.&state=[client_id]'
+        onAuthCancelled();
+      }
+      if (response && response.account) {
+        onAccountAdded();
+      }
     },
     [managerOptions, managerName]
   );
