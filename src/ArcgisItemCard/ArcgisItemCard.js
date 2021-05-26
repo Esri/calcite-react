@@ -34,6 +34,7 @@ const ArcgisItemCard = ({
   token,
   vertical,
   actions,
+  customTitleRenderer,
   ...other
 }) => {
   let imageEl;
@@ -88,7 +89,11 @@ const ArcgisItemCard = ({
       {imageEl}
       <StyledItemCardContent>
         <StyledCardItemTitle title={item.title}>
-          {_textShortener(item.title, 70)}
+          {customTitleRenderer ? (
+            customTitleRenderer(_textShortener(item.title, 70))
+          ) : (
+            <>{_textShortener(item.title, 70)}</>
+          )}
         </StyledCardItemTitle>
         <StyledCardItemMetrics>
           <StyledCardItemIconLabelText>
@@ -123,7 +128,9 @@ ArcgisItemCard.propTypes = {
   /** Style prop to position Card content vertically */
   vertical: PropTypes.bool,
   /** Whether the ArcgisItemCard shows an actions tab at the bottom or not */
-  actions: PropTypes.object
+  actions: PropTypes.object,
+  /** Function to render custom elements or values in the item card title */
+  customTitleRenderer: PropTypes.func
 };
 
 ArcgisItemCard.defaultProps = {
