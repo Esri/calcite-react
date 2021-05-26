@@ -129,7 +129,7 @@ ArcgisItemCard.propTypes = {
   vertical: PropTypes.bool,
   /** Whether the ArcgisItemCard shows an actions tab at the bottom or not */
   actions: PropTypes.object,
-  /** Whether the ArcgisItemCard should render the title differently */
+  /** Function to render custom elements or values in the item card title */
   customTitleRenderer: PropTypes.func
 };
 
