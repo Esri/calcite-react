@@ -65,16 +65,18 @@ const useAccountManager = (
       if (loading) {
         console.log('loading');
         const completeAddAccount = async () => {
-          const account = await completeLogin(authProps);
+          const account = await completeLogin(authProps); //in popup
           if (account && account.key) {
             addAccountStorage(managerName, account);
-            console.log('complete addAccount');
-            onAccountAdded();
           }
+
           //Update localStorage/ state
           completeStatusStorage(managerName);
           const accountManager = getAccountManagerStorage(managerName);
           setAccountManagerState(accountManager);
+
+          console.log('complete addAccount');
+          onAccountAdded();
         };
 
         completeAddAccount();
