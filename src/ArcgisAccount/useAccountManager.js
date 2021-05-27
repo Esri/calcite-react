@@ -29,10 +29,23 @@ const useAccountManager = (
     popup: false,
     params: { force_login: false }
   },
-  name = 'arcgis-account-manager'
+  name = 'arcgis-account-manager',
+  onAccountAdded = () => {
+    console.log('onAccountAdded');
+  },
+  onAccountRemoved = () => {
+    console.log('onAccountRemoved');
+  },
+  onAccountsUpdated = () => {
+    console.log('onAccountsUpdated');
+  },
+  onAuthCancelled = () => {
+    console.log('onAuthCancelled');
+  }
 ) => {
   const [managerName] = useState(name);
   const [managerOptions] = useState(options);
+  const [popupOpen, setPopupOpen] = useState(false);
 
   const { accounts, status, active, order } = getAccountManagerStorage(
     managerName
@@ -41,7 +54,8 @@ const useAccountManager = (
     active,
     accounts,
     status,
-    order
+    order,
+    popupOpen
   });
 
   /** Complete Login */
