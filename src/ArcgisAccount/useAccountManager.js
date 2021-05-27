@@ -67,6 +67,8 @@ const useAccountManager = (
           const account = await completeLogin(authProps);
           if (account && account.key) {
             addAccountStorage(managerName, account);
+            console.log('complete addAccount');
+            onAccountAdded();
           }
           //Update localStorage/ state
           completeStatusStorage(managerName);
@@ -115,6 +117,9 @@ const useAccountManager = (
         setAccountManagerState,
         type
       );
+
+      console.log('addAccount');
+      onAccountAdded();
     },
     [managerOptions, managerName]
   );
