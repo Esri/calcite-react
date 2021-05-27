@@ -85,6 +85,7 @@ export const loginOAuth2 = async (
 export const completeLogin = async (options, type = 'OAuth2') => {
   if (type === 'OAuth2') {
     const account = await completeOAuth2(options);
+    console.log(account);
     return account;
   }
 };
