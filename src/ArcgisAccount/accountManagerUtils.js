@@ -62,7 +62,10 @@ export const loginOAuth2 = async (
 
       const accountManager = getAccountManagerStorage(managerName);
       setAccountManagerState(accountManager);
+
+      console.log('onAccountAdded');
     } catch (e) {
+      console.log('onAccountNOTAdded');
       console.error(`Error getting User Session (loginOAuth2). ${e}`);
     }
   } else {
