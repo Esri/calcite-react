@@ -45,7 +45,6 @@ const useAccountManager = (
 ) => {
   const [managerName] = useState(name);
   const [managerOptions] = useState(options);
-  const [popupOpen, setPopupOpen] = useState(false);
 
   const { accounts, status, active, order } = getAccountManagerStorage(
     managerName
@@ -55,7 +54,7 @@ const useAccountManager = (
     accounts,
     status,
     order,
-    popupOpen
+    popupOpen: false
   });
 
   /** Complete Login */
@@ -90,6 +89,13 @@ const useAccountManager = (
     [managerName, status]
   );
 
+  useEffect(
+    () => {
+      console.log(accountManagerState);
+    },
+    [accountManagerState]
+  );
+
   /** Add Account */
   const addAccount = useCallback(
     async (options = null, setActive = true, type = 'OAuth2') => {
@@ -99,6 +105,10 @@ const useAccountManager = (
       const { clientId, redirectUri, portalUrl, popup, params } = options
         ? options || {}
         : managerOptions || {};
+
+      if (popup) {
+        setAccountManagerState({ ...accountManagerState, popupOpen: true });
+      }
 
       //set localstorage status
       beginStatusStorage(
@@ -113,19 +123,27 @@ const useAccountManager = (
         setActive
       );
       //begin login
-      const response = await beginLogin(
-        managerName,
-        {
-          clientId,
-          redirectUri,
-          portalUrl,
-          popup,
-          params
-        },
-        setAccountManagerState,
-        type
-      );
-      console.log(response);
+      const { success, error } =
+        (await beginLogin(
+          managerName,
+          {
+            clientId,
+            redirectUri,
+            portalUrl,
+            popup,
+            params
+          },
+          setAccountManagerState,
+          type
+        )) || {};
+
+      setAccountManagerState({ ...accountManagerState, popupOpen: false });
+      if (error && error.code === 'access_denied') {
+        onAuthCancelled();
+      }
+      if (success) {
+        onAccountAdded();
+      }
     },
     [managerOptions, managerName]
   );
