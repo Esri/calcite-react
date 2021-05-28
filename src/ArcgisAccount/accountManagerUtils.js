@@ -92,6 +92,8 @@ export const loginOAuth2 = async (
       });
     }
   }
+
+  return null;
 };
 
 /** Complete auth and return account with serialized portal and session  */
