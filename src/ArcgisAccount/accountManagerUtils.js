@@ -18,8 +18,12 @@ export const beginLogin = async (
   type = 'OAuth2'
 ) => {
   if (type === 'OAuth2') {
-    await loginOAuth2(managerName, options, setAccountManagerState);
-    return true;
+    const response = await loginOAuth2(
+      managerName,
+      options,
+      setAccountManagerState
+    );
+    return response;
   }
 };
 
@@ -64,9 +68,8 @@ export const loginOAuth2 = async (
       const accountManager = getAccountManagerStorage(managerName);
       setAccountManagerState(accountManager);
 
-      console.log('onAccountAdded');
+      return { account, success: true };
     } catch (e) {
-      console.log('onAccountNOTAdded');
       //error.code === 'access_denied'
       //error.name === 'ArcGISAuthError'
       //error.message === 'access_denied: The user denied your request.&state=
@@ -74,6 +77,7 @@ export const loginOAuth2 = async (
         note: 'Error getting User Session (loginOAuth2).',
         error: e
       });
+      return { error: e, success: false };
     }
   } else {
     try {
@@ -92,7 +96,6 @@ export const loginOAuth2 = async (
       });
     }
   }
-
   return null;
 };
 
