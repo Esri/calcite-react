@@ -92,7 +92,7 @@ const useAccountManager = (
 
   /** Add Account */
   const addAccount = useCallback(
-    (options = null, setActive = true, type = 'OAuth2') => {
+    async (options = null, setActive = true, type = 'OAuth2') => {
       // saving window.location.href (query params, etc) as originRoute
       const originRoute = window.location.href;
 
@@ -113,7 +113,7 @@ const useAccountManager = (
         setActive
       );
       //begin login
-      beginLogin(
+      const response = await beginLogin(
         managerName,
         {
           clientId,
@@ -125,6 +125,7 @@ const useAccountManager = (
         setAccountManagerState,
         type
       );
+      console.log(response);
     },
     [managerOptions, managerName]
   );
@@ -423,13 +424,3 @@ useAccountManager.defaultProps = {
 useAccountManager.displayName = 'useAccountManager';
 
 export default useAccountManager;
-//         // if (
-//         //   response &&
-//         //   response.error &&
-//         //   response.error.code === 'access_denied'
-//         // ) {
-//         //   //error.code === 'access_denied'
-//         //   //error.name === 'ArcGISAuthError'
-//         //   //error.message === 'access_denied: The user denied your request.&state=[client_id]'
-//         //   onAuthCancelled();
-//         // }
