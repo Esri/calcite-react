@@ -114,6 +114,7 @@ export const completeOAuth2 = async ({
       popup
     });
 
+    console.log(dSession);
     const account = await createAccountObject({ dSession, portal, clientId });
 
     // Clear hash token from URL
@@ -130,7 +131,7 @@ export const completeOAuth2 = async ({
         'Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url.',
       ...e
     });
-    return { ...e };
+    return { error: e };
   }
 };
 
