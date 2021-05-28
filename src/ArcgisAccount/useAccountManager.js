@@ -76,6 +76,7 @@ const useAccountManager = (
           setAccountManagerState(accountManager);
 
           //check if declined or added (popup=false)
+          //response.code === 'access_denied'
           onAccountAdded();
         };
         completeAddAccount();

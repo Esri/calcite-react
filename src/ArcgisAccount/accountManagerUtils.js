@@ -130,7 +130,7 @@ export const completeOAuth2 = async ({
         'Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url.',
       ...e
     });
-    return e;
+    return null;
   }
 };
 
