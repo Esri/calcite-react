@@ -123,7 +123,7 @@ const useAccountManager = (
         setActive
       );
       //begin login
-      const { success, error } =
+      const { success, account, error } =
         (await beginLogin(
           managerName,
           {
@@ -141,7 +141,8 @@ const useAccountManager = (
       if (error && error.code === 'access_denied') {
         onAuthCancelled();
       }
-      if (success) {
+      if (success && account) {
+        console.log('here');
         onAccountAdded();
       }
     },
