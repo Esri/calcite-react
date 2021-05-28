@@ -64,10 +64,11 @@ const useAccountManager = (
       const { loading, authProps } = status || {};
       if (loading) {
         const completeAddAccount = async () => {
-          const response = await completeLogin(authProps); //in popup
-          console.log(response);
-          if (response && response.key) {
-            addAccountStorage(managerName, response);
+          const { success, error, account } =
+            (await completeLogin(authProps)) || {}; //in popup
+
+          if (success) {
+            addAccountStorage(managerName, account);
           }
 
           //update localStorage/ state
@@ -77,7 +78,11 @@ const useAccountManager = (
 
           //check if declined or added (popup=false)
           //response.code === 'access_denied'
-          onAccountAdded();
+          console.log(error);
+          if (error && error.code === 'access_denied') {
+          } else {
+            onAccountAdded();
+          }
         };
         completeAddAccount();
       }

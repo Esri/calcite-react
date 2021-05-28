@@ -116,7 +116,6 @@ export const completeOAuth2 = async ({
       popup
     });
 
-    console.log(dSession);
     const account = await createAccountObject({ dSession, portal, clientId });
 
     // Clear hash token from URL
@@ -126,14 +125,14 @@ export const completeOAuth2 = async ({
     } else {
       window.location.hash = '';
     }
-    return account;
+    return { account, success: true };
   } catch (e) {
     console.warn({
-      m:
+      note:
         'Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url.',
       error: e
     });
-    return { error: e };
+    return { error: e, success: false };
   }
 };
 
@@ -329,7 +328,9 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
     };
   } catch (e) {
     throw new Error(
-      `Could not create account object. This could be due to UserSession.getUser(). ${e}`
+      `Could not create account object. This could be due to UserSession.getUser(). ${
+        e.message
+      }`
     );
   }
 };
