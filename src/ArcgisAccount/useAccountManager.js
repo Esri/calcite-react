@@ -45,6 +45,7 @@ const useAccountManager = (
 ) => {
   const [managerName] = useState(name);
   const [managerOptions] = useState(options);
+  const [popupOpen, setPopupOpen] = useState(false);
 
   const { accounts, status, active, order } = getAccountManagerStorage(
     managerName
@@ -53,8 +54,7 @@ const useAccountManager = (
     active,
     accounts,
     status,
-    order,
-    popupOpen: false
+    order
   });
 
   /** Complete Login */
@@ -91,9 +91,9 @@ const useAccountManager = (
 
   useEffect(
     () => {
-      console.log(accountManagerState);
+      console.log(popupOpen);
     },
-    [accountManagerState]
+    [popupOpen]
   );
 
   /** Add Account */
@@ -107,7 +107,7 @@ const useAccountManager = (
         : managerOptions || {};
 
       if (popup) {
-        setAccountManagerState({ ...accountManagerState, popupOpen: true });
+        setPopupOpen(true);
       }
 
       //set localstorage status
@@ -137,7 +137,7 @@ const useAccountManager = (
           type
         )) || {};
 
-      setAccountManagerState({ ...accountManagerState, popupOpen: false });
+      setPopupOpen(false);
       if (error && error.code === 'access_denied') {
         onAuthCancelled();
       }
@@ -403,6 +403,7 @@ const useAccountManager = (
 
   return {
     accountManagerState,
+    popupOpen,
     addAccount,
     logoutAccount,
     logoutAllAccounts,
