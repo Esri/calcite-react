@@ -106,7 +106,9 @@ export const completeOAuth2 = async ({
   popup
 }) => {
   try {
-    const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/rest';
+    const portal = portalUrl
+      ? portalUrl
+      : 'https://www.arcgis.com/sharing/rest';
     const dSession = UserSession.completeOAuth2({
       clientId,
       portal,
