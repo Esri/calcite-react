@@ -70,8 +70,8 @@ export const loginOAuth2 = async (
       //error.name === 'ArcGISAuthError'
       //error.message === 'access_denied: The user denied your request.&state=
       console.warn({
-        error: 'Error getting User Session (loginOAuth2).',
-        ...e
+        m: 'Error getting User Session (loginOAuth2).',
+        error: e
       });
     }
   } else {
@@ -127,9 +127,9 @@ export const completeOAuth2 = async ({
     return account;
   } catch (e) {
     console.warn({
-      error:
+      m:
         'Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url.',
-      ...e
+      error: e
     });
     return { error: e };
   }
