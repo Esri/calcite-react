@@ -80,6 +80,7 @@ const useAccountManager = (
           if (error && error.code === 'access_denied') {
             onAuthCancelled();
           } else {
+            console.log({ success, error, account });
             onAccountAdded();
           }
         };
