@@ -66,7 +66,13 @@ export const loginOAuth2 = async (
       console.log('onAccountAdded');
     } catch (e) {
       console.log('onAccountNOTAdded');
-      console.error(`Error getting User Session (loginOAuth2). ${e}`);
+      //error.code === 'access_denied'
+      //error.name === 'ArcGISAuthError'
+      //error.message === 'access_denied: The user denied your request.&state=
+      console.warn({
+        error: 'Error getting User Session (loginOAuth2).',
+        ...e
+      });
     }
   } else {
     try {
@@ -87,9 +93,8 @@ export const loginOAuth2 = async (
 /** Complete auth and return account with serialized portal and session  */
 export const completeLogin = async (options, type = 'OAuth2') => {
   if (type === 'OAuth2') {
-    const account = await completeOAuth2(options);
-    console.log(account);
-    return account;
+    const response = await completeOAuth2(options);
+    return response;
   }
 };
 
@@ -120,10 +125,12 @@ export const completeOAuth2 = async ({
     }
     return account;
   } catch (e) {
-    console.error(
-      `Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url. ${e}`
-    );
-    return null;
+    console.warn({
+      error:
+        'Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url.',
+      ...e
+    });
+    return e;
   }
 };
 
