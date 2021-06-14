@@ -24,7 +24,7 @@ To get started, go ahead and fork this repo. Once you've done that, there are a 
 
 ## Testing
 
-If you're having trouble using `npm link` to test calcite-react changes in a parent app, here is an alternative approach: After saving your changes and building for production, run `npm pack` in your calcite-react/dist folder. This will create a `/calcite-react/dist/calcite-react-[version].tgz` file that mimics a npm-published calcite-react package. Then run `npm install /path/to/file/calcite-react-[version].tgz` from your parent app to install the package locally and start test driving the changes.
+After saving your changes and building for production, run `npm pack` in your dist folder to create a .tgz file that mimics a npm-published calcite-react package. Then run `npm install [filename].tgz` from your parent app to install the package locally and test drive the changes.
 
 ## Submitting a Pull Request
 
