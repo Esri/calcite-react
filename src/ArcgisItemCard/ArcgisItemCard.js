@@ -35,15 +35,19 @@ const ArcgisItemCard = ({
   vertical,
   actions,
   customTitleRenderer,
+  defaultThumbnailUrl,
   ...other
 }) => {
   let imageEl;
   let hostname = portal ? portal.portalHostname : 'arcgis.com';
   if (showThumbnail) {
     const tokenUrlParam = token ? `?token=${token}` : '';
-    const imageSource = `https://${hostname}/sharing/rest/content/items/${
-      item.id
-    }/info/${item.thumbnail}${tokenUrlParam}`;
+    const imageSource =
+      item.thumbnail || !defaultThumbnailUrl
+        ? `https://${hostname}/sharing/rest/content/items/${item.id}/info/${
+            item.thumbnail
+          }${tokenUrlParam}`
+        : defaultThumbnailUrl;
     imageEl = (
       <StyledItemCardImageWrap vertical={vertical} imageSource={imageSource} />
     );
@@ -130,7 +134,9 @@ ArcgisItemCard.propTypes = {
   /** Whether the ArcgisItemCard shows an actions tab at the bottom or not */
   actions: PropTypes.object,
   /** Function to render custom elements or values in the item card title */
-  customTitleRenderer: PropTypes.func
+  customTitleRenderer: PropTypes.func,
+  /** String source URL to serve as default image for invalid thumbnails */
+  defaultThumbnailUrl: PropTypes.string
 };
 
 ArcgisItemCard.defaultProps = {

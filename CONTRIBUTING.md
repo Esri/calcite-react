@@ -22,6 +22,10 @@ To get started, go ahead and fork this repo. Once you've done that, there are a 
 
 `npm run build`
 
+## Testing
+
+To test a local build of calcite-react from your own parent application, first run `npm run build` to generate the dist folder, then run `npm pack` in the dist folder to create a .tgz file that mimics a npm-published calcite-react package. Finally, run `npm install [filename].tgz` from your parent app to install the package locally and test drive the changes.
+
 ## Submitting a Pull Request
 
 Once you're ready to submit your changes, submit a pull request **into the `develop` branch**. Often it's a good idea to open an issue to discuss your proposed changes before making a PR, but you're welcome to submit a PR without an issue - just be sure to include a good description of your changes.
