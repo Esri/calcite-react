@@ -15,7 +15,11 @@ export const getAccountManagerStorage = manager => {
 
 export const addAccountStorage = (manager, account) => {
   const previous = getLocalSerialized(manager);
-  const { accounts, active, status: setActive } = previous || {};
+  const {
+    accounts,
+    active,
+    status: { setActive }
+  } = previous || {};
   const updateActive = setActive || !active ? account.key : active;
   const order = previous.order
     ? previous.order.find(id => id === account.key)
