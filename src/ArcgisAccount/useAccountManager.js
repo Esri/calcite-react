@@ -25,14 +25,27 @@ const useAccountManager = (
   options = {
     clientId: null,
     redirectUri: null,
-    portalUrl: 'https://www.arcgis.com/sharing',
+    portalUrl: 'https://www.arcgis.com/sharing/rest',
     popup: false,
     params: { force_login: false }
   },
-  name = 'arcgis-account-manager'
+  name = 'arcgis-account-manager',
+  onAccountAdded = () => {
+    console.log('onAccountAdded');
+  },
+  onAccountRemoved = () => {
+    console.log('onAccountRemoved');
+  },
+  onAccountsUpdated = () => {
+    console.log('onAccountsUpdated');
+  },
+  onAuthCancelled = () => {
+    console.log('onAuthCancelled');
+  }
 ) => {
   const [managerName] = useState(name);
   const [managerOptions] = useState(options);
+  const [popupOpen, setPopupOpen] = useState(false);
 
   const { accounts, status, active, order } = getAccountManagerStorage(
     managerName
@@ -49,32 +62,54 @@ const useAccountManager = (
     () => {
       const { loading, authProps } = status || {};
       if (loading) {
+        //occurs in popup
         const completeAddAccount = async () => {
-          const account = await completeLogin(authProps);
-          if (account && account.key) {
+          const { success, error, account } =
+            (await completeLogin(authProps)) || {};
+
+          if (success) {
             addAccountStorage(managerName, account);
           }
-          //Update localStorage/ state
+
+          //update localStorage/ state
           completeStatusStorage(managerName);
           const accountManager = getAccountManagerStorage(managerName);
           setAccountManagerState(accountManager);
-        };
 
+          //response.code === 'access_denied'
+          if (error && error.code === 'access_denied') {
+            onAuthCancelled();
+          }
+          if (success) {
+            onAccountAdded();
+          }
+        };
         completeAddAccount();
       }
     },
     [managerName, status]
   );
 
+  useEffect(
+    () => {
+      console.log(popupOpen);
+    },
+    [popupOpen]
+  );
+
   /** Add Account */
   const addAccount = useCallback(
-    (options = null, setActive = true, type = 'OAuth2') => {
+    async (options = null, setActive = true, type = 'OAuth2') => {
       // saving window.location.href (query params, etc) as originRoute
       const originRoute = window.location.href;
 
       const { clientId, redirectUri, portalUrl, popup, params } = options
         ? options || {}
         : managerOptions || {};
+
+      if (popup) {
+        setPopupOpen(true);
+      }
 
       //set localstorage status
       beginStatusStorage(
@@ -89,18 +124,28 @@ const useAccountManager = (
         setActive
       );
       //begin login
-      beginLogin(
-        managerName,
-        {
-          clientId,
-          redirectUri,
-          portalUrl,
-          popup,
-          params
-        },
-        setAccountManagerState,
-        type
-      );
+      const { success, account, error } =
+        (await beginLogin(
+          managerName,
+          {
+            clientId,
+            redirectUri,
+            portalUrl,
+            popup,
+            params
+          },
+          setAccountManagerState,
+          type
+        )) || {};
+
+      setPopupOpen(false);
+      if (error && error.code === 'access_denied') {
+        onAuthCancelled();
+      }
+      if (success && account) {
+        console.log('here');
+        onAccountAdded();
+      }
     },
     [managerOptions, managerName]
   );
@@ -165,7 +210,7 @@ const useAccountManager = (
     const { username } = user || {};
 
     if (appId && portalHostname) {
-      const portalUrl = `https://${portalHostname}/sharing`;
+      const portalUrl = `https://${portalHostname}/sharing/rest`;
       const clientId = appId;
       const { authProps } = accountManagerState.status || {};
       const { redirectUri, popup } = authProps || { popup: false };
@@ -221,7 +266,7 @@ const useAccountManager = (
         const { username } = user || {};
 
         if (appId && portalHostname) {
-          const portalUrl = `https://${portalHostname}/sharing`;
+          const portalUrl = `https://${portalHostname}/sharing/rest`;
           const clientId = appId;
           const { authProps } = accountManagerState.status || {};
           const { redirectUri, popup } = authProps || { popup: false };
@@ -360,6 +405,7 @@ const useAccountManager = (
 
   return {
     accountManagerState,
+    popupOpen,
     addAccount,
     logoutAccount,
     logoutAllAccounts,
@@ -390,7 +436,7 @@ useAccountManager.defaultProps = {
   options: {
     clientId: null,
     redirectUri: null,
-    portalUrl: 'https://www.arcgis.com/sharing',
+    portalUrl: 'https://www.arcgis.com/sharing/rest',
     popup: false,
     params: { force_login: false }
   }

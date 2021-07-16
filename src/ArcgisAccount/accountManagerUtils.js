@@ -18,7 +18,12 @@ export const beginLogin = async (
   type = 'OAuth2'
 ) => {
   if (type === 'OAuth2') {
-    loginOAuth2(managerName, options, setAccountManagerState);
+    const response = await loginOAuth2(
+      managerName,
+      options,
+      setAccountManagerState
+    );
+    return response;
   }
 };
 
@@ -32,7 +37,7 @@ export const loginOAuth2 = async (
   // https://github.com/Esri/arcgis-rest-js/blob/master/packages/arcgis-rest-auth/src/UserSession.ts#L303
   // https://github.com/Esri/arcgis-rest-js/blob/master/packages/arcgis-rest-request/src/utils/encode-query-string.ts#L28
 
-  const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
+  const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing/rest';
   const url = new URL(portal);
 
   if (!url.pathname) {
@@ -62,8 +67,17 @@ export const loginOAuth2 = async (
 
       const accountManager = getAccountManagerStorage(managerName);
       setAccountManagerState(accountManager);
+
+      return { account, success: true };
     } catch (e) {
-      console.error(`Error getting User Session (loginOAuth2). ${e}`);
+      //error.code === 'access_denied'
+      //error.name === 'ArcGISAuthError'
+      //error.message === 'access_denied: The user denied your request.&state=
+      console.warn({
+        note: 'Error getting User Session (loginOAuth2).',
+        error: e
+      });
+      return { error: e, success: false };
     }
   } else {
     try {
@@ -76,16 +90,20 @@ export const loginOAuth2 = async (
         params
       });
     } catch (e) {
-      console.error(`Error getting User Session (loginOAuth2). ${e}`);
+      console.warn({
+        note: 'Error getting User Session (loginOAuth2).',
+        error: e
+      });
     }
   }
+  return null;
 };
 
 /** Complete auth and return account with serialized portal and session  */
 export const completeLogin = async (options, type = 'OAuth2') => {
   if (type === 'OAuth2') {
-    const account = await completeOAuth2(options);
-    return account;
+    const response = await completeOAuth2(options);
+    return response;
   }
 };
 
@@ -97,7 +115,9 @@ export const completeOAuth2 = async ({
   popup
 }) => {
   try {
-    const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
+    const portal = portalUrl
+      ? portalUrl
+      : 'https://www.arcgis.com/sharing/rest';
     const dSession = UserSession.completeOAuth2({
       clientId,
       portal,
@@ -114,12 +134,14 @@ export const completeOAuth2 = async ({
     } else {
       window.location.hash = '';
     }
-    return account;
+    return { account, success: true };
   } catch (e) {
-    console.error(
-      `Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url. ${e}`
-    );
-    return null;
+    console.warn({
+      note:
+        'Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url.',
+      error: e
+    });
+    return { error: e, success: false };
   }
 };
 
@@ -315,7 +337,9 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
     };
   } catch (e) {
     throw new Error(
-      `Could not create account object. This could be due to UserSession.getUser(). ${e}`
+      `Could not create account object. This could be due to UserSession.getUser(). ${
+        e.message
+      }`
     );
   }
 };
