@@ -51,12 +51,12 @@ const StyledArcgisAccountControl = styled.div`
 
   &:hover {
     color: ${props => props.theme.palette.black};
-    box-shadow: inset 0 -3px 0 0 ${props => props.theme.palette.lighterBlue};
+    box-shadow: inset 0 -3px 0 0 ${props => (props.hoverColor ? props.hoverColor : props.theme.palette.blue)};
   }
 
   &:active {
     color: ${props => props.theme.palette.black};
-    box-shadow: inset 0 -3px 0 0 ${props => props.theme.palette.blue};
+    box-shadow: inset 0 -3px 0 0 ${props => (props.color ? props.color : props.theme.palette.blue)};
   }
 
   ${props =>
@@ -65,7 +65,7 @@ const StyledArcgisAccountControl = styled.div`
       &,
       &:hover {
         color: ${props => props.theme.palette.black};
-        box-shadow: inset 0 -3px 0 0 ${props => props.theme.palette.blue};
+        box-shadow: inset 0 -3px 0 0 ${props => (props.color ? props.color : props.theme.palette.blue)};
       }
     `};
 `;
