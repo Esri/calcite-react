@@ -24,6 +24,7 @@ const Switch = ({
   labelPosition,
   fullWidth,
   destructive,
+  color,
   checked,
   field,
   form,
@@ -98,7 +99,7 @@ const Switch = ({
         {...other}
         type="checkbox"
       />
-      <StyledSwitchTrack destructive={destructive} />
+      <StyledSwitchTrack destructive={destructive} color={color} />
       {labelPosition === 'after' ? getSwitchLabel(children) : null}
     </StyledSwitch>
   );
@@ -115,6 +116,8 @@ Switch.propTypes = {
   onChange: PropTypes.func,
   /** Should use a red highlight color. */
   destructive: PropTypes.bool,
+  /** The color of the Switch. 'green' | 'rgb(0, 255, 255)' | '#fefefe'  */
+  color: PropTypes.string,
   /** Position of the label text in relation to the input. */
   labelPosition: PropTypes.oneOf(['before', 'after']),
   /** Switch and label will take up the full width of the container */
