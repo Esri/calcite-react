@@ -20,6 +20,7 @@ import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
 // Calcite components
 import { CalciteP } from '../Elements';
+import HandleVerticalIcon from 'calcite-ui-icons-react/HandleVerticalIcon';
 import Avatar from '../Avatar';
 
 const StyledAccountTile = styled.div`
@@ -74,7 +75,6 @@ const StyledP = styled(CalciteP)`
 `;
 
 const StyledIconWrapper = styled.span`
-  min-width: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -87,6 +87,10 @@ const StyledTextWrapper = styled.span`
   overflow: hidden;
 `;
 
+const StyledHandleVerticalIcon = styled(HandleVerticalIcon)`
+  margin-left: ${props => (props.marginLeft ? '0.5rem' : '0')};
+`;
+
 export {
   StyledAccountTile,
   StyledContentWrapper,
@@ -94,5 +98,6 @@ export {
   StyledOrgAvatar,
   StyledIconWrapper,
   StyledTextWrapper,
-  StyledP
+  StyledP,
+  StyledHandleVerticalIcon
 };

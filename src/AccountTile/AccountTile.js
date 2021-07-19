@@ -20,7 +20,8 @@ import {
   StyledOrgAvatar,
   StyledIconWrapper,
   StyledTextWrapper,
-  StyledP
+  StyledP,
+  StyledHandleVerticalIcon
 } from './AccountTile-styled';
 
 import Avatar from '../Avatar';
@@ -29,7 +30,6 @@ import { MenuItem } from '../Menu';
 import Popover from '../Popover';
 import Menu from '../Menu';
 
-import HandleVerticalIcon from 'calcite-ui-icons-react/HandleVerticalIcon';
 import CheckCircleIcon from 'calcite-ui-icons-react/CheckCircleIcon';
 import ExclamationMarkTriangleIcon from 'calcite-ui-icons-react/ExclamationMarkTriangleIcon';
 
@@ -161,7 +161,10 @@ const AccountTile = ({
               </Tooltip>
             )}
             {clickable && actions.length !== 0 && (
-              <HandleVerticalIcon scale={16} />
+              <StyledHandleVerticalIcon
+                scale={16}
+                marginLeft={!hideAuthentication}
+              />
             )}
           </StyledIconWrapper>
         </StyledAccountTile>
