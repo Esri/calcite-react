@@ -32,7 +32,8 @@ const StyledAccountTile = styled.div`
   background-color: ${props =>
     props.open ? props.theme.palette.offWhite : props.theme.palette.white};
 
-  ${props => props.clickable &&
+  ${props =>
+    props.clickable &&
     css`
       &:hover {
         background-color: ${props.theme.palette.offWhite};
@@ -73,7 +74,7 @@ const StyledP = styled(CalciteP)`
 `;
 
 const StyledIconWrapper = styled.span`
-  width: 48px;
+  min-width: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
