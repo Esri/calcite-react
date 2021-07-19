@@ -20,7 +20,8 @@ import {
   StyledOrgAvatar,
   StyledIconWrapper,
   StyledTextWrapper,
-  StyledP
+  StyledP,
+  StyledHandleVerticalIcon
 } from './AccountTile-styled';
 
 import Avatar from '../Avatar';
@@ -29,7 +30,6 @@ import { MenuItem } from '../Menu';
 import Popover from '../Popover';
 import Menu from '../Menu';
 
-import HandleVerticalIcon from 'calcite-ui-icons-react/HandleVerticalIcon';
 import CheckCircleIcon from 'calcite-ui-icons-react/CheckCircleIcon';
 import ExclamationMarkTriangleIcon from 'calcite-ui-icons-react/ExclamationMarkTriangleIcon';
 
@@ -44,7 +44,7 @@ const AccountTile = ({
   expiredText,
   authenticatedText,
   clickable,
-  hideIcons,
+  hideAuthentication,
   ...other
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -135,8 +135,8 @@ const AccountTile = ({
               </StyledP>
             </StyledTextWrapper>
           </StyledContentWrapper>
-          {!hideIcons && (
-            <StyledIconWrapper>
+          <StyledIconWrapper>
+            {!hideAuthentication && (
               <Tooltip
                 title={isAuthenticated ? authenticatedText : expiredText}
                 placement="top"
@@ -159,9 +159,14 @@ const AccountTile = ({
                   />
                 )}
               </Tooltip>
-              {actions.length !== 0 && <HandleVerticalIcon scale={16} />}
-            </StyledIconWrapper>
-          )}
+            )}
+            {clickable && actions.length !== 0 && (
+              <StyledHandleVerticalIcon
+                scale={16}
+                marginLeft={!hideAuthentication}
+              />
+            )}
+          </StyledIconWrapper>
         </StyledAccountTile>
       }
     >
@@ -202,8 +207,8 @@ AccountTile.propTypes = {
   }),
   /** Can the time be clicked (false will disable hover effects and pointer events) */
   clickable: PropTypes.bool,
-  /** Should the account tiles be hidden */
-  hideIcons: PropTypes.bool
+  /** Should the account tile authentication be hidden */
+  hideAuthentication: PropTypes.bool
 };
 
 AccountTile.defaultProps = {
@@ -213,7 +218,7 @@ AccountTile.defaultProps = {
   authenticatedText: 'Signed in',
   expiredText: 'Session expired',
   clickable: true,
-  hideIcons: false
+  hideAuthentication: false
 };
 
 AccountTile.displayName = 'AccountTile';

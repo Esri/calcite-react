@@ -27,6 +27,7 @@ import { CalciteTheme as theme } from '../CalciteThemeProvider';
 
 const StyledRadio = styled(baseRadioCheckbox)`
   -webkit-appearance: radio;
+  flex-shrink: 0;
   border-radius: 50%;
   margin-right: ${props => unitCalc(props.theme.baseline, 4, '/')};
   cursor: pointer;
