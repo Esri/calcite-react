@@ -74,7 +74,7 @@ const StyledP = styled(CalciteP)`
 `;
 
 const StyledIconWrapper = styled.span`
-  width: 48px;
+  min-width: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
