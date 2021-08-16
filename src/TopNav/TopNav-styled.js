@@ -62,10 +62,10 @@ const StyledTopNavActions = styled.div`
 
   > a,
   > button {
-    margin-left: 0.75em;
+    margin-inline-start: 0.75em;
 
     &:first-child {
-      margin-left: 0;
+      margin-inline-start: 0;
     }
   }
 `;
