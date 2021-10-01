@@ -323,8 +323,9 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
 const createAccountKey = ({ user, portal }) => {
   try {
     const { customBaseUrl, portalHostname } = portal || {};
-    const type = portal ? 'online' : 'enterprise';
-    const name = portalHostname ? portalHostname : customBaseUrl;
+    const type = portalHostname === 'www.arcgis.com' ? 'online' : 'enterprise';
+    const name =
+      portalHostname === 'www.arcgis.com' ? customBaseUrl : portalHostname;
     const { username } = user || {};
 
     const key = `${type}-${name}-${username}`;
