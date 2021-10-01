@@ -87,8 +87,10 @@ import ArcgisAccount, {
     const Example = () => {
 
       // register an app of your own to create a unique clientId
-      const clientId =  "dwecSqF6H1LcJ1n3"
+      //const clientId =  "dwecSqF6H1LcJ1n3"
+      const clientId =  "m1Kp19P5Sb8XIXQA"
       const redirectUri = `${window.location.origin}/arcgis-account`
+      const portalUrl = "https://jctest3.esri.com/portal"
 
       const options = {
         clientId,
@@ -97,6 +99,7 @@ import ArcgisAccount, {
       };
 
       const optionsPopup = {
+        portalUrl,
         clientId,
         redirectUri,
         popup: true
