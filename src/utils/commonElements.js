@@ -248,7 +248,7 @@ const input = styled(formSelectInputTextarea)`
     const bgPos = [];
     props.success && bgPos.push(`right center`);
     props.error && bgPos.push(`right center`);
-    props.search && bgPos.push(`0.25rem center`);
+    props.search && bgPos.push(`left 0.25rem center`);
     return bgPos.join(', ');
   }};
 
@@ -269,7 +269,7 @@ const input = styled(formSelectInputTextarea)`
       const bgPos = [];
       props.success && bgPos.push(`left center`);
       props.error && bgPos.push(`left center`);
-      props.search && bgPos.push(`0.25em center`);
+      props.search && bgPos.push(`right 0.25em center`);
       return bgPos.join(', ');
     }};
   }

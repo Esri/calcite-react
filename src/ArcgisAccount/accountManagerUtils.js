@@ -322,10 +322,13 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
 
 const createAccountKey = ({ user, portal }) => {
   try {
+    const { customBaseUrl, portalHostname, urlKey, isPortal } = portal || {};
+
+    const type = isPortal ? 'enterprise' : 'online';
+    const name = isPortal ? portalHostname : urlKey;
     const { username } = user || {};
-    const { name } = portal || {};
-    const orgName = name ? name.replace(/\s+/g, '') : 'org';
-    const key = username + '-' + orgName;
+
+    const key = `${type}-${customBaseUrl}-${name}-${username}`;
     return key;
   } catch (e) {
     throw new Error(`Error creating account key. ${e}`);
