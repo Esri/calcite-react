@@ -371,7 +371,7 @@ class Search extends Component {
             <Manager style={ManagerStyle}>
               <Downshift
                 itemToString={this.itemToString}
-                inputValue={inputValue}
+                selectedItem={this.props.inputValue || selectedItem}
                 selectedItem={selectedItem}
                 onChange={onChange}
                 onUserAction={this.handleOnUserAction}
