@@ -164,7 +164,11 @@ ArcgisAccount.propTypes = {
   /** Callback when the user selects the Sign Out button. */
   onRequestSignOut: PropTypes.func,
   /** Append Popover to body. */
-  appendToBody: PropTypes.bool
+  appendToBody: PropTypes.bool,
+  /** Specify color of Popover buttons and active marker under avatar. */
+  color: PropTypes.string,
+  /** Specify hover color of Popover buttons and active marker under avatar. */
+  hoverColor: PropTypes.string
 };
 
 ArcgisAccount.defaultProps = {
