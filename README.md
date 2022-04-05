@@ -1,6 +1,6 @@
 ### This project is deprecated and is not recommended for future development.
 
-We recommend you check out Esri's [Calcite Design System](https://www.esri.com/arcgis-blog/products/developers/announcements/make-beautiful-consistent-web-apps-faster/)!
+We recommend you check out Esri's [Calcite Design System](https://www.esri.com/arcgis-blog/products/developers/announcements/make-beautiful-consistent-web-apps-faster/), which provides a [react output target](https://www.npmjs.com/package/@esri/calcite-components-react) for the [web component library](https://github.com/Esri/calcite-components#calcite-components)!
 
 
 ---
