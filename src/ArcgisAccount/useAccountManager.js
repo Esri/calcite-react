@@ -50,6 +50,8 @@ const useAccountManager = (
       const { loading, authProps } = status || {};
       if (loading) {
         const completeAddAccount = async () => {
+          console.log('activating useEffect completeLogin');
+          //debugger;
           const account = await completeLogin(authProps);
           if (account && account.key) {
             addAccountStorage(managerName, account);
@@ -69,6 +71,9 @@ const useAccountManager = (
   /** Add Account */
   const addAccount = useCallback(
     (options = null, setActive = true, type = 'OAuth2') => {
+      // hardcode
+      type = 'Webtier';
+
       // saving window.location.href (query params, etc) as originRoute
       const originRoute = window.location.href;
 

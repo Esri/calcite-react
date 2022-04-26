@@ -51,6 +51,8 @@ const AccountTile = ({
 
   const themeContext = useContext(ThemeContext);
 
+  console.log('user: ', user);
+
   user.fullName = user.fullName || `${user.firstName} ${user.lastName}`;
 
   const close = () => {

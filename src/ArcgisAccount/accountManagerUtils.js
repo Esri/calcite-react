@@ -1,6 +1,9 @@
 import { UserSession } from '@esri/arcgis-rest-auth';
 import { getSelf } from '@esri/arcgis-rest-portal';
 import { request } from '@esri/arcgis-rest-request';
+import { setDefaultRequestOptions } from '@esri/arcgis-rest-request';
+
+import fetchJsonp from 'fetch-jsonp';
 
 import {
   addAccountStorage,
@@ -10,6 +13,14 @@ import {
 //** Login Workflow*/
 //** ============= */
 
+//debugger;
+
+console.log('fetchJsonp object here: ', fetchJsonp);
+setDefaultRequestOptions({
+  credentials: 'include' /*,
+    "fetch": fetchJsonp*/
+});
+
 //** Login */
 export const beginLogin = async (
   managerName,
@@ -17,8 +28,13 @@ export const beginLogin = async (
   setAccountManagerState,
   type = 'OAuth2'
 ) => {
+  type = 'Webtier';
+
   if (type === 'OAuth2') {
     loginOAuth2(managerName, options, setAccountManagerState);
+  } else if (type === 'Webtier') {
+    console.log('Attempting web tier authentication');
+    loginWebtier(managerName, options, setAccountManagerState);
   }
 };
 
@@ -81,11 +97,193 @@ export const loginOAuth2 = async (
   }
 };
 
+//** Login: Begin Webtier */
+export const jsonpRequest = async url => {
+  fetchJsonp(url)
+    .then(function(response) {
+      console.log('response', response);
+      return response.json();
+    })
+    .then(function(json) {
+      console.log('parsed json', json);
+      Promise.resolve(json);
+    })
+    .catch(function(ex) {
+      console.log('parsing failed', ex);
+    });
+};
+
+//** Login: Begin Webtier */
+export const loginWebtier = async (
+  managerName,
+  { clientId, redirectUri, portalUrl, popup, params },
+  setAccountManagerState
+) => {
+  // params is an undocumented IOAuth2Option:
+  // https://github.com/Esri/arcgis-rest-js/blob/master/packages/arcgis-rest-auth/src/UserSession.ts#L303
+  // https://github.com/Esri/arcgis-rest-js/blob/master/packages/arcgis-rest-request/src/utils/encode-query-string.ts#L28
+
+  // "referrerPolicy": "unsafe-url"
+
+  const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
+  const url = new URL(portal);
+
+  if (!url.pathname) {
+    const resource = new URL(
+      'https://developers.arcgis.com/rest/users-groups-and-items/root.htm'
+    );
+    const format =
+      'https://<webadaptorhost>.<domain>.com/<webadaptorname>/sharing/rest';
+    console.warn(
+      `No URL path given may cause 400 error. If using Enterprise portal verify url format: ${format}. View resource for formatting url: ${resource}`
+    );
+  }
+
+  console.log('using portal.href : ', portal.href);
+  clientId = 'unused';
+
+  const userSession = new UserSession({
+    portal: portal.href,
+    username: 'TestUser',
+    password: 'TestUser42',
+    clientId: clientId
+  });
+
+  // try {
+  //   const res = await request(portal.href + "/rest/sharing?f=json", {
+  //     httpMethod: 'GET',
+  //     mode: 'no-cors'
+  //   });
+  //   console.log("res : ", res);
+  //   const success = res ? res.success : undefined;
+  // } catch (error) {
+  //     console.log("error when initiating authentication request", e);
+  // }
+
+  const portalToken = await userSession.getToken(portal.href, {
+    credentials: 'include' /*,
+    "httpMethod": "GET"*/
+  });
+
+  console.log('generated portalToken : ', portalToken);
+
+  console.log('userSession : ', userSession);
+
+  //debugger;
+
+  console.log('fetchJsonp object here: ', fetchJsonp);
+  setDefaultRequestOptions({
+    credentials: 'include' /*,
+    "fetch": fetchJsonp*/
+  });
+
+  try {
+    const account = await createAccountObjectWebTier({
+      userSession,
+      portal,
+      clientId
+    });
+    addAccountStorage(managerName, account);
+
+    const accountManager = getAccountManagerStorage(managerName);
+    setAccountManagerState(accountManager);
+
+    // close modal
+    // import the function from accountcontext isEnterprise
+  } catch (e) {
+    console.error(`Error getting User Session (loginWebtier). ${e}`);
+  }
+};
+
 /** Complete auth and return account with serialized portal and session  */
-export const completeLogin = async (options, type = 'OAuth2') => {
-  if (type === 'OAuth2') {
+export const completeLogin = async (options, type = 'Webtier') => {
+  console.log('completeLogin running');
+  if (type === 'OAuth2' || true) {
     const account = await completeOAuth2(options);
     return account;
+  } else if (type === 'Webtier') {
+    const account = await completeWebTier(options);
+    return account;
+  }
+};
+
+/** Login: Complete Webtier  */
+export const completeWebTier = async ({ portalUrl, redirectUri, popup }) => {
+  try {
+    const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
+    const dSession = UserSession.completeOAuth2({
+      clientId,
+      portal,
+      redirectUri,
+      popup
+    });
+
+    /*
+                if (popup) {
+          // Guard b/c IE does not support window.opener
+          if (win.opener) {
+            if (win.opener.parent && win.opener.parent[handlerFnName]) {
+              handlerFn = win.opener.parent[handlerFnName];
+            } else if (win.opener && win.opener[handlerFnName]) {
+              // support pop-out oauth from within an iframe
+              handlerFn = win.opener[handlerFnName];
+            }
+          } else {
+            // IE
+            if (win !== win.parent && win.parent && win.parent[handlerFnName]) {
+              handlerFn = win.parent[handlerFnName];
+            }
+          }
+          // if we have a handler fn, call it and close the window
+          if (handlerFn) {
+            handlerFn(
+              error ? JSON.stringify(error) : undefined,
+              JSON.stringify(oauthInfo)
+            );
+            win.close();
+            return undefined;
+          }
+        }
+      } catch (e) {
+        throw new ArcGISAuthError(
+          `Unable to complete authentication. It's possible you specified popup based oAuth2 but no handler from "beginOAuth2()" present. This generally happens because the "popup" option differs between "beginOAuth2()" and "completeOAuth2()".`
+        );
+      }
+
+      if (error) {
+        throw new ArcGISAuthError(error.errorMessage, error.error);
+      }
+
+      return new UserSession({
+        clientId,
+        portal,
+        ssl: oauthInfo.ssl,
+        token: oauthInfo.token,
+        tokenExpires: oauthInfo.expires,
+        username: oauthInfo.username,
+      });
+    }
+
+
+      */
+
+    const account = await createAccountObject({ dSession, portal, clientId });
+
+    // Clear hash token from URL
+    // Refactored by Alex Ela to use window.history.replaceState() instead of window.history.pushState()
+    if (window.history.replaceState) {
+      window.history.replaceState({}, '', window.location.pathname);
+    } else {
+      window.location.hash = '';
+    }
+    console.log('account: ', account);
+
+    return account;
+  } catch (e) {
+    console.error(
+      `Error getting User Session (completeOAuth). Error reading property may result from app redirecting before operation can read token hash in url. ${e}`
+    );
+    return null;
   }
 };
 
@@ -96,6 +294,8 @@ export const completeOAuth2 = async ({
   redirectUri,
   popup
 }) => {
+  console.log('completing oauth2 login via completeOAuth2');
+
   try {
     const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
     const dSession = UserSession.completeOAuth2({
@@ -114,6 +314,8 @@ export const completeOAuth2 = async ({
     } else {
       window.location.hash = '';
     }
+    console.log('account: ', account);
+
     return account;
   } catch (e) {
     console.error(
@@ -310,6 +512,48 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
       user,
       portal: JSON.stringify(dPortal),
       session: dSession.serialize(),
+      token: token,
+      key
+    };
+  } catch (e) {
+    throw new Error(
+      `Could not create account object. This could be due to UserSession.getUser(). ${e}`
+    );
+  }
+};
+
+const createAccountObjectWebTier = async ({
+  userSession,
+  portal,
+  clientId
+}) => {
+  try {
+    userSession.clientId = userSession.clientId
+      ? userSession.clientId
+      : clientId;
+    const token = userSession.token;
+    //const user = await dSession.getUser();
+
+    //const user = await userSession.username;
+    const user = await userSession.getUser();
+
+    console.log('webtier user from getUser(): ', user);
+
+    const dPortal = await getPortal({
+      portalUrl: portal,
+      session: userSession
+    });
+    const key = createAccountKey({
+      session: userSession,
+      user,
+      portal: dPortal,
+      token
+    });
+
+    return {
+      user,
+      portal: JSON.stringify(dPortal),
+      session: userSession.serialize(),
       token: token,
       key
     };
